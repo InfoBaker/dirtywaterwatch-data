@@ -22,6 +22,7 @@ from ingest import ny_sprtk_history as M
 PLANTS = ["Jane Roe repaired the pump.", "operator jane roe inspected the spill.", "JANE ROE responded.",
           "Staff callback: 5185550142."]
 P1, P2, P3, P4 = PLANTS
+NOTE = "CSO outfall behind the home of Jane Roe"      # a location note that decides the type, never kept
 
 REPORT_HDR = ["Discovery Date and Time", "Facility Name", "Closest Address or Landmark", "Town/City", "County",
               "Estimate or Actual", "Volume", "Treated State", "Other Explained", "Ending Date and Time",
@@ -41,9 +42,9 @@ ALERT18_HDR = ["facility name", "sprtk id", "start time", "headline", "duration"
 
 def a18(start, headline="Erie, Sampleton, Sewage Discharge, Sample Creek, Unknown", water="Sample Creek",
         fac="Sampleton (V) WWTP NY0999903", fid="NY0999903", qty="65", reason="Weather Conditions",
-        street=("12", "Harbor Rd")):
+        street=("12", "Harbor Rd"), note=P4):
     """An alert18 row; every narrative column holds a planted text, and so does an unnamed column past the header."""
-    return [fac, fid, start, headline, "24", "Hours", street[0], street[1], "Sampleton", "Erie", P4, water,
+    return [fac, fid, start, headline, "24", "Hours", street[0], street[1], "Sampleton", "Erie", note, water,
             "Untreated", qty, "Gallons per Minute", "Estimated", reason, None, None, P1, P2, P3, P1]
 
 
@@ -76,7 +77,7 @@ def workbook(*, short=False, extra_tab=False, cut=False) -> bytes:
              P1, "Example River", "Untreated", "300", "Gallons", "0", "Weather Conditions", P2, P3, P4],
         ]),
         ("NYALERTS NOVEMBER 2018", [ALERT18_HDR, a18("17/NOV/2014 01:00:00")]),
-        ("NYALERTS DECEMBER 2018", [ALERT18_HDR, a18("21/DEC/2018 04:15:00")]),
+        ("NYALERTS DECEMBER 2018", [ALERT18_HDR, a18("21/DEC/2018 04:15:00"), a18("22/DEC/2018 04:15:00", note=NOTE)]),
         ("NYALERTS MARCH 2019", [ALERT18_HDR, a18("09/MAR/2019 21:30:00"), a18("09/MAR/2019 22:30:00")]),  # spring
         ("NYALERTS JUNE 2019", [
             ALERT18_HDR,
@@ -105,7 +106,7 @@ def workbook(*, short=False, extra_tab=False, cut=False) -> bytes:
     return xlsx(tabs)
 
 
-N_TABS, N_ROWS, N_RECORDS = 11, 26, 25
+N_TABS, N_ROWS, N_RECORDS = 11, 27, 26
 
 
 def _col(i: int) -> str:
@@ -463,3 +464,17 @@ def test_reader_helpers():
     assert t["header_row"] == 3 and [n for n, _r in t["rows"]] == [1, 2, 4] and t["title"] == []
     with pytest.raises(ValueError, match="no header row"):
         M.read_tabs(xlsx([("Mystery", [["a", "b"], ["c", "d"]])]))
+
+
+def test_a_withheld_location_note_decides_the_type_and_stays_withheld(env):
+    """The classifier sees the withheld narrative columns only to decide event_type; the record and the saved page
+    keep the result and its basis, never the text."""
+    tmp, events, _wb = env
+    doc = run_file(env)
+    a = by_start(doc, "alert18")
+    cso, plain = a["2018-12-22T04:15"][0], a["2018-12-21T04:15"][0]
+    assert cso["event_type"] == "cso" and "withheld" in cso["raw"]["_type_basis"]
+    assert plain["event_type"] == "unknown" and "_type_basis" not in plain["raw"]
+    page = next((tmp / "raw" / M.SOURCE_ID).glob("*.json")).read_text().lower()
+    for text in (json.dumps(cso).lower(), json.dumps(doc).lower(), page):
+        assert "jane roe" not in text and "cso outfall" not in text and "behind the home" not in text

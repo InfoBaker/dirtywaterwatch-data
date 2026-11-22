@@ -103,7 +103,9 @@ Privacy
   descriptions, corrective actions, "Other Explained" and every unnamed column past the reasons) can name staff,
   residents and private addresses in ways no scrub catches (an uncued name, a name in capitals, a phone number typed
   as ten digits), so they are never read into a record or the saved raw page (KEEP lists the columns read, per
-  layout); raw._withheld names the columns left out of each row. The record id still hashes the whole row, so two
+  layout); raw._withheld names the columns left out of each row. The location note and the discharge description
+  are seen in memory only by ny_sprtk.classify, to decide event_type (a "CSO" there makes the record a CSO); when
+  they change the type, raw._type_basis says so, and their text is not kept. The record id still hashes the whole row, so two
   notices that differ only in their narrative stay two records. What is read: facility, permit, start, headline,
   duration and units, address, city, county, affected water, treated state, quantity with its units and estimate
   word, and the reason categories. Every raw goes through common.strip_personal (in common.event), as in ny_sprtk,
@@ -199,6 +201,13 @@ FACILITY_COLUMNS = {"facilityname", "organizationfacility", "sprtkid", "facility
 WITHHELD_WHY = ("the operator's narrative columns (descriptions, instructions, location notes, corrective actions and "
                 "unnamed columns) can name staff, residents and private addresses, so they are never read")
 FRAGMENT_WHY = "this row names no facility (a fragment of a notice): only its date and time are read"
+# the withheld columns ny_sprtk.classify reads (as its addressDescription and dischargeDescription): seen in memory only
+# to decide event_type; the record keeps the type and raw._type_basis, never the text
+CLASSIFY_ONLY = {"locationdescription": "addressDescription", "locationdesc": "addressDescription",
+                 "additionaladdressinfo": "addressDescription", "dischargedescription": "dischargeDescription",
+                 "dischargedesc": "dischargeDescription", "descriptionofdischarge": "dischargeDescription",
+                 "otherexplained": "dischargeDescription"}
+TYPE_BASIS = ("decided with the withheld {cols}, whose text is not kept: {basis}")
 BARE_VOLUME = re.compile(r"\s*[\d,.]+\s*(?:'s\s*)?(?:gallons?(?:\s+per\s+minute)?|gal|mgd|gpm|million gallons)\s*", re.I)
 CELL_FALL = 0.01        # a tab with more than 1 per cent fewer filled cells than at the last good read fails the read
 END_OF_DAY_NOTE = "the source gives the end's date only ({d}): ended_at is the end of that day (the latest it can be)"
@@ -634,12 +643,14 @@ def notices_of(tabs: list[dict]) -> tuple[list[dict], Counter]:
                 stats["identical_rows"] += 1
                 continue
             kept, withheld = withhold(row, tab["layout"])
+            hidden = {CLASSIFY_ONLY[norm_header(k)]: v for k, v in row.items()
+                      if k in withheld and norm_header(k) in CLASSIFY_ONLY and clean(v)}
             if withheld:
                 stats["rows_with_columns_withheld"] += 1
             f, info = fields_of(kept, tab["layout"])
             by_id[nid] = {"id": nid, "synthetic_id": False, "tab": tab["tab"], "tab_index": t_i, "row": rownum,
                           "f": f, "row_raw": kept, "withheld": withheld, "website": False, "layout": tab["layout"],
-                          "info": info, "copies": [], "period": tab["period"]}
+                          "info": info, "copies": [], "period": tab["period"], "classify_only": hidden}
     return list(by_id.values()), stats
 
 
@@ -719,6 +730,22 @@ def finish(rec: dict, n: dict) -> dict:
     return rec
 
 
+def retype(rec: dict, n: dict, ctx: dict) -> None:
+    """event_type decided again with the withheld columns ny_sprtk.classify reads (n["classify_only"], in memory only);
+    when they change it, the record takes the new type and basis, and raw._type_basis says the withheld columns
+    decided it. No withheld text reaches the record."""
+    hidden = n.get("classify_only") or {}
+    if not hidden:
+        return
+    etype, basis = S.classify({**n["f"], **hidden}, ctx["cso_permits"], rec.get("npdes_permit"))
+    raw = rec.setdefault("raw", {})
+    if etype == rec.get("event_type") and basis == raw.get("_event_type_basis"):
+        return
+    names = {"addressDescription": "location note", "dischargeDescription": "discharge description"}
+    rec["event_type"], raw["_event_type_basis"] = etype, basis
+    raw["_type_basis"] = TYPE_BASIS.format(cols=" and ".join(names[k] for k in sorted(hidden)), basis=basis)
+
+
 def build(tabs: list[dict], fetched_at: str, prev: list[dict], live: list[dict]) -> tuple[list[dict], dict]:
     notices, stats = notices_of(tabs)
     for n in notices:
@@ -744,6 +771,7 @@ def build(tabs: list[dict], fetched_at: str, prev: list[dict], live: list[dict])
         parent = None
         for i, n in enumerate(chain):
             rec = S.to_record(n, cid, chain, i, parent, ctx)
+            retype(rec, n, ctx)
             try:
                 finish(rec, n)
             except Exception as e:  # noqa: BLE001 - never drop a record
