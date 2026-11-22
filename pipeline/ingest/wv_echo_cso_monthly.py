@@ -60,6 +60,7 @@ import requests
 
 import common
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, write_events, write_json
+from common import error_text
 
 SOURCE_ID = "wv-echo-dmr-cso"
 URL = "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart"
@@ -125,7 +126,7 @@ def fetch(permit: str, since: date) -> tuple[dict | None, str]:
                 raise ValueError(msg[:200])
             return res, "live"
         except (requests.RequestException, ValueError) as e:
-            err = f"{type(e).__name__}: {e}"
+            err = f"{error_text(e)}"
             time.sleep(3 * (i + 1))
     return None, f"failed ({err})"
 

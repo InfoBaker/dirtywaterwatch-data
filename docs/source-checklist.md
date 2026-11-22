@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1728 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1734 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -12,7 +12,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 |---|---:|---:|---:|---:|---:|---:|
 | science | 137 | 29 | 7 | 20 | 11 | 204 |
 | federal | 25 | 17 | 24 | 14 | 1 | 81 |
-| ma | 19 | 34 | 21 | 6 | 3 | 83 |
+| ma | 20 | 34 | 21 | 6 | 3 | 84 |
 | ct | 19 | 17 | 14 | 16 | 2 | 68 |
 | ri | 27 | 12 | 11 | 14 | 3 | 67 |
 | nh-vt | 44 | 24 | 28 | 13 | 11 | 120 |
@@ -26,12 +26,12 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | va | 22 | 11 | 28 | 7 | 1 | 69 |
 | dc | 24 | 7 | 25 | 12 | 5 | 73 |
 | nc | 10 | 1 | 5 | 1 | 0 | 17 |
-| ga | 7 | 0 | 4 | 1 | 0 | 12 |
+| ga | 8 | 0 | 4 | 1 | 0 | 13 |
 | fl | 5 | 0 | 5 | 1 | 0 | 11 |
 | mi | 6 | 2 | 5 | 2 | 0 | 15 |
 | wa | 6 | 3 | 4 | 1 | 0 | 14 |
 | ca | 9 | 1 | 10 | 3 | 0 | 23 |
-| il | 10 | 1 | 12 | 3 | 2 | 28 |
+| il | 11 | 1 | 11 | 3 | 2 | 28 |
 | az | 3 | 1 | 3 | 3 | 1 | 11 |
 | sd | 3 | 1 | 5 | 0 | 0 | 9 |
 | ms | 5 | 0 | 2 | 1 | 0 | 8 |
@@ -43,13 +43,13 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | tx | 9 | 0 | 6 | 1 | 0 | 16 |
 | ut | 4 | 0 | 3 | 2 | 1 | 10 |
 | or | 7 | 1 | 5 | 1 | 0 | 14 |
-| ky | 7 | 0 | 3 | 1 | 1 | 12 |
-| tn | 6 | 2 | 3 | 1 | 0 | 12 |
-| oh | 15 | 2 | 8 | 1 | 1 | 27 |
+| ky | 8 | 0 | 3 | 1 | 1 | 13 |
+| tn | 7 | 2 | 3 | 1 | 0 | 13 |
+| oh | 16 | 2 | 8 | 1 | 1 | 28 |
 | mn | 7 | 0 | 6 | 4 | 1 | 18 |
 | nd | 6 | 0 | 7 | 1 | 1 | 15 |
 | mo | 7 | 0 | 4 | 2 | 0 | 13 |
-| ks | 4 | 0 | 4 | 1 | 1 | 10 |
+| ks | 5 | 0 | 4 | 1 | 1 | 11 |
 | ar | 4 | 1 | 5 | 2 | 1 | 13 |
 | wi | 8 | 0 | 10 | 2 | 1 | 21 |
 | de | 3 | 0 | 5 | 1 | 0 | 9 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **639** | **232** | **547** | **229** | **81** | **1728** |
+| **all** | **646** | **232** | **546** | **229** | **81** | **1734** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -362,12 +362,13 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `fed-usgs-wateralert` | USGS WaterAlert (email/text threshold alerts for gauges) | rejected | inferred | hydrography | Gauge thresholds only; API polling is better. |
 | `fed-r1-cso-web-pages` | EPA Region 1 CSO web pages (guessed URLs) | unreachable | fetched | permits | No live Region 1 CSO page or community list found on epa.gov; the ArcGIS layers above are the only Region 1 list. |
 
-## ma: Massachusetts (83)
+## ma: Massachusetts (84)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
 | `ma-dph-annual-beach-reports` | MA DPH Annual Beach Reports (Marine and Freshwater Beach Testing in Massachusetts) | used | fetched | science | Program facts: 16,069 samples from 591 marine and 574 freshwater sampling locations in 2024; posting after two consecutive-day exceedances at most beaches; criteria table; CSOs named as a posting reason; dashboard expanded to freshwater in 2024. |
 | `ma-dph-hab-factsheet` | MA DPH fact sheet 'Harmful algae blooms in freshwater bodies' (advisory thresholds) | used | fetched | science | DPH advisory criteria: visible scum; >70,000 cells/mL; microcystin >=8 ppb; cylindrospermopsin >=15 ppb. Says boating 'not recommended during a HAB event'. |
+| `ma-echo-dmr-cso-files` | EPA ECHO monthly DMR CSO figures for Massachusetts CSO permits (EPA's state DMR file) | used | verified | events | Read by echo_dmr_cso_states (2026-11-21, decision 45): 74 outfall-months with a discharge from 4 of 16 permits, 2025-01 to 2026-09, received a median 14 days after the month. Month precision: the monthly mark only. |
 | `ma-law-105cmr445` | 105 CMR 445.000 Minimum Standards for Bathing Beaches (State Sanitary Code Ch. VII) | used | fetched | law | Bacteria criteria (marine Enterococci 104 single / 35 geomean; fresh E. coli 235 / 126, or Enterococci 61 / 33) and posting sign wording. |
 | `ma-law-314cmr16` | 314 CMR 16.00: Notification Requirements to Promote Public Awareness of Sewage Pollution | used | fetched | law | Defines events, 2-hour notice, 8-hour updates, 2-hour cessation notice, 48-hour advice text, recipients, website, signage, monthly data, DEP reporting. |
 | `ma-law-gl-c21-s43a` | M.G.L. c. 21, s. 43A as inserted by St. 2020, c. 322 ('An Act promoting awareness of sewage pollution in public waters') | used | fetched | law | Primary legal basis for every MA discharge notice; deadlines quoted in report. |
@@ -1332,12 +1333,13 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nc-wwals-and-swim-guide` | Swim Guide affiliates in NC (riverkeepers; WNC program) | watch | search_only | prior_art | NC beaches and WNC river stations appear on Swim Guide; not checked one by one. |
 | `nc-epa-sobe` | EPA SOBE extract, NC rows | rejected | inferred | events | Only a handful of NC rows; NC uses its own reporting. The DWR layer is complete and faster. |
 
-## ga: Georgia (12)
+## ga: Georgia (13)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
 | `ga-atlanta-cso-permits` | Atlanta CSO permits GA0037168 and GA0038644 notification clause (EPD 2015 release) | used | fetched | permits | EPD release (Aug 2015): "If an overflow event occurs, the city is required to promptly report details of that overflow with signage at the site, at public access points downstream and on the city's website." Permit text itself not read; no such page found on atlantawatershed.org. |
 | `ga-dnr-healthy-beaches` | Georgia DNR Coastal Resources Division Healthy Beaches (with Coastal Health District) | used | fetched | advisories | Weekly enterococci at Tybee, St. Simons, Jekyll (and others) in season, monthly in winter; a map shows advisories. Advisory = avoid swimming, not closure. Swim Guide carries GA beaches. Built: pipeline/ingest/ga_dnr_beaches.py (feed ga-dnr-beaches) reads the map's GeoJSON (https://webapp.gadnr.org/beach/working/beach.geojson) behind https://coastalgadnr.org/HealthyBeaches. |
+| `ga-echo-dmr-cso` | EPA ECHO monthly DMR CSO figures for Georgia CSO permits (EPA's state DMR file) | used | verified | events | Read by echo_dmr_cso_states (2026-11-21, decision 45): 71 outfall-months with a discharge from 1 of 4 permits, 2025-01 to 2026-09, received a median 12 days after the month. Month precision: the monthly mark only. |
 | `ga-epa-sobe` | EPA SOBE (eRule Phase 2) extract, GA rows | used | inferred | events | 1,232 events from 90 GA permits on 2026-11-03 (coordinator count). GA permittees file through EPD GEOS; the events reach EPA. Likely carries start/end times and volumes; use for history and to fill end times the EPD list lacks. Built: Georgia is one of the states of pipeline/ingest/echo_sewer_overflow_events.py (feed echo-sewer-overflow, registry fed-echo-sewer-overflow-bypass-events). |
 | `ga-epd-sewage-spills-report` | Georgia EPD "Municipal Sewage Spills Reported to EPD" daily spreadsheet | used | fetched | events | Statewide rolling 30-day list of municipal sewage spills, updated each business day, as an Excel file whose URL carries the date. Day precision, permit number, location address, gallons, river basin, waterway impacted. First feed (with daily snapshots to build history; history backfill from EPD's dated postings since 2025-10-09). Built: pipeline/ingest/ga_epd_spills.py (feed ga-epd-spills; --backfill reads the dated postings). |
 | `ga-epd-spills-map-layer` | Georgia EPD Spills in Georgia StoryMap layer (Spill_Summary_Continuous_Update) | used | fetched | events | Public ArcGIS layer behind the "Spills in Georgia" StoryMap (updated weekly): same 30-day rows with LATITUDE/LONGITUDE. BEGIN_DATE was null in all 61 rows on 2026-11-03, so it supplies points only, joined to the spreadsheet. Built: read by pipeline/ingest/ga_epd_spills.py (feed ga-epd-spills), which lends a layer point to a workbook row of the same permit and address. |
@@ -1436,6 +1438,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
+| `il-echo-dmr-cso` | EPA ECHO monthly DMR CSO figures for Illinois CSO permits (EPA's state DMR file) | used | verified | events | Read by echo_dmr_cso_states (2026-11-21, decision 45): 1,472 outfall-months with a discharge from 63 of 119 permits, 2025-01 to 2026-09, received a median 22 days after the month. Month precision: the monthly mark only. |
 | `il-epa-cso-inventory` | EPA National CSO Inventory, Illinois rows (federal seed) | used | fetched | outfalls | Baseline outfall list; MWRD CSO Points is better for Cook County. |
 | `il-epa-erule-phase2-plan` | Illinois EPA NPDES eRule Phase 2 Implementation Plan (December 2016) | used | search_only | law | Explains why Illinois permittees appear in EPA's SOBE tables: Illinois uses EPA's NeT-SewerOverflow. |
 | `il-epa-gl-cso-permit-list` | EPA "Combined Sewer Overflows in the Great Lakes Basin: Illinois" permit list | used | fetched | permits | Defines which Illinois CSO permits carry the 4-hour notice duty. |
@@ -1450,7 +1453,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `il-bloomington-normal-cso-notice` | Bloomington-Normal Water Reclamation District CSO public notification | watch | search_only | events | Downstate CSO permittee (IL0027731, 6 open outfalls) with a stated notice practice; channel not traced. |
 | `il-chicago-beach-lab-data` | Chicago Park District Beach Lab Data (qPCR enterococci and culture E. coli) | watch | fetched | monitoring | Bacteria results, not advisories: monitored for changes (register row il-chicago-beach-lab-data); the Park District's swim status was not traced. |
 | `il-chicago-cso-lights-pilot` | City of Chicago CSO warning-light pilot at four boat launches (River Park, Clark Park, Ping Tom, Park 571) | watch | fetched | advisories | Planned, not found live; a light is sign-only unless the city also publishes the state. |
-| `il-echo-dmr-cso` | ECHO DMR CSO monitoring parameters for Illinois CSO permits | watch | inferred | events | Monthly fallback for downstate CSO permits that do not file SOBE CSO rows; unknown whether their permits carry CSO count parameters. |
 | `il-friends-chicago-river-overflow-action` | Friends of the Chicago River: Overflow Action Days and CSO blog | watch | fetched | social | Context and advocacy; not a source of dated discharge records. |
 | `il-lake-county-beaches` | Lake County Health Department beach monitoring map | watch | search_only | advisories | Feeds BeachGuard; use BeachGuard. |
 | `il-mwrd-cso-alerts` | MWRD CSO notification alerts (email and SMS, via Smart911) | watch | fetched | events | The legally required public channel, but email/SMS behind a Smart911 account; owner sign-up only. WTTW (2025): alerts say only that an overflow occurred somewhere in the MWRD network. |
@@ -1639,13 +1641,14 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `or-oda-shellfish` | Oregon Department of Agriculture shellfish closures (biotoxin and sewage) | watch | search_only | advisories | Commercial bay closures follow sewage events (e.g. Tillamook); a 2017 ArcGIS closure layer exists in the state org. Not fetched. |
 | `or-epa-sobe` | EPA eRule SOBE extract (Oregon permittees) | rejected | inferred | events | 0 Oregon events on 2026-11-03. |
 
-## ky: Kentucky (12)
+## ky: Kentucky (13)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
 | `ky-dow-cso-sites-layer` | Kentucky DOW Combined Sewer Overflow Sites (ArcGIS) | used | fetched | outfalls | The state's own register of active combined sewer outfall sites, read to check EPA's inventory: 285 of its 286 sites are EPA open outfalls at the same point (within 0.3 m), the other (KY0026093-001) is the Harlan plant's own outfall; EPA lists 4 open outfalls the layer does not (KY0020711-011, KY0022411-062, KY0022861-017 and -018), kept open. Its RecvWater field is the basin's main river (263 of 286 'OHIO RIVER'), not the outfall's water, and is not used. No state outfall file is needed. |
 | `ky-dow-hab-viewer` | Kentucky DOW HAB Viewer (HABService Observation Points) | used | fetched | advisories | Read through the generic ArcGIS ingester (fetch block in its source file): one record per point under an advisory status (Warning or Danger); Below and NoDetect are grey; each date in its point's own zone; blooms, not sewage. |
 | `ky-dow-swimming-advisories` | Kentucky swimming advisories (DOW and Department for Public Health) | used | fetched | advisories | Read by ingest/ky_dow_swimming_advisories.py: the page's list as standing advisories in the agencies' own words, one record per named stretch or water (12 on 2026-11-07), from the first read that listed it (the page gives no date), ended when a read no longer lists it; placed by the named water as a marker. |
+| `ky-echo-dmr-cso` | EPA ECHO monthly DMR CSO figures for Kentucky CSO permits (EPA's state DMR file) | used | verified | events | Read by echo_dmr_cso_states (2026-11-21, decision 45): 1,908 outfall-months with a discharge from 8 of 13 permits, 2025-01 to 2026-09, received a median 27 days after the month. Month precision: the monthly mark only. |
 | `ky-law-401-kar-5-065` | 401 KAR 5:065 Section 2(5): KPDES reporting of spills, bypasses, upsets | used | fetched | law | The only overflow-reporting rule found: report to the Division of Water, no public notice duty. |
 | `ky-louisville-msd-overflow-advisory` | Louisville MSD Overflow Advisory Level banner and notice nodes | used | fetched | advisories | Polled by ingest/ky_louisville_msd.py (source id ky-louisville-msd-overflow-advisory): the banner as a snapshot state machine; MSD-01 as MSD's own advisory at each of MSD's open combined sewer outfalls, MSD-02 as a dated report. |
 | `ky-sd1-wet-weather-notification` | SD1 Wet Weather Overflow Notification Program (Northern Kentucky) | used | fetched | advisories | SD1's own published rule written into data/rules.json (rain_likely.fallback.by_permit.KY0021466): 0.25 inch of rain, a 72-hour caution, May to October, applied from radar rainfall at SD1's combined sewer outfalls; the Ohio River stage part (above 38 feet) is not applied. The alerts themselves reach subscribers only. |
@@ -1656,10 +1659,11 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ky-dep-ert-incidents` | Kentucky DEP Environmental Response Team incident records | rejected | search_only | events | No public web output; records request only. |
 | `ky-orsanco-bacteria` | ORSANCO contact recreation bacteria monitoring (Ohio River: Louisville and others) | unreachable | search_only | monitoring | Bot wall; shared with WV. |
 
-## tn: Tennessee (12)
+## tn: Tennessee (13)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
+| `tn-echo-dmr-cso` | EPA ECHO monthly DMR CSO figures for Tennessee CSO permits (EPA's state DMR file) | used | verified | events | Read by echo_dmr_cso_states (2026-11-21, decision 45): 151 outfall-months with a discharge from 2 of 3 permits, 2025-01 to 2026-08, received a median 14 days after the month. Month precision: the monthly mark only. |
 | `tn-kub-sso-log` | Knoxville Utilities Board, SSO Logs | used | fetched | events | Read hourly by pipeline/ingest/tn_kub_sso_log.py from 2026-11-17 (the previous and current month; --backfill to 2023-01-01): one dated record per row with its time, street and gallons, listed in Knox County and placed on no water. Status and Completion are the cleanup's, never the end of the overflow. A record of the same day and street as a TDEC Events Report record of a KUB permit is its duplicate. |
 | `tn-law-0400-40-05-07` | Tenn. Comp. R. & Regs. 0400-40-05-.07 (permit terms: bypass, SSO prohibition, 24-hour reporting) | used | fetched | law | Regulator report within 24 hours, written within five days; no public notice. |
 | `tn-memphis-cd-quarterly` | City of Memphis, consent-decree quarterly SSO reports | used | fetched | events | Read hourly by pipeline/ingest/tn_memphis_cd_quarterly.py from 2026-11-17 (the index and the newest two reports; --backfill from 2023 Q1): one record per row with its date and time, street, gallons and estimated duration; placed only on the stream the row names, otherwise on no water, with the City's footnote on whether a water was reached. 652 rows from 14 reports on 2026-11-17; 31 rows in layouts not read are named in meta. |
@@ -1673,7 +1677,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `tn-harpeth-conservancy` | Harpeth Conservancy sewer overflow transparency page | watch | search_only | prior_art | Advocates real-time public reporting; notes Franklin and Brentwood post overflows with signs and web notice within days. |
 | `tn-orsanco-na` | ORSANCO (Tennessee is not on the Ohio main stem) | rejected | inferred | monitoring | TN is an ORSANCO member state but its waters are Cumberland/Tennessee; no TN sampling site. |
 
-## oh: Ohio (27)
+## oh: Ohio (28)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
@@ -1682,6 +1686,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-bowling-green-cso-events` | Bowling Green CSO Events yearly reporting table | used | fetched | events | Read daily by pipeline/ingest/oh_bowling_green_cso.py: 37 overflows at Mercer and Poe roads, 2019 to 2026-07-21, each with begin, end and estimated volume; placed on the permit's one CSO outfall (OH0024139 002, North Branch Portage River). |
 | `oh-clyde-cso-notification` | Clyde CSO Notification System | used | fetched | events | Read daily by pipeline/ingest/oh_clyde_cso.py: 9 overflows of Clyde's one CSO (OH0024686 outfall 010, Raccoon Creek) in 2017 to 2026 (the newest 2026-04-01), each with start, end and volume; the counts match each page's own statement. |
 | `oh-columbus-sewer-overflow` | Columbus Sewer Overflow Discharge Information (SSO/CSO) and overflow map | used | fetched | events | Read daily by pipeline/ingest/oh_columbus_overflows.py: 8,542 recorded overflows (4,462 CSO, 4,080 SSO; 291 in 2026 to 2026-09-29), each dated by the day the city found it at inspection (day precision, no end), with volume in million gallons on 4,742; CSO rows carry their permit and outfall by Ohio EPA's station code (Jackson Pike OH0024732, Southerly OH0024741); the site's point (46 of 50 sites) or EPA's outfall point; the city updates the data monthly, usually after the 15th. |
+| `oh-echo-dmr-cso` | EPA ECHO monthly DMR CSO figures for Ohio CSO permits (EPA's state DMR file) | used | verified | events | Read by echo_dmr_cso_states (2026-11-21, decision 45): 4,514 outfall-months with a discharge from 53 of 66 permits, 2025-01 to 2026-09, received a median 15 days after the month. Month precision: the monthly mark only. |
 | `oh-epa-cso-inventory` | EPA National CSO Inventory (Ohio extract) | used | fetched | outfalls | Outfall points statewide. |
 | `oh-epa-gl-cso-ohio` | EPA: Combined Sewer Overflows in the Great Lakes Basin, Ohio (operator list with websites and annual reports) | used | fetched | outfalls | Seeds the channel column for the Lake Erie basin operators. |
 | `oh-epa-spills-opendata` | Ohio EPA Spills (current year and previous years), Office of Emergency Response | used | fetched | events | Read daily by pipeline/ingest/oh_epa_spills.py as a supplementary source: the SEWAGE HUMAN, SEWAGE SLUDGE / BIOSOLIDS and WASTE WATER rows of both layers (1,121 cases, 2017 to 2026-11-05; 121 in 2026), day precision, no end, the call time in Ohio's wall clock, the waterway named on 218; WASTE WATER is kept as a possible sewage release with the product stated; AIR ODOR SEWAGE rows are not read. |
@@ -1766,10 +1771,11 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `mo-dnr-environmental-concern` | Missouri DNR environmental concern / 24-hour spill line | rejected | fetched | events | Intake only (573-634-2436); no public list. |
 | `mo-msdis-npdes-outfalls` | MSDIS MO_NPDES_Outfalls (University of Missouri copy) | rejected | search_only | outfalls | Copy of the DNR layer; use the DNR source. |
 
-## ks: Kansas (10)
+## ks: Kansas (11)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
+| `ks-echo-dmr-cso` | EPA ECHO monthly DMR CSO figures for Kansas CSO permits (EPA's state DMR file) | used | verified | events | Read by echo_dmr_cso_states (2026-11-21, decision 45): 84 outfall-months with a discharge from 1 of 3 permits, 2025-01 to 2026-09, received a median 18 days after the month. Month precision: the monthly mark only. |
 | `ks-kdhe-hab-status` | KDHE HAB Status service (Lake Points, Lake Status) | used | fetched | advisories | Read by ingest/ks_kdhe_hab.py: lakes under a Hazard, Warning or Watch, dated to the polls that list them. |
 | `ks-kdhe-stream-advisories` | KDHE stream advisories (news flash RSS) | used | fetched | advisories | Read by ingest/ks_kdhe_stream_advisories.py: issue and rescission pairs; the archive is what has been kept since the first read. |
 | `ks-law-kar-28-16-27` | K.A.R. 28-16-27: emergency or accidental discharge of sewage; report to the department | used | fetched | law | Immediate report to KDHE; planned bypass needs 7 days' notice and approval; no public notice. |

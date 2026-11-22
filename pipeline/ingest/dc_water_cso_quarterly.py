@@ -94,6 +94,7 @@ import requests
 
 import common
 from common import BUILD_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, write_events, write_json
+from common import error_detail, error_text
 
 SOURCE_ID = "dc-water-cso-quarterly"
 REGISTRY_ID = "dc-dcwater-cso-quarterly-reports"
@@ -210,9 +211,9 @@ def pdf_pages(content: bytes) -> list[str]:
             raise UnreadableReport("the file is encrypted with a password: not read")
         return [p.extract_text() or "" for p in reader.pages]
     except pypdf.errors.DependencyError as e:
-        raise UnreadableReport(f"the file is encrypted with a cipher this reader cannot open ({e})") from e
+        raise UnreadableReport(f"the file is encrypted with a cipher this reader cannot open ({error_detail(e)})") from e
     except pypdf.errors.PdfReadError as e:
-        raise UnreadableReport(f"not a readable PDF ({e})") from e
+        raise UnreadableReport(f"not a readable PDF ({error_detail(e)})") from e
 
 
 def no_text_layer(page: str) -> bool:
@@ -478,7 +479,7 @@ def read_quarter(state: dict, entry: dict, content: bytes | None, at: str, error
         try:
             parsed = parse_report(pdf_pages(content), entry["year"], entry["q"])
         except UnreadableReport as e:
-            error = str(e)
+            error = error_detail(e)
     sha = hashlib.sha256(content).hexdigest() if content is not None else None
     attempt = {"url": entry["url"], "sha256": sha, "read_at": at, "parser_version": PARSER_VERSION, "error": error}
     rep = {**prev, "quarter": key, "year": entry["year"], "q": entry["q"], "url": entry["url"],
@@ -717,7 +718,7 @@ def main(argv=None) -> int:
             state["index"] = {e["quarter"]: {"url": e["url"], "published": e["published"]} for e in listed}
             state["index_odd"] = odd
         except (requests.RequestException, RuntimeError) as e:
-            errors.append(f"publications list not read: {type(e).__name__}: {e}")
+            errors.append(f"publications list not read: {error_text(e)}")
             listed = []
             list_failed = True
         for e in due(state, listed, at, refresh):
@@ -725,7 +726,7 @@ def main(argv=None) -> int:
                 content = fetch(e["url"])
                 err = None
             except requests.RequestException as ex:
-                content, err = None, f"report not fetched: {type(ex).__name__}: {ex}"
+                content, err = None, f"report not fetched: {error_text(ex)}"
             read_quarter(state, e, content, at, err)
     write_json(STATE_PATH, state)
     recs = records(state)

@@ -186,6 +186,7 @@ from shapely.strtree import STRtree
 from build import status as S
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, ROOT, gnis_num, now_iso, same_gnis, read_json,
                     write_json, write_rows_json)
+from common import answer_error, error_detail, error_text, safe_traceback, text_category, url_host
 from ingest import waters_extra as WX
 
 NLDI_HYDROLOCATION = "https://api.water.usgs.gov/nldi/linked-data/hydrolocation"
@@ -722,7 +723,7 @@ class Http:
                     time.sleep(5)
                     continue
                 if isinstance(data, dict) and data.get("error"):    # ArcGIS reports errors in a 200
-                    print(f"  {kind}: {str(data['error'])[:160]}; retrying", flush=True)
+                    print(f"  {kind}: {answer_error(data['error'])}; retrying", flush=True)
                     self.nap(min(60, 5 * 2 ** attempt))
                     continue
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -2800,7 +2801,7 @@ def write_output(recs, targets_out, skipped, problems, partial: bool, stats=None
     try:
         prev = read_json(OUT) or {}
     except ValueError as ex:
-        raise WriteRefused(f"{shown(OUT)} exists but cannot be read ({ex}); it was left as it is") from ex
+        raise WriteRefused(f"{shown(OUT)} exists but cannot be read ({error_detail(ex)}); it was left as it is") from ex
     old_rows = prev.get("waters") or []
     old_slugs = {r["slug"] for r in old_rows if r.get("slug")}
     run_slugs = {r["slug"] for r in run_rows if r.get("slug")}
@@ -3799,7 +3800,7 @@ def state_fetch(q: str, mirrors: list[str], refresh: bool, offline: bool, deadli
             why = f"{url}: not JSON"
             continue
         if d.get("remark") and re.search(r"error|timed out|out of memory", d["remark"], re.I):
-            why = f"{url}: {d['remark'][:80]}"
+            why = f"{url_host(url)}: {text_category(d['remark'])}"   # never the service's words (security #7)
             continue
         d["_fetched_at"] = now_iso()
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -4013,7 +4014,7 @@ class Run:
             try:
                 rec, problem = build_hand(spec, self.nhd, self.http)
             except Exception as ex:      # a hand record must not stop the run
-                rec, problem = None, f"hand record {spec['name']} ({spec['state']}): {type(ex).__name__}: {ex}"
+                rec, problem = None, f"hand record {spec['name']} ({spec['state']}): {error_text(ex)}"
             if rec is None:
                 self.problems.append(problem)
                 continue
@@ -4184,8 +4185,8 @@ class Run:
                             self.feats[k] = rec
                     rec = self.feats.get(k)
             except BudgetExhausted as ex:
-                self.stopped = str(ex)
-                row["reason"] = f"{row['reason']}; NHD high resolution not asked ({ex})"
+                self.stopped = error_detail(ex)
+                row["reason"] = f"{row['reason']}; NHD high resolution not asked ({error_detail(ex)})"
                 continue
             if rec is None:
                 row["reason"] = f"{row['reason']}; {how}"
@@ -4274,9 +4275,9 @@ class Run:
             try:
                 c, how = resolve_point(self.nhd, t, lon, lat)
             except BudgetExhausted as ex:       # the run's budget: this place and the rest wait for the next run
-                c, how = None, f"not tried this run ({ex})"
+                c, how = None, f"not tried this run ({error_detail(ex)})"
             except Exception as ex:             # one bad place must not stop the run
-                c, how = None, f"build error ({type(ex).__name__}: {ex})"
+                c, how = None, f"build error ({error_text(ex)})"
             if c is None:
                 if len(failed) < 12:
                     failed.append({"lon": lon, "lat": lat, "reason": how})
@@ -4287,7 +4288,7 @@ class Run:
                     rec = self.new_record(k, c, t, row)   # fetches the record's geometry: the budget can end here too
                 except BudgetExhausted as ex:
                     if len(failed) < 12:
-                        failed.append({"lon": lon, "lat": lat, "reason": f"not tried this run ({ex})"})
+                        failed.append({"lon": lon, "lat": lat, "reason": f"not tried this run ({error_detail(ex)})"})
                     continue
                 if rec is None:
                     continue
@@ -4321,7 +4322,7 @@ class Run:
             try:
                 self.osm_one(t, row)
             except Exception as ex:
-                self.problems.append(f"{t['key']}: OSM fallback {type(ex).__name__}: {ex}")
+                self.problems.append(f"{t['key']}: OSM fallback {error_text(ex)}")
             if n % 10 == 9:
                 print(f"  OSM fallback {n + 1}/{min(len(self.osm_queue), a.osm_max)}", flush=True)
                 self.checkpoint(n, len(self.osm_queue))
@@ -4408,7 +4409,7 @@ class Run:
                 try:
                     rec, how = osm_record(t, spec, d, self.states, self.towns, self.existing_list)
                 except Exception as ex:      # a malformed element must not stop the run
-                    self.problems.append(f"{t['key']}: OSM fallback {type(ex).__name__}: {ex}")
+                    self.problems.append(f"{t['key']}: OSM fallback {error_text(ex)}")
                     continue
                 if rec is None:
                     row["reason"] = f"{row['reason']}; {how}" if row["reason"] else how
@@ -4445,7 +4446,7 @@ class Run:
                                     scope_states=getattr(self, "only_states", None),
                                     rows_from=getattr(self, "rows_from", None))
             except WriteRefused as ex:      # an unreadable file: not overwritten; the next checkpoint tries again
-                print(f"[{i}/{n}] checkpoint not written: {ex}", flush=True)
+                print(f"[{i}/{n}] checkpoint not written: {error_detail(ex)}", flush=True)
                 return
             print(f"[{i}/{n}] {len(built)} records this run, {info['written']} in the file; requests {dict(self.http.fetched)} cached "
                   f"{sum(self.http.cached.values())} failed {dict(self.http.failed)}", flush=True)
@@ -4573,12 +4574,11 @@ def main(argv=None):
         except BudgetExhausted as ex:
             run.stop(t, ex)
         except Exception as ex:      # one bad feature must not stop the run
-            import traceback
-            traceback.print_exc()
-            run.problems.append(f"{t['key']}: {type(ex).__name__}: {ex}")
+            sys.stderr.write(safe_traceback(ex))     # frames and error_text, never the exception's own words
+            run.problems.append(f"{t['key']}: {error_text(ex)}")
             row = run.rows[-1] if run.rows and run.rows[-1]["_key"] == t["key"] else None
             if row is not None and not row["how"]:
-                row["reason"] = row["reason"] or f"build error ({type(ex).__name__}: {ex})"
+                row["reason"] = row["reason"] or f"build error ({error_text(ex)})"
         run.checkpoint(i, len(todo))
     pairs = list(zip(todo, run.rows)) if len(run.rows) == len(todo) else \
         [(t, r) for t in todo for r in run.rows if r["_key"] == t["key"]]
@@ -4630,7 +4630,7 @@ def main(argv=None):
         info = write_output(recs, rows, skipped_list(skipped_reason), problems, partial=bool(args.limit or run.stopped),
                             stats=stats_out, final=True, rebuild=args.rebuild and not run.stopped)
     except WriteRefused as ex:
-        print(f"\nNOT WRITTEN: {ex}")
+        print(f"\nNOT WRITTEN: {error_detail(ex)}")
         for p in problems[:40]:
             print("PROBLEM", p)
         return 1
@@ -4806,7 +4806,7 @@ def state_main(args) -> int:
                                       [c for t in targets for c in t.get("nhdplus_ids") or []])
         print(f"EPA reach index: {len(run.reach_index)} keys", flush=True)
     except BudgetExhausted as ex:
-        run.stopped = str(ex)
+        run.stopped = error_detail(ex)
     todo = targets[:args.limit] if args.limit else targets
     for i, t in enumerate(todo, 1):
         if run.stopped:
@@ -4817,12 +4817,11 @@ def state_main(args) -> int:
         except BudgetExhausted as ex:
             run.stop(t, ex)
         except Exception as ex:      # one bad feature must not stop the run
-            import traceback
-            traceback.print_exc()
-            run.problems.append(f"{t['key']}: {type(ex).__name__}: {ex}")
+            sys.stderr.write(safe_traceback(ex))     # frames and error_text, never the exception's own words
+            run.problems.append(f"{t['key']}: {error_text(ex)}")
             row = run.rows[-1] if run.rows and run.rows[-1]["_key"] == t["key"] else None
             if row is not None and not row["how"]:
-                row["reason"] = row["reason"] or f"build error ({type(ex).__name__}: {ex})"
+                row["reason"] = row["reason"] or f"build error ({error_text(ex)})"
         run.checkpoint(i, len(todo))
     pairs = [(t, r) for t, r in zip(todo, run.rows)]
     if not run.stopped:
@@ -4851,7 +4850,7 @@ def state_main(args) -> int:
         info = write_output(recs, rows, skipped_list(skipped_reason), problems, partial=True, stats=stats_out,
                             final=True, scope_states=set(states))
     except WriteRefused as ex:
-        print(f"\nNOT WRITTEN: {ex}")
+        print(f"\nNOT WRITTEN: {error_detail(ex)}")
         return 1
     print(f"\n{len(recs)} records -> {shown(OUT)}: {describe_write(info)}")
     print(json.dumps(stats_out, indent=1))
@@ -5488,7 +5487,7 @@ def names_main(args) -> int:
         prefetch_names(nhd, state, targets, 2, "_l2")
         prefetch_names(nhd, state, [t for t in targets if wants_area(t) or not t.get("_l2")], 4, "_l4")
     except BudgetExhausted as ex:
-        run.stopped = str(ex)
+        run.stopped = error_detail(ex)
     hr_queue = []
     for i, t in enumerate(targets, 1):
         row = run.new_row(t)
@@ -5530,10 +5529,9 @@ def names_main(args) -> int:
         except BudgetExhausted as ex:
             run.stop(t, ex)
         except Exception as ex:      # one bad name must not stop the run
-            import traceback
-            traceback.print_exc()
-            run.problems.append(f"{t['key']}: {type(ex).__name__}: {ex}")
-            row["reason"] = row["reason"] or f"build error ({type(ex).__name__}: {ex})"
+            sys.stderr.write(safe_traceback(ex))     # frames and error_text, never the exception's own words
+            run.problems.append(f"{t['key']}: {error_text(ex)}")
+            row["reason"] = row["reason"] or f"build error ({error_text(ex)})"
         run.checkpoint(i, len(targets))
     for t, row in hr_queue:             # NHDPlus V2.1 has none of the name there: the high-resolution flowlines
         if run.stopped:
@@ -5567,8 +5565,8 @@ def names_main(args) -> int:
                 if row["how"]:
                     row["reason"], row["defined_by"] = None, "name (NHD high resolution)"
         except BudgetExhausted as ex:
-            run.stopped = str(ex)
-            row["reason"] = f"{row['reason']}; NHD high resolution not asked ({ex})"
+            run.stopped = error_detail(ex)
+            row["reason"] = f"{row['reason']}; NHD high resolution not asked ({error_detail(ex)})"
         if not row["how"] and t["points"] and not args.no_osm and not generic_name(t["name"]):
             run.osm_queue.append((t, row))
     if run.osm_queue and not run.stopped:
@@ -5628,7 +5626,7 @@ def names_hand_only(args, path, meta, state, rows, targets, done, skipped_reason
     try:
         towns.load(state)
     except BudgetExhausted as ex:
-        run.stopped = str(ex)
+        run.stopped = error_detail(ex)
     run.hand_pass(pairs)
     return names_finish(args, path, meta, state, rows, targets, done, skipped_reason, existing, shapes, http, run,
                         hand_only=True)
@@ -5689,7 +5687,7 @@ def names_finish(args, path, meta, state, rows, targets, done, skipped_reason, e
                             # --names build's stay
                             + (f"_{Path(path).stem.replace('-', '_')}" if hand_scope(path) else ""))
     except WriteRefused as ex:
-        print(f"\nNOT WRITTEN: {ex}")
+        print(f"\nNOT WRITTEN: {error_detail(ex)}")
         return 1
     S._GEOM_CACHE.clear()          # the records this run wrote: the status resolver as the hourly run will build it
     after = S.make_resolver(S.load_waters(include_nhd=True))
@@ -5978,7 +5976,7 @@ def osm_only(args) -> int:
         info = write_output(recs, rows, skipped_list(skipped_reason), problems, partial=False, stats=stats_out,
                             keep=keep, final=True, rebuild=args.rebuild)
     except WriteRefused as ex:
-        print(f"NOT WRITTEN: {ex}")
+        print(f"NOT WRITTEN: {error_detail(ex)}")
         return 1
     print(f"{len(recs)} new records ({stats_out['osm_only_run']['osm_records']} OSM, "
           f"{stats_out['osm_only_run']['hand_records']} hand) + {len(keep)} kept -> {shown(OUT)}: {describe_write(info)}")

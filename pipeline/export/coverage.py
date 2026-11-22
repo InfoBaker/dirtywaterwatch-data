@@ -138,6 +138,23 @@ MIN_OPERATORS_FOR_PUBLISHER = 2
 
 
 REFUSED = re.compile(r"\b403\b|forbidden", re.I)
+# EPA's per-state DMR files (ingest/echo_dmr_cso_states.py; decision 45): the operators' monthly figures beside a
+# state's own reports. They are counted in the published figures (records_12m, dated_share, the feeds), but the grade
+# and its sentence are worked out without them wherever a state or a water has other sewage reports in the window, so
+# a state whose operators publish dated reports keeps its grade (Ohio: 659 dated reports and about 2,400 monthly
+# figures in the 12 months to 2026-11-21 would otherwise read "Ohio publishes monthly totals, not dated reports").
+# Where they are the only reports, or the others are not dated reports, the grade counts them (P2-11).
+SUPPLEMENT_SOURCES = frozenset({"oh-echo-dmr-cso", "ky-echo-dmr-cso", "il-echo-dmr-cso", "tn-echo-dmr-cso",
+                                "ks-echo-dmr-cso", "ga-echo-dmr-cso", "ma-echo-dmr-cso-files"})
+
+
+DATED_GRADES = ("Dated reports", "Dated reports, delayed")
+
+
+def grade_set(evs: list[dict]) -> list[dict]:
+    """The reports a grade is worked out from: all but SUPPLEMENT_SOURCES', unless those are all there is."""
+    other = [e for e in evs if e.get("source_id") not in SUPPLEMENT_SOURCES]
+    return other if other else evs
 
 
 def unreadable(feeds: list[dict]) -> str | None:
@@ -432,6 +449,8 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
         ids = sorted({e.get("source_id") for e in evs} | {sid for sid in sewage_feeds if st in feed_states.get(sid, [])})
         own = {sid for sid in sewage_feeds if st in feed_states.get(sid, [])}
         f = _figures(evs, firsts_state.get(st, []), own, cadence, names, ids, batches)
+        gevs = grade_set(evs)
+        fg = f if len(gevs) == len(evs) else _figures(gevs, firsts_state.get(st, []), own, cadence, names, ids, batches)
         dated = {e.get("source_id") for e in evs if is_dated(e)}
         federal = bool(dated) and all(set((source_levels or {}).get(s) or []) == {"federal"} for s in dated)
         operator = None
@@ -440,8 +459,11 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
             sid = next(iter(dated))
             if set((source_levels or {}).get(sid) or []) == {"operator"}:
                 operator = (reg.get(sid) or {}).get("attribution")
-        grade, sentence = grade_of(st, f, now, federal=federal, operator=operator,
-                                   unread=unreadable([feed_rows[s] for s in sorted(own) if s in feed_rows]))
+        unread = unreadable([feed_rows[s] for s in sorted(own) if s in feed_rows])
+        grade, sentence = grade_of(st, fg, now, federal=federal, operator=operator, unread=unread)
+        if fg is not f and grade not in DATED_GRADES:
+            # the monthly figures are left out only beside dated reports (Astra review 2026-11-21 P2-11)
+            grade, sentence = grade_of(st, f, now, federal=federal, operator=operator, unread=unread)
         states[st] = {"code": st, "name": state_name(st), "duty": duty_sentence(rules, st), **f, "grade": grade,
                       "sentence": sentence, "rain_caution": (rain_states or {}).get(st)}
     # what stands in the way, and how each state's operators tell the public (the channel register; §2.y)
@@ -460,9 +482,14 @@ def coverage(events: list[dict], waters, feeds: list[dict], registry: list[dict]
         evs = [kept[i] for i in ids_on if i in kept]
         firsts = [e for e in evs if not e.get("parent_event_id")]
         f = _figures(evs, firsts, set(), cadence, names, sorted({e.get("source_id") for e in evs}))
+        gevs = grade_set(evs)
+        fg = f if len(gevs) == len(evs) else _figures(gevs, firsts, set(), cadence, names,
+                                                      sorted({e.get("source_id") for e in gevs}))
         st = str(w.get("state") or w["slug"][-2:]).upper()
         sg = (states[st]["grade"], states[st]["sentence"]) if st in states else None
-        grade, sentence = water_grade(f, sg, now)
+        grade, sentence = water_grade(fg, sg, now)
+        if fg is not f and grade not in DATED_GRADES:
+            grade, sentence = water_grade(f, sg, now)
         water_out[w["slug"]] = {"state": st, "records_12m": f["records_12m"], "dated_share": f["dated_share"],
                                 "latest_dated": f["latest_dated"], "monthly_share": f["monthly_share"],
                                 "annual_share": f["annual_share"], "feeds": [x["source_id"] for x in f["feeds"]],

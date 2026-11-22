@@ -60,6 +60,7 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail
 from ingest import nh_pdftext
 from ingest.mo_kc_water_news import migrate_water_text, water_text, waters
 
@@ -437,8 +438,8 @@ def main(argv=None) -> int:
             reports = fetch(prev, read)
         recs, stats, safe = run(reports, prev, now_iso(), pmeta.get("decisions"))
     except (requests.RequestException, OSError, ValueError, KeyError, IndexError, TypeError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=str(e))
-        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=error_detail(e))
+        print(f"{SOURCE_ID}: {error_detail(e)}", file=sys.stderr)
         return 1
     if safe:
         save_raw(SOURCE_ID, json.dumps(safe, ensure_ascii=False, indent=1), "json")

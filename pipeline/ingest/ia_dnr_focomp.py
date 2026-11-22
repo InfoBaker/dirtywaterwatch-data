@@ -68,6 +68,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_text
 from ingest.ia_id_privacy import home_place
 from ingest.ia_id_privacy import scrub as strict_scrub
 
@@ -497,7 +498,7 @@ def main(argv=None) -> int:
             fold_facility(state, fac, parsed, at)
             read_f += 1
         except (requests.RequestException, ValueError) as e:
-            errors.append(f"facility {fac['st_fac_id']}: {type(e).__name__}: {str(e)[:120]}")
+            errors.append(f"facility {fac['st_fac_id']}: {error_text(e)}")
     pending = ([(state["reports"][k]["fac"], k) for k in rep_files if k in state.get("reports", {})] if offline
                else reports_to_read(state, at, rb))
     saved = []
@@ -515,7 +516,7 @@ def main(argv=None) -> int:
             # the earlier fields stay; the report is read again first next run, and the feed is not healthy until then
             if rid in state.get("reports", {}):
                 state["reports"][rid]["retry"] = True
-            errors.append(f"report {rid}: {type(e).__name__}: {str(e)[:120]}")
+            errors.append(f"report {rid}: {error_text(e)}")
     for rid, r in sorted((state.get("reports") or {}).items()):
         if r.get("retry") and not any(e.startswith(f"report {rid}:") for e in errors):
             errors.append(f"report {rid}: an earlier read failed and it has not been read again yet")

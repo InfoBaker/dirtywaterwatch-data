@@ -61,6 +61,7 @@ import requests
 
 from common import (BUILD_DIR, HEADERS, event, now_iso, parse_volume_gal, read_json, save_raw, write_events,
                     write_json)
+from common import error_detail
 from ingest import pa_waters
 
 SOURCE_ID = "pa-alcosan"
@@ -162,7 +163,7 @@ def parse_log_time(raw: str | None, alert: date | None) -> tuple[datetime | None
     try:
         dt = datetime(y, mo, dd, hh, mi, tzinfo=TZ)
     except ValueError as e:
-        return None, fixes, f"impossible date/time in {s!r} ({e})"
+        return None, fixes, f"impossible date/time in {s!r} ({error_detail(e)})"
     if alert is not None:
         lag = (alert - dt.date()).days
         if (lag < -1 or lag > 10) and dt.year != alert.year:
@@ -605,7 +606,7 @@ def fetch_log(sess, state: dict, backfill: bool) -> tuple[list[dict], int, bool]
         except Exception as e:
             if n == 1:
                 raise
-            print(f"pa-alcosan: page {n} failed ({e}); stopping", file=sys.stderr)
+            print(f"pa-alcosan: page {n} failed ({error_detail(e)}); stopping", file=sys.stderr)
             complete = False
             break
         page = parse_log_page(html)
@@ -655,7 +656,7 @@ def fetch_news(sess, state: dict, now: str) -> tuple[int, str | None]:
     try:
         listing = parse_news_list(get(sess, NEWS_URL))
     except Exception as e:
-        return 0, f"news list: {e}"
+        return 0, f"news list: {error_detail(e)}"
     errors = []
     for item in listing:
         if not NEWS_TITLE.search(item["title"]):
@@ -667,7 +668,7 @@ def fetch_news(sess, state: dict, now: str) -> tuple[int, str | None]:
         try:
             html = get(sess, item["url"])
         except Exception as e:
-            errors.append(f"{item['url']}: {e}")
+            errors.append(f"{item['url']}: {error_detail(e)}")
             continue
         p = parse_post(html)
         h = hashlib.sha256(f"{p['title']}|{p['posted']}|{p['text']}".encode()).hexdigest()
@@ -692,8 +693,8 @@ def main(argv=None) -> int:
     try:
         fetched, pages, complete = fetch_log(sess, state, args.backfill)
     except Exception as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"log: {e}")
-        print(f"pa-alcosan: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"log: {error_detail(e)}")
+        print(f"pa-alcosan: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     if not fetched:
         write_events(SOURCE_ID, [], ok=False, error="log page 1 has no SOAK entries (layout changed?)")

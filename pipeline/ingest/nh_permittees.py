@@ -63,6 +63,7 @@ import requests
 
 from common import (BROWSER_HEADERS, DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, parse_volume_gal,
                     read_json, save_raw, write_events)
+from common import error_text
 from ingest.nh_pdftext import rows as pdf_rows, text_items
 from ingest.nh_vt_waters import match_waters
 
@@ -527,7 +528,7 @@ def main(argv=None) -> int:
             new[key] = recs
             counts[key] = len(recs)
         except Exception as e:
-            errors[key] = f"{type(e).__name__}: {e}"
+            errors[key] = f"{error_text(e)}"
     prev_file = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
     if not new:
         write_events(SOURCE_ID, [], ok=False, error="; ".join(f"{k}: {v}" for k, v in errors.items()),

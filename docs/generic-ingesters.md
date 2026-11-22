@@ -101,6 +101,7 @@ The code is `pipeline/ingest/generic/`: `fieldmap.py` (the field map), one reade
 | `raw_notes` | `{_name: value spec}`: notes written on each record (decoded codes, labels) |
 | `decoded_times` | `{fields, parse}`: the source's date fields as read, on each record (`raw._decoded_times`) |
 | `min_rows_ratio`, `max_error_share` | the failure thresholds (0.5 and 0.2) |
+| `min_rows` | a source of known size (a frozen table): a response with fewer rows fails, the first run included |
 | `short_runs_to_accept` | the short responses in a row after which a short response is accepted (3) |
 | `after`, `module` | blocks that run first; the feed module the block replaces |
 | `meta` | added to the events file's meta: `credit`, `license`, `caveat` (published as `disclaimer`), `time_basis` (as `time_note`) |

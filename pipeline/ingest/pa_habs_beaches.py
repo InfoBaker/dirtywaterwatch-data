@@ -58,6 +58,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, read_json, save_raw, write_events
+from common import error_detail
 from ingest import pa_waters
 from ingest.nh_vt_waters import norm
 
@@ -211,8 +212,8 @@ def run_habs(sess: requests.Session) -> tuple[int, str]:
     try:
         rows, content = fetch_habs(sess, year)
     except Exception as e:
-        write_events(HAB_ID, [], ok=False, error=f"layer: {e}")
-        return 1, f"{HAB_ID}: FAILED {e}"
+        write_events(HAB_ID, [], ok=False, error=f"layer: {error_detail(e)}")
+        return 1, f"{HAB_ID}: FAILED {error_detail(e)}"
     h = hashlib.sha256(content).hexdigest()
     if (prev.get("meta") or {}).get("raw_hash") != h:
         save_raw(HAB_ID, content, "json")
@@ -365,8 +366,8 @@ def run_beaches(sess: requests.Session) -> tuple[int, str]:
         if not beaches:
             raise ValueError("no beach placemarks in the KML")
     except Exception as e:
-        write_events(BEACH_ID, [], ok=False, error=f"kml: {e}")
-        return 1, f"{BEACH_ID}: FAILED {e}"
+        write_events(BEACH_ID, [], ok=False, error=f"kml: {error_detail(e)}")
+        return 1, f"{BEACH_ID}: FAILED {error_detail(e)}"
     h = hashlib.sha256(r.content).hexdigest()
     if hashes.get("kml") != h:
         save_raw(BEACH_ID, r.content, "kml")
@@ -389,9 +390,9 @@ def run_beaches(sess: requests.Session) -> tuple[int, str]:
             if not rows or "Collection Date" not in rows[0]:
                 raise ValueError("not the expected results sheet (no Collection Date column)")
         except Exception as e:
-            errors.append(f"{b['name']}: {e}")
+            errors.append(f"{b['name']}: {error_detail(e)}")
             records += prev_by_beach.get(b["name"], [])   # keep this beach's previous records
-            per_beach[b["name"]] = {"error": str(e), "kept_previous": len(prev_by_beach.get(b["name"], [])),
+            per_beach[b["name"]] = {"error": error_detail(e), "kept_previous": len(prev_by_beach.get(b["name"], [])),
                                     "current_status": b.get("current_status")}
             continue
         hh = hashlib.sha256(resp.content).hexdigest()

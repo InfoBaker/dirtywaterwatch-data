@@ -92,6 +92,7 @@ import requests
 
 from common import (BUILD_DIR, HEADERS, event, load_outfall_registry, now_iso, outfall_number, read_json, save_raw,
                     scrub_text, write_events, write_json)
+from common import error_detail, error_text, url_label
 from ingest.oh_cso_pdf_notices import existing
 
 SOURCE_ID = "in-fort-wayne-cso-notifications"
@@ -553,7 +554,7 @@ def read_doc(state: dict, url: str, content: bytes, now: str, via: str, pieces_o
         if n < MIN_OUTFALLS or n < most - DROP_ALLOWED:
             raise SummaryError(f"{n} outfall columns (the most read is {most}): the document looks cut off")
     except Exception as e:      # any failure of pypdf or the reader: unread, never "no overflows" (review 2026-11-16)
-        state.setdefault("unread", {})[url] = scrub_text(f"{type(e).__name__}: {e}")[:200]
+        state.setdefault("unread", {})[url] = scrub_text(f"{error_text(e)}")[:200]
         return "unread"
     state["most_outfalls"] = max(state.get("most_outfalls") or 0, len(parsed["outfalls"]))
     return take(state, url, doc, parsed, sha, now, via)
@@ -574,8 +575,8 @@ def run(now: str, state_path: Path, out: Path | None = None, get=_get, backfill:
         if not links:
             raise LayoutError("no CSO-7-Day-Summary PDF link on the page")
     except (requests.RequestException, LayoutError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"page: {type(e).__name__}: {e}", path=out)
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"page: {error_text(e)}", path=out)
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     state = read_json(state_path, {}) or {}
     unread = state.setdefault("unread", {})
@@ -589,7 +590,7 @@ def run(now: str, state_path: Path, out: Path | None = None, get=_get, backfill:
                 sleep(90)
                 resp = get(url)
         except requests.RequestException as e:
-            unread[url] = scrub_text(f"{type(e).__name__}: {e}")[:200]
+            unread[url] = scrub_text(f"{error_text(e)}")[:200]
             counts["unread"] += 1
             return None
         if resp.status_code != 200:
@@ -633,13 +634,13 @@ def run(now: str, state_path: Path, out: Path | None = None, get=_get, backfill:
     if unread:
         meta["unread"] = dict(unread)
         write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta, path=out,
-                     error="documents not read: " + "; ".join(f"{u.rsplit('/', 1)[-1]}: {w}" for u, w in unread.items()))
+                     error="documents not read: " + "; ".join(f"{url_label(u)}: {w}" for u, w in unread.items()))
         print(f"{SOURCE_ID}: PARTIAL {len(recs)} records; {len(unread)} documents not read", file=sys.stderr)
         if backfill and state.get("docs"):
             # the one-time backfill saved what it read: it exits 0 so the refresh goes on and saves the history; the
             # documents not read are named here and in meta.unread, and health stays false until they read. A
             # backfill that read no document at all (a changed layout) still fails, as a failed page does above.
-            print(f"{SOURCE_ID}: backfill saved; not read: " + ", ".join(u.rsplit("/", 1)[-1] for u in unread),
+            print(f"{SOURCE_ID}: backfill saved; not read: " + ", ".join(url_label(u) for u in unread),
                   file=sys.stderr)
             return 0
         return 1

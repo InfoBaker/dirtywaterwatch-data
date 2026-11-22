@@ -180,6 +180,10 @@
 #                  at an outlet; month precision; a weekly cache in data/build) and wv_dep_hab_advisories (DEP's algal bloom
 #                  advisory map, three layers, poll-dated); outlets from DEP's layer (data/outfalls-wv.json, built by hand with
 #                  scripts/build_wv_outfalls.py --fetch)
+#                  EPA's per-state DMR files: echo_dmr_cso_states (Ohio, Kentucky, Illinois, Tennessee, Kansas, Georgia and
+#                  Massachusetts beyond Springfield, Holyoke and Chicopee: each combined sewer outfall's monthly figures
+#                  from EPA's state DMR ZIP per fiscal year, month precision, through in_echo_cso_monthly; HEAD each
+#                  run, download when changed, a cache in data/build; `--backfill` once lifts the download budget)
 #                  Louisiana: la_baton_rouge_quarterly (Baton Rouge's consent-decree quarterly reports, Part D collection-
 #                  system tables read with pypdf; a report used only when its rows match its own summary; each report once)
 #                  Nevada: nv_state_parks_hab (the state parks' HAB Advisory page: Watch, Warning and Danger bloom

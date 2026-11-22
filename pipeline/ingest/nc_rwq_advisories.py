@@ -52,6 +52,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, path_notes_to_meta, read_json, save_raw, write_events
+from common import error_detail, error_text
 
 SOURCE_ID = "nc-rwq-advisories"
 LAYER = "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/RWQ_Advisory_EXTERNAL/FeatureServer/1"
@@ -240,8 +241,8 @@ def main(argv=None) -> int:
             s.headers.update(HEADERS)
             features, meta_js = fetch(s)
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
     records, stats = build(features, meta_js, fetched_at, prev)

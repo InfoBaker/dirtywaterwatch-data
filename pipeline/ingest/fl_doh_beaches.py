@@ -73,6 +73,7 @@ import requests
 import zones
 from common import (BROWSER_HEADERS, BUILD_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, write_events,
                     write_json)
+from common import error_detail, error_text
 
 SOURCE_ID = "fl-doh-beaches"
 POINTS = ("https://services1.arcgis.com/CY1LXxl9zlJeBuRZ/arcgis/rest/services/FloridaBeachSamplingPoints/"
@@ -460,8 +461,8 @@ def main(argv=None) -> int:
             state.update({"fetched_at": fetched_at, "pass": cur})
             meta = {"pass": close_pass(state, cur, points, info)}
             write_json(STATE_FILE, state)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=meta)
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}", meta=meta)
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
     records, stats = build(points, pages, prev, fetched_at)

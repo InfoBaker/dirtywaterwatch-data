@@ -72,6 +72,7 @@ import requests
 
 from common import (EVENTS_DIR, HEADERS, ROOT, event, now_iso, parse_volume_gal, read_json,
                     save_raw, scrub_text, write_events)
+from common import error_detail, error_text, url_host
 
 SOURCE_ID = "dc-water-news"
 BASE = "https://www.dcwater.com"
@@ -473,7 +474,7 @@ def fetch_text(url: str, params: dict | None = None) -> bytes:
         except requests.RequestException as e:
             last = e
             time.sleep(2 * (i + 1))
-    raise RuntimeError(f"{url}: {type(last).__name__}: {last}")
+    raise RuntimeError(f"{url_host(url)}: {error_text(last)}")
 
 
 def digest(b: bytes) -> str:
@@ -493,7 +494,7 @@ def read_pages(pages: int, src: Path | None, prev_meta: dict) -> tuple[list[tupl
             else:
                 content = fetch_text(LIST_URL, {"page": n})
         except RuntimeError as e:
-            errors.append(str(e))
+            errors.append(error_detail(e))
             break
         h = digest(content)
         hashes[str(n)] = h

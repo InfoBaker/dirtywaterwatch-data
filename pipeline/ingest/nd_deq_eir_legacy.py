@@ -61,6 +61,7 @@ import requests
 import common
 import zones
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail, error_text
 from ingest.generic.fieldmap import scrub_strict_names
 
 SOURCE_ID = "nd-deq-eir-legacy-general"
@@ -274,8 +275,8 @@ def main(argv=None) -> int:
         if not recs:
             raise ValueError("no sewage row read from the archive")
     except Exception as e:  # noqa: BLE001 (any failure keeps the previous records)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)
     print(f"{SOURCE_ID}: {meta['rows_read']} rows read, {meta['kept']} sewage reports -> {path}")

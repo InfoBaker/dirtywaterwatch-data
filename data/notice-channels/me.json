@@ -24,6 +24,32 @@
    "barrier": "print_only"
   },
   {
+   "id": "me-bangor-consent-decree-reports",
+   "state": "ME",
+   "operator_id": "me-bangor",
+   "agency": null,
+   "name": "City of Bangor",
+   "permit": "ME0100781",
+   "channel_kind": "feed",
+   "urls": [
+    "https://bangormaine.gov/411/Consent-Decree---US-EPA"
+   ],
+   "method": "pdf",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "documents",
+   "note": "The City's yearly Annual Report on Compliance under its 2015 consent decree, posted voluntarily; appendix E or F is the SSO Event Log (every sanitary sewer overflow found in the year). Read through ingest/me_bangor_sso_log.py from a two-reading transcription (the 2016 to 2022 logs are scans); the page is checked each run for a new report. The page answers the runner (200).",
+   "checked": "2026-11-21",
+   "feed_source_id": "me-bangor-sso-log",
+   "noun": "Data feed",
+   "sources": [
+    "me-bangor-sso-log"
+   ],
+   "barrier": null
+  },
+  {
    "id": "me-bangor-newspaper-notice",
    "state": "ME",
    "operator_id": "me-bangor",

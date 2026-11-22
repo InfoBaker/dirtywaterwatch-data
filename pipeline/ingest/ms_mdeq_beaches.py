@@ -45,6 +45,7 @@ import requests
 
 import common
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
+from common import error_detail
 
 SOURCE_ID = "ms-mdeq-beach-monitoring"
 LAYER = "https://mgis19.mdeq.ms.gov/arcgis/rest/services/Hosted/BeachMonitoringView/FeatureServer"
@@ -208,8 +209,8 @@ def main(argv=None) -> int:
         if not rows or (isinstance(last, int) and len(rows) < last * MIN_RATIO):
             raise RuntimeError(f"{len(rows)} stations in the layer (the last good run had {last})")
     except (requests.RequestException, RuntimeError, ValueError, OSError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=str(e))
-        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=error_detail(e))
+        print(f"{SOURCE_ID}: {error_detail(e)}", file=sys.stderr)
         return 1
     recs, stats = run(rows, segments(seg), prev, now_iso())
     out = write_events(SOURCE_ID, recs, meta={"registry_ids": [SOURCE_ID, "ms-hab"], "url": LAYER, **stats,

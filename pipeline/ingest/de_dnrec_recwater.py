@@ -58,6 +58,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import (BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json)
+from common import error_detail, error_text
 # DNREC's free text through the Delaware scrubber (names after "call"/"contact", house numbers, phones, e-mails),
 # not common.scrub_text alone (re-review P1-5)
 from ingest.de_dnrec_derns import scrub as _scrub
@@ -532,8 +533,8 @@ def run(args) -> int:
             if not rows or not stations:
                 raise RuntimeError("an empty history or station list")
         except (requests.RequestException, ValueError, RuntimeError) as e:
-            write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=META)
-            print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+            write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}", meta=META)
+            print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
             return 1
     rows, stations = safe_rows(rows), safe_stations(stations)
     if not args.file:

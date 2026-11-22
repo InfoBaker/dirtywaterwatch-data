@@ -58,6 +58,7 @@ from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 from common import BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, now_iso, read_json, write_json
+from common import error_text
 
 OUT_JSON = BUILD_DIR / "rain-thresholds.json"
 OUT_MD = BUILD_DIR / "rain-thresholds.md"
@@ -290,12 +291,12 @@ def iem_daily(lat: float, lon: float, years: list[int], offline: bool = False, s
             except ServiceRefused:
                 raise
             except Exception as e:  # noqa: BLE001  the cached copy (if any) still serves
-                print(f"rain_thresholds: IEM {lat:.2f},{lon:.2f} {y}: {type(e).__name__}: {e}")
+                print(f"rain_thresholds: IEM {lat:.2f},{lon:.2f} {y}: {error_text(e)}")
                 if budget is not None:
                     budget.failures_in_a_row += 1
                     budget.failures += 1
                     if budget.failures_in_a_row >= IEM_MAX_FAILURES:
-                        raise ServiceRefused(f"{IEM_MAX_FAILURES} failures in a row, the last: {type(e).__name__}: {e}") from e
+                        raise ServiceRefused(f"{IEM_MAX_FAILURES} failures in a row, the last: {error_text(e)}") from e
             time.sleep(IEM_PAUSE_S)
         try:
             d = read_json(p, {}) if p.exists() else {}
@@ -786,7 +787,7 @@ def main() -> None:
             d = radar_build(a.radar, budget=a.budget, min_days=a.min_days, offline=a.offline,
                             events={k.upper(): Path(v) for k, v in events.items()})
         except (BudgetSpent, ServiceRefused) as e:
-            print(f"rain_thresholds --radar: stopped, nothing written: {type(e).__name__}: {e}")
+            print(f"rain_thresholds --radar: stopped, nothing written: {error_text(e)}")
             raise SystemExit(2) from e
         print(f"rain_thresholds --radar: {d['count']} operators, {d['with_threshold']} with their own threshold, "
               f"{d['requests']} point-service requests -> {RADAR_FILE}")

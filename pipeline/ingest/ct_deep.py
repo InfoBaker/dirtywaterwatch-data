@@ -134,6 +134,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, RAW_DIR, write_json, event, now_iso, parse_volume_gal, read_json, save_raw, write_events
+from common import error_detail, error_text
 
 # The shared name matcher of the NH/VT ingesters works for any state (state "ct" has no spelling
 # table there; CT spellings are applied here first).
@@ -440,14 +441,15 @@ class Zoho:
                     self.tokens.pop(view_url, None)
                     self.s.cookies.clear()
             except requests.RequestException as e:
-                last = f"{type(e).__name__}: {e}"
+                last = f"{error_text(e)}"
             time.sleep(2 * (attempt + 1))
         raise RuntimeError(f"Zoho request failed: {last}")
 
 
 def zoho_error(text: str) -> str:
-    m = re.search(r"STATUS_MESSAGE_START\s*(.*?)\s*STATUS_MESSAGE_END", text or "", re.S)
-    return (m.group(1) if m else (text or "")[:200]).strip()
+    """Whether Zoho's answer carried its status message; never the message or the body (security review 2026-11-17
+    #7: a provider's words are not kept in a log or an error field). The HTTP status beside it says what happened."""
+    return "with a status message" if re.search(r"STATUS_MESSAGE_START", text or "") else "no status message"
 
 
 def table_url(kind: str, key: str) -> str:
@@ -926,7 +928,7 @@ def rows_from_raw() -> tuple[dict, dict]:
             elif mm:
                 points[mm.group(1)] = decode_map(json.loads(p.read_text()))
         except (ValueError, KeyError) as e:
-            print(f"  skip {p.name}: {e}", file=sys.stderr)
+            print(f"  skip {p.name}: {error_detail(e)}", file=sys.stderr)
     return rows, points
 
 
@@ -991,8 +993,8 @@ def main(argv=None) -> int:
             for kind in ("cso", "sso"):
                 points[kind] = fetch_map(z, kind)
     except Exception as e:  # feed outage: keep the previous records
-        print(f"ct_deep: fetch failed: {type(e).__name__}: {e}", file=sys.stderr)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
+        print(f"ct_deep: fetch failed: {error_text(e)}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
         return 1
 
     records = []
@@ -1003,7 +1005,7 @@ def main(argv=None) -> int:
             except Exception as e:  # never drop a record
                 rec = event(source_id=SOURCE_ID, source_record_id=row_key(row), fetched_at=fetched, source_url=DASHBOARD_URL,
                             authority="CT DEEP Performance Dashboard", raw=scrub(dict(row)),
-                            parse_error=f"{type(e).__name__}: {e}")
+                            parse_error=f"{error_text(e)}")
                 rec["_key"] = (None, None, None, None, None)
                 records.append(rec)
     ids = Counter(r["event_id"] for r in records)

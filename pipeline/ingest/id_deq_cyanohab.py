@@ -75,6 +75,7 @@ import requests
 
 import zones
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_detail
 from ingest.ia_id_privacy import scrub
 from ingest.poll_periods import GAP_DAYS
 
@@ -523,7 +524,7 @@ def main(argv=None) -> int:
         if layer_partial:
             layer_error = f"DHW's layer: {layer_partial} (no water is ended on this read; the last good points are kept)"
     except (requests.RequestException, OSError, ValueError) as e:
-        layer_error = scrub(f"DHW's layer: {e} (the last good points are kept)")
+        layer_error = scrub(f"DHW's layer: {error_detail(e)} (the last good points are kept)")
     state = scrub_state(read_json(STATE_PATH, {}) or {})
     snapshot = {"rows": rows, "points": layer}
     if "--file" not in argv and state.get("last_snapshot") != snapshot:

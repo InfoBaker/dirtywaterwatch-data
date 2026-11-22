@@ -299,5 +299,7 @@ def test_a_failed_read_keeps_every_held_record_as_it_was(monkeypatch, tmp_path):
     assert S.main([]) == 1
     out = json.loads(ev.read_text())
     assert out["ok"] is False and out["records"] == old
-    assert S.SURVEY_LAYER in out["error"] and "incident_number, permit_with_name, start_date absent" in out["error"]
+    # the error names the layer's host, never its full address (common.public_error; security review 2026-11-17 #7)
+    assert "services2.arcgis.com" in out["error"] and S.SURVEY_LAYER not in out["error"]
+    assert "incident_number, permit_with_name, start_date absent" in out["error"]
     assert "sso_start" in out["error"] and "permit" in out["error"]

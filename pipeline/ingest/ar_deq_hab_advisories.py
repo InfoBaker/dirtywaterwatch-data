@@ -24,6 +24,7 @@ import requests
 
 from common import BUILD_DIR, EVENTS_DIR, HEADERS, ROOT, now_iso, path_notes_to_meta, read_json, save_raw, write_events
 from common import write_json
+from common import error_text
 from ingest import ar_transforms as T
 from ingest.generic import runner
 
@@ -111,8 +112,8 @@ def main(argv: list[str] | None = None) -> int:
             raise ValueError("no advisories in the file")
         check_rows(rows)
     except (requests.RequestException, ValueError, KeyError, TypeError, AttributeError, OSError) as e:
-        write_events(SOURCE_ID, prev, ok=False, error=f"{type(e).__name__}: {e}", path=path, partial=True)
-        print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, prev, ok=False, error=f"{error_text(e)}", path=path, partial=True)
+        print(f"{SOURCE_ID}: FAILED {error_text(e)}", file=sys.stderr)
         return 1
     raw_path = None
     if not a.file:
@@ -128,8 +129,8 @@ def main(argv: list[str] | None = None) -> int:
         records, stats = runner.build(SOURCE_ID, block, rows, fetched_at, prev, None)
         records = [T.scrub_coords_deep(r) for r in records]
     except Exception as e:  # noqa: BLE001 - a run that cannot finish keeps the previous records
-        write_events(SOURCE_ID, prev, ok=False, error=f"{type(e).__name__}: {e}", path=path, partial=True)
-        print(f"{SOURCE_ID}: FAILED {type(e).__name__}: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, prev, ok=False, error=f"{error_text(e)}", path=path, partial=True)
+        print(f"{SOURCE_ID}: FAILED {error_text(e)}", file=sys.stderr)
         return 1
     meta = {**stats, **runner.public_meta(block.get("meta") or {}), "platform": "json", "raw_path": raw_path,
             "generic": True, "registry_ids": row.get("registry_ids") or [], "timezone": block.get("time_zone"),

@@ -50,6 +50,7 @@ import requests
 
 import common
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_detail
 from ingest import wv_la_privacy
 
 SOURCE_ID = "wv-dep-hab-advisories"
@@ -296,12 +297,12 @@ def main(argv=None) -> int:
         state = rescrub(read_json(STATE_PATH, {}) or {})
         if state.get("items"):
             write_json(STATE_PATH, state)
-            write_events(SOURCE_ID, records(state), ok=False, error=str(e), partial=True)
+            write_events(SOURCE_ID, records(state), ok=False, error=error_detail(e), partial=True)
         else:
             prev = read_json(common.EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
-            write_events(SOURCE_ID, rescrub_records(prev.get("records") or []), ok=False, error=str(e),
+            write_events(SOURCE_ID, rescrub_records(prev.get("records") or []), ok=False, error=error_detail(e),
                          partial=True)
-        print(f"{SOURCE_ID}: {e}", file=sys.stderr)
+        print(f"{SOURCE_ID}: {error_detail(e)}", file=sys.stderr)
         return 1
     state = rescrub(read_json(STATE_PATH, {}) or {})
     if "--file" not in argv and current and state.get("last_rows") != current:

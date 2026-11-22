@@ -39,6 +39,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import HEADERS, event, now_iso, write_events
+from common import error_detail, error_text
 
 SOURCE_ID = "oh-bowling-green-cso-events"
 URL = "https://gis.bgohio.org/cso_events/dbo_cso_events_list.php"
@@ -133,8 +134,8 @@ def main(argv=None) -> int:
         if not recs:
             raise ValueError("no rows in the table")
     except (requests.RequestException, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"table: {type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"table: {error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     path = write_events(SOURCE_ID, recs, meta=meta)
     print(f"{SOURCE_ID}: {len(recs)} records -> {path}")

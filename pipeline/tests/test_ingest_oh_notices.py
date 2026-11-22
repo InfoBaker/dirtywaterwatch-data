@@ -9,6 +9,7 @@ from pathlib import Path
 
 import pytest
 
+from common import url_key
 from ingest import oh_lakewood_cso as LW
 from ingest import oh_willard_cso as WL
 
@@ -420,7 +421,8 @@ def test_fremont_records(tmp_path):
     # 5:50PM to 10:52AM the same day: the end is before the start and is not used
     odd = ids["20260422T1750"]
     assert odd["ended_at"] is None and odd["status"] == "unknown" and odd["raw"]["end_as_written"] == "4/22/2026 10:52AM"
-    assert list(d["meta"]["unread"]) == [u for u in FR_TEXTS if u.endswith("CSO-July21-2026.pdf")]
+    # meta.unread names the document by host and file name, no query string (common.url_key; security #7)
+    assert list(d["meta"]["unread"]) == [url_key(u) for u in FR_TEXTS if u.endswith("CSO-July21-2026.pdf")]
     text = json.dumps(d)
     assert "contact" not in text.lower() and "@" not in text
 

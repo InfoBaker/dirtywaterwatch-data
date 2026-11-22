@@ -46,6 +46,7 @@ from __future__ import annotations
 import sys
 
 from common import EVENTS_DIR, now_iso, read_json, write_events
+from common import error_detail, error_text
 from ingest import notice_set as NS
 
 SOURCE_ID = "co-official-notices"
@@ -164,8 +165,8 @@ def main(argv=None) -> int:
     try:
         recs, meta = NS.build(SOURCE_ID, NOTICES, fetched, prev)
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     ok = not meta["unvalidated"]
     path = write_events(SOURCE_ID, recs, ok=ok, partial=not ok, meta=meta,

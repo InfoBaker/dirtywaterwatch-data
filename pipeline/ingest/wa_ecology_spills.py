@@ -102,6 +102,7 @@ import requests
 from build import redact
 from common import (DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, path_notes_to_meta, read_json,
                     save_raw, scrub_text, strip_house_numbers, write_events)
+from common import error_detail, error_text
 
 SOURCE_ID = "wa-ecology-sewage-spills"
 LAYER = ("https://gis.ecology.wa.gov/hosting/rest/services/Hosted/"
@@ -430,8 +431,8 @@ def run(file: str | None = None, out: str | None = None) -> int:
     try:
         rows, info = load_file(file) if file else fetch()
     except (requests.RequestException, RuntimeError, ValueError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}", meta=base_meta, path=path)
-        print(f"{SOURCE_ID}: failed: {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}", meta=base_meta, path=path)
+        print(f"{SOURCE_ID}: failed: {error_detail(e)}", file=sys.stderr)
         return 1
     last_n = (prev_doc.get("meta") or {}).get("rows")
     if not rows or (last_n and len(rows) < last_n * MIN_ROWS_RATIO and not file):

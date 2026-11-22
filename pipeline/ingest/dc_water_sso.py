@@ -50,6 +50,7 @@ from datetime import date, datetime, timedelta
 import requests
 
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, write_events
+from common import error_detail, error_text
 
 SOURCE_ID = "dc-water-sso"
 REGISTRY_ID = "dc-dcwater-sso-csv"
@@ -271,7 +272,7 @@ def main(argv=None) -> int:
         r.raise_for_status()
         rows, bad = parse(r.content.decode("utf-8-sig", "replace"))
     except (requests.RequestException, ValueError) as e:
-        msg = f"{type(e).__name__}: {e}" if isinstance(e, requests.RequestException) else str(e)
+        msg = f"{error_text(e)}" if isinstance(e, requests.RequestException) else error_detail(e)
         write_events(SOURCE_ID, [], ok=False, error=f"not read: {msg}",
                      meta={"registry_ids": [REGISTRY_ID], "url": URL, "fields_kept": KEPT, "fields_dropped": DROPPED})
         print(f"{SOURCE_ID}: not read ({msg}); earlier records kept", file=sys.stderr)

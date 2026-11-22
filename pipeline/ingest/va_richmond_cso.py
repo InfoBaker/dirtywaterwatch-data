@@ -46,6 +46,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_detail, error_text
 from ingest import va_waters
 from ingest.ny_sprtk import _rows, _sheets, _shared_strings
 
@@ -164,7 +165,7 @@ def to_records(month: str, parsed: dict, source_url: str, fetched_at: str) -> li
                 start, end = excel_time(row.get("start")), excel_time(row.get("end"))
             except (TypeError, ValueError) as e:
                 start = end = None
-                problems.append(f"time not read: {e}")
+                problems.append(f"time not read: {error_detail(e)}")
             if start and end and end < start:
                 problems.append("end before start")
             mg = _f(row.get("Observed Overflow Volume, mg"))
@@ -215,8 +216,8 @@ def main(argv=None) -> int:
         if not links:
             raise ValueError("no month links on the CSO Outfalls page (layout changed?)")
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"page: {type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"page: {error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     newest = max(links)
     since = f"{BACKFILL_FROM:%Y-%m}"
@@ -245,7 +246,7 @@ def main(argv=None) -> int:
                          "title": parsed["title"], "notes": parsed["notes"], "summary": parsed["summary"],
                          "events": parsed["events"]}
         except Exception as e:  # noqa: BLE001
-            errors.append(f"{m}: {type(e).__name__}: {e}")
+            errors.append(f"{m}: {error_text(e)}")
         time.sleep(1)
     state["last_poll_at"] = fetched_at
     state["listed_months"] = sorted(links)

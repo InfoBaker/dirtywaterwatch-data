@@ -43,6 +43,7 @@ from typing import Callable
 import requests
 
 from common import HEADERS, event, save_raw
+from common import error_text
 
 PAUSE_S = 1.0
 
@@ -71,7 +72,7 @@ def fetch(url: str, timeout: int = 60) -> tuple[int | None, str | None, str | No
     try:
         r = requests.get(url, headers=HEADERS, timeout=timeout)
     except requests.RequestException as e:
-        return None, None, f"{type(e).__name__}: {str(e)[:160]}"
+        return None, None, f"{error_text(e)}"
     if r.status_code != 200:
         return r.status_code, None, f"HTTP {r.status_code}"
     return 200, page_text(r.text), None

@@ -123,6 +123,7 @@ import requests
 
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, NAME_REMOVED, ROOT, event, now_iso, path_notes_to_meta,
                     read_json, save_raw, scrub_text, write_events, write_json)
+from common import error_detail, error_text
 from ingest import mi_egle_mienviro as mi
 
 SOURCE_ID = "wy-deq-spill-list"
@@ -660,7 +661,7 @@ def parse_csv(content: bytes) -> list[dict]:
     try:
         table = list(csv.reader(io.StringIO(text, newline=""), strict=True))
     except csv.Error as e:
-        raise BadRead(f"the file could not be read as CSV ({e}): read as cut short") from None
+        raise BadRead(f"the file could not be read as CSV ({error_detail(e)}): read as cut short") from None
     if not table or table[0] != HEADER:
         got = table[0] if table else []
         raise BadRead(f"the header changed: {len(got)} columns, {len(set(got) ^ set(HEADER))} names differ from the "
@@ -733,7 +734,7 @@ def main(argv=None) -> int:
         rows = parse_csv(content)
         check_count(rows, None if args.file else state.get("last_complete_rows"))
     except Exception as e:  # noqa: BLE001 - every failure keeps the records
-        msg = f"{type(e).__name__}: {scrub_text(str(e))[:300]}"
+        msg = scrub_text(error_text(e))
         write_events(SOURCE_ID, [], ok=False, error=msg,
                      meta={"completeness": {"failed_at": fetched_at, "last_complete_rows": state.get("last_complete_rows")}})
         print(f"{SOURCE_ID}: FAILED {msg}", file=sys.stderr)

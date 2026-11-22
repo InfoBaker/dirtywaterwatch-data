@@ -1,0 +1,772 @@
+"""Monthly CSO figures per outfall from EPA's per-state discharge monitoring report files: Ohio, Kentucky, Illinois,
+Tennessee, Kansas, Georgia and Massachusetts (registry: oh-echo-dmr-cso, ky-echo-dmr-cso, il-echo-dmr-cso,
+tn-echo-dmr-cso, ks-echo-dmr-cso, ga-echo-dmr-cso, ma-echo-dmr-cso-files) -> data/build/events/<source id>.json.
+
+Source
+  EPA ECHO's "Permit limit and DMR by jurisdiction" files (decision 45; docs/analysis/2026-11-17-echo-downloads.md, C1),
+  https://echo.epa.gov/files/echodownloads/NPDES_by_state_year/<ST>_FY<yyyy>_NPDES_DMRS_LIMITS.zip, no key: one ZIP per
+  state and federal fiscal year (October to September), holding <ST>_FY<yyyy>_NPDES_DMRS.csv (every value of every
+  discharge monitoring report the state's permittees filed) and the permit limits. EPA refreshes the current and the
+  previous year weekly (the ICIS-NPDES extract) and older years monthly; the current year's file is published some
+  weeks after the year starts (FY2027's answered 404 on 2026-11-21). Read with the pipeline's named client from EPA's
+  download server (echo.epa.gov/files), not the effluent-chart service (echodata.epa.gov) the Indiana, West Virginia,
+  New Jersey and Massachusetts readers ask per permit, which did not answer from about 00:50Z to 03:40Z on 2026-11-19.
+  Fields read: EXTERNAL_PERMIT_NMBR, PERM_FEATURE_NMBR, PERM_FEATURE_TYPE_CODE, PARAMETER_CODE, PARAMETER_DESC,
+  MONITORING_LOCATION_CODE, NMBR_OF_REPORT, STATISTICAL_BASE_CODE, MONITORING_PERIOD_END_DATE, DMR_VALUE_ID,
+  DMR_VALUE_NMBR, DMR_UNIT_DESC, LIMIT_UNIT_DESC, VALUE_RECEIVED_DATE, DAYS_LATE, NODI_CODE, VERSION_NMBR,
+  LIMIT_SET_SCHEDULE_ID. The files name permits and plants, never a person.
+
+What is read (STATES)
+  Per state, the permits with at least one open combined sewer outfall in the outfall registry (common.
+  load_outfall_registry; in_echo_cso_monthly.registry_outfalls and permits_to_read), less a state's permits another
+  reader already takes from EPA (Massachusetts: Springfield, Holyoke and Chicopee, ingest/echo_cso_dmr_monthly.py).
+  Only lines at an external outfall the registry holds as a combined sewer outfall of the permit, at the effluent-gross
+  monitoring locations (codes 1 'Effluent Gross' and Y 'Effluent Gross (Supplementary)'), with a one-month monitoring
+  period, and for the parameters that count or measure an overflow (codes per figure, in order of preference):
+    events  74062 'Overflows', 84165 'Discharge event observation', 51484 'Number of Events'
+    hours   50037 'Duration', 81381 and 82517 'Duration of discharge'
+    volume  74063 'Overflow volume', 82220 'Flow, total'
+  An outfall that files two codes for one figure keeps the first (the others counted in meta). Lines at a permit's
+  other outfalls (Ohio's station 300, a plant's own outfall) and figures per year or quarter (Ohio's 51709 'Overflows'
+  in occurrences a year, filed once in December) are counted in meta and not read.
+
+Statistical bases (fold_rows)
+  One DMR can carry a figure under several statistical bases. A monthly or period total (MO TOTAL, TOTAL; EVNT TOT for
+  a count) is the month's figure. Ohio files each CSO figure under both the daily maximum and the monthly average
+  columns: where the two agree (99 percent of Ohio's counts; checked against Columbus's own overflow table, 2026-11-21)
+  the figure is the month's; where they differ, or a line gives only a statistic (a monthly average, a maximum), a rate
+  (MGD, gal/d), a yes-or-no observation (N=0;Y=1) or a count above MAX_EVENTS_PER_MONTH, the figure is not the month's
+  total: above zero it marks the month as a discharge month and gives no count, hours or volume, and the record writes
+  it out as filed (row FiguredAs; in_echo_cso_monthly.figures). A unit missing from the value is the permit limit's
+  unit on the same line (raw.dmr UnitFrom "limit").
+
+Records (in_echo_cso_monthly.finish, the same as Indiana's)
+  One per permit + outfall + month in which any figure is above zero: event_type cso, status ended, started_at the first
+  and ended_at the last day of the month, time_precision month, reported_at the DMR's VALUE_RECEIVED_DATE (the day the
+  permitting authority received it; never our fetch time), volume_gal from million gallons (a month's total only;
+  above MAX_MGAL_PER_MONTH, or Indiana's MAX_MGAL_PER_HOUR where hours are filed, kept in the text only), the
+  figures in volume_text, raw.dmr per figure
+  (DMR value id, value, unit, statistical bases, NODI code, receipt date, version, parameter): permit, outfall, month,
+  parameter and value cite EPA's DMR record. These are monthly figures, not events: the status build gives them the
+  monthly mark and never red or yellow (build/status.py EPA_MONTHLY_SOURCES), and the charts never add them to the
+  discharge counts. A month filed NODI C ('No Discharge') or zero for every figure the outfall carries is no record and
+  clears an older monthly mark (meta.latest_month_by_outfall). Revisions: the higher VERSION_NMBR, then the later
+  receipt, wins; a month the file no longer lists is kept and marked; the evidence store keeps every month read. The
+  point and the water come from the registry row (a plant's point is never used); points rounded to three decimals.
+  meta.outfalls_without_water lists the outfalls with records whose registry row has no water record.
+
+Cache, budget and cadence
+  data/build/<source id>-cache.json keeps, per fiscal year, the file's Last-Modified and size, the registry outfalls it
+  was filtered on and the folded rows of the outfalls read; and the evidence store (in_echo_cso_monthly.merge_previous).
+  Each run asks each file's headers (HEAD) and downloads only a file that changed (or whose registry outfalls changed),
+  at most MAX_DOWNLOAD_BYTES a run and none after WALL_S seconds (the rest from the cache: meta.not_asked_this_run).
+  The fiscal years read are those from --since (default 2025-01-01) to today. --backfill lifts the budget.
+
+Failures
+  A file that answers an error (after three tries) is failed: that state's run is ok=False, its cached rows of that year
+  still used and the previous records kept. The current fiscal year's file answering 404 within CURRENT_FY_GRACE_DAYS of
+  the year's start is "not published yet", no failure; any other 404 is a failure. A ZIP with no DMR table, or a table
+  missing a field read, is a failed read. Each state is written on its own, so one state's failure leaves the others.
+
+Run from pipeline/:  python -m ingest.echo_dmr_cso_states [--state OH] [--since 2025-01-01] [--backfill]
+                     python -m ingest.echo_dmr_cso_states --state OH --file OH_FY2026_NPDES_DMRS_LIMITS.zip --fy 2026
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import io
+import json
+import sys
+import time
+import zipfile
+from collections import Counter, defaultdict
+from datetime import UTC, date, datetime
+from pathlib import Path
+
+import requests
+
+import common
+import zones
+from common import BUILD_DIR, HEADERS, RAW_DIR, read_json, save_raw, write_events, write_json
+from ingest import in_echo_cso_monthly as M
+
+BASE_URL = "https://echo.epa.gov/files/echodownloads/NPDES_by_state_year/"
+DEFAULT_SINCE = "2025-01-01"
+REQUEST_TIMEOUT = (15, 120)
+HEAD_TIMEOUT = (10, 30)
+HARD_STOP_S = 150                      # a download still streaming this long after WALL_S is stopped (cap 600 s)
+MAX_DOWNLOAD_BYTES = 300_000_000       # a run downloads at most this much; the rest waits (the weekly refresh is ~165 MB)
+WALL_S = 360                           # no download starts after this many seconds (the refresh caps a feed at 600 s)
+CURRENT_FY_GRACE_DAYS = 120            # the current year's file answering 404 this soon after October 1 is not yet out
+MAX_EVENTS_PER_MONTH = 744             # a count above one an hour of a 31-day month is kept as filed, not counted
+# a month's volume at one outfall above this (about 130 million gallons a day, day and night for 31 days) is kept as
+# filed in the text and not counted (2026-11-21: 7,841,548 'Mgal/mo' at IL0021113 002 and 17,412 'Mgal' at KY0035467
+# 008, gallons filed as million gallons; MWRD's largest monthly figures run to 3,372); with hours filed, Indiana's
+# MAX_MGAL_PER_HOUR applies first
+MAX_MGAL_PER_MONTH = 4000
+FIGURES = {"events": ("74062", "84165", "51484"), "hours": ("50037", "81381", "82517"), "volume": ("74063", "82220")}
+CODES = {c: name for name, cs in FIGURES.items() for c in cs}
+LOCATIONS = {"1": "Effluent Gross", "Y": "Effluent Gross (Supplementary)"}
+# statistical bases (ECHO's REF_STATISTICAL_BASE.csv, read 2026-11-21): short form as the effluent-chart service gives it
+BASES = {"MP": "MO TOTAL", "TB": "TOTAL", "ET": "EVNT TOT", "DD": "DAILY MX", "MK": "MO AVG", "DB": "DAILY AV",
+         "DC": "DAILY MN", "AF": "AVERAGE", "MB": "MAXIMUM", "ME": "MINIMUM", "AB": "ANNL AVG", "M6": "MAXIMUM"}
+BASE_WORDS = {"MP": "a monthly total", "TB": "a total", "ET": "an event total", "DD": "a daily maximum",
+              "MK": "a monthly average", "DB": "a daily average", "DC": "a daily minimum", "AF": "an average",
+              "MB": "a maximum", "ME": "a minimum", "AB": "an annual average", "M6": "a maximum"}
+FOLD_VERSION = 3                         # bumped when fold_rows changes, so the cached rows are folded again
+TOTAL_BASES = {"MP", "TB"}
+NOT_MONTHLY_BASES = {"AB", "TC"}         # annual average, season-to-date total: never one month's figure
+FIGURE_WORDS = {"events": "overflow count", "hours": "hours of discharge", "volume": "overflow volume"}
+HOUR_UNITS = {"hr", "hr/mo", "hrs", "hours"}
+NODI_WORDS = {"C": "No Discharge"}
+FIELDS = ("EXTERNAL_PERMIT_NMBR", "PERM_FEATURE_NMBR", "PERM_FEATURE_TYPE_CODE", "PARAMETER_CODE", "PARAMETER_DESC",
+          "MONITORING_LOCATION_CODE", "NMBR_OF_REPORT", "STATISTICAL_BASE_CODE", "MONITORING_PERIOD_END_DATE",
+          "DMR_VALUE_ID", "DMR_VALUE_NMBR", "DMR_UNIT_DESC", "LIMIT_UNIT_DESC", "VALUE_RECEIVED_DATE", "DAYS_LATE",
+          "NODI_CODE", "VERSION_NMBR", "LIMIT_SET_SCHEDULE_ID")
+# a folded row in the cache: these effluent-chart field names, in this order
+ROW_KEYS = ("permit", "feature", "ParameterCode", "ParameterDesc", "MonitoringLocationDesc", "MonitoringPeriodEndDate",
+            "DMRValueId", "DMRValueNmbr", "DMRUnitDesc", "UnitFrom", "StatisticalBaseDesc", "StatisticalBases",
+            "FiguredAs", "NODICode", "NODIDesc", "ValueReceivedDate", "DaysLate", "VersionNmbr", "LimitSetScheduleId",
+            "PermitVersion")
+
+AUTHORITY = ("EPA ECHO discharge monitoring reports (the operator's own monthly combined sewer overflow figures, filed "
+             "with {agency}; reported weeks after the month)")
+STATES = {
+    "OH": {"source_id": "oh-echo-dmr-cso", "agency": "Ohio EPA"},
+    "KY": {"source_id": "ky-echo-dmr-cso", "agency": "the Kentucky Division of Water"},
+    "IL": {"source_id": "il-echo-dmr-cso", "agency": "Illinois EPA"},
+    "TN": {"source_id": "tn-echo-dmr-cso", "agency": "the Tennessee Department of Environment and Conservation"},
+    "KS": {"source_id": "ks-echo-dmr-cso", "agency": "the Kansas Department of Health and Environment"},
+    "GA": {"source_id": "ga-echo-dmr-cso", "agency": "Georgia's Environmental Protection Division"},
+    # Springfield, Holyoke and Chicopee are read by ingest/echo_cso_dmr_monthly.py (echo-cso-dmr-monthly)
+    # Region 1's CSO permits put the CSO lines at the 'Storm Water' monitoring location (SW) as well as at 1
+    "MA": {"source_id": "ma-echo-dmr-cso-files", "agency": "EPA Region 1 and MassDEP",
+           "exclude": ("MA0101613", "MA0101630", "MA0101508"), "locations": {"SW": "Storm Water"}},
+}
+
+
+def fiscal_year(d: date) -> int:
+    return d.year + 1 if d.month >= 10 else d.year
+
+
+def fiscal_years(since: date, today: date) -> list[int]:
+    return list(range(fiscal_year(since), fiscal_year(today) + 1))
+
+
+def file_url(state: str, fy: int) -> str:
+    return f"{BASE_URL}{state}_FY{fy}_NPDES_DMRS_LIMITS.zip"
+
+
+def ddmon(mdy: str | None) -> str | None:
+    """'05/31/2026' -> '31-MAY-26', the effluent-chart service's form, which in_echo_cso_monthly reads."""
+    try:
+        return datetime.strptime(mdy, "%m/%d/%Y").strftime("%d-%b-%y").upper() if mdy else None
+    except ValueError:
+        return None
+
+
+def _num(v) -> float | None:
+    return M.num(v)
+
+
+def _unit_words(unit: str) -> str:
+    return {"Mgal": "million gallons", "Mgal/mo": "million gallons"}.get(unit, unit)
+
+
+def _fmt(v: float) -> str:
+    return M._g(v)
+
+
+def _unit_txt(name: str, unit: str) -> str:
+    if name == "events" or not unit or (name == "hours" and unit in HOUR_UNITS):
+        return ""
+    return f" {_unit_words(unit)}"
+
+
+def figured_as(name: str, unit: str | None, kept: list[tuple]) -> str:
+    """The filed form of a figure that is not the month's own total, for the record's text ('overflow volume filed
+    as a daily maximum of 0.5 million gallons and a monthly average of 0.33 million gallons'). kept: (base, value) or
+    (base, value, the line's own unit)."""
+    vals = " and ".join(f"{BASE_WORDS.get(k[0], 'a figure (' + k[0] + ')')} given as no discharge"
+                        if len(k) > 3 and k[3] else
+                        f"{BASE_WORDS.get(k[0], 'a figure (' + k[0] + ')')} of {_fmt(k[1])}"
+                        f"{_unit_txt(name, k[2] if len(k) > 2 else unit)}" for k in kept)
+    return f"{FIGURE_WORDS[name]} filed as {vals}"
+
+
+def _unit_of(r: dict) -> tuple[str, str | None]:
+    """A line's own unit and where it came from: its value's unit, else its limit's (Astra review 2026-11-21 P1-3)."""
+    if r["DMR_UNIT_DESC"]:
+        return r["DMR_UNIT_DESC"], None
+    if r["LIMIT_UNIT_DESC"]:
+        return r["LIMIT_UNIT_DESC"], "limit"
+    return "(unit not given)", None
+
+
+def _value_of(r: dict) -> float | None:
+    """0 for NODI C ('No Discharge'), the number for a plain value, None for a line that says nothing."""
+    if r["NODI_CODE"].upper() == "C":
+        return 0.0
+    if r["NODI_CODE"]:
+        return None
+    return _num(r["DMR_VALUE_NMBR"])
+
+
+def fold_rows(rows: list[dict], name: str, stats: Counter, locations: dict[str, str] | None = None) -> dict | None:
+    """One row per permit, outfall, parameter, month, permit version and receipt from the lines EPA's file gives it (one
+    per statistical base and value type): the effluent-chart row in_echo_cso_monthly reads, or None when no line says
+    anything. Module docstring, 'Statistical bases'. Every line that says something is evidence (Astra review
+    2026-11-21 P1-1): a month is a discharge month when any of them is above zero, and no discharge only when all of
+    them are zero or NODI C. The month's own figure is a total (MO TOTAL, TOTAL; EVNT TOT for a count) at least as large
+    as every statistic beside it, or Ohio's daily maximum and monthly average agreeing (P1-4); anything else is written
+    as filed (FiguredAs). Each line keeps its own unit; lines in different units are written as filed (P1-3)."""
+    first = rows[0]
+    said = [(r["STATISTICAL_BASE_CODE"], _value_of(r), r) for r in rows if _value_of(r) is not None]
+    bases = "; ".join(f"{BASES.get(r['STATISTICAL_BASE_CODE'], r['STATISTICAL_BASE_CODE'])} "
+                      f"{r['DMR_VALUE_NMBR'] or ('NODI ' + r['NODI_CODE'] if r['NODI_CODE'] else 'blank')}"
+                      for r in sorted(rows, key=lambda x: x["STATISTICAL_BASE_CODE"]))
+    row = {"permit": first["EXTERNAL_PERMIT_NMBR"].strip().upper(), "feature": first["PERM_FEATURE_NMBR"].strip().upper(),
+           "ParameterCode": first["PARAMETER_CODE"], "ParameterDesc": first["PARAMETER_DESC"],
+           "MonitoringLocationDesc": (locations or LOCATIONS)[first["MONITORING_LOCATION_CODE"]],
+           "MonitoringPeriodEndDate": ddmon(first["MONITORING_PERIOD_END_DATE"]),
+           "StatisticalBases": bases, "FiguredAs": None, "NODIDesc": None,
+           "ValueReceivedDate": ddmon(first["VALUE_RECEIVED_DATE"]), "DaysLate": first["DAYS_LATE"] or None,
+           # VERSION_NMBR is the permit's version (0 the permit in force), not a revision of the report: kept apart,
+           # and every row ranks as version 0, so the later receipt wins (Astra review 2026-11-21 P1-2)
+           "VersionNmbr": "0", "PermitVersion": first["VERSION_NMBR"] or None,
+           "LimitSetScheduleId": first["LIMIT_SET_SCHEDULE_ID"] or None}
+    if not said:
+        # no value and no NODI C: another NODI code (says nothing) or a blank line
+        code = next((r["NODI_CODE"] for r in rows if r["NODI_CODE"]), "")
+        if not code:
+            return None
+        unit, unit_from = _unit_of(rows[0])
+        row.update(DMRValueId=rows[0]["DMR_VALUE_ID"], DMRValueNmbr=None, NODICode=code, DMRUnitDesc=unit,
+                   UnitFrom=unit_from,
+                   StatisticalBaseDesc=BASES.get(rows[0]["STATISTICAL_BASE_CODE"], rows[0]["STATISTICAL_BASE_CODE"]))
+        return row
+    units = {_unit_of(r)[0] for _, _, r in said}
+    # volume units convert (Mgal, gal): compared in gallons; any other mix of units is written as filed
+    gal = len(units) > 1 and all(u in M.MGAL for u in units)
+    if gal:
+        said = [(b, v, r, v * M.MGAL[_unit_of(r)[0]]) for b, v, r in said]
+    else:
+        said = [(b, v, r, v) for b, v, r in said]
+    positive = [v for _, v, _, _ in said if v > 0]
+    desc = " and ".join(sorted({BASES.get(b, b) for b, _, _, _ in said}))
+    if not positive:
+        # every line zero or NODI C: no discharge
+        r0 = said[0][2]
+        nodi_c = all(r["NODI_CODE"].upper() == "C" for _, _, r, _ in said)
+        unit, unit_from = _unit_of(r0)
+        row.update(DMRValueId=r0["DMR_VALUE_ID"], DMRValueNmbr=None if nodi_c else "0",
+                   NODICode="C" if nodi_c else None, NODIDesc=NODI_WORDS["C"] if nodi_c else None,
+                   DMRUnitDesc=unit, UnitFrom=unit_from, StatisticalBaseDesc=desc)
+        return row
+    totals = [x for x in said if x[0] in TOTAL_BASES or (x[0] == "ET" and name == "events")]
+    others = [x for x in said if x not in totals]
+    top = max(said, key=lambda x: x[3])
+    pick, month_figure = top, False
+    kept = sorted({(b, v, _unit_of(r)[0], r["NODI_CODE"].upper() == "C") for b, v, r, _ in said},
+                  key=lambda x: (["DD", "MK"].index(x[0]) if x[0] in ("DD", "MK") else 2, x[0], x[1]))
+    if len(units) > 1 and not gal:
+        row["FiguredAs"] = figured_as(name, None, kept)
+        stats["figures_in_more_than_one_unit"] += 1
+    elif totals:
+        tv = {n for _, _, _, n in totals}
+        if len(tv) == 1 and min(tv) > 0 and all(n <= min(tv) for _, _, _, n in others):
+            month_figure, pick = True, totals[0]
+        else:
+            row["FiguredAs"] = figured_as(name, None, kept)
+            stats["figures_with_disagreeing_bases"] += 1
+    elif {b for b, _, _, _ in said} == {"DD", "MK"}:
+        # Ohio's two columns: one figure in both is the month's (unless the report holds daily entries: mark_daily)
+        agree = len({n for _, _, _, n in said}) == 1
+        row["_pair"] = "agree" if agree else "differ"
+        if agree:
+            month_figure = True
+        else:
+            row["FiguredAs"] = figured_as(name, None, kept)
+            stats["figures_with_disagreeing_bases"] += 1
+    else:
+        # statistics only (a monthly average, a maximum, a daily average beside a daily maximum): no month's total
+        row["FiguredAs"] = figured_as(name, None, kept)
+        stats["figures_given_only_as_a_statistic"] += 1
+    unit, unit_from = _unit_of(pick[2])
+    row.update(DMRValueId=pick[2]["DMR_VALUE_ID"], DMRValueNmbr=pick[2]["DMR_VALUE_NMBR"], NODICode=None,
+               DMRUnitDesc=unit, UnitFrom=unit_from, StatisticalBaseDesc=desc)
+    if not month_figure:
+        return row
+    v = pick[1]
+    if unit == "N=0;Y=1":
+        row["FiguredAs"] = "a discharge filed as observed (yes)"
+        stats["figures_filed_yes_or_no"] += 1
+    elif unit.endswith("/d") or unit in ("MGD", "gpd"):
+        row["FiguredAs"] = f"{FIGURE_WORDS[name]} filed as a rate of {_fmt(v)} {unit}"
+        stats["figures_filed_as_a_rate"] += 1
+    elif name == "events" and v > MAX_EVENTS_PER_MONTH:
+        row["FiguredAs"] = f"overflow count filed as {_fmt(v)}, more than one an hour of the month"
+        stats["implausible_counts"] += 1
+    elif name == "hours" and unit not in HOUR_UNITS:
+        row["FiguredAs"] = f"duration filed as {_fmt(v)} {unit}"
+        stats["durations_in_other_units"] += 1
+    return row
+
+
+def mark_daily(rows: list[dict], stats: Counter) -> list[dict]:
+    """A report (permit, outfall, month, version, receipt) in which one figure's daily maximum and monthly average
+    differ holds daily entries; a figure whose two columns agree there is one day's figure, not the month's total."""
+    daily = {(r["permit"], r["feature"], r["MonitoringPeriodEndDate"], r["PermitVersion"], r["ValueReceivedDate"])
+             for r in rows if r.get("_pair") == "differ"}
+    for r in rows:
+        k = (r["permit"], r["feature"], r["MonitoringPeriodEndDate"], r["PermitVersion"], r["ValueReceivedDate"])
+        if r.pop("_pair", None) == "agree" and k in daily and not r.get("FiguredAs") and (_num(r["DMRValueNmbr"]) or 0) > 0:
+            name = CODES[r["ParameterCode"]]
+            r["FiguredAs"] = (f"{FIGURE_WORDS[name]} filed as {_fmt(_num(r['DMRValueNmbr']))}"
+                              f"{_unit_txt(name, r['DMRUnitDesc'])} for both the daily maximum and the monthly "
+                              "average of daily entries")
+            stats["figures_in_reports_of_daily_entries"] += 1
+    for r in rows:
+        r.pop("_pair", None)
+    return rows
+
+
+def _not_monthly_unit(unit: str) -> bool:
+    return any(unit.endswith(s) for s in ("/yr", "/qtr", "/year", "/quarter"))
+
+
+def parse_zip(path: Path, keys: set[tuple[str, str]], permits: set[str], stats: Counter,
+              locations: dict[str, str] | None = None) -> list[dict]:
+    """The folded rows of EPA's state file for the registry's combined sewer outfalls (keys) of the permits read, at
+    the monitoring locations given (code -> description; LOCATIONS unless given)."""
+    locations = locations or LOCATIONS
+    with zipfile.ZipFile(path) as z:
+        name = next((n for n in z.namelist() if n.upper().endswith("_NPDES_DMRS.CSV")), None)
+        if name is None:
+            raise ValueError("no DMR table in the ZIP")
+        groups: dict[tuple, list[dict]] = defaultdict(list)
+        with z.open(name) as f:
+            rd = csv.reader(io.TextIOWrapper(f, encoding="utf-8", errors="replace", newline=""))
+            hdr = next(rd)
+            missing = [k for k in FIELDS if k not in hdr]
+            if missing:
+                raise ValueError("DMR table without " + ", ".join(missing))
+            ix = {k: hdr.index(k) for k in FIELDS}
+            pc, pp = ix["PARAMETER_CODE"], ix["EXTERNAL_PERMIT_NMBR"]
+            n_lines = n_permit_lines = 0
+            for line in rd:
+                n_lines += 1
+                if len(line) < len(hdr) or line[pp].strip().upper() not in permits:
+                    continue
+                n_permit_lines += 1             # any parameter: a plant's own lines show the file holds the permit
+                if line[pc] not in CODES:
+                    continue
+                r = {k: line[i].strip() for k, i in ix.items()}
+                permit = r["EXTERNAL_PERMIT_NMBR"].upper()
+                key = common.outfall_key(permit, r["PERM_FEATURE_NMBR"])
+                if key not in keys:
+                    stats[f"lines_at_outfalls_not_in_registry_as_cso:{permit}:{r['PERM_FEATURE_NMBR']}"] += 1
+                    continue
+                if r["PERM_FEATURE_TYPE_CODE"] != "EXO":
+                    stats["lines_not_at_an_external_outfall"] += 1
+                    continue
+                if r["MONITORING_LOCATION_CODE"] not in locations:
+                    stats[f"lines_at_other_monitoring_locations:{r['MONITORING_LOCATION_CODE']}"] += 1
+                    continue
+                if r["NMBR_OF_REPORT"] != "1":
+                    # a period of more than one month, or none given (Astra review 2026-11-21 P1-4)
+                    stats["lines_with_a_monitoring_period_longer_than_a_month"] += 1
+                    continue
+                if r["STATISTICAL_BASE_CODE"] in NOT_MONTHLY_BASES:
+                    stats["lines_with_an_annual_or_season_base"] += 1
+                    continue
+                if _not_monthly_unit(r["DMR_UNIT_DESC"] or r["LIMIT_UNIT_DESC"]):
+                    stats["lines_in_units_per_year_or_quarter"] += 1
+                    continue
+                groups[(permit, r["PERM_FEATURE_NMBR"].upper(), r["PARAMETER_CODE"], r["MONITORING_PERIOD_END_DATE"],
+                        r["VERSION_NMBR"], r["VALUE_RECEIVED_DATE"], r["LIMIT_SET_SCHEDULE_ID"])].append(r)
+            # a table with no line, or none for any permit read, is a broken file, not a month of no reports (Astra
+            # review 2026-11-21 P1-7): the read fails and the previous records stay
+            if n_lines == 0:
+                raise ValueError("an empty DMR table")
+            if permits and n_permit_lines == 0:
+                raise ValueError("no line for any permit read")
+    out = []
+    for k, rows in groups.items():
+        row = fold_rows(rows, CODES[k[2]], stats, locations)
+        if row is not None:
+            out.append(row)
+        else:
+            stats["blank_lines"] += 1
+    out = mark_daily(out, stats)
+    out.sort(key=lambda r: (r["permit"], r["feature"], r["ParameterCode"], r["MonitoringPeriodEndDate"] or "",
+                            r["VersionNmbr"]))
+    return out
+
+
+def in_window(rows: list[dict], since: date, stats: Counter) -> list[dict]:
+    """The rows of months from --since's month on (a fiscal year's file starts in the October before)."""
+    first = since.replace(day=1)
+    out = []
+    for r in rows:
+        try:
+            end = datetime.strptime(r["MonitoringPeriodEndDate"], "%d-%b-%y").date()
+        except (TypeError, ValueError):
+            stats["rows_with_no_monitoring_period"] += 1
+            continue
+        if end >= first:
+            out.append(r)
+        else:
+            stats["rows_before_since"] += 1
+    return out
+
+
+def preferred(rows: list[dict], stats: Counter) -> list[dict]:
+    """An outfall that files two codes for one figure in a month keeps the first code of FIGURES for that month; a
+    month with one code keeps it (Astra review 2026-11-21 P2-9: the choice was once per outfall, which dropped the
+    months only the other code covered)."""
+    def key(r):
+        return r["permit"], r["feature"], CODES[r["ParameterCode"]], r["MonitoringPeriodEndDate"]
+    have: dict[tuple, set] = defaultdict(set)
+    for r in rows:
+        have[key(r)].add(r["ParameterCode"])
+    keep = {k: next(c for c in FIGURES[k[2]] if c in cs) for k, cs in have.items()}
+    out = []
+    for r in rows:
+        if keep[key(r)] == r["ParameterCode"]:
+            out.append(r)
+        else:
+            stats[f"other_codes_for_the_same_figure:{r['permit']}:{r['feature']}:{r['ParameterCode']}"] += 1
+    return out
+
+
+def to_results(rows: list[dict]) -> dict[tuple[str, str], dict]:
+    """The folded rows as the effluent-chart answers in_echo_cso_monthly.collect reads, keyed (permit, code)."""
+    res: dict[tuple[str, str], dict] = {}
+    for r in rows:
+        a = res.setdefault((r["permit"], r["ParameterCode"]), {"Message": "Success", "CWPName": None, "PermFeatures": []})
+        feat = next((f for f in a["PermFeatures"] if f["PermFeatureNmbr"] == r["feature"]), None)
+        if feat is None:
+            feat = {"PermFeatureNmbr": r["feature"], "PermFeatureTypeDesc": "External Outfall", "Parameters": []}
+            a["PermFeatures"].append(feat)
+        par = next((p for p in feat["Parameters"] if p["MonitoringLocationDesc"] == r["MonitoringLocationDesc"]), None)
+        if par is None:
+            par = {"ParameterCode": r["ParameterCode"], "ParameterDesc": r["ParameterDesc"],
+                   "MonitoringLocationDesc": r["MonitoringLocationDesc"], "DischargeMonitoringReports": []}
+            feat["Parameters"].append(par)
+        par["DischargeMonitoringReports"].append({k: v for k, v in r.items() if k not in ("permit", "feature")})
+    return res
+
+
+def pack(rows: list[dict]) -> list[list]:
+    return [[r.get(k) for k in ROW_KEYS] for r in rows]
+
+
+def unpack(rows: list[list]) -> list[dict]:
+    return [dict(zip(ROW_KEYS, r)) for r in rows]
+
+
+def registry_hash(keys: set[tuple[str, str]]) -> str:
+    return hashlib.sha1(json.dumps(sorted(keys)).encode()).hexdigest()[:16]
+
+
+def head(url: str) -> tuple[int | None, str | None, int | None, str]:
+    """(status, Last-Modified, Content-Length, how) of a file, three tries; status None when nothing answered."""
+    err = "not tried"
+    for i in range(3):
+        try:
+            r = requests.head(url, headers=HEADERS, timeout=HEAD_TIMEOUT, allow_redirects=True)
+            if r.status_code == 404:
+                return 404, None, None, "HTTP 404"
+            r.raise_for_status()
+            n = r.headers.get("Content-Length")
+            return r.status_code, r.headers.get("Last-Modified"), int(n) if n and n.isdigit() else None, "ok"
+        except requests.RequestException as e:
+            err = M.error_category(e)
+            time.sleep(3 * (i + 1))
+    return None, None, None, err
+
+
+def download(url: str, dest: Path, budget: "Budget | None" = None) -> str:
+    """The file to dest; '' when done, else a bounded error category (never answer text). Streamed bytes are spent from
+    the budget; past its bytes or its hard stop the download ends as 'budget' and the partial file is removed; a failed
+    download leaves no file (Astra review 2026-11-21 P2-8, P3-14)."""
+    err = "not tried"
+    for i in range(3):
+        if budget is not None and i and budget.expired():
+            return err
+        try:
+            got = 0
+            with requests.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT, stream=True) as r:
+                r.raise_for_status()
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                with open(dest, "wb") as f:
+                    for chunk in r.iter_content(1 << 20):
+                        f.write(chunk)
+                        got += len(chunk)
+                        if budget is not None and ((budget.left is not None and got > budget.left)
+                                                   or (budget.stop_at() is not None
+                                                       and time.monotonic() > budget.stop_at())):
+                            budget.spend(got)
+                            dest.unlink(missing_ok=True)
+                            return "budget"
+            if budget is not None:
+                budget.spend(got)
+            if not zipfile.is_zipfile(dest):
+                raise ValueError("not a ZIP")
+            return ""
+        except (requests.RequestException, ValueError, OSError) as e:
+            err = M.error_category(e) if isinstance(e, requests.RequestException) else "not a ZIP"
+            dest.unlink(missing_ok=True)
+            time.sleep(3 * (i + 1))
+    return err
+
+
+class Budget:
+    """A run's download budget: bytes left (streamed bytes are spent) and a wall clock after which no request starts
+    and a download still streaming HARD_STOP_S later is stopped (Astra review 2026-11-21 P2-8). None: no limit."""
+    def __init__(self, max_bytes: int | None, wall_s: float | None):
+        self.left, self.until = max_bytes, (time.monotonic() + wall_s) if wall_s else None
+
+    def expired(self) -> bool:
+        return self.until is not None and time.monotonic() > self.until
+
+    def allows(self, n: int | None) -> bool:
+        if self.expired():
+            return False
+        return self.left is None or (n or 0) <= self.left
+
+    def spend(self, n: int | None) -> None:
+        if self.left is not None:
+            self.left -= n or 0
+
+    def stop_at(self) -> float | None:
+        return None if self.until is None else self.until + HARD_STOP_S
+
+
+def cache_file(source_id: str) -> Path:
+    return BUILD_DIR / f"{source_id}-cache.json"
+
+
+def locations_of(state: str) -> dict[str, str]:
+    return {**LOCATIONS, **(STATES[state].get("locations") or {})}
+
+
+def read_state_files(state: str, keys: set, permits: set, since: date, today: date, cache: dict, budget: Budget,
+                     stats: Counter, local: dict[int, Path] | None = None) -> tuple[list[dict], dict, dict]:
+    """(folded rows of every fiscal year read, fetch log by year, file facts by year); cache['files'] updated."""
+    files = cache.setdefault("files", {})
+    rows, log, facts = [], {}, {}
+    rh = registry_hash(keys | {("locations", ",".join(sorted(locations_of(state)))), ("fold", str(FOLD_VERSION))})
+    sid = STATES[state]["source_id"]
+    for fy in fiscal_years(since, today):
+        k, url = f"FY{fy}", file_url(state, fy)
+        old = files.get(k) or {}
+        if local and fy not in local:
+            # a --file run reads only its file: the other years from the cache, nothing asked of EPA
+            if old.get("rows") is not None:
+                rows += unpack(old["rows"])
+                stats.update(old.get("stats") or {})
+                log[k] = f"cache (file of {old.get('last_modified')}; not read: a --file run)"
+            else:
+                log[k] = "not asked this run (a --file run); no earlier read"
+            continue
+        if not (local and fy in local) and budget.expired():
+            # past the run's wall clock no request starts; the year is read from the cache (Astra review P2-8)
+            if old.get("rows") is not None:
+                rows += unpack(old["rows"])
+                stats.update(old.get("stats") or {})
+                log[k] = f"stale cache (file of {old.get('last_modified')}; not asked this run: wall clock)"
+            else:
+                log[k] = "not asked this run (wall clock); no earlier read"
+            continue
+        if local and fy in local:
+            st, lm, n, how = 200, f"local file {local[fy].name}", local[fy].stat().st_size, "ok"
+        else:
+            st, lm, n, how = head(url)
+        if st == 404:
+            fy_start = date(fy - 1, 10, 1)
+            # the grace is for a year's file not yet published, never for one read before (Astra review P2-10)
+            if fy == fiscal_year(today) and (today - fy_start).days <= CURRENT_FY_GRACE_DAYS and not old.get("read_at"):
+                log[k] = "not published yet (HTTP 404)"
+            else:
+                log[k] = "failed (HTTP 404)"
+            if old.get("rows"):
+                rows += unpack(old["rows"])
+                stats.update(old.get("stats") or {})
+                log[k] += f"; cached rows of the file of {old.get('last_modified')} used"
+            continue
+        if st is None:
+            log[k] = f"failed ({how})"
+            if old.get("rows"):
+                rows += unpack(old["rows"])
+                stats.update(old.get("stats") or {})
+                log[k] += f"; cached rows of the file of {old.get('last_modified')} used"
+            continue
+        if old.get("rows") is not None and old.get("last_modified") == lm and old.get("length") == n \
+                and old.get("registry") == rh and not (local and fy in local):
+            rows += unpack(old["rows"])
+            stats.update(old.get("stats") or {})
+            log[k] = f"cache (file of {lm}, read {old.get('read_at')})"
+            facts[k] = {"url": url, "last_modified": lm, "length": n, "rows": len(old["rows"])}
+            continue
+        if not (local and fy in local) and not budget.allows(n):
+            if old.get("rows") is not None:
+                rows += unpack(old["rows"])
+                stats.update(old.get("stats") or {})
+                log[k] = f"stale cache (file of {old.get('last_modified')}; not read this run: download budget)"
+            else:
+                log[k] = "not asked this run (download budget); no earlier read"
+            continue
+        path = local[fy] if local and fy in local else RAW_DIR / sid / f"{state}_FY{fy}.zip"
+        if not (local and fy in local):
+            err = download(url, path, budget=budget)
+            if err == "budget":
+                if old.get("rows") is not None:
+                    rows += unpack(old["rows"])
+                    stats.update(old.get("stats") or {})
+                    log[k] = f"stale cache (file of {old.get('last_modified')}; not read this run: download budget)"
+                else:
+                    log[k] = "not asked this run (download budget); no earlier read"
+                continue
+            if err:
+                path.unlink(missing_ok=True)        # a failed download leaves no file (Astra review P3-14)
+                log[k] = f"failed ({err})"
+                if old.get("rows"):
+                    rows += unpack(old["rows"])
+                    stats.update(old.get("stats") or {})
+                    log[k] += f"; cached rows of the file of {old.get('last_modified')} used"
+                continue
+        file_stats: Counter = Counter()
+        try:
+            got = parse_zip(path, keys, permits, file_stats, locations_of(state))
+        except (ValueError, zipfile.BadZipFile, OSError) as e:
+            log[k] = f"failed (unreadable file: {e if isinstance(e, ValueError) else type(e).__name__})"
+            if old.get("rows"):
+                rows += unpack(old["rows"])
+                stats.update(old.get("stats") or {})
+                log[k] += f"; cached rows of the file of {old.get('last_modified')} used"
+            continue
+        finally:
+            if not (local and fy in local):
+                path.unlink(missing_ok=True)       # 10 to 60 MB; the folded rows are kept (save_raw and the cache)
+        save_raw(sid, json.dumps({"url": url, "last_modified": lm, "rows": pack(got)}).encode(), f"FY{fy}.json")
+        files[k] = {"url": url, "last_modified": lm, "length": n, "registry": rh,
+                    "read_at": datetime.now(UTC).replace(microsecond=0).isoformat(), "stats": dict(file_stats),
+                    "rows": pack(got)}
+        stats.update(file_stats)
+        rows += got
+        log[k] = f"live (file of {lm})"
+        facts[k] = {"url": url, "last_modified": lm, "length": n, "rows": len(got)}
+    return rows, log, facts
+
+
+def zone_for(state: str):
+    return lambda o, lat, lon: zones.zone_for(state, lat, lon) or zones.STATE_ZONES.get(state)
+
+
+def run_state(state: str, since: date, today: date, budget: Budget, registry_rows: list[dict],
+              local: dict[int, Path] | None = None) -> int:
+    cfg = STATES[state]
+    sid = cfg["source_id"]
+    reg = M.registry_outfalls(registry_rows, state)
+    permits = [p for p in M.permits_to_read(reg) if p not in set(cfg.get("exclude") or ())]
+    keys = {k for k in reg if k[0] in set(permits)}
+    path = cache_file(sid)
+    doc = read_json(path, {}) or {}
+    cache = {"files": doc.get("files") or {}}
+    stats: Counter = Counter()
+    rows, log, facts = read_state_files(state, keys, set(permits), since, today, cache, budget, stats, local)
+    rows = preferred(in_window(rows, since, stats), stats)
+    evidence_store = doc.get("evidence") or {}
+
+    def save_store(store: dict) -> None:
+        write_json(path, {"source_id": sid, "about": "per fiscal year: EPA's file facts and the folded DMR rows of the "
+                          "registry's combined sewer outfalls (ingest/echo_dmr_cso_states.py); 'evidence' keeps the "
+                          "winning DMR row of every outfall, month and parameter ever read (in_echo_cso_monthly."
+                          "merge_previous)", "files": cache["files"], "evidence": dict(sorted(store.items()))})
+    save_store(evidence_store)
+    if not any(v.startswith(("live", "cache", "stale")) or "cached rows" in v for v in log.values()):
+        # nothing read this run and nothing cached: never written as a healthy feed with no records
+        err = "no file read: " + "; ".join(f"{k} {v}" for k, v in log.items())
+        write_events(sid, [], ok=False, error=err)
+        print(f"{sid}: {err}", file=sys.stderr)
+        return 1
+    feed = {"source_id": sid, "params": {c: n for c, n in CODES.items()},
+            "authority": AUTHORITY.format(agency=cfg["agency"]), "zone": zone_for(state),
+            "source_url": lambda permit: f"https://echo.epa.gov/effluent-charts#{permit}",
+            "location_ok": lambda desc, ok=frozenset(locations_of(state).values()): desc in ok,
+            "max_mgal_per_month": MAX_MGAL_PER_MONTH,
+            "cadence": ("EPA's state file per fiscal year, read when its Last-Modified changes (weekly for the current "
+                        "and previous year); DMRs reach EPA weeks after the month"),
+            "note": ("the operator's monthly DMR figures for this outfall, not an individual discharge: no day is "
+                     "given")}
+    lines = Counter()
+    skipped = {}
+    for k, v in stats.items():
+        head_, _, rest = k.partition(":")
+        if rest:
+            lines[head_] += v
+            skipped.setdefault(head_, {})[rest] = v
+    meta_extra = {"state": state, "files": facts, "file_log": log,
+                  **{k: v for k, v in stats.items() if ":" not in k},
+                  **{f"{k}_total": v for k, v in lines.items()}, "skipped_lines": skipped,
+                  "codes": FIGURES, "monitoring_locations_read": locations_of(state),
+                  **({"permits_read_by_another_feed": list(cfg["exclude"])} if cfg.get("exclude") else {})}
+    rc = M.finish(to_results(rows), reg, M.dischargers(state), since=since.isoformat(), permits=permits,
+                  fetch_log=log, evidence_store=evidence_store, save_store=save_store, feed=feed,
+                  meta_extra=meta_extra)
+    annotate(sid, reg)
+    return rc
+
+
+def annotate(source_id: str, reg: dict) -> None:
+    """meta.outfalls_without_water: the outfalls with records whose registry row has no water record."""
+    p = common.EVENTS_DIR / f"{source_id}.json"
+    doc = read_json(p, {}) or {}
+    recs = doc.get("records") or []
+    if not doc:
+        return
+    seen = {}
+    for r in recs:
+        o = reg.get(common.outfall_key(r.get("npdes_permit"), r.get("outfall_id"))) or {}
+        if not o.get("water_slug"):
+            seen[f"{r.get('npdes_permit')}|{r.get('outfall_id')}"] = o.get("receiving_water_echo")
+    meta = doc.setdefault("meta", {})
+    outfalls = {f"{r.get('npdes_permit')}|{r.get('outfall_id')}" for r in recs}
+    meta["outfalls_with_records"] = len(outfalls)
+    meta["outfalls_without_water"] = dict(sorted(seen.items()))
+    write_json(p, doc)
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--state", action="append", choices=sorted(STATES), help="one state (repeatable); default all")
+    ap.add_argument("--since", default=DEFAULT_SINCE)
+    ap.add_argument("--backfill", action="store_true", help="no download budget (a first load or a history reread)")
+    ap.add_argument("--file", type=Path, help="a saved state ZIP (with --state and --fy): read instead of EPA's")
+    ap.add_argument("--fy", type=int, help="the fiscal year of --file")
+    args = ap.parse_args(argv)
+    if args.file and (not args.fy or not args.state or len(args.state) != 1):
+        ap.error("--file needs --fy and one --state")
+    since = date.fromisoformat(args.since)
+    today = datetime.now(UTC).date()
+    budget = Budget(None, None) if args.backfill else Budget(MAX_DOWNLOAD_BYTES, WALL_S)
+    registry_rows = common.load_outfall_registry(provisional=False)
+    rc = 0
+    for st in args.state or list(STATES):
+        local = {args.fy: args.file} if args.file else None
+        try:
+            rc = max(rc, run_state(st, since, today, budget, registry_rows, local))
+        except Exception as e:  # one state's unexpected failure must not stop the others
+            sid = STATES[st]["source_id"]
+            write_events(sid, [], ok=False, error=f"{type(e).__name__} while reading {st}")
+            print(f"{sid}: {type(e).__name__} while reading {st}", file=sys.stderr)
+            rc = 1
+    return rc
+
+
+if __name__ == "__main__":
+    sys.exit(main())

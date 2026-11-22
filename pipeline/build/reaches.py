@@ -100,6 +100,7 @@ import requests
 import common
 from build import shoreline as SH
 from common import BUILD_DIR, DATA_DIR, HEADERS, now_iso, read_json, write_json
+from common import error_detail, error_text
 
 NLDI = "https://api.water.usgs.gov/nldi/linked-data"
 EPA_ATTRS = "https://watersgeo.epa.gov/arcgis/rest/services/NHDPlus/NHDPlus/MapServer/2/query"
@@ -1125,7 +1126,7 @@ def trace(o: dict, cap: float, prev: dict | None = None) -> dict:
         raise
     except Exception as e:  # keep going; the failure is cached and retried after a day (then 2, 4 ...)
         rec["cut_reason"] = "no_trace"
-        rec["error"] = f"{type(e).__name__}: {e}"[:300]
+        rec["error"] = f"{error_text(e)}"[:300]
     return rec
 
 
@@ -1569,7 +1570,7 @@ def refresh_flows() -> dict:
                     continue
                 sites[p["monitoring_location_id"]] = {"value": v, "unit": p.get("unit_of_measure"), "time": p.get("time")}
         except Exception as e:
-            errors[st] = f"{type(e).__name__}: {e}"[:200]
+            errors[st] = f"{error_text(e)}"[:200]
     out = {"fetched_at": now_iso(), "source": OGC_LATEST + " (parameter 00060)", "errors": errors, "sites": sites}
     write_json(GAUGES_LATEST, out)
     return out
@@ -2025,7 +2026,7 @@ def shoreline_record(c: dict, waters: dict, shore: dict, land: dict | None) -> d
                        float(shore["shore_m"]), float(shore["gap_km"]), float(shore["snap_km"]), land_states=near,
                        min_ring_km=(float(shore["min_ring_km"]) if shore.get("min_ring_km") is not None else None))
     except SH.NoShore as e:
-        rec["error"] = str(e)
+        rec["error"] = error_detail(e)
         return rec
     own = str(c.get("state") or (c.get("permit") or "")[:2] or w.get("state") or "").upper()
     found = set(r["states"]) | ({own} if own else set())
@@ -2165,7 +2166,7 @@ def _run_shorelines(cands: list[dict], waters: dict, shore: dict, force: bool, l
             land = land_outlines()
         except Exception as e:      # the stretches wait for a run that has the outlines
             log(f"reaches: {len(due)} shoreline stretches due, not built: Census state outlines unavailable "
-                f"({type(e).__name__}: {e})"[:300])
+                f"({error_text(e)})"[:300])
             out["stopped"] = "Census state outlines unavailable"
             return out
     REACH_DIR.mkdir(parents=True, exist_ok=True)
@@ -2175,8 +2176,8 @@ def _run_shorelines(cands: list[dict], waters: dict, shore: dict, force: bool, l
         except Exception as e:      # one bad outline never stops the reach build; the record says why
             rec = {**c, "fetched_at": now_iso(), "model": SH.MODEL, "method": SH.MODEL, "segments": [],
                    "cut_reason": "no_trace", "length_km": 0.0, "rule_sig": sig,
-                   "error": f"shoreline stretch failed: {type(e).__name__}: {e}"[:300]}
-            log(f"reaches: shoreline stretch {c['key']} failed ({type(e).__name__}: {e})"[:300])
+                   "error": f"shoreline stretch failed: {error_text(e)}"[:300]}
+            log(f"reaches: shoreline stretch {c['key']} failed ({error_text(e)})"[:300])
         write_json(REACH_DIR / f"{c['key']}.json", rec)
         out["built" if rec["segments"] else "no_trace"] += 1
     log(f"reaches: shoreline stretches {out}")
@@ -2212,7 +2213,7 @@ def run_traces(cands: list[dict], cap: float, budget: Budget, force: bool = Fals
         try:
             rec = trace(c, cap, prev)
         except RateLimited as e:
-            stopped = f"NLDI rate limit ({e})"[:200]
+            stopped = f"NLDI rate limit ({error_detail(e)})"[:200]
             break
         budget.traced += 1
         if rec["cut_reason"] == "no_trace":

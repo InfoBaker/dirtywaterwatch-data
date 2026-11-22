@@ -41,7 +41,7 @@ from __future__ import annotations
 from collections import defaultdict
 from datetime import UTC, datetime, timedelta
 
-from common import BUILD_DIR, DATA_DIR, load_outfall_registry, read_json, system_wide_advisory
+from common import BUILD_DIR, DATA_DIR, load_outfall_registry, public_error, read_json, system_wide_advisory
 
 RULE = "rain_likely"
 # the site default where the state publishes no rain trigger of its own (owner, 2026-11-03: no other operator's
@@ -699,7 +699,7 @@ def compute(rain: dict, rules: dict, events: list[dict], now: datetime, h_start:
              "notice_suppress_hours": supp.total_seconds() / 3600, "rainfall_stale_hours": cfg["rainfall_stale_hours"],
              "rainfall": {"source_id": SOURCE_ID, "source": RAINFALL_SOURCE, "fetched_at": iso(fetched),
                           "valid_time": iso(valid), "ok": rf.get("ok"), "last_ok_at": rf.get("last_ok_at"),
-                          "error": rf.get("error"), "stale": stale, "points": (rf.get("mrms") or {}).get("points"),
+                          "error": public_error(rf.get("error")), "stale": stale, "points": (rf.get("mrms") or {}).get("points"),
                           "read": (rf.get("mrms") or {}).get("read"), "product": PRODUCT,
                           "states": (rf.get("mrms") or {}).get("states"),
                           # the unit the service's values were read in (mm converted to inches) and the evidence
@@ -979,7 +979,7 @@ def _site_flags(site: dict, cfg: dict, now, h_start, waters, reaches, reach_wate
         or bool(snap.get("source_is_stale")) or bool(snap.get("source_is_historical"))
     block["site_flags"] = {"source_id": SITE_SOURCE_ID, "source": SITE_NAME, "url": SITE_URL, "rainfall": SITE_RAIN,
                            "fetched_at": iso(fetched), "ok": snap.get("ok"), "last_ok_at": iso(last_ok),
-                           "error": snap.get("error"), "stale": stale, "disclaimer": snap.get("disclaimer"),
+                           "error": public_error(snap.get("error")), "stale": stale, "disclaimer": snap.get("disclaimer"),
                            "permits": len(set(rows) | set(obs))}
     outs_by = defaultdict(list)
     for o in site.get("outfalls") or []:
@@ -1193,7 +1193,7 @@ def site_health_file(rain: dict) -> dict | None:
     snap = ((rain or {}).get("site_flags") or {}).get("snapshot") or {}
     if not snap:
         return None
-    return {"source_id": SITE_SOURCE_ID, "ok": snap.get("ok"), "error": snap.get("error"),
+    return {"source_id": SITE_SOURCE_ID, "ok": snap.get("ok"), "error": public_error(snap.get("error")),
             "fetched_at": snap.get("fetched_at"), "last_ok_at": snap.get("last_ok_at"), "fixture": False,
             "records": snap.get("count")}
 
@@ -1223,7 +1223,7 @@ def health_file(rain: dict) -> dict | None:
     rf = (rain or {}).get("rainfall") or {}
     if not rf:
         return None
-    return {"source_id": SOURCE_ID, "ok": rf.get("ok"), "error": rf.get("error"), "fetched_at": rf.get("fetched_at"),
+    return {"source_id": SOURCE_ID, "ok": rf.get("ok"), "error": public_error(rf.get("error")), "fetched_at": rf.get("fetched_at"),
             "last_ok_at": rf.get("last_ok_at"), "fixture": False, "records": (rf.get("mrms") or {}).get("points")}
 
 

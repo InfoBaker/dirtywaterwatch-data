@@ -65,6 +65,7 @@ from build.status import (ADVISORY_TYPES, BEACH_CHAR, BLOOM_CHAR, COARSE_PRECISI
                           future_start, load_events, live_waters, load_rules, load_waters, make_resolver, parse_time, resolve_revisions)
 from common import (BUILD_DIR, DATA_DIR, OUT_DIR, discharger_alias_map, now_iso, read_json, rules_live_states,
                     system_wide_advisory, write_json)
+from common import error_detail
 
 CHARTS_DIR = OUT_DIR / "charts"
 WINDOW_YEARS = 5                 # monthly charts: January of (this year - 4) to this month
@@ -133,6 +134,7 @@ SOURCE_LABEL = {
     "echo-cso-dmr-monthly": "U.S. Environmental Protection Agency discharge monitoring reports",
     "me-dep-cso-annual": "Maine Department of Environmental Protection combined sewer overflow reports",
     "me-cbep-portland-cso": "City of Portland and Portland Water District overflow filings, 2015 to 2019, published by the Casco Bay Estuary Partnership",
+    "me-bangor-sso-log": "City of Bangor sewer overflow logs, from its yearly reports to the U.S. Environmental Protection Agency",
     "ma-somerville-cso-table": "City of Somerville combined sewer overflow table",
     "tx-houston-sso-monthly": "City of Houston monthly sanitary sewer overflow reports",
     "me-healthy-beaches": "Maine Healthy Beaches",
@@ -142,6 +144,13 @@ SOURCE_LABEL = {
     "vt-advisories": "Vermont advisories (cyanobacteria, Burlington beaches)",
     "in-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for Indiana",
     "wv-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for West Virginia",
+    "oh-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for Ohio",
+    "ky-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for Kentucky",
+    "il-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for Illinois",
+    "tn-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for Tennessee",
+    "ks-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for Kansas",
+    "ga-echo-dmr-cso": "U.S. Environmental Protection Agency discharge monitoring reports for Georgia",
+    "ma-echo-dmr-cso-files": "U.S. Environmental Protection Agency discharge monitoring reports for Massachusetts",
 }
 
 # Per-source caveats, by chart; {first} and {last} are the source's coverage dates, written out.
@@ -158,13 +167,23 @@ SOURCE_NOTES = {
     "ri-nbc": {"events": "The Narragansett Bay Commission feed shows current overflows only; our record begins {first}."},
     "me-cbep-portland-cso": {"events": "Portland's filings cover {first} to {last}, storm by storm, with the gallons at each outlet; each report is dated to the storm's first and last day. Only measured discharges are listed: several outlets were not metered in 2015, and a discharge with no measured volume is missing.",
                              "volume": "Portland's sums leave out outlets that were not metered (several in 2015) and discharges with no measured volume."},
+    "me-bangor-sso-log": {"events": "Bangor's yearly reports list each sanitary sewer overflow the city found, {first} to {last}, with the time it was found and, where known, stopped."},
 }
 # Sources whose volume note is shown on the volume chart whenever they are in it (not only when they give ranges).
 VOLUME_NOTE_ALWAYS = {"me-cbep-portland-cso"}
+# EPA's per-state DMR files (ingest/echo_dmr_cso_states.py): one note for every state they cover
+STATE_FILE_TOTAL_NOTE = ("Monthly figures each operator files for each combined sewer outlet (number of discharges, hours and million gallons in discharge monitoring reports, published by the U.S. Environmental Protection Agency weeks after the month). They are shown here and never added to the discharge counts. A figure filed only as a daily maximum, an average or a rate is not a monthly total and is left out of these sums. A month with no row is one with no discharge or no report, which the reports do not tell apart, so it is left blank, never shown as zero.")
 TOTAL_NOTES = {
     "me-dep-cso-annual": "Maine's Department of Environmental Protection reports one total per community and year, for all of its combined sewer outlets; the total is shown in full on each water the community's outlets reach. Event-days: calendar days with any combined sewer discharge in the community.",
     "echo-cso-dmr-monthly": "Monthly totals each operator files with the U.S. Environmental Protection Agency for each outlet (discharge monitoring reports). They describe the same discharges the state notices report, so they are shown here and never added to the discharge counts. A month with no row counts as zero inside the date range.",
     "nh-permittees": "Portsmouth publishes monthly combined sewer overflow volumes for each outlet, not individual discharges.",
+    "oh-echo-dmr-cso": STATE_FILE_TOTAL_NOTE,
+    "ky-echo-dmr-cso": STATE_FILE_TOTAL_NOTE,
+    "il-echo-dmr-cso": STATE_FILE_TOTAL_NOTE,
+    "tn-echo-dmr-cso": STATE_FILE_TOTAL_NOTE,
+    "ks-echo-dmr-cso": STATE_FILE_TOTAL_NOTE,
+    "ga-echo-dmr-cso": STATE_FILE_TOTAL_NOTE,
+    "ma-echo-dmr-cso-files": STATE_FILE_TOTAL_NOTE,
     "in-echo-dmr-cso": "Monthly totals each Indiana operator files for each combined sewer outlet (number of discharges, hours and million gallons in discharge monitoring reports, published by the U.S. Environmental Protection Agency weeks after the month). They are shown here and never added to the discharge counts. An operator files a month with no discharge as such; a month with no row is one with no discharge or no report, which the reports do not tell apart, so it is left blank, never shown as zero.",
 }
 MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
@@ -374,7 +393,7 @@ class Data:
         try:
             pl = self._resolver.resolve(ev)
         except Exception as e:  # placement must never stop the charts
-            self.problems.append(f"{ev['event_id']}: placement failed ({e})")
+            self.problems.append(f"{ev['event_id']}: placement failed ({error_detail(e)})")
             return []
         return [s for s in pl.get("water_slugs") or [] if s in self.waters]
 
@@ -724,7 +743,10 @@ def total_measures(ev: dict) -> dict[str, float]:
 
 # monthly-total sources whose missing periods and missing measures are null in the totals chart, not zero
 # (Indiana's DMR totals, re-review 2026-11-14 P2-5); every other source's series are as before
-UNKNOWN_IS_NULL_SOURCES = frozenset({"in-echo-dmr-cso"})
+UNKNOWN_IS_NULL_SOURCES = frozenset({"in-echo-dmr-cso",
+                                     # EPA's per-state DMR files (ingest/echo_dmr_cso_states.py): the same reports
+                                     "oh-echo-dmr-cso", "ky-echo-dmr-cso", "il-echo-dmr-cso", "tn-echo-dmr-cso",
+                                     "ks-echo-dmr-cso", "ga-echo-dmr-cso", "ma-echo-dmr-cso-files"})
 
 MEASURE_LABEL = {"gallons": ("Reported volume", "gallons"), "events": ("Discharges reported", "discharges"),
                  "hours": ("Hours of discharge reported", "hours"), "event_days": ("Days with a combined sewer discharge", "days")}

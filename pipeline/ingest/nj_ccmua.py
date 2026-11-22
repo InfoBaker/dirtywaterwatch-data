@@ -50,6 +50,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import error_detail
 
 SOURCE_ID = "nj-ccmua-cso-status"
 PAGE_URL = "https://www.ccmua.org/cso-status/"
@@ -118,7 +119,7 @@ def fetch(sess: requests.Session) -> tuple[str, dict, bytes, str]:
             raise ValueError("no content.rendered")
         return content, {"via": REST_URL, "page_modified_gmt": js.get("modified_gmt"), "link": js.get("link")}, r.content, "json"
     except (requests.RequestException, ValueError) as e:
-        err = f"REST: {e}"
+        err = f"REST: {error_detail(e)}"
     r = sess.get(PAGE_URL, timeout=45)
     r.raise_for_status()
     return r.text, {"via": PAGE_URL, "page_modified_gmt": None, "rest_error": err}, r.content, "html"
@@ -219,8 +220,8 @@ def main() -> int:
     try:
         content, page, body, ext = fetch(sess)
     except Exception as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"page: {e}")
-        print(f"nj-ccmua-cso-status: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"page: {error_detail(e)}")
+        print(f"nj-ccmua-cso-status: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     reading = parse_status(content)
     h = hashlib.sha256(f"{reading['sentence']}|{reading['icon']}|{page.get('page_modified_gmt')}".encode()).hexdigest()

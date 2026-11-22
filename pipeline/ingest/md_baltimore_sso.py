@@ -61,6 +61,7 @@ import requests
 from build import redact
 from common import (BUILD_DIR, EVENTS_DIR, HEADERS, ROOT, event, now_iso, path_notes_to_meta, read_json, save_raw,
                     write_events, write_json)
+from common import error_detail, error_text
 from ingest import md_waters
 
 SOURCE_ID = "md-baltimore-sso"
@@ -232,7 +233,7 @@ def to_record(a: dict, fetched_at: str, prev: dict | None) -> dict:
         return build_record(a, base, raw, prev)
     except Exception as e:  # noqa: BLE001 - never drop a record
         return event(**base, event_type="unknown", status="unknown", raw=raw, authority=AUTHORITY,
-                     parse_error=f"{type(e).__name__}: {e}")
+                     parse_error=f"{error_text(e)}")
 
 
 def build_record(a: dict, base: dict, raw: dict, prev: dict | None) -> dict:
@@ -355,8 +356,8 @@ def main(argv=None) -> int:
             sess.headers.update(HEADERS)
             features, raw_bytes, gone = query_layer(sess)
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     state = read_json(STATE_FILE, {}) or {}
     raw_path = state.get("raw_path")
