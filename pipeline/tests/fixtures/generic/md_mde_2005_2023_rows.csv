@@ -1,0 +1,8 @@
+Overflow Type,Municipality/Facility,NPDES #,Date Discovered,Time Discovered,Duration - Days,Duration - Hours,Duration - Minutes,Location,Zip Code,Collection-System,Quantity in Gallons (Estimated),Net in Gallons (Estimated),Cause,Watershed,Receiving waters,County,Notes,Penalty Collected,Penalty Comments,Latitude,Longitude
+CSO,"Cumberland, City of",MD0021598,03/14/2011,08:15:00 AM,0,6,30,Outfall 004 Wills Creek,21502,Cumberland CSS,250000,250000,Rain,Wills Creek,Wills Creek,Allegany,Called in by Mr. Placeholder Person,,,39.6489,78.7625
+CSO,"Frostburg, City of",MD0067423,06/02/2015,2:00:00 PM,1,0,0,Outfall 012 Braddock Rd,21532,Frostburg CSS,40000,40000,Heavy rain,,Georges Creek,Allegany,,,,,
+SSO,City of Baltimore,N/A,07/04/2018,,,,,1200 Example Ave.,21218,Back River,1500,1500,Grease,,Jones Falls,Baltimore City,Resident Ms. Invented Name reported odor,500.00,Penalty waived after Mr. Second Placeholder called,39.33,-76.62
+SSO,City of Baltimore,N/A,07/04/2018,,,,,1200 Example Ave.,21218,Back River,1500,1500,Grease,,Jones Falls,Baltimore City,,,,39.33,-76.62
+BYPASS,MES,MD0023868,09/09/2009,11:00:00 AM,0,3,0,Example WWTP,21014,,8000,8000,Power failure,,Unknown,Harford,,,,,
+Bypass,Example Private Utility,N/A,12/01/2007,09:30:00 AM,0,1,0,Example Plant Rd,21901,,300,300,Storm,,None,Cecil,,,,,
+SSO,Baltimore County DPW,N/A,01/04/2023,,,,,3637 Example Rd.,21216,,5,5,Blockage,,Unknown,Baltimore City,,,,,
