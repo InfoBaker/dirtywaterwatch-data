@@ -2560,7 +2560,7 @@ class Resolver:
         return out
 
     def distance_m(self, slug, lat, lon):
-        key = (slug, round(lat, 4), round(lon, 4))
+        key = (slug, lat, lon)
         if key not in self._dist:
             near = self.nearest([slug], lat, lon)
             self._dist[key] = near[0] if near else None
