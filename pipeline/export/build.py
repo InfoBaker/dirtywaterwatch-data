@@ -41,6 +41,23 @@ Files:
                      marked whole (reach.shoreline.min_ring_km) as a segment of its own with islet true,
                      km 0 to 0 and no stop marker; the lake itself is drawn as an
                      outline (overlays display "outline", stretch_model "shoreline")
+                     A report whose outlet is not identified, with no point, a CSO, bypass, plant bypass or blend with
+                     a permit (never a sanitary sewer overflow), is drawn on each river it is placed on (named by the
+                     report or taken from its permit) from its permit's most upstream open registered outlet that starts
+                     on that river, only when that outlet is established upstream of the others (build/status.py
+                     permit_outlet_reaches; otherwise it stays "unmodeled"). reach_basis is "permit_outlet_unnamed" (the
+                     report names no outlet) or "permit_outlet_unmatched" (it names one the outlet registry does not
+                     hold; one the registry holds is never stood in for). Its segment and stop features then carry
+                     reach_basis and reach_basis_note (the plain sentence, also appended to
+                     the segment label); the path feature of the stretch carries reach_basis_events ({event_id:
+                     {reach_basis, reach_basis_note}}); its event record (events.json, events/<f>.json) carries
+                     reach_basis, reach_basis_note and reach_basis_outfalls ([{water_slug, reach, permit, outfall,
+                     candidates, water_named}]: per river the outfall chosen, how many qualified, and whether the report
+                     names that river); each of its active.json
+                     reasons on such a stretch carries reach_basis; and its history.json intervals (waters and
+                     reach_intervals) carry the basis as a seventh item. The record's own outfall_id, lat and lon stay
+                     as published. An event's detail file carries reach_band (the band of its `reach`) and,
+                     when it is drawn on several reaches, reach_bands (one per reach).
   reach-paths.geojson every traced outfall path with its status now (replay with history.json reaches)
   reaches/<st>.geojson the same per live state (write_reach_state_files): the traced paths (feature "path"), the
                      active segments and stop markers of every reach that touches the state, each with
@@ -413,6 +430,9 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
                     f"at {a.get('flow_time')}" if a.get("gauge") else
                     "at the river's average flow (NHDPlus mean annual; no current gauge reading)")
         below_tide = False
+        # a report naming no outlet, drawn from its permit's most upstream registered outlet (status.PERMIT_OUTLET_BASIS)
+        basis = ({"reach_basis": a["reach_basis"], "reach_basis_note": a.get("reach_basis_note")}
+                 if a.get("reach_basis") else {})
         for sg, band in zip(r["segments"], a["segments"]):
             where_from = f"outfall {r['outfall']}" if r.get("outfall") else "the reported location"
             if sg.get("tidal_river") or band.get("tidal_river"):
@@ -433,6 +453,8 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
                          f"{hours_text(band['hours_fast'])}) {flow_txt}. This is a calculation from published USGS "
                          f"methods, not a measurement of bacteria. The river is not necessarily unsafe here, and it "
                          f"is not necessarily safe outside the line.")
+            if basis.get("reach_basis_note"):
+                label = f"{label} {basis['reach_basis_note']}"
             feats.append({"type": "Feature", "geometry": {"type": "LineString", "coordinates": sg["coords"]},
                           "properties": {"category": "sewage",
                               "feature": "segment", "event_id": a["event_id"], "reach": a["reach"], "status": a["status"],
@@ -447,13 +469,13 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
                               "flow_cfs": a.get("flow_cfs"), "flow_time": a.get("flow_time"),
                               "flow_basis": a.get("flow_basis"), "cut_reason": r.get("cut_reason"),
                               "line_text": LINE_TEXT, "label": label, "fixture": bool(e.get("fixture")),
-                              **({"tidal_river": True} if sg.get("tidal_river") else {})}})
+                              **({"tidal_river": True} if sg.get("tidal_river") else {}), **basis}})
         last = r["segments"][-1]["coords"][-1]
         feats.append({"type": "Feature", "geometry": {"type": "Point", "coordinates": last},
                       "properties": {"category": "sewage", "feature": "stop", "event_id": a["event_id"], "reach": a["reach"],
                                      "status": a["status"], "cut_reason": r.get("cut_reason"),
                                      "km_from_outfall": r.get("length_km"),
-                                     "label": stop_text(r, cap)}})
+                                     "label": stop_text(r, cap), **basis}})
     status_by_reach = st.get("reaches") or {}
     paths = []
     for key, r in sorted(cached.items()):
@@ -479,7 +501,10 @@ def reach_features(st: dict, by_event: dict, cached: dict | None = None) -> tupl
                                      and not (status_by_reach.get(key) or {}).get("active"),
                                      "segments_km": [[sg["km_start"], sg["km_end"]] for sg in r["segments"]],
                                      "stop_label": stop_text(r, cap),
-                                     "line_text": LINE_TEXT, **tidal_path_props(r), **shore_path_props(r)}})
+                                     "line_text": LINE_TEXT, **tidal_path_props(r), **shore_path_props(r),
+                                     # records drawn here from an outlet they do not name: {event_id: basis, note}
+                                     **({"reach_basis_events": (status_by_reach.get(key) or {})["reach_basis_events"]}
+                                        if (status_by_reach.get(key) or {}).get("reach_basis_events") else {})}})
     return feats, paths
 
 
@@ -748,8 +773,17 @@ def note_wording(rec: dict) -> list[str]:
 
 # the placement texts a public record carries (from status.json placements); each can quote the record's
 # receiving-water, outfall or volume text, so each goes through the record's redaction (public_record)
-PLACEMENT_TEXT_KEYS = ("note", "unplaced_reason", "no_receiving_water")
+PLACEMENT_TEXT_KEYS = ("note", "unplaced_reason", "no_receiving_water", "reach_basis_note")
 LINKED_TEXT_KEYS = ("advice_text", "volume_text", "volume_method")     # build.status.linked_notices
+
+
+def band_fields(bands: list[dict], pl: dict) -> dict:
+    """An event detail's travel bands (status reach_events_active of the event): reach_band, the band of its singular
+    `reach` (else its first), and reach_bands, one per reach, when it is drawn on several."""
+    out = {"reach_band": next((b for b in bands if b.get("reach") == pl.get("reach")), bands[0] if bands else None)}
+    if len(bands) > 1:
+        out["reach_bands"] = list(bands)
+    return out
 
 
 def public_placement(pl: dict, r: Redactor, swaps=()) -> dict:
@@ -794,6 +828,8 @@ def public_record(e: dict, pl: dict, r: Redactor, swaps=()) -> dict:
     if pl.get("linked_notices"):            # an operator's e-mail notice of this event (build.status.linked_notices)
         rec["linked_notices"] = pl["linked_notices"]
     rec["reach"] = pl.get("reach")
+    if pl.get("reach_basis"):               # the stretch is drawn from an outlet the report does not name
+        rec.update({k: pl.get(k) for k in ("reach_basis", "reach_basis_outfalls", "reach_basis_note")})
     if pl.get("no_stated_reason"):          # a beach closure whose source gives no reason: listed, not coloured
         rec["no_stated_reason"] = pl["no_stated_reason"]        # (data/rules.json beach_reason; build.beach_reason)
     if pl.get("future_start"):              # a start in the future as published: page and archive row, no status
@@ -874,6 +910,11 @@ def redact_status_texts(st: dict, r: Redactor, swaps_of: dict | None = None) -> 
                     fix(x, k)
     for x in (st.get("advisory_points") or []) + (st.get("reach_events_active") or []):
         fix(x, "short")
+        fix(x, "reach_basis_note")      # copied to segment and stop features, their labels and reach_band
+    for x in (st.get("reaches") or {}).values():
+        for eid, b in ((x or {}).get("reach_basis_events") or {}).items():
+            if isinstance(b, dict):
+                fix(b, "reach_basis_note", eid)
     for x in st.get("monthly_outfalls") or []:
         for k in MONTHLY_TEXT_KEYS:
             fix(x, k)
@@ -1731,9 +1772,12 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                                               "short": r["short"], "from": r["from"], "until": r["until"],
                                               "placement": r.get("placement"), "reach": r.get("reach"),
                                               "rule_applied": r.get("rule_applied"),
+                                              **({"reach_basis": r["reach_basis"]} if r.get("reach_basis") else {}),
                                               **({"rain": r["rain"]} if r.get("rain") else {})})
 
-    reach_band = {a["event_id"]: a for a in st.get("reach_events_active") or []}
+    bands_of = defaultdict(list)            # an event's travel bands, one per reach it is drawn on
+    for a in st.get("reach_events_active") or []:
+        bands_of[a["event_id"]].append(a)
     out_events, index, seen = [], [], set()
     csv_events = []                         # the full public records, for the CSV downloads (export/csv.py)
     ev_dir = OUT_DIR / "events"
@@ -1752,7 +1796,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         full["status_effects"] = effects.get(e["event_id"], [])
         full["active_now"] = active_now.get(e["event_id"], [])
         full["reach"] = pl.get("reach")
-        full["reach_band"] = reach_band.get(e["event_id"])
+        full.update(band_fields(bands_of.get(e["event_id"]) or [], pl))
         write_compact(OUT_DIR / rec["file"], publicize(full))
         csv_events.append(rec)
         out_events.append(slim_event(rec))

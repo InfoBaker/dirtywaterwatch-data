@@ -681,7 +681,9 @@ REPORTED_DAYS = 90          # status.HISTORY_DAYS: a closed outfall named by a r
 
 def reported_outfalls(days: int = REPORTED_DAYS) -> set:
     """{(permit, outfall key)} named by an event record of the last `days` (npdes_permit + outfall_id), and
-    {reach key} of the reaches the last status build placed records on (data/build/status.json)."""
+    {reach key} of the reaches the last status build placed records on (data/build/status.json), except those drawn
+    for a report whose outlet is not identified (reach_basis "permit_outlet_unnamed" or "permit_outlet_unmatched": it
+    keeps no closed outfall traced)."""
     from build.status import EVENTS_DIR, oid_key
     since = datetime.now(UTC) - timedelta(days=days)
     out: set = set()
@@ -700,6 +702,8 @@ def reported_outfalls(days: int = REPORTED_DAYS) -> set:
             out.add((e["npdes_permit"], k if k else norm_oid(e["outfall_id"])))
     st = read_json(BUILD_DIR / "status.json") or {}
     for pl in (st.get("placements") or {}).values():
+        if pl.get("reach_basis") in ("permit_outlet_unnamed", "permit_outlet_unmatched"):
+            continue        # a report naming no outlet, drawn from an open outlet of its permit: names no outfall
         for k in [pl.get("reach"), *(pl.get("reaches") or [])]:
             if k:
                 out.add(k)
