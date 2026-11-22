@@ -350,6 +350,9 @@ SOURCES: dict[str, dict] = {
     "me-healthy-beaches": {"cause": beach_comment("comment", "cause"), "notes": beach_comment("comment", "notes")},
     # ADEM's live layer gives the cause; its history layer gives none (ingest/al_adem_sso.py keeps the live row)
     "al-adem-sso-history": {"cause": text("live.cause_of_discharge")},
+    # EPA's BEACON archive (ingest/fed_beacon_beach_actions.py): BEACON's action type, and the state's own reason
+    # comment where it wrote one (the coded reason stays in the record and the CSV)
+    "fed-beacon-beach-actions": {"report_kind": text("action_type"), "cause": text("reason_comments")},
     # feeds built after the 2026-11-14 export (fields as their ingesters keep them)
     "ar-deq-overflow-incidents": {"cause": text("cause", "row.cause")},
     "wy-deq-spill-list": {"cause": text("CauseDescription", "row.CauseDescription")},

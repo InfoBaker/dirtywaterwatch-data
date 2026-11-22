@@ -1664,11 +1664,11 @@
   "history": "Carson Beach actions back to 2013; BEACON back to ~1997 for some jurisdictions",
   "license": "EPA Standard Open Data License: \"Unless otherwise specified, all data produced by the U.S EPA is by default in the public domain and is not subject to domestic copyright protection under 17 U.S.C. § 105.\" https://edg.epa.gov/EPA_Data_License.html No BEACON-specific terms found.",
   "legal_basis": "BEACH Act 2000, CWA 406(e)-(g)",
-  "status": "watch",
-  "status_reason": "Authoritative history of coastal beach advisories and their stated cause, but a season late; state/local beach feeds are needed for current status.",
+  "status": "used",
+  "status_reason": "Authoritative history of coastal beach advisories and their stated cause, but a season late; state/local beach feeds are needed for current status. Read since 2026-11-21 by pipeline/ingest/fed_beacon_beach_actions.py (source fed-beacon-beach-actions: the Beach Actions report and its detailed report for the current and previous year, history only); the beach registry data/beaches-epa.json is built from the Beach Attributes, Swim Season, WQS Criteria and Possible Pollution Sources reports (scripts/build_epa_beach_registry.py).",
   "verified": "fetched",
-  "checked": "2026-11-01",
-  "notes": "App version 24.7.15; User's Guide dated 10/20/2026 (raw/beacon/beacon_usersguide.pdf)."
+  "checked": "2026-11-21",
+  "notes": "App version 24.7.15; User's Guide dated 10/20/2026 (raw/beacon/beacon_usersguide.pdf). 2026-11-21: the report builder's CSV export is reached by a session replay (four application-process posts, then ?request=CSV); BEACON answered 503 Service Unavailable from 13:52Z that day."
  },
  {
   "id": "fed-beacon-wqp-beaches-featureserver",

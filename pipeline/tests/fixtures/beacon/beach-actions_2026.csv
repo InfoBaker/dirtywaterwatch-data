@@ -1,0 +1,3 @@
+Jurisdiction,Year,Beach ID,BeachName,County,WaterbodyName,WaterbodyType,Tier,Station ID,Action ID,ActionStart Date,ActionEnd Date,Action Type,ActionReasons,ActionIndicator,ActionPossible Source,ActionDurationDays,% oftime beachwas affectedduring open hours,Time affected(in hours),Time beachis open(in hours)
+LA,2026,LA971783,CYPT1,ST. MARY,Gulf of America,Open Coast,1,21LABCH|CYPT1,736651,15-OCT-2026 07:00AM,22-OCT-2026 07:00AM,Contamination Advisory,ELEV_BACT,ENTERO,UNKNOWN,7,100,24,24
+GU,2026,GU732200,"ASAN MEMORIAL BEACH,Head of Asan Bay",GUAM,Pacific Ocean,Open Coast,1,21GUBCH|GU732200,736703,12-NOV-2026 12:00PM,19-NOV-2026 11:59AM,Contamination Advisory,ELEV_BACT,ENTERO,UNKNOWN,7,100,24,24
