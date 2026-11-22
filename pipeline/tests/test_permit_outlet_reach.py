@@ -516,3 +516,22 @@ def test_reported_outfalls_ignores_a_stretch_drawn_for_a_report_naming_no_outlet
     (tmp_path / "status.json").write_text(json.dumps({"placements": {
         "a": {"reach": f"{VT}-006", "reach_basis": "permit_outlet_unnamed"}, "b": {"reach": f"{VT}-004"}}}))
     assert R.reported_outfalls() == {f"{VT}-004"}
+
+
+def test_the_status_summary_counts_the_records_drawn_from_a_chosen_outlet():
+    from build.status import outlet_basis_summary
+    assert outlet_basis_summary({}) == "status: no record drawn from an outlet chosen for it (reach_basis)"
+    pls = {
+        "a": {"reach_basis": "permit_outlet_unnamed",
+              "reach_basis_outfalls": [{"reach": "VT0101010-004", "water_named": True}]},
+        "b": {"reach_basis": "permit_outlet_unmatched",
+              "reach_basis_outfalls": [{"reach": "NY0027081-067", "water_named": True}]},
+        "c": {"reach_basis": "permit_outlet_unnamed",
+              "reach_basis_outfalls": [{"reach": "NH0100447-031", "water_named": False},
+                                       {"reach": "NH0100447-039", "water_named": False}]},
+        "d": {"reach": "MA0101613-010"},
+    }
+    assert outlet_basis_summary(pls) == (
+        "status: 3 records drawn from an outlet chosen for them (reach_basis) "
+        "{'permit_outlet_unmatched': 1, 'permit_outlet_unnamed': 2} on 4 reaches; "
+        "1 with a river taken from the permit")

@@ -4402,6 +4402,25 @@ def permit_outlet_reaches(ev: dict, named: list[str], index: dict, waters: dict,
     return list(picks.values())
 
 
+def outlet_basis_summary(placements: dict) -> str:
+    """The status step's one line on the records drawn from an outlet the build chose (reach_basis): how many under
+    each basis, on how many reaches, and how many of them have a river taken from the permit. Counts only."""
+    by, reaches, inferred = Counter(), set(), 0
+    for pl in (placements or {}).values():
+        b = pl.get("reach_basis")
+        if not b:
+            continue
+        by[b] += 1
+        outs = pl.get("reach_basis_outfalls") or []
+        reaches.update(o.get("reach") for o in outs if o.get("reach"))
+        inferred += any(o.get("water_named") is False for o in outs)
+    n = sum(by.values())
+    if not n:
+        return "status: no record drawn from an outlet chosen for it (reach_basis)"
+    return (f"status: {n} records drawn from an outlet chosen for them (reach_basis) {dict(sorted(by.items()))} "
+            f"on {len(reaches)} reaches; {inferred} with a river taken from the permit")
+
+
 def permit_outlet_note(picks: list[dict], waters: dict, basis: str = PERMIT_OUTLET_BASIS,
                        named: set | None = None) -> str:
     """The note: PERMIT_OUTLET_LEAD for the basis, then PERMIT_OUTLET_NOTE for one river or PERMIT_OUTLET_NOTE_MANY
@@ -6027,6 +6046,7 @@ def main() -> None:
     print(f"status: {len(status['waters'])} tracked waters {dict(by)}; {status['counts']['events']} events "
           f"({status['counts']['unplaced']} unplaced, {status['counts']['no_receiving_water']} name no receiving "
           f"water); fixtures {'in' if status['fixtures_included'] else 'out'}")
+    print(outlet_basis_summary(status.get("placements")))
     cov = status.get("outlines") or {}
     print("status: water records with an outline here, by state: "
           + ", ".join(f"{st} {c['with_outline']}/{c['records']}" for st, c in cov.items()))
