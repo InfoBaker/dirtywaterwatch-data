@@ -17,7 +17,7 @@ license: "none stated"
 attribution: "Idaho Department of Environmental Quality; Idaho Department of Health and Welfare"
 enabled: true
 role: "advisories"
-event_types: ["hab_advisory"]
+event_types: ["hab_advisory", "beach_closure", "beach_advisory"]
 states: ["ID"]
 access: ["html"]
 access_detail: "Public HTML table, no row identifier, no issue or lift date."

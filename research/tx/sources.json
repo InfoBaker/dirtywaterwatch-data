@@ -232,7 +232,7 @@
     "status_reason": "Read through the generic ArcGIS reader (data/sources/tx-glo-beach-watch.yaml): 174 stations on 2026-11-07 (Low 162, Medium 12, High 0); High is the program's advisory, Medium its label.",
     "verified": "fetched",
     "checked": "2026-11-07",
-    "notes": "Watch for the service name changing (BW2026_...)."
+    "notes": "Watch for the service name changing (BW2026_...). 2026-11-21: www.texasbeachwatch.com answered 302 to GLO's home page and the layer timed out (this Mac and GitHub's runner) during GLO's announced weekend maintenance of texasbeachwatch.com and some map applications from 2026-11-20 17:00 Central; the citation stays."
   },
   {
     "id": "tx-houston-sso-monthly",

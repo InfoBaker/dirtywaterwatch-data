@@ -48539,7 +48539,7 @@
  },
  {
   "id": "nc-rwq-advisories",
-  "name": "NC DEQ Recreational Water Quality program: swimming advisory status layer (RWQ_Advisory_EXTERNAL)",
+  "name": "NC DEQ Recreational Water Quality program: PUBLICVIEW service (stations and Beach_Activity table)",
   "jurisdiction": "NC",
   "operator": "NC DEQ Division of Marine Fisheries, Recreational Water Quality",
   "operator_type": "state",
@@ -48547,11 +48547,11 @@
   "event_types": [],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/RWQ_Advisory_EXTERNAL/FeatureServer/1",
+  "url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/PUBLICVIEWRecreationWaterQualityDatabase/FeatureServer",
   "access": [
    "arcgis"
   ],
-  "access_detail": null,
+  "access_detail": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/PUBLICVIEWRecreationWaterQualityDatabase/FeatureServer/0 (Monitoring_Stations: ASN, DESCRIPTIO, LOCATION, Status, Active, EditDate, point; 229 on 2026-11-21) and https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/PUBLICVIEWRecreationWaterQualityDatabase/FeatureServer/2 (Beach_Activity: ACTIVITY_NAME, ACTIVITY_CODE CONTAM_ADV or Pending, START_DATE, END_DATE, REASON ELEV_BACT, INDICATOR ENTERO, STATE_ID; 605 rows since 2005, 93 begun in 2026). Never request Creator or Editor (staff). The 2022 layer https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/RWQ_Advisory_EXTERNAL/FeatureServer/1 is the older copy (status only); on 2026-11-21 it still showed N88 as an advisory the table ended on 2026-10-31.",
   "machine_readable": true,
   "sample_record": {
    "STATION": 100,
@@ -48585,9 +48585,9 @@
   "license": null,
   "legal_basis": "15A NCAC 18A .3400 (.3403 bacteria advisories; .3404 point-source, wastewater spill and storm-water advisories)",
   "status": "used",
-  "status_reason": "Coastal (ocean and sound) monitoring stations with current Status (No Alert / Pending Swimming Advisory / Advisory / Precautionary). Built: pipeline/ingest/nc_rwq_advisories.py (snapshot spells; 225 stations on 2026-11-04).",
+  "status_reason": "Built: pipeline/ingest/nc_rwq_advisories.py reads the PUBLICVIEW service since 2026-11-21: each Beach_Activity row a record with DMF's start and end; Precautionary as snapshot spells of the station status.",
   "verified": "fetched",
-  "checked": "2026-11-04",
+  "checked": "2026-11-21",
   "notes": "225 stations on 2026-11-03: 216 No Alert, 8 Precautionary, 1 Advisory. The program also issues sewage-spill swimming advisories by press release (search only). Related layer PUBLICVIEWRecreationWaterQualityDatabase (229 stations). Checked 2026-11-04: the station Data links (xapps.ncdenr.org/mf/beaches/smplData.do) answer 404; the layer's last data edit was 2026-09-03, so the 1 Advisory and 8 Precautionary stations had not been re-confirmed since then. Precautionary is the storm-water discharge area advisory of .3404(c).",
   "area": "nc"
  },
@@ -49427,6 +49427,51 @@
   "area": "ga"
  },
  {
+  "id": "ga-valdosta-river-water-quality",
+  "name": "City of Valdosta Utilities: Withlacoochee River bacteriological monitoring and spill-testing pages",
+  "jurisdiction": "GA",
+  "operator": "City of Valdosta Utilities Department",
+  "operator_type": "municipal",
+  "role": "results",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "Withlacoochee River (HWY 133, HWY 84); Sugar Creek, One Mile Branch (spill testing)",
+  "water_slugs": [],
+  "url": "https://www.valdostacity.com/utilities/river-stream-water-quality-monitoring",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Index https://www.valdostacity.com/utilities/river-stream-water-quality-monitoring (the old address .../river-stream-water-quality-data redirects there) links the pages: https://www.valdostacity.com/utilities/river-stream-water-quality-data/20252026-withlacoochee-river-bacteriological-monitoring (date, HWY 133 and HWY 84 E. coli MPN/100 mL; 72 weekly dates 2025-07-02 to 2026-11-16), .../nov-2024-overflow-testing-results, .../2025-sugar-creek-spill-testing, .../august-2025-sanitary-sewer-spills (spill date, amount where given, place, receiving stream, upstream and downstream sampling places, daily DO, temperature, pH, fecal coliform and E. coli). Checked 2026-11-21 with the named client; GitHub's runner read the index and the results page (run 44913220623).",
+  "machine_readable": false,
+  "sample_record": null,
+  "fields": [
+   "DATE",
+   "HWY 133 E coli (MPN/100ml)",
+   "HWY 84 E coli (MPN/100ml)"
+  ],
+  "fills_event_fields": [
+   "sampled_at",
+   "waterbody"
+  ],
+  "cannot_fill": [
+   "coordinates",
+   "the spill's end"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "weekly (river results); per major spill",
+  "history": "2025-07 on (river results); spill pages from November 2024",
+  "license": "none stated",
+  "legal_basis": null,
+  "status": "candidate",
+  "status_reason": "Official results and spill-testing pages, watched in the register (ga-valdosta-river-water-quality); not collected yet (HTML tables).",
+  "verified": "fetched",
+  "checked": "2026-11-21",
+  "notes": "",
+  "area": "ga"
+ },
+ {
   "id": "fl-dep-pnp-arcgis",
   "name": "Florida DEP Public Notice of Pollution (PNP) ArcGIS feature service",
   "jurisdiction": "FL",
@@ -50260,9 +50305,10 @@
   "url": "https://mienviro.michigan.gov/nsite/beach/map/",
   "access": [
    "map_only",
-   "api"
+   "api",
+   "csv"
   ],
-  "access_detail": "React app; POST https://mienviro.michigan.gov/nsite/ss/explorersites with JSON {insertUpdateList:[{displayHeight,displayWidth,filterValuesJson:null,isIncludeUnmappable,latitudeMin/Max,longitudeMin/Max,modeId:'BEACH',searchTerm:''}]} and headers Origin/Referer from the site (without Referer it returns 400). Statewide extent returns clusters (totalSiteCount 2913); a small bbox returns sites: id, siteId, siteName, geographyWKT POINT, color (#188018 no advisory, #AAAAAA no data; red closed, yellow advisory per EGLE). Advisory detail endpoints (beachadvisories, beachresults) need login (401). Mode settings at /nsite/api/settings/getWslSettings?environment=beach.",
+  "access_detail": "Public without a login. Export (checked 2026-11-21): GET https://mienviro.michigan.gov/nsite/ss/explorersiteexports?responseContentType=text/csv&includeMetadataInResponse=false&loadChildren=true&queryParams={\"filter\":[{\"reportId\":2082,\"latitudeMin\":41.0,\"latitudeMax\":48.5,\"longitudeMin\":-90.5,\"longitudeMax\":-82.0,\"modeId\":\"BEACH\",\"searchTerm\":\"\",\"isIncludeUnmappable\":true,\"filterValuesJson\":null}]}&filterString= with the map's Referer (400 without it); the body is a gzip CSV. Report ids from /nsite/api/settings/getWslSettings?environment=beach: 2082 Closures and Contamination Advisories (columns StartDate, EndDate, AdvisoryType, Reason, PollutionSource, DaysUnderAdvisory, IssuingOrganization, AdvisoryComments, Name, Identifier; 3,655 rows since 1994, 246 begun in 2026 at 152 beaches: 241 high bacteria levels, 1 sewage, 1 rainfall, 1 other, 2 not specified), 2078 Sampling Results, 2081 Beach Details. The map's status service: POST https://mienviro.michigan.gov/nsite/ss/explorersites (a colour per site; 2,913 sites). Only the per-beach detail services (beachadvisories, beachresults) answer 401. Never request 2081's \"Private Comments\"; drop AdvisoryComments (free text).",
   "machine_readable": true,
   "sample_record": {
    "siteId": "-8244981064274697406",
@@ -50271,22 +50317,25 @@
    "color": "#188018"
   },
   "fields": [
-   "id",
-   "siteId",
-   "siteName",
-   "geographyWKT",
-   "color",
-   "clusterCount"
+   "StartDate",
+   "EndDate",
+   "AdvisoryType",
+   "Reason",
+   "PollutionSource",
+   "IssuingOrganization",
+   "Name",
+   "Identifier"
   ],
   "fills_event_fields": [
-   "coordinates",
+   "started_at",
+   "ended_at",
+   "event_type",
+   "authority",
    "waterbody",
    "source_status"
   ],
   "cannot_fill": [
-   "started_at",
-   "ended_at",
-   "advice_text",
+   "time of day (dates only)",
    "volume"
   ],
   "has_coordinates": true,
@@ -50296,9 +50345,9 @@
   "license": null,
   "legal_basis": "BEACH Act; Michigan Part 31 water quality standard (E. coli 300/100 mL daily geometric mean, 130/100 mL 30-day)",
   "status": "candidate",
-  "status_reason": "Statewide current status with points; history and reasons need the logged-in detail or snapshots.",
+  "status_reason": "Public export with each advisory's dates, type and reason (verified 2026-11-21); no reader built yet. The earlier login barrier applied only to the map's per-beach detail services.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-21",
   "notes": "Status colour includes green for 'no advisory'; the site must not map that to green (grey = no report).",
   "area": "mi"
  },
@@ -60410,7 +60459,7 @@
    "api",
    "map_only"
   ],
-  "access_detail": "React app; JSON at https://publicapps.odh.ohio.gov/beachguardpublic/api/advisorieslist?queryParams={\"filter\":[{\"isCurrentAdvisory\":true}]} (unfiltered call fails: response exceeds 10 MB serializer limit), /api/advisorieslistlookups, /api/beacheslist (192 beaches with coordinates, EPA beach id, HUC). Advisory types CONTAM_ADV (bacteria), HAB_WATCH_ADV, HAB_WARNING_ADV, HAB_CAUTION. Current on 2026-11-03: 5 (4 HAB warnings at Grand Lake St. Marys since 2026-05-20; 1 bacteria advisory at Crystal Lake Club since 2026-07-31).",
+  "access_detail": "React app; JSON at https://publicapps.odh.ohio.gov/beachguardpublic/api/advisorieslist?queryParams={\"filter\":[{\"isCurrentAdvisory\":true}]} (the unfiltered call fails whole: response exceeds 10 MB serializer limit; it pages with queryParams={\"top\":1500,\"skip\":N,\"orderBy\":[\"id desc\"]}, hasResultsRemaining false on the last page: 8,657 advisories since 2008 on 2026-11-21, 468 begun in 2026 at 110 beaches), /api/advisorieslistlookups, /api/beacheslist (192 beaches with coordinates, EPA beach id, HUC). Advisory types CONTAM_ADV (bacteria), HAB_WATCH_ADV, HAB_WARNING_ADV, HAB_CAUTION. Current on 2026-11-03: 5 (4 HAB warnings at Grand Lake St. Marys since 2026-05-20; 1 bacteria advisory at Crystal Lake Club since 2026-07-31).",
   "machine_readable": true,
   "sample_record": {
    "id": "-3509472276091755669",
@@ -60482,13 +60531,13 @@
   "has_coordinates": true,
   "has_outfall_ids": false,
   "cadence": "As local health districts and ODNR post; season Memorial Day to Labor Day.",
-  "history": null,
+  "history": "2008 on (the full list, paged)",
   "license": null,
   "legal_basis": null,
   "status": "used",
-  "status_reason": "Read hourly by pipeline/ingest/oh_odh_beachguard.py: current advisories (5 on 2026-11-08: 4 HAB warnings at Grand Lake St. Marys since 20 May, 1 bacteria advisory since 31 July), lifted at the first poll that no longer lists them; bacteria as beach advisories, HAB types as blooms. Past advisories: the API refuses the whole list (too large to serialise), so the archive grows from the polls.",
+  "status_reason": "Read hourly by pipeline/ingest/oh_odh_beachguard.py: current advisories, lifted at the first poll that no longer lists them; bacteria as beach advisories, HAB types as blooms. The full list of past advisories (8,657 since 2008 on 2026-11-21) is read by pages on --backfill and weekly, each past advisory ended at the reopening BeachGuard gives.",
   "verified": "fetched",
-  "checked": "2026-11-08",
+  "checked": "2026-11-21",
   "notes": "Endpoint 'acceptadvisorynotifications' in the app code suggests an advisory notification sign-up.",
   "area": "oh"
  },
@@ -66912,32 +66961,45 @@
   ],
   "waters_covered": "23 coastal beach sites (Gulf beaches, Cameron to Grand Isle; Lake Pontchartrain north shore)",
   "water_slugs": [],
-  "url": "https://www.ldh.la.gov/bureau-of-sanitarian-services/beach-monitoring-program",
+  "url": "https://ldh.la.gov/page/beach-monitoring-program",
   "access": [
-   "html",
-   "pdf"
+   "arcgis",
+   "html"
   ],
-  "access_detail": "HTTP 403 to both WebFetch and curl on 2026-11-03 (bot protection); not retried. Per search snippets: enterococci sampling at 23 sites; advisories issued weekly every Thursday from May 1 to October 31; media advisory and a swim-advisory sign when high; annual report PDF (LA2025_AnnualBeachReport_Final.pdf) with a 2026 risk table. Data also reach Swim Guide.",
-  "machine_readable": false,
+  "access_detail": "The program page https://ldh.la.gov/page/beach-monitoring-program answers 403 to the named client (this Mac and GitHub's runner, 2026-11-21) and 200 to a browser's user agent (this Mac, 2026-11-21): an HTML table of the 23 sites with the most recent sample date and advisory status, weekly every Thursday May 1 to October 31, and a link to LDH's map (ladhh.maps.arcgis.com web app f68d74740bbb4eda9ceffca7ef71a404, web map a8ec9ba61a7e49ca8750a78a8c093223). Its layer https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/BEACH_ADVISORY_STATUS/FeatureServer/0 is open to the named client (this Mac and the runner): STATE_ID, BEACH_NAME, LAT, LONG, DATE_SAMPL, STATUS (ADVISORY / NO ADVISORY), ENTEROCOCCI, GEO_MEAN, ADVISORY_REASON, TIME_SAMPL, SAMPLE_DATE; 23 rows, 1 ADVISORY on 2026-11-21 (Lake Charles North Beach, sampled 2026-10-20). Annual report PDF (LA2025_AnnualBeachReport_Final.pdf) per earlier search.",
+  "machine_readable": true,
   "sample_record": null,
-  "fields": [],
+  "fields": [
+   "STATE_ID",
+   "BEACH_NAME",
+   "LAT",
+   "LONG",
+   "STATUS",
+   "ADVISORY_REASON",
+   "SAMPLE_DATE",
+   "TIME_SAMPL",
+   "ENTEROCOCCI",
+   "GEO_MEAN"
+  ],
   "fills_event_fields": [
    "source_status",
+   "coordinates",
+   "sampled_at",
    "advice_text"
   ],
   "cannot_fill": [
-   "coordinates (not seen)"
+   "the advisory's issue and lift dates (current status only)"
   ],
-  "has_coordinates": false,
+  "has_coordinates": true,
   "has_outfall_ids": false,
   "cadence": "weekly (Thursday) May to October",
   "history": "annual reports",
   "license": "unknown",
   "legal_basis": "BEACH Act",
-  "status": "unreachable",
-  "status_reason": "Both addresses answer 403 to this project's client (2026-11-14) and to GitHub's runner (2026-11-16): registered as a barrier (bot wall); a data request to LDH is the owner's item.",
-  "verified": "search_only",
-  "checked": "2026-11-16",
+  "status": "candidate",
+  "status_reason": "The map layer is open and the page answers a browser's user agent (2026-11-21); not collected yet. The generic ArcGIS reader can read the layer with a fetch block only.",
+  "verified": "fetched",
+  "checked": "2026-11-21",
   "notes": "",
   "area": "la"
  },
@@ -67339,10 +67401,10 @@
   "history": null,
   "license": null,
   "legal_basis": null,
-  "status": "unreachable",
-  "status_reason": "403 to this project's client (2026-11-14) and to GitHub's runner (2026-11-16).",
+  "status": "candidate",
+  "status_reason": "The program page: 403 to the named client (this Mac and GitHub's runner, 2026-11-21), 200 to a browser's user agent (this Mac, 2026-11-21). Its data are on the open map layer (la-ldh-beach-monitoring).",
   "verified": "fetched",
-  "checked": "2026-11-16",
+  "checked": "2026-11-21",
   "notes": null,
   "area": "la"
  },

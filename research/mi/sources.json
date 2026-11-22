@@ -355,9 +355,10 @@
   "url": "https://mienviro.michigan.gov/nsite/beach/map/",
   "access": [
    "map_only",
-   "api"
+   "api",
+   "csv"
   ],
-  "access_detail": "React app; POST https://mienviro.michigan.gov/nsite/ss/explorersites with JSON {insertUpdateList:[{displayHeight,displayWidth,filterValuesJson:null,isIncludeUnmappable,latitudeMin/Max,longitudeMin/Max,modeId:'BEACH',searchTerm:''}]} and headers Origin/Referer from the site (without Referer it returns 400). Statewide extent returns clusters (totalSiteCount 2913); a small bbox returns sites: id, siteId, siteName, geographyWKT POINT, color (#188018 no advisory, #AAAAAA no data; red closed, yellow advisory per EGLE). Advisory detail endpoints (beachadvisories, beachresults) need login (401). Mode settings at /nsite/api/settings/getWslSettings?environment=beach.",
+  "access_detail": "Public without a login. Export (checked 2026-11-21): GET https://mienviro.michigan.gov/nsite/ss/explorersiteexports?responseContentType=text/csv&includeMetadataInResponse=false&loadChildren=true&queryParams={\"filter\":[{\"reportId\":2082,\"latitudeMin\":41.0,\"latitudeMax\":48.5,\"longitudeMin\":-90.5,\"longitudeMax\":-82.0,\"modeId\":\"BEACH\",\"searchTerm\":\"\",\"isIncludeUnmappable\":true,\"filterValuesJson\":null}]}&filterString= with the map's Referer (400 without it); the body is a gzip CSV. Report ids from /nsite/api/settings/getWslSettings?environment=beach: 2082 Closures and Contamination Advisories (columns StartDate, EndDate, AdvisoryType, Reason, PollutionSource, DaysUnderAdvisory, IssuingOrganization, AdvisoryComments, Name, Identifier; 3,655 rows since 1994, 246 begun in 2026 at 152 beaches: 241 high bacteria levels, 1 sewage, 1 rainfall, 1 other, 2 not specified), 2078 Sampling Results, 2081 Beach Details. The map's status service: POST https://mienviro.michigan.gov/nsite/ss/explorersites (a colour per site; 2,913 sites). Only the per-beach detail services (beachadvisories, beachresults) answer 401. Never request 2081's \"Private Comments\"; drop AdvisoryComments (free text).",
   "machine_readable": true,
   "sample_record": {
    "siteId": "-8244981064274697406",
@@ -366,22 +367,25 @@
    "color": "#188018"
   },
   "fields": [
-   "id",
-   "siteId",
-   "siteName",
-   "geographyWKT",
-   "color",
-   "clusterCount"
+   "StartDate",
+   "EndDate",
+   "AdvisoryType",
+   "Reason",
+   "PollutionSource",
+   "IssuingOrganization",
+   "Name",
+   "Identifier"
   ],
   "fills_event_fields": [
-   "coordinates",
+   "started_at",
+   "ended_at",
+   "event_type",
+   "authority",
    "waterbody",
    "source_status"
   ],
   "cannot_fill": [
-   "started_at",
-   "ended_at",
-   "advice_text",
+   "time of day (dates only)",
    "volume"
   ],
   "has_coordinates": true,
@@ -391,9 +395,9 @@
   "license": null,
   "legal_basis": "BEACH Act; Michigan Part 31 water quality standard (E. coli 300/100 mL daily geometric mean, 130/100 mL 30-day)",
   "status": "candidate",
-  "status_reason": "Statewide current status with points; history and reasons need the logged-in detail or snapshots.",
+  "status_reason": "Public export with each advisory's dates, type and reason (verified 2026-11-21); no reader built yet. The earlier login barrier applied only to the map's per-beach detail services.",
   "verified": "fetched",
-  "checked": "2026-11-03",
+  "checked": "2026-11-21",
   "notes": "Status colour includes green for 'no advisory'; the site must not map that to green (grey = no report)."
  },
  {

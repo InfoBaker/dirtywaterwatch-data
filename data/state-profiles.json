@@ -3130,7 +3130,7 @@
     ],
     "machine_readable": false,
     "scope": "coastal",
-    "notes": "LDH site returned 403 (bot protection) to this machine."
+    "notes": "LDH's map layer BEACH_ADVISORY_STATUS is open and its page answers a browser's user agent (2026-11-21); not collected yet."
    },
    "habs": {
     "program": "LDH ad hoc algal bloom advisories",
@@ -3181,12 +3181,6 @@
      "what": "Overflow reports, if kept, are reachable only one document at a time in EDMS or by public records request.",
      "fix_level": "agency",
      "note": ""
-    },
-    {
-     "kind": "bot_wall",
-     "what": "LDH beach monitoring pages return 403 to automated fetches.",
-     "fix_level": "engineering",
-     "note": "Ask LDH for a data feed or use Swim Guide / BEACON."
     }
    ],
    "subscriptions": [],
@@ -3195,12 +3189,11 @@
     "expected_grade": "No public reports",
     "first_feed": "la-ldh-beach-monitoring",
     "effort": "medium",
-    "rationale": "No statewide overflow list, no SOBE rows and no municipal CSOs; only EDMS documents (untested) and consent-decree reports. Louisiana shows plant outfalls, the rain caution and the plain statement, plus LDH beach advisories once the 403 is solved.",
+    "rationale": "No statewide overflow list, no SOBE rows and no municipal CSOs; only EDMS documents (untested) and consent-decree reports. Louisiana shows plant outfalls, the rain caution and the plain statement, plus LDH beach advisories once its open map layer is read.",
     "order_hint": 6
    },
    "owner_questions": [
     "Label the two industrial 'CSO' permits as industrial combined outfalls, or drop them from the sewage CSO count?",
-    "Ask LDH for beach advisory data access (their site blocks automated fetches)?",
     "Worth a records request to LDEQ for SSO reports, to make the barrier visible?"
    ],
    "surprise": "Louisiana's only two 'CSO' permits in EPA's inventory are petrochemical plants (Shell Geismar and an ethylene plant at Westlake), not sewer systems; the state has no municipal CSOs and no public overflow reports at all.",
@@ -3427,7 +3420,7 @@
     ],
     "machine_readable": true,
     "scope": "all",
-    "notes": "Public JSON gives current status colour per site; advisory detail needs login."
+    "notes": "The map's Export gives every advisory with its dates, type and reason without a login (report 2082; checked 2026-11-21); not collected yet."
    },
    "habs": {
     "program": "EGLE/MDHHS HAB reports map and reporting form (Michigan.gov/HABs)",
@@ -3487,12 +3480,6 @@
      "what": "No public overflow alert subscription; only beach advisories",
      "fix_level": "agency",
      "note": ""
-    },
-    {
-     "kind": "login",
-     "what": "BeachGuard advisory and sample detail endpoints need a MiEnviro login",
-     "fix_level": "agency",
-     "note": "Public status colour only."
     }
    ],
    "subscriptions": [

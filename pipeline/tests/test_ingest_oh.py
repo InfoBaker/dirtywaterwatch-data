@@ -301,6 +301,149 @@ def test_beachguard_lift_at_poll_and_empty_list_held():
     assert next(r for r in recs if r["event_type"] == "hab_advisory")["ended_at"] == "2026-11-08T02:10:00Z"
 
 
+# ODH BeachGuard history: the paged list of every advisory (own-fixes 2026-11-21: the feed held 5 of 2026's 468) ------
+
+def _history():
+    return [r for n in (0, 1) for r in BG.rows_of(_load(f"oh_odh_beachguard_history_p{n}.json"))]
+
+
+def test_beachguard_history_pages_until_the_list_says_no_more():
+    pages = [_load("oh_odh_beachguard_history_p0.json"), _load("oh_odh_beachguard_history_p1.json")]
+    asked = []
+
+    class Resp:
+        def __init__(self, doc):
+            self.doc = doc
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self.doc
+
+    class Sess:
+        def get(self, url, params=None, timeout=None):
+            q = json.loads(params["queryParams"])
+            asked.append(q)
+            return Resp(pages[q["skip"] // q["top"]])
+
+    rows = BG.fetch_history(Sess(), page_size=3)
+    assert [q["skip"] for q in asked] == [0, 3] and all(q["top"] == 3 and q["orderBy"] == ["id desc"] for q in asked)
+    assert len(rows) == 5 and len({r["id"] for r in rows}) == 5
+    assert "daysUnderAdvisory" not in rows[0] and "metadata" not in rows[0]
+
+
+def test_beachguard_past_advisories_are_records_ended_at_the_issuers_reopening():
+    state = {}
+    recs, meta = BG.run(state, BG.rows_of(_load("oh_odh_beachguard.json")), NOW, history=_history())
+    by = {r["source_record_id"]: r for r in recs}
+    assert len(recs) == 6 and meta["history"]["past"] == 4 and meta["history"]["current"] == 1
+    sew = by["2690753711280649949"]                  # 2026's sewage advisory at Community Park Beach, Lorain County
+    assert sew["event_type"] == "beach_advisory" and sew["status"] == "advisory_lifted"
+    assert sew["started_at"] == "2026-06-16T10:57:00-04:00" and sew["time_precision"] == "minute"
+    assert sew["ended_at"] == "2026-06-17T14:06:00-04:00" and sew["raw"]["ended_at_precision"] == "minute"
+    assert "reopen" in sew["raw"]["end_basis"] and sew["raw"]["reason"].startswith("Sewage")
+    assert "_last_seen_in_source" not in sew["raw"] and sew["fetched_at"] == NOW
+    old = by["9188"]                                 # 2015: dates only
+    assert old["started_at"] == "2015-09-04T00:00:00-04:00" and old["time_precision"] == "day"
+    assert old["ended_at"] == "2015-09-07T00:00:00-04:00" and old["raw"]["ended_at_precision"] == "day"
+    cur = by["3707863259281249333"]                  # in effect: the current list decides, the history changes nothing
+    assert cur["status"] == "advisory_active" and cur["ended_at"] is None and cur["raw"]["_last_seen_in_source"] == NOW
+
+
+def test_beachguard_a_polled_advisory_takes_the_issuers_reopening_only_within_the_lift_window():
+    state = {}
+    rows = BG.rows_of(_load("oh_odh_beachguard.json"))
+    BG.run(state, rows, NOW)
+    BG.run(state, rows[:1], LATER)                   # the bacteria advisory leaves the current list
+    past = copy.deepcopy(_history())
+    row = next(r for r in past if r["id"] == "3707863259281249333")
+    row.update(isCurrentAdvisory=False, reopenDate="11/07/2026 7:40 PM")      # 2026-11-08T00:40Z: inside the window
+    recs, _ = BG.run(copy.deepcopy(state), rows[:1], LATER, history=past)
+    r = next(x for x in recs if x["source_record_id"] == "3707863259281249333")
+    assert r["ended_at"] == "2026-11-07T19:40:00-05:00" and r["raw"]["ended_at_precision"] == "minute"
+    row["reopenDate"] = "11/01/2026 8:00 AM"         # before our last sighting in the current list: the poll stands
+    recs, _ = BG.run(copy.deepcopy(state), rows[:1], LATER, history=past)
+    r = next(x for x in recs if x["source_record_id"] == "3707863259281249333")
+    assert r["ended_at"] == LATER and r["raw"]["ended_at_precision"] == "poll" and "reopen_note" in r["raw"]
+
+
+def test_beachguard_backfill_reads_history_and_a_failed_history_read_fails_the_backfill(tmp_path, monkeypatch):
+    monkeypatch.setattr(BG, "STATE_PATH", tmp_path / "state.json")
+    monkeypatch.setattr(BG, "fetch", lambda sess: BG.rows_of(_load("oh_odh_beachguard.json")))
+    monkeypatch.setattr(BG, "fetch_history", lambda sess, page_size=BG.PAGE_SIZE: _history())
+    written = {}
+    monkeypatch.setattr(BG, "write_events", lambda sid, recs, **kw: written.update(recs=recs, **kw) or tmp_path / "e.json")
+    monkeypatch.setattr(BG, "save_raw", lambda *a, **k: None)
+    assert BG.main(["--backfill"]) == 0 and len(written["recs"]) == 6
+    assert json.loads((tmp_path / "state.json").read_text())["history"]["read_at"]
+
+    def boom(sess, page_size=BG.PAGE_SIZE):
+        raise ValueError("the API answered an error: X")
+    monkeypatch.setattr(BG, "fetch_history", boom)
+    assert BG.main(["--backfill"]) == 1 and len(written["recs"]) == 6       # the current list is still written
+    assert "history" in written["meta"]["history_error"]
+
+
+def test_beachguard_hourly_run_rereads_history_only_when_a_week_old(monkeypatch):
+    assert BG.history_due({}, NOW) is True
+    assert BG.history_due({"history": {"read_at": "2026-11-05T00:00:00Z"}}, NOW) is False
+    assert BG.history_due({"history": {"read_at": "2026-10-31T00:00:00Z"}}, NOW) is True
+
+
+def _sess(pages):
+    class Resp:
+        def __init__(self, doc):
+            self.doc = doc
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self.doc
+
+    class Sess:
+        def get(self, url, params=None, timeout=None):
+            return Resp(pages.pop(0))
+    return Sess()
+
+
+def test_review_an_empty_page_that_says_more_remain_or_an_empty_list_is_a_failed_read():
+    import pytest
+    with pytest.raises(ValueError):
+        BG.fetch_history(_sess([{"queryResults": [], "hasResultsRemaining": True}]), page_size=3)
+    with pytest.raises(ValueError):
+        BG.fetch_history(_sess([{"queryResults": [], "hasResultsRemaining": False}]), page_size=3)
+
+
+def test_review_the_full_list_never_rewrites_an_advisory_the_current_list_shows():
+    state = {}
+    rows = BG.rows_of(_load("oh_odh_beachguard.json"))
+    past = copy.deepcopy(_history())
+    row = next(r for r in past if r["id"] == "3707863259281249333")
+    row.update(isCurrentAdvisory=False, typeId="HAB_WARNING_ADV", latitudeCenter=40.0, reopenDate="11/07/2026 7:40 PM")
+    recs, _ = BG.run(state, rows, NOW, history=past)
+    r = next(x for x in recs if x["source_record_id"] == "3707863259281249333")
+    assert r["status"] == "advisory_active" and r["event_type"] == "beach_advisory" and r["lat"] != 40.0
+
+
+def test_review_a_date_only_reopening_counts_as_its_whole_day_inside_the_lift_window():
+    state = {}
+    rows = BG.rows_of(_load("oh_odh_beachguard.json"))
+    BG.run(state, rows, NOW)
+    BG.run(state, rows[:1], LATER)
+    past = copy.deepcopy(_history())
+    row = next(r for r in past if r["id"] == "3707863259281249333")
+    row.update(isCurrentAdvisory=False, reopenDate="11/07/2026")      # the day of the polls, Ohio's clock
+    recs, _ = BG.run(copy.deepcopy(state), rows[:1], LATER, history=past)
+    r = next(x for x in recs if x["source_record_id"] == "3707863259281249333")
+    assert r["ended_at"] == "2026-11-07T00:00:00-05:00" and r["raw"]["ended_at_precision"] == "day"
+    row["reopenDate"] = "11/05/2026"                                  # a day before the last listing: the poll stands
+    recs, _ = BG.run(copy.deepcopy(state), rows[:1], LATER, history=past)
+    r = next(x for x in recs if x["source_record_id"] == "3707863259281249333")
+    assert r["ended_at"] == LATER and r["raw"]["ended_at_precision"] == "poll"
+
+
 # County-aware placement (build/status.py COUNTY_STATES) --------------------------------------------------------------
 
 def test_ohio_name_placement_is_county_aware(monkeypatch):

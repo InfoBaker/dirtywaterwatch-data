@@ -1,0 +1,4 @@
+StartDate,EndDate,AdvisoryType,Reason,PollutionSource,DaysUnderAdvisory,IssuingOrganization,AdvisoryComments,Name,Identifier
+6/25/2026 12:00:00 AM,7/1/2026 12:00:00 AM,Closed                   ,Sewage,Combined Sewer Overflow,6.0000000000,Western Upper Peninsula DHD Main Office,,L'Anse Waterfront Park,1502
+6/12/2026 12:00:00 AM,6/16/2026 12:00:00 AM,Closed                   ,High bacteria levels,Storm water runoff,4.0000000000,Oakland County Health Division,,Cranberry Lake,3964
+6/30/2026 12:00:00 AM,7/2/2026 12:00:00 AM,Closed                   ,Rainfall,Other reason,2.0000000000,Luce-Mackinac-Alger-Schoolcraft District,,Indian Lake State Park,3288

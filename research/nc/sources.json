@@ -377,7 +377,7 @@
   },
   {
     "id": "nc-rwq-advisories",
-    "name": "NC DEQ Recreational Water Quality program: swimming advisory status layer (RWQ_Advisory_EXTERNAL)",
+    "name": "NC DEQ Recreational Water Quality program: PUBLICVIEW service (stations and Beach_Activity table)",
     "jurisdiction": "NC",
     "operator": "NC DEQ Division of Marine Fisheries, Recreational Water Quality",
     "operator_type": "state",
@@ -385,11 +385,11 @@
     "event_types": [],
     "waters_covered": null,
     "water_slugs": [],
-    "url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/RWQ_Advisory_EXTERNAL/FeatureServer/1",
+    "url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/PUBLICVIEWRecreationWaterQualityDatabase/FeatureServer",
     "access": [
       "arcgis"
     ],
-    "access_detail": null,
+    "access_detail": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/PUBLICVIEWRecreationWaterQualityDatabase/FeatureServer/0 (Monitoring_Stations: ASN, DESCRIPTIO, LOCATION, Status, Active, EditDate, point; 229 on 2026-11-21) and https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/PUBLICVIEWRecreationWaterQualityDatabase/FeatureServer/2 (Beach_Activity: ACTIVITY_NAME, ACTIVITY_CODE CONTAM_ADV or Pending, START_DATE, END_DATE, REASON ELEV_BACT, INDICATOR ENTERO, STATE_ID; 605 rows since 2005, 93 begun in 2026). Never request Creator or Editor (staff). The 2022 layer https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/RWQ_Advisory_EXTERNAL/FeatureServer/1 is the older copy (status only); on 2026-11-21 it still showed N88 as an advisory the table ended on 2026-10-31.",
     "machine_readable": true,
     "sample_record": {
       "STATION": 100,
@@ -423,9 +423,9 @@
     "license": null,
     "legal_basis": "15A NCAC 18A .3400 (.3403 bacteria advisories; .3404 point-source, wastewater spill and storm-water advisories)",
     "status": "used",
-    "status_reason": "Coastal (ocean and sound) monitoring stations with current Status (No Alert / Pending Swimming Advisory / Advisory / Precautionary). Built: pipeline/ingest/nc_rwq_advisories.py (snapshot spells; 225 stations on 2026-11-04).",
+    "status_reason": "Built: pipeline/ingest/nc_rwq_advisories.py reads the PUBLICVIEW service since 2026-11-21: each Beach_Activity row a record with DMF's start and end; Precautionary as snapshot spells of the station status.",
     "verified": "fetched",
-    "checked": "2026-11-04",
+    "checked": "2026-11-21",
     "notes": "225 stations on 2026-11-03: 216 No Alert, 8 Precautionary, 1 Advisory. The program also issues sewage-spill swimming advisories by press release (search only). Related layer PUBLICVIEWRecreationWaterQualityDatabase (229 stations). Checked 2026-11-04: the station Data links (xapps.ncdenr.org/mf/beaches/smplData.do) answer 404; the layer's last data edit was 2026-09-03, so the 1 Advisory and 8 Precautionary stations had not been re-confirmed since then. Precautionary is the storm-water discharge area advisory of .3404(c)."
   },
   {

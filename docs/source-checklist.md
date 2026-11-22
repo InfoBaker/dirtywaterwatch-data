@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1734 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1735 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -26,7 +26,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | va | 22 | 11 | 28 | 7 | 1 | 69 |
 | dc | 24 | 7 | 25 | 12 | 5 | 73 |
 | nc | 10 | 1 | 5 | 1 | 0 | 17 |
-| ga | 8 | 0 | 4 | 1 | 0 | 13 |
+| ga | 8 | 1 | 4 | 1 | 0 | 14 |
 | fl | 5 | 0 | 5 | 1 | 0 | 11 |
 | mi | 6 | 2 | 5 | 2 | 0 | 15 |
 | wa | 6 | 3 | 4 | 1 | 0 | 14 |
@@ -56,7 +56,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | sc | 7 | 0 | 2 | 1 | 1 | 11 |
 | in | 9 | 0 | 15 | 0 | 2 | 26 |
 | wv | 8 | 0 | 12 | 1 | 1 | 22 |
-| la | 4 | 0 | 7 | 3 | 2 | 16 |
+| la | 4 | 2 | 7 | 3 | 0 | 16 |
 | nv | 4 | 1 | 8 | 3 | 0 | 16 |
 | ok | 3 | 0 | 6 | 1 | 0 | 10 |
 | pr | 6 | 0 | 4 | 1 | 0 | 11 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **646** | **232** | **546** | **229** | **81** | **1734** |
+| **all** | **646** | **235** | **546** | **229** | **79** | **1735** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1323,7 +1323,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nc-law-15a-ncac-18a-3400` | 15A NCAC 18A .3400 Coastal Recreational Waters Monitoring, Evaluation and Notification | used | fetched | law | The coastal advisory rules: pending and full swimming advisories from bacteria results (.3403), and advisories with signs for waters impacted by a wastewater spill and at storm-water discharges (.3404). No set number of hours after a spill. |
 | `nc-law-gs-143-215-1c` | N.C. Gen. Stat. 143-215.1C(b) Publication of Notice of Discharge of Untreated Wastewater | used | fetched | law | The public-notice duty: press release within 24 hours for 1,000 gallons or more reaching surface waters; newspaper notice for 15,000 gallons or more. |
 | `nc-law-gs-143-215-1c-a` | N.C. Gen. Stat. 143-215.1C(a) Report to Wastewater System Customers | used | fetched | law | A law-named public channel: municipal or domestic collection and treatment works with an average annual flow over 200,000 gallons a day give their users or customers and the Department a yearly performance report, within 60 days after the calendar or fiscal year. Register rows per operator (ids ending -annual-report, made by scripts/add_register_rows.py); no web posting is required. |
-| `nc-rwq-advisories` | NC DEQ Recreational Water Quality program: swimming advisory status layer (RWQ_Advisory_EXTERNAL) | used | fetched | advisories | Coastal (ocean and sound) monitoring stations with current Status (No Alert / Pending Swimming Advisory / Advisory / Precautionary). Built: pipeline/ingest/nc_rwq_advisories.py (snapshot spells; 225 stations on 2026-11-04). |
+| `nc-rwq-advisories` | NC DEQ Recreational Water Quality program: PUBLICVIEW service (stations and Beach_Activity table) | used | fetched | advisories | Built: pipeline/ingest/nc_rwq_advisories.py reads the PUBLICVIEW service since 2026-11-21: each Beach_Activity row a record with DMF's start and end; Precautionary as snapshot spells of the station status. |
 | `nc-shellfish-closures` | NC DMF polluted area proclamations (shellfish temporary closures and reopenings) | used | fetched | advisories | Read by the nc-dmf-polluted-area-proclamations ingester (ingest.nc_dmf_shellfish): one shellfish_closure record per area a temporary-closure proclamation names, from its effective time; a later proclamation that returns the area to normal boundaries ends it on its effective day, and a reopening proclaimed for a later day is DMF's plan until then. Permanent-closure proclamations (Sanitary Survey boundary changes) are left out. An area named whole that has one of DMF's Conditionally Approved-Open polygons and a water record here is marked at a point inside the polygon; the others are listed only. On 2026-11-16 the list held 162 proclamations from February 2025 (56 temporary closures, 103 reopenings, 3 permanent-closure proclamations); the newest, PA-67-2026 (issued 10/16/2026), reopened the last areas closed on October 4 and 11 except Shallotte Inlet and the whole of Bay River, which no later summary names, and Oyster Creek, which PA-59-2026 names for both Carteret and Pamlico counties (each has an Oyster Creek), so no reopening can be matched to it. A closure no reopening ends is coloured for 14 days from its start. |
 | `nc-wnc-rec-monitoring` | NC DEQ Western NC Recreational Water Quality Monitoring Program (E. coli results) | candidate | fetched | monitoring | Inland river E. coli results (2,298 rows; fields Station_ID, SampleDate, Ecoli, Lat, Long). Also published to Swim Guide. |
 | `nc-bims-public-portal` | NC DEQ BIMS Public Incident Portal | watch | search_only | events | Incident lookup by permit or incident number; the ArcGIS layers are easier. Not fetched. |
@@ -1333,7 +1333,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nc-wwals-and-swim-guide` | Swim Guide affiliates in NC (riverkeepers; WNC program) | watch | search_only | prior_art | NC beaches and WNC river stations appear on Swim Guide; not checked one by one. |
 | `nc-epa-sobe` | EPA SOBE extract, NC rows | rejected | inferred | events | Only a handful of NC rows; NC uses its own reporting. The DWR layer is complete and faster. |
 
-## ga: Georgia (13)
+## ga: Georgia (14)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
@@ -1345,6 +1345,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ga-epd-spills-map-layer` | Georgia EPD Spills in Georgia StoryMap layer (Spill_Summary_Continuous_Update) | used | fetched | events | Public ArcGIS layer behind the "Spills in Georgia" StoryMap (updated weekly): same 30-day rows with LATITUDE/LONGITUDE. BEGIN_DATE was null in all 61 rows on 2026-11-03, so it supplies points only, joined to the spreadsheet. Built: read by pipeline/ingest/ga_epd_spills.py (feed ga-epd-spills), which lends a layer point to a workbook row of the same permit and address. |
 | `ga-law-ocgs-12-5-30-1` | O.C.G.A. 12-5-30.1 Major spills by publicly owned treatment works | used | search_only | law | Statutory base for the legal-organ notice and downstream notice within 20 miles. Text not fetched (search only). |
 | `ga-rule-391-3-6-05` | Ga. Comp. R. & Regs. 391-3-6-.05 Emergency Actions (spills and major spills by POTWs) | used | fetched | law | Public-notice duties: media within 24 hours, sign at the site immediately for at least 7 days, legal organ within 7 days for a major spill, downstream water suppliers within 24 hours. |
+| `ga-valdosta-river-water-quality` | City of Valdosta Utilities: Withlacoochee River bacteriological monitoring and spill-testing pages | candidate | fetched | results | Official results and spill-testing pages, watched in the register (ga-valdosta-river-water-quality); not collected yet (HTML tables). |
 | `ga-epd-hab` | Georgia EPD harmful algal bloom information | watch | inferred | advisories | No statewide bloom feed found; not searched in depth. |
 | `ga-flint-riverkeeper-atlanta-notice` | Flint Riverkeeper / SELC notice of intent to sue Atlanta (2026) | watch | search_only | news | Pending Clean Water Act case over spills to the Flint headwaters (60-day notice, July 2026). |
 | `ga-georgia-water-coalition-dirty-dozen` | Georgia Water Coalition "Dirty Dozen" | watch | search_only | prior_art | Annual advocacy report naming problem sites (sewer spills feature often). Context, not events. |
@@ -1377,7 +1378,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `mi-epa-gl-cso-michigan` | EPA: Combined Sewer Overflows in the Great Lakes Basin, Michigan (operator list with websites) | used | fetched | outfalls | Seeds the per-operator website column of dischargers.json. |
 | `mi-glwa-cso-notification-plan` | Great Lakes Water Authority CSO Public Notification Plan (2018) | used | fetched | law | Shows the largest Michigan CSO permittee uses the state list as its public 4-hour notice channel. |
 | `mi-law-mcl-324-3112a` | MCL 324.3112a (NREPA Part 31): discharge of untreated or partially treated sewage; notice, posting, E. coli testing | used | fetched | law | Primary legal basis: 24-hour notice to EGLE, local health departments and daily newspapers; EGLE must post on its website; E. coli testing of affected waters. |
-| `mi-egle-beachguard` | EGLE BeachGuard (MiEnviro nSITE beach explorer) | candidate | fetched | advisories | Statewide current status with points; history and reasons need the logged-in detail or snapshots. |
+| `mi-egle-beachguard` | EGLE BeachGuard (MiEnviro nSITE beach explorer) | candidate | fetched | advisories | Public export with each advisory's dates, type and reason (verified 2026-11-21); no reader built yet. The earlier login barrier applied only to the map's per-beach detail services. |
 | `mi-egle-hab-reports-map` | EGLE/MDHHS Michigan HAB Reports Map and reporting form | candidate | search_only | advisories | State HAB reports with locations; trace the map's layer next. |
 | `mi-egle-annual-cso-sso-rtb-reports` | EGLE Annual CSO/SSO/RTB Reports (PDF) | watch | search_only | events | Annual PDFs with event appendices; superseded by the live list for current data; latest found is 2021. |
 | `mi-egle-mienviro-subscriptions` | MiEnviro email subscriptions (beach advisories, permit notices) | watch | inferred | advisories | Owner sign-up for beach advisory emails; no overflow alert exists. |
@@ -1695,7 +1696,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-law-40cfr122-38` | 40 CFR 122.38 Great Lakes CSO public notification (Lake Erie basin permittees) | used | inferred | law | 4-hour public notice for Ohio CSO permittees in the Lake Erie basin (42 operators on EPA's Ohio list); implemented through their public notification plans. |
 | `oh-law-oac-3745-33-08` | OAC 3745-33-08 Generic NPDES permit conditions (outfall signs; notice to public water supply operators) | used | fetched | law | Ohio's only general rule touching public notice: permanent outfall signs, and notice to drinking-water intake operators near major discharges. |
 | `oh-neorsd-cso-notification-map` | NEORSD CSO Alerts: map and status of outfalls (ArcGIS) | used | fetched | events | Read hourly by pipeline/ingest/oh_neorsd_cso.py (layers 4 and 5, safe fields): each new last wet- or dry-weather overflow per outfall becomes a dated cso record with NEORSD's start, end and volume, labelled metered (24 outfalls) or modelled (88) by NEORSD; 148 records from the first poll on 2026-11-08 (102 of them in 2026). The 112 outfalls' points and receiving waters improve EPA's rows (data/outfalls-oh.json). |
-| `oh-odh-beachguard` | Ohio Department of Health BeachGuard public (bathing beach and HAB advisories) | used | fetched | advisories | Read hourly by pipeline/ingest/oh_odh_beachguard.py: current advisories (5 on 2026-11-08: 4 HAB warnings at Grand Lake St. Marys since 20 May, 1 bacteria advisory since 31 July), lifted at the first poll that no longer lists them; bacteria as beach advisories, HAB types as blooms. Past advisories: the API refuses the whole list (too large to serialise), so the archive grows from the polls. |
+| `oh-odh-beachguard` | Ohio Department of Health BeachGuard public (bathing beach and HAB advisories) | used | fetched | advisories | Read hourly by pipeline/ingest/oh_odh_beachguard.py: current advisories, lifted at the first poll that no longer lists them; bacteria as beach advisories, HAB types as blooms. The full list of past advisories (8,657 since 2008 on 2026-11-21) is read by pages on --backfill and weekly, each past advisory ended at the reopening BeachGuard gives. |
 | `oh-willard-cso-notices` | Willard CSO public notifications | used | fetched | events | Read hourly by pipeline/ingest/oh_willard_cso.py from 2026-11-16: 2 overflows from 4 notices (2025-04-05, 11.24 million gallons; 2026-04-01, 7.78 million gallons), each initial and supplemental notice pair one record. |
 | `oh-lima-cso-activity` | Lima Combined Sewer Overflow Activity Report | candidate | fetched | events | Page lists 2026 '4 hour Overflows' and '7 Day Supplemental Notifications' as dated PDFs (e.g. 9_12_26). PDF polling. |
 | `oh-toledo-cso` | Toledo Combined Sewer Overflows page | candidate | fetched | events | Status line ('Last updated: 11/03/2026 There are no combined sewer overflows at this time. The public will be notified within four hours of a documented CSO event.') and dated daily CSO report PDFs (latest 09 05 26). |
@@ -1927,6 +1928,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `la-lac-33-i-ch39` | LAC 33:I Chapter 39, Notification Regulations and Procedures for Unauthorized Discharges | used | search_only | law | Regulator duty only; no public-notice duty found. |
 | `la-ldeq-spoc` | LDEQ Single Point of Contact (SPOC) incident reporting | used | fetched | law | Regulator-report route; no public list. |
 | `la-ldeq-written-notification-guidance` | LDEQ written notification procedures | used | search_only | law | Nonbinding summary of the seven-day written report. |
+| `la-ldh-beach-alternate` | LDH beach monitoring page (alternate address) | candidate | fetched | advisories | The program page: 403 to the named client (this Mac and GitHub's runner, 2026-11-21), 200 to a browser's user agent (this Mac, 2026-11-21). Its data are on the open map layer (la-ldh-beach-monitoring). |
+| `la-ldh-beach-monitoring` | Louisiana Department of Health Beach Monitoring Program | candidate | fetched | advisories | The map layer is open and the page answers a browser's user agent (2026-11-21); not collected yet. The generic ArcGIS reader can read the layer with a fetch block only. |
 | `la-baton-rouge-consent-decree` | City of Baton Rouge / East Baton Rouge Parish sewer consent decree (2002, modified 2012-2013) | watch | search_only | events | EPA's settlement page: context; the City-Parish's quarterly reports are the feed (la-baton-rouge-quarterly-reports). |
 | `la-ldeq-edms` | LDEQ Electronic Document Management System (EDMS) | watch | fetched | events | The site is readable: GitHub's runner was answered (200) on 2026-11-16. A CAPTCHA guards the search: no document read; registered as a barrier (records request or a supported export needed). |
 | `la-ldh-hab-advisories` | LDH algal bloom advisories (news releases) | watch | search_only | advisories | Ad hoc only. |
@@ -1937,8 +1940,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `la-epa-sobe` | EPA SOBE (eRule) extract, Louisiana rows | rejected | fetched | events | Rechecked 2026-11-14 (current and all-versions extracts): no Louisiana report; 17 Louisiana collection-system permits are listed in EPA's permits table. |
 | `la-industrial-cso-permits` | EPA CSO inventory rows for Louisiana (industrial) | rejected | fetched | outfalls | EPA's two Louisiana 'CSO' rows are petrochemical plants' combined outfalls: kind other in data/outfalls-la.json, off the combined sewer outlets and the rain caution. |
 | `la-ldeq-uas-incidents` | LDEQ_UAS_Incident_Report_View_Layer (ArcGIS Online) | rejected | search_only | events | Not an overflow feed (by title); verify if time allows. |
-| `la-ldh-beach-alternate` | LDH beach monitoring page (alternate address) | unreachable | fetched | advisories | 403 to this project's client (2026-11-14) and to GitHub's runner (2026-11-16). |
-| `la-ldh-beach-monitoring` | Louisiana Department of Health Beach Monitoring Program | unreachable | search_only | advisories | Both addresses answer 403 to this project's client (2026-11-14) and to GitHub's runner (2026-11-16): registered as a barrier (bot wall); a data request to LDH is the owner's item. |
 
 ## nv: Nevada (16)
 

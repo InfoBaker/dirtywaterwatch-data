@@ -5,6 +5,7 @@ Run from pipeline/: python -m pytest tests/test_ingest_nc.py -q
 """
 from __future__ import annotations
 
+import copy
 import json
 from pathlib import Path
 
@@ -215,6 +216,133 @@ def test_the_same_status_on_a_later_run_is_reconfirmed_not_duplicated():
     assert len(again) == 3 and stats["open"] == 3
     a = next(r for r in again if r["raw"]["ASN"] == "N88")
     assert a["started_at"] == "2026-09-03T14:50:03-04:00" and a["source_updated_at"] == "2026-11-05T09:00:00-05:00"
+
+
+# ---------------------------------------------------------------- the PUBLICVIEW service (own-fixes 2026-11-21)
+# The Swim Guide review: the feed read the 2022 layer (RWQ_Advisory_EXTERNAL), which on 2026-11-21 still showed N88 as
+# an advisory DMF ended on 2026-10-31; DMF's dashboard reads PUBLICVIEWRecreationWaterQualityDatabase. Trimmed real
+# fixtures of both, read 2026-11-21: six stations, six activities (one with its end typed before its start).
+
+PV_AT = "2026-11-21T15:00:00Z"
+
+
+def pv(prev=()):
+    feats = json.loads((FIX / "nc_pv_stations.json").read_text())["features"]
+    meta = json.loads((FIX / "nc_pv_stations_meta.json").read_text())
+    acts = [f["attributes"] for f in json.loads((FIX / "nc_pv_activity.json").read_text())["features"]]
+    tmeta = json.loads((FIX / "nc_pv_activity_meta.json").read_text())
+    return R.build(feats, meta, PV_AT, list(prev), activities=acts, table_meta=tmeta)
+
+
+def old_2022():
+    # as production first read the 2022 layer (2026-11-04): its last data edit was then 2026-09-03 18:50:03Z
+    feats = json.loads((FIX / "nc_rwq2022_stations.json").read_text())["features"]
+    return R.build(feats, {"editingInfo": {"dataLastEditDate": 1788461403000}}, "2026-11-04T15:00:00Z", [])[0]
+
+
+def test_the_feed_reads_the_publicview_service():
+    assert "PUBLICVIEWRecreationWaterQualityDatabase/FeatureServer/0" in R.LAYER and R.TABLE.endswith("/FeatureServer/2")
+    assert "RWQ_Advisory_EXTERNAL" not in R.LAYER
+    assert not {"Creator", "Editor"} & set(R.FIELDS + R.ACTIVITY_FIELDS)
+
+
+def test_dmfs_activities_are_records_with_dmfs_own_start_and_end():
+    recs, stats = pv()
+    by = {r["source_record_id"]: r for r in recs}
+    n88 = by["N88_Posting2026-09-29"]
+    assert n88["event_type"] == "beach_advisory" and n88["status"] == "advisory_lifted"
+    assert n88["started_at"] == "2026-09-24T12:35:00-04:00" and n88["ended_at"] == "2026-10-31T12:56:05-04:00"
+    assert n88["time_precision"] == "minute" and n88["raw"]["_kind"] == "activity" and n88["raw"]["_reason"] == "elevated bacteria"
+    assert "Division of Marine Fisheries' own" in n88["raw"]["_date_basis"] and n88["lat"] is not None
+    assert n88["waterbody_text"] == "Jockey's Ridge Soundside Access (estuary)" and "200'" in n88["advice_text"]
+    pend = by["S43A_Pending2026-10-14"]
+    assert pend["raw"]["_status_code"] == "Pending Swimming Advisory" and pend["status"] == "advisory_lifted"
+    old = by["C27A_SSM_POSTING20091016"]
+    assert old["started_at"].startswith("2009-10-16") and old["status"] == "advisory_lifted"
+    bad = by["C48C_Posting2025-08-12"]                 # the end typed before the start: not used, said so
+    assert bad["ended_at"] is None and bad["status"] == "unknown" and "before" in bad["parse_error"]
+    assert stats["activities"] == 6 and stats["activities_open"] == 0
+
+
+def test_precautionary_spells_still_come_from_the_station_status():
+    recs, stats = pv()
+    pre = [r for r in recs if r["raw"].get("_status_code") == "Precautionary"]
+    assert sorted(r["raw"]["ASN"] for r in pre) == ["N14A", "N15"]
+    n14a = next(r for r in pre if r["raw"]["ASN"] == "N14A")      # dated by the station row's own last edit
+    assert n14a["event_type"] == "rain_advisory" and n14a["started_at"] == "2026-09-29T11:50:45-04:00"
+    assert "station row's last edit" in n14a["raw"]["_start_basis"]
+    assert {t["station"] for t in stats["tracked"]} == {"C27A", "C48C", "N88", "S43A"}     # "No Advisory" is no event
+
+
+def test_the_2022_layers_records_keep_their_ids_or_point_to_dmfs_record():
+    first = old_2022()
+    by_old = {r["source_record_id"]: r for r in first}
+    adv = next(k for k, r in by_old.items() if r["raw"]["ASN"] == "N88")
+    pre = next(k for k, r in by_old.items() if r["raw"]["ASN"] == "N15")
+    recs, stats = pv(first)
+    by = {r["source_record_id"]: r for r in recs}
+    a = by[adv]                                         # the stale 2022 advisory: DMF's activity record replaces it
+    assert a["duplicate_of"] == by["N88_Posting2026-09-29"]["event_id"]
+    assert a["raw"]["_superseded_by_activity"] == "N88_Posting2026-09-29"
+    p = by[pre]                                         # the precautionary spell continues under the same id
+    assert p["status"] == "advisory_active" and p["duplicate_of"] is None and p["raw"]["_last_seen_at"] == PV_AT
+    assert sum(1 for r in recs if r["raw"].get("ASN") == "N15" and r["raw"].get("_status_code") == "Precautionary") == 1
+    assert stats["superseded"] == 1 and stats["open"] == 2
+
+
+def test_review_a_legacy_spell_links_to_the_activity_its_time_overlaps_and_never_to_an_older_one():
+    # production's first read (2026-11-04) dated N88's 2022-layer spell by that layer's last edit, 2026-09-03 18:50Z:
+    # before DMF's posting began (2026-09-24), so "an activity that began on or before it" missed it (Astra P1)
+    feats = json.loads((FIX / "nc_rwq2022_stations.json").read_text())["features"]
+    first, _ = R.build(feats, {"editingInfo": {"dataLastEditDate": 1788461403000}}, "2026-11-04T15:00:00Z", [])
+    n88 = next(r for r in first if r["raw"]["ASN"] == "N88")
+    assert n88["started_at"] == "2026-09-03T14:50:03-04:00"
+    recs, stats = pv(first)
+    assert {r["event_id"]: r for r in recs}[n88["event_id"]]["duplicate_of"] == "nc-rwq-advisories:N88_Posting2026-09-29"
+    # a spell no activity overlaps (C48C's posting ended 2026-10-27) is not tied to an older activity
+    later = copy.deepcopy(n88)
+    later.update(event_id="nc-rwq-advisories:C48C:advisory:20261120T1500Z", source_record_id="C48C:advisory:20261120T1500Z",
+                 started_at="2026-11-20T10:00:00-05:00")
+    later["raw"].update(ASN="C48C")
+    recs, _ = pv([later])
+    assert {r["event_id"]: r for r in recs}[later["event_id"]].get("duplicate_of") is None
+
+
+def test_review_a_repeated_activity_name_keeps_a_stable_id():
+    acts = [f["attributes"] for f in json.loads((FIX / "nc_pv_activity.json").read_text())["features"]]
+    a = next(x for x in acts if x["ACTIVITY_NAME"] == "S43A_Pending2026-10-14")
+    twin = dict(a, OBJECTID=a["OBJECTID"] + 5000, GlobalID="twin", START_DATE=a["START_DATE"] - 86400000)
+    feats = json.loads((FIX / "nc_pv_stations.json").read_text())["features"]
+    meta = json.loads((FIX / "nc_pv_stations_meta.json").read_text())
+    recs, _ = R.build(feats, meta, PV_AT, [], activities=acts + [twin], table_meta={})
+    ids = {r["raw"].get("GlobalID"): r["source_record_id"] for r in recs if r["raw"].get("_kind") == "activity"}
+    assert ids["twin"] == f"S43A_Pending2026-10-14~{twin['OBJECTID']}" and ids[a["GlobalID"]] == "S43A_Pending2026-10-14"
+    recs2, _ = R.build(feats, meta, PV_AT, recs, activities=[x for x in acts if x is not a] + [twin], table_meta={})
+    assert sum(1 for r in recs2 if r["raw"].get("GlobalID") == "twin") == 1
+
+
+def test_review_an_empty_activity_read_is_a_failed_read():
+    class Resp:
+        def __init__(self, doc):
+            self.doc = doc
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self.doc
+
+    class Sess:
+        def __init__(self, pages):
+            self.pages = list(pages)
+
+        def get(self, url, params=None, timeout=None):
+            return Resp(self.pages.pop(0) if self.pages else {"name": "Beach_Activity"})
+
+    with pytest.raises(ValueError):
+        R.fetch_activities(Sess([{"features": [], "exceededTransferLimit": True}]))
+    with pytest.raises(ValueError):
+        R.fetch_activities(Sess([{"features": []}]))
 
 
 # ---------------------------------------------------------------- algal bloom reports

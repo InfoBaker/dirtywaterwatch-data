@@ -17,6 +17,12 @@ level: "state"
 #   a Low row is not a record (filter). Only the latest sample per station is published: an advisory's end is the first
 #   fetch at which the station shows a newer sample. No water name is given: a station is placed by its own point
 #   (the Gulf beaches, Galveston Bay, Corpus Christi Bay, the Laguna Madre and others).
+# Checked 2026-11-21 (the Swim Guide review said texasbeachwatch.com now lands on GLO's home page): it answered 302
+#   to https://www.glo.texas.gov/ from this Mac and from GitHub's runner (runner probe 44913220623), and this layer
+#   timed out on both. GLO's home page that day: "www.texasbeachwatch.com, txcoasts.com, all payment systems and some
+#   of our map applications are undergoing maintenance and will not be available over the weekend starting
+#   Friday11/20 @ 5pm." The page served its own content when archived on 2026-09-08, and GLO's site has no other
+#   Beach Watch page, so the citation stays: a planned outage, not a move. Re-check after 2026-11-23.
 cadence: "weekly in the swimming season (May to September), every other week otherwise (program description)"
 license: "No licence statement on the service"
 attribution: "Texas General Land Office, Texas Beach Watch"

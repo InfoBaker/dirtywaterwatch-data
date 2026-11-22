@@ -5898,7 +5898,7 @@
    "channel_kind": "state_alert_page",
    "urls": [
     "https://www.deq.nc.gov/about/divisions/marine-fisheries/shellfish-sanitation-and-recreational-water-quality/recreational-water-quality",
-    "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/RWQ_Advisory_EXTERNAL/FeatureServer/1"
+    "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/PUBLICVIEWRecreationWaterQualityDatabase/FeatureServer/0"
    ],
    "method": "json",
    "legal_basis": "15A NCAC 18A .3403 (pending and full swimming advisories from bacteria results) and .3404 (spill and storm-water advisories, with signs)",
@@ -5906,8 +5906,8 @@
    "monitored": false,
    "unmonitored_reason": "feed_ingested",
    "publishes": "status",
-   "note": "Coastal swimming advisory map: 225 ocean and sound stations with a current status (No Alert, Pending Swimming Advisory, Advisory, Precautionary). Current state only; the station sample-data links answered 404 on 2026-11-04. (research/nc/report.md §2.5)",
-   "checked": "2026-11-04",
+   "note": "Coastal swimming advisory dashboard and its service PUBLICVIEWRecreationWaterQualityDatabase: 229 ocean and sound stations with a current status (No Advisory, Pending Swimming Advisory, Advisory, Precautionary) and the Beach_Activity table of every advisory and pending resample with the Division's own start and end (605 since 2005 on 2026-11-21). Read as a feed since 2026-11-21; before that the feed read the 2022 layer RWQ_Advisory_EXTERNAL, which on 2026-11-21 still showed N88 as an advisory the table ended on 2026-10-31. Answered GitHub's runner on 2026-11-21 (run 44913220623). (research/nc/report.md §2.5)",
+   "checked": "2026-11-21",
    "feed_source_id": "nc-rwq-advisories",
    "noun": "State page",
    "sources": [

@@ -1,0 +1,156 @@
+{
+ "objectIdFieldName": "OBJECTID",
+ "geometryType": "esriGeometryPoint",
+ "features": [
+  {
+   "attributes": {
+    "OBJECTID": 916,
+    "STATION": 27,
+    "COUNTY": "ONSLOW",
+    "TIER": 2,
+    "LATITUDE": 34.6848326804,
+    "LONGITUDE": -77.1232351803,
+    "EFFECTIVE": 2003,
+    "EPA_ID": "NC892318",
+    "StationID": "27A",
+    "GlobalID": "{2F9D7D34-544B-485E-83D0-6F7858BB12EE}",
+    "Status": "No Advisory",
+    "ASN": "C27A",
+    "ASN2": "C27A",
+    "DESCRIPTIO": "Wards Shore Access in Swansboro",
+    "LOCATION": "ESTUARY",
+    "Active": "Yes",
+    "EditDate": 1788466821696
+   },
+   "geometry": {
+    "x": -77.12323724594043,
+    "y": 34.68483961723912
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 932,
+    "STATION": 48,
+    "COUNTY": "CARTERET",
+    "TIER": 1,
+    "LATITUDE": 34.7185065475,
+    "LONGITUDE": -76.724400172,
+    "EFFECTIVE": 2008,
+    "EPA_ID": "NC727802",
+    "StationID": "48C",
+    "GlobalID": "{80F83608-96D9-4FE7-8C37-277B9C6272A9}",
+    "Status": "No Advisory",
+    "ASN": "C48C",
+    "ASN2": "C48C",
+    "DESCRIPTIO": "Drain Pipe at 16th street in MHC",
+    "LOCATION": "ESTUARY",
+    "Active": "Yes",
+    "EditDate": 1793101729771
+   },
+   "geometry": {
+    "x": -76.72440211768375,
+    "y": 34.7185135045534
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 980,
+    "STATION": 14,
+    "COUNTY": "DARE",
+    "TIER": 1,
+    "LATITUDE": 36.0142046701,
+    "LONGITUDE": -75.6546370908,
+    "EFFECTIVE": 2001,
+    "EPA_ID": "NC148512",
+    "StationID": "14A",
+    "GlobalID": "{0687EBA9-E6D0-4506-B244-5CFFAB40F3AD}",
+    "Status": "Precautionary",
+    "ASN": "N14A",
+    "ASN2": "N14A",
+    "DESCRIPTIO": "Drain Pipe at Oregon St in KDH",
+    "LOCATION": "OCEAN",
+    "Active": "Yes",
+    "EditDate": 1790697045140
+   },
+   "geometry": {
+    "x": -75.65463877016337,
+    "y": 36.01421194488688
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 981,
+    "STATION": 15,
+    "COUNTY": "DARE",
+    "TIER": 1,
+    "LATITUDE": 35.9984826297,
+    "LONGITUDE": -75.6457437706,
+    "EFFECTIVE": 1997,
+    "EPA_ID": "NC701853",
+    "StationID": "15",
+    "GlobalID": "{79DBF6B3-14BC-4966-863A-B69A7668A1D5}",
+    "Status": "Precautionary",
+    "ASN": "N15",
+    "ASN2": "N15",
+    "DESCRIPTIO": "Drain Pipe at Lake Dr. in KDH",
+    "LOCATION": "OCEAN",
+    "Active": "Yes",
+    "EditDate": 1790696810478
+   },
+   "geometry": {
+    "x": -75.64574544643007,
+    "y": 35.99848990140181
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 1018,
+    "STATION": 88,
+    "COUNTY": "DARE",
+    "TIER": 1,
+    "LATITUDE": 35.9522873902,
+    "LONGITUDE": -75.6329643497,
+    "EFFECTIVE": 1997,
+    "EPA_ID": "NC981058",
+    "StationID": "88",
+    "GlobalID": "{5B604440-2F32-40A6-ABC7-E294F346C0E8}",
+    "Status": "No Advisory",
+    "ASN": "N88",
+    "ASN2": "N88",
+    "DESCRIPTIO": "Jockey's Ridge Soundside Access",
+    "LOCATION": "ESTUARY",
+    "Active": "Yes",
+    "EditDate": 1794312589788
+   },
+   "geometry": {
+    "x": -75.63296601938826,
+    "y": 35.9522946522979
+   }
+  },
+  {
+   "attributes": {
+    "OBJECTID": 1077,
+    "STATION": 43,
+    "COUNTY": "BRUNSWICK",
+    "TIER": 2,
+    "LATITUDE": 33.9173184604,
+    "LONGITUDE": -78.0161067097,
+    "EFFECTIVE": 2004,
+    "EPA_ID": "NC642348",
+    "StationID": "43A",
+    "GlobalID": "{DAEDE92C-D8B4-4C80-922B-15208A15158F}",
+    "Status": "No Advisory",
+    "ASN": "S43A",
+    "ASN2": "S43A",
+    "DESCRIPTIO": "Southport municipal pier",
+    "LOCATION": "ESTUARY",
+    "Active": "Yes",
+    "EditDate": 1792084916494
+   },
+   "geometry": {
+    "x": -78.01610901025201,
+    "y": 33.91732519823172
+   }
+  }
+ ]
+}

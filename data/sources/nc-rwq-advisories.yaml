@@ -1,11 +1,18 @@
 id: "nc-rwq-advisories"
-name: "NC DEQ Recreational Water Quality program: swimming advisory status layer (RWQ_Advisory_EXTERNAL)"
-url: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/RWQ_Advisory_EXTERNAL/FeatureServer/1"
+name: "NC DEQ Recreational Water Quality program: PUBLICVIEW service (stations and Beach_Activity table)"
+url: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/PUBLICVIEWRecreationWaterQualityDatabase/FeatureServer"
 homepage: "https://www.deq.nc.gov/about/divisions/marine-fisheries/shellfish-sanitation-and-recreational-water-quality/recreational-water-quality"
 kind: "arcgis"
 level: "state"
-# Feed row: the source id written by pipeline/ingest/nc_rwq_advisories.py (data/build/events/nc-rwq-advisories.json),
-#   a snapshot of the current station status turned into advisory spells.
+# Feed row: the source id written by pipeline/ingest/nc_rwq_advisories.py (data/build/events/nc-rwq-advisories.json).
+# Since 2026-11-21 (own-fixes, after the Swim Guide review) it reads the PUBLICVIEW service DMF's dashboard uses:
+#   layer 0 (229 stations) and table 2 Beach_Activity (605 advisories and pending resamples since 2005, with DMF's
+#   START_DATE and END_DATE; 93 begun in 2026). Each activity is a record with DMF's dates; Precautionary stays a
+#   snapshot spell of the station status. Compared on 2026-11-21 with the 2022 layer it read before
+#   (RWQ_Advisory_EXTERNAL/FeatureServer/1): the 2022 layer still showed N88 as an Advisory that DMF ended on
+#   2026-10-31 and lacked N14A's and N17A's Precautionary status; 5 stations were only in PUBLICVIEW and 1 (C56B)
+#   only in the 2022 layer. The 2022 layer's N88 record points to DMF's (duplicate_of); its precautionary spells
+#   continue under their own ids.
 # Notes (research/nc, status used, verified fetched, checked 2026-11-04): Coastal (ocean and sound)
 #   monitoring stations with current Status (No Alert / Pending Swimming Advisory / Advisory /
 #   Precautionary). Built: pipeline/ingest/nc_rwq_advisories.py (snapshot spells; 225 stations on
@@ -27,4 +34,4 @@ access: ["arcgis"]
 access_detail: null
 machine_readable: true
 legal_basis: "15A NCAC 18A .3400 (.3403 bacteria advisories; .3404 point-source, wastewater spill and storm-water advisories)"
-checked: "2026-11-04"
+checked: "2026-11-21"

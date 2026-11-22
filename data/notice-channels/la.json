@@ -3534,32 +3534,35 @@
    "operator_id": null,
    "agency": "Louisiana Department of Health",
    "permit": null,
-   "checked": "2026-11-16",
+   "checked": "2026-11-21",
    "id": "la-ldh-beach-monitoring",
    "name": "Louisiana Department of Health (Beach Monitoring Program)",
    "channel_kind": "local_health_page",
    "urls": [
-    "https://ldh.la.gov/page/beach-monitoring-program"
+    "https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/BEACH_ADVISORY_STATUS/FeatureServer/0/query?where=1%3D1&outFields=*&f=json"
    ],
-   "method": "html",
+   "method": "json",
    "legal_basis": "BEACH Act grant (33 U.S.C. 1346): coastal recreation water monitoring and public notification",
    "basis_kind": "law",
-   "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "monitored": true,
+   "unmonitored_reason": null,
    "publishes": "status",
-   "note": "Weekly advisories for about two dozen coastal beach sites, May to October, with sample dates; the Department's site answers 403 to this project's client (2026-11-14, both addresses) and to GitHub's runner (2026-11-16).",
+   "note": "LDH's beach monitoring page (https://ldh.la.gov/page/beach-monitoring-program) lists its 23 coastal monitoring sites with the most recent sample date and advisory status; advisories are issued weekly every Thursday from May 1 to October 31. The page links LDH's map, whose layer BEACH_ADVISORY_STATUS (https://services5.arcgis.com/O5K6bb5dZVZcTo5M/arcgis/rest/services/BEACH_ADVISORY_STATUS/FeatureServer/0) is open: one row per site with STATUS, ADVISORY_REASON, SAMPLE_DATE, TIME_SAMPL, ENTEROCOCCI, GEO_MEAN and a point (23 rows on 2026-11-21, 1 ADVISORY: Lake Charles North Beach, sampled 2026-10-20, the same as the page). The page answers 403 to this project's named client (this Mac and GitHub's runner, run 44913220623, 2026-11-21) and 200 to a browser's user agent (this Mac, 2026-11-21), which decision 30 allows; the layer answers the named client on both, so the row watches the layer. Not collected yet: the generic ArcGIS reader can read the layer with a fetch block only (a STATUS filter and history.confirm_while_listed), no new code. The earlier bot-wall barrier rested on the named client's 403 alone.",
    "sources": [
     "la-ldh-beach-monitoring",
     "la-ldh-beach-alternate"
    ],
-   "barrier": "bot_wall"
+   "barrier": null,
+   "records": false,
+   "availability_only": true,
+   "every_hours": 24
   },
   {
    "state": "LA",
    "operator_id": null,
    "agency": "Louisiana Department of Health",
    "permit": null,
-   "checked": "2026-11-14",
+   "checked": "2026-11-21",
    "id": "la-ldh-hab-advisories",
    "name": "Louisiana Department of Health (algal bloom advisories)",
    "channel_kind": "news_page",
@@ -3570,13 +3573,13 @@
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "bot_wall",
+   "unmonitored_reason": "other",
    "publishes": "notices",
-   "note": "Bloom advisories as occasional news releases; the Department's site answers 403 to this project's client.",
+   "note": "Bloom advisories as occasional news releases (this one: a large algal bloom on Lake Pontchartrain). The Department's site refuses this project's named client with a 403 (2026-11-14; GitHub's runner 2026-11-16) and answers a browser's user agent (2026-11-21), which decision 30 allows; where the releases are listed for reading was not verified in the research, so the row is not watched yet.",
    "sources": [
     "la-ldh-hab-advisories"
    ],
-   "barrier": "bot_wall"
+   "barrier": "not_verified"
   },
   {
    "state": "LA",

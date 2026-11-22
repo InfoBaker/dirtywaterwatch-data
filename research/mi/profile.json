@@ -118,7 +118,7 @@
   ],
   "machine_readable": true,
   "scope": "all",
-  "notes": "Public JSON gives current status colour per site; advisory detail needs login."
+  "notes": "The map's Export gives every advisory with its dates, type and reason without a login (report 2082; checked 2026-11-21); not collected yet."
  },
  "habs": {
   "program": "EGLE/MDHHS HAB reports map and reporting form (Michigan.gov/HABs)",
@@ -178,12 +178,6 @@
    "what": "No public overflow alert subscription; only beach advisories",
    "fix_level": "agency",
    "note": ""
-  },
-  {
-   "kind": "login",
-   "what": "BeachGuard advisory and sample detail endpoints need a MiEnviro login",
-   "fix_level": "agency",
-   "note": "Public status colour only."
   }
  ],
  "subscriptions": [

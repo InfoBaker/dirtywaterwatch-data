@@ -917,6 +917,15 @@
     ],
     "read": "the Department's notice title, text and cause"
    },
+   "id-deq-cyanohab-risk-table": {
+    "kind": "fields",
+    "fields": [
+     "dhw_issue",
+     "dhw_issue_other",
+     "dhw_web_note"
+    ],
+    "read": "the Idaho Department of Health and Welfare map's issue (Beach Closure, Swimmer's Itch or Other), its description of an Other issue and its note"
+   },
    "il-idph-beachguard": {
     "kind": "fields",
     "fields": [
