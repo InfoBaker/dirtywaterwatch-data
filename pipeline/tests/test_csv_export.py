@@ -380,6 +380,24 @@ def test_observed_sample_advisory_end_is_not_exported_as_agency_reported_end(tmp
     assert row["time_precision"] == row["ended_at_precision"] == "poll"
 
 
+@pytest.mark.parametrize("source,raw", [
+    ("pa-erie-beaches", {"end_basis": "the next sample's collection date at this beach"}),
+    ("ny-parks-beaches", {"_ended_at_basis": "date of the next sample row, which reads Reopened / Clear after resample"}),
+    ("ny-parks-beaches", {"_ended_at_basis": "Date_sampled of the next status shown (Open / Clear after resample)"}),
+    ("ny-parks-beaches", {"_ended_at_basis": "first poll showing another status"}),
+])
+def test_sample_date_ends_without_sampled_at_are_not_reported(tmp_path, source, raw):
+    # These ingesters store observation dates in the legacy start/end fields at day precision.
+    sample = ev("sample-date", source_id=source, event_type="beach_advisory", status="advisory_lifted",
+                started="2026-07-01T00:00:00-04:00", ended_at="2026-07-02T00:00:00-04:00",
+                time_precision="day", raw=raw)
+    out, _ = write(tmp_path, [sample])
+    row = read(out / "all-reports-2026.csv")[0]
+    assert row["ended_at"] == sample["ended_at"] and row["end_reported"] == "false"
+    assert row["end_estimate_at"] == row["end_estimate_basis"] == ""
+    assert row["time_precision"] == row["ended_at_precision"] == "day"
+
+
 def test_an_operators_notice_volume_fills_its_own_columns(tmp_path):
     linked = [{"event_id": "ma-holyoke-everbridge:m1:1", "volume_gal": 225192, "published_at": "2026-10-20T15:05:00Z"}]
     a, b = ev("1", volume_gal=None, volume_text=None), ev("2")
