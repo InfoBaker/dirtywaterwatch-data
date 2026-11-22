@@ -806,12 +806,13 @@ def _is_xlsx(content: bytes) -> bool:
 
 def fetch(sess: requests.Session, state: dict, force: bool) -> tuple[bytes | None, dict]:
     """(workbook bytes, or None when not modified since the last read; where it came from). DEC with
-    If-Modified-Since (none when force), then the latest Internet Archive capture. Raises when neither answers."""
+    If-Modified-Since (none when force), then the latest Internet Archive capture. Raises when neither answers. The
+    timeouts keep a run where no host answers (two DEC addresses, two archive tries) under the feed's 600-second cap."""
     headers = {} if force or not state.get("last_modified_http") else {"If-Modified-Since": state["last_modified_http"]}
     errors = []
     for url in DEC_URLS:
         try:
-            r = sess.get(url, headers=headers, timeout=(15, 180))
+            r = sess.get(url, headers=headers, timeout=(10, 90))
             if r.status_code == 304:
                 return None, {"via": "dec", "url": url, "last_modified": state.get("last_modified")}
             r.raise_for_status()
@@ -824,7 +825,7 @@ def fetch(sess: requests.Session, state: dict, force: bool) -> tuple[bytes | Non
     url = ARCHIVE_URL.format(ts=datetime.now(UTC).strftime("%Y%m%d%H%M%S"))
     for attempt in range(2):
         try:
-            r = sess.get(url, timeout=(20, 180))
+            r = sess.get(url, timeout=(15, 120))
             if r.status_code == 429:
                 raise requests.HTTPError("429 Too Many Requests")
             r.raise_for_status()
