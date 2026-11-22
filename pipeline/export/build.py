@@ -93,12 +93,16 @@ Files:
                      flow, water level, temperature, turbidity, conductance, NWS flood stages and
                      the cold / turbid / high-flow flags), shown beside the status, never changing
                      it; also as `conditions` in waters/<slug>.json (null when the water has none)
+  assessments.json   the state's own Clean Water Act assessment beside the status, never changing it (EPA ATTAINS,
+                     export/assessments.py, docs/attains.md): {"built", "source", "waters": {slug: SUMMARY}}; the units
+                     are `assessment` in waters/<slug>.json (null when none matched or the cache is missing or stale)
   csv/               the reports as CSV downloads (export/csv.py, docs/data-downloads.md): water/<slug>.csv,
-                     operator/<id>.csv, state/<st>.csv and all-reports-<year>.csv; the site serves them at /csv/...
+                     operator/<id>.csv, state/<st>.csv and all-reports-<year>.csv; the site serves them at /csv/...;
+                     and assessments.csv, the matched assessment units per tracked water (export/assessments.py)
   coverage.json      what is reported, state by state (docs/plan.md §2.y); rain_caution_states: where the
                      "discharge likely" caution is computed and how (radar, or New Jersey's shared site);
                      states.<ST>.notification_pages: the public-notice page health (ingest/notification_pages.py)
-  meta.json          build times, fixture flag, counts by state and status, by event type, csv_files
+  meta.json          build times, fixture flag, counts by state and status, by event type, csv_files, assessments
 
 Placement texts and status lines that quote a record pass through the same redactor as the records' free text
 (public_placement, redact_status_texts), and the export ends with a self-check: a name of the owner's blocklist in
@@ -126,6 +130,7 @@ from common import scrub_residence_numbers
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, OUT_DIR, OUTFALL_REGISTRY_GLOB, OUTFALL_REGISTRY_SKIPPED,
                     PROVISIONAL_FIELDS, REPORTED_OUTFALLS, ROOT, STATE_CODE, discharger_alias_map, is_provisional, now_iso, read_json,
                     error_text, public_error, scrub_names, split_path_notes, strip_personal, write_json)
+from export import assessments as assess_mod
 from export import detail as detail_mod
 from export import outfalls as outfalls_mod
 
@@ -1023,7 +1028,7 @@ def shown_path(p: Path) -> str:
 
 PUBLIC_PAYLOADS = ("waters.json", "active.json", "monthly-outfalls.json", "overlays.geojson", "advisory-points.geojson",
                    "reaches.geojson", "reach-paths.geojson", "rain.json", "coverage.json", "dischargers.json",
-                   "outfalls.json", "rain-levels.json")
+                   "outfalls.json", "rain-levels.json", "assessments.json")
 BLOCKED_MARK = BUILD_DIR / "export-blocked.json"     # the old hard stop; removed whenever the export runs
 HITS_MARK = BUILD_DIR / "blocklist-hits.json"        # the files (never the name) a hit is in, for the next run's fix
 SCAN_CACHE = BUILD_DIR / "blocklist-scan-cache.json"  # digests of out/ texts found clean (blocklist_hits), saved state
@@ -1462,6 +1467,28 @@ def public_conditions(cond: dict | None, tracked) -> dict:
             "note": CONDITIONS_NOTE, "count": len(waters), "waters": waters}
 
 
+def public_assessments(st: dict, redactor: Redactor | None = None, out_dir: Path | None = None,
+                       path: Path | None = None, now: str | None = None) -> dict:
+    """The state's own Clean Water Act assessments for the tracked waters (export/assessments.py, docs/attains.md):
+    the cache kept to st's waters, checked whole and its free text through common.scrub_text and the records'
+    redactor (Redactor.note), out/assessments.json written, and why nothing is shown printed. Beside the status,
+    never changing it: st is only read. Never raises over the cache (missing, unreadable, malformed or stale: every
+    water's `assessment` is null and meta.json's assessments.unavailable says why)."""
+    a = assess_mod.load(set(st["waters"]), canon=lambda s: status_mod.SLUG_ALIASES.get(s, s), path=path, now=now,
+                        scrub=redactor.note if redactor is not None else None)
+    if a["unavailable"]:
+        print(f"export: no state assessments on the water pages ({a['unavailable']})")
+    assess_mod.write_index(out_dir or OUT_DIR, a)
+    return a
+
+
+def assessment_download(out_dir: Path, a: dict, tracked: list[dict]) -> int:
+    """out/csv/assessments.csv beside the report downloads (after write_csvs, which swaps the csv folder in whole):
+    the rows written, 0 (and no file) when no tracked water has a unit."""
+    return assess_mod.write_csv(Path(out_dir) / "csv" / "assessments.csv", a,
+                                names={w["slug"]: w["name"] for w in tracked})
+
+
 # ---------------------------------------------------------------- inputs
 
 def status_inputs() -> list[Path]:
@@ -1843,6 +1870,9 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     # conditions at the nearest gauge (ingest/gauges.py), beside the status, never changing it
     conditions = public_conditions(read_json(BUILD_DIR / "conditions.json"), set(st["waters"]))
     write_compact(OUT_DIR / "conditions.json", conditions)
+    # the state's own Clean Water Act assessment (export/assessments.py), beside the status, never changing it; its
+    # free text through the same redactor as the records'
+    assessments = public_assessments(st, redactor)
 
     # waters.json and overlays
     health = st.get("sources") or {}
@@ -1901,6 +1931,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
             **{k: v for k, v in row.items() if k != "events"},
             "launches": launch_objs,
             "conditions": conditions["waters"].get(slug),
+            "assessment": assess_mod.water_block(assessments, slug),
             "history": {"start": hist.get("start"), "step_hours": hist.get("step_hours", 1),
                         "strip": (hist.get("waters") or {}).get(slug), "intervals": (hist.get("intervals") or {}).get(slug, [])},
             "events": [{k: v for k, v in {**index_obj(e), **{k: e.get(k) for k in WATER_EVENT_EXTRA}}.items()
@@ -2075,6 +2106,9 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
             states=set(status_mod.states()),
             as_of=st.get("now"), active_ids=active_ids, source_states=source_states)
         csv_files = csv_counts["files"]
+        # the assessment download beside them (after write_csvs, which swaps the csv folder in whole)
+        if assessment_download(OUT_DIR, assessments, tracked):
+            csv_files += 1
         if csv_counts["oversize"]:          # the host takes no file over 25 MiB; scripts/mirror-csv.sh leaves them out
             note = f"csv files over 25 MiB are not published on the site: {', '.join(csv_counts['oversize'])}"
             print(f"export: {note}")
@@ -2143,6 +2177,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                        "with_flow": sum(1 for r in conditions["waters"].values() if r.get("flow_cfs") is not None),
                        "with_temperature": sum(1 for r in conditions["waters"].values() if r.get("temp_c") is not None),
                        "with_turbidity": sum(1 for r in conditions["waters"].values() if r.get("turbidity_ntu") is not None)},
+        "assessments": assess_mod.meta(assessments),
         "waters_without_geometry": missing_geom,
         # as they may be published: a problem that quotes an exception keeps its kind and category (common.public_error)
         "problems": [public_error(p) for p in (st.get("problems") or []) + problems],
@@ -2152,7 +2187,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     if rules_src.exists():                  # the methods page prints it; internal "_" keys stay home
         write_json(OUT_DIR / "rules.json", live_rules(public_rules(json.loads(rules_src.read_text())), status_mod.states()))
     for name in ("meta.json", "sources.json", "waters.json", "conditions.json", "active.json", "dischargers.json",
-                 "coverage.json", "monthly-outfalls.json", "outfalls.json"):
+                 "coverage.json", "monthly-outfalls.json", "outfalls.json", "assessments.json"):
         hits = internal_wording(read_json(OUT_DIR / name))
         if hits:
             print(f"export: internal wording left in {name}: {', '.join(sorted(set(hits))[:5])}")

@@ -17,7 +17,8 @@ name: Refresh data
 # (the raw caches are not saved over it; the build state warns over it and is still saved up to wrangler's limit).
 # Needs the CLOUDFLARE_R2_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets (R2 objects in dirtywaterwatch-data through R2's S3
 # endpoint, scripts/r2-s3-keys.sh: the state, and the inbox/ files the private site repository writes, the e-mail
-# notice lists and the Worker's NBC file, pipeline/inbox.py; the refresh reads no D1 and no raw mail), for the model steps
+# notice lists and the Worker's NBC file, pipeline/inbox.py; the state assessments the weekly ATTAINS job saves,
+# state/attains.tar.gz, read only; the refresh reads no D1 and no raw mail), for the model steps
 # OPENROUTER_API_KEY (without it they run rules-only), and for openboatlaunch's API OBL_API_KEY (without it, or with
 # the API down, the R2 copy is used as before).
 on:
@@ -133,6 +134,25 @@ jobs:
             echo "::error::state/build.tar.gz is in R2 but could not be fetched; nothing is published or saved this run"; exit 1
           fi
           find data/build -name '._*' -delete 2>/dev/null || true   # AppleDouble files from a tarball made on a Mac
+      - name: Restore the state assessments from R2 (state/attains.tar.gz, the weekly ATTAINS job's output; read only)
+        if: steps.pause.outputs.paused != '1'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          # after the build state, so this week's file replaces the copy that rides in build.tar.gz. Never stops the run:
+          # absent, not fetched or unreadable, the export uses the copy in the build state, or shows no assessment
+          # (pipeline/build/attains.py, docs/attains.md). Only the assessment file is written (unpack-attains --only cache)
+          rc=0; python3 -I scripts/state_paths.py fetch state/attains.tar.gz attains.tar.gz || rc=$?
+          if [ "$rc" = 0 ]; then
+            python3 -I scripts/state_paths.py unpack-attains attains.tar.gz --only cache \
+              || echo "::warning::state/attains.tar.gz could not be read; the export uses the copy in the build state"
+          elif [ "$rc" = 3 ]; then
+            echo "no state assessments in R2 yet"
+          else
+            echo "::warning::state/attains.tar.gz could not be fetched; the export uses the copy in the build state"
+          fi
+          rm -f attains.tar.gz
       - name: Restore the raw caches from R2 (after the build state, which names the NY workbook entry)
         id: restore_raw
         if: steps.pause.outputs.paused != '1'
