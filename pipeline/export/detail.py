@@ -368,6 +368,8 @@ SOURCES: dict[str, dict] = {
         "rainfall_label": lambda raw: "Precipitation" if plain_inches("precipitationAmount")(raw) else None,
     },
     "tx-tceq-sso-opendata": {"cause": text("_cause", "cause")},
+    "in-evansville-releases": {"report_kind": const("SSO/CSSR Event"),
+                              "cause": text("CauseDescription")},
     # Houston's monthly SSO table (ingest/tx_houston_sso_monthly.py): its columns as written; "Est. Volume (Gallons)"
     # is an estimate, and a "0" is no figure (the City's note, kept as raw.volume_note)
     "tx-houston-sso-monthly": {"report_kind": const("Monthly SSO Report"),
