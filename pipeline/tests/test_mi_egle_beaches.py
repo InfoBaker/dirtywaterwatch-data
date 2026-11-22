@@ -175,6 +175,9 @@ def test_a_gzip_body_without_its_header_is_read():
 
 def test_decision_40_reads_egles_reason_and_source():
     rules = json.loads((ROOT / "data" / "rules.json").read_text())
+    held = rules["beach_reason"]["sources"].get(M.SOURCE_ID)
+    assert held is None or held == M.BEACH_REASON_ENTRY      # the file's entry, once integrated, is the module's
+    rules["beach_reason"]["sources"][M.SOURCE_ID] = M.BEACH_REASON_ENTRY
     ids = by_id(run()[0])
 
     def stated(key):
@@ -186,7 +189,6 @@ def test_decision_40_reads_egles_reason_and_source():
     assert stated("3288-20260630-closure")              # Rainfall
     assert not stated("374-20260811-closure")           # Not Specified, Not Specified
     assert not stated("374-20260729-closure")           # Other, Not Specified
-    assert rules["beach_reason"]["sources"][M.SOURCE_ID]["kind"] == "fields"
 
 
 def test_a_failed_read_keeps_the_held_records_and_marks_the_feed_not_ok(monkeypatch, tmp_path):

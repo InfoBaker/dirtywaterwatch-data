@@ -957,15 +957,6 @@
     ],
     "read": "Maine Healthy Beaches' status and comment"
    },
-   "mi-egle-beachguard": {
-    "kind": "fields",
-    "fields": [
-     "reason",
-     "pollution_source",
-     "advisory_type"
-    ],
-    "read": "EGLE's reason and pollution source for the closure or advisory, as its MiEnviro beach export lists them"
-   },
    "ms-mdeq-beach-monitoring": {
     "kind": "fields",
     "fields": [

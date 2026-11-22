@@ -46,8 +46,8 @@ Records (category beach: beach_closure or beach_advisory; never a sewage dischar
     re-confirmed (never as lifted).
   - The reason: raw.reason (EGLE's Reason: High bacteria levels, Rainfall, Sewage, Chemical or Oil discharge, Other,
     Not Specified) and raw.pollution_source (Unknown, Storm water runoff, Wildlife, Sanitary Sewer Overflow, Combined
-    Sewer Overflow ...). data/rules.json beach_reason reads them (decision 40): "Other" and "Not Specified" with no
-    stated source are listed without a colour.
+    Sewer Overflow ...). data/rules.json beach_reason reads them (decision 40; the entry is BEACH_REASON_ENTRY):
+    "Other" and "Not Specified" with no stated source are listed without a colour.
   - Place: the site's point (coord_source source), waterbody_text the site's Waterbody, outfall_name the beach name
     (and park); raw.county, raw.access (Public Owned, Public Access; Private Owned, Private Access; Not a Beach ...),
     raw.great_lake, raw.epa_beach_id (BEACON's beach id, for its copy links). A beach missing from report 2081 is a
@@ -113,6 +113,14 @@ MIN_SITES = 2000         # report 2081 listed 2,914 sites on 2026-11-21
 CREDIT = "Michigan EGLE, MiEnviro beach monitoring"
 GENERIC_WATER = re.compile(r"^(lake|pond|beach|river|reservoir|quarry|creek)$", re.I)
 TYPES = {"closed": ("beach_closure", "closure"), "contamination advisory": ("beach_advisory", "advisory")}
+# Decision 40's entry for this source, as data/rules.json beach_reason.sources should carry it. rules.json has one writer
+# (the build coordinator integrates it at merge, .coordinator/work/mi-beaches/shared-files.patch); the tests check the
+# file's entry equals this one once it is there.
+BEACH_REASON_ENTRY = {
+    "kind": "fields",
+    "fields": ["reason", "pollution_source", "advisory_type"],
+    "read": "EGLE's reason and pollution source for the closure or advisory, as its MiEnviro beach export lists them",
+}
 
 
 class ReadError(Exception):
