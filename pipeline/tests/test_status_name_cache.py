@@ -104,7 +104,8 @@ def test_cache_invalidation_and_every_output_byte(tmp_path, monkeypatch, change)
     hits.clear()
     if change == "rules":
         rules = json.loads(rules_path.read_text())
-        rules["yellow"]["default_hours"] = 1000       # content change without changing rules.version
+        rules.setdefault("placement", {})["no_outfall_all_waters"] = not bool(
+            rules.get("placement", {}).get("no_outfall_all_waters"))  # without changing rules.version
         rules_path.write_text(json.dumps(rules))
         kw["rules"] = S.load_rules(rules_path)
     elif change == "record":

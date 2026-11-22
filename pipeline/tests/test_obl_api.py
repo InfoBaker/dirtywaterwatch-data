@@ -429,7 +429,7 @@ def test_the_export_reads_long_keys_and_shows_published_launches_only(tmp_path, 
     X._OBL_BUILD.clear()
 
 
-def test_the_placement_stamp_follows_geometry_hash_not_file_times(tmp_path, monkeypatch):
+def test_the_placement_stamp_follows_outline_content_not_file_times_or_advertised_hash(tmp_path, monkeypatch):
     from build import status as S
     water = tmp_path / "water"
     water.mkdir()
@@ -438,7 +438,10 @@ def test_the_placement_stamp_follows_geometry_hash_not_file_times(tmp_path, monk
     one = S.outline_files({"a-ri": {"geometry_hash": "1" * 64}})
     os.utime(water / "a-ri.json", (1, 1))
     assert S.outline_files({"a-ri": {"geometry_hash": "1" * 64}}) == one
-    assert S.outline_files({"a-ri": {"geometry_hash": "2" * 64}}) != one
+    # Advertised hashes and filesystem metadata are not the outline; hash the content actually read.
+    assert S.outline_files({"a-ri": {"geometry_hash": "2" * 64}}) == one
+    (water / "a-ri.json").write_text(json.dumps({"geometry": {"type": "LineString", "coordinates": [[0, 0], [1, 1]]}}))
+    assert S.outline_files({"a-ri": {"geometry_hash": "1" * 64}}) != one
 
 
 def test_slug_aliases_of_a_later_duplicate_record_still_resolve(tmp_path, monkeypatch):

@@ -5126,58 +5126,83 @@ def source_health(sid: str, f: dict, reg: dict, now: datetime) -> dict:
 
 PLACEMENT_CACHE = BUILD_DIR / "placement-cache.json"
 PLACEMENT_CACHE_DAYS = 120      # records that began longer ago than this reuse their placement while nothing changed
-STAMP_IGNORED_WATER_KEYS = frozenset({"fetched_at", "targets"})    # bookkeeping of waters_from_nhd; placement reads neither
+# Resolver inputs, not the source documents' fetch/run metadata. Keep these beside the stamp so a new
+# placement input has an explicit cache dependency. Lists whose order chooses a tie or appears in a note
+# stay ordered; JSON object key order and unrelated registry rows do not affect the stamp.
+PLACEMENT_WATER_KEYS = ("name", "state", "kind", "towns", "bbox", "aliases", "slug_aliases", "covers_part_of")
+PLACEMENT_OUTFALL_KEYS = ("npdes_permit", "outfall", "outfall_name", "outfall_status", "state", "lat", "lon",
+                          "water_slug", "receiving_water", "receiving_water_echo", "water_name", "city", "county",
+                          "water_matched_by", "water_match", "match", "no_water_reason", "distance_m", "_file")
 
 
 def outline_files(waters) -> list:
-    """The outlines placement reads from openboatlaunch's folder (water_geometry: a record with no inline geometry),
-    as (slug, geometry_hash, present) for a record whose extract carries the hash, else (slug, size, modified) or
-    (slug, None) where there is none: a moved outline, or a machine without the folder
-    (the hosted runner has none), is a placement input like the records themselves (review 2026-11-04)."""
-    out = [str(OBL_WATER_DIR)]
+    """Hash the actual geometry and geometry_lines read by water_geometry, inline or external.
+
+    An archive restore, changed fetch metadata or another checkout path is not a changed outline. An
+    upstream geometry_hash is not sufficient either: it can be absent or stale and omit geometry_lines.
+    No stat-based memo survives a build: even a same-size edit with a preserved mtime must invalidate.
+    """
+    import hashlib
+    out = []
     for slug in sorted(waters):
-        if (waters[slug] or {}).get("geometry"):
-            continue
-        gh = (waters[slug] or {}).get("geometry_hash")
-        if gh:
-            # openboatlaunch's API records name their outline's hash (the extract carries it): a changed outline
-            # changes the hash, and a folder unpacked again (new file times) with the same outlines does not
-            out.append((slug, gh, (OBL_WATER_DIR / f"{slug}.json").is_file()))
-            continue
-        try:
-            st = (OBL_WATER_DIR / f"{slug}.json").stat()
-            out.append((slug, st.st_size, st.st_mtime_ns))
-        except OSError:
-            out.append((slug, None))
+        w = waters[slug] or {}
+        if not w.get("geometry"):
+            try:
+                w = read_json(OBL_WATER_DIR / f"{slug}.json") or {}
+            except (OSError, ValueError):
+                w = {}
+        g = {k: w[k] for k in ("geometry", "geometry_lines") if isinstance(w.get(k), dict) and w[k]}
+        out.append((slug, hashlib.sha256(json.dumps(g, sort_keys=True, separators=(",", ":")).encode()).hexdigest()))
     return out
 
 
-def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules, states) -> str:
-    """Everything a placement is made from besides the record: the water records, the outlines read from
-    openboatlaunch's folder (outline_files), the outfall registry, the operators' towns and receiving waters, the
-    rules, the live states, the placement steps switched on (PLACE_STEPS), the code (this module, build/redact.py,
-    common.py) and the name lists. A change to any of them places every record again."""
+def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules, states, parts=None) -> str:
+    """Content dependencies of Resolver.resolve, independent of fetch/run times and filesystem metadata.
+
+    Colour/reach rules are evaluated afresh outside the cached resolver. person_shaped reads the reference
+    vocabulary, not the export's allow/block lists. County outlines and Hawaii's island code also affect
+    placement. Source code is deliberately conservative: any code edit invalidates, never a code mtime.
+    """
     import hashlib
     import sys as _sys
     from build import redact as _redact
-    # the water records less the keys no placement reads and that change every hour without their water changing:
-    # ingest/waters_from_nhd.py stamps fetched_at with the build time and counts the record's targets each run, even for
-    # a record rebuilt from its cached answers, so with them in the stamp no hourly run ever reused a placement (run
-    # 42417263287: "reused for 0 of 142323"; 2026-11-07 refresh-time brief)
-    waters = {s: ({k: v for k, v in w.items() if k not in STAMP_IGNORED_WATER_KEYS} if isinstance(w, dict) else w)
-              for s, w in waters.items()}
-    h = hashlib.sha256(json.dumps([waters, outline_files(waters), outfalls, discharger_towns, discharger_waters, rules,
-                                   sorted(states), PLACE_STEPS], sort_keys=True, default=str).encode())
-    for f in (Path(__file__), Path(_redact.__file__), Path(_sys.modules["common"].__file__),
-              DATA_DIR / "name-allowlist.json", BUILD_DIR / "name-blocklist.json"):
-        h.update(f.read_bytes() if f.exists() else b"-")
-    return h.hexdigest()
+    from ingest import hi_doh_cwb_events as _hi
+    water_inputs = [(s, {k: w.get(k) for k in PLACEMENT_WATER_KEYS}) for s, w in waters.items()]
+    # Resolver groups by permit; ordering between different permits is immaterial, but ordering within a
+    # permit determines its fallback and the order of outfalls in the placement note.
+    by_permit = defaultdict(list)
+    for o in outfalls:
+        if o.get("npdes_permit"):
+            by_permit[o["npdes_permit"]].append({k: o.get(k) for k in PLACEMENT_OUTFALL_KEYS})
+    towns = {k: sorted({norm_town(t) for t in v or []}) for k, v in discharger_towns.items()}
+    operator_waters = {k: {f: v.get(f) for f in ("state", "names", "slugs")} for k, v in discharger_waters.items()}
+    # Hash the same memoized vocabulary person_shaped reads. Each hourly stage runs in a fresh process;
+    # callers changing reference files within one process clear the redactor's caches as well.
+    reference_names = [sorted(v) for v in _redact._reference_norm(str(_redact.DATA_DIR))]
+    counties = {}
+    for state, filename in COUNTY_STATES.items():
+        doc = read_json(DATA_DIR / "reference" / filename) or {}
+        counties[state] = [{k: c.get(k) for k in ("geoid", "county", "geometry")} for c in doc.get("counties") or []]
+    inputs = {"waters": water_inputs, "outlines": outline_files(waters), "outfalls": by_permit,
+              "operator_towns": towns, "operator_waters": operator_waters,
+              "placement_rules": bool((rules.get("placement") or {}).get("no_outfall_all_waters")),
+              "states": sorted(states), "steps": PLACE_STEPS, "reference_names": reference_names, "counties": counties}
+    fingerprints = {k: hashlib.sha256(json.dumps(v, sort_keys=True, default=str).encode()).hexdigest()
+                    for k, v in inputs.items()}
+    code = hashlib.sha256()
+    for f in (Path(__file__), Path(_redact.__file__), Path(_sys.modules["common"].__file__), Path(_hi.__file__)):
+        code.update(f.read_bytes() if f.exists() else b"-")
+    fingerprints["code"] = code.hexdigest()
+    if parts is not None:
+        parts.update(fingerprints)
+    return hashlib.sha256(json.dumps(fingerprints, sort_keys=True).encode()).hexdigest()
 
 
 def record_hash(ev: dict) -> str:
     import hashlib
-    # feed health is not the record (load_events), nor is the beach verdict build() sets (placement does not read it)
-    ev = {k: v for k, v in ev.items() if k not in ("_feed_health", "_beach_reason")}
+    # Fetch time affects freshness and some intervals, all recomputed outside Resolver. Keep source times
+    # and the remaining record conservatively: unlike fetched_at they may carry an agency's correction.
+    ev = {k: v for k, v in ev.items() if k not in ("_feed_health", "_beach_reason", "fetched_at")}
     return hashlib.blake2b(json.dumps(ev, sort_keys=True, default=str).encode(), digest_size=16).hexdigest()
 
 
@@ -5261,8 +5286,10 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         placement_cache = PLACEMENT_CACHE if write and Path(events_dir) == Path(EVENTS_DIR) else None
     resolver.cache_name_matches = bool(placement_cache)
     cache_old, cache_new, cache_stamp = {}, {}, None
+    cache_parts = {}
     if placement_cache:
-        cache_stamp = placement_stamp(waters, placement_outfalls, discharger_towns, discharger_waters, rules, _STATES)
+        cache_stamp = placement_stamp(waters, placement_outfalls, discharger_towns, discharger_waters, rules, _STATES,
+                                      parts=cache_parts)
         try:
             c = read_json(Path(placement_cache)) or {}
         except (OSError, ValueError):
@@ -5270,6 +5297,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         if c.get("stamp") == cache_stamp:
             cache_old = c.get("placements") or {}
             resolver.name_matches_old = c.get("name_matches") or {}
+        elif c.get("inputs"):
+            changed = [k for k, v in cache_parts.items() if c["inputs"].get(k) != v]
+            print("status: placement cache inputs changed: " + ", ".join(changed))
     cache_before = (now - timedelta(days=PLACEMENT_CACHE_DAYS)) if placement_cache else None
     cache_hits = 0
 
@@ -6030,7 +6060,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         p = Path(placement_cache)
         p.parent.mkdir(parents=True, exist_ok=True)
         tmp = p.with_suffix(p.suffix + ".tmp")
-        tmp.write_text(json.dumps({"stamp": cache_stamp, "built": iso(now), "placements": cache_new,
+        tmp.write_text(json.dumps({"stamp": cache_stamp, "inputs": cache_parts, "built": iso(now), "placements": cache_new,
                                   "name_matches": resolver.name_matches},
                                   separators=(",", ":"), default=str))
         tmp.replace(p)
