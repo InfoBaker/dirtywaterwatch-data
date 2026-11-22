@@ -15,6 +15,8 @@ level: "state"
 # Clock (the module's docstring has the evidence): the NY-Alert tabs from June 13, 2018 store New York local time
 #   shifted back by the UTC offset, the same rule as the newer workbook's DD/MON tabs; the earlier tabs store local
 #   time. Read at most weekly with If-Modified-Since; a run between reads keeps the records.
+# Privacy (review 2026-11-22): the operator's narrative columns (descriptions, instructions, location notes,
+#   corrective actions, unnamed columns) are never read into a record or the saved raw page; raw._withheld names them.
 cadence: "frozen: DEC last changed the file on 2023-07-11; the feed asks for it at most weekly"
 license: "No licence stated. NY-Alert notifier terms (Wayback copy of sprtknotifierterms.pdf, 2025-11-14): 'All data provided remains under the ownership of DEC, which has the right to remove, add, delete, and view the data stored on the NY-ALERT databases.'"
 attribution: "NYS DEC"
