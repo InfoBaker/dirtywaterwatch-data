@@ -370,11 +370,13 @@ SOURCES: dict[str, dict] = {
     "tx-tceq-sso-opendata": {"cause": text("_cause", "cause")},
     # Houston's monthly SSO table (ingest/tx_houston_sso_monthly.py): its columns as written; "Est. Volume (Gallons)"
     # is an estimate, and a "0" is no figure (the City's note, kept as raw.volume_note)
-    "tx-houston-sso-monthly": {"report_kind": const("Monthly SSO Report"),
+    "tx-houston-sso-monthly": {"report_kind": lambda raw: raw.get("report_kind") or "Monthly SSO Report",
                                "cause": text("cause", "structure_and_cause_as_written"),
                                "overflow_point": text("structure_type"), "town": text("city"),
                                "volume_qualifier": lambda raw: "estimated" if not raw.get("volume_note") else None,
-                               "volume_method": text("volume_note")},
+                               "volume_method": text("volume_note", "volume_method"),
+                               "duration_text": with_unit("duration_minutes", "minutes"),
+                               "notes": text("system_note", "system")},
     # the notice's own form fields as the ingester reads them from its text (fl_dep_pnp.template_fields: "Cause:")
     "fl-dep-pnp": {"cause": text("_template.cause"), "town": text("FACILITY_CITY")},
     "ct-deep": CT, "ct-deep-annual": CT, "ct-deep-archive": CT,
