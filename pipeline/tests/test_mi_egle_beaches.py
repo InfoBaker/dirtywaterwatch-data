@@ -200,13 +200,13 @@ def test_a_failed_read_keeps_the_held_records_and_marks_the_feed_not_ok(monkeypa
     monkeypatch.setattr(M, "save_raw", lambda sid, content, ext: saved.append(content))
     monkeypatch.setattr(M, "check_rows", lambda rows, state: None)
     texts = {M.REPORT_ADVISORIES: adv_text(), M.REPORT_SITES: site_text()}
-    monkeypatch.setattr(M, "fetch_report", lambda sess, rid: texts[rid])
+    monkeypatch.setattr(M, "fetch_report", lambda sess, rid, fields=None: texts[rid])
     assert M.main([]) == 0
     first = json.loads((tmp_path / f"{M.SOURCE_ID}.json").read_text())
     assert first["ok"] and first["count"] == 15
     assert saved and not any(s in saved[0] for s in SENTINELS)
 
-    def boom(sess, rid):
+    def boom(sess, rid, fields=None):
         raise M.ReadError("report 2082: no rows")
     monkeypatch.setattr(M, "fetch_report", boom)
     assert M.main([]) == 1
@@ -350,3 +350,41 @@ def test_a_shorter_beach_list_adds_to_the_saved_one_and_never_drops_a_beach(monk
     first = M.load_sites(None, rows, T0)
     second = M.load_sites(None, rows, "2026-11-23T21:00:00Z")
     assert set(second) == set(first) and len(second) == 12
+
+
+# ---- Codex's plan P5 (docs/analysis/2026-11-21-additions-plan-astra.md): request the safe fields explicitly
+
+def test_the_advisory_report_is_asked_for_the_kept_fields_only(monkeypatch):
+    seen = {}
+
+    class R:
+        status_code = 200
+        headers = {"content-type": "text/csv"}
+        content = b"StartDate\n"
+
+        def raise_for_status(self):
+            pass
+
+    class S:
+        def get(self, url, params=None, headers=None, timeout=None):
+            seen.update(params or {})
+            return R()
+
+    M.fetch_report(S(), M.REPORT_ADVISORIES, M.ADV_KEPT)
+    assert seen["responseFields"] == ",".join(M.ADV_KEPT) and "AdvisoryComments" not in seen["responseFields"]
+    seen.clear()
+    M.fetch_report(S(), M.REPORT_SITES)
+    assert "responseFields" not in seen          # report 2081 refuses its display names: dropped at parse instead
+
+
+def test_an_answer_with_only_the_requested_fields_is_read_as_the_full_one():
+    import csv as _csv
+    import io as _io
+    rd = list(_csv.DictReader(_io.StringIO(adv_text())))
+    out = _io.StringIO()
+    w = _csv.DictWriter(out, fieldnames=M.ADV_KEPT, extrasaction="ignore")
+    w.writeheader()
+    w.writerows(rd)
+    narrow, rejected = M.read_advisories(out.getvalue())
+    full = M.parse_advisories(adv_text())
+    assert rejected == 0 and narrow == full

@@ -12,7 +12,8 @@ Source (registry mi-egle-beachguard; docs/analysis/2026-11-21-swimguide.md in th
   - 2082 "Closures and Contamination Advisories": every advisory since 1994 (3,655 on 2026-11-21, 246 begun in 2026
     at 152 beaches): StartDate, EndDate (dates: "6/12/2026 12:00:00 AM"), AdvisoryType (Closed, Contamination
     Advisory), Reason, PollutionSource, DaysUnderAdvisory, IssuingOrganization, AdvisoryComments, Name, Identifier
-    (the beach's id). One request each run (about 63 KB gzip).
+    (the beach's id). One request each run (about 63 KB gzip), asking for ADV_KEPT only (responseFields), so
+    AdvisoryComments is not sent; an answer with every field is still read and the comments dropped.
   - 2081 "Beach Details": the 2,914 sites with their point, county, waterbody, EPA beach id and access. Read at most
     once a day (SITES_MAX_AGE_H) and whenever an advisory names a beach the saved list lacks; only SITE_FIELDS are
     kept (data/build/mi-egle-beaches-sites.json). A new answer is added to the saved list (a beach it lacks keeps its
@@ -23,8 +24,9 @@ Source (registry mi-egle-beachguard; docs/analysis/2026-11-21-swimguide.md in th
   daily geometric mean, 130 as a 30-day mean); EGLE says local health departments post advisories "within 24 hours".
 
 Privacy (what is kept)
-  AdvisoryComments (free text by health department staff) is never kept: not in a record, not in raw, not in the saved
-  raw read. From report 2081 only SITE_FIELDS are kept: never "Site Information - Private Comments", "Site
+  AdvisoryComments (free text by health department staff) is not requested (responseFields) and, if sent anyway, never
+  kept: not in a record, not in raw, not in the saved raw read. Report 2081 refuses a field list by its display
+  names, so its private columns arrive and are dropped while parsing, before anything is saved. From report 2081 only SITE_FIELDS are kept: never "Site Information - Private Comments", "Site
   Information - Additional Comments", "Beach Description" or "Site Information - Facilities". Points are rounded to
   three decimals (POINT_DECIMALS): private beaches are among the sites. common.event runs strip_personal.
 
@@ -144,20 +146,24 @@ def decode(body: bytes) -> str:
     return body.decode("utf-8-sig")
 
 
-def fetch_report(sess, report_id: int) -> str:
-    r = sess.get(EXPORT, params={"responseContentType": "text/csv", "includeMetadataInResponse": "false",
-                                 "loadChildren": "true", "queryParams": query_params(report_id), "filterString": ""},
-                 headers={"Accept": "text/csv", "Referer": MAP_PAGE}, timeout=(20, 180))
+def fetch_report(sess, report_id: int, fields: list[str] | None = None) -> str:
+    """One export report as CSV text. fields: responseFields, the columns to ask for (report 2082 honours it, so its
+    AdvisoryComments never leaves EGLE's server; report 2081 refuses its display names, 400 "is not a field")."""
+    params = {"responseContentType": "text/csv", "includeMetadataInResponse": "false", "loadChildren": "true",
+              "queryParams": query_params(report_id), "filterString": ""}
+    if fields:
+        params["responseFields"] = ",".join(fields)
+    r = sess.get(EXPORT, params=params, headers={"Accept": "text/csv", "Referer": MAP_PAGE}, timeout=(20, 180))
     r.raise_for_status()
     if not str(r.headers.get("content-type", "")).startswith("text/csv"):
         raise ReadError(f"report {report_id}: not CSV ({r.headers.get('content-type')})")
     return decode(r.content)
 
 
-def _valid(r: dict) -> bool:
+def _valid(r: dict, columns: list[str]) -> bool:
     """A row as wide as the header with an identifier, a start date, a type and a name, and an end that is empty or
     a date (Astra review 2026-11-21 P1: a row shifted by an unquoted comma is never kept)."""
-    if "__extra__" in r or any(r.get(k) is None for k in ADV_COLUMNS):
+    if "__extra__" in r or any(r.get(k) is None for k in columns):
         return False
     return bool(re.fullmatch(r"\d+", _clean(r["Identifier"])) and parse_date(r["StartDate"])
                 and (not _clean(r["EndDate"]) or parse_date(r["EndDate"]))
@@ -168,11 +174,12 @@ def read_advisories(text: str) -> tuple[list[dict], int]:
     """(the valid advisory rows with ADV_KEPT only, the number of malformed rows left out). AdvisoryComments is
     dropped here, before anything is saved; a malformed row is dropped whole."""
     rd = csv.DictReader(io.StringIO(text), restkey="__extra__", restval=None)
-    if [c.strip() for c in (rd.fieldnames or [])] != ADV_COLUMNS:
+    columns = [c.strip() for c in (rd.fieldnames or [])]
+    if columns not in (ADV_KEPT, ADV_COLUMNS):        # the requested fields, or every field when they are not honoured
         raise ReadError(f"report {REPORT_ADVISORIES}: header changed: {rd.fieldnames}")
     rows, rejected = [], 0
     for r in rd:
-        if not _valid(r):
+        if not _valid(r, columns):
             rejected += 1
             continue
         rows.append({k: _clean(r.get(k)) for k in ADV_KEPT})
@@ -426,7 +433,7 @@ def main(argv=None) -> int:
     sess.headers.update(HEADERS)
     state = read_json(STATE_PATH, {}) or {}
     try:
-        rows, rejected = read_advisories(fetch_report(sess, REPORT_ADVISORIES))
+        rows, rejected = read_advisories(fetch_report(sess, REPORT_ADVISORIES, ADV_KEPT))
         accept(rows, rejected)
         check_rows(rows, state)
         sites = load_sites(sess, rows, now)
