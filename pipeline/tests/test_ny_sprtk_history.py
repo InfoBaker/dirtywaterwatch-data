@@ -1,6 +1,6 @@
 """New York: DEC's older SPRTK workbook, 2013 to August 2021 (pipeline/ingest/ny_sprtk_history.py).
-The workbooks are synthetic, built here in the file's four layouts with invented facilities, permits and people; a
-planted name and phone number must never reach a record or the saved raw page.
+The workbooks are synthetic, built here in the file's four layouts with invented facilities, permits and people; the
+texts planted in the narrative columns must never reach a record or the saved raw page.
 Run from pipeline/: python -m pytest tests/test_ny_sprtk_history.py -q
 """
 from __future__ import annotations
@@ -18,8 +18,10 @@ from common import event
 from ingest import ny_sprtk as S
 from ingest import ny_sprtk_history as M
 
-NAME, PHONE = "Jane Roe", "518-555-0142"
-PLANT = f"Crew on site; contact {NAME} at {PHONE} with questions"
+# the review's planted texts (Astra 2026-11-22 P1-1): uncued names, capital variants, a phone typed as ten digits
+PLANTS = ["Jane Roe repaired the pump.", "operator jane roe inspected the spill.", "JANE ROE responded.",
+          "Staff callback: 5185550142."]
+P1, P2, P3, P4 = PLANTS
 
 REPORT_HDR = ["Discovery Date and Time", "Facility Name", "Closest Address or Landmark", "Town/City", "County",
               "Estimate or Actual", "Volume", "Treated State", "Other Explained", "Ending Date and Time",
@@ -38,37 +40,44 @@ ALERT18_HDR = ["facility name", "sprtk id", "start time", "headline", "duration"
 
 
 def a18(start, headline="Erie, Sampleton, Sewage Discharge, Sample Creek, Unknown", water="Sample Creek",
-        fac="Sampleton (V) WWTP NY0999903", fid="NY0999903", qty="65", reason="Weather Conditions", extra=PLANT,
+        fac="Sampleton (V) WWTP NY0999903", fid="NY0999903", qty="65", reason="Weather Conditions",
         street=("12", "Harbor Rd")):
-    return [fac, fid, start, headline, "24", "Hours", street[0], street[1], "Sampleton", "Erie", "CSO 004", water,
-            "Untreated", qty, "Gallons per Minute", "Estimated", reason, None, None, f"rain; call {NAME} at {PHONE}",
-            "rain water and sewage", extra]
+    """An alert18 row; every narrative column holds a planted text, and so does an unnamed column past the header."""
+    return [fac, fid, start, headline, "24", "Hours", street[0], street[1], "Sampleton", "Erie", P4, water,
+            "Untreated", qty, "Gallons per Minute", "Estimated", reason, None, None, P1, P2, P3, P1]
 
 
-def workbook(*, short=False, extra_tab=False) -> bytes:
+def report(start, end=None, expected=None, estimate="Estimate", volume="1000"):
+    return [start, "Sampleton (V) WWTP", "Sample Pump Station", "Sampleton", "Erie", estimate, volume, "Untreated", P2,
+            end, expected, "1:30" if end else None, P3, "Sample Creek", "Blockage;", P1]
+
+
+def workbook(*, short=False, extra_tab=False, cut=False) -> bytes:
     tabs = [
         ("PDFs through May 2015", [
             ["SPRTK Discharge Report Summary"], ["Updated 10/29/15"], REPORT_HDR,
-            ["2014/08/13 10:30 AM", "Sampleton (V) WWTP", "Sample Pump Station", "Sampleton", "Erie", "Estimate", "1000",
-             "Untreated", None, "08/13/2014 12:00 PM", None, "1:30", PLANT, "Sample Creek", "Blockage;", "Grease;"],
-            ["2014/09/01 08:00 AM", "Sampleton (V) WWTP", "Sample Pump Station", "Sampleton", "Erie", "Unknown", None,
-             "Untreated", None, None, "09/02/2014 08:00 AM", None, None, "Sample Creek", "Other;", "Power failure;"],
+            report("2014/08/13 10:30 AM", end="08/13/2014 12:00 PM"),
+            report("2014/09/01 08:00 AM", expected="09/02/2014 08:00 AM", estimate="Unknown", volume=None),
+            report("2014/10/01 09:00 AM", end="10/1/2014 :"),            # the end's date only, the same day
+            report("2014/10/05 09:00 AM", end="10/06/2014"),             # the end's date only, the next day
         ]),
         ("NYAlerts Through 5_10_16", [
             ["UPDATED 5/10/16"], ALERT15_HDR,
-            ["Example Falls WWTP,", "NY0999902", "42286", "07:25:0", "1 Example Road, Example Falls, NY", "Outfall 001",
-             "Example River", "Untreated wastewater", "6.0 hours ended.", ", Weather Conditions, ,", "heavy rain, ,",
-             "500", "Gallons Per Minute", "(Estimated)", "Untreated", PLANT],
-            [None, None, "01/06/2016", "3:00 AM", "ragment of a notice"],
+            ["Example Falls WWTP,", "NY0999902", "42286", "07:25:0", "1 Example Road, Example Falls, NY", P1,
+             "Example River", P2, "6.0 hours ended.", ", Weather Conditions, ,", P3, "500", "Gallons Per Minute",
+             "(Estimated)", "Untreated", P4],
+            ["Example Falls WWTP", "NY0999902", "42290", "08:00", "1 Example Road, Example Falls, NY", None,
+             "Example River", None, "2.0 hours ended.", "Blockage", "10000 Gallons"],   # the volume under Description
+            [None, None, "01/06/2016", "3:00 AM", f"r{P1}"],                            # a fragment, no facility
         ]),
         ("NYALERTS May2017 thru July2017", [
             ALERT16_HDR,
             ["Example Falls WWTP", "NY0999902", "18/JUN/2017 15:25:00", "2", "1 Example Road", "Example Falls", "14000",
-             "This event started at 3:25 PM", "Example River", "Untreated", "300", "Gallons", "0", "Weather Conditions",
-             "heavy rain", "overflow", PLANT],
+             P1, "Example River", "Untreated", "300", "Gallons", "0", "Weather Conditions", P2, P3, P4],
         ]),
         ("NYALERTS NOVEMBER 2018", [ALERT18_HDR, a18("17/NOV/2014 01:00:00")]),
         ("NYALERTS DECEMBER 2018", [ALERT18_HDR, a18("21/DEC/2018 04:15:00")]),
+        ("NYALERTS MARCH 2019", [ALERT18_HDR, a18("09/MAR/2019 21:30:00"), a18("09/MAR/2019 22:30:00")]),  # spring
         ("NYALERTS JUNE 2019", [
             ALERT18_HDR,
             a18("21/JUN/2019 10:00:00"),
@@ -77,19 +86,26 @@ def workbook(*, short=False, extra_tab=False) -> bytes:
             a18("21/JUN/2019 10:00:00", headline="ENDED: Erie, Sampleton, Sewage Discharge, Sample Creek, Unknown",
                 qty="0"),
             a18("21/JUN/2019 10:00:00"),                          # a copy of the first row
-        ]),
+        ] + ([a18("22/JUN/2019 10:00:00")[:3]] if cut else [a18("22/JUN/2019 10:00:00")])),
+        ("NYALERTS NOVEMBER 2019", [ALERT18_HDR, a18("02/NOV/2019 20:30:00")]),          # fall: two readings
         ("NYALERT March 2021", [
             ALERT18_HDR,
             a18("02/MAR/2021 21:30:00"),                          # 2021-03-03 02:30 EST; the newer workbook: 2021-03-02
             a18("05/MAR/2021 10:00:00"),                          # the newer workbook names another water
             a18("06/MAR/2021 10:00:00", fac="Otherton (C) STP NY0999904", fid="NY0999904"),
+            a18("08/MAR/2021 10:00:00", street=("99", "Other Rd")),   # the newer workbook: 12 Harbor Rd
         ]),
-        ("NYALERT July 2021", [ALERT18_HDR, a18("01/JUL/2021 14:00:07")] + ([] if short else [a18("02/JUL/2021 08:00:34")])),
+        ("NYALERT July 2021", [ALERT18_HDR, a18("01/JUL/2021 14:00:07")] + ([] if short else [
+            a18("02/JUL/2021 14:00:07", water="Other River",
+                headline="ENDED: Erie, Sampleton, Sewage Discharge, Other River, Unknown")])),
         ("NYALERT August 2021", [a18("01/AUG/2021 08:50:26"), a18("02/AUG/2021 09:10:00")]),   # no header row
     ]
     if extra_tab:
         tabs.append(("NYALERT September 2021", [ALERT18_HDR, a18("01/SEP/2021 08:00:00")]))
     return xlsx(tabs)
+
+
+N_TABS, N_ROWS, N_RECORDS = 11, 26, 25
 
 
 def _col(i: int) -> str:
@@ -122,12 +138,14 @@ def xlsx(tabs) -> bytes:
     return buf.getvalue()
 
 
-def live_record(nid, start_date, water, fid="NY0999903", status="New"):
+def live_record(nid, start_date, water, fid="NY0999903", status="New", street=("12", "Harbor Rd"), chain=None):
+    raw = {"row": {"POTW/POSS ID": fid, "Notification Status": status, "Street Number": street[0],
+                   "Street Name": street[1], "City": "Sampleton"}}
+    if chain:
+        raw["_chain"] = {"id": chain}
     return event(source_id=S.SOURCE_ID, source_record_id=nid, event_type="cso", status="unknown",
                  discharger_name="Sampleton (V) WWTP", npdes_permit=fid, waterbody_text=water,
-                 started_at=f"{start_date}T00:00:00-05:00", time_precision="day",
-                 raw={"row": {"POTW/POSS ID": fid, "Notification Status": status, "Street Number": "12",
-                              "Street Name": "Harbor Rd", "City": "Sampleton"}})
+                 started_at=f"{start_date}T00:00:00-05:00", time_precision="day", raw=raw)
 
 
 @pytest.fixture()
@@ -142,7 +160,8 @@ def env(tmp_path, monkeypatch):
     monkeypatch.setattr(M, "LIVE_EVENTS", events / "live.json")
     monkeypatch.setattr(M.time, "sleep", lambda s: None)
     common.write_json(events / "live.json", {"records": [live_record("9001", "2021-03-02", "Sample Creek"),
-                                                         live_record("9002", "2021-03-05", "Other Creek")]})
+                                                         live_record("9002", "2021-03-05", "Other Creek"),
+                                                         live_record("9003", "2021-03-08", "Sample Creek")]})
     wb = tmp_path / "Sewage_Discharge_Reports.xlsx"
     wb.write_bytes(workbook())
     return tmp_path, events, wb
@@ -166,7 +185,7 @@ def test_layouts_clocks_and_status(env):
     doc = run_file(env)
     recs = doc["records"]
     # every distinct row is a record; the copy is listed on its twin; the fragment row is kept
-    assert doc["meta"]["rows"] == 18 and doc["meta"]["identical_rows"] == 1 and len(recs) == 17
+    assert doc["meta"]["rows"] == N_ROWS and doc["meta"]["identical_rows"] == 1 and len(recs) == N_RECORDS
     assert doc["meta"]["frozen"] is True and doc["meta"]["statewide"] is False
     # report tab: local time as typed, the discovery time as the start, an ending time makes it ended
     rep = by_start(doc, "report")
@@ -181,8 +200,10 @@ def test_layouts_clocks_and_status(env):
     assert r["started_at"] == "2015-10-09T07:25:00-04:00" and r["status"] == "ended" and r["ended_at"] is None
     assert r["discharger_name"] == "Example Falls WWTP" and r["volume_gal"] is None
     assert r["volume_text"] == "500 Gallons Per Minute Estimated"
+    r = by_start(doc, "alert15")["2015-10-13T08:00"][0]
+    assert r["volume_gal"] == 10000 and r["raw"]["row"]["Description"] == "10000 Gallons"
     frag = by_start(doc, "alert15")["2016-01-06T03:00"][0]
-    assert "names no facility" in frag["parse_error"]
+    assert "names no facility" in frag["parse_error"] and "Location of Discharge" in frag["raw"]["_withheld"]["columns"]
     # alert16: local time (the text says "started at 3:25 PM"), quantity flag 0 read as Actual
     r = by_start(doc, "alert16")["2017-06-18T15:25"][0]
     assert r["started_at"] == "2017-06-18T15:25:00-04:00" and r["estimate_flag"] == "measured"
@@ -209,6 +230,41 @@ def test_layouts_clocks_and_status(env):
     assert tabs["PDFs through May 2015"]["title"] == ["SPRTK Discharge Report Summary", "Updated 10/29/15"]
 
 
+def test_an_end_known_only_to_the_day_is_the_end_of_that_day(env):
+    """docs/generic-ingesters.md: an end known only to the day on a record timed to the minute is the end of that
+    day; a same-day date-only end is not before the start (report rows 2410, 2411 and 2566)."""
+    rep = by_start(run_file(env), "report")
+    same = rep["2014-10-01T09:00"][0]
+    assert same["status"] == "ended" and same["ended_at"] == "2014-10-02T00:00:00-04:00" and same["parse_error"] is None
+    assert "end of that day" in same["raw"]["_end_basis"] and "_end_before_start" not in same["raw"]
+    nxt = rep["2014-10-05T09:00"][0]
+    assert nxt["ended_at"] == "2014-10-07T00:00:00-04:00" and nxt["time_precision"] == "minute"
+
+
+def test_clock_change_readings_are_kept_to_the_day(env):
+    """A stored time that fits the stored + 4 h (EDT) / + 5 h (EST) rule twice (fall) or not at all (spring) is
+    published at day precision with the candidates in raw._time_notes."""
+    a = by_start(run_file(env), "alert18")
+    fall = a["2019-11-02T20:30"][0]
+    assert fall["started_at"] == "2019-11-03T00:00:00-04:00" and fall["time_precision"] == "day"
+    notes = fall["raw"]["_time_notes"]["start"]
+    assert notes["candidates"] == ["2019-11-03T00:30:00-04:00", "2019-11-03T01:30:00-05:00"] and "two" in notes["why"]
+    for stored in ("2019-03-09T21:30", "2019-03-09T22:30"):
+        spring = a[stored][0]
+        assert spring["started_at"] == "2019-03-10T00:00:00-05:00" and spring["time_precision"] == "day"
+        assert "no reading" in spring["raw"]["_time_notes"]["start"]["why"]
+    assert a["2018-12-21T04:15"][0]["time_precision"] == "minute" and "_time_notes" not in a["2018-12-21T04:15"][0]["raw"]
+
+
+def test_a_closing_notice_into_another_water_is_its_own_discharge(env):
+    """No edited-start merge in this feed (Astra P1-3): a July 1 first notice into Sample Creek and a July 2 closing
+    notice into Other River at the same facility and address stay two chains."""
+    a = by_start(run_file(env), "alert18")
+    first, close = a["2021-07-01T14:00"][0], a["2021-07-02T14:00"][0]
+    assert first["raw"]["_chain"]["id"] != close["raw"]["_chain"]["id"]
+    assert close["parent_event_id"] is None and "edited" not in (close["raw"]["_chain"]["basis"] or "")
+
+
 def test_copies_in_the_newer_workbook(env):
     doc = run_file(env)
     a = by_start(doc, "alert18")
@@ -219,42 +275,72 @@ def test_copies_in_the_newer_workbook(env):
     weak = a["2021-03-05T10:00"][0]
     assert weak["duplicate_of"] is None
     assert weak["raw"]["_possible_copy_of"]["event_id"] == f"{S.SOURCE_ID}:9002"
-    assert "another or no water" in weak["raw"]["_possible_copy_of"]["reason"]
+    assert "another water" in weak["raw"]["_possible_copy_of"]["reason"]
+    # Astra P1-2: 99 Other Rd against 12 Harbor Rd, same facility, date and water: never a duplicate
+    addr = a["2021-03-08T10:00"][0]
+    assert addr["duplicate_of"] is None and addr["raw"]["_possible_copy_of"]["event_id"] == f"{S.SOURCE_ID}:9003"
+    assert "another address" in addr["raw"]["_possible_copy_of"]["reason"]
     other = a["2021-03-06T10:00"][0]
     assert other["duplicate_of"] is None and "_possible_copy_of" not in other["raw"]
     assert doc["meta"]["overlap_with_newer_workbook"]["duplicate_of"] == 1
 
 
-def test_one_to_one_pairing():
-    """Three notices of one discharge in this workbook, two in the newer one: two pairs, one possible copy."""
-    def h(nid, kind):
-        return event(source_id=M.SOURCE_ID, source_record_id=nid, npdes_permit="NY0999903", waterbody_text="Sample Creek",
-                     started_at="2021-03-03T02:30:00-05:00", time_precision="minute",
-                     raw={"_layout": "alert18", "_facility_id": "NY0999903", "_start_stored": "2021-03-02T21:30",
-                          "_notice_kind": {"status": kind}, "row": {}})
-    hist = [h("a", "New"), h("b", "Update"), h("c", "Close")]
-    live = [live_record("1", "2021-03-02", "Sample Creek", status="New"),
-            live_record("2", "2021-03-02", "Sample Creek", status="Close")]
+def hist_record(nid, kind, chain="key:x", street=("12", "Harbor Rd"), water="Sample Creek", fid="NY0999903"):
+    row = a18("02/MAR/2021 21:30:00", street=street, water=water, fid=fid)
+    return event(source_id=M.SOURCE_ID, source_record_id=nid, npdes_permit=fid, waterbody_text=water,
+                 started_at="2021-03-03T02:30:00-05:00", time_precision="minute",
+                 raw={"_layout": "alert18", "_facility_id": fid, "_start_stored": "2021-03-02T21:30",
+                      "_notice_kind": {"status": kind}, "_chain": {"id": chain},
+                      "row": dict(zip([h or f"col{i + 1}" for i, h in enumerate(ALERT18_HDR)], row))})
+
+
+def test_one_to_one_pairing_within_one_discharge():
+    """Three notices of one discharge in this workbook, two of one discharge in the newer one: two pairs, one possible
+    copy; links are made again from scratch."""
+    hist = [hist_record("a", "New"), hist_record("b", "Update"), hist_record("c", "Close")]
+    live = [live_record("1", "2021-03-02", "Sample Creek", status="New", chain="incident:7"),
+            live_record("2", "2021-03-02", "Sample Creek", status="Close", chain="incident:7")]
     out = M.link_copies(hist, live)
     assert out == {"duplicate_of": 2, "possible_copy_of": 1, "newer_workbook_records": 2}
     assert [x["duplicate_of"] for x in hist] == [f"{S.SOURCE_ID}:1", None, f"{S.SOURCE_ID}:2"]
     assert "paired with another notice" in hist[1]["raw"]["_possible_copy_of"]["reason"]
-    # links are made again from scratch
     assert M.link_copies(hist, []) == {"duplicate_of": 0, "possible_copy_of": 0, "newer_workbook_records": 0}
     assert all(x["duplicate_of"] is None and "_possible_copy_of" not in x["raw"] for x in hist)
 
 
-def test_a_planted_name_and_phone_reach_no_record_or_saved_page(env):
+def test_contradictions_and_ambiguity_rule_out_duplicate_of():
+    # another address (Astra's 99 Other Rd case), another water, another permit: possible copies only
+    for h, word in ((hist_record("a", "New", street=("99", "Other Rd")), "address"),
+                    (hist_record("b", "New", water="Other River"), "water")):
+        assert M.link_copies([h], [live_record("1", "2021-03-02", "Sample Creek", chain="incident:7")])["duplicate_of"] == 0
+        assert word in h["raw"]["_possible_copy_of"]["reason"]
+    # two discharges in the newer workbook fit one date-only notice: ambiguous, so a possible copy
+    h = hist_record("c", "New")
+    live = [live_record("1", "2021-03-02", "Sample Creek", chain="incident:7"),
+            live_record("2", "2021-03-02", "Sample Creek", chain="incident:8")]
+    assert M.link_copies([h], live) == {"duplicate_of": 0, "possible_copy_of": 1, "newer_workbook_records": 2}
+    assert "more than one discharge" in h["raw"]["_possible_copy_of"]["reason"]
+
+
+def test_narrative_columns_never_reach_a_record_or_the_saved_page(env):
+    """Astra P1-1: the operator narrative columns are never read; their names are listed in raw._withheld."""
     tmp, events, _wb = env
     doc = run_file(env)
-    text = json.dumps(doc["records"])
-    assert NAME not in text and PHONE not in text and "555-0142" not in text
-    assert "[phone removed]" in text
     pages = list((tmp / "raw" / M.SOURCE_ID).glob("*.json"))
     assert len(pages) == 1 and doc["meta"]["raw_path"] == str(pages[0].relative_to(tmp))
     page = pages[0].read_text()
-    assert NAME not in page and PHONE not in page and "555-0142" not in page
-    assert "Sample Creek" in page and len(json.loads(page)["tabs"]) == 9
+    for text in (json.dumps(doc), page):
+        low = text.lower()
+        for plant in PLANTS:
+            assert plant.lower() not in low
+        assert "jane roe" not in low and "5185550142" not in low and "callback" not in low
+    assert "Sample Creek" in page and len(json.loads(page)["tabs"]) == N_TABS
+    a = by_start(doc, "alert18")["2018-12-21T04:15"][0]
+    assert set(a["raw"]["_withheld"]["columns"]) == {"location description", "reason description",
+                                                     "discharge description", "additional instructions", "col23"}
+    assert a["advice_text"] is None and a["outfall_name"] is None
+    assert set(by_start(doc, "report")["2014-08-13T10:30"][0]["raw"]["_withheld"]["columns"]) == {
+        "Other Explained", "Corrective Actions", "Other Explanation"}
 
 
 class Resp:
@@ -297,18 +383,19 @@ def test_reading_weekly_304_failure_and_shape(env, monkeypatch):
 
     assert run([Resp(content=content, headers={"Last-Modified": LM})]) == 0
     first = json.loads(path.read_text())
-    assert first["ok"] and len(first["records"]) == 17 and Session.asked[0][1] == {}
+    assert first["ok"] and len(first["records"]) == N_RECORDS and Session.asked[0][1] == {}
     state = json.loads(M.STATE_FILE.read_text())
-    assert state["last_modified_http"] == LM and len(state["tabs"]) == 9
+    assert state["last_modified_http"] == LM and len(state["tabs"]) == N_TABS and all(t["cells"] for t in state["tabs"])
     # within the week: nothing asked, records kept, links made again
     assert run([]) == 0 and Session.asked == []
-    assert len(json.loads(path.read_text())["records"]) == 17
+    assert len(json.loads(path.read_text())["records"]) == N_RECORDS
     # a week on: If-Modified-Since, a 304 keeps the records
     state["read_at"] = (datetime.now(UTC) - timedelta(days=8)).isoformat()
     common.write_json(M.STATE_FILE, state)
     assert run([Resp(status=304)]) == 0 and Session.asked[0][1] == {"If-Modified-Since": LM}
     doc = json.loads(path.read_text())
-    assert doc["ok"] and len(doc["records"]) == 17 and doc["meta"]["workbook_not_modified_since"] == "2023-07-11T14:00:00Z"
+    assert doc["ok"] and len(doc["records"]) == N_RECORDS
+    assert doc["meta"]["workbook_not_modified_since"] == "2023-07-11T14:00:00Z"
     # --backfill reads now, without If-Modified-Since
     assert run([Resp(content=content, headers={"Last-Modified": LM})], ["--backfill"]) == 0 and Session.asked[0][1] == {}
 
@@ -321,18 +408,25 @@ def test_reading_weekly_304_failure_and_shape(env, monkeypatch):
     common.write_json(M.STATE_FILE, stale())
     assert run([ConnectionError("refused")] * 4) == 1
     doc = json.loads(path.read_text())
-    assert doc["ok"] is False and len(doc["records"]) == 17 and len(Session.asked) == 4
-    # a file cut short, fewer rows in a tab, fewer tabs: each fails the read and keeps the records
-    for bad in (content[: len(content) // 2], workbook(short=True)):
+    assert doc["ok"] is False and len(doc["records"]) == N_RECORDS and len(Session.asked) == 4
+    # a file cut short, fewer rows in a tab, a row cut to its first three cells: each fails and keeps the records
+    for bad, why in ((content[: len(content) // 2], ""), (workbook(short=True), "fewer rows"),
+                     (workbook(cut=True), "fewer filled cells")):
         common.write_json(M.STATE_FILE, stale())
         assert run([Resp(content=bad, headers={"Last-Modified": "Wed, 12 Jul 2023 14:00:00 GMT"})]) == 1
         doc = json.loads(path.read_text())
-        assert doc["ok"] is False and len(doc["records"]) == 17
+        assert doc["ok"] is False and len(doc["records"]) == N_RECORDS and why in (doc["error"] or "")
     s = stale()
     s["tabs"].append({"tab": "NYALERT September 2021", "rows": 1})
     common.write_json(M.STATE_FILE, s)
     assert run([Resp(content=content, headers={"Last-Modified": "Wed, 12 Jul 2023 14:00:00 GMT"})]) == 1
-    assert "10 at the last read" in (json.loads(path.read_text())["error"] or "")
+    assert "NYALERT September 2021" in (json.loads(path.read_text())["error"] or "")
+
+
+def test_a_lost_tab_replaced_by_a_new_one_fails():
+    """Astra P2-5: every tab of the last good read must still be there, whatever the count."""
+    with pytest.raises(ValueError, match="lost"):
+        M.check_shape([{"tab": "new", "rows": [(2, {"a": "1"})], "cells": 1}], {"tabs": [{"tab": "lost", "rows": 1}]})
 
 
 def test_archive_fallback_unchanged_counts_as_not_modified(env, monkeypatch):
@@ -348,7 +442,7 @@ def test_archive_fallback_unchanged_counts_as_not_modified(env, monkeypatch):
     Session.asked, Session.answers = [], [ConnectionError("timeout"), ConnectionError("timeout"), cap]
     assert M.main([]) == 0
     doc = json.loads((events / f"{M.SOURCE_ID}.json").read_text())
-    assert doc["ok"] and doc["meta"]["last_read_via"] == "archive.org" and len(doc["records"]) == 17
+    assert doc["ok"] and doc["meta"]["last_read_via"] == "archive.org" and len(doc["records"]) == N_RECORDS
 
 
 def test_reader_helpers():

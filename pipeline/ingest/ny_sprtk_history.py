@@ -14,12 +14,14 @@ Layouts (LAYOUTS: each tab's header row is matched to one; a tab whose header ma
   report   "PDFs through May 2015": the written reports of 2013 to May 2015 as DEC transcribed them: discovery time,
            facility, closest address or landmark, volume with "Estimate", "Actual" or "Unknown", ending time, expected
            ending time, duration, corrective actions, receiving water, reason. A title row comes before the header.
+  (Each layout's narrative columns are never read: "Privacy" below.)
   alert15  "NYAlerts Through 5_10_16": NY-Alert notices of late 2015 to May 2016. The date and the time are separate
            columns (dates as Excel serials, MM/DD/YYYY or "April 6, 2016"); the duration carries the notifier's word
            ("2.0 hours ended.", "ongoing.", "unknown."); the treated state and the steps taken sit in two unnamed
-           columns past the header (col15, col16); older rows put the volume under "Description". A title row comes
-           before the header. 36 rows carry only a date, a time and a cut fragment of text (no facility); they are
-           kept, with a parse_error saying so.
+           columns past the header (col15, col16); older rows put the volume under "Description" (read there only
+           when the cell is a bare volume and the volume column is empty). A title row comes before the header. 36
+           rows carry only a date, a time and a cut fragment of text (no facility); they are kept with their date
+           and time only, and a parse_error saying so.
   alert16  May 2016 to June 13, 2018 (snake_case headers: start_time, affectd_water_body, estimated_ind, up to three
            reasons): the start as ISO (the first tab) or DD/MON/YYYY, the duration in hours, the quantity with its
            units and an estimated flag (1 is read as "Estimated", 0 as "Actual", NY-Alert's two choices).
@@ -50,6 +52,11 @@ Times (raw._time_basis; raw._start_stored keeps the stored value)
     discovery date), is a typing error (one row, "1982-06-08" in the May 2016-May 2017 tab): it is not used
     (raw._start_not_used) and the record is kept with no start. No row gives a posting time: reported_at and
     published_at stay empty.
+  - Every alert18 reading is checked against the rule (shifted_readings: the reading must exist in New York time and
+    carry the offset the rule adds). At the fall clock change a stored time can fit twice (02/NOV/2019 20:30 is 00:30
+    EDT or 01:30 EST on November 3), at the spring change not at all (09/MAR/2019 21:30 and 22:30): such a start is
+    published as its date only (time_precision "day"), with the readings in raw._time_notes (10 two-way and 9
+    impossible starts in the file read on 2026-11-22; meta.clock_change_starts).
   - A start more than a year before its tab's month (a "November 2018" tab row starting 17/NOV/2014), or more than a
     month after it, is kept as written with raw._dww_note: a typing error in the year or a long-running discharge,
     which the file does not settle.
@@ -60,6 +67,9 @@ Status, end and volume (ny_sprtk.to_record)
     "hours ended." or "Discharge ended before discovery" is ended, "hours ongoing." ongoing, anything else unknown.
     report: an ending time makes the report ended at that time (ended_at), unless it is before the start; the
     expected ending time is a projection (raw._projected_end). alert16: no kind and no state, so unknown.
+  - An end known only to the day ("10/1/2014 :", "10/06/2014", or typed as exactly 12:00 AM, which is read as a date
+    as in docs/generic-ingesters.md) on a record timed to the minute is the end of that day, the latest it can be
+    (raw._end_basis), so a same-day end is never taken for one before the start; the expected end the same way.
   - The duration is the notifier's (raw._duration_text: "24 Hours", "1.0 hours ended.", "1:30"). No end time is ever
     computed from it.
   - Volume: the quantity with its units and estimate word ("65 Gallons per Minute Estimated"), read by
@@ -70,29 +80,36 @@ Ids and chains
   - No notification ids: the record id is "h" plus a hash of the row's own fields (stable while the file does not
     change; raw._id_note). A row that repeats another row exactly, in the same tab or another, is the same notice: one
     record, with raw._copies naming the other places (meta.identical_rows).
-  - Chains by facility + address + start minute (ny_sprtk.build_chains, with its edited-start merge); within a chain
-    parent_event_id is the notice before, so the chain's latest notice is its live record.
+  - Chains by facility + address + start minute (ny_sprtk.build_chains without its edited-start merge: with no ids,
+    nothing in the file shows that a later notice revised an earlier one's start, and the merge joined a closing
+    notice into another water to an open discharge); within a chain parent_event_id is the notice before, so the
+    chain's latest notice is its live record.
 
 Overlap with the newer workbook (link_copies; re-made on every run)
   A notice also in SPRTK_Data.xlsx stays in ny-dec-sprtk (data/build/events/ny-dec-sprtk.json, written first in the
   sorted ingest loop). This record is kept with duplicate_of that feed's event id (raw._duplicate_basis) only on strict
   identity: the same facility (permit or name), the same start (the same minute, or the same date where one side has
-  the date only; the newer workbook's 2021 dates follow the stored clock, so the stored date counts too), and the
-  same water (name or mapped water) or headline, paired one to one (address, notice kind and volume decide between
-  several). A weaker match, the same facility and start with another or no water, the same facility, water and date
-  with another start time, or a strict match whose partner is taken, gets raw._possible_copy_of {event_id, reason}
-  and both are listed. No record is ever dropped; a record of an earlier read that leaves the file keeps its record
-  with raw._missing_from_workbook_since.
+  the date only; the newer workbook's 2021 dates follow the stored clock, so the stored date counts too), the same
+  water (name or mapped water) or headline, nothing in conflict (another permit, outfall, water, street number or
+  street), and one discharge on each side (this record's chain agrees with one chain of the newer workbook and that
+  chain with this one chain), the notices paired one to one within it (address, notice kind and volume decide). Any
+  conflict, a date that fits more than one discharge, no water to compare, another start time on the same date, or
+  a partner already paired gives raw._possible_copy_of {event_id, reason} instead, and both are listed. No record is
+  ever dropped; a record of an earlier read that leaves the file keeps its record with
+  raw._missing_from_workbook_since.
 
 Privacy
-  The free-text columns (reason description, discharge description, additional instructions, location description,
-  corrective actions) can carry names and phone numbers. Every raw goes through common.strip_personal (in
-  common.event), as in ny_sprtk, and the records through build.redact before they are written (names in free text
-  anywhere, phone numbers in the top-level fields). advice_text (the additional instructions) also goes through
-  common.scrub_text, since build.redact keeps phone numbers there (an agency's number is public) and these notices
-  give staff contacts. The saved raw page (data/raw/ny-dec-sprtk-2013-2021/) holds the rows after
-  common.strip_personal and the records' redactor (a name removed from the records goes from the page too), never
-  the workbook. tests/test_ny_sprtk_history.py proves that a planted name and phone number reach neither.
+  The operator's narrative columns (reason and discharge descriptions, additional instructions, location
+  descriptions, corrective actions, "Other Explained" and every unnamed column past the reasons) can name staff,
+  residents and private addresses in ways no scrub catches (an uncued name, a name in capitals, a phone number typed
+  as ten digits), so they are never read into a record or the saved raw page (KEEP lists the columns read, per
+  layout); raw._withheld names the columns left out of each row. The record id still hashes the whole row, so two
+  notices that differ only in their narrative stay two records. What is read: facility, permit, start, headline,
+  duration and units, address, city, county, affected water, treated state, quantity with its units and estimate
+  word, and the reason categories. Every raw goes through common.strip_personal (in common.event), as in ny_sprtk,
+  and the records through build.redact before they are written; the saved raw page
+  (data/raw/ny-dec-sprtk-2013-2021/) holds the rows read, after common.strip_personal and the records' redactor,
+  never the workbook. tests/test_ny_sprtk_history.py proves that the planted texts reach neither.
 
 Reading (each run)
   The workbook is history. A run asks for it at most once every REREAD_DAYS (7) days, with If-Modified-Since (state in
@@ -100,8 +117,9 @@ Reading (each run)
   links to the newer workbook are made again. DEC first (extapps, then www), then the latest Internet Archive capture
   when DEC does not answer, as ny_sprtk does (a capture whose original Last-Modified is the one already read counts as
   unchanged). A read that fails keeps the previous records (write_events ok false, exit 1): no answer, a workbook part
-  that fails its zip checksum or a sheet whose XML ends early (a file cut short), fewer tabs than the last read, fewer
-  rows in a tab than the last read, or a tab in no known layout. A read takes about a minute, most of it the shared
+  that fails its zip checksum or a sheet whose XML ends early (a file cut short), a tab of the last good read that is
+  gone (whatever the tab count), fewer rows in a tab, more than 1 per cent fewer filled cells in a tab (cells cut
+  short; the fragments the file has always held count at both reads), or a tab in no known layout. A read takes about a minute, most of it the shared
   redaction (the refresh caps each feed at 600 seconds). meta.frozen is true (the status build never calls the feed
   stale for its age, only for a failed read) and meta.statewide false (history covers no water now). `--backfill`
   reads now, without the weekly wait or If-Modified-Since, and otherwise behaves the same: every read takes every row.
@@ -126,7 +144,7 @@ from pathlib import Path
 import requests
 
 from common import (BUILD_DIR, EVENTS_DIR, HEADERS, ROOT, error_detail, error_text, now_iso, path_notes_to_meta,
-                    read_json, save_raw, scrub_text, strip_personal, write_events, write_json)
+                    read_json, save_raw, strip_personal, write_events, write_json)
 from ingest import ny_sprtk as S
 
 SOURCE_ID = "ny-dec-sprtk-2013-2021"
@@ -156,7 +174,34 @@ BASIS_TEXT = {
               "read as America/New_York"),
     "local_typed": "local time as the facility typed it (inferred: no other copy to compare); read as America/New_York",
     "date": "date only in the workbook (no time of day)",
+    "shifted_unsettled": ("a stored time at a clock change that the stored + 4 h (EDT) / + 5 h (EST) rule reads two ways "
+                          "or not at all: the date only (raw._time_notes gives the readings)"),
 }
+# the columns read, per layout (header lowercased, non-alphanumerics removed). Every other column, the operator's
+# narrative (reason and discharge descriptions, additional instructions, location descriptions, corrective actions and
+# the unnamed columns), is never read into a record or the saved raw page; raw._withheld names them (Astra P1-1)
+KEEP = {
+    "report": {"discoverydateandtime", "facilityname", "closestaddressorlandmark", "towncity", "county",
+               "estimateoractual", "volume", "treatedstate", "endingdateandtime", "expectedendingdateandtime",
+               "durationhoursandminutes", "receivingwaterbody", "reasonfordischarge"},
+    "alert15": {"organizationfacility", "facilityid", "dateofdischarge", "timeofdischarge", "locationofdischarge",
+                "nameofwaterbodyaffected", "durationofdischarge", "reasonfordischarge", "volumeorrateofdischarge",
+                "units", "estimateactual", "col15"},
+    "alert16": {"facilityname", "sprtkid", "starttime", "duration", "address", "city", "zipcode", "affectdwaterbody",
+                "affectedwaterbody", "treatedstate", "quantity", "volumerateunits", "estimatedind",
+                "reasonfordischarge", "reasonfordischarge1", "reasonfordischarge2", "reasonfordischarge3"},
+    "alert18": {"facilityname", "sprtkid", "starttime", "headline", "duration", "units", "address", "col8", "city",
+                "county", "affectedwaterbody", "treatedstate", "quantity", "col15", "estimatedindicator",
+                "reasonsfordischarge", "col18", "col19"},
+}
+TIME_COLUMNS = {"discoverydateandtime", "dateofdischarge", "timeofdischarge", "starttime"}
+FACILITY_COLUMNS = {"facilityname", "organizationfacility", "sprtkid", "facilityid"}
+WITHHELD_WHY = ("the operator's narrative columns (descriptions, instructions, location notes, corrective actions and "
+                "unnamed columns) can name staff, residents and private addresses, so they are never read")
+FRAGMENT_WHY = "this row names no facility (a fragment of a notice): only its date and time are read"
+BARE_VOLUME = re.compile(r"\s*[\d,.]+\s*(?:'s\s*)?(?:gallons?(?:\s+per\s+minute)?|gal|mgd|gpm|million gallons)\s*", re.I)
+CELL_FALL = 0.01        # a tab with more than 1 per cent fewer filled cells than at the last good read fails the read
+END_OF_DAY_NOTE = "the source gives the end's date only ({d}): ended_at is the end of that day (the latest it can be)"
 START_BASIS_REPORT = ("the written report gives the discovery time, used here as the start; the discharge may have "
                       "begun earlier")
 
@@ -311,7 +356,7 @@ def read_tabs(content: bytes) -> list[dict]:
         first, last, year = tab_period(name, year)
         tab = {"tab": name, "layout": layout, "header_row": None if hdr_i is None else hdr_i + 1, "columns": cols,
                "title": [" ".join(str(c) for c in lists[i] if c) for i in title_rows], "header_note": note,
-               "period": (first, last), "rows": rows}
+               "period": (first, last), "rows": rows, "cells": sum(len(r) for _n, r in rows)}
         tabs.append(tab)
         if layout:
             prev = tab
@@ -332,31 +377,57 @@ def _reads_as_data(cells: list, prev: dict) -> bool:
 
 
 def check_shape(tabs: list[dict], state: dict) -> None:
-    """A read with fewer tabs than the last read, or fewer rows in one of its tabs, fails (a file cut short)."""
-    before = {t["tab"]: t["rows"] for t in state.get("tabs") or [] if isinstance(t, dict)}
+    """A read that lost a tab of the last good read (whatever the count), has fewer rows in a tab, or more than
+    CELL_FALL fewer filled cells in a tab (cells cut short) fails: the previous records are kept."""
+    before = {t["tab"]: t for t in state.get("tabs") or [] if isinstance(t, dict) and t.get("tab")}
     if not before:
         return
-    if len(tabs) < len(before):
-        raise ValueError(f"the workbook has {len(tabs)} tabs, {len(before)} at the last read")
-    short = [f"{t['tab']} {len(t['rows'])} rows ({before[t['tab']]} at the last read)"
-             for t in tabs if t["tab"] in before and len(t["rows"]) < before[t["tab"]]]
+    now = {t["tab"]: t for t in tabs}
+    lost = [name for name in before if name not in now]
+    if lost:
+        raise ValueError(f"tabs of the last read are lost: {'; '.join(lost[:5])}")
+    short = [f"{name} {len(now[name]['rows'])} rows ({b['rows']} at the last read)"
+             for name, b in before.items() if isinstance(b.get("rows"), int) and len(now[name]["rows"]) < b["rows"]]
     if short:
         raise ValueError("fewer rows than at the last read: " + "; ".join(short[:5]))
+    cut = [f"{name} {now[name].get('cells', 0)} filled cells ({b['cells']} at the last read)"
+           for name, b in before.items()
+           if isinstance(b.get("cells"), int) and now[name].get("cells", 0) < b["cells"] * (1 - CELL_FALL)]
+    if cut:
+        raise ValueError("fewer filled cells than at the last read (cells cut short): " + "; ".join(cut[:5]))
+
+
+def withhold(row: dict, layout: str) -> tuple[dict, list[str]]:
+    """(the row with only the columns KEEP reads, the names of the others). A row naming no facility keeps its date
+    and time only. alert15's "Description" is kept only where it holds a bare volume and the volume column is empty
+    (the older rows put the volume there)."""
+    keep = KEEP[layout]
+    if not any(norm_header(k) in FACILITY_COLUMNS and clean(v) for k, v in row.items()):
+        keep = keep & TIME_COLUMNS
+    elif layout == "alert15" and not any(norm_header(k) == "volumeorrateofdischarge" and clean(v) for k, v in row.items()):
+        keep = keep | {k for k in ("description",) if BARE_VOLUME.fullmatch(str(next(
+            (v for c, v in row.items() if norm_header(c) == "description"), "") or ""))}
+    kept = {k: v for k, v in row.items() if norm_header(k) in keep}
+    return kept, [k for k in row if k not in kept]
 
 
 # ---------------------------------------------------------------- one row
 
-def typed_time(v) -> str | None:
+def typed_time(v, midnight_date: bool = False) -> str | None:
     """A typed time ("2014/08/13 10:30 AM", "08/13/2014 12:00 PM", "8/13/2014 :") as ISO text (a date alone when the
-    time is blank); the text as given when it is none of these (parse_dt then notes it); None when blank."""
+    time is blank, or, with midnight_date, typed as exactly midnight: text at midnight is a date, as in
+    docs/generic-ingesters.md); the text as given when it is none of these (parse_dt then notes it); None when blank."""
     s = clean(v)
     if not s or JUNK_TIME.fullmatch(s):
         return None
     for fmt in ("%Y/%m/%d %I:%M %p", "%m/%d/%Y %I:%M %p", "%m/%d/%Y %I:%M%p", "%Y/%m/%d %H:%M", "%m/%d/%Y %H:%M"):
         try:
-            return datetime.strptime(s, fmt).isoformat(timespec="minutes")
+            t = datetime.strptime(s, fmt)
         except ValueError:
-            pass
+            continue
+        if midnight_date and t.hour == 0 and t.minute == 0:
+            return t.date().isoformat()
+        return t.isoformat(timespec="minutes")
     m = re.fullmatch(r"(\d{1,2}/\d{1,2}/\d{4})\s*:?\s*(?:[AP]M)?", s, re.I)
     if m:
         try:
@@ -439,12 +510,12 @@ def fields_of(row: dict, layout: str) -> tuple[dict, dict]:
         m = HEADLINE_WORD.match(str(f.get("headline") or ""))
         word = m.group(1).upper() if m else None
         f["notificationStatus"] = KIND_OF_WORD.get(word, "New")
+        f["explanation"] = f.get("headline")        # for ny_sprtk.classify only: the narrative columns are never read
         info["kind"] = {"word": word, "read_as": f["notificationStatus"],
                         "basis": (f"the headline opens with {word}:" if word else "the headline opens with no "
                                   "UPDATE or ENDED word") + "; the workbook has no status column"}
     elif layout == "alert16":
         f["dischargeReason"] = reasons_of(g.get("_reason1"), g.get("_reason2"), g.get("_reason3"))
-        f["reasonDescription"] = "; ".join(x for x in (clean(g.get(k)) for k in ("_rdesc1", "_rdesc2", "_rdesc3")) if x) or None
         est = {"1": "Estimated", "0": "Actual"}.get(str(g.get("_estimated_ind") or "").strip())
         f["quantity"] = joined(g.get("_quantity"), g.get("_quantity_units"), est)
         hours = clean(g.get("_duration_hours"))
@@ -473,8 +544,8 @@ def fields_of(row: dict, layout: str) -> tuple[dict, dict]:
         f["quantity"] = joined(g.get("_quantity"), est)
         f["duration"] = clean(g.get("_duration"))
         f["startDateTime"] = typed_time(g.get("_start"))
-        f["endDateTime"] = typed_time(g.get("_end"))
-        info["expected_end"] = typed_time(g.get("_expected_end"))
+        f["endDateTime"] = typed_time(g.get("_end"), midnight_date=True)
+        info["expected_end"] = typed_time(g.get("_expected_end"), midnight_date=True)
         try:
             ended = f["endDateTime"] is not None and S.parse_dt(f["endDateTime"])[0] is not None
         except ValueError:
@@ -489,17 +560,53 @@ def fields_of(row: dict, layout: str) -> tuple[dict, dict]:
     return f, info
 
 
+def shifted_readings(v: datetime) -> list[datetime]:
+    """Every instant (UTC) the stored value v stands for under the rule local = stored + 4 h in EDT or + 5 h in EST:
+    each reading must exist in New York time and carry that offset (a round trip). One reading is the usual case;
+    two at the fall clock change, none at the spring one (Astra P2-4)."""
+    out = []
+    for h in (4, 5):
+        naive = v + timedelta(hours=h)
+        for fold in (0, 1):
+            aware = naive.replace(tzinfo=S.TZ, fold=fold)
+            if aware.astimezone(UTC).astimezone(S.TZ).replace(tzinfo=None) != naive:
+                continue                            # a time the spring change skips
+            if aware.utcoffset() != timedelta(hours=-h):
+                continue
+            u = aware.astimezone(UTC)
+            if u not in out:
+                out.append(u)
+    return sorted(out)
+
+
+def unsettled_day(v: datetime, readings: list[datetime]) -> date:
+    """The New York date of a stored time the rule reads two ways or not at all (the earlier, when they differ)."""
+    days = [r.astimezone(S.TZ).date() for r in readings] or [(v + timedelta(hours=h)).date() for h in (4, 5)]
+    return min(days)
+
+
 def clock_for(basis: str):
-    """The time reader for a layout's clock (ny_sprtk.parse_notice's clock): a date alone is day precision."""
+    """The time reader for a layout's clock (ny_sprtk.parse_notice's clock): a date alone is day precision; a shifted
+    stored time that the rule reads two ways or not at all is its date only."""
     def clock(v):
         val, _fam = S.parse_dt(v)
         if val is None:
             return None, None, None
         if not isinstance(val, datetime):
             return val, "day", "date"
-        out = S.resolve(val, "dmon", None)[0] if basis == "shifted" else S.resolve(val, "iso_dt", "local")[0]
-        return out, "minute", basis
+        if basis == "shifted":
+            readings = shifted_readings(val)
+            if len(readings) == 1:
+                return readings[0], "minute", basis
+            return unsettled_day(val, readings), "day", "shifted_unsettled"
+        return S.resolve(val, "iso_dt", "local")[0], "minute", basis
     return clock
+
+
+def end_of_day(d: date) -> datetime:
+    """The end of a New York day, as the next day's midnight in UTC."""
+    nxt = d + timedelta(days=1)
+    return datetime(nxt.year, nxt.month, nxt.day, tzinfo=S.TZ).astimezone(UTC)
 
 
 def stored_value(v) -> datetime | date | None:
@@ -512,7 +619,8 @@ def stored_value(v) -> datetime | date | None:
 # ---------------------------------------------------------------- notices and records
 
 def notices_of(tabs: list[dict]) -> tuple[list[dict], Counter]:
-    """One notice per distinct row (a row repeating another exactly is a copy: n["copies"])."""
+    """One notice per distinct row (a row repeating another exactly, narrative columns included, is a copy:
+    n["copies"]). The id hashes the whole row; the notice keeps only the columns withhold() reads."""
     by_id: dict[str, dict] = {}
     stats = Counter()
     for t_i, tab in enumerate(tabs):
@@ -525,10 +633,13 @@ def notices_of(tabs: list[dict]) -> tuple[list[dict], Counter]:
                 by_id[nid]["copies"].append({"tab": tab["tab"], "row": rownum})
                 stats["identical_rows"] += 1
                 continue
-            f, info = fields_of(row, tab["layout"])
+            kept, withheld = withhold(row, tab["layout"])
+            if withheld:
+                stats["rows_with_columns_withheld"] += 1
+            f, info = fields_of(kept, tab["layout"])
             by_id[nid] = {"id": nid, "synthetic_id": False, "tab": tab["tab"], "tab_index": t_i, "row": rownum,
-                          "f": f, "row_raw": row, "website": False, "layout": tab["layout"], "info": info,
-                          "copies": [], "period": tab["period"]}
+                          "f": f, "row_raw": kept, "withheld": withheld, "website": False, "layout": tab["layout"],
+                          "info": info, "copies": [], "period": tab["period"]}
     return list(by_id.values()), stats
 
 
@@ -553,10 +664,9 @@ def finish(rec: dict, n: dict) -> dict:
     raw, info, p = rec.setdefault("raw", {}), n["info"], n.get("p") or {}
     raw["_layout"] = n["layout"]
     raw["_id_note"] = ID_NOTE
-    if isinstance(rec.get("advice_text"), str):
-        # the notifier's additional instructions: build.redact keeps phone numbers in advice_text (an agency's number
-        # is public), but these notices give staff contacts, so the text goes through common.scrub_text as raw does
-        rec["advice_text"] = scrub_text(rec["advice_text"])
+    if n.get("withheld"):
+        has_facility = any(norm_header(k) in FACILITY_COLUMNS for k in n["row_raw"])
+        raw["_withheld"] = {"columns": n["withheld"], "why": WITHHELD_WHY if has_facility else FRAGMENT_WHY}
     if n["layout"] != "alert18" and isinstance(raw.get("_chain"), dict):
         raw["_chain"].pop("head_missing", None)     # only alert18 rows say which notice is the first
     if n["copies"]:
@@ -569,12 +679,23 @@ def finish(rec: dict, n: dict) -> dict:
     stored = stored_value(n["f"].get("startDateTime"))
     if isinstance(stored, datetime):
         raw["_start_stored"] = stored.isoformat(timespec="minutes")
+        if CLOCK[n["layout"]] == "shifted" and n.get("start_not_used") is None:
+            readings = shifted_readings(stored)
+            if len(readings) != 1:
+                raw["_time_notes"] = {"start": {
+                    "stored": raw["_start_stored"], "candidates": [S.local_iso(x) for x in readings],
+                    "why": ("the stored time fits the rule two ways at the fall clock change (stored + 4 h in EDT and "
+                            "stored + 5 h in EST), so the start is published as its date only" if readings else
+                            "no reading fits the rule at the spring clock change (stored + 4 h is not in EDT and "
+                            "stored + 5 h is not in EST), so the start is published as its date only")}}
     elif isinstance(stored, date):
         raw["_start_stored"] = stored.isoformat()
     if p.get("facility_id"):
         raw["_facility_id"] = p["facility_id"]
     if n.get("start_not_used"):
         raw["_start_not_used"] = {"value": n["start_not_used"], "reason": START_NOT_USED}
+    if n.get("end_day_only") and rec.get("ended_at"):
+        raw["_end_basis"] = END_OF_DAY_NOTE.format(d=n["end_day_only"])
     if info.get("start_basis") and rec.get("started_at"):
         raw["_start_basis"] = info["start_basis"]
     if rec.get("status") == "unknown" and info.get("state"):
@@ -586,8 +707,12 @@ def finish(rec: dict, n: dict) -> dict:
         except ValueError:
             val = None
         if val is not None:
+            note = "the report's expected ending time: a projection, not a reported end"
+            if not isinstance(val, datetime) and p.get("start_prec") == "minute":
+                note += "; " + END_OF_DAY_NOTE.format(d=val.isoformat()).replace("ended_at", "this")
+                val = end_of_day(val)
             raw["_projected_end"] = S.local_iso(val)
-            raw["_projected_end_note"] = "the report's expected ending time: a projection, not a reported end"
+            raw["_projected_end_note"] = note
     note = period_note(n, p.get("start"))
     if note:
         raw["_dww_note"] = list(raw.get("_dww_note") or []) + [note]
@@ -604,7 +729,13 @@ def build(tabs: list[dict], fetched_at: str, prev: list[dict], live: list[dict])
             n["start_not_used"] = S.local_iso(p["start"])
             p["start"] = p["start_prec"] = None
             p["basis"].pop("start", None)
-    chains = S.build_chains(notices)
+        if p["end"] is not None and not isinstance(p["end"], datetime) and p["start_prec"] == "minute":
+            # an end known only to the day on a record timed to the minute is the end of that day
+            n["end_day_only"] = p["end"].isoformat()
+            p["end"], p["end_prec"] = end_of_day(p["end"]), "minute"
+    # no edited-start merge (Astra P1-3): the workbook has no ids, so nothing shows that a later notice revised an
+    # earlier one; chains are facility + address + start minute only
+    chains = S.build_chains(notices, merge_edited=False)
     dmap, cso = S.load_dischargers()
     ctx = {"echo": S.load_echo(), "dischargers": dmap, "cso_permits": cso, "place_cache": {}, "fetched_at": fetched_at,
            "source_id": SOURCE_ID, "source_url": SOURCE_URL, "basis_text": BASIS_TEXT}
@@ -639,7 +770,8 @@ def build(tabs: list[dict], fetched_at: str, prev: list[dict], live: list[dict])
         "tabs": [{"tab": t["tab"], "layout": t["layout"], "rows": len(t["rows"]), "header_row": t["header_row"],
                   **({"title": t["title"]} if t["title"] else {}), **({"header_note": t["header_note"]} if t["header_note"] else {})}
                  for t in tabs],
-        "rows": stats["rows"], "rows_by_layout": {k[5:]: v for k, v in stats.items() if k.startswith("rows_")},
+        "rows": stats["rows"], "rows_by_layout": {k[5:]: v for k, v in stats.items() if k.startswith("rows_")
+                                                  and k[5:] in LAYOUTS},
         "identical_rows": stats["identical_rows"], "notices": len(notices), "chains": len(chains),
         "records_written": len(new_ids), "records_kept_from_earlier_reads": kept,
         "rows_without_start": len(no_start),
@@ -648,6 +780,11 @@ def build(tabs: list[dict], fetched_at: str, prev: list[dict], live: list[dict])
         "start_range": [starts[0], starts[-1]] if starts else None,
         "starts_outside_tab_months": sum(1 for r in records if any("tab's" in str(x) for x in r["raw"].get("_dww_note") or [])),
         "time_basis": dict(Counter(b for n in notices for b in n["p"]["basis"].values())),
+        "day_precision_starts": sum(1 for r in records if r.get("started_at") and r.get("time_precision") == "day"),
+        "clock_change_starts": dict(Counter("two_readings" if (r["raw"].get("_time_notes") or {})["start"]["candidates"]
+                                            else "no_reading" for r in records if r["raw"].get("_time_notes"))),
+        "ends_known_to_the_day": sum(1 for r in records if r["raw"].get("_end_basis")),
+        "rows_with_columns_withheld": stats["rows_with_columns_withheld"],
         "records_by_status": dict(Counter(r["status"] for r in records)),
         "latest_notices_by_type": dict(Counter(r["event_type"] for r in latest)),
         "latest_notices_water_match": dict(Counter(r["water_match"] for r in latest)),
@@ -673,6 +810,23 @@ def _when(rec: dict) -> tuple[datetime | None, date | None]:
     return minute, t.astimezone(S.TZ).date()
 
 
+STREET_WORDS = set("""rd road st street ave av avenue dr drive ln lane blvd boulevard ct court pl place way hwy highway route
+rte pkwy parkway ter terrace cir circle sq square n s e w north south east west ny usa""".split())
+
+
+def address_parts(f: dict) -> tuple[str | None, frozenset]:
+    """(street number, street-name words) of a row: the number column, else a number opening the street text; the
+    street words without their suffixes and directions ("12 Harbor Rd" -> ("12", {"harbor"})). A number 0 is none."""
+    num, name = clean(f.get("streetNumber")), str(clean(f.get("streetName")) or "").split(",")[0]
+    if not num:
+        m = re.match(r"\s*(\d+)", name)
+        if m:
+            num, name = m.group(1), name[m.end():]
+    m = re.match(r"\d+", num or "")
+    words = frozenset(w for w in S.norm_text(name).split() if w not in STREET_WORDS and not w.isdigit())
+    return (m.group(0).lstrip("0") or None) if m else None, words
+
+
 def _side(rec: dict, history: bool) -> dict:
     raw = rec.get("raw") if isinstance(rec.get("raw"), dict) else {}
     row = raw.get("row") if isinstance(raw.get("row"), dict) else {}
@@ -696,9 +850,12 @@ def _side(rec: dict, history: bool) -> dict:
     if not history and minute is not None:
         wall = datetime.fromisoformat(rec["started_at"]).astimezone(S.TZ).replace(tzinfo=None, second=0, microsecond=0)
     head = S.norm_text(HEADLINE_WORD.sub("", str(row.get("headline") or "")))
-    return {"keys": keys, "minute": minute, "day": day, "stored": stored, "wall": wall,
+    chain = (raw.get("_chain") or {}).get("id") if isinstance(raw.get("_chain"), dict) else None
+    return {"keys": keys, "fid": fid, "minute": minute, "day": day, "stored": stored, "wall": wall,
             "water": S.norm_text(rec.get("waterbody_text")), "slugs": tuple(sorted(rec.get("water_slugs") or [])),
-            "head": head, "kind": kind, "addr": S.address_key(f), "vol": S.norm_text(rec.get("volume_text"))}
+            "head": head, "kind": kind, "addr": S.address_key(f), "parts": address_parts(f),
+            "outfall": rec.get("outfall_id"), "vol": S.norm_text(rec.get("volume_text")),
+            "chain": chain or rec.get("event_id")}
 
 
 def _same_start(h: dict, live: dict) -> str | None:
@@ -725,9 +882,26 @@ def _same_water(h: dict, live: dict) -> str | None:
     return None
 
 
+def _contradiction(h: dict, live: dict) -> str | None:
+    """What the two records disagree on, if anything: facility id, outfall, water or address (Astra P1-2)."""
+    if h["fid"] and live["fid"] and h["fid"] != live["fid"]:
+        return "another permit or facility id"
+    if h["outfall"] and live["outfall"] and h["outfall"] != live["outfall"]:
+        return "another outfall"
+    if h["water"] and live["water"] and h["water"] != live["water"] and not (h["slugs"] and h["slugs"] == live["slugs"]):
+        return "another water"
+    (hn, hw), (ln, lw) = h["parts"], live["parts"]
+    if (hn and ln and hn != ln) or (hw and lw and not hw & lw):
+        return "another address"
+    return None
+
+
 def link_copies(records: list[dict], live: list[dict]) -> dict:
     """duplicate_of / raw._possible_copy_of against the newer workbook's records (docstring "Overlap"); the links of
-    an earlier run are made again from scratch. Returns the counts."""
+    an earlier run are made again from scratch. Returns the counts.
+    duplicate_of needs the same facility, the same start, the same water or headline and no contradiction
+    (_contradiction), with one discharge on each side: the history chain agrees with one chain of the newer
+    workbook and that chain with this one history chain; within it the notices are paired one to one."""
     for r in records:
         r["duplicate_of"] = None
         raw = r.get("raw") if isinstance(r.get("raw"), dict) else {}
@@ -744,51 +918,69 @@ def link_copies(records: list[dict], live: list[dict]) -> dict:
         sides[rec["event_id"]] = s
         for k in s["keys"]:
             idx[(k, s["day"])].append(rec["event_id"])
-    strict, weak = [], {}
+    agree, weak, hchain = [], {}, {}
     by_id = {r["event_id"]: r for r in records}
     for rec in records:
         h = _side(rec, history=True)
+        hid = rec["event_id"]
+        hchain[hid] = h["chain"]
         if h["day"] is None or not h["keys"]:
             continue
         days = {h["day"]} | ({h["stored"].date()} if isinstance(h["stored"], datetime) else set())
-        cands = sorted({eid for k in h["keys"] for d in days for eid in idx.get((k, d), ())})
-        for eid in cands:
-            ls = sides[eid]
+        for lid in sorted({eid for k in h["keys"] for d in days for eid in idx.get((k, d), ())}):
+            ls = sides[lid]
             start, water = _same_start(h, ls), _same_water(h, ls)
-            if start and water:
+            if not start:
+                if water and h["minute"] is not None and ls["minute"] is not None:
+                    weak.setdefault(hid, (lid, "the same facility, water and date, with another start time"))
+                continue
+            contra = _contradiction(h, ls)
+            if contra:
+                weak.setdefault(hid, (lid, f"the same facility and start ({start}), but {contra}"))
+            elif not water:
+                weak.setdefault(hid, (lid, f"the same facility and start ({start}), with no water to compare"))
+            else:
                 score = ((4 if start == "the same start minute" else 0) + (3 if h["addr"] and h["addr"] == ls["addr"] else 0)
                          + (2 if h["kind"] and h["kind"] == ls["kind"] else 0) + (1 if h["vol"] and h["vol"] == ls["vol"] else 0)
                          + (1 if water == "the same water" else 0))
-                strict.append((score, rec["event_id"], eid, start, water))
-            elif start and rec["event_id"] not in weak:
-                weak[rec["event_id"]] = (eid, f"the same facility and start ({start}), with another or no water")
-            elif water and h["minute"] is not None and ls["minute"] is not None and rec["event_id"] not in weak:
-                weak[rec["event_id"]] = (eid, "the same facility, water and date, with another start time")
-    taken_h, taken_l, left = set(), set(), {}
-    for score, hid, eid, start, water in sorted(strict, key=lambda x: (-x[0], x[1], x[2])):
+                agree.append((score, hid, lid, start, water))
+    h2l, l2h = defaultdict(set), defaultdict(set)
+    for _score, hid, lid, _s, _w in agree:
+        h2l[hchain[hid]].add(sides[lid]["chain"])
+        l2h[sides[lid]["chain"]].add(hchain[hid])
+    taken_h, taken_l, left, ambiguous = set(), set(), {}, {}
+    for score, hid, lid, start, water in sorted(agree, key=lambda x: (-x[0], x[1], x[2])):
+        hc, lc = hchain[hid], sides[lid]["chain"]
+        if h2l[hc] != {lc} or l2h[lc] != {hc}:
+            ambiguous.setdefault(hid, lid)
+            continue
         if hid in taken_h:
             continue
-        if eid in taken_l:
-            left.setdefault(hid, eid)
+        if lid in taken_l:
+            left.setdefault(hid, lid)
             continue
         taken_h.add(hid)
-        taken_l.add(eid)
-        rec = by_id[hid]
-        rec["duplicate_of"] = eid
-        rec["raw"]["_duplicate_basis"] = (f"also in the newer workbook (SPRTK_Data.xlsx) as {eid}: the same facility, "
-                                          f"{start}, {water}; listed from there")
+        taken_l.add(lid)
+        by_id[hid]["duplicate_of"] = lid
+        by_id[hid]["raw"]["_duplicate_basis"] = (f"also in the newer workbook (SPRTK_Data.xlsx) as {lid}: the same "
+                                                 f"facility, {start}, {water}, nothing in conflict, and one discharge "
+                                                 "on each side; listed from there")
     possible = 0
-    for hid, eid in left.items():
-        if hid in taken_h:
+    reasons = (
+        (left, "the same facility, start and water as a notice of the newer workbook that is paired with another "
+               "notice of this workbook"),
+        (ambiguous, "the same facility, start and water, but more than one discharge in the two workbooks fits"),
+    )
+    for found, reason in reasons:
+        for hid, lid in found.items():
+            if hid in taken_h or "_possible_copy_of" in by_id[hid]["raw"]:
+                continue
+            by_id[hid]["raw"]["_possible_copy_of"] = {"event_id": lid, "reason": reason}
+            possible += 1
+    for hid, (lid, reason) in weak.items():
+        if hid in taken_h or "_possible_copy_of" in by_id[hid]["raw"]:
             continue
-        by_id[hid]["raw"]["_possible_copy_of"] = {
-            "event_id": eid, "reason": "the same facility, start and water as a notice of the newer workbook that is "
-                                       "paired with another notice of this workbook"}
-        possible += 1
-    for hid, (eid, reason) in weak.items():
-        if hid in taken_h or hid in left:
-            continue
-        by_id[hid]["raw"]["_possible_copy_of"] = {"event_id": eid, "reason": reason}
+        by_id[hid]["raw"]["_possible_copy_of"] = {"event_id": lid, "reason": reason}
         possible += 1
     return {"duplicate_of": len(taken_h), "possible_copy_of": possible, "newer_workbook_records": len(live)}
 
@@ -875,15 +1067,18 @@ def keep(prev_doc: dict, prev: list[dict], fetched_at: str, state: dict, why: di
 
 
 def raw_page(tabs: list[dict], info: dict, fetched_at: str, text=None) -> dict:
-    """The saved raw page: every row after common.strip_personal and then text (the records' redactor: a name it
-    removes from the records goes from the page too), never the workbook itself."""
-    def scrub(row: dict) -> dict:
-        row = strip_personal(row)
+    """The saved raw page: every row with only the columns withhold() reads, after common.strip_personal and then
+    text (the records' redactor: a name it removes from the records goes from the page too); never the workbook
+    itself and never a narrative column."""
+    def scrub(row: dict, layout: str) -> dict:
+        row = strip_personal(withhold(row, layout)[0])
         return {k: text(v) if text and isinstance(v, str) else v for k, v in row.items()}
     return {"file": info.get("url") or SOURCE_URL, "last_modified": info.get("last_modified"), "fetched_at": fetched_at,
-            "rows_note": "every row of every tab, with personal data scrubbed (common.strip_personal, build.redact)",
-            "tabs": [{"tab": t["tab"], "layout": t["layout"], "header_row": t["header_row"], "columns": t["columns"],
-                      "rows": [[n, scrub(r)] for n, r in t["rows"]]} for t in tabs]}
+            "rows_note": ("every row of every tab: the columns read (never the operator's narrative columns), with "
+                          "personal data scrubbed (common.strip_personal, build.redact)"),
+            "tabs": [{"tab": t["tab"], "layout": t["layout"], "header_row": t["header_row"],
+                      "columns_read": [c for c in t["columns"] if norm_header(c) in KEEP.get(t["layout"], ())],
+                      "rows": [[n, scrub(r, t["layout"])] for n, r in t["rows"]]} for t in tabs]}
 
 
 def main(argv=None) -> int:
@@ -939,7 +1134,7 @@ def main(argv=None) -> int:
     size = len(content)
     del page, content, red
     if not args.file:
-        state.update(read_at=fetched_at, tabs=[{"tab": t["tab"], "rows": len(t["rows"])} for t in tabs],
+        state.update(read_at=fetched_at, tabs=[{"tab": t["tab"], "rows": len(t["rows"]), "cells": t["cells"]} for t in tabs],
                      **{k: info.get(k) for k in ("via", "url", "capture", "last_modified_http", "last_modified")})
     if args.backfill:
         state["backfill"] = {"at": fetched_at, "notices": stats["notices"]}

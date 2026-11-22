@@ -595,9 +595,11 @@ def sort_key(n: dict):
     return (t, STATUS_RANK.get(p["status"], 1), len(n["id"]), n["id"])
 
 
-def build_chains(notices: list[dict]) -> dict[str, list[dict]]:
+def build_chains(notices: list[dict], merge_edited: bool = True) -> dict[str, list[dict]]:
     """chain id -> notices in order. incidentId first; then facility + address + start (minute), which
-    also joins a later notice to an incidentId chain with the same key."""
+    also joins a later notice to an incidentId chain with the same key. merge_edited: join a chain that opens
+    without a New notice to an open chain at the same place (merge_edited_starts); off for a workbook with no
+    evidence of revisions (ingest/ny_sprtk_history.py)."""
     chains: dict[str, list[dict]] = {}
     key_to_chain: dict[str, str] = {}
     for n in notices:
@@ -624,7 +626,8 @@ def build_chains(notices: list[dict]) -> dict[str, list[dict]]:
         n["chain_basis"] = basis
     for lst in chains.values():
         lst.sort(key=sort_key)
-    merge_edited_starts(chains)
+    if merge_edited:
+        merge_edited_starts(chains)
     return chains
 
 
