@@ -87,9 +87,11 @@ Privacy
   The free-text columns (reason description, discharge description, additional instructions, location description,
   corrective actions) can carry names and phone numbers. Every raw goes through common.strip_personal (in
   common.event), as in ny_sprtk, and the records through build.redact before they are written (names in free text
-  anywhere, phone numbers in the top-level fields too). The saved raw page (data/raw/ny-dec-sprtk-2013-2021/) holds
-  the rows after common.strip_personal, never the workbook. tests/test_ny_sprtk_history.py proves that a planted name
-  and phone number reach neither.
+  anywhere, phone numbers in the top-level fields). advice_text (the additional instructions) also goes through
+  common.scrub_text, since build.redact keeps phone numbers there (an agency's number is public) and these notices
+  give staff contacts. The saved raw page (data/raw/ny-dec-sprtk-2013-2021/) holds the rows after
+  common.strip_personal and the records' redactor (a name removed from the records goes from the page too), never
+  the workbook. tests/test_ny_sprtk_history.py proves that a planted name and phone number reach neither.
 
 Reading (each run)
   The workbook is history. A run asks for it at most once every REREAD_DAYS (7) days, with If-Modified-Since (state in
@@ -123,7 +125,7 @@ from pathlib import Path
 import requests
 
 from common import (BUILD_DIR, EVENTS_DIR, HEADERS, ROOT, error_detail, error_text, now_iso, path_notes_to_meta,
-                    read_json, save_raw, strip_personal, write_events, write_json)
+                    read_json, save_raw, scrub_text, strip_personal, write_events, write_json)
 from ingest import ny_sprtk as S
 
 SOURCE_ID = "ny-dec-sprtk-2013-2021"
@@ -549,6 +551,10 @@ def finish(rec: dict, n: dict) -> dict:
     raw, info, p = rec.setdefault("raw", {}), n["info"], n.get("p") or {}
     raw["_layout"] = n["layout"]
     raw["_id_note"] = ID_NOTE
+    if isinstance(rec.get("advice_text"), str):
+        # the notifier's additional instructions: build.redact keeps phone numbers in advice_text (an agency's number
+        # is public), but these notices give staff contacts, so the text goes through common.scrub_text as raw does
+        rec["advice_text"] = scrub_text(rec["advice_text"])
     if n["layout"] != "alert18" and isinstance(raw.get("_chain"), dict):
         raw["_chain"].pop("head_missing", None)     # only alert18 rows say which notice is the first
     if n["copies"]:
@@ -865,12 +871,16 @@ def keep(prev_doc: dict, prev: list[dict], fetched_at: str, state: dict, why: di
     return 0
 
 
-def raw_page(tabs: list[dict], info: dict, fetched_at: str) -> dict:
-    """The saved raw page: every row after common.strip_personal, never the workbook itself."""
+def raw_page(tabs: list[dict], info: dict, fetched_at: str, text=None) -> dict:
+    """The saved raw page: every row after common.strip_personal and then text (the records' redactor: a name it
+    removes from the records goes from the page too), never the workbook itself."""
+    def scrub(row: dict) -> dict:
+        row = strip_personal(row)
+        return {k: text(v) if text and isinstance(v, str) else v for k, v in row.items()}
     return {"file": info.get("url") or SOURCE_URL, "last_modified": info.get("last_modified"), "fetched_at": fetched_at,
-            "rows_note": "every row of every tab, with personal data scrubbed (common.strip_personal)",
+            "rows_note": "every row of every tab, with personal data scrubbed (common.strip_personal, build.redact)",
             "tabs": [{"tab": t["tab"], "layout": t["layout"], "header_row": t["header_row"], "columns": t["columns"],
-                      "rows": [[n, strip_personal(r)] for n, r in t["rows"]]} for t in tabs]}
+                      "rows": [[n, scrub(r)] for n, r in t["rows"]]} for t in tabs]}
 
 
 def main(argv=None) -> int:
@@ -915,15 +925,16 @@ def main(argv=None) -> int:
         write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
         print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
-    page = raw_page(tabs, info, fetched_at)
+    red = redact.redactor_for(records)
+    records = redact.redact_events(records, redactor=red)
+    page = raw_page(tabs, info, fetched_at, red.text)
     sha = hashlib.sha256(json.dumps(page["tabs"], sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     raw_path = state.get("raw_path")
     if sha != state.get("sha256") or not (raw_path and (ROOT / raw_path).exists()):
         raw_path = str(save_raw(SOURCE_ID, json.dumps(page, ensure_ascii=False), "json").relative_to(ROOT))
         state.update(sha256=sha, raw_path=raw_path, saved_at=fetched_at)
     size = len(content)
-    del page, content
-    records = redact.redact_events(records)
+    del page, content, red
     if not args.file:
         state.update(read_at=fetched_at, tabs=[{"tab": t["tab"], "rows": len(t["rows"])} for t in tabs],
                      **{k: info.get(k) for k in ("via", "url", "capture", "last_modified_http", "last_modified")})
