@@ -98,8 +98,9 @@ def vt_bypass(rid="hqs", **kw):
     kw.setdefault("event_type", "plant_bypass")
     kw.setdefault("water_slugs", ["conn-river-vt"])
     kw.setdefault("started_at", (NOW - 30 * H).isoformat())
+    kw.setdefault("waterbody_text", "Connecticut River")
     return event(source_id="vt-dec", source_record_id=rid, status="ongoing", npdes_permit=VT,
-                 discharger_name="Hartford White River Junction", waterbody_text="Connecticut River",
+                 discharger_name="Hartford White River Junction",
                  volume_gal=13_200_000, **kw)
 
 
@@ -221,8 +222,8 @@ def test_outlets_on_separate_branches_are_chosen_only_when_all_start_within_a_ki
     far = [branch("a", 5, 3.0), branch("b", 6, 0.4)]
     assert S._order(*far) == (None, 3.4) and S.most_upstream(far) is None
     near = [branch("a", 5, 0.5), branch("b", 6, 0.3)]
-    assert S.most_upstream(near)["key"] == "a"        # farther above the flowline where they meet
-    assert S.most_upstream([branch("a", 5, 0.4), branch("b", 6, 0.4)])["key"] == "a"     # the same place: lower key
+    assert S.most_upstream(near)["key"] == f"{VT}-a"      # farther above the flowline where they meet
+    assert S.most_upstream([branch("a", 5, 0.4), branch("b", 6, 0.4)])["key"] == f"{VT}-a"   # the same place: lower key
 
 
 def test_the_upstream_outlet_is_found_by_position_not_by_key():
