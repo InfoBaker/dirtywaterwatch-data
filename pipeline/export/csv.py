@@ -21,7 +21,8 @@ line ends, a quote inside a value doubled), one report per row, newest first. Co
 
 The rows come from the public event objects the export writes (build.py: personal fields stripped
 under the current rules, staff and private names redacted, no keys starting with "_"), and only from
-the fixed top-level fields named here, the named fields of `detail` and `later_volume` (export/detail.py: each
+the fixed top-level fields named here, our `volume_estimate` and `end_estimate` (export/estimates.py), the named
+fields of `detail` and `later_volume` (export/detail.py: each
 read from a source key named there, scrubbed) plus two link and municipality values read from their `raw`
 (RAW_NOTICE_KEYS, status.TOWN_KEYS). Nothing else of `raw` is copied, so a field the sources add later
 cannot reach a download by accident. Text that begins with = + - or @ gets a leading apostrophe so a
@@ -62,7 +63,13 @@ COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id"
            "listed_without_colour",
            # detail fields added on 2026-11-21 (export/detail.py FIELDS, the same names), at the end so that a reader
            # of the earlier columns by position is not moved
-           "resolution", "notes"]
+           "resolution", "notes",
+           # the source's descriptions and a rate it gives in place of a volume (export/detail.py)
+           "description", "location_description", "rate_text",
+           # our own figures, apart from the source's (export/estimates.py): a volume computed from the record's rate
+           # and duration, and an end estimated from its start and the duration it gives, each with its basis
+           "volume_estimate_gal", "volume_estimate_low_gal", "volume_estimate_high_gal", "volume_estimate_bound",
+           "volume_estimate_basis", "end_estimate_at", "end_estimate_basis"]
 DETAIL_COLUMNS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
                   "volume_method", "volume_to_water_gal", "overflow_point", "town")
 LATER_DETAIL_COLUMNS = ("resolution", "notes")
@@ -412,7 +419,9 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     towns = _join_towns(_own_towns(e) or d.get("towns") or [])
     eid = e["event_id"]
     ended_precision = status_mod.end_precision(e) if e.get("ended_at") else None
-    end_reported = bool(e.get("ended_at")) and not (e.get("sampled_at") and ended_precision == "poll")
+    # an end the pipeline worked out (export/estimates.py ended_at_ours) is ours, not the source's report
+    end_reported = (bool(e.get("ended_at")) and not (e.get("sampled_at") and ended_precision == "poll")
+                    and not isinstance(e.get("ended_at_ours"), dict))
     notice = linked_notice(e)
     row = [
         _text(eid), _text(water), _text(LIST_SEP.join(slugs)), _text(state), _text(operator), _text(operator_id),
@@ -441,6 +450,14 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     nsr = e.get("no_stated_reason") if isinstance(e.get("no_stated_reason"), dict) else {}
     row.append(_text(nsr.get("label")))
     row += [_text(d.get(k)) for k in LATER_DETAIL_COLUMNS]
+    rate = d.get("rate") if isinstance(d.get("rate"), dict) else {}
+    row += [_text(d.get("description")), _text(d.get("location_description")), _text(rate.get("text"))]
+    ve = e.get("volume_estimate") if isinstance(e.get("volume_estimate"), dict) else {}
+    ee = e.get("end_estimate") if isinstance(e.get("end_estimate"), dict) else {}
+    if not ee and isinstance(e.get("ended_at_ours"), dict) and e.get("ended_at"):
+        ee = {"at": e["ended_at"], "basis": e["ended_at_ours"].get("basis")}      # the record's own end, worked out by us
+    row += [_number(ve.get("gallons")), _number(ve.get("low")), _number(ve.get("high")), _text(ve.get("bound")),
+            _text(ve.get("basis")), _text(ee.get("at")), _text(ee.get("basis"))]
     return row, ops
 
 
