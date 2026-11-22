@@ -36,7 +36,9 @@
 #                  INGEST_SNAPSHOTS (so a generic feed can dedupe against a module's events file); blocks with
 #                  live: false (ports being compared with their modules) are not run.
 #                  Florida: fl_dep_pnp (DEP Public Notice of Pollution, last 30 days; `--backfill` once
-#                  for every notice since 2017), fl_dep_habs (DEP algal bloom visits), fl_doh_beaches
+#                  for every notice since 2017), fl_miami_dade_sso (RER/DERM all-utility county history;
+#                  runs after fl_dep_pnp and links matching records to one DEP event, including on a failed read),
+#                  fl_dep_habs (DEP algal bloom visits), fl_doh_beaches
 #                  (Healthy Beaches result pages: a full pass starts at most every 20 hours and is spread over
 #                  hourly runs, at most 6 minutes of pages a run, resumed where it stopped)
 #                  Michigan: mi_egle_mienviro (EGLE MiEnviro CSO/SSO List: every open report and the completed
