@@ -69,6 +69,7 @@ jobs:
           elif [ "$EVENT" = schedule ] && [ "$hour" = 03 ]; then due=1; fi
           weekly=0; [ "$due" = 1 ] && [ "$dow" = 7 ] && weekly=1
           echo "due=$due" >> "$GITHUB_OUTPUT"; echo "weekly=$weekly" >> "$GITHUB_OUTPUT"
+          echo "started=$(date -u +%s)" >> "$GITHUB_OUTPUT"   # the job's start, for the optional R2 uploads' time
           echo "dataset release: due=$due weekly=$weekly ($EVENT, $(date -u +%FT%TZ))"
       - name: Secrets present
         env:
@@ -123,7 +124,10 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          JOB_STARTED: ${{ steps.release.outputs.started }}
         run: |
+          # the optional history uploads stop 15 minutes before the job's 100-minute limit (state_paths.py optional_budget)
+          echo "${JOB_STARTED:-$(date -u +%s)}" > job-started
           # a missing object is a first run; one that is there but cannot be fetched or unpacked stops the run here, so
           # nothing is published without the history and the blocklist and the stored state is never saved over.
           # unpack-build checks the whole archive first: data/build members only, no links or special files (SOL
@@ -296,6 +300,8 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          # never saved over the history with no events file at all (the stored state stands; the step fails)
+          python3 -I scripts/state_paths.py save-check restored-counts.json --restored restored-build.tar.gz
           # the generation record (data/build/state-generations.json, travels with the state): the previous run's copies
           # whose markers name it are recorded, and the copies this save is due for written as pending before the
           # archive is made; the next step makes them

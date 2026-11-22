@@ -218,6 +218,7 @@ def test_guard_held_upload_that_fails_is_a_warning_and_recorded(tmp_path, r2, mo
     b, arch, counts = restored_state(tmp_path, {"a": 100})
     (b / "events" / "a.json").unlink()
     monkeypatch.setenv("FAKE_R2_FAIL_PUT", "state/held/build-2026-11-21-7.tar.gz")
+    monkeypatch.setenv("STATE_NOW", "2026-11-21T15:07:00Z")                 # the held key's date: the CLI's clock
     assert SP.main(["guard", str(counts), "--build", str(b), "--out", str(b / "history-guard.json"),
                     "--restored", str(arch), "--run-id", "7"]) == 0          # the save goes on
     assert "::warning::history guard: the restored state could not be held" in capsys.readouterr().out
@@ -488,6 +489,7 @@ def gone(pid_file: Path) -> bool:
 def test_p1_2_a_stalled_operation_is_killed_at_its_total_deadline(tmp_path, monkeypatch, op):
     import time
     pid = stalled(tmp_path, monkeypatch)
+    monkeypatch.setattr(SP, "MIN_OPTIONAL_S", 0.5)                         # a short deadline, to keep the test short
     src = tmp_path / "f"
     src.write_bytes(b"x")
     t0 = time.monotonic()

@@ -51,7 +51,11 @@ under `state/daily/`, `state/monthly/` and `state/held/` (`scripts/state_paths.p
 - `state/held/build-<date>-<run>.tar.gz`: before each save a history guard compares every feed's record count with
   the restored archive. A feed that lost at least 1% and at least 5 of its records, or whose events file is gone, is
   a warning in the run log and in `data/build/history-guard.json`, and the restored archive is kept here, so the
-  history before the run can be recovered. The save still goes on.
+  history before the run can be recovered. The save still goes on, unless `data/build/events` is missing or empty
+  while the restored state had files: then the save step fails and the stored state stands.
+
+These uploads are optional: each has its own time limit, and none runs within 15 minutes of the job's 100-minute
+limit, so the state save keeps its time.
 
 Each daily and monthly copy is followed by a small marker (`build-<...>.json` beside it). The next run reads the
 marker and only then records the copy in `data/build/state-generations.json`, so the record never names a copy whose

@@ -58,7 +58,13 @@ least DROP_MIN_RECORDS records, or whose events file disappeared or can no longe
 per source with its counts, the restored archive held, and data/build/history-guard.json written (time, run, each
 drop's counts, the held key and whether it uploaded; earlier drop runs kept below it). The save still goes on
 (operations are not disrupted; the held copy and the warning are the safeguard). No drop: nothing uploaded. No
-restored state (a first run): nothing compared.
+restored state (a first run): nothing compared. A missing data/build counts as every source gone. The one case that
+stops the save is save-check's: data/build/events missing or holding no events file while the restored state had some;
+the save step then fails and the stored state stands.
+Time. The held copy, the copies, their markers and the marker reads are optional: each has a total deadline, retries
+included (OPTIONAL_CAP_S: 10 minutes for an archive, 1 for a marker), its process group killed when it runs out, and
+none runs past SAVE_RESERVE_S (15 minutes) before the job's 100-minute limit, counted from the job's start the restore
+step writes to job-started; with less time left an operation is skipped with a warning.
 The generation record, data/build/state-generations.json, travels with the state. Before the archive is made,
 generations plan records the copies the previous run left pending whose markers name that run (one small read each),
 then writes the copies due (the day's daily when the record does not hold this UTC date for that weekday, the month's
@@ -152,6 +158,9 @@ that cannot be read is replaced by the next good run's.
                                                             the history guard (above) against COUNTS, the counts taken
                                                             at the restore; FILE (default restored-build.tar.gz) is
                                                             held on a drop; exit 0 (the save goes on)
+    python3 -I scripts/state_paths.py save-check COUNTS [--restored FILE] [--build DIR]
+                                                            exit 1 (an ::error::) when data/build/events is missing or
+                                                            empty while the restored state had events files
     python3 -I scripts/state_paths.py generations plan|put [FILE] [--record FILE] [--run-id ID]
                                                             plan: record the previous run's copies their markers name,
                                                             print the copies due and write them as pending; put FILE:
@@ -174,6 +183,7 @@ import gzip
 import json
 import os
 import re
+import signal
 import subprocess
 import sys
 import tarfile
@@ -349,25 +359,69 @@ def check_size(path: Path, cap_mb: float, label: str | None = None, hard_mb: flo
     return True
 
 
-def fetch(key: str, out: Path, tries: int = 3, wrangler: str | None = None) -> int:
+def run_killable(cmd: list[str], timeout: float) -> tuple[int | None, str]:
+    """(exit code, output) of cmd, stdout and stderr together; (None, the reason) when it could not start or ran past
+    timeout, in which case its whole process group (wrangler's filter and the AWS CLI it starts) is killed."""
+    try:
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors="replace",
+                             start_new_session=True)
+    except OSError as ex:
+        return None, type(ex).__name__
+    try:
+        out, _ = p.communicate(timeout=max(timeout, 0.1))
+    except subprocess.TimeoutExpired:
+        try:
+            os.killpg(p.pid, signal.SIGKILL)
+        except OSError:
+            p.kill()
+        try:
+            p.communicate(timeout=10)
+        except subprocess.TimeoutExpired:
+            pass
+        return None, "TimeoutExpired"
+    return p.returncode, out or ""
+
+
+def _attempts(tries: int, budget_s: float | None, per_try_s: float):
+    """The timeouts of up to `tries` attempts: per_try_s each, or with a total budget (retries and pauses included)
+    what is left of it. Yields (attempt number, timeout); the caller sleeps between attempts with pause()."""
+    end = None if budget_s is None else time.monotonic() + budget_s
+    for n in range(tries):
+        left = per_try_s if end is None else min(per_try_s, end - time.monotonic())
+        if left < 1:
+            return
+        yield n, left
+
+
+def _pause(n: int, tries: int, budget_end: float | None, pause: float) -> bool:
+    """Sleep before attempt n + 1; False when there is none, or no time for it within the budget."""
+    if n >= tries - 1:
+        return False
+    wait = pause * (n + 1)
+    if budget_end is not None and time.monotonic() + wait + 1 >= budget_end:
+        return False
+    time.sleep(wait)
+    return True
+
+
+def fetch(key: str, out: Path, tries: int = 3, wrangler: str | None = None, budget_s: float | None = None) -> int:
     """Get a state object with wrangler: FETCHED (0), ABSENT (3: wrangler says there is no such key) or FAILED (1:
-    anything else, after `tries` attempts). Never leaves a partial file behind on ABSENT or FAILED."""
+    anything else, after `tries` attempts). Never leaves a partial file behind on ABSENT or FAILED. budget_s: a total
+    deadline, retries included, for an optional read (a generation marker); without it each attempt has 300 s."""
     if not STATE_KEY.fullmatch(key):
         raise ValueError(f"not a state object key: {key!r}")
     cmd = [wrangler or os.environ.get("WRANGLER") or "wrangler", "r2", "object", "get", f"{BUCKET}/{key}",
            "--file", str(out), "--remote"]
     pause = float(os.environ.get("STATE_FETCH_RETRY_S") or 15)
+    if budget_s is not None and budget_s < MIN_OPTIONAL_S:
+        say(f"{key}: not fetched, skipped ({max(budget_s, 0):.0f} s left for it, kept for the state save)")
+        return FAILED
+    end = None if budget_s is None else time.monotonic() + budget_s
     last = "no answer"
-    for n in range(tries):
+    for n, timeout in _attempts(tries, budget_s, 300):
         out.unlink(missing_ok=True)
-        try:
-            p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors="replace",
-                               timeout=300)
-        except (OSError, subprocess.TimeoutExpired) as ex:
-            p, text = None, f"{type(ex).__name__}"
-        else:
-            text = p.stdout or ""
-        if p is not None and p.returncode == 0 and out.is_file():
+        rc, text = run_killable(cmd, timeout)
+        if rc == 0 and out.is_file():
             say(f"{key}: fetched, {mb(out.stat().st_size)}")
             return FETCHED
         out.unlink(missing_ok=True)
@@ -375,10 +429,11 @@ def fetch(key: str, out: Path, tries: int = 3, wrangler: str | None = None) -> i
             say(f"{key}: not in the bucket")
             return ABSENT
         lines = [x.strip() for x in text.splitlines() if x.strip()]
-        last = lines[-1][:300] if lines else (f"exit {p.returncode}" if p is not None else text)
+        last = lines[-1][:300] if lines else (f"exit {rc}" if rc is not None else text)
         if n < tries - 1:
             say(f"{key}: not fetched ({last}); trying again")
-            time.sleep(pause * (n + 1))
+        if not _pause(n, tries, end, pause):
+            break
     print(f"::warning::{key} could not be fetched ({last})", flush=True)
     return FAILED
 
@@ -830,6 +885,14 @@ DROP_MIN_PERCENT = 1               # ...and at least this share of the restored 
 GUARD_FILE = ROOT / BUILD_DIR / "history-guard.json"
 GUARD_KEEP = 50                    # earlier drop runs kept in it (their held keys among them)
 GENERATIONS_FILE = ROOT / BUILD_DIR / "state-generations.json"
+# Time for the optional R2 operations (Astra review 2026-11-21 P1-2): each has a total deadline, retries included, and
+# none runs past SAVE_RESERVE_S before the job's limit (refresh.yml timeout-minutes), counted from the start the
+# restore step writes to JOB_START_FILE
+JOB_START_FILE = ROOT / "job-started"
+JOB_LIMIT_S = 100 * 60
+SAVE_RESERVE_S = 15 * 60
+OPTIONAL_CAP_S = {"held": 600.0, "copy": 600.0, "marker": 60.0}
+MIN_OPTIONAL_S = 20.0
 
 
 def utc_now() -> datetime:
@@ -925,18 +988,19 @@ def write_counts(src: Path, out: Path, now: datetime | None = None) -> dict:
 
 
 def history_drops(before: dict, after: dict) -> list[dict]:
-    """The sources whose records fell by at least DROP_MIN_RECORDS and DROP_MIN_PERCENT percent of the restored
-    count, or whose events file disappeared or can no longer be read. A source unreadable when restored has no
+    """The sources whose events file disappeared (whether or not it could be read when restored: its bytes may still
+    have been recoverable), can no longer be read, or whose records fell by at least DROP_MIN_RECORDS and
+    DROP_MIN_PERCENT percent of the restored count. A source unreadable when restored that is still there has no
     count to compare and is left out."""
     out = []
     for sid in sorted(before):
         b = before[sid] if isinstance(before[sid], dict) else {}
-        n = b.get("records")
-        if b.get("unreadable") or not isinstance(n, int):
-            continue
+        n = b.get("records") if isinstance(b.get("records"), int) and not b.get("unreadable") else None
         a = after.get(sid)
         if a is None:
             out.append({"source": sid, "why": "events file gone", "before": b, "after": None})
+        elif n is None:
+            continue
         elif a.get("unreadable") or not isinstance(a.get("records"), int):
             out.append({"source": sid, "why": "events file unreadable", "before": b, "after": None})
         elif (fell := n - a["records"]) >= DROP_MIN_RECORDS and fell * 100 >= n * DROP_MIN_PERCENT:
@@ -948,72 +1012,106 @@ def _shown(sid: str) -> str:
     return re.sub(r"[^A-Za-z0-9._-]", "?", str(sid))[:80]
 
 
-def put(key: str, src: Path, tries: int = 2, wrangler: str | None = None) -> int:
+def job_start() -> float | None:
+    """The job's start (epoch seconds) the restore step wrote (JOB_START_FILE, or STATE_JOB_START_FILE); None when
+    there is none (outside the workflow)."""
+    path = Path(os.environ.get("STATE_JOB_START_FILE") or JOB_START_FILE)
+    try:
+        return float(path.read_text().split()[0])
+    except (OSError, ValueError, IndexError):
+        return None
+
+
+def optional_budget(kind: str) -> float:
+    """Seconds an optional R2 operation (OPTIONAL_CAP_S: held, copy, marker) may take, retries included: its own cap,
+    and never past SAVE_RESERVE_S before the job's limit (JOB_LIMIT_S from the start on file), so the state save and
+    the steps after it keep their time. Below MIN_OPTIONAL_S the operation is skipped."""
+    cap = OPTIONAL_CAP_S[kind]
+    start = job_start()
+    if start is None:
+        return cap
+    return min(cap, start + JOB_LIMIT_S - SAVE_RESERVE_S - time.time())
+
+
+def put(key: str, src: Path, tries: int = 2, wrangler: str | None = None, budget_s: float | None = None) -> int:
     """Upload src to a history-copy key (GENERATION_KEY only) with `wrangler r2 object put BUCKET/KEY --file F
-    --remote`, the form the workflow uses: FETCHED (0) uploaded, FAILED (1) not (the last line of wrangler's answer
-    is said; the caller warns)."""
+    --remote`, the form the workflow uses: FETCHED (0) uploaded, FAILED (1) not (the reason is said; the caller
+    warns). Every attempt counts against one total deadline (budget_s, default optional_budget for the key's kind),
+    and a stalled upload is killed when it runs out; with too little time left it is skipped."""
     if not GENERATION_KEY.fullmatch(key):
         raise ValueError(f"not a history copy key: {key!r}")
+    if budget_s is None:
+        budget_s = optional_budget("held" if key.startswith("state/held/") else
+                                   "marker" if key.endswith(".json") else "copy")
+    if budget_s < MIN_OPTIONAL_S:
+        say(f"{key}: not uploaded, skipped ({max(budget_s, 0):.0f} s left for it, kept for the state save)")
+        return FAILED
     cmd = [wrangler or os.environ.get("WRANGLER") or "wrangler", "r2", "object", "put", f"{BUCKET}/{key}",
            "--file", str(src), "--remote"]
     pause = float(os.environ.get("STATE_FETCH_RETRY_S") or 15)
+    end = time.monotonic() + budget_s
     last = "no answer"
-    for n in range(tries):
-        try:
-            p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors="replace",
-                               timeout=1900)    # over wrangler_redact's own 1800 s deadline for an S3 upload
-        except (OSError, subprocess.TimeoutExpired) as ex:
-            p, text = None, type(ex).__name__
-        else:
-            text = p.stdout or ""
-        if p is not None and p.returncode == 0:
+    for n, timeout in _attempts(tries, budget_s, budget_s):
+        rc, text = run_killable(cmd, timeout)
+        if rc == 0:
             say(f"{key}: uploaded, {mb(Path(src).stat().st_size)}")
             return FETCHED
         lines = [x.strip() for x in text.splitlines() if x.strip()]
-        last = lines[-1][:300] if lines else (f"exit {p.returncode}" if p is not None else text)
+        last = lines[-1][:300] if lines else (f"exit {rc}" if rc is not None else text)
         if n < tries - 1:
             say(f"{key}: not uploaded ({last}); trying again")
-            time.sleep(pause * (n + 1))
+        if not _pause(n, tries, end, pause):
+            break
     say(f"{key}: not uploaded ({last})")
     return FAILED
+
+
+def restored_baseline(restored_counts: Path, restored: Path | None) -> dict | None:
+    """The restored records per source: the counts taken at the restore, else the kept archive counted; None when
+    there is no restored state (a first run) or it cannot be counted (said in a warning)."""
+    if Path(restored_counts).is_file():
+        s = read_json_dict(restored_counts).get("sources")
+        if isinstance(s, dict):
+            return s
+        say(f"{Path(restored_counts).name} cannot be read")
+    if restored is None or not Path(restored).is_file():
+        return None
+    try:
+        before = event_counts(Path(restored))
+    except (OSError, EOFError, tarfile.TarError, zlib.error) as ex:
+        print(f"::warning::the restored state could not be counted ({type(ex).__name__})", flush=True)
+        return None
+    say(f"the restored records were counted from {Path(restored).name}")
+    return before
 
 
 def guard(restored_counts: Path, build: Path = ROOT / BUILD_DIR, out: Path = GUARD_FILE,
           restored: Path | None = None, run: str = "local", now: datetime | None = None,
           wrangler: str | None = None) -> list[dict]:
     """Before the save: compare data/build/events with the counts taken at the restore (restored_counts; the kept
-    archive `restored` is counted instead when they are missing). On a drop: one ::warning:: per source (counts
-    only), the restored archive uploaded to state/held/build-<UTC date>-<run>.tar.gz, and `out` written (time, run,
-    the drops, the held key and whether it uploaded; earlier drop runs kept below). Returns the drops; never stops
-    the save. No restored state (a first run): nothing compared."""
+    archive `restored` is counted instead when they are missing). A missing build folder counts as every restored
+    source gone. On a drop: one ::warning:: per source (counts only), the restored archive uploaded to
+    state/held/build-<UTC date>-<run>.tar.gz (within optional_budget), and `out` written when its folder is there
+    (time, run, the drops, the held key and whether it uploaded; earlier drop runs kept below). Returns the drops;
+    never stops the save and never creates the build folder. No restored state (a first run): nothing compared."""
     now = now or utc_now()
     restored = Path(restored) if restored else None
-    before = None
-    if Path(restored_counts).is_file():
-        s = read_json_dict(restored_counts).get("sources")
-        if isinstance(s, dict):
-            before = s
-        else:
-            say(f"history guard: {Path(restored_counts).name} cannot be read")
+    before = restored_baseline(restored_counts, restored)
     if before is None:
         if restored is None or not restored.is_file():
             say("history guard: no restored state (a first run); nothing to compare")
-            return []
-        try:
-            before = event_counts(restored)
-            say(f"history guard: the restored records were counted from {restored.name}")
-        except (OSError, EOFError, tarfile.TarError, zlib.error) as ex:
-            print(f"::warning::history guard: the restored state could not be counted ({type(ex).__name__}); the "
-                  "history was not compared this run", flush=True)
-            return []
-    drops = history_drops(before, event_counts(build))
+        else:
+            print("::warning::history guard: the history was not compared this run", flush=True)
+        return []
+    drops = history_drops(before, event_counts(build) if Path(build).is_dir() else {})
     if not drops:
         say(f"history guard: {len(before)} source(s) compared with the restored state; no drop")
         return []
     key = f"state/held/build-{now.strftime('%Y-%m-%d')}-{run}.tar.gz"
     held = restored is not None and restored.is_file() and put(key, restored, wrangler=wrangler) == FETCHED
     for d in drops:
-        b, a = d["before"]["records"], (d["after"] or {}).get("records")
+        b, a = d["before"].get("records"), (d["after"] or {}).get("records")
+        b = b if isinstance(b, int) and not d["before"].get("unreadable") else "an unknown number of"
         print(f"::warning::history guard: {_shown(d['source'])}: {d['why']}, {b} record(s) restored, "
               f"{'none readable' if a is None else a} now; the state is saved as usual", flush=True)
     if held:
@@ -1021,12 +1119,37 @@ def guard(restored_counts: Path, build: Path = ROOT / BUILD_DIR, out: Path = GUA
     else:
         print(f"::warning::history guard: the restored state could not be held at {key}; the state is saved as "
               "usual", flush=True)
+    if not Path(out).parent.is_dir():
+        say(f"history guard: {Path(out).parent} is gone; {Path(out).name} is not written")
+        return drops
     prev = read_json_dict(out)
     earlier = ([{k: prev[k] for k in ("time", "run", "drops", "held") if k in prev}] if prev.get("time") else []) \
         + [e for e in prev.get("earlier") or [] if isinstance(e, dict)]
     write_json(out, {"time": stamp(now), "run": run, "drops": drops, "held": {"key": key, "uploaded": held},
                      "earlier": earlier[:GUARD_KEEP]})
     return drops
+
+
+def save_check(restored_counts: Path, build: Path = ROOT / BUILD_DIR, restored: Path | None = None) -> bool:
+    """Right before the state is archived: False, with an ::error::, when data/build/events is missing or holds no
+    events file while the restored state had some (or a restored state is there that cannot be counted). The save
+    step then fails and the stored state stands, rather than a run that ended well replacing the history with
+    nothing (Astra review 2026-11-21 P1-1). A first run, or a restored state with no events file, passes."""
+    events = Path(build) / "events"
+    n = sum(1 for p in events.glob("*.json") if EVENT_FILE.fullmatch(p.name) and p.is_file()) \
+        if events.is_dir() else 0
+    if n:
+        return True
+    restored = Path(restored) if restored else None
+    before = restored_baseline(restored_counts, restored)
+    if before is None and (restored is None or not restored.is_file()) and not Path(restored_counts).is_file():
+        return True                                    # a first run: nothing restored
+    if before == {}:
+        return True
+    had = f"{len(before)} events file(s)" if before else "a history that could not be counted"
+    print(f"::error::data/build/events is {'empty' if events.is_dir() else 'missing'} while the restored state had "
+          f"{had}; state/build.tar.gz is not saved over, so the stored state stands", flush=True)
+    return False
 
 
 def generation_key(kind: str, slot: str, mark: bool = False) -> str:
@@ -1051,15 +1174,56 @@ def generations_due(rec: dict, now: datetime) -> list[dict]:
     return due
 
 
+DATE_RE = re.compile(r"[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])")
+MONTH_RE = re.compile(r"[0-9]{4}-(?:0[1-9]|1[0-2])")
+RUN_RE = re.compile(r"[0-9a-z][0-9a-z-]{0,39}")
+
+
+def normalize_generations(rec) -> tuple[dict, bool]:
+    """(the record with only well-formed entries, whether anything was dropped). daily: {weekday: {"date", "run"}}
+    with a weekday key and a date; monthly: {"YYYY-MM": {...}}; pending: {"run", "planned_at", "copies": [daily or
+    monthly copies with a valid slot and date]}. A malformed entry is dropped (its copy is then due again); a
+    malformed record starts again from nothing (Astra review 2026-11-21 P2-4)."""
+    if not isinstance(rec, dict):
+        return {}, rec not in ({}, None)
+    out: dict = {}
+    daily = rec.get("daily") if isinstance(rec.get("daily"), dict) else {}
+    out["daily"] = {k: {"date": v["date"], **({"run": str(v["run"])} if isinstance(v.get("run"), (str, int)) else {})}
+                    for k, v in daily.items()
+                    if k in WEEKDAYS and isinstance(v, dict) and isinstance(v.get("date"), str)
+                    and DATE_RE.fullmatch(v["date"])}
+    monthly = rec.get("monthly") if isinstance(rec.get("monthly"), dict) else {}
+    out["monthly"] = {k: v for k, v in monthly.items() if isinstance(k, str) and MONTH_RE.fullmatch(k)
+                      and isinstance(v, dict)}
+    pend = rec.get("pending")
+    if isinstance(pend, dict) and isinstance(pend.get("run"), str) and RUN_RE.fullmatch(pend["run"]) \
+            and isinstance(pend.get("copies"), list):
+        copies = []
+        for g in pend["copies"]:
+            if not (isinstance(g, dict) and g.get("kind") in ("daily", "monthly") and isinstance(g.get("slot"), str)
+                    and isinstance(g.get("date"), str) and DATE_RE.fullmatch(g["date"])):
+                continue
+            try:
+                key = generation_key(g["kind"], g["slot"])
+            except ValueError:
+                continue
+            copies.append({"kind": g["kind"], "slot": g["slot"], "date": g["date"], "key": key})
+        if copies:
+            out["pending"] = {"run": pend["run"], "planned_at": pend.get("planned_at"), "copies": copies}
+    return out, out != {"daily": {}, "monthly": {}, **rec}
+
+
 def _marker_says(kind: str, slot: str, date, run: str, wrangler: str | None = None) -> bool:
-    """True when the copy's marker in R2 names this copy, date and run: the copy uploaded. Absent, unreadable or
-    naming another run (an earlier week's, or a copy whose upload failed after an earlier one): False."""
+    """True when the copy's marker in R2 names this copy, date and run: the copy uploaded. Absent, unreadable, not
+    read within its time (optional_budget) or naming another run (an earlier week's, or a copy whose upload failed
+    after an earlier one): False."""
     import tempfile
     fd, name = tempfile.mkstemp(prefix="dww-mark-", suffix=".json")
     os.close(fd)
     tmp = Path(name)
     try:
-        if fetch(generation_key(kind, slot, mark=True), tmp, tries=1, wrangler=wrangler) != FETCHED:
+        if fetch(generation_key(kind, slot, mark=True), tmp, tries=2, wrangler=wrangler,
+                 budget_s=optional_budget("marker")) != FETCHED:
             return False
         m = read_json_dict(tmp)
     finally:
@@ -1069,24 +1233,33 @@ def _marker_says(kind: str, slot: str, date, run: str, wrangler: str | None = No
 
 def generations_plan(record: Path = GENERATIONS_FILE, run: str = "local", now: datetime | None = None,
                      wrangler: str | None = None) -> list[str]:
-    """Before the archive is made. First the copies an earlier run left pending are recorded when their markers say
-    they uploaded (one small read each, once a day); then the copies this save is due for are written as this run's
-    pending ones (the record travels in the archive and claims nothing for them) and their keys printed."""
+    """Before the archive is made. The record is checked first (a malformed one repaired: normalize_generations).
+    Then the copies an earlier run left pending are recorded when their markers say they uploaded (one small read
+    each, once a day); then the copies this save is due for are written as this run's pending ones (the record
+    travels in the archive and claims nothing for them) and their keys printed. When the build folder is missing,
+    nothing is written (the folder is never made here) and no generation is due."""
     now = now or utc_now()
-    rec = read_json_dict(record)
-    pend = rec.get("pending") if isinstance(rec.get("pending"), dict) else {}
-    if pend.get("run") and pend.get("run") != run and isinstance(pend.get("copies"), list):
+    record = Path(record)
+    if not record.parent.is_dir():
+        print(f"::warning::state generations: {record.parent} is missing; no generation is made this run",
+              flush=True)
+        return []
+    try:
+        raw = json.loads(record.read_text(encoding="utf-8")) if record.exists() else {}
+    except (OSError, ValueError):
+        raw = None
+    rec, repaired = normalize_generations(raw)
+    if repaired:
+        say(f"the generation record {record.name} was malformed; repaired (what could not be read is due again)")
+    pend = rec.get("pending") or {}
+    if pend.get("run") and pend["run"] != run:
         for g in pend["copies"]:
-            try:
-                kind, slot = g["kind"], g["slot"]
-                key = generation_key(kind, slot)
-            except (KeyError, TypeError, ValueError):
-                continue
-            if _marker_says(kind, slot, g.get("date"), str(pend["run"]), wrangler):
-                rec.setdefault(kind, {})[slot] = {"date": g.get("date"), "run": pend["run"]}
-                say(f"generation {key} of run {pend['run']}: uploaded, recorded")
+            if _marker_says(g["kind"], g["slot"], g["date"], pend["run"], wrangler):
+                rec[g["kind"]][g["slot"]] = {"date": g["date"], "run": pend["run"]}
+                say(f"generation {g['key']} of run {pend['run']}: uploaded, recorded")
             else:
-                say(f"generation {key} of run {pend['run']}: no marker for it, so not recorded (made again when due)")
+                say(f"generation {g['key']} of run {pend['run']}: no marker for it, so not recorded (made again when "
+                    "due)")
     due = generations_due(rec, now)
     if due:
         rec["pending"] = {"run": run, "planned_at": stamp(now), "copies": due}
@@ -1108,9 +1281,8 @@ def generations_put(src: Path, record: Path = GENERATIONS_FILE, run: str = "loca
     copy again; it never stops the run."""
     import tempfile
     now = now or utc_now()
-    pend = read_json_dict(record).get("pending")
-    pend = pend if isinstance(pend, dict) else {}
-    if pend.get("run") != run or not isinstance(pend.get("copies"), list) or not pend["copies"]:
+    pend = normalize_generations(read_json_dict(record))[0].get("pending") or {}
+    if pend.get("run") != run or not pend.get("copies"):
         say("no generation planned by this run")
         return []
     made = []
@@ -1212,6 +1384,10 @@ def main(argv=None) -> int:
     s.add_argument("--build", default=str(ROOT / BUILD_DIR))
     s.add_argument("--out", default=str(GUARD_FILE))
     s.add_argument("--run-id")
+    s = sub.add_parser("save-check", help="refuse to save over the history with no events file")
+    s.add_argument("restored_counts")
+    s.add_argument("--restored", default="restored-build.tar.gz")
+    s.add_argument("--build", default=str(ROOT / BUILD_DIR))
     s = sub.add_parser("generations", help="the daily and monthly copies: plan before the archive, put after the save")
     s.add_argument("action", choices=("plan", "put"))
     s.add_argument("file", nargs="?", help="put: the archive just saved")
@@ -1231,6 +1407,8 @@ def main(argv=None) -> int:
             print(f"::error::{Path(a.src).name} could not be counted ({type(ex).__name__})", flush=True)
             return 1
         return 0
+    if a.cmd == "save-check":
+        return 0 if save_check(Path(a.restored_counts), Path(a.build), Path(a.restored) if a.restored else None) else 1
     if a.cmd == "guard":
         guard(Path(a.restored_counts), Path(a.build), Path(a.out), Path(a.restored) if a.restored else None, run)
         return 0

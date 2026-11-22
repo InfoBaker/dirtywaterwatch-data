@@ -534,7 +534,9 @@ def test_refresh_release_decision_from_the_run_start_time(tmp_path, event, hour,
     seed(tmp)
     r = simulate("refresh.yml", tmp, {"FAKE_HOUR": hour, "FAKE_DOW": dow}, event=event)
     assert not r["failed"], r["log"]
-    assert r["outputs"]["release"] == {"due": due, "weekly": weekly}
+    out = r["outputs"]["release"]
+    assert {"due": out["due"], "weekly": out["weekly"]} == {"due": due, "weekly": weekly}
+    assert out["started"].isdigit()                                         # the job's start, for the uploads' time
     if due == "1":
         assert (tmp / "release.done").read_text().strip() == f"release weekly={weekly}"
     else:
