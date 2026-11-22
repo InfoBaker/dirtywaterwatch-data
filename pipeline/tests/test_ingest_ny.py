@@ -180,13 +180,15 @@ def test_real_website_serials_and_midnight_duplicate_boundary():
     winter = _clock_fixture_notice("website_winter")
     assert ny_sprtk.local_iso(winter["p"]["start"]) == "2021-02-23T17:00:00-05:00"
     other = _clock_fixture_notice("id_notice")
-    # Stored date May 3 matched before the shift; the corrected local date is May 4.
+    # These trimmed clock fixtures lack address, quantity and notice identity. Neither
+    # the stored date nor a competing next-day notice establishes a confirmed copy.
     kept, dropped = ny_sprtk.website_duplicates([n], [other])
     assert kept == [n] and dropped == 0
-    # The existing facility/date rule still drops a true local-date match.
     other["f"]["startDateTime"] = "2021-05-04"
     ny_sprtk.parse_notice(other)
-    assert ny_sprtk.website_duplicates([n], [other]) == ([], 1)
+    kept, dropped = ny_sprtk.website_duplicates([n], [other])
+    assert len(kept) == 1 and dropped == 0
+    assert n["possible_copy_of"]["event_id"] == f"{ny_sprtk.SOURCE_ID}:{other['id']}"
 
 
 def test_real_date_only_start_keeps_the_stored_date_despite_early_morning_text():

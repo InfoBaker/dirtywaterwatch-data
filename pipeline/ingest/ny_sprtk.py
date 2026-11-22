@@ -15,8 +15,9 @@ Source
 Quirks (research/ny/report.md 2.4, and what this module found)
   - 27 tabs, one per month or batch, with five header layouts; every header variant is mapped to
     one set of names (FIELD_ALIASES). One tab ("May _website") is a copy of the DEC web page
-    with no notification ids: its rows are kept only where no id-bearing notice has the same
-    facility, address and start (meta.website_rows).
+    with no notification ids: only uniquely corroborated copies of id-bearing notices are dropped.
+    Dates are compared in the same source clock, with address, water, notice kind, duration and
+    quantity checked; uncertain copies stay with raw._possible_copy_of (meta.website_rows).
   - Tabs overlap: the same notificationId appears in several tabs. One notice per id; the row from
     the latest tab wins and the other tabs are listed in raw._tabs (with the fields that differ).
   - Times use several clocks (see "times" below), labelled in raw._time_basis. The May website
@@ -810,6 +811,8 @@ def build_record(n, f, p, chain_id, chain, pos, base, raw, ctx) -> dict:
         raw["_other_tabs"] = n["other_tabs"]
     if n["synthetic_id"]:
         raw["_id_note"] = "this tab has no notificationId; the record id is built from the incident id and the row's fields"
+    if n.get("possible_copy_of"):
+        raw["_possible_copy_of"] = n["possible_copy_of"]
     texts = ctx.get("basis_text") or BASIS_TEXT
     raw["_time_basis"] = {k: texts.get(v, v) for k, v in p["basis"].items()}
     if p["near_cutover"]:
@@ -964,24 +967,137 @@ def fetch_workbook(sess: requests.Session, refetch: bool, max_age_h: float, file
 
 # ---------------------------------------------------------------- main
 
+def website_fields(n: dict) -> dict:
+    """Comparison fields for the website's split address and quantity columns.
+
+    Do not change n['f']: the original interpretation is part of published synthetic IDs.
+    """
+    f = dict(n["f"])
+    row = n["row_raw"]
+    if row.get("col8"):
+        f["streetNumber"], f["streetName"] = f.get("streetName"), row["col8"]
+    if row.get("col15"):
+        f["quantity"] = " ".join(str(x) for x in
+                                 (f.get("quantity"), row["col15"], f.get("estimatedIndicator")) if x)
+    return f
+
+
+def website_duration_matches(w: dict, f: dict) -> bool:
+    """Compare source durations, including Excel time fractions against HH:MM:SS."""
+    duration = re.sub(r"\s*-\s*(Ended|Ongoing)\s*$", "", str(f.get("duration") or ""), flags=re.I)
+    wd = str(w.get("duration") or "").strip()
+    units = str(w.get("durationUnits") or "").strip()
+    if not wd or not duration or not units:
+        return False
+    if norm_text(f"{wd} {units}") == norm_text(duration):
+        return True
+    # Excel stores an HH:MM:SS cell as a fraction of a day, even when its units say Hours.
+    clock = re.fullmatch(r"(\d+):(\d{2}):(\d{2})\s+Hours", duration, flags=re.I)
+    if clock and units.lower() == "hours":
+        try:
+            seconds = float(wd) * 86400
+        except ValueError:
+            return False
+        h, m, s = map(int, clock.groups())
+        return abs(seconds - (h * 3600 + m * 60 + s)) < 0.5
+    return False
+
+
+def website_notice_matches(w: dict, n: dict, stored_day: date | None) -> bool:
+    """A possible date match needs source evidence identifying this particular notice."""
+    wp, p = w["p"], n["p"]
+    if p["start_prec"] == "day":
+        if stored_day != p["start"]:
+            return False
+    elif (wp["start_prec"] != "minute" or p["start"] is None or
+          wp["start"].replace(second=0, microsecond=0) != p["start"].replace(second=0, microsecond=0)):
+        return False
+    wf, f = website_fields(w), n["f"]
+    if not wf.get("streetName") or not f.get("streetName") or address_key(wf) != address_key(f):
+        return False
+    water = norm_text(wf.get("receivingWaterBody"))
+    if not water or water != norm_text(f.get("receivingWaterBody")):
+        return False
+    headline = str(wf.get("headline") or "").strip()
+    word = re.match(r"^(UPDATE|ENDED|NEW)\b", headline, flags=re.I)
+    kind = {"UPDATE": "Update", "ENDED": "Close", "NEW": "New"}.get(word[1].upper()) if word else (
+        "New" if headline else None)
+    if kind is None or kind != p["status"] or not website_duration_matches(wf, f):
+        return False
+    quantity = norm_text(str(wf.get("quantity") or "").replace(",", ""))
+    if not quantity or quantity != norm_text(str(f.get("quantity") or "").replace(",", "")):
+        return False
+    for key in ("treatedState", "dischargeDescription", "addressDescription", "csoOutfallDescription"):
+        a, b = norm_text(wf.get(key)), norm_text(f.get(key))
+        if a and b and a != b:
+            return False
+    return True
+
+
 def website_duplicates(website: list[dict], notices: list[dict]) -> tuple[list[dict], int]:
-    """The web-page tab copies notices that also have ids: drop a row when an id-bearing notice has
-    the same facility and start date (New York time)."""
-    seen = set()
+    """Reconcile exact repeats, then uniquely corroborated website/notice pairs before chaining.
+
+    Date-only notices use DEC's stored date, not the website's corrected local date. The latter
+    can suggest a possible copy but cannot establish one. Distinct website rows competing for
+    one notice, or a row fitting several notices, are retained. Only colliding synthetic IDs
+    gain a suffix; it hashes all source fields, never tab/row position or the matched notices.
+    """
+    groups = {}
+    unique = []
+    dropped = 0
+    for n in website:
+        n.pop("possible_copy_of", None)
+        n.pop("copy_of", None)
+        legacy = synthetic_id(n["f"]) if n["synthetic_id"] else n["id"]
+        fingerprint = json.dumps({"fields": n["f"], "extra": canonical(n["row_raw"])[1]}, sort_keys=True)
+        group = groups.setdefault(legacy, {})
+        if fingerprint in group:
+            dropped += 1
+            continue
+        group[fingerprint] = n
+        unique.append(n)
+    reserved = {n["id"] for n in notices}
+    for legacy, group in groups.items():
+        for fingerprint, n in group.items():
+            n["id"] = legacy
+            if n["synthetic_id"] and (len(group) > 1 or legacy in reserved):
+                n["id"] = f"{legacy}-{hashlib.sha256(fingerprint.encode()).hexdigest()}"
+
+    index = {}
     for n in notices:
         p = n["p"]
         if p["start"] is not None and p["facility_id"]:
             d = as_utc(p["start"]).astimezone(TZ).date() if isinstance(p["start"], datetime) else p["start"]
-            seen.add((p["facility_id"], d))
-    keep, dropped = [], 0
-    for n in website:
+            index.setdefault((p["facility_id"], d), []).append(n)
+    matches, candidates = {}, {}
+    for n in unique:
         p = parse_notice(n)
-        d = None
-        if p["start"] is not None:
-            d = as_utc(p["start"]).astimezone(TZ).date() if isinstance(p["start"], datetime) else p["start"]
-        if (p["facility_id"], d) in seen:
+        try:
+            stored, _ = parse_dt(n["f"].get("startDateTime"))
+        except ValueError:
+            stored = None
+        stored_day = stored.date() if isinstance(stored, datetime) else stored
+        local_day = as_utc(p["start"]).astimezone(TZ).date() if p["start"] is not None else None
+        possible = {x["id"]: x for d in {stored_day, local_day} if d is not None
+                    for x in index.get((p["facility_id"], d), [])}
+        candidates[n["id"]] = possible
+        matches[n["id"]] = [x["id"] for x in possible.values() if website_notice_matches(n, x, stored_day)]
+    uses = Counter(nid for ids in matches.values() for nid in ids)
+    keep = []
+    for n in unique:
+        ids = matches[n["id"]]
+        if len(ids) == 1 and uses[ids[0]] == 1:
+            n["copy_of"] = ids[0]
             dropped += 1
         else:
+            possible = candidates[n["id"]]
+            if possible:
+                nid = sorted(ids or possible)[0]
+                n["possible_copy_of"] = {
+                    "event_id": f"{SOURCE_ID}:{nid}",
+                    "reason": ("The facility and date suggest a copy, but the source fields do not identify "
+                               "a unique matching notice. We keep both reports."),
+                }
             keep.append(n)
     return keep, dropped
 
@@ -1010,7 +1126,24 @@ def main(argv=None) -> int:
         parse_notice(n)
     web_keep, web_dropped = website_duplicates(website, notices)
     all_notices = notices + web_keep
+    assert len({n["id"] for n in all_notices}) == len(all_notices), "duplicate notice IDs before chaining"
     chains = build_chains(all_notices)
+
+    prev = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
+    # A prior run may have written the colliding ID (and even a self-parent). Replace that
+    # ambiguous ID with its source-identified notices or confirmed counterparts, including
+    # outside the normal window. Previously unique IDs are not renamed or removed here.
+    replacements = {}
+    for n in website:
+        legacy = synthetic_id(n["f"])
+        if n["synthetic_id"] and n["id"] != legacy:
+            replacements.setdefault(f"{SOURCE_ID}:{legacy}", set()).add(n.get("copy_of") or n["id"])
+    repair_ids = {nid for r in prev.get("records", []) for nid in replacements.get(r["event_id"], ())}
+    website_by_id = {}
+    for n in website:
+        website_by_id.setdefault(f"{SOURCE_ID}:{n['id']}", n)
+    repair_ids.update(n["copy_of"] for r in prev.get("records", [])
+                      if (n := website_by_id.get(r["event_id"])) and n.get("copy_of"))
 
     now = datetime.now(UTC)
     cutoff = now - timedelta(days=args.since)
@@ -1022,7 +1155,7 @@ def main(argv=None) -> int:
     for cid, chain in chains.items():
         latest = max((as_utc(x["p"]["air"]) or as_utc(x["p"]["start"]) for x in chain if (x["p"]["air"] or x["p"]["start"])),
                      default=None)
-        if not args.backfill and (latest is None or latest < cutoff):
+        if not args.backfill and (latest is None or latest < cutoff) and not any(n["id"] in repair_ids for n in chain):
             continue
         parent = None
         for i, n in enumerate(chain):
@@ -1033,17 +1166,32 @@ def main(argv=None) -> int:
 
     # keep every record of earlier runs that this run did not rewrite (older than the window, or
     # gone from the workbook): the events file is the history seen so far
-    prev = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
     new_ids = {r["event_id"] for r in records}
-    all_ids = {f"{SOURCE_ID}:{n['id']}" for n in all_notices}
+    all_ids = {f"{SOURCE_ID}:{n['id']}" for n in all_notices} | set(website_by_id)
     kept = 0
     for r in prev.get("records", []):
-        if r["event_id"] in new_ids:
+        if r["event_id"] in new_ids or r["event_id"] in replacements:
             continue
+        if n := website_by_id.get(r["event_id"]):
+            raw = r.setdefault("raw", {})
+            raw.pop("_missing_from_workbook_since", None)
+            raw.pop("_possible_copy_of", None)
+            raw.pop("_duplicate_basis", None)
+            r.pop("duplicate_of", None)
+            if n.get("copy_of"):
+                # Preserve the published page's unique ID, while listing the confirmed notice
+                # from its id-bearing counterpart. The counterpart's chain is emitted above.
+                r["duplicate_of"] = f"{SOURCE_ID}:{n['copy_of']}"
+                raw["_duplicate_basis"] = ("Also in the workbook with a notification ID: the facility, stored "
+                                           "start date, address, water, notice kind, duration and quantity agree.")
+            elif n.get("possible_copy_of"):
+                raw["_possible_copy_of"] = n["possible_copy_of"]
         if r["event_id"] not in all_ids:
             r.setdefault("raw", {})["_missing_from_workbook_since"] = r["raw"].get("_missing_from_workbook_since") or now_iso()
         records.append(r)
         kept += 1
+    assert len({r["event_id"] for r in records}) == len(records), "duplicate emitted event IDs"
+    assert all(r.get("parent_event_id") != r["event_id"] for r in records), "self-parent in emitted records"
     records.sort(key=lambda r: (r.get("published_at") or r.get("started_at") or ""), reverse=True)
 
     latest_recs = [r for r in records if (r["raw"].get("_chain") or {}).get("latest") == r["event_id"]]
