@@ -586,6 +586,13 @@ def safe_row(row: dict, block: dict) -> tuple[dict, list[str]]:
             continue
         if f in row or v is not None:
             out[f] = v
+    # Preserve only explicit source identities before strict scrubbing removes numbers.
+    # Scoped to this transform: an incident number or an unrelated SSO mention is not a Houston ID.
+    if block.get("transform") == "ingest.tx_transforms.tx_tceq_record":
+        ids = re.findall(r"\bSSO\s*ID\s*#?\s*(\d{1,6})\b",
+                         str(out.get("incident_description") or ""), re.I)
+        if ids:
+            out["_houston_sso_ids"] = sorted({str(int(i)) for i in ids if int(i) > 0})
     mode = block.get("free_text_scrub")
     for f in block.get("free_text") or ():
         if isinstance(out.get(f), str):

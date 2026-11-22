@@ -55,6 +55,13 @@ checked: "2026-11-22"
 # Complete live read: 29,314 unique EXCURSIONID rows, 2018 through October 2026; all 4,494 monthly records match.
 # Monthly values prevail; monthly void 67077 excludes that layer row. Union: 29,313 records. 17,563 Private System
 # rows remain in scope, marked as private with no invented operator. There is no receiving-water-name field.
+# Building backups follow the existing monthly reader: retain all, with contained flow marked reached_water false.
+# The snapshot has 33 backups (24 private, nine public); 20 private backups explicitly describe contained flow.
+# TCEQ descriptions with an explicit Houston SSO ID can link without an inferred operator; existing date, volume,
+# street and water conflict checks still apply. Old TCEQ batches are reread once for the new reference parser.
+# Void notices are held separately from monthly reports and recovered from previous events before merging.
+# Each record retains its citation. meta.history.query_template plus EXCURSIONID reproduces its query.
+# Unused BASIN, WWTP, NOTOBSERVED and GPM fields are neither requested nor retained.
 # UTC date epochs represent Houston dates; separate time epochs use December 1899. Decode both in America/Chicago
 # before combining their local date and clock. Missing clocks keep day precision; missing ends remain absent.
 # Source TOTALVOLLOST is retained as published, even when unlike GPM * DURATION (source minutes); no calculation
