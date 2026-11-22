@@ -19,10 +19,10 @@ Quirks (research/ny/report.md 2.4, and what this module found)
     facility, address and start (meta.website_rows).
   - Tabs overlap: the same notificationId appears in several tabs. One notice per id; the row from
     the latest tab wins and the other tabs are listed in raw._tabs (with the fields that differ).
-  - Times are UTC (checked against the alert text: 17:37 in the workbook = 13:37 EDT). They are
-    converted to America/New_York and labelled (raw._time_basis). Tabs before April 2024 give dates
-    only (time_precision "day": the UTC date, which can be a day after the local date late in the
-    evening); two tabs carry Excel serial dates; one transposes name and id.
+  - Times use several clocks (see "times" below), labelled in raw._time_basis. The May website
+    tab's Excel serial times use the shifted clock, as 485 equal stored pairs in the history
+    workbook establish. Tabs before April 2024 give DEC's stored date only: an early-morning
+    local start can fall on the next day. Two tabs carry Excel serial dates; one transposes name and id.
   - latitude holds longitude and vice versa in most rows; coordinates are checked against New
     York's bounding box and swapped (or given their missing minus sign) only when that puts them in
     the state (raw._coords). The NYC citywide CSO notice (NYCDEPCSO) carries a placeholder
@@ -99,10 +99,6 @@ EXCEL_EPOCH = datetime(1899, 12, 30)
 FUTURE_START_H = 24
 
 AUTHORITY_SUFFIX = "(NY DEC Sewage Pollution Right to Know)"
-TIME_BASIS = ("DEC's workbook gives times in UTC (checked against NY-Alert text: 17:37 in the workbook = 13:37 EDT); "
-              "converted here to America/New_York")
-DAY_BASIS = ("this tab gives the date only (no time of day); the date is DEC's (UTC) date and is shown as that day "
-             "in New York time, so a late-evening local start can carry the next day's date")
 PLACEHOLDER_NOTE = ("first (New) notice: NY-Alert requires a volume and an end time up front, so this figure is "
                     "the notifier's estimate or placeholder, not a measured total")
 
@@ -231,8 +227,9 @@ def read_workbook(content: bytes) -> list[dict]:
 #  - rows in DD/MON/YYYY form (August 2024-March 2025, and the April-June 2023 tab): local time
 #    shifted back once more by the UTC offset (17:11 EDT appears as 13:11; 21:45 EST as 16:45), so
 #    local = shown + 4 h (EDT) or + 5 h (EST);
-#  - date-only tabs (2021 to March 2024) and whole Excel serials: the date only, most likely the
-#    local date (the stored clock was local before May 2025, inferred).
+#  - website-tab serial times: the same shifted clock (history workbook: 485 equal May 2021 pairs);
+#  - date-only tabs (2021 to March 2024) and whole Excel serials: DEC's stored date. A local start
+#    before 04:00 EDT / 05:00 EST can be the following day; keep the date and use the later window bound.
 CUTOVER = datetime(2025, 5, 24)          # first day read as UTC (local before; switch seen 23-24 May 2025)
 CUTOVER_FUZZ = timedelta(days=1)
 BASIS_TEXT = {
@@ -241,9 +238,13 @@ BASIS_TEXT = {
               "comparing tabs); read as America/New_York"),
     "dmon_shifted": ("DD/MON rows hold local time shifted back by the UTC offset (found by comparing tabs: 17:11 EDT "
                      "is shown as 13:11); read as shown + 4 h (EDT) or 5 h (EST), America/New_York"),
-    "local_serial": "Excel serial time on the DEC web-page copy tab; read as America/New_York (inferred)",
-    "date": ("date only in this tab; most likely the local date (the stored clock was local before May 2025, "
-             "inferred)"),
+    "local_serial": "Excel serial time; read as America/New_York (inferred)",
+    "website_serial_shifted": ("Excel serial times on DEC's May website tab match 485 stored May 2021 times in "
+                               "DEC's history workbook, which shifts local time back by the UTC offset. We add "
+                               "4 hours in EDT or 5 hours in EST to read them in America/New_York."),
+    "date": ("DEC's stored date, with no time of day. It is one day early for a discharge that began between "
+             "midnight and 4 a.m. EDT (5 a.m. EST). We keep the stored date; windows counted from the start "
+             "allow through the end of the next day."),
 }
 
 
@@ -293,7 +294,8 @@ def row_era(air, family: str | None) -> tuple[str | None, bool]:
     return None, False
 
 
-def resolve(v, family: str | None, era: str | None) -> tuple[datetime | date | None, str | None, str | None]:
+def resolve(v, family: str | None, era: str | None, *, website: bool = False
+            ) -> tuple[datetime | date | None, str | None, str | None]:
     """Naive workbook value -> (aware UTC datetime, "minute", basis) or (date, "day", "date")."""
     if v is None:
         return None, None, None
@@ -301,9 +303,11 @@ def resolve(v, family: str | None, era: str | None) -> tuple[datetime | date | N
         return v, "day", "date"
     basis = {"dmon": "dmon_shifted", "serial_dt": "local_serial"}.get(family) or era or (
         "utc" if v >= CUTOVER else "local")
+    if website and family == "serial_dt":
+        basis = "website_serial_shifted"
     if basis == "utc":
         return v.replace(tzinfo=UTC), "minute", basis
-    if basis == "dmon_shifted":
+    if basis in ("dmon_shifted", "website_serial_shifted"):
         for h in (4, 5):
             cand = (v + timedelta(hours=h)).replace(tzinfo=TZ)
             if cand.utcoffset() == timedelta(hours=-h):
@@ -554,7 +558,7 @@ def parse_notice(n: dict, clock=None) -> dict:
     p = {"problems": problems, "near_cutover": near, "basis": {}}
     for key, short in TIME_FIELDS:
         v, fam = raw_vals[key]
-        val, prec, basis = resolve(v, fam, era)
+        val, prec, basis = resolve(v, fam, era, website=n.get("website", False))
         if n["tab"] == "April-June23" and basis == "dmon_shifted":
             p["basis_unverified"] = True   # same export format as the 2024-25 tab; the shift is inferred, not checked
         p[short], p[short + "_prec"] = val, prec

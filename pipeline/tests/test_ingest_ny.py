@@ -136,3 +136,68 @@ def test_beach_reasons():
     assert q("Closed", "No lifeguard") is None
     assert q("Reopened", "Harmful Algal Bloom clear") is None
     assert q("Closed", None) is None
+
+
+def test_serial_clock_shift_is_restricted_to_website_rows():
+    for stored, want in (("2021-05-12T21:30", "2021-05-13T01:30:00-04:00"),
+                         ("2021-01-12T21:30", "2021-01-13T02:30:00-05:00")):
+        dt = datetime.fromisoformat(stored)
+        serial = str((dt - ny_sprtk.EXCEL_EPOCH).total_seconds() / 86400)
+        n = _notice("1001", "New", serial, serial)
+        original = ny_sprtk.local_iso(n["p"]["start"])
+        n["website"] = True
+        p = ny_sprtk.parse_notice(n)
+        assert ny_sprtk.local_iso(p["start"]) == want
+        assert p["basis"]["start"] == "website_serial_shifted"
+        assert "485" in ny_sprtk.BASIS_TEXT[p["basis"]["start"]]
+        n["website"] = False
+        assert ny_sprtk.local_iso(ny_sprtk.parse_notice(n)["start"]) == original
+
+
+def test_date_only_basis_keeps_decs_stored_date():
+    v, prec, basis = _resolve("2021-03-02")
+    assert ny_sprtk.local_iso(v) == "2021-03-02T00:00:00-05:00" and prec == "day"
+    text = ny_sprtk.BASIS_TEXT[basis]
+    assert "DEC's stored date" in text
+    assert "one day early" in text and "midnight" in text and "4 a.m. EDT" in text and "5 a.m. EST" in text
+
+
+def _clock_fixture_notice(name):
+    import json
+    from pathlib import Path
+    row = json.loads((Path(__file__).parent / "fixtures/ny_sprtk_clocks.json").read_text())["rows"][name]
+    notices, website, _ = ny_sprtk.notices_from([{"tab": row["tab"], "rows": [row["values"]]}])
+    n = (notices or website)[0]
+    n["row"] = row["row"]
+    ny_sprtk.parse_notice(n)
+    return n
+
+
+def test_real_website_serials_and_midnight_duplicate_boundary():
+    n = _clock_fixture_notice("website")
+    assert ny_sprtk.local_iso(n["p"]["start"]) == "2021-05-04T00:06:00-04:00"
+    assert n["p"]["basis"]["start"] == "website_serial_shifted"
+    winter = _clock_fixture_notice("website_winter")
+    assert ny_sprtk.local_iso(winter["p"]["start"]) == "2021-02-23T17:00:00-05:00"
+    other = _clock_fixture_notice("id_notice")
+    # Stored date May 3 matched before the shift; the corrected local date is May 4.
+    kept, dropped = ny_sprtk.website_duplicates([n], [other])
+    assert kept == [n] and dropped == 0
+    # The existing facility/date rule still drops a true local-date match.
+    other["f"]["startDateTime"] = "2021-05-04"
+    ny_sprtk.parse_notice(other)
+    assert ny_sprtk.website_duplicates([n], [other]) == ([], 1)
+
+
+def test_real_date_only_start_keeps_the_stored_date_despite_early_morning_text():
+    n = _clock_fixture_notice("early_morning")
+    assert "from 00:40 - 09:00 hrs on 9/24" in n["f"]["dischargeDescription"]
+    ctx = {"fetched_at": "2026-11-22T20:00:00Z", "echo": {}, "dischargers": {}, "cso_permits": set(),
+           "place_cache": {}}
+    r = ny_sprtk.to_record(n, "clock", [n], 0, None, ctx)
+    assert r["parse_error"] is None
+    assert r["source_record_id"] == "1792483126150553"
+    assert r["started_at"] == "2021-09-23T00:00:00-04:00" and r["time_precision"] == "day"
+    assert r["ended_at"] == "2021-09-24T00:00:00-04:00"
+    assert r["raw"]["_time_basis"]["start"] == ny_sprtk.BASIS_TEXT["date"]
+    assert "one day early" in r["raw"]["_time_basis"]["start"]
