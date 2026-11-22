@@ -1,0 +1,17 @@
+StartDate,EndDate,AdvisoryType,Reason,PollutionSource,DaysUnderAdvisory,IssuingOrganization,AdvisoryComments,Name,Identifier
+9/11/2026 12:00:00 AM,9/16/2026 12:00:00 AM,Closed                   ,High bacteria levels,Unknown,5.0000000000,Livingston County Department of Public Health,COMMENT SENTINEL do not keep,Lake Chemung Outdoor Resort,1491
+8/13/2026 12:00:00 AM,8/14/2026 12:00:00 AM,Contamination Advisory   ,High bacteria levels,Unknown,1.0000000000,District Health Department No. 10,,Missaukee County Park Beach,3948
+8/10/2026 12:00:00 AM,,Closed                   ,High bacteria levels,Unknown,,Livingston County Department of Public Health,,Our Lady of the Fields Beach,3973
+8/24/2026 12:00:00 AM,,Closed                   ,High bacteria levels,Not Specified,,Livingston County Department of Public Health,COMMENT SENTINEL do not keep,Our Lady of the Fields Beach,3973
+8/11/2026 12:00:00 AM,,Contamination Advisory   ,High bacteria levels,Not Specified,,Health Department of Northwest Michigan,,Richardi Park,1290
+9/4/2026 12:00:00 AM,,Closed                   ,High bacteria levels,Not Specified,,"Wayne County Department of Health, Veterans and Community Wellness",,Van Buren Township Park,291
+6/25/2026 12:00:00 AM,7/1/2026 12:00:00 AM,Closed                   ,Sewage,Combined Sewer Overflow,6.0000000000,Western Upper Peninsula DHD Main Office,COMMENT SENTINEL do not keep,L'Anse Waterfront Park,1502
+8/11/2026 12:00:00 AM,8/14/2026 12:00:00 AM,Closed                   ,Not Specified,Not Specified,3.0000000000,Public Health-Delta & Menominee Counties,,Henes Park,374
+7/29/2026 12:00:00 AM,7/30/2026 12:00:00 AM,Closed                   ,Not Specified,Not Specified,1.0000000000,Public Health-Delta & Menominee Counties,,Memorial Beach,1272
+7/29/2026 12:00:00 AM,7/30/2026 12:00:00 AM,Closed                   ,Other,Not Specified,1.0000000000,Public Health-Delta & Menominee Counties,COMMENT SENTINEL do not keep,Henes Park,374
+6/30/2026 12:00:00 AM,7/2/2026 12:00:00 AM,Closed                   ,Rainfall,Other reason,2.0000000000,Luce-Mackinac-Alger-Schoolcraft District,,Indian Lake State Park,3288
+8/26/2026 12:00:00 AM,8/27/2026 12:00:00 AM,Closed                   ,High bacteria levels,Unknown,1.0000000000,Western Upper Peninsula DHD Main Office,,Sunday Lake Beach,2119
+7/29/2025 12:00:00 AM,7/31/2025 12:00:00 AM,Closed                   ,High bacteria levels,Unknown,2.0000000000,Huron County Health Department,COMMENT SENTINEL do not keep,Wagener County Park,465
+7/29/2025 12:00:00 AM,7/31/2025 12:00:00 AM,Closed                   ,High bacteria levels,Unknown,2.0000000000,Huron County Health Department,,Wagener County Park,465
+6/20/2006 12:00:00 AM,7/18/2006 12:00:00 AM,Closed                   ,High bacteria levels,Unknown,28.0000000000,,,Manton Park,2093
+6/20/2006 12:00:00 AM,7/5/2006 12:00:00 AM,Closed                   ,High bacteria levels,Unknown,15.0000000000,,COMMENT SENTINEL do not keep,Manton Park,2093
