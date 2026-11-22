@@ -456,6 +456,15 @@ def end_of_local_day(dt: datetime, tz: ZoneInfo | None = None) -> datetime:
     return datetime(d.year, d.month, d.day, tzinfo=tz).astimezone(UTC)
 
 
+def latest_start_for_windows(ev: dict, start: datetime, state: str | None = None) -> datetime:
+    """NY SPRTK's date-only start can be the stored date or the next day. Windows count from the
+    end of that later calendar day; the record and the beginning of the interval retain the stored date."""
+    if ev.get("source_id") == "ny-dec-sprtk" and ev.get("time_precision") == "day" and ev.get("started_at"):
+        tz = event_zone(ev, state)
+        return end_of_local_day(end_of_local_day(start, tz), tz)
+    return start
+
+
 @functools.lru_cache(maxsize=64)
 def _zone(name: str) -> ZoneInfo | None:
     try:
@@ -578,7 +587,7 @@ def end_assumed(ev: dict, now: datetime, rules: dict) -> datetime | None:
     begin = ev_time(ev, "started_at", tz=tz) or ev_time(ev, "reported_at", tz=tz) or ev_time(ev, "published_at", tz=tz)
     if begin is None:
         return None
-    at = begin + timedelta(days=unresolved_days(rules))
+    at = latest_start_for_windows(ev, begin) + timedelta(days=unresolved_days(rules))
     return at if at <= now else None
 
 
@@ -3966,17 +3975,19 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
     red_days = float(u.get("ongoing_red_days") or 7)
     unres_days = float(u.get("unresolved_yellow_days") or 30)
     unknown_days = float(u.get("unknown_status_yellow_days") or 14)
+    latest_start = latest_start_for_windows(ev, start, state)
 
     def no_end(anchor, first_until, first_rule):
         """From the anchor (the start for ongoing, the source's report time for unknown status): the first colour,
         then unresolved to day 30, then the off-map note to day 90. Every colour ends by the absolute cap, 30 days
         (unresolved_yellow_days) after the report began, however late it was reported or first seen: after that the
         site assumes the discharge ended and the record says the end was never reported (owner, 2026-11-03)."""
-        cap = (pt(ev.get("started_at")) or start) + timedelta(days=unres_days)
+        cap = latest_start + timedelta(days=unres_days)
+        latest_anchor = max(anchor, latest_start)
         first_until = min(first_until, cap)
-        u_until = min(anchor + timedelta(days=unres_days), cap)
+        u_until = min(latest_anchor + timedelta(days=unres_days), cap)
         note_from = max(anchor, first_until, u_until)
-        note_until = max(note_from, anchor + timedelta(days=NOTE_DAYS))
+        note_until = max(note_from, latest_anchor + timedelta(days=NOTE_DAYS))
         unres_rule = {"rule": "unresolved.unresolved_yellow_days", "days": unres_days,
                       "rationale": u.get("unresolved_yellow_rationale"), "source": "data/rules.json"}
         out = []
@@ -3997,6 +4008,12 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             note["rule_applied"] = {**unres_rule, "rationale": u.get("end_assumed_rationale")
                                     or u.get("unresolved_yellow_rationale")}
             out.append(note)
+        if latest_start != start:
+            for iv in out:
+                iv["rule_applied"]["start_bound"] = {
+                    "at": iso(latest_start),
+                    "basis": "DEC's stored start date can be one day early. We count the window from the end "
+                             "of the next day."}
         return out
 
     if st == "ongoing" and end is None:
@@ -4005,7 +4022,7 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         listed = listed_ongoing_intervals(ev, start, now, state, red, yellow, rules)
         if listed is not None:
             return listed
-        return no_end(start, start + timedelta(days=red_days), "ongoing")
+        return no_end(start, latest_start + timedelta(days=red_days), "ongoing")
     if end is not None:
         out = [_iv(ev, start, end, "discharge", red, yellow)]
         out[0]["rule_applied"] = {"rule": "discharge", "rationale": "between the reported start and end"}
@@ -4048,7 +4065,7 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         return out
     told = next((t for t in (pt(ev.get("reported_at")), pt(ev.get("published_at"))) if t), None)
     anchor = max(start, told) if told else start
-    return no_end(anchor, anchor + timedelta(days=unknown_days), "no_end")
+    return no_end(anchor, max(anchor, latest_start) + timedelta(days=unknown_days), "no_end")
 
 
 def resolve_revisions(events: list[dict], by_id: dict) -> tuple[dict, dict]:
