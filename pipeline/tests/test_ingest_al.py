@@ -296,3 +296,30 @@ def test_live_absence_marks_retained_history_and_uses_legacy_fetch_time():
     again, _ = S.build([], [], later, [old], False, ops=OPS)
     assert again[0]["raw"]["_live_last_seen_at"] == AT
     assert again[0]["raw"]["_live_missing_since"] == later
+
+
+def test_absent_live_only_report_keeps_observed_status_but_only_caution_intervals():
+    from datetime import datetime
+    from build import status
+
+    observed = "2026-11-21T20:00:00Z"
+    missing = "2026-11-22T20:00:00Z"
+    live = {"sso_report_id": "SSO-00990001", "sso_ongoing_ind": "Yes",
+            "date_sso_began": "Nov 21 2026 1:03PM"}
+    first, _ = S.build([], [live], observed, [], True, ops=OPS)
+    assert first[0]["status"] == "ongoing" and first[0]["started_at"]
+    gone, _ = S.build([], [], missing, first, True, ops=OPS)
+    r = gone[0]
+    assert r["status"] == "unknown" and r["ended_at"] is None
+    assert r["raw"]["live"]["sso_ongoing_ind"] == "Yes"
+    assert r["raw"]["_live_last_seen_at"] == observed
+    assert r["raw"]["_live_missing_since"] == missing
+    assert r["fetched_at"] == observed
+    ivs = status.event_intervals(r, "AL", datetime.fromisoformat(missing.replace("Z", "+00:00")))
+    assert ivs and any(i["color"] == "yellow" for i in ivs)
+    assert all(i["color"] != "red" and i["rule"] != "ongoing" for i in ivs)
+    again, _ = S.build([], [], "2026-11-23T20:00:00Z", gone, True, ops=OPS)
+    assert again[0]["status"] == "unknown" and again[0]["ended_at"] is None
+    assert again[0]["raw"]["_live_last_seen_at"] == observed
+    back, _ = S.build([], [live], "2026-11-24T20:00:00Z", again, True, ops=OPS)
+    assert back[0]["status"] == "ongoing" and "_live_missing_since" not in back[0]["raw"]

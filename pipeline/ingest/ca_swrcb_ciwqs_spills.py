@@ -392,9 +392,9 @@ def location_name(v) -> str | None:
     return cut_location_numbers(strip_house_numbers(scrub_text(s))) or None
 
 
-def private_only(appearance_points) -> bool:
+def private_only(appearance_points, categories=PRIVATE_ONLY) -> bool:
     apps = {x.strip().lower() for x in clean(appearance_points).split(";") if x.strip()}
-    return bool(apps) and apps <= PRIVATE_ONLY
+    return bool(apps) and apps <= categories
 
 
 def rounded(v) -> str | None:
@@ -403,8 +403,8 @@ def rounded(v) -> str | None:
     return None if f is None else str(round(f, 3))
 
 
-def round_raw_points(raw: dict) -> None:
-    if private_only(raw.get("appearance_points")):
+def round_raw_points(raw: dict, private_categories=PRIVATE_ONLY) -> None:
+    if private_only(raw.get("appearance_points"), private_categories):
         raw["lat"], raw["lon"] = rounded(raw.get("lat")), rounded(raw.get("lon"))
         if raw.get("_coords_rejected"):
             raw["_coords_rejected"] = point(raw["lat"], raw["lon"])[2]
@@ -418,14 +418,14 @@ def round_raw_points(raw: dict) -> None:
             pt[k] = fnum(rounded(pt.get(k)))
 
 
-def scrub_history(records: list[dict]) -> list[dict]:
+def scrub_history(records: list[dict], private_categories=PRIVATE_ONLY) -> list[dict]:
     from copy import deepcopy
 
     records = deepcopy(records)
     for r in records:
         raw = r.get("raw") or {}
-        round_raw_points(raw)
-        if private_only(raw.get("appearance_points")):
+        round_raw_points(raw, private_categories)
+        if private_only(raw.get("appearance_points"), private_categories):
             for k in ("lat", "lon"):
                 r[k] = fnum(rounded(r.get(k)))
             if r.get("lat") is not None:

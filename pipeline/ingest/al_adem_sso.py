@@ -614,6 +614,8 @@ def build(hist_rows: list[dict], live_rows: list[dict], fetched_at: str, prev_re
             continue
         r = deepcopy(r)
         retain_live(r.setdefault("raw", {}), None, fetched_at, r)
+        if r["raw"].get("_live_missing_since") and r.get("status") == "ongoing":
+            r["status"] = "unknown"
         if full:
             r.setdefault("raw", {})
             r["raw"]["_missing_from_layer_since"] = r["raw"].get("_missing_from_layer_since") or fetched_at

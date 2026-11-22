@@ -228,7 +228,9 @@ def sheet_rows(rows: list[list]) -> list[dict]:
     for i, r in enumerate(rows):
         cells = [re.sub(r"\s+", " ", clean(x)).strip() if clean(x) else None for x in r]
         names = {c for c in cells if c}
-        if len(names & HEADER_KEYS) >= 2:
+        candidate = {h: (cells[j] if j < len(cells) else None)
+                     for j, h in enumerate(header or []) if h}
+        if len(names & HEADER_KEYS) >= 2 and (header is None or is_header_or_section(candidate)):
             header = cells
             continue
         if header is None:
@@ -260,15 +262,21 @@ def to_dashboard_row(kind: str, rec: dict) -> dict:
 
 def is_header_or_section(row: dict) -> bool:
     """Recognize workbook labels, without dropping an incident just because its date will not parse."""
-    values = {" ".join(v.split()) for k, v in row.items() if not k.startswith("_") and isinstance(v, str)}
-    if len(values & HEADER_KEYS) >= 2:
-        return True
-    for k in ("Request ID", "Date Activated", "Date Bypass Began or was Discovered",
-              "Regulator activated", "Bypass Began or Discovered"):
-        value = " ".join((clean(row.get(k)) or "").split())
-        if value in HEADER_KEYS or (value and re.match(r"^NO REPORTED BYPASSES\b", value, re.I)):
-            return True
-    return False
+    cells = {" ".join(k.split()): " ".join(str(v).split()) for k, v in row.items()
+             if not k.startswith("_") and v is not None and str(v).strip()}
+    rid = cells.get("Request ID")
+    if rid and rid != "Request ID":
+        return False
+    # Every populated cell must be a label. Even one independent value is evidence
+    # of an incident, including a utility alongside an accidentally copied date header.
+    old_dates = {"Regulator activated": "Date Activated", "Regulator Stopped": "Date Ceased",
+                 "Bypass Began or Discovered": "Date Bypass Began or was Discovered",
+                 "Bypass Ended": "Date Bypass Ended"}
+    def label(k, v):
+        return (v == k or OLD_CSO.get(v) == k or OLD_SSO.get(v) == k or old_dates.get(v) == k or
+                bool(re.fullmatch(r"NO REPORTED BYPASSES(?: AT [\w-]+)?", v, re.I))) or (
+            k == "Report Type" and v == "CSO - Utility")  # translated old header
+    return bool(cells) and all(label(k, v) for k, v in cells.items())
 
 
 def load_history() -> list[dict]:

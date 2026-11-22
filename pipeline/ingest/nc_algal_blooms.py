@@ -18,8 +18,9 @@ Source
 Record rules
   - Only reports that include an algal bloom become records (event_type hab_advisory, category bloom); fish kill
     reports alone are counted in meta.fish_kill_reports and are not events. A negative finding in DWR's final
-    public comment or archive Confirmed=No is kept as an unknown record quoting the finding;
-    it produces no bloom caution. The same guard applies to records retained from earlier reads.
+    public comment or archive Confirmed=No is kept as an unknown record quoting the finding
+    only when the complete text is unambiguous and contains no advice or contrary finding.
+    Otherwise the report keeps its caution. Saved records are reevaluated by the same guard.
   - status "unknown" (a report, not an advisory): the status build shows a report for 7 days from the
     observation date as an unconfirmed bloom advisory, never red. started_at is the observation date
     (time_precision minute); no end. reported_at is the submission time where the layer has one (archive).
@@ -74,39 +75,50 @@ BASIS = ("A report to NC DEQ of an algal bloom, with DWR's investigation status 
          "The point is rounded to about 100 m.")
 ADVICE_RE = re.compile(r"[^.\n]*\b(avoid contact|stay out|keep (children|pets)|prevent children)[^.\n]*\.", re.I)
 
-# Match findings, not missing photos, unfinished tests or general advice about possible blooms.
-_BLOOM = r"(?:(?:active|algal|cyanobacterial)\s+)*blooms?"
-_TOXIN = r"(?:microcystins?|cyanotoxins?|toxins?|Abraxis)"
-NEGATIVE_FINDING = re.compile(
-    rf"\bno\s+{_BLOOM}(?: and algae accumulation)?\s+(?:(?:was|were)\s+)?(?:found|observed|detected)\b|"
-    rf"\b{_BLOOM}\s+(?:was|were|is)\s+not\s+(?:observed|found|detected)\b|"
-    rf"\bnot\s+an?\s+{_BLOOM}\b|"
-    rf"\bno\s+{_TOXIN}(?:\s+\(toxin\))?\s+(?:(?:was|were)\s+)?(?:found|observed|detected)\b|"
-    rf"\b{_TOXIN}\b[^.\n;]{{0,100}}?\b(?:negative|below (?:the )?detection limits?)\b|"
-    r"\bnot\s+(?:(?:harmful or )?toxic|toxin[- ]produc(?:ing|ers?))\b", re.I)
-POSITIVE_TOXIN = re.compile(
-    rf"\b{_TOXIN}\b[^.\n;]{{0,100}}?\b(?:(?:tested|showed|were|was|reported)\s+positive|"
-    r"(?:was|were)\s+detected)\b", re.I)
-NOT_A_RESULT = re.compile(r"\b(?:may|might|could|can|would)\b|\bnot\s+(?:yet\s+)?(?:negative|below)\b", re.I)
+# Only complete, affirmative incident findings can suppress a report. Every sentence must
+# qualify: an unrecognized clause, advice, positive result or pending test keeps the caution.
+_BLOOM = r"(?:(?:active|algal|cyanobacterial)\s+)*bloom"
+_TOXIN = r"(?:microcystins?|cyanotoxins?|toxins?)"
+NEGATIVE_SENTENCE = re.compile(
+    rf"no\s+{_BLOOM}(?: and algae accumulation)?\s+(?:(?:was|were)\s+)?(?:found|observed|detected)|"
+    rf"(?:an? |the |this ){_BLOOM}\s+(?:was|is)\s+not\s+(?:observed|found|detected)|"
+    r"upon further investigation it was determined this is duck weed and not an algal bloom|"
+    rf"no\s+{_TOXIN}(?:\s+\(toxin\))?\s+(?:(?:was|were)\s+)?(?:found|observed|detected)(?: in samples)?|"
+    rf"(?:{_TOXIN}(?: test strip sample| test results?)?|Abraxis microcystic test results) "
+    r"(?:was|were) (?:negative|below (?:the )?detection limits?)|"
+    r"ARO staff ran the Abraxis strip test for microcystins and reported negative|"
+    r"(?:the algae|these (?:green )?algae) (?:are|were) not (?:harmful or )?toxic|"
+    r"all samples were not toxin[- ]producing", re.I)
 
 
 def negative_finding(raw: dict) -> dict | None:
-    if clean(raw.get("Confirmed")).lower() == "no":
+    comment = clean(raw.get("final_investigation_comments"))
+    sentences = [s.strip() for s in comment.split(".") if s.strip()]
+    if sentences and not all(NEGATIVE_SENTENCE.fullmatch(s) for s in sentences):
+        return None
+    confirmed = clean(raw.get("Confirmed")).lower()
+    if confirmed == "yes":
+        return None
+    if confirmed == "no":
         return {"field": "Confirmed", "value": clean(raw["Confirmed"])}
-    comment = str(raw.get("final_investigation_comments") or "")
-    findings = [m for m in NEGATIVE_FINDING.finditer(comment) if not NOT_A_RESULT.search(m.group())]
-    if not findings:
-        return None
-    last = findings[-1]
-    # Public comments may append follow-ups. A later positive toxin result defeats an earlier negative one.
-    if any(m.start() > last.start() for m in POSITIVE_TOXIN.finditer(comment)):
-        return None
-    return {"field": "final_investigation_comments", "value": last.group(0)}
+    if sentences:
+        return {"field": "final_investigation_comments", "value": comment}
+    return None
 
 
 def apply_finding(record: dict) -> dict:
     raw = record.get("raw") or {}
-    finding = negative_finding(raw)
+    previous = raw.get("_negative_finding")
+    if previous:
+        # Reevaluate saved classifications made by the former fragment-based guard.
+        label = "Confirmed" if previous["field"] == "Confirmed" else "Final investigation public comments"
+        old_quote = f"NC DEQ Division of Water Resources, {label}: “{previous['value']}”"
+        if not record.get("advice_text") or record["advice_text"] == old_quote:
+            record["advice_text"] = advice(raw.get("final_investigation_comments"))
+        raw.pop("_negative_finding")
+        raw["_basis"] = BASIS
+        record.update(event_type="hab_advisory", status="unknown")
+    finding = negative_finding(raw) if not record.get("advice_text") else None
     if finding:
         raw.update(_negative_finding=finding,
                    _basis="DWR's negative investigation finding, retained as a listing.")

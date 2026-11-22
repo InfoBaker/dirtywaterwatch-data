@@ -449,7 +449,7 @@ def test_a_blank_status_leaves_an_open_advisory_open_and_only_named_fields_are_r
     "An active algal bloom was not observed.",
     "No Algal Bloom was found.",
     "Upon further investigation it was determined this is Duck weed and not an algal bloom.",
-    "No Microcystin (toxin) detected in samples, but future active blooms should be avoided regardless of the presence of toxins.",
+    "No Microcystin (toxin) detected in samples.",
     "Microcystin test strip sample was below the detection limit.",
     "ARO staff ran the Abraxis strip test for microcystins and reported negative.",
     "The algae are not toxic.",
@@ -464,7 +464,7 @@ def test_negative_bloom_findings_are_quoted_listings_without_caution(comment):
 
     f = {"attributes": {"objectid": 40, "incident_id": "negative", "report_type": "Algal Bloom",
                         "observation_date": 1795291200000, "investigation_status": "Completed",
-                        "final_investigation_comments": comment + " NCDEQ advises the public to avoid contact with discolored water."}}
+                        "final_investigation_comments": comment}}
     r = B.current_record(f, "2026-11-22T14:00:00Z")
     assert r["event_type"] == "unknown" and r["status"] == "unknown"
     assert "_placement" not in r["raw"]  # placement is not the reason this finding has no caution
@@ -499,7 +499,86 @@ def test_archive_negative_confirmation_and_retained_negative_reports_are_listing
     assert stats["negative_findings"] == 1
     old = B.current_record({"attributes": {"incident_id": "retained", "final_investigation_comments": "No bloom was observed."}}, FETCHED)
     old["event_type"] = "hab_advisory"  # persisted before the guard existed
+    old["advice_text"] = None  # no agency advice and no generated negative-finding quote yet
     old["raw"].pop("_negative_finding", None)
     recs, stats = B.build([], "2026-11-22T14:00:00Z", [old])
     assert recs[0]["event_type"] == "unknown" and stats["negative_findings"] == 1
     assert recs[0]["fetched_at"] == FETCHED
+
+
+@pytest.mark.parametrize("comment", [
+    "Microcystin was below the detection limit. A recreational advisory remains in effect. Avoid contact with the water.",
+    "No bloom was observed. Follow-up investigation confirmed an active algal bloom.",
+    "An active algal bloom was confirmed. No microcystin was detected.",
+    "Toxins were detected. No bloom was observed.",
+    "No bloom was observed. An advisory remains in effect.",
+    "No bloom was observed. NCDEQ advises the public to avoid contact with discolored water.",
+])
+def test_negative_samples_preserve_advisories_positive_findings_and_advice(comment):
+    from datetime import datetime
+    from build import status
+
+    r = B.current_record({"attributes": {"incident_id": "contradictory",
+        "observation_date": 1795291200000, "final_investigation_comments": comment}}, FETCHED)
+    assert r["event_type"] == "hab_advisory"
+    assert r["raw"]["final_investigation_comments"] == comment
+    assert r["advice_text"] == B.advice(comment)
+    assert "_negative_finding" not in r["raw"]
+    assert any(i["color"] == "yellow" for i in status.event_intervals(
+        r, "NC", datetime.fromisoformat("2026-11-22T14:00:00+00:00")))
+
+
+@pytest.mark.parametrize("comment", [
+    "Some blooms are not toxic, but this bloom has not been tested. Avoid contact with the water.",
+    "If no bloom was observed, staff would close the investigation. Testing is pending.",
+    "If no bloom was observed, staff would close the investigation.",
+    "No bloom was observed, according to an unverified report.",
+    "No bloom was observed? Testing is pending.",
+    "In general, the algae are not toxic.",
+    "The algae are not toxic in some cases.",
+    "No bloom was observed. Testing is pending.",
+    "No bloom was observed. This bloom has not been tested.",
+    "It is not true that no bloom was observed.",
+    "No bloom was observed at another incident.",
+    "Microcystin results may be below the detection limit.",
+    "Microcystin was below the detection limit, if the sample was representative.",
+    "Some blooms are not toxic.",
+])
+def test_qualified_or_general_negative_sentences_preserve_caution(comment):
+    r = B.current_record({"attributes": {"incident_id": "qualified",
+        "final_investigation_comments": comment}}, FETCHED)
+    assert r["event_type"] == "hab_advisory"
+    assert "_negative_finding" not in r["raw"]
+    assert r["advice_text"] == B.advice(comment)
+
+
+def test_retained_misclassified_negative_restores_caution_and_agency_advice():
+    comment = "No bloom was observed. Avoid contact with the water."
+    old = common.event(source_id=B.SOURCE_ID, source_record_id="retained-contradiction",
+        event_type="unknown", status="unknown", advice_text=(
+            "NC DEQ Division of Water Resources, Final investigation public comments: “No bloom was observed”"),
+        raw={"final_investigation_comments": comment,
+             "_negative_finding": {"field": "final_investigation_comments", "value": "No bloom was observed"}})
+    recs, stats = B.build([], FETCHED, [old])
+    assert recs[0]["event_type"] == "hab_advisory"
+    assert recs[0]["advice_text"] == "Avoid contact with the water."
+    assert stats["negative_findings"] == 0
+
+
+def test_negative_guard_keeps_existing_agency_advice():
+    r = common.event(source_id=B.SOURCE_ID, source_record_id="advice",
+        event_type="hab_advisory", advice_text="Stay out of the water.",
+        raw={"final_investigation_comments": "No bloom was observed."})
+    B.apply_finding(r)
+    assert r["event_type"] == "hab_advisory"
+    assert r["advice_text"] == "Stay out of the water."
+
+
+def test_rechecking_saved_negative_marker_preserves_existing_agency_advice():
+    r = common.event(source_id=B.SOURCE_ID, source_record_id="saved-advice",
+        event_type="unknown", advice_text="Stay out of the water.",
+        raw={"final_investigation_comments": "No bloom was observed.",
+             "_negative_finding": {"field": "final_investigation_comments", "value": "No bloom was observed"}})
+    B.apply_finding(r)
+    assert r["advice_text"] == "Stay out of the water."
+    assert r["event_type"] == "hab_advisory" and "_negative_finding" not in r["raw"]
