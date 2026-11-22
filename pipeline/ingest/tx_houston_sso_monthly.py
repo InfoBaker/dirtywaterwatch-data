@@ -1,4 +1,4 @@
-"""The City of Houston's monthly sanitary sewer overflow reports -> data/build/events/tx-houston-sso-monthly.json
+"""The City of Houston's monthly sanitary sewer overflow reports and history enrichment -> data/build/events/tx-houston-sso-monthly.json
 
 Source (registry tx-houston-sso-monthly; operator tx-city-of-houston)
   Houston Public Works' consent decree page, https://www.houstonpublicworks.org/wastewater-cd (200 to the pipeline's
@@ -83,6 +83,28 @@ One event, one record (link_tceq, the shape of tx_spill_notice_form.link_tceq an
   unchanged (if_changed); a new TCEQ batch is linked in the same hour by ingest.tx_houston_tceq_link (link_only), run
   after the generic readers (Makefile INGEST_SNAPSHOTS). The counts are in meta.tceq_links.
 
+
+History enrichment (verified live 2026-11-22; one source, not a second event feed)
+  RSSO_Package/FeatureServer/0 in the City of Houston GIS organization publishes 29,314 unique EXCURSIONID rows
+  since 2018, including private systems. All 4,494 monthly records through October 2026 match that identity. Read
+  selected fields and WGS84 geometry in complete, ordered, count-checked pages (maxRecordCount 2000). The numeric
+  fields called LATITUDE/LONGITUDE are projected coordinates and must not be used as degrees. Source points are
+  rounded to three decimals before persistence. Names, addresses with house numbers and narrative fields are not
+  saved. The layer has no receiving-water-name field; BASIN and WWTP are not receiving waters.
+  EXCURSIONID is the existing SSO ID. A monthly row keeps its event ID, reported values and PDF citation; missing
+  detail can come from the layer, recorded in raw.history_fields. The selected layer row, point, citation, fetch
+  time and layer edit time stay together in raw.history. Layer-only rows use the same source/identity scheme.
+  Monthly voids exclude a row even if the layer still lists it. Private-system rows are marked, never attributed
+  to the City as operator. Without a permit/known operator, history-only rows do not gain speculative TCEQ links.
+  Source TOTALVOLLOST is the City's figure, not our calculation: it need not equal rounded GPM times DURATION.
+  Zero and null are unknown volume; no end is computed from duration. DURATION is source minutes. Dates are UTC
+  epochs of local midnight; separate clocks use an 1899 base date. Decode each epoch in America/Chicago, then
+  combine the local day and clock with the event day's DST offset. Missing clocks remain date-only; ambiguous
+  clocks remain day precision. A nonmidnight date epoch can itself provide a time if no separate clock exists.
+  Cache by layer edit time and count, checked hourly. Failed/incomplete reads keep earlier enrichment and mark
+  the source unhealthy. Disappeared history rows retain their original evidence times and a missing-since mark.
+  The TCEQ matching algorithm and the post-generic link step are unchanged.
+
 Privacy: the cover letter is never read; no house number, name, telephone or e-mail is kept: the state file holds the
   parsed rows with streets only, never the PDF or its text; errors name a report and a reason, never a row's text.
 
@@ -103,6 +125,7 @@ import argparse
 import hashlib
 import html as htmllib
 import io
+import math
 import re
 import sys
 import unicodedata
@@ -110,7 +133,7 @@ from collections import Counter
 from datetime import UTC, date, datetime
 from email.utils import parsedate_to_datetime
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urlencode, urljoin
 from zoneinfo import ZoneInfo
 
 import requests
@@ -120,6 +143,12 @@ from common import BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, rea
 
 SOURCE_ID = "tx-houston-sso-monthly"
 INDEX = "https://www.houstonpublicworks.org/wastewater-cd"
+HISTORY_LAYER = "https://services.arcgis.com/NummVBqZSIJKUeVR/ArcGIS/rest/services/RSSO_Package/FeatureServer/0"
+# Neither LATITUDE/LONGITUDE (projected coordinates despite their names) nor narrative/contact fields are read.
+HISTORY_FIELDS = ("OBJECTID", "EXCURSIONID", "ADDRESS", "BASIN", "WWTP", "NOTOBSERVED", "STARTDATE", "STARTTIME",
+                  "ENDDATE", "ENDTIME", "GPM", "TOTALVOLLOST", "DURATION", "STRUCTURETYPE", "FLOWLOCATION",
+                  "SYSTEM", "CAUSE")
+HISTORY_VERSION = 1
 STATE_PATH = BUILD_DIR / "tx-houston-sso-monthly-state.json"
 TCEQ_SOURCE = "tx-tceq-sso-opendata"
 TCEQ_EVENTS = EVENTS_DIR / f"{TCEQ_SOURCE}.json"
@@ -950,6 +979,243 @@ def link_tceq(records: list[dict], tceq: list[dict]) -> Counter:
     return counts
 
 
+# ---------------------------------------------------------------- history enrichment (same source and SSO identity)
+
+def _number(v):
+    try:
+        n = float(v) if v is not None and not isinstance(v, bool) else None
+        return n if n is not None and math.isfinite(n) else None
+    except (TypeError, ValueError):
+        return None
+
+
+def history_id(a: dict) -> str:
+    n = _number(a.get("EXCURSIONID"))
+    if n is None or n <= 0 or not n.is_integer():
+        raise ReadError("history row has no valid excursion identity")
+    return str(int(n))
+
+
+def safe_history_feature(f: dict) -> dict:
+    """Only selected fields, streets without house numbers, and source geometry rounded to about 100 m."""
+    from ingest.generic.fieldmap import scrub_strict_names
+    a = {k: v for k, v in (f.get("attributes") or {}).items() if k in HISTORY_FIELDS}
+    history_id(a)
+    for k, v in a.items():
+        if isinstance(v, str):
+            a[k] = scrub_strict_names(v)
+    if a.get("ADDRESS"):
+        a["ADDRESS"] = street_of(a["ADDRESS"])
+    g = f.get("geometry") or {}
+    x, y = _number(g.get("x")), _number(g.get("y"))
+    # A service returning its projected geometry despite outSR must not become a geographic point.
+    point = {"x": round(x, 3), "y": round(y, 3)} if (
+        x is not None and y is not None and -97 < x < -94 and 28 < y < 31) else None
+    return {"attributes": a, "geometry": point}
+
+
+def read_history(held: dict, at: str, get) -> dict:
+    """Atomic, count-checked offset paging. An unchanged version needs only metadata and count requests.
+
+    A changed layer is read completely before replacing state. Previously observed rows that disappear are
+    retained with their original observation time; monthly void notices still exclude them at merge time.
+    """
+    def request(path, **params):
+        response = get(path + "?" + urlencode({"f": "json", **params}))
+        response.raise_for_status()
+        d = response.json()
+        if not isinstance(d, dict) or "error" in d:
+            raise ReadError("history service did not return a usable response")
+        return d
+
+    meta = request(HISTORY_LAYER)
+    names = {f.get("name") for f in meta.get("fields") or []}
+    if not set(HISTORY_FIELDS) <= names:
+        raise ReadError("history layer is missing required fields")
+    if not (meta.get("advancedQueryCapabilities") or {}).get("supportsPagination"):
+        raise ReadError("history layer does not support complete offset paging")
+    size = min(int(meta.get("maxRecordCount") or 0), 2000)
+    if size < 1:
+        raise ReadError("history layer has no valid page size")
+    query = HISTORY_LAYER + "/query"
+    count = request(query, where="1=1", returnCountOnly="true").get("count")
+    if not isinstance(count, int) or count <= 0:
+        raise ReadError("history layer has no readable count")
+    edit = (meta.get("editingInfo") or {}).get("lastEditDate")
+    if edit is not None and held.get("last_edit") == edit and held.get("current_count") == count \
+            and held.get("parser_version") == HISTORY_VERSION and held.get("features"):
+        return {**held, "checked_at": at}
+    features, ids, oids = [], set(), set()
+    last_oid = -1
+    while len(features) < count:
+        d = request(query, where="1=1", outFields=",".join(HISTORY_FIELDS), returnGeometry="true", outSR=4326,
+                    orderByFields="OBJECTID ASC", resultOffset=len(features), resultRecordCount=size)
+        page = d.get("features")
+        if not isinstance(page, list) or not page:
+            raise ReadError("history paging ended before the stated count")
+        for f in page:
+            a = f.get("attributes") or {}
+            sid, oid = history_id(a), a.get("OBJECTID")
+            if not isinstance(oid, int) or oid <= last_oid or oid in oids or sid in ids:
+                raise ReadError("history paging repeated an identity or returned rows out of order")
+            ids.add(sid)
+            oids.add(oid)
+            last_oid = oid
+            updated = _epoch(edit)
+            features.append({**safe_history_feature(f), "fetched_at": at,
+                             "layer_updated_at": updated.isoformat() if updated else None})
+        if len(features) > count or (len(features) == count and d.get("exceededTransferLimit")):
+            raise ReadError("history count changed during paging")
+    # Detect a count/edit change during the read, rather than accepting a mixed snapshot.
+    after = request(HISTORY_LAYER)
+    if (after.get("editingInfo") or {}).get("lastEditDate") != edit \
+            or request(query, where="1=1", returnCountOnly="true").get("count") != count:
+        raise ReadError("history changed during paging")
+    for f in held.get("features") or []:
+        if history_id(f["attributes"]) not in ids:
+            features.append({**f, "missing_since": f.get("missing_since") or at})
+    return {"features": features, "current_count": count, "last_edit": edit, "read_at": at,
+            "checked_at": at, "parser_version": HISTORY_VERSION}
+
+
+def _epoch(v) -> datetime | None:
+    n = _number(v)
+    try:
+        return datetime.fromtimestamp(n / 1000, UTC) if n is not None else None
+    except (ValueError, OverflowError, OSError):
+        return None
+
+
+def history_when(a: dict, which: str) -> tuple[str | None, str | None]:
+    """UTC date epoch -> Houston day; UTC time epoch on its 1899 base date -> Houston wall clock.
+
+    Both fields must be decoded independently before combining. Missing clocks leave dates as dates. A nonmidnight
+    date field can itself supply a clock. DST gaps/overlaps are dated to the day, as with the monthly tables.
+    """
+    dt = _epoch(a.get(which + "DATE"))
+    if dt is None:
+        return None, None
+    local = dt.astimezone(TZ)
+    clock = _epoch(a.get(which + "TIME"))
+    if clock is None and (local.hour, local.minute, local.second) == (0, 0, 0):
+        return local.date().isoformat(), "day"
+    clock = clock.astimezone(TZ) if clock else local
+    instant = _local(local.date(), clock.hour, clock.minute)
+    if instant is None:
+        return local.date().isoformat(), "day"
+    if clock.second or clock.microsecond:
+        # Existing event precision vocabulary has no seconds; don't claim a more precise clock than we expose.
+        instant = instant.replace(second=clock.second, microsecond=clock.microsecond)
+    return instant.isoformat(), "minute"
+
+
+def history_record(f: dict, hist: dict) -> dict:
+    a = f["attributes"]
+    sid = history_id(a)
+    started, precision = history_when(a, "START")
+    ended, end_precision = history_when(a, "END")
+    raw = {"state": "TX", "time_zone": TZ_NAME, "sso_id": sid, "tpdes_permit": None,
+           "location": a.get("ADDRESS"), "cause": a.get("CAUSE"), "structure_type": a.get("STRUCTURETYPE"),
+           "flow_location": a.get("FLOWLOCATION"), "system": a.get("SYSTEM"),
+           "average_flow_gpm": a.get("GPM"), "duration_minutes": a.get("DURATION"),
+           "report_kind": "SSO history", "_placement": "named_water_only",
+           "timezone_note": ("We decode the source's date and separate time epochs in America/Chicago before "
+                             "combining the local date and clock; a missing or ambiguous clock keeps day precision.")}
+    if ended and started and (ended[:10] < started[:10] or (
+            precision == end_precision == "minute" and datetime.fromisoformat(ended) < datetime.fromisoformat(started))):
+        raw["end_note"] = "The source's end precedes its start; we give no end."
+        ended = None
+    if ended:
+        raw["ended_at_precision"] = end_precision
+    total = _number(a.get("TOTALVOLLOST"))
+    gal = total if total is not None and total > 0 else None
+    raw["volume_as_written"] = a.get("TOTALVOLLOST")
+    if gal is None:
+        raw["volume_note"] = ("The City's history layer gives zero or no total volume; we treat the volume as unknown.")
+    else:
+        raw["volume_method"] = "Total volume lost as published by the City; we have not recomputed it."
+    raw["system_note"] = ("The City's history layer marks this overflow as " + str(a.get("SYSTEM") or "system unspecified")
+                          + "; it does not name the system's owner.")
+    # No reached-water flag or water name is present. BASIN and WWTP are sewer infrastructure, not receiving waters.
+    # Explicit containment is source evidence; proximity ('Within 5 ft') is not evidence that water was reached.
+    flow = str(a.get("FLOWLOCATION") or "").lower().replace("’", "'").replace("''", "'")
+    if "not cont" not in flow and ("cont'd" in flow or "contained" in flow or "cont’d" in flow):
+        raw["reached_water"] = False
+        raw["_no_water_reason"] = "The City's history layer describes the flow as contained on site: " + a["FLOWLOCATION"]
+    url = HISTORY_LAYER + "/query?" + urlencode({"f": "json", "where": f"EXCURSIONID={sid}",
+                                               "outFields": ",".join(HISTORY_FIELDS), "returnGeometry": "false"})
+    updated = _epoch(hist.get("last_edit"))
+    raw["history"] = {"attributes": a, "geometry": f.get("geometry"), "url": url,
+                      "fetched_at": f.get("fetched_at") or hist.get("read_at"),
+                      "layer_updated_at": f.get("layer_updated_at") or (updated.isoformat() if updated else None),
+                      "time_basis": raw["timezone_note"]}
+    if f.get("missing_since"):
+        raw["history"]["missing_since"] = f["missing_since"]
+    g = f.get("geometry") or {}
+    return event(source_id=SOURCE_ID, source_record_id=sid, event_type="sso", status="ended" if ended else "unknown",
+                 outfall_name=a.get("ADDRESS"), started_at=started, ended_at=ended, time_precision=precision,
+                 lat=g.get("y"), lon=g.get("x"), coord_source="source" if g else None,
+                 coord_precision_m=100 if g else None, volume_gal=gal,
+                 volume_text=f"{gal:g} gallons (City estimate)" if gal else "Volume unknown",
+                 estimate_flag="estimated" if gal is not None else "unknown", material="untreated sewage",
+                 authority="City of Houston, Houston Public Works, SSO history", source_url=url,
+                 fetched_at=raw["history"]["fetched_at"], raw=raw)
+
+
+def enrich_history(records: list[dict], hist: dict, voided: dict) -> list[dict]:
+    """Exact EXCURSIONID only. Monthly reported values prevail; new IDs use the existing source/id scheme."""
+    by_id = {str(r["source_record_id"]): r for r in records if str(r["source_record_id"]) not in voided}
+    for f in hist.get("features") or []:
+        sid = history_id(f["attributes"])
+        if sid in voided:
+            continue
+        h = history_record(f, hist)
+        r = by_id.get(sid)
+        if r is None or not (r.get("raw") or {}).get("report_month"):
+            by_id[sid] = h
+            continue
+        raw = r["raw"]
+        raw["history"] = h["raw"]["history"]
+        for k in ("system", "duration_minutes"):
+            raw[k] = h["raw"].get(k)
+        raw["report_kind"] = "Monthly SSO Report and SSO history"
+        # Each substituted field is explicitly attributed to the layer; PDF publication time remains the PDF's.
+        fields = raw.setdefault("history_fields", [])
+        for k in ("lat", "lon", "coord_source", "coord_precision_m"):
+            if h.get(k) is not None:
+                r[k] = h[k]
+                if k not in fields:
+                    fields.append(k)
+        if h.get("lat") is not None:
+            raw["place_note"] = "The City's history layer supplies this point; we round it to about 100 meters."
+        if not r.get("volume_gal") and h.get("volume_gal") is not None:
+            raw["monthly_volume_note"] = raw.pop("volume_note", None)
+            raw["monthly_volume_as_written"] = raw.get("volume_as_written")
+            for k in ("volume_gal", "volume_text", "estimate_flag"):
+                r[k] = h[k]
+                fields.append(k)
+            raw["volume_as_written"] = h["raw"]["volume_as_written"]
+            raw["volume_method"] = h["raw"].get("volume_method")
+        if not r.get("started_at") and h.get("started_at"):
+            r["started_at"], r["time_precision"] = h["started_at"], h["time_precision"]
+            fields.append("started_at")
+        if not r.get("ended_at") and h.get("ended_at"):
+            start, end = r.get("started_at"), h["ended_at"]
+            compatible = not start or end[:10] >= start[:10]
+            if start and r.get("time_precision") == h["raw"].get("ended_at_precision") == "minute":
+                compatible = datetime.fromisoformat(end) >= datetime.fromisoformat(start)
+            if compatible:
+                r["ended_at"], r["status"] = end, "ended"
+                raw["ended_at_precision"] = h["raw"]["ended_at_precision"]
+                if raw.get("end_note"):
+                    raw["monthly_end_note"] = raw.pop("end_note")
+                fields.append("ended_at")
+        if not raw.get("cause") and h["raw"].get("cause"):
+            raw["cause"] = h["raw"]["cause"]
+            fields.append("cause")
+    return sorted(by_id.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
+
+
 # ---------------------------------------------------------------- reading
 
 def http_date(v: str | None) -> str | None:
@@ -1030,6 +1296,13 @@ def _get(url: str, headers: dict | None = None):
 def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_get, backfill: bool = False,
         since: str = BACKFILL_FROM, tceq_path: Path | None = TCEQ_EVENTS, pages_of=pdf_pages) -> int:
     state = read_json(state_path, {}) or {}
+    previous = read_json(out if out else EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
+    if not (state.get("history") or {}).get("features"):
+        # A lost state followed by an outage must not erase evidence on a monthly row we can still re-read.
+        evidence = [(r.get("raw") or {}).get("history") for r in previous.get("records") or []]
+        state["history"] = {"features": [{k: h[k] for k in (
+            "attributes", "geometry", "fetched_at", "layer_updated_at", "missing_since") if k in h}
+            for h in evidence if h and h.get("attributes")]}
     try:
         r = get(INDEX)
         r.raise_for_status()
@@ -1071,11 +1344,17 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
                    f"the report could not be read ({type(e).__name__})")       # never the message (a row's text)
             pend[m] = {"url": links[m]["url"], "reason": why, "since": prev.get("since") or now, "last_tried": now}
             counts["pending"] += 1
+    history_error = None
+    try:
+        state["history"] = read_history(state.get("history") or {}, now, get)
+    except Exception as e:  # noqa: BLE001 - the last complete history survives a failed page
+        history_error = common.error_text(e)
     state["last_read"] = {"at": now, "listed": len(links), **counts}
     write_json(state_path, state)
     recs, voided = build(state)
-    held = retained(read_json(out if out else EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}, state, recs, voided)
+    held = retained(previous, state, recs, voided)
     recs += held
+    recs = enrich_history(recs, state.get("history") or {}, voided)
     tdoc = read_json(tceq_path, {}) if tceq_path else {}
     tlinks = link_tceq(recs, (tdoc or {}).get("records") or [])
     reps = state.get("reports") or {}
@@ -1093,11 +1372,16 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
             "listed_not_read": [m for m in listed if m not in reps and m not in pend],
             "rows_not_read": {m: v["not_read"] for m, v in sorted(reps.items()) if v.get("not_read")},
             "count_mismatch": mismatch, "voided": voided, "pending": dict(sorted(pend.items())),
+            "history": {"url": HISTORY_LAYER, "count": (state.get("history") or {}).get("current_count"),
+                        "read_at": (state.get("history") or {}).get("read_at"),
+                        "checked_at": (state.get("history") or {}).get("checked_at"), "error": history_error},
             "tceq_links": dict(tlinks), "newest_listed": listed[-1] if listed else None,
             "retained_from_previous_events": sorted({(r.get("raw") or {}).get("report_month") or "" for r in held}),
-            "placement_rule": ("the City's table names no water: a row is placed only on the water TCEQ's record of the "
-                               "same overflow names; never by its street or its permit")}
+            "placement_rule": ("We use the City's history-layer point, rounded to about 100 meters, and receiving "
+                               "waters named by linked TCEQ records. We never locate an overflow by its street or permit.")}
     problems = [f"report {m} not read ({v['reason']})" for m, v in sorted(pend.items())]
+    if history_error:
+        problems.append("history: " + history_error)
     problems += [f"report {m}: {n} rows not read" for m, n in meta["rows_not_read"].items()]
     problems += [f"report {m}: {v['read']} rows read, {v['stated'] if v['stated'] is not None else 'no total read'} "
                  "stated" for m, v in mismatch.items()]
