@@ -3,9 +3,9 @@
 Source
   NYS DEC's older SPRTK workbook, https://extapps.dec.ny.gov/fs/data/Sewage_Discharge_Reports.xlsx (the www.dec.ny.gov
   address 301s there), linked from the SPRTK page. DEC last changed it on 2023-07-11 (Last-Modified; 3,809,544 bytes
-  when read on 2026-11-22). It holds 54 tabs and 31,660 rows: the written discharge reports of 2013 to May 2015, the
-  NY-Alert notices of late 2015 to May 2016, and one tab per month or batch of NY-Alert notices from May 2016 to August
-  2021. No notification ids and no posting times. The newer workbook, SPRTK_Data.xlsx (January 2021 on), is read by
+  when read on 2026-11-22). It holds 54 tabs and 31,657 data rows: the written discharge reports of 2013 to May 2015,
+  the NY-Alert notices of late 2015 to May 2016, and one tab per month or batch of NY-Alert notices from May 2016 to
+  August 2021. No notification ids and no posting times. The newer workbook, SPRTK_Data.xlsx (January 2021 on), is read by
   ingest/ny_sprtk.py (source ny-dec-sprtk); this module reuses its reader, field names, clocks (resolve), chains,
   record builder, water placement and volume rules. DEC's caveat: "Data quality is not checked by DEC". Credit: "NYS
   DEC Sewage Pollution Right to Know (Sewage_Discharge_Reports.xlsx)". No licence stated.
@@ -18,7 +18,7 @@ Layouts (LAYOUTS: each tab's header row is matched to one; a tab whose header ma
            columns (dates as Excel serials, MM/DD/YYYY or "April 6, 2016"); the duration carries the notifier's word
            ("2.0 hours ended.", "ongoing.", "unknown."); the treated state and the steps taken sit in two unnamed
            columns past the header (col15, col16); older rows put the volume under "Description". A title row comes
-           before the header. 35 rows carry only a date, a time and a cut fragment of text (no facility); they are
+           before the header. 36 rows carry only a date, a time and a cut fragment of text (no facility); they are
            kept, with a parse_error saying so.
   alert16  May 2016 to June 13, 2018 (snake_case headers: start_time, affectd_water_body, estimated_ind, up to three
            reasons): the start as ISO (the first tab) or DD/MON/YYYY, the duration in hours, the quantity with its
@@ -27,8 +27,9 @@ Layouts (LAYOUTS: each tab's header row is matched to one; a tab whose header ma
            starts (Excel serials in the January 2019 tab), the duration with its units, "address" the street number
            and the unnamed column after it the street name, the quantity with its units (col15) and "Estimated" or
            "Actual", up to three reasons. Later notices of a discharge open their headline with "UPDATE:" or
-           "ENDED:". The August 2021 tab has no header row (its first row is data): it is read with the columns of
-           the tab before it.
+           "ENDED:". The August 2021 tab puts its header row after its first two notices, which are read as data
+           (a row above the header that reads as data in the header's layout); a tab with no header row at all is
+           read with the columns of the tab before it.
 
 Times (raw._time_basis; raw._start_stored keeps the stored value)
   - alert18 tabs store New York local time shifted back by the UTC offset: local = stored + 4 h (EDT) or 5 h (EST),
@@ -38,7 +39,7 @@ Times (raw._time_basis; raw._start_stored keeps the stored value)
     stored start hours peak at 03:00-04:00, where the local tabs peak at 07:00-08:00. The newer workbook's copy of
     the May 2021 notices (tab "May _website", Excel serials) holds the same stored values (485 pairs, no offset), and
     its January-August 2021 tabs give dates only, which follow the stored date, not the local one: of 347 notices
-    stored at 19:00 or later and matched to one date there, 244 carry the stored date and 24 the next day.
+    stored at 19:00 or later and found there, 244 match the stored date alone and 24 the local (next) date alone.
   - alert16 tabs (and their two Excel serials) store local time: times written in the notices' text equal the stored
     time ("This event started at 3:25 PM" stored 15:25 EDT; "at 2:55pm" stored 14:55 EST), and the same notices are
     4 hours later than in the alert18 tab (above).
@@ -260,8 +261,9 @@ def tab_period(name: str, year_before: int | None) -> tuple[date | None, date | 
 def read_tabs(content: bytes) -> list[dict]:
     """[{tab, layout, header_row, columns, title, header_note, period, rows: [(row number, {column: value})]}] for
     every tab, in workbook order (ny_sprtk's stdlib reader). The header is the first of a tab's first three rows that
-    matches a layout; the rows before it are its title. A tab with no header row whose first row reads as data in the
-    tab before's layout is read with that tab's columns. Raises ValueError for a damaged workbook or an unknown layout."""
+    matches a layout; the rows before it are its title, unless they read as data. A tab with no header row whose
+    first row reads as data in the tab before's layout is read with that tab's columns. Raises ValueError for a
+    damaged workbook or an unknown layout."""
     z = zipfile.ZipFile(io.BytesIO(content))
     bad = z.testzip()
     if bad:

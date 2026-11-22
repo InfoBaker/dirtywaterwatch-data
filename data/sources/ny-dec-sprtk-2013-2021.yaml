@@ -8,9 +8,10 @@ level: "state"
 #   (data/build/events/ny-dec-sprtk-2013-2021.json). The newer workbook, SPRTK_Data.xlsx (January 2021 on), is the
 #   feed ny-dec-sprtk (pipeline/ingest/ny_sprtk.py); a notice in both workbooks is listed from that feed.
 # Built 2026-11-22: DEC's older SPRTK workbook, unchanged since 2023-07-11 (Last-Modified), 3,809,544 bytes.
-#   54 tabs and 31,660 rows: the written discharge reports of 2013 to May 2015 (one tab), the NY-Alert notices of
+#   54 tabs and 31,657 data rows: the written discharge reports of 2013 to May 2015 (one tab), the NY-Alert notices of
 #   late 2015 to May 2016 (one tab), and one tab per month or batch of NY-Alert notices from May 2016 to August
-#   2021 (four column layouts; the last tab has no header row). No notification ids, no posting times.
+#   2021 (four column layouts; the last tab's header row stands after its first two notices). No notification
+#   ids, no posting times.
 # Clock (the module's docstring has the evidence): the NY-Alert tabs from June 13, 2018 store New York local time
 #   shifted back by the UTC offset, the same rule as the newer workbook's DD/MON tabs; the earlier tabs store local
 #   time. Read at most weekly with If-Modified-Since; a run between reads keeps the records.
