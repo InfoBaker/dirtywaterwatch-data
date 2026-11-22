@@ -1,0 +1,13 @@
+Jurisdiction,Year,Beach ID,Beach Name,County,Waterbody Name,Waterbody Type,IsBeach ActBeach?,Tier,IsHistorical?,IsDormant?,BeachLength (MI),BeachAccess,BeachOwner,StartLatitude,StartLongitude,EndLatitude,EndLongitude,SSMonitoringFrequency,AdvisoryReportingFrequency[to EPA],MonitoringReportingFrequency[to EPA]
+AL,2025,AL656449,BEAR POINT CIVIC ASSOCIATION,BALDWIN,Gulf of America,"Sound, Bay, or Inlet",Y,3,N,N,.1,Public,Private,30.308514,-87.526794,30.30985,-87.526844,2 per-month,1 per-year,1 per-year
+BR,2025,WI432346,Second Landing,ASHLAND,Lake Superior,"Sound, Bay, or Inlet",Y,1,N,N,.038,Public,Private,46.63071,-90.78121,46.63097,-90.78049,1 per-week,1 per-year,1 per-year
+BR,2025,WI123451,Waverly,ASHLAND,Lake Superior,"Sound, Bay, or Inlet",Y,1,N,N,.652,Private,Private,46.60608,-90.59737,46.60011,-90.5866,2 per-week,1 per-year,1 per-year
+CA,2025,CA298722,Aliso County Beach - ACM1U,ORANGE,Pacific Ocean,"Sound, Bay, or Inlet",Y,1,N,N,.93,Public,Public,33.5135,-117.757,33.5028,-117.7472,1 per-week,1 per-year,1 per-year
+GU,2025,GU732200,"ASAN MEMORIAL BEACH,Head of Asan Bay",GUAM,Pacific Ocean,Open Coast,Y,1,N,N,.46,Public,Public,13.474049,144.717947,13.473998,144.71153,1 per-week,1 per-year,1 per-week
+IL,2025,IL928218,Winnetka Elder Park Beach,COOK,Lake Michigan,Still Water,Y,1,N,N,.075,Public,Public,42.1,-87.716,42.099,-87.715,1 per-week,1 per-year,1 per-week
+LA,2025,LA971783,CYPT1,ST. MARY,Gulf of America,Open Coast,Y,1,N,N,.45,Public,Public,29.734399,-91.85381,29.74077,-91.855338,1 per-week,1 per-year,1 per-year
+MI,2025,MI001504,Agate Beach,HOUGHTON,Lake Superior,Still Water,Y,3,N,N,.309,Public,Public,47.0394,-88.9264,47.0364,-88.929,1 per-week,1 per-year,1 per-week
+NJ,2025,NJ290142,Barnegat Light Borough at 25th St Bay Front,OCEAN,Atlantic Ocean,"Sound, Bay, or Inlet",Y,1,N,N,.056,Public,Public,39.7449,-74.118008,39.745665,-74.117665,1 per-week,1 per-year,1 per-year
+NY,2025,NY989199,FISHER'S ISLAND COUNTRY CLUB,SUFFOLK,Atlantic Ocean,"Sound, Bay, or Inlet",Y,3,N,N,.13,Private,Private,41.280838,-71.943583,41.2801,-71.945766,1 per-month,1 per-year,1 per-year
+PA,2025,PA102094,BEACH 11,ERIE,Lake Erie,Open Coast,Y,1,N,N,.28,Public,Public,42.1625,-80.078641,42.161944,-80.078056,2 per-week,1 per-year,1 per-year
+RI,2025,RI276487,Peabody's Beach,NEWPORT,Atlantic Ocean,"Sound, Bay, or Inlet",Y,1,N,N,.15,Public,Private,41.494509,-71.246507,41.492355,-71.247364,8 per-month,1 per-year,1 per-year
