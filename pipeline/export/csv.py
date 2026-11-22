@@ -59,9 +59,13 @@ COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id"
            # an operator's e-mail notice of the same event linked to this record (build.status.linked_notices)
            "notice_volume_gal", "notice_record_id",
            # a beach closure or advisory whose source gives no reason: listed, not coloured (rules.json beach_reason)
-           "listed_without_colour"]
+           "listed_without_colour",
+           # detail fields added on 2026-11-21 (export/detail.py FIELDS, the same names), at the end so that a reader
+           # of the earlier columns by position is not moved
+           "resolution", "notes"]
 DETAIL_COLUMNS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
                   "volume_method", "volume_to_water_gal", "overflow_point", "town")
+LATER_DETAIL_COLUMNS = ("resolution", "notes")
 LIST_SEP = ";"
 # children of out_dir this module owns (and replaces on every run); everything else in out_dir is left alone
 MANAGED_DIRS = ("water", "operator", "state")
@@ -436,6 +440,7 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     row += [_number((notice or {}).get("volume_gal")), _text((notice or {}).get("event_id"))]
     nsr = e.get("no_stated_reason") if isinstance(e.get("no_stated_reason"), dict) else {}
     row.append(_text(nsr.get("label")))
+    row += [_text(d.get(k)) for k in LATER_DETAIL_COLUMNS]
     return row, ops
 
 

@@ -346,3 +346,9 @@ def test_review_p2_7_a_row_with_no_time_stays_a_date():
     rid, = [k for k, _ in JC.keyed([row])]
     rec = JC.to_record(rid, {"row": row})
     assert rec["time_precision"] == "day" and rec["started_at"] == "2026-11-16T00:00:00-06:00"
+
+
+def test_the_reason_column_is_the_records_cause(tmp_path):
+    from export import detail as D
+    _, doc = run(tmp_path, Web())
+    assert D.detail_of(by_start(doc)["2026-11-16T09:19:00-06:00"]) == {"cause": "Roots, Grease or Debris"}

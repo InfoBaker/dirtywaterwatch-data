@@ -260,3 +260,12 @@ def test_focomp_a_stream_field_that_names_no_water_places_nothing():
         assert r["waterbody_text"] is None and r["raw"]["receiving_stream_as_typed"] == v
     r = F.make_record(dict(rep, receiving_stream=" Cedar River "), FAC, {"label": "x"}, (None, None), AT)
     assert r["waterbody_text"] == "Cedar River"
+
+
+def test_waterloo_cause_reaches_the_records_detail():
+    from export import detail as D
+    recs, _ = waterloo()
+    assert D.detail_of(recs["2026-09-28T0846~w-example-hwy"]) == {
+        "cause": "debris and rags, resulting in a plugged sanitary sewer main"}
+    assert D.detail_of(recs["2026-10-01T0740~example-st"]) == {"cause": "a wet weather event"}
+    assert D.detail_of(recs["2026-07-31T1904~the-example-lift-station"]) == {}         # the notice states none

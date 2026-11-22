@@ -43,6 +43,8 @@ _NOT_A_RANGE = (r"(?!\s*(?:-|to\b)?\s*(?:(?:feet|foot|ft|yards?|yds?|miles?|mete
                 r"mins?|seconds?|secs?|days?|am|pm|percent)\b|a\.m\.|p\.m\.|%))")
 # not the decimals of a coordinate ("-86.512345 1234 Example Rd" is a longitude and a house number)
 PHONE_RE = re.compile(r"(?<![\w-])(?<!\d\.)(?:\+?1[\s.-]?)?(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]\d{4}(?![\w-])"
+                      # an area code in brackets before seven digits run together: "(860)5550123" (review 2026-11-21)
+                      r"|(?<![\w-])(?:\+?1[\s.-]?)?\(\d{3}\)[\s.-]?\d{7}(?![\w-])"
                       r"|(?<![\w-])\d{3}[.-]\d{4}(?![\w-])" + _NOT_A_RANGE, re.I)
 # Staff names inside free text: "Inspector Eddy", "Investigator Tom Watson", "contact Jane Doe at ...".
 # A name is one to three capitalised words or initials (an optional Mr/Ms/Dr first); common words that

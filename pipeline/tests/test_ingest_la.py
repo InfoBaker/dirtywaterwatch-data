@@ -783,3 +783,10 @@ def test_a_failed_reread_by_the_new_parser_keeps_the_report_pending_and_is_not_f
     assert not Q.parsed_by_older(state["reports"]["93"])
     assert Q.due(state, {93: url}, "2026-11-16T01:00:00Z") == []
     assert Q.due(state, {93: url}, "2026-12-17T00:00:00Z") == [(93, url)]
+
+
+def test_the_cause_reaches_the_records_detail():
+    from export import detail as D
+    recs = Q.records({"reports": {"https://example.org/r98.pdf": {**_parsed(), "number": 98}}})
+    assert {r["started_at"]: D.detail_of(r)["cause"] for r in recs} == {
+        "2026-07-14": "Force Main Failure", "2026-09-04": "Blockage - Collection Line", "2026-08-12": "Grease"}
