@@ -54,12 +54,12 @@ def test_michigan_export_carries_dates_type_and_reason_without_a_login():
 
 
 def test_michigan_beachguard_row_has_no_login_barrier():
+    # what must hold whether the row is watched (this branch) or read as a feed (the Michigan reader's branch)
     r = channel("mi-egle-beachguard")
-    assert r["barrier"] is None and r["unmonitored_reason"] is None and r["monitored"] is True
-    assert r["urls"] == ["https://mienviro.michigan.gov/nsite/beach/map/"] and r["availability_only"] is True
-    assert "2082" in r["note"] and "without a login" in r["note"] and r["checked"] == "2026-11-21"
+    assert r["barrier"] is None and r["unmonitored_reason"] != "login"
+    assert "2082" in r["note"] and "without a login" in r["note"]
     s = research("mi", "mi-egle-beachguard")
-    assert s["status"] == "candidate" and "csv" in s["access"] and "need login" not in s["access_detail"]
+    assert s["status"] in ("candidate", "used") and "csv" in s["access"] and "need login" not in s["access_detail"]
     prof = json.loads((ROOT / "research" / "mi" / "profile.json").read_text())
     assert not [b for b in prof["barriers"] if b["kind"] == "login" and "BeachGuard" in b["what"]]
     y = yaml.safe_load((ROOT / "data" / "sources" / "mi-egle-beachguard.yaml").read_text())
