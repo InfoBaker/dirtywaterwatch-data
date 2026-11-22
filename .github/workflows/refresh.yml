@@ -40,7 +40,7 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 100   # a one-time backfill plus the refresh ran past 55 minutes on 2026-11-04
+    timeout-minutes: 150   # 100 until 2026-11-22: the refresh reached 96 to 100 minutes after the history feeds landed
     # The secrets are given to the steps that use them, never to the job (security review 2026-11-17 #12): the
     # actions and the installs of the Python packages, wrangler and poppler run without them. CLOUDFLARE_API_TOKEN is
     # the secret CLOUDFLARE_R2_TOKEN (R2 objects in dirtywaterwatch-data through R2's S3 endpoint; nothing else since
