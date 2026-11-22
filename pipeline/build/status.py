@@ -2265,6 +2265,36 @@ class Resolver:
                 elif slug not in self.exact[(w.get("state"), an)]:
                     self.exact[(w.get("state"), an)].append(slug)
 
+        # Preserve the name index's order, but never scan other states for each report.
+        self.names_by_state = defaultdict(list)
+        self.stems_by_state = defaultdict(list)
+        for st, n in self.names:
+            self.names_by_state[st].append(n)
+        for st, n in self.stems:
+            self.stems_by_state[st].append(n)
+        self.name_matches_old = {}
+        self.name_matches = {}
+        self.cache_name_matches = True
+
+    def matching_names(self, text: str, state, stems: bool = False) -> list[str]:
+        """Names contained in already-normalised, space-padded text. Only this pure text lookup is cached:
+        point, town, county, island, qualification and placement guards still run for each report.
+        Persisted entries are admitted only under placement_stamp; keep only keys used this build."""
+        key = json.dumps([state, text, stems], ensure_ascii=False)
+        if self.cache_name_matches:
+            if key in self.name_matches:
+                return self.name_matches[key]
+            if key in self.name_matches_old:
+                self.name_matches[key] = self.name_matches_old[key]
+                return self.name_matches[key]
+        names = self.names_by_state.get(state, [])
+        if stems:
+            names = names + self.stems_by_state.get(state, [])
+        found = [n for n in names if f" {n} " in text]
+        if self.cache_name_matches:
+            self.name_matches[key] = found
+        return found
+
     def _index_folded(self, slug: str, w: dict) -> None:
         """__init__'s index for a record of an ACCENT_FOLD_STATES state: the name's forms (name_forms_in: accents
         folded, Spanish and English) are names like the name itself, its English form's stem a stem ('Cibuco' for the
@@ -2438,9 +2468,7 @@ class Resolver:
         if folds(state):
             found = self.folded_phrases(text, state)
         else:
-            for (st, n), slugs in self.names.items():
-                if st == state and f" {n} " in t:
-                    found[n] = slugs
+            found = {n: self.names[(state, n)] for n in self.matching_names(t, state)}
         for key in (() if folds(state) else ((state, norm_name(text)), (state, nt))):
             if key in self.exact:                                     # a short alias, the whole text
                 found[key[1]] = list(dict.fromkeys(found.get(key[1], []) + self.exact[key]))
@@ -2567,7 +2595,7 @@ class Resolver:
         if labels and rest is None:
             return False
         t = f" {norm_name(rest if labels else text)} "
-        return any(st == state and f" {n} " in t for (st, n) in list(self.names) + list(self.stems))
+        return bool(self.matching_names(t, state, stems=True))
 
     def same_named(self, slug: str) -> list[str]:
         """The other records of the water's state that carry its name (an NHD remainder of a river, a
@@ -5167,7 +5195,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     history of a state on file (Michigan from 2001, some 55,000 records) placing every record again took 30 s an
     hour. Everything else (intervals, colours, counts) is computed for every record as before. True: the file
     PLACEMENT_CACHE when this build writes the shared outputs (write and the default events directory); a path: that
-    file; None or False: no cache."""
+    file; None or False: no cache. The same file also holds the resolver's pure text matches, shared by
+    reports of any age; changing a report's point or other placement inputs still runs its guards afresh."""
     now = now or datetime.now(UTC)
     loaded = waters is None
     waters = load_waters() if loaded else waters
@@ -5230,6 +5259,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     resolver = Resolver(waters, placement_outfalls, discharger_towns, discharger_waters, rules.get("placement") or {})
     if placement_cache is True:
         placement_cache = PLACEMENT_CACHE if write and Path(events_dir) == Path(EVENTS_DIR) else None
+    resolver.cache_name_matches = bool(placement_cache)
     cache_old, cache_new, cache_stamp = {}, {}, None
     if placement_cache:
         cache_stamp = placement_stamp(waters, placement_outfalls, discharger_towns, discharger_waters, rules, _STATES)
@@ -5239,6 +5269,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             c = {}
         if c.get("stamp") == cache_stamp:
             cache_old = c.get("placements") or {}
+            resolver.name_matches_old = c.get("name_matches") or {}
     cache_before = (now - timedelta(days=PLACEMENT_CACHE_DAYS)) if placement_cache else None
     cache_hits = 0
 
@@ -5999,7 +6030,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         p = Path(placement_cache)
         p.parent.mkdir(parents=True, exist_ok=True)
         tmp = p.with_suffix(p.suffix + ".tmp")
-        tmp.write_text(json.dumps({"stamp": cache_stamp, "built": iso(now), "placements": cache_new},
+        tmp.write_text(json.dumps({"stamp": cache_stamp, "built": iso(now), "placements": cache_new,
+                                  "name_matches": resolver.name_matches},
                                   separators=(",", ":"), default=str))
         tmp.replace(p)
         print(f"status: placement reused for {cache_hits} of {len(cache_new)} records that began over "
