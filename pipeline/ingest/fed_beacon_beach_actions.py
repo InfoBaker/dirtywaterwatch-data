@@ -14,8 +14,9 @@ Source (registry data/sources/fed-beacon-beach-actions.yaml)
   lists, choose the national region, build the filters and set the calendar year), and each report is exported as
   CSV (pull_report: the report page once, then ?request=CSV). The pipeline's named client (common.HEADERS), about one
   second between requests: nine requests a year.
-Cadence (MIN_HOURS): a full pull of the current and the previous calendar year (Eastern time) at most once every 20
-  hours; between pulls the records are written again from the saved rows (data/build/fed-beacon-beach-actions-state.json)
+Cadence (pull_interval): a full pull of the current and the previous calendar year (Eastern time) at most once every 7
+  days from November through March, when the states file the past season, and every 30 days from April through
+  October (a missing events file pulls at once; a failed pull is tried again the next hour); between pulls the records are written again from the saved rows (data/build/fed-beacon-beach-actions-state.json)
   without the network, so the links to the state feeds follow their files every hour. The events file's header keeps
   the time of the last pull (last_ok_at). --backfill FROM_YEAR pulls the years from FROM_YEAR to the one before the
   previous year by hand (not in the refresh); they stay in the saved rows. A failed pull keeps the previous records and
@@ -53,7 +54,9 @@ Copies, not second reports (link_copies; the ingester's own duplicate_of, as ing
   day) and of the same kind (COMPATIBLE: a closure repeats a closure, an advisory an advisory or a rain advisory). By
   EPA beach id where the feed keeps it (BY_ID_PATHS); elsewhere by the beach's point (within LINK_M of the
   beach's line from its start to its end point) or by the same beach name in the same state, never when the two name
-  different waters (build/status.py waters_differ). Each state record takes at most one copy, the closest first;
+  different waters (build/status.py waters_differ), and only when the two ends fall within a day of each other (or
+  neither has one): otherwise the two are two records with their own dates, and BEACON's names the nearest such state
+  record in raw.related_record with the basis. Each state record takes at most one copy, the closest first;
   raw.copy_of and raw._duplicate_basis say how. meta.links counts them. The links are made again after every feed
   (ingest/fed_beacon_beach_link.py, Makefile INGEST_SNAPSHOTS: this module runs before most state feeds) and on a
   failed pull (the saved rows written again, health false), so a copy never hides behind a record that has gone.
@@ -97,7 +100,10 @@ APP_ID, NATIONAL_REGION = "132", "11"
 STATE_FILE = BUILD_DIR / f"{SOURCE_ID}-state.json"
 REGISTRY_FILE = DATA_DIR / "beaches-epa.json"
 TZ_EAST = ZoneInfo("America/New_York")
-MIN_HOURS = 20
+# at most one pull every 7 days from November through March (when states file the past season) and every 30 days from
+# April through October (coordinator, 2026-11-21); the records are written again each hour between pulls
+PULL_DAYS_FILING, PULL_DAYS_SEASON = 7, 30
+FILING_MONTHS = frozenset({11, 12, 1, 2, 3})
 PAUSE_S = 1.0
 LINK_M = 300.0
 LINK_DAYS = 1
@@ -485,30 +491,48 @@ def candidates(files: dict[str, dict]) -> list[dict]:
     return out
 
 
+def ends_apart(rec: dict, end_day, other_end_day) -> tuple[int | None, str | None]:
+    """(days between the two ends, why the ends differ) of a BEACON record's end and a state record's (local days); the
+    why is None when the ends agree: both within LINK_DAYS, or neither given."""
+    if end_day is None and other_end_day is None:
+        return None, None
+    if end_day is None or other_end_day is None:
+        return None, "BEACON gives no end" if end_day is None else "the state's record gives no end"
+    days = abs((end_day - other_end_day).days)
+    if days <= LINK_DAYS:
+        return days, None
+    return days, f"ends {days} days apart (BEACON's {end_day.isoformat()}, the state's {other_end_day.isoformat()})"
+
+
 def link_copies(records: list[dict], cands: list[dict], registry: dict[str, dict]) -> Counter:
     """Set duplicate_of on each record that repeats a state record (module docstring); returns the counts. A name links
-    only a state record with no point: a point more than LINK_M from the beach says it is another beach."""
+    only a state record with no point: a point more than LINK_M from the beach says it is another beach. A pair whose
+    ends differ by more than LINK_DAYS, or of which one has an end and the other none, is two records: BEACON's names
+    the nearest such state record in raw.related_record (with the basis), never as duplicate_of, so the differing dates
+    both stay on the record (coordinator, 2026-11-21)."""
     from build import status as S
     by_id, by_day = defaultdict(list), defaultdict(list)
     for ev in cands:
         d = _local_day(ev)
         if d is None:
             continue
-        c = {"ev": ev, "day": d, "names": None}
+        c = {"ev": ev, "day": d, "end": _local_day(ev, "ended_at"), "names": None}
         path = BY_ID_PATHS.get(ev.get("source_id"))
         v = _get(ev.get("raw") or {}, path) if path else None
         if isinstance(v, str) and v.strip():
             by_id[v.strip().upper()].append(c)
         by_day[(S.event_state(ev) or "", d)].append(c)
-    pairs = []
+    pairs, related = [], []
     for rec in records:
         rec["duplicate_of"] = None
         raw = rec["raw"]
         raw.pop("copy_of", None)
         raw.pop("_duplicate_basis", None)
+        raw.pop("related_record", None)
         d = _local_day(rec)
         if d is None:
             continue
+        e = _local_day(rec, "ended_at")
         reg = registry.get(raw.get("beach_id"))
         kinds = COMPATIBLE.get(rec.get("event_type"), frozenset())
         seen = set()
@@ -516,7 +540,8 @@ def link_copies(records: list[dict], cands: list[dict], registry: dict[str, dict
             days = abs((c["day"] - d).days)
             if days <= LINK_DAYS and c["ev"].get("event_type") in kinds:
                 seen.add(c["ev"]["event_id"])
-                pairs.append(((0, days, 0.0), rec, c, "epa_beach_id", None, days))
+                ends, why = ends_apart(rec, e, c["end"])
+                (related if why else pairs).append(((0, days, 0.0), rec, c, "epa_beach_id", None, days, ends, why))
         mine = norm_name(raw.get("beach_name"))
         near = [c for k in range(-LINK_DAYS, LINK_DAYS + 1)
                 for c in by_day.get((raw.get("jurisdiction"), d + timedelta(days=k)), [])]
@@ -543,23 +568,36 @@ def link_copies(records: list[dict], cands: list[dict], registry: dict[str, dict
                 continue            # the state's record has a point and this beach none: nothing to compare
             if S.waters_differ(rec, c["ev"]):
                 continue
-            pairs.append(((1 if how == "point" else 2, days, m if m is not None else LINK_M), rec, c, how, m, days))
+            ends, why = ends_apart(rec, e, c["end"])
+            (related if why else pairs).append(((1 if how == "point" else 2, days, m if m is not None else LINK_M), rec,
+                                                c, how, m, days, ends, why))
     pairs.sort(key=lambda p: (p[0], p[1]["event_id"], p[2]["ev"]["event_id"]))
     used, n = set(), Counter()
-    for _, rec, c, how, m, days in pairs:
+    said_how = lambda rec, how, m: {"epa_beach_id": f"the same EPA beach id ({rec['raw'].get('beach_id')})",  # noqa: E731
+                                    "point": f"its point {round(m or 0)} m from the beach's line",
+                                    "name": "the same beach name in the same state"}[how]
+    for _, rec, c, how, m, days, _e, _w in pairs:
         other = c["ev"]
         if rec["duplicate_of"] or other["event_id"] in used:
             continue
         rec["duplicate_of"] = other["event_id"]
         rec["raw"]["copy_of"] = {"event_id": other["event_id"], "source_id": other.get("source_id"), "by": how,
                                  "days_apart": days, **({"metres": round(m)} if m is not None else {})}
-        said = {"epa_beach_id": f"the same EPA beach id ({rec['raw'].get('beach_id')})",
-                "point": f"its point {round(m or 0)} m from the beach's line",
-                "name": "the same beach name in the same state"}[how]
         rec["raw"]["_duplicate_basis"] = (f"the state's record {other['event_id']} of {other.get('source_id')}: "
-                                          f"{said}, starting {days} day(s) apart")
+                                          f"{said_how(rec, how, m)}, starting {days} day(s) apart, ending within a day")
         used.add(other["event_id"])
         n[f"by_{how}"] += 1
+    related.sort(key=lambda p: (p[0], p[1]["event_id"], p[2]["ev"]["event_id"]))
+    for _, rec, c, how, m, days, ends, why in related:
+        if rec["duplicate_of"] or "related_record" in rec["raw"]:
+            continue
+        other = c["ev"]
+        rec["raw"]["related_record"] = {
+            "event_id": other["event_id"], "source_id": other.get("source_id"), "by": how, "start_days_apart": days,
+            **({"end_days_apart": ends} if ends is not None else {}), **({"metres": round(m)} if m is not None else {}),
+            "basis": (f"the state's record {other['event_id']} of {other.get('source_id')}: {said_how(rec, how, m)}, "
+                      f"starting {days} day(s) apart; {why}: two records, each with its own dates")}
+        n["related_not_linked"] += 1
     return n
 
 
@@ -611,6 +649,7 @@ def build(state: dict, registry: dict[str, dict], files: dict[str, dict], prev_r
             if reg and str(reg.get("historical") or "").upper() == "Y":
                 historical[st] += 1
     links = link_copies(records, candidates(files), registry)
+    related = links.pop("related_not_linked", 0)
     linked_by_sy = Counter((r["raw"]["jurisdiction"], str(r["raw"].get("year")), r["raw"]["copy_of"]["by"])
                            for r in records if r.get("duplicate_of"))
     records.sort(key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
@@ -628,11 +667,18 @@ def build(state: dict, registry: dict[str, dict], files: dict[str, dict], prev_r
             "no_registry_row": {"rows": sum(no_reg.values()), "by_state": dict(sorted(no_reg.items()))},
             "private_owner_beaches": dict(sorted(private.items())),
             "historical_beaches": dict(sorted(historical.items())),
-            "links": {"linked": sum(links.values()), **dict(sorted(links.items())),
+            "links": {"linked": sum(links.values()), **dict(sorted(links.items())), "related_not_linked": related,
                       "state_files_read": sorted(files),
                       "withheld_not_linked": sorted(s for s, f in files.items()
                                                     if (f.get("meta") or {}).get("distribution_discouraged"))}}
     return records, meta
+
+
+def pull_interval(now: datetime) -> timedelta:
+    """The time between pulls at `now` (Eastern months): PULL_DAYS_FILING from November through March, PULL_DAYS_SEASON
+    from April through October."""
+    month = now.astimezone(TZ_EAST).month
+    return timedelta(days=PULL_DAYS_FILING if month in FILING_MONTHS else PULL_DAYS_SEASON)
 
 
 def refresh_years(now: datetime | None = None) -> list[int]:
@@ -675,7 +721,7 @@ def summary(records: list[dict], meta: dict, what: str) -> str:
 def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, events_dir: Path = EVENTS_DIR,
         state_file: Path = STATE_FILE, registry_file: Path = REGISTRY_FILE) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--force", action="store_true", help="pull now even within 20 hours of the last pull")
+    ap.add_argument("--force", action="store_true", help="pull now, before the interval since the last pull is up")
     ap.add_argument("--backfill", type=int, metavar="FROM_YEAR",
                     help="pull the years from FROM_YEAR to the one before the previous year (by hand)")
     ap.add_argument("--from-dir", type=Path, help="read saved CSVs instead of BEACON (no network)")
@@ -696,7 +742,7 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
             return 2
     last = _t(state.get("pulled_at"))
     due = bool(args.force or args.backfill or args.from_dir or last is None or not out_path.exists()
-               or now - last >= timedelta(hours=MIN_HOURS))
+               or now - last >= pull_interval(now))
     pulled, failed, counts = {}, [], Counter()
     if due:
         sess = sess or (None if args.from_dir else new_session())

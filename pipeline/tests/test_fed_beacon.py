@@ -142,13 +142,13 @@ def test_the_session_replay_sets_the_national_region_and_the_year_then_exports_b
 
 def test_a_changed_report_is_a_failed_pull_that_keeps_the_records_and_names_only_the_class(tmp_path, registry):
     code, doc, _ = run_saved(tmp_path, registry)
-    assert code == 0 and doc["ok"] and doc["count"] == 21
+    assert code == 0 and doc["ok"] and doc["count"] == 22
     bad = FakeSession(main="Jurisdiction,Year,Something Else\nAL,2025,x\n")
     ev = tmp_path / "events"
     code = B.run(["--force"], sess=bad, sleep=lambda s: None, now=NOW, events_dir=ev,
                  state_file=tmp_path / "state.json", registry_file=registry)
     after = json.loads((ev / f"{B.SOURCE_ID}.json").read_text())
-    assert code == 1 and after["ok"] is False and after["count"] == 21      # the previous records kept
+    assert code == 1 and after["ok"] is False and after["count"] == 22      # the previous records kept
     assert after["error"] == "BEACON pull failed (2025: PullError)"           # a fixed reason and the class, no text
 
 
@@ -224,14 +224,77 @@ def test_a_copy_is_linked_by_epa_beach_id_and_another_by_the_beach_point(tmp_pat
     assert nj_a["duplicate_of"] == "nj-beaches:OC0142:beach_advisory:2025-08-18"
     assert nj_c["raw"]["copy_of"] == {"event_id": "nj-beaches:OC0142:beach_closure:2025-08-19",
                                       "source_id": "nj-beaches", "by": "epa_beach_id", "days_apart": 0}
-    pa = recs["728218-closure"]                 # Erie County's sheet keeps no EPA id field: its point, 100 m from Beach 11
-    assert pa["duplicate_of"] == "pa-erie-beaches:PA102094-20250715"
-    assert pa["raw"]["copy_of"]["by"] == "point" and pa["raw"]["copy_of"]["metres"] <= B.LINK_M
-    assert "100 m from the beach's line" in pa["raw"]["_duplicate_basis"]
+    ri = recs["724353-closure"]         # RIDOH's sheet keeps no EPA id: its point, 7 m from Peabody's Beach, Aug. 26 to 28
+    assert ri["duplicate_of"] == "ri-ridoh-beaches:peabodys-beach:middletown:2025-08-26"
+    assert ri["raw"]["copy_of"]["by"] == "point" and ri["raw"]["copy_of"]["metres"] <= B.LINK_M
+    assert "m from the beach's line" in ri["raw"]["_duplicate_basis"]
     assert doc["meta"]["links"]["linked"] == 3 and doc["meta"]["links"]["by_epa_beach_id"] == 2
     assert doc["meta"]["by_state_year"]["NJ"]["2025"] == {"actions": 2, "linked_by_epa_beach_id": 2}
     # each state record takes one copy; every other record stands on its own
     assert sum(1 for r in recs.values() if r["duplicate_of"]) == 3
+
+
+def test_a_longer_beacon_window_stays_its_own_record_and_names_the_state_record_beside_it(tmp_path, registry):
+    # Erie County's sheet: Beach 11 closed Jul. 15 to 16, 2025; BEACON: Jul. 15 07:36 to Sep. 2. The ends differ by
+    # 48 days: two records, each with its own dates; BEACON's names the state's record and why it is near
+    _, doc, recs = run_saved(tmp_path, registry)
+    pa = recs["728218-closure"]
+    assert pa["duplicate_of"] is None and "copy_of" not in pa["raw"]
+    rel = pa["raw"]["related_record"]
+    assert (rel["event_id"], rel["source_id"], rel["by"]) == ("pa-erie-beaches:PA102094-20250715", "pa-erie-beaches",
+                                                             "point")
+    assert rel["start_days_apart"] == 0 and rel["end_days_apart"] == 48 and rel["metres"] <= B.LINK_M
+    assert "ends 48 days apart" in rel["basis"]
+    assert doc["meta"]["links"]["related_not_linked"] == 1
+
+
+def test_a_state_record_with_no_end_is_never_the_copy_of_one_with_an_end(tmp_path, registry):
+    ev = events_dir(tmp_path)
+    nj = json.loads((ev / "nj-beaches.json").read_text())
+    for r in nj["records"]:
+        if r["event_type"] == "beach_closure":
+            r["ended_at"], r["status"] = None, "advisory_active"
+    (ev / "nj-beaches.json").write_text(json.dumps(nj))
+    B.run(["--from-dir", str(FIX), "--fetched-at", READ], now=NOW, events_dir=ev, state_file=tmp_path / "s.json",
+          registry_file=registry)
+    recs = {r["source_record_id"]: r for r in json.loads((ev / f"{B.SOURCE_ID}.json").read_text())["records"]}
+    assert recs["723982-closure"]["duplicate_of"] is None
+    assert recs["723982-closure"]["raw"]["related_record"]["by"] == "epa_beach_id"
+    assert "the state's record gives no end" in recs["723982-closure"]["raw"]["related_record"]["basis"]
+
+
+def test_pulls_are_weekly_from_november_to_march_and_monthly_from_april_to_october(tmp_path, registry):
+    assert B.pull_interval(datetime(2026, 11, 21, tzinfo=UTC)) == B.timedelta(days=7)
+    assert B.pull_interval(datetime(2027, 3, 31, 12, tzinfo=UTC)) == B.timedelta(days=7)
+    assert B.pull_interval(datetime(2027, 4, 1, 12, tzinfo=UTC)) == B.timedelta(days=30)
+    assert B.pull_interval(datetime(2027, 10, 31, 12, tzinfo=UTC)) == B.timedelta(days=30)
+    run_saved(tmp_path, registry)
+    ev = tmp_path / "events"
+
+    class NoNetwork:
+        def get(self, *a, **k):
+            raise AssertionError("no request before the interval")
+        post = get
+
+    def at(pulled, now, sess):
+        st = json.loads((tmp_path / "state.json").read_text())
+        st["pulled_at"] = pulled
+        (tmp_path / "state.json").write_text(json.dumps(st))
+        return B.run([], sess=sess, sleep=lambda s: None, now=now, events_dir=ev, state_file=tmp_path / "state.json",
+                     registry_file=registry)
+    assert at("2026-11-21T05:40:00Z", datetime(2026, 11, 27, 23, tzinfo=UTC), NoNetwork()) == 0     # six days on
+    sess = FakeSession()
+    assert at("2026-11-21T05:40:00Z", datetime(2026, 11, 28, 6, tzinfo=UTC), sess) == 0
+    assert len([c for c in sess.calls if c[0] == "POST"]) == 8                                       # seven days on
+    assert at("2027-06-01T05:40:00Z", datetime(2027, 6, 30, 5, tzinfo=UTC), NoNetwork()) == 0         # 29 days
+    sess = FakeSession()
+    at("2027-06-01T05:40:00Z", datetime(2027, 7, 1, 6, tzinfo=UTC), sess)
+    assert len([c for c in sess.calls if c[0] == "POST"]) == 8                                       # 30 days on
+    import re
+    y = (ROOT / "data" / "sources" / "fed-beacon-beach-actions.yaml").read_text()
+    assert re.search(r'^cadence: "31 days \(a pull every 7 days from November through March, every 30 days from '
+                     r'April through October\)"$', y, re.M)
+    assert S.cadence_hours(re.search(r'^cadence: "(.*)"$', y, re.M).group(1)) == 31 * 24
 
 
 def test_no_link_a_day_and_a_half_apart_nor_to_a_file_withheld_from_the_public_export(tmp_path, registry):
@@ -240,26 +303,26 @@ def test_no_link_a_day_and_a_half_apart_nor_to_a_file_withheld_from_the_public_e
     for r in nj["records"]:
         r["started_at"] = "2025-08-21" if r["event_type"] == "beach_closure" else r["started_at"]
     (ev / "nj-beaches.json").write_text(json.dumps(nj))
-    pa = json.loads((ev / "pa-erie-beaches.json").read_text())
-    pa["meta"]["distribution_discouraged"] = True
-    (ev / "pa-erie-beaches.json").write_text(json.dumps(pa))
+    ri = json.loads((ev / "ri-ridoh-beaches.json").read_text())
+    ri["meta"]["distribution_discouraged"] = True
+    (ev / "ri-ridoh-beaches.json").write_text(json.dumps(ri))
     B.run(["--from-dir", str(FIX), "--fetched-at", READ], now=NOW, events_dir=ev, state_file=tmp_path / "s.json",
           registry_file=registry)
     recs = {r["source_record_id"]: r for r in json.loads((ev / f"{B.SOURCE_ID}.json").read_text())["records"]}
     assert recs["723982-closure"]["duplicate_of"] is None          # two days apart
     assert recs["723981-advisory"]["duplicate_of"] is not None      # the advisory still is the same day
-    assert recs["728218-closure"]["duplicate_of"] is None          # a withheld file is never the record shown
+    assert recs["724353-closure"]["duplicate_of"] is None          # a withheld file is never the record shown
 
 
 def test_a_point_link_is_not_made_when_the_two_name_different_waters(tmp_path, registry):
     ev = events_dir(tmp_path)
-    pa = json.loads((ev / "pa-erie-beaches.json").read_text())
-    pa["records"][0]["waterbody_text"] = "Presque Isle Bay"
-    (ev / "pa-erie-beaches.json").write_text(json.dumps(pa))
+    ri = json.loads((ev / "ri-ridoh-beaches.json").read_text())
+    ri["records"][0]["waterbody_text"] = "Narragansett Bay"
+    (ev / "ri-ridoh-beaches.json").write_text(json.dumps(ri))
     B.run(["--from-dir", str(FIX), "--fetched-at", READ], now=NOW, events_dir=ev, state_file=tmp_path / "s.json",
           registry_file=registry)
     recs = {r["source_record_id"]: r for r in json.loads((ev / f"{B.SOURCE_ID}.json").read_text())["records"]}
-    assert recs["728218-closure"]["duplicate_of"] is None
+    assert recs["724353-closure"]["duplicate_of"] is None
 
 
 # ---------------------------------------------------------------- decision 40 and history only
@@ -371,7 +434,7 @@ def test_between_pulls_the_records_are_written_again_without_the_network(tmp_pat
             raise AssertionError("no request between pulls")
         post = get
     first = json.loads((ev / f"{B.SOURCE_ID}.json").read_text())
-    code = B.run([], sess=NoNetwork(), now=datetime(2026, 11, 22, 1, tzinfo=UTC), events_dir=ev,
+    code = B.run([], sess=NoNetwork(), now=datetime(2026, 11, 25, 1, tzinfo=UTC), events_dir=ev,
                  state_file=tmp_path / "state.json", registry_file=registry)
     again = json.loads((ev / f"{B.SOURCE_ID}.json").read_text())
     assert code == 0 and again["count"] == first["count"]
@@ -379,9 +442,9 @@ def test_between_pulls_the_records_are_written_again_without_the_network(tmp_pat
     assert {r["event_id"]: r["fetched_at"] for r in again["records"]} == {r["event_id"]: r["fetched_at"]
                                                                          for r in first["records"]}
     sess = FakeSession()
-    code = B.run([], sess=sess, sleep=lambda s: None, now=datetime(2026, 11, 22, 2, tzinfo=UTC), events_dir=ev,
+    code = B.run([], sess=sess, sleep=lambda s: None, now=datetime(2026, 11, 28, 6, tzinfo=UTC), events_dir=ev,
                  state_file=tmp_path / "state.json", registry_file=registry)
-    assert code == 0 and len([c for c in sess.calls if c[0] == "POST"]) == 8     # 20 hours on: two years pulled
+    assert code == 0 and len([c for c in sess.calls if c[0] == "POST"]) == 8     # seven days on: two years pulled
 
 
 def test_a_backfill_reads_the_older_years_names_those_it_could_not_and_keeps_the_rest(tmp_path, registry):
@@ -531,7 +594,7 @@ def test_a_failed_pull_still_drops_a_link_whose_state_record_is_gone(tmp_path, r
     code = B.run(["--force"], sess=bad, sleep=lambda s: None, now=NOW, events_dir=ev,
                  state_file=tmp_path / "state.json", registry_file=registry)
     doc = json.loads((ev / f"{B.SOURCE_ID}.json").read_text())
-    assert code == 1 and doc["ok"] is False and doc["count"] == 21
+    assert code == 1 and doc["ok"] is False and doc["count"] == 22
     nj_recs = [r for r in doc["records"] if r["raw"]["jurisdiction"] == "NJ"]
     assert nj_recs and all(r["duplicate_of"] is None for r in nj_recs)
 

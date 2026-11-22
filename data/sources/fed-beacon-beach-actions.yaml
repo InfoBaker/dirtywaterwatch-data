@@ -7,7 +7,8 @@ level: "federal"
 # Feed row: the source id written by the ingester pipeline/ingest/fed_beacon_beach_actions.py
 #   (data/build/events/fed-beacon-beach-actions.json). The Beach Actions report and its detailed report for the
 #   current and the previous calendar year, one report-builder session per year (four application-process posts,
-#   then each report's ?request=CSV), at most once every 20 hours; the records are written again each hour from the
+#   then each report's ?request=CSV), at most once every 7 days from November through March and every 30 days
+#   from April through October; the records are written again each hour from the
 #   saved rows. States file after the season (by January 31 of the next year): every record is history only
 #   (data/rules.json unresolved.history_only) and never colours the map now. Out of scope: AS, GU, MP, VI and the
 #   tribal programs BR, GP, MK, ST (counted in meta). The beach points and waters come from data/beaches-epa.json
@@ -16,7 +17,7 @@ level: "federal"
 #   Act grants to notify the public of exceedances and to report to EPA; EPA's National Beach Guidance and Required
 #   Performance Criteria for Grants (2014), performance criterion 4 (report monitoring results to the public and to
 #   EPA at least annually) and criterion 8 (notification reports to EPA).
-cadence: "daily"
+cadence: "31 days (a pull every 7 days from November through March, every 30 days from April through October)"
 license: "U.S. EPA data: public domain."
 attribution: "U.S. EPA BEACON 2.0, as reported by each state's beach program"
 enabled: true

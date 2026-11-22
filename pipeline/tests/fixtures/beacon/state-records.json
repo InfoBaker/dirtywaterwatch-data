@@ -257,5 +257,86 @@
     "duplicate_of": null
    }
   ]
+ },
+ "ri-ridoh-beaches": {
+  "source_id": "ri-ridoh-beaches",
+  "ok": true,
+  "meta": {},
+  "records": [
+   {
+    "event_id": "ri-ridoh-beaches:peabodys-beach:middletown:2025-08-26",
+    "source_id": "ri-ridoh-beaches",
+    "source_record_id": "peabodys-beach:middletown:2025-08-26",
+    "parent_event_id": null,
+    "event_type": "beach_closure",
+    "status": "advisory_lifted",
+    "discharger_id": null,
+    "discharger_name": null,
+    "npdes_permit": null,
+    "outfall_id": null,
+    "outfall_name": null,
+    "waterbody_text": "Peabody's Beach (Middletown)",
+    "water_slugs": [
+     "sakonnet-river-ri"
+    ],
+    "water_match": "geometry",
+    "lat": 41.493489,
+    "lon": -71.246999,
+    "coord_source": "source",
+    "coord_precision_m": null,
+    "started_at": "2025-08-26T00:00:00-04:00",
+    "ended_at": "2025-08-28T00:00:00-04:00",
+    "time_precision": "day",
+    "reported_at": null,
+    "published_at": null,
+    "source_updated_at": null,
+    "fetched_at": "2026-11-02T10:57:59Z",
+    "material": null,
+    "volume_gal": null,
+    "volume_text": null,
+    "estimate_flag": "unknown",
+    "authority": "Rhode Island Department of Health (RIDOH) Beach Monitoring Program",
+    "advice_text": null,
+    "advice_window_hours": null,
+    "advice_window_basis": null,
+    "source_url": "https://health.ri.gov/beaches",
+    "raw": {
+     "sheet": "history",
+     "sheet_row": 1099,
+     "sheet_url": "https://docs.google.com/spreadsheets/d/1KXdH37xHUPrjJSEkryquPQ2GaP-R_9Gl5NkZrUnAjjU/gviz/tq?tqx=out:csv&gid=29002208",
+     "Beach": "Peabody's Beach",
+     "City/Town": "Middletown",
+     "Closed On": "8/26/2025",
+     "Re-Opened": "",
+     "Number of Days Closed": "2",
+     "FW/SW": "SW",
+     "ended_at_basis": "Closed On + Number of Days Closed (Re-Opened blank)",
+     "coord_join": {
+      "layer": "https://services1.arcgis.com/dkWT1XL4nglP5MLP/arcgis/rest/services/RIDOHGIS_Beaches_View/FeatureServer/0",
+      "how": "name (same town)",
+      "matched": [
+       {
+        "name": "Peabody's Beach",
+        "beach_id": "RI276487",
+        "town": "MIDDLETOWN"
+       }
+      ]
+     },
+     "water_placement": {
+      "nearest_waters_m": [
+       [
+        "sakonnet-river-ri",
+        12
+       ],
+       [
+        "rhode-island-sound-ri",
+        973
+       ]
+      ]
+     }
+    },
+    "parse_error": null
+   }
+  ]
  }
 }
