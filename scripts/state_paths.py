@@ -123,6 +123,7 @@ import sys
 import tarfile
 import time
 import zlib
+from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
@@ -459,10 +460,27 @@ def attains_member_problem(m: tarfile.TarInfo, only: str | None = None) -> str |
     return None if ok else "a file that is not the cache's"
 
 
+def safe_error(ex: BaseException) -> str:
+    """An exception as a public log may show it: the pipeline's common.error_text (a fixed category, never the
+    exception's own words, which can quote a member name or a path), loaded from pipeline/common.py (standard library
+    only); the exception's kind alone when that file cannot be loaded."""
+    try:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("dww_common", ROOT / "pipeline" / "common.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.error_text(ex)
+    except Exception:  # noqa: BLE001 - the kind alone rather than the words
+        name = type(ex).__name__
+        return name if re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]{0,60}", name) else "Error"
+
+
 def unpack_attains(src: Path, root: Path = ROOT, only: str | None = None) -> dict:
     """Restore state/attains.tar.gz (the assessment cache) or state/attains-geom.tar.gz (the geometry cache) under
     root. The whole archive is read and checked first (attains_member_problem); one member that may not be restored,
-    or a damaged gzip, raises Unreadable having written nothing. Refused when a folder on the way is a link."""
+    or a damaged gzip, raises Unreadable having written nothing. Refused when a folder on the way is a link. The
+    message counts the refused members by their fixed category (attains_member_problem's words) and never names one:
+    a member name is the archive's text, which can hold a path or an address, and the logs are public."""
     root = Path(root)
     for d in ATTAINS_DIRS:
         if (root / d).is_symlink():
@@ -470,7 +488,7 @@ def unpack_attains(src: Path, root: Path = ROOT, only: str | None = None) -> dic
     try:
         with open(src, "rb") as fh:
             if fh.read(2) != b"\x1f\x8b":
-                raise Unreadable(f"{Path(src).name} is not a gzip file")
+                raise Unreadable("the archive is not a gzip file")
         with gzip.open(src, "rb") as g:
             while g.read(1 << 20):
                 pass
@@ -478,18 +496,19 @@ def unpack_attains(src: Path, root: Path = ROOT, only: str | None = None) -> dic
             ms = tf.getmembers()
             # AppleDouble '._*' files from a tarball made on a Mac are skipped, as in unpack-build
             ms = [m for m in ms if not any(x.startswith("._") for x in PurePosixPath(m.name).parts)]
-            bad = [(m.name, why) for m in ms if (why := attains_member_problem(m, only))]
+            bad = [why for m in ms if (why := attains_member_problem(m, only))]
             if bad:
-                shown = "; ".join(f"{n[:120]!r}: {w}" for n, w in bad[:3])
-                raise Unreadable(f"{Path(src).name} holds {len(bad)} member(s) that may not be restored ({shown}); "
+                counts = sorted(Counter(bad).items())
+                shown = "; ".join(f"{why}: {n}" for why, n in counts)
+                raise Unreadable(f"the archive holds {len(bad)} member(s) that may not be restored ({shown}); "
                                  "nothing was written")
             if not any(m.isfile() for m in ms):
-                raise Unreadable(f"{Path(src).name} holds no file; nothing was written")
+                raise Unreadable("the archive holds no file; nothing was written")
             tf.extractall(root, members=ms, filter="data")
     except Unreadable:
         raise
     except (OSError, EOFError, tarfile.TarError, zlib.error) as ex:
-        raise Unreadable(f"{Path(src).name}: {type(ex).__name__}") from None
+        raise Unreadable(f"the archive could not be read ({safe_error(ex)})") from None
     n = sum(1 for m in ms if m.isfile())
     say(f"restored {n} file(s) from {Path(src).name}")
     return {"files": n}
@@ -831,8 +850,8 @@ def main(argv=None) -> int:
     if a.cmd == "unpack-attains":
         try:
             unpack_attains(Path(a.file), only=a.only)
-        except Unreadable as ex:
-            say(f"the assessment object could not be read ({ex}); nothing was restored from it")
+        except Exception as ex:  # noqa: BLE001 - every failure in fixed words (Unreadable's are this script's own)
+            say(f"the assessment object could not be read ({safe_error(ex)}); nothing was restored from it")
             return 1
         return 0
     if a.cmd == "unpack-obl":

@@ -13,8 +13,9 @@ most units are "Not Assessed" or "Insufficient Information" for recreation, and 
 state took, in the years it took them.
 
 Code: `pipeline/build/attains.py` (the build), `scripts/attains_context.py` (its command line),
-`pipeline/export/build.py` (`public_assessments`), `.github/workflows/attains.yml` (the weekly job), tests in
-`pipeline/tests/test_attains.py`.
+`pipeline/export/assessments.py` (the export module), `pipeline/export/build.py` (`public_assessments`,
+`assessment_download`), `.github/workflows/attains.yml` (the weekly job), tests in `pipeline/tests/test_attains.py`
+and `pipeline/tests/test_attains_export_hook.py`.
 
 ## Sources
 
@@ -37,7 +38,16 @@ May 2026 change), takes an api.data.gov key in the `api_key` query parameter or 
 national downloads) need no key. The pipeline sends the key, when the environment variable `ATTAINS_API_KEY` is set,
 in the `X-Api-Key` header only: an address can be printed in a public Actions log, a header is not. The key is never
 logged, written or put in an address; the weekly workflow passes none, and everything runs and is tested without one.
-With a key, at most 100 units a run are looked up, and only units the national files lack.
+Whitespace around the key is stripped; a key with any other character than visible ASCII (a newline or a space inside)
+is not used, and the log says so without the value. A request the HTTP library refuses (its error would quote the
+header) is reported by its kind and host only, and the unit falls back to the layers. With a key, at most 100 units a
+run are looked up, and only units the national files lack. Only the parsed fields are cached
+(`data/raw/attains/api/<org>__<au>.json`: `fetched_at`, `cycle`, `newest_known`, `unit`, its free text scrubbed), never
+the raw answer; an entry is asked again after 30 days, or when the national files or the layers show a cycle for the
+unit newer than the entry's cycle and the newest known when it was fetched. Of the items an answer has for a unit, the
+newest reporting cycle is read. A probable source counts only with an associated cause that is a pathogen
+(`associatedCauseNames`), as the national file ties each source row to its cause; a unit filled this way says
+`"from": "web services"`.
 
 ## How it runs
 
@@ -48,14 +58,23 @@ With a key, at most 100 units a run are looked up, and only units the national f
 
 1. **File list.** The lookup is read; each address is checked (https, an EPA or Amazon S3 host, the expected file
    name). A file is downloaded again only when the list's timestamp or size differs from the cached copy's sidecar
-   (`data/raw/attains/<file>.csv.zip` and `.meta.json`, git-ignored).
+   (`data/raw/attains/<file>.csv.zip` and `.meta.json`, git-ignored). A download is staged as a `.part` file and
+   checked there: the list's size, every member's CRC (the whole zip is read) and the CSV's header with the columns
+   the readers use. Only then does it replace the cached copy, with a new sidecar; a download that fails a check is
+   removed, the cached copy and its sidecar stay, and the run stops.
 2. **Geometry.** For each live state (`data/rules.json` `live_states`) with a state organization in the control
    table, the three layers are read with `where orgtype='State' AND state='<ST>'`, 2,000 rows a page, paged by
    OBJECTID, `outSR=4326`, `maxAllowableOffset=0.0002` (about 20 m) and `geometryPrecision=5`; one request at a time,
    a one-second pause between requests, and back-off on HTTP 429, 5xx and ArcGIS errors (Retry-After honoured up to
    two minutes, six tries). Each state is cached as `data/raw/attains/geom/<ST>.json.gz` and fetched again only when
    its load date in the control table changes, after 90 days, or with `--refresh-geometry`. The rows repeat per
-   geometry part; they are grouped by organization and unit id. All 52 live jurisdictions took 438 requests and 16
+   geometry part; they are grouped by organization and unit id. The answers are checked whole before anything is
+   kept: each layer's count is asked first (`returnCountOnly`) and the pages must add up to it; every page needs its
+   `features` list and every feature an OBJECTID above the one before; a page that announces more
+   (`exceededTransferLimit`) and brings nothing is an interrupted sequence. A control-table answer without its
+   `features` list or with no state organization, and one that lacks a live state the last run covered (the geometry
+   manifest, the last assessment file) or a state asked for, stop the run the same way. A stopped run writes nothing:
+   the last assessment file and each state's cached geometry stand. All 52 live jurisdictions took 438 requests and 16
    minutes on 2026-11-21 (Pennsylvania's 185,225 line features 2.5 minutes); the cache is about 190 MB.
 3. **Join** (below).
 4. **National files.** Each zip's one CSV is streamed (zipfile and csv, never read whole; the assessments file took
@@ -65,7 +84,13 @@ With a key, at most 100 units a run are looked up, and only units the national f
    own cycle. A matched unit that is not in its organization's latest cycle of the assessments file keeps the map
    layer's identity, link and flags (`"from": "layer"`).
 5. **Output.** `data/build/attains/attains-waters.json` (below). A state whose geometry could not be fetched stops
-   the run before anything is written: a partial file never replaces a whole one.
+   the run before anything is written: a partial file never replaces a whole one. Every free-text string written
+   (unit and organization names, location text, recreation uses, source and cause names, the audit list's names)
+   passes through the pipeline's free-text scrub (`common.scrub_text`: e-mail addresses, phone numbers, staff names
+   after a title, a resident's house number); the matching reads the text before it. The file is checked against the
+   form the export reads (`export/assessments.py` `cache_problem`) before it is written. The command line prints
+   any failure (a request, a zip, a CSV, the disk) through the pipeline's `error_text`, never in the failure's own
+   words, and exits 1.
 
 **Weekly.** `.github/workflows/attains.yml` runs on Mondays and by hand (with `refresh_geometry: yes` to refetch
 all geometry). It restores openboatlaunch's outlines from R2 `state/obl-water.tar.gz` (the copy the hourly refresh
@@ -77,7 +102,8 @@ concurrency group: it writes only its own two objects, never `state/build.tar.gz
 blocks or cancels the hourly refresh or a state batch, which share the refresh's one waiting place. The hourly
 refresh restores `state/attains.tar.gz` read only after its build state (`state_paths.py unpack-attains --only
 cache`, which writes the assessment file and nothing else); the copy that then rides in `state/build.tar.gz` is the
-fallback when the object cannot be fetched.
+fallback when the object cannot be fetched. An object it refuses is reported by counts of fixed categories ("an odd
+path: 1"), never by a member's name, and a damaged one by the failure's category (`common.error_text`).
 
 ## The join
 
@@ -102,8 +128,9 @@ A unit matches a water when **both** hold:
   Tributary", "Little Mill Creek" and "Shenandoah River North Fork" do not); when a qualifier of the same water comes
   first ("Upper Mississippi River", "Tidal Anacostia River"); or when one part of a compound unit name agrees
   ("Dalco Passage and East Passage", "Nisqually Reach/Drayton Passage", the reservoir of "Emory River Embayment of
-  Watts Bar Reservoir"). A fork written after the name ("Lewis River, E.F.", "White River - West Fork") is the fork,
-  never the main stem. A reservoir unit on a river record matches only when the reservoir's name is one of the
+  Watts Bar Reservoir"). A fork written after the name ("Lewis River, E.F.", "White River - West Fork", "White River
+  (West Fork)", "Mill Creek (North Branch)") is the fork, never the main stem; a water record named with its fork in
+  parentheses is the fork's record, and the main stem's name alone does not agree with it. A reservoir unit on a river record matches only when the reservoir's name is one of the
   water's aliases (`data/water-aliases.json`) or the unit's name contains the river's name. A name that is the
   other with initials or "of", "the", "and" added also agrees ("A M Puett Reservoir" and "Puett Reservoir."); a name
   that adds a word does not ("Little Mill Creek"; Ohio's watershed "Sawyer Brook-Cuyahoga River" against the
@@ -145,7 +172,9 @@ non-point wet-weather category. Each kept source carries its own cycle (`cycle`)
      "audit": {slug: [{"org_id", "au_id", "au_name", "reason", "distance_m", "kept"?, "others"?}]}}
 
 UNIT: `org_id`, `org_name`, `state`, `au_id`, `au_name`, `cycle` (the organization's latest cycle in the assessments
-file, else the layer's), `cycle_status`, `water_type`, `size`, `size_units`, `location` (the state's text), `recreation`
+file, else the layer's), `cycle_status`, `water_type`, `size`, `size_units`, `location` (the state's text; these four
+from the assessment or the assessment-units file's record of the same cycle, else null, never from another
+cycle), `recreation`
 (`support` in ATTAINS's words: "Not Supporting", "Fully Supporting", "Insufficient Information", "Not Assessed";
 "Not Supporting" when any recreation use is; `uses`, the recreation uses; `monitoring_start`, the earliest, and
 `monitoring_end`, the latest, of their monitoring dates; `assessment_date`; dates as given, never a time), `pathogens`
@@ -154,7 +183,8 @@ file, else the layer's), `cycle_status`, `water_type`, `size`, `size_units`, `lo
 against, left out when it ties it to none), `sewage_sources` (`name`, `kind`, `confirmed`, `cause`, `cycle`),
 `sources_cycle` (the one cycle all its sources come from, else null), `has_tmdl` (a pathogen parameter in category 4A
 or tied to a TMDL), `report_url` (the cycle-pinned How's My Waterway address, the citation), `latest_url` (the
-cycle-less address, which opens the state's latest assessment), `from` ("national files" or "layer") and `match`
+cycle-less address, which opens the state's latest assessment), `from` ("national files", "web services" or
+"layer") and `match`
 (`method`, `distance_m`, `geometry`: the unit's kind, "line", "area" or "point"; `name_from`: "location" when the
 unit is named by a station code and its location text was compared).
 
@@ -182,9 +212,15 @@ a pathogen listing first, then a sewage source named, then distance; its `summar
 `pathogen_listed_total` and `sewage_named_total`. The cache and the download keep every unit. `out/assessments.json` is
 `{"built", "source", "waters": {slug: SUMMARY}}` with the whole source block (the latest cycle of each organization in
 each file, the geometry fetch time of each state) once. `out/meta.json` carries
-`assessments`: `waters_with_units`, `waters_pathogen_listed`, `waters_sewage_named`, `waters_capped` (blocks cut to 25
-units), `built` and `unavailable` (why nothing is shown, else null). A cache that is missing, unreadable or built more than 30 days before the export leaves
-every `assessment` null and says why in the log and in `unavailable`; it never fails the export. A slug the cache knows
+`assessments`: `waters_with_units`, `waters_pathogen_listed` and `waters_sewage_named` (a water counts when any of its
+units has the finding, those past the cap of 25 included), `waters_capped` (blocks cut to 25 units), `built` and
+`unavailable` (why nothing is shown, else null). The whole cache is checked before anything is exported
+(`cache_problem`: every water and unit, `recreation`, `pathogens`, `sewage_sources`, `match` and the source block, by
+the types documented above). A cache that is missing, unreadable, of another form in any part, or built more than 30
+days before the export leaves every `assessment` null and says why (naming the part, never a value) in the log and in
+`unavailable`; it never fails the export. Every free-text string of a published unit passes through
+`common.scrub_text` and the export's redactor (`Redactor.note`, the pass the records' free text takes: names marked
+as a person, the owner's blocklist) before the water pages, `assessments.json` and the download are written. A slug the cache knows
 under an older name is written under the record's own slug. The report CSV downloads are unchanged. `assessments.json`
 is in the export's public payloads, so the blocklist self-check reads it with `waters/*.json`. The code is
 `pipeline/export/assessments.py`; `export/build.py` only calls it.
@@ -225,6 +261,16 @@ and the water records at data main of 2026-11-21. Every count here is read from 
   compressed; 4,833 blocks, median 2.3 KB, none over 100 KB; the largest, the Roanoke River in Virginia, 33 KB) and no
   file. Two files are new: `out/assessments.json` (0.8 MB) and `out/csv/assessments.csv` (11.1 MB, 25,147 rows, every
   unit).
+
+**Rerun after the review fixes** (built 2026-11-22 02:05Z, offline from the same downloads, geometry and water
+records): 14,268 water records with a unit of their own state (4 fewer), 3,892 with a pathogen listing (2 fewer) and
+964 with a sewage source named (unchanged); 45,099 water-unit pairs, 44,313 distinct units. The 23 pairs that went are
+each a fork, branch or prong written in parentheses ("WILLS BRANCH (NORTH PRONG)", "NEW RIVER (NORTH FORK)"), 21 in
+Florida and 2 in North Carolina, that had matched the main stem's record; the North Prong Alafia River's record gained
+its two "(NORTH PRONG)" units. No matched unit's water type, size, location or text changed: the assessments file
+gives them for the assessment's own cycle, and none of their text held an e-mail address or a phone number. In the
+table below (the first run's), Florida now has 687 waters with a unit and 202 with a pathogen listing, North Carolina
+386 with a unit. The join and the files' read took 292 seconds, 4.0 GB resident at most.
 
 Per state (a water counts in its own state; "Units in the layers" is the state organization's units in its cycle in
 the layers):
@@ -292,8 +338,8 @@ upper bounds), every live jurisdiction:
 
 | Step | Requests or bytes | Wall time | Peak memory |
 |---|---|---|---|
-| The three national files | 343,261,458 bytes (203,056,994 + 55,784,762 + 84,419,702), once per new timestamp | 9.5 minutes (345 + 157 + 70 s) | small (streamed to disk) |
-| Assessment-unit geometry, all 52 jurisdictions | 438 requests, one at a time with a one-second pause; about 193 MB cached (compressed) | 16 minutes | small |
+| The three national files | 343,261,458 bytes (203,056,994 + 55,784,762 + 84,419,702), once per new timestamp | 9.5 minutes (345 + 157 + 70 s), plus the staged check of each new download (every member read once) | small (streamed to disk) |
+| Assessment-unit geometry, all 52 jurisdictions | 438 requests, one at a time with a one-second pause; about 193 MB cached (compressed); since the review fixes, one count request more per layer and state fetched (156 on a full fetch, about 3 minutes more) | 16 minutes | small |
 | The join and the files' read (`scripts/attains_context.py`, downloads and geometry cached) | none beyond the file list and the layers' metadata (5 requests) | 4.9 minutes on an idle machine (292 s); 11.8 minutes under load | 3.8 GB resident at most (2.3 to 3.8 GB over three runs) |
 
 Estimate for the weekly job on GitHub's standard runner (4 processors, 16 GB): the downloads from EPA's bucket in

@@ -13,14 +13,19 @@ Sources (all keyless; docs/attains.md):
      group PATHOGENS with their status, IR category and first listing), `sources` (the probable sources the state
      names per cause) and `assessmentUnits` (water type, size, location text). They are streamed (zipfile + csv),
      never loaded whole, and only the rows of the units the join found are kept. Several cycles per organization are
-     in the files: each organization's latest cycle in each file is kept, and every finding carries its cycle.
+     in the files: each organization's latest cycle in each file is kept, and every finding carries its cycle. A new
+     download is staged and checked (size, every member's CRC, the CSV's columns) before it replaces the cached copy.
   2. The ATTAINS map layers (FS_URL, layers 0 points, 1 lines, 2 areas; table 5 the control table): each state's
      assessment-unit geometry, fetched one request at a time with a pause, paged by OBJECTID, simplified on the
      server and cached per state under data/raw/attains/geom/ (refetched when the state's load date in the control
-     table changes, or after GEOM_MAX_DAYS).
-  3. The ATTAINS web services (API_URL): optional, only when ATTAINS_API_KEY is set, only to fill a matched unit the
-     national files lack, at most API_MAX_CALLS a run. The key goes in the X-Api-Key header (api.data.gov's header
-     option), never in an address and never in a log.
+     table changes, or after GEOM_MAX_DAYS). The answers are checked whole (features lists, OBJECTIDs, the layer's
+     count; the control table's states against the last run's): an incomplete answer stops the run, nothing written.
+  3. The ATTAINS web services (API_URL): optional, only when ATTAINS_API_KEY is set (whitespace stripped, visible
+     characters only), only to fill a matched unit the national files lack, at most API_MAX_CALLS a run. The key goes
+     in the X-Api-Key header (api.data.gov's header option), never in an address and never in a log. The parsed fields
+     are cached with their fetch time and cycle (api_cached: asked again after API_MAX_DAYS or on a newer cycle).
+Every free-text string written passes through common.scrub_text; the file is checked against the export's form
+(export/assessments.py cache_problem) before it is written. main() prints any failure through error_text.
 
 The join (water record -> assessment units): a unit matches a water when it lies along the water (a line: within
 MATCH_M of the water's outline for at least half its length or ALONG_MIN_M; an area: it intersects the water or lies
@@ -52,6 +57,7 @@ import sys
 import time
 import unicodedata
 import zipfile
+import zlib
 from collections import Counter, defaultdict
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
@@ -59,8 +65,8 @@ from urllib.parse import urlsplit
 
 import requests
 
-from common import BUILD_DIR, DATA_DIR, HEADERS, error_text, live_states, now_iso
-
+from common import BUILD_DIR, DATA_DIR, HEADERS, error_text, live_states, now_iso, safe_traceback, scrub_text
+from export.assessments import cache_problem, scrub_unit
 
 
 LOOKUP_URL = "https://owapps.epa.gov/expertquery/api/lookupFiles"
@@ -90,6 +96,10 @@ API_DIR = RAW_DIR / "api"
 OUT = BUILD_DIR / "attains" / "attains-waters.json"
 STALE_DAYS = 30                      # the export shows nothing from a cache older than this
 API_MAX_CALLS = 100
+API_MAX_DAYS = 30                    # a cached web-services answer is asked again after this, or on a newer cycle
+# a key as a header value can carry: visible ASCII only (a newline or a space inside makes requests refuse the header,
+# and its error quotes the value)
+API_KEY_FORM = re.compile(r"[\x21-\x7e]{1,512}")
 
 MATCH_M = 100.0
 ALONG_MIN_M = 500.0                  # a line lies along the water for at least min(half its length, this)
@@ -207,11 +217,13 @@ def au_names(name: str) -> list[tuple[str, ...]]:
     """The names an assessment unit's name may stand for: the name cut at its first location words ("from", "above",
     "to", "mile" ...) with a trailing id and parentheses removed, and each part of a compound name ("Dalco Passage and
     East Passage", "Nisqually Reach/Drayton Passage", "Kerr Lake; Buggs Island Lake") that names a kind of water;
-    a fork written after the name ("Lewis River, E.F.", "White River - West Fork") is put in front of it; a name in
-    parentheses that names a kind of water ("Smith Mtn. Lake (Blackwater River)"); the reservoir of "X Embayment of
-    Y Reservoir"."""
+    a fork written after the name ("Lewis River, E.F.", "White River - West Fork") or in parentheses after it ("White
+    River (West Fork)", "Mill Creek (North Branch)") is put in front of it, so the name stays the fork's and never
+    the main stem's; a name in parentheses that names a kind of water ("Smith Mtn. Lake (Blackwater River)"); the
+    reservoir of "X Embayment of Y Reservoir"."""
     s = str(name or "")
     paren = re.findall(r"\(([^()]*)\)", s)
+    paren_forks = [t for x in paren if is_fork(t := tokens(x))]
     base = re.sub(r"\([^()]*\)", " ", s)
     base = TRAILING_ID.sub("", base).strip()
     base = LOCATION_CUT.sub("", base).strip()
@@ -220,10 +232,12 @@ def au_names(name: str) -> list[tuple[str, ...]]:
     out: list[tuple[str, ...]] = []
     if parts:
         first = parts[0]
-        forks = [p for p in parts[1:] if is_fork(p)]
+        forks = [p for p in parts[1:] if is_fork(p)] + paren_forks
         out.append(forks[0] + first if forks else first)
         out += [p for p in parts[1:] if not is_fork(p) and set(p) & GENERIC and set(p) - GENERIC]
     whole = tokens(base)
+    if whole and paren_forks:
+        whole = whole + paren_forks[0]              # "White River (West Fork)": never the bare "White River"
     if whole and whole not in out:
         out.append(whole)
     # a parenthesis that names a water, not one that gives bounds ("(Red River to headwaters)")
@@ -244,11 +258,19 @@ def au_names(name: str) -> list[tuple[str, ...]]:
 
 def water_names(names) -> list[tuple[str, ...]]:
     """A water's names (its name and aliases) as comparable words, each also split at "/", ";" and parentheses
-    ("Staunton River / Roanoke River", "Kerr Lake;Buggs Island Lake", "Lake Cochituate (Middle Pond)")."""
+    ("Staunton River / Roanoke River", "Kerr Lake;Buggs Island Lake", "Lake Cochituate (Middle Pond)"). A fork in
+    parentheses ("White River (West Fork)") stays with the name, written in front of it ("West Fork White River"):
+    neither the bare main stem nor the bare fork words are a name of the fork's record."""
     out = []
     for n in names:
-        for x in [n, *re.split(r"\s*(?:/|;|\(|\))\s*", str(n or ""))]:
-            t = tokens(x)
+        text = str(n or "")
+        forks = [t for x in re.findall(r"\(([^()]*)\)", text) if is_fork(t := tokens(x))]
+        if forks:
+            base = tokens(re.sub(r"\([^()]*\)", " ", text))
+            pieces = [tokens(n), forks[0] + base] if base else [tokens(n)]
+        else:
+            pieces = [tokens(x) for x in [n, *re.split(r"\s*(?:/|;|\(|\))\s*", text)]]
+        for t in pieces:
             if t and t not in out:
                 out.append(t)
     return out
@@ -345,6 +367,10 @@ class Client:
                                      stream=stream)
             except (requests.ConnectionError, requests.Timeout) as e:
                 last = error_text(e)
+            except (requests.RequestException, ValueError) as e:
+                # a request that could not be made (a header value requests refuses, InvalidHeader, or an address
+                # it cannot use): its words quote the header or the address, so only its kind is kept; not retried
+                raise AttainsError(f"the request could not be made ({type(e).__name__}) for {host_of(url)}") from None
             else:
                 self._last = time.monotonic()
                 if r.status_code == 200:
@@ -420,9 +446,50 @@ def cached_file(key: str, meta: dict, raw_dir: Path = RAW_DIR) -> Path | None:
     return p
 
 
+# the columns each national file must have (the readers below use them); a download without them is refused
+REQUIRED_COLUMNS = {
+    "assessments": ("organizationId", "assessmentUnitId", "reportingCycle", "parameterGroup", "parameterName",
+                    "parameterStatus", "useName", "useSupport"),
+    "sources": ("organizationId", "assessmentUnitId", "reportingCycle", "parameterGroup", "causeName", "sourceName"),
+    "assessmentUnits": ("organizationId", "assessmentUnitId", "reportingCycle", "locationDescription"),
+}
+ZIP_ERRORS = (zipfile.BadZipFile, zipfile.LargeZipFile, OSError, EOFError, zlib.error, NotImplementedError,
+              UnicodeError, csv.Error)
+
+
+def missing_columns(key: str, header) -> list[str]:
+    have = {col(h) for h in header or []}
+    return [c for c in REQUIRED_COLUMNS[key] if col(c) not in have]
+
+
+def check_zip(key: str, path: Path) -> None:
+    """A download as it must be before it replaces the cached copy: a zip with one CSV, every member's CRC right
+    (zipfile's testzip reads it all), and the CSV's header with the columns of REQUIRED_COLUMNS. AttainsError
+    otherwise, in this module's words (never a member name or a library's text)."""
+    try:
+        with zipfile.ZipFile(path) as z:
+            names = [n for n in z.namelist() if n.lower().endswith(".csv")]
+            if len(names) != 1:
+                raise AttainsError(f"{key}: {len(names)} CSV files inside, one expected")
+            if z.testzip() is not None:
+                raise AttainsError(f"{key}: a member fails its CRC check")
+            with z.open(names[0]) as raw:
+                header = next(csv.reader(io.TextIOWrapper(raw, encoding="utf-8-sig", newline="", errors="replace")),
+                              None)
+    except AttainsError:
+        raise
+    except ZIP_ERRORS as e:
+        raise AttainsError(f"{key}: not a readable zip ({error_text(e)})") from None
+    gone = missing_columns(key, header)
+    if gone:
+        raise AttainsError(f"{key}: columns missing ({', '.join(gone)})")
+
+
 def download(client: Client, key: str, meta: dict, raw_dir: Path = RAW_DIR, log=print) -> Path:
     """The national file `key`, from the cache when the lookup's timestamp and size are unchanged, else downloaded
-    whole (to a .part file, checked against the lookup's size, then moved in place) with its sidecar."""
+    whole to a staged .part file, checked there (the lookup's size, then check_zip: the CRC of every member and the
+    CSV's columns) and only then moved in place with its sidecar. A download that fails a check is removed and the
+    cached copy and its sidecar stay as they were (the run stops; the next one downloads again)."""
     have = cached_file(key, meta, raw_dir)
     if have:
         log(f"attains: {key} cached ({meta.get('timestamp')}, {have.stat().st_size:,} bytes)")
@@ -430,24 +497,34 @@ def download(client: Client, key: str, meta: dict, raw_dir: Path = RAW_DIR, log=
     raw_dir.mkdir(parents=True, exist_ok=True)
     p = raw_dir / FILES[key]
     part = p.with_name(p.name + ".part")
+    side = p.with_name(p.name + ".meta.json")
     t0 = time.monotonic()
-    r = client.get(meta["url"], stream=True, timeout=300)
     n = 0
-    with open(part, "wb") as f:
-        for chunk in r.iter_content(1 << 20):
-            f.write(chunk)
-            n += len(chunk)
-    if meta.get("zipSize") and n != meta["zipSize"]:
+    try:
+        r = client.get(meta["url"], stream=True, timeout=300)
+        with open(part, "wb") as f:
+            for chunk in r.iter_content(1 << 20):
+                f.write(chunk)
+                n += len(chunk)
+        if meta.get("zipSize") and n != meta["zipSize"]:
+            raise AttainsError(f"{key}: {n:,} bytes, the file list says {meta['zipSize']:,}")
+        check_zip(key, part)
+    except requests.RequestException as e:
         part.unlink(missing_ok=True)
-        raise AttainsError(f"{key}: {n:,} bytes, the file list says {meta['zipSize']:,}")
+        raise AttainsError(f"{key}: the download was cut off ({error_text(e)})") from None
+    except BaseException:
+        part.unlink(missing_ok=True)
+        raise
+    side.unlink(missing_ok=True)            # a file without its sidecar is downloaded again, never trusted
     os.replace(part, p)
-    p.with_name(p.name + ".meta.json").write_text(json.dumps({"key": key, **meta, "downloaded_at": now_iso()}, indent=1))
-    log(f"attains: {key} downloaded ({n:,} bytes in {time.monotonic() - t0:.0f} s)")
+    write_json_atomic(side, {"key": key, **meta, "downloaded_at": now_iso()})
+    log(f"attains: {key} downloaded and checked ({n:,} bytes in {time.monotonic() - t0:.0f} s)")
     return p
 
 
-def csv_rows(path: Path):
-    """The rows of the one CSV in a national zip, as dicts, streamed (the file is never read whole)."""
+def csv_rows(path: Path, key: str | None = None):
+    """The rows of the one CSV in a national zip, streamed (the file is never read whole), each with the header; with
+    `key`, a header without the columns of REQUIRED_COLUMNS[key] is refused (AttainsError)."""
     with zipfile.ZipFile(path) as z:
         names = [n for n in z.namelist() if n.lower().endswith(".csv")]
         if len(names) != 1:
@@ -458,6 +535,9 @@ def csv_rows(path: Path):
             header = next(reader, None)
             if not header:
                 return
+            gone = missing_columns(key, header) if key else []
+            if gone:
+                raise AttainsError(f"{path.name}: columns missing ({', '.join(gone)})")
             for row in reader:
                 yield header, row
 
@@ -494,9 +574,12 @@ def _int(x):
 
 
 def _num(x):
+    """A size as a number (an integer when whole), or None: never NaN or infinity, which the export refuses."""
     try:
         v = float(str(x).replace(",", ""))
     except (TypeError, ValueError):
+        return None
+    if not math.isfinite(v):
         return None
     return int(v) if v.is_integer() else round(v, 3)
 
@@ -522,13 +605,10 @@ def read_assessments(path: Path, wanted: set[tuple[str, str]]) -> tuple[dict, di
     org_max: dict[str, int] = {}
     units: dict[tuple, dict] = {}
     pathogen_names: set[str] = set()
-    idx = g = None
-    for header, row in csv_rows(path):
+    g = None
+    for header, row in csv_rows(path, "assessments"):
         if g is None:
-            idx, g = getter(header)
-            need = ("organizationId", "assessmentUnitId", "reportingCycle")
-            if any(col(k) not in idx for k in need):
-                raise AttainsError(f"{path.name}: columns missing ({', '.join(k for k in need if col(k) not in idx)})")
+            _, g = getter(header)
         org, cyc = g(row, "organizationId"), _int(g(row, "reportingCycle"))
         if cyc is not None and cyc > org_max.get(org, 0):
             org_max[org] = cyc
@@ -589,7 +669,7 @@ def read_sources(path: Path, wanted: set[tuple[str, str]], pathogen_names: set[s
     org_max: dict[str, int] = {}
     out: dict[tuple, list] = defaultdict(list)
     g = None
-    for header, row in csv_rows(path):
+    for header, row in csv_rows(path, "sources"):
         if g is None:
             _, g = getter(header)
         org, cyc = g(row, "organizationId"), _int(g(row, "reportingCycle"))
@@ -607,28 +687,37 @@ def read_sources(path: Path, wanted: set[tuple[str, str]], pathogen_names: set[s
 
 
 def read_units(path: Path, wanted: set[tuple[str, str]]) -> dict:
-    """Per (org, au) the unit's record of its latest cycle in the assessment-units file (water type, size, location)."""
+    """Per (org, au, cycle) the unit's record in the assessment-units file (water type, size, location), every cycle
+    the file has for a wanted unit: a unit's metadata is taken from the cycle its assessment is of, never another."""
     out: dict[tuple, dict] = {}
     g = None
-    for header, row in csv_rows(path):
+    for header, row in csv_rows(path, "assessmentUnits"):
         if g is None:
             _, g = getter(header)
         key = (g(row, "organizationId"), g(row, "assessmentUnitId"))
-        if key not in wanted:
+        cyc = _int(g(row, "reportingCycle"))
+        if key not in wanted or cyc is None:
             continue
-        cyc = _int(g(row, "reportingCycle")) or 0
-        have = out.get(key)
-        if have is not None and have["cycle"] > cyc:
-            continue
+        have = out.get(key + (cyc,))
         rec = {"cycle": cyc, "org_name": g(row, "organizationName"), "state": g(row, "state"),
                "au_name": g(row, "assessmentUnitName"), "water_type": g(row, "waterType") or None,
                "size": _num(g(row, "waterSize")), "size_units": g(row, "waterSizeUnits") or None,
                "location": g(row, "locationDescription") or None, "au_status": g(row, "assessmentUnitStatus") or None}
-        if have is not None and have["cycle"] == cyc:          # one row per water type: the first, the others added
+        if have is not None:                                   # one row per water type: the first, the others added
             if rec["water_type"] and rec["water_type"] not in str(have["water_type"]):
                 have["water_type"] = f"{have['water_type']}; {rec['water_type']}" if have["water_type"] else rec["water_type"]
             continue
-        out[key] = rec
+        out[key + (cyc,)] = rec
+    return out
+
+
+def latest_units(recs: dict) -> dict:
+    """read_units' records as {(org, au): the record of its latest cycle}: a station-coded unit's location text, read
+    for the name test only (never published from another cycle)."""
+    out: dict[tuple, dict] = {}
+    for (org, au, cyc), rec in recs.items():
+        if (org, au) not in out or out[(org, au)]["cycle"] < cyc:
+            out[(org, au)] = rec
     return out
 
 
@@ -668,18 +757,32 @@ def esri_geometry(layer: int, g: dict):
     return geom if geom.is_valid else make_valid(geom)
 
 
+def _features(d, what: str) -> list[dict]:
+    """The `features` list of an ArcGIS query answer, each a dict with an `attributes` dict; AttainsError when the
+    answer has no such list (a missing field is never read as an empty page)."""
+    feats = d.get("features") if isinstance(d, dict) else None
+    if not isinstance(feats, list):
+        raise AttainsError(f"{what}: the answer has no features list")
+    if not all(isinstance(f, dict) and isinstance(f.get("attributes"), dict) for f in feats):
+        raise AttainsError(f"{what}: a feature has no attributes")
+    return feats
+
+
 def fetch_control(client: Client) -> dict:
-    """The control table's state organizations: {state: [{org_id, org_name, cycle, created_on}]}."""
+    """The control table's state organizations: {state: [{org_id, org_name, cycle, created_on}]}. An answer without a
+    features list, or with no state organization at all, stops the run (AttainsError): it is never read as no states."""
     d = client.get_json(f"{FS_URL}/{CONTROL_TABLE}/query", params={
         "where": "orgtype='State'", "outFields": "state,organizationid,organizationname,reportingcycle,createdon",
         "returnGeometry": "false", "f": "json"})
     out: dict[str, list] = defaultdict(list)
-    for f in d.get("features") or []:
-        a = f.get("attributes") or {}
+    for f in _features(d, "the control table"):
+        a = f["attributes"]
         st = str(a.get("state") or "").upper()
         if re.fullmatch(r"[A-Z]{2}", st):
             out[st].append({"org_id": a.get("organizationid"), "org_name": a.get("organizationname"),
                             "cycle": a.get("reportingcycle"), "created_on": a.get("createdon")})
+    if not out:
+        raise AttainsError("the control table names no state organization")
     return dict(out)
 
 
@@ -688,8 +791,8 @@ def layer_edits(client: Client) -> dict:
     out = {}
     for layer in LAYERS:
         d = client.get_json(f"{FS_URL}/{layer}", params={"f": "json"})
-        ms = ((d.get("editingInfo") or {}).get("dataLastEditDate"))
-        out[str(layer)] = ms_iso(ms)
+        info = d.get("editingInfo") if isinstance(d, dict) else None
+        out[str(layer)] = ms_iso(info.get("dataLastEditDate") if isinstance(info, dict) else None)
     return out
 
 
@@ -701,27 +804,45 @@ def ms_iso(ms) -> str | None:
 
 def fetch_state_layer(client: Client, state: str, layer: int, log=print) -> list[list]:
     """Every feature of one state organization in one layer, paged by OBJECTID (keyset), as compact rows
-    [layer, org, au_id, au_name, cycle, report_link, recreation_use, pathogens, cycle_status, geometry]."""
+    [layer, org, au_id, au_name, cycle, report_link, recreation_use, pathogens, cycle_status, geometry].
+    Checked whole (AttainsError, nothing kept): the layer's count is asked first and the pages must add up to it;
+    every page needs its features list, every feature an OBJECTID above the one before; a page that says there is
+    more (exceededTransferLimit) and brings nothing is an interrupted sequence."""
     if not re.fullmatch(r"[A-Z]{2}", state):
         raise ValueError(f"not a state code: {state!r}")
-    rows, last = [], 0
+    what = f"{state} layer {layer}"
+    where = f"orgtype='State' AND state='{state}'"
+    c = client.get_json(f"{FS_URL}/{layer}/query", params={"where": where, "returnCountOnly": "true", "f": "json"})
+    count = c.get("count") if isinstance(c, dict) else None
+    if not isinstance(count, int) or isinstance(count, bool) or count < 0:
+        raise AttainsError(f"{what}: the count answer has no count")
+    rows, last, page = [], 0, 0
     while True:
+        page += 1
         d = client.get_json(f"{FS_URL}/{layer}/query", params={
-            "where": f"orgtype='State' AND state='{state}' AND OBJECTID>{last}", "outFields": OUT_FIELDS,
+            "where": f"{where} AND OBJECTID>{last}", "outFields": OUT_FIELDS,
             "returnGeometry": "true", "outSR": "4326", "maxAllowableOffset": str(MAX_OFFSET_DEG),
             "geometryPrecision": str(PRECISION), "orderByFields": "OBJECTID", "resultRecordCount": str(PAGE),
             "f": "json"})
-        feats = d.get("features") or []
+        feats = _features(d, f"{what} page {page}")
+        more = bool(d.get("exceededTransferLimit"))
         for f in feats:
-            a = f.get("attributes") or {}
+            a = f["attributes"]
             oid = a.get("OBJECTID")
-            if isinstance(oid, int) and oid > last:
-                last = oid
+            if not isinstance(oid, int) or isinstance(oid, bool) or oid <= last:
+                raise AttainsError(f"{what} page {page}: a feature without an OBJECTID above the last one")
+            last = oid
             rows.append([layer, a.get("organizationid"), a.get("assessmentunitidentifier"), a.get("assessmentunitname"),
                          a.get("reportingcycle"), a.get("waterbodyreportlink"), a.get("recreation_use"),
                          a.get("pathogens"), a.get("cyclestatus"), f.get("geometry")])
-        if not feats or (len(feats) < PAGE and not d.get("exceededTransferLimit")):
+        if more and not feats:
+            raise AttainsError(f"{what} page {page}: more features announced and none sent (an interrupted sequence)")
+        if not feats or (len(feats) < PAGE and not more):
             break
+        if len(rows) > count:
+            break
+    if len(rows) != count:
+        raise AttainsError(f"{what}: {len(rows):,} features read, the layer counts {count:,} (an incomplete sequence)")
     log(f"attains: {state} layer {layer} ({LAYERS[layer]}s): {len(rows):,} features")
     return rows
 
@@ -1015,8 +1136,10 @@ def water_state(slug: str, w: dict) -> str:
 def unit_record(key: tuple[str, str], lay: dict, match: dict, assess: dict | None, src_rows: list | None,
                 src_cycle: int | None, au_file: dict | None) -> dict:
     """UNIT (docs/attains.md): the layer's identity and link, the national files' assessment of the organization's
-    latest cycle (else the layer's flags, marked "from": "layer"), the sewage sources of its PATHOGENS causes."""
-    org, au = key
+    latest cycle (else the layer's flags, marked "from": "layer"), the sewage sources of its PATHOGENS causes.
+    au_file is the assessment-units file's record of the unit's own cycle (unit_cycle), or None: water type, size and
+    location come from the assessment or that record only, never from another cycle."""
+    org, au = str(key[0]), str(key[1])
     a = assess or {}
     f = au_file or {}
     rec_uses = a.get("uses") or {}
@@ -1038,7 +1161,7 @@ def unit_record(key: tuple[str, str], lay: dict, match: dict, assess: dict | Non
         if "Not Supporting" in worst:
             rec["support"] = "Not Supporting"
     elif not assess and lay.get("recreation_use"):
-        rec = {"support": lay.get("recreation_use"), "uses": [], "monitoring_start": None, "monitoring_end": None,
+        rec = {"support": _text_or_none(lay.get("recreation_use")), "uses": [], "monitoring_start": None, "monitoring_end": None,
                "assessment_date": None}
     if assess:
         pathogens = sorted((p for p in a.get("pathogens", {}).values()),
@@ -1046,7 +1169,7 @@ def unit_record(key: tuple[str, str], lay: dict, match: dict, assess: dict | Non
         has_tmdl = any(p.get("tmdl") or str(p.get("ir_category") or "").upper().startswith("4A") for p in pathogens)
         pathogens = [public_pathogen(p) for p in pathogens]
     elif lay.get("pathogens"):
-        pathogens = [{"parameter": PATHOGEN_GROUP, "status": lay.get("pathogens"), "ir_category": None,
+        pathogens = [{"parameter": PATHOGEN_GROUP, "status": _text_or_none(lay.get("pathogens")), "ir_category": None,
                       "first_listed": None}]
         has_tmdl = False
     else:
@@ -1062,12 +1185,12 @@ def unit_record(key: tuple[str, str], lay: dict, match: dict, assess: dict | Non
         seen.add(k)
         sources.append({"name": s.get("name"), "kind": kind, "confirmed": s.get("confirmed"), "cause": s.get("cause"),
                         "cycle": src_cycle})
-    cycle = a.get("_cycle") or lay.get("cycle")
+    cycle = unit_cycle(lay, assess)
     return {
         "org_id": org, "org_name": a.get("org_name") or f.get("org_name") or None,
         "state": a.get("state") or f.get("state") or lay.get("state"),
-        "au_id": au, "au_name": lay.get("au_name") or a.get("au_name") or f.get("au_name"),
-        "cycle": cycle, "cycle_status": a.get("cycle_status") or lay.get("cycle_status"),
+        "au_id": au, "au_name": _text_or_none(lay.get("au_name")) or a.get("au_name") or f.get("au_name"),
+        "cycle": cycle, "cycle_status": a.get("cycle_status") or _text_or_none(lay.get("cycle_status")),
         "water_type": a.get("water_type") or f.get("water_type"),
         "size": a.get("size") if a.get("size") is not None else f.get("size"),
         "size_units": a.get("size_units") or f.get("size_units"),
@@ -1079,10 +1202,20 @@ def unit_record(key: tuple[str, str], lay: dict, match: dict, assess: dict | Non
         "sources_cycle": src_cycle if sources else None,
         "report_url": (REPORT_URL.format(org=org, au=au) + (f"/{cycle}" if cycle else "")),
         "latest_url": REPORT_URL.format(org=org, au=au),
-        "from": "national files" if assess else "layer",
+        "from": a.get("_from") or ("national files" if assess else "layer"),
         "match": {"method": match["method"], "distance_m": match["distance_m"], "geometry": lay.get("kind"),
                   **({"name_from": match["name_from"]} if match.get("name_from") else {})},
     }
+
+
+def unit_cycle(lay: dict, assess: dict | None) -> int | None:
+    """The cycle a unit's record is of: its assessment's (the organization's latest in the assessments file, or the web
+    services'), else the layer's."""
+    return (assess or {}).get("_cycle") or _int(lay.get("cycle"))
+
+
+def _text_or_none(v):
+    return v if isinstance(v, str) else None
 
 
 def public_pathogen(p: dict) -> dict:
@@ -1119,79 +1252,156 @@ def sort_units(units: list[dict]) -> list[dict]:
 # ---------------------------------------------------------------- the optional web services
 
 
+def api_key_from_env(log=print) -> str | None:
+    """ATTAINS_API_KEY with surrounding whitespace stripped (a secret pasted with a newline), or None when it is unset,
+    empty or not a usable header value (API_KEY_FORM): then the web services are not used, and the log says so in
+    fixed words, never with the value."""
+    v = (os.environ.get("ATTAINS_API_KEY") or "").strip()
+    if not v:
+        return None
+    if not API_KEY_FORM.fullmatch(v):
+        log("attains: ATTAINS_API_KEY is set but is not a usable key (visible characters only); the web services are "
+            "not used this run")
+        return None
+    return v
+
+
+def api_cached(p: Path, newest_known: int | None, now: datetime) -> tuple[bool, dict | None]:
+    """(usable, unit) of a cached web-services entry {"fetched_at", "cycle", "newest_known", "unit"}: usable when it
+    is younger than API_MAX_DAYS and neither the national files nor the layers show a cycle for the unit newer than
+    the entry's cycle and the newest cycle known when it was fetched. An entry of another form (an older raw answer)
+    or unreadable is not usable."""
+    try:
+        d = json.loads(p.read_text())
+    except (OSError, ValueError):
+        return False, None
+    if not isinstance(d, dict) or "fetched_at" not in d:
+        return False, None
+    t = parse_time(d.get("fetched_at"))
+    if t is None or now - t > timedelta(days=API_MAX_DAYS) or t > now + timedelta(days=1):
+        return False, None
+    basis = max((c for c in (d.get("cycle"), d.get("newest_known")) if isinstance(c, int) and not isinstance(c, bool)),
+                default=None)
+    if newest_known is not None and (basis is None or newest_known > basis):
+        return False, None
+    unit = d.get("unit")
+    return True, (unit if isinstance(unit, dict) else None)
+
+
 def api_fill(client: Client, key: tuple[str, str], pathogen_names: set[str], api_dir: Path = API_DIR,
-             api_key: str | None = None, log=print) -> dict | None:
-    """The unit's assessment from the ATTAINS web services (latest cycle), in read_assessments' shape plus
-    "_sources", or None. Only with ATTAINS_API_KEY (or api_key): the key goes in the X-Api-Key header, never in the
-    address or a log. Answers are cached under data/raw/attains/api/."""
-    api_key = api_key if api_key is not None else os.environ.get("ATTAINS_API_KEY")
+             api_key: str | None = None, log=print, newest_known: int | None = None,
+             now: datetime | None = None) -> dict | None:
+    """The unit's assessment from the ATTAINS web services (the newest cycle the answer has for it), in
+    read_assessments' shape plus "_sources", or None. Only with a key (api_key, else ATTAINS_API_KEY through
+    api_key_from_env): it goes in the X-Api-Key header, never in the address or a log. Only the parsed fields are
+    cached (data/raw/attains/api/<org>__<au>.json), their free text scrubbed (common.scrub_text), with the fetch time
+    and the cycle: an entry is asked again after API_MAX_DAYS or when a newer cycle shows (api_cached). Any failure
+    falls back to the layers (None)."""
+    api_key = api_key if api_key is not None else api_key_from_env(log)
     if not api_key:
         return None
+    now = now or datetime.now(UTC)
     org, au = key
     safe = re.sub(r"[^A-Za-z0-9._-]", "_", f"{org}__{au}")
     p = api_dir / f"{safe}.json"
-    d = None
-    if p.is_file():
-        try:
-            d = json.loads(p.read_text())
-        except ValueError:
-            d = None
-    if d is None:
+    ok, unit = api_cached(p, newest_known, now)
+    if not ok:
         try:
             d = client.get_json(f"{API_URL}assessments", params={"organizationId": org, "assessmentUnitIdentifier": au},
                                 headers={"X-Api-Key": api_key})
         except AttainsError as e:
             log(f"attains: web services: {error_text(e)}")
             return None
-        api_dir.mkdir(parents=True, exist_ok=True)
-        p.write_text(json.dumps(d))
-    return parse_api(d, au, pathogen_names)
+        unit = api_unit(d, au, pathogen_names)
+        try:
+            write_json_atomic(p, {"fetched_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                                  "cycle": unit.get("_cycle") if unit else None, "newest_known": newest_known,
+                                  "unit": unit})
+        except OSError as e:
+            log(f"attains: web services: the answer was not cached ({error_text(e)})")
+    if not unit:
+        return None
+    unit["_from"] = "web services"
+    for par in (unit.get("pathogens") or {}).values():
+        par["uses"], par["use_groups"] = set(par.get("uses") or []), set(par.get("use_groups") or [])
+    return unit
 
 
-def parse_api(d: dict, au: str, pathogen_names: set[str]) -> dict | None:
-    """The fields read_assessments keeps, from a web-services assessments answer (items[].assessments[])."""
-    for item in (d or {}).get("items") or []:
+def api_unit(d, au: str, pathogen_names: set[str]) -> dict | None:
+    """parse_api's unit as it is cached: JSON-ready (sets as sorted lists) and every free-text string scrubbed (the
+    use names, which are keys, too)."""
+    u = parse_api(d, au, pathogen_names)
+    if u is None:
+        return None
+    for par in u["pathogens"].values():
+        par["uses"], par["use_groups"] = sorted(par["uses"]), sorted(par["use_groups"])
+    u["uses"] = {scrub_text(k): v for k, v in u["uses"].items()}
+    return scrub_unit(u, scrub_text)
+
+
+def parse_api(d, au: str, pathogen_names: set[str]) -> dict | None:
+    """The fields read_assessments keeps, from a web-services assessments answer (items[].assessments[]): of the
+    items that assess the unit, the one of the newest reporting cycle. A probable source is kept only with an
+    associated cause that is a pathogen (associatedCauseNames, as the national file ties each source row to its
+    cause); a source with none named, an empty list or only other causes is not kept."""
+    best = None
+    items = d.get("items") if isinstance(d, dict) else None
+    for item in items if isinstance(items, list) else []:
+        if not isinstance(item, dict):
+            continue
         cyc = _int(item.get("reportingCycleText"))
         for a in item.get("assessments") or []:
-            if a.get("assessmentUnitIdentifier") != au:
+            if isinstance(a, dict) and a.get("assessmentUnitIdentifier") == au and (
+                    best is None or (cyc or 0) > (best[0] or 0)):
+                best = (cyc, item, a)
+    if best is None:
+        return None
+    cyc, item, a = best
+    u = {"org_name": _text_or_none(item.get("organizationName")), "state": None, "au_name": None,
+         "cycle_status": _text_or_none(item.get("reportStatusCode")), "water_type": None, "size": None,
+         "size_units": None, "location": None, "overall_status": _text_or_none(a.get("overallStatus")),
+         "ir_category": _text_or_none(a.get("epaIRCategory")), "uses": {}, "pathogens": {}, "_cycle": cyc}
+    for use in a.get("useAttainments") or []:
+        if not isinstance(use, dict):
+            continue
+        name = str(use.get("useName") or "")
+        if not RECREATION_USE.search(name):
+            continue
+        md = use.get("assessmentMetadata") if isinstance(use.get("assessmentMetadata"), dict) else {}
+        mon = md.get("monitoringActivity") if isinstance(md.get("monitoringActivity"), dict) else {}
+        act = md.get("assessmentActivity") if isinstance(md.get("assessmentActivity"), dict) else {}
+        code = str(use.get("useAttainmentCode") or "")
+        u["uses"][name] = {"support": support_words(code),
+                           "monitoring_start": _date(mon.get("monitoringStartDate")),
+                           "monitoring_end": _date(mon.get("monitoringEndDate")),
+                           "assessment_date": _date(md.get("assessmentDate") or act.get("assessmentDate"))}
+    for par in a.get("parameters") or []:
+        if not isinstance(par, dict):
+            continue
+        name = str(par.get("parameterName") or "").upper()
+        if not name or not (name in pathogen_names or PATHOGEN_NAME.search(name)):
+            continue
+        iwi = par.get("impairedWatersInformation") if isinstance(par.get("impairedWatersInformation"), dict) else {}
+        li = iwi.get("listingInformation") if isinstance(iwi.get("listingInformation"), dict) else {}
+        uses = {str(x.get("associatedUseName")) for x in par.get("associatedUses") or []
+                if isinstance(x, dict) and x.get("associatedUseName")}
+        u["pathogens"][name] = {"parameter": name, "status": _text_or_none(par.get("parameterStatusName")),
+                                "ir_category": None,
+                                "first_listed": _int(li.get("cycleFirstListedText")), "delisted": None,
+                                "tmdl": False, "uses": uses, "use_groups": set()}
+    srcs = []
+    for s in a.get("probableSources") or []:
+        if not isinstance(s, dict):
+            continue
+        causes = s.get("associatedCauseNames")
+        for c in causes if isinstance(causes, list) else []:
+            cause = str(c.get("causeName") or "").strip().upper() if isinstance(c, dict) else ""
+            if not cause or not (cause in pathogen_names or PATHOGEN_NAME.search(cause)):
                 continue
-            u = {"org_name": item.get("organizationName"), "state": None, "au_name": None,
-                 "cycle_status": item.get("reportStatusCode"), "water_type": None, "size": None, "size_units": None,
-                 "location": None, "overall_status": a.get("overallStatus"), "ir_category": a.get("epaIRCategory"),
-                 "uses": {}, "pathogens": {}, "_cycle": cyc}
-            for use in a.get("useAttainments") or []:
-                name = use.get("useName") or ""
-                if not RECREATION_USE.search(name):
-                    continue
-                md = use.get("assessmentMetadata") or {}
-                mon = md.get("monitoringActivity") or {}
-                code = str(use.get("useAttainmentCode") or "")
-                u["uses"][name] = {"support": support_words(code),
-                                   "monitoring_start": _date(mon.get("monitoringStartDate")),
-                                   "monitoring_end": _date(mon.get("monitoringEndDate")),
-                                   "assessment_date": _date(md.get("assessmentDate")
-                                                            or (md.get("assessmentActivity") or {}).get("assessmentDate"))}
-            for par in a.get("parameters") or []:
-                name = str(par.get("parameterName") or "").upper()
-                if not name or not (name in pathogen_names or PATHOGEN_NAME.search(name)):
-                    continue
-                li = ((par.get("impairedWatersInformation") or {}).get("listingInformation") or {})
-                uses = {str(x.get("associatedUseName")) for x in par.get("associatedUses") or []
-                        if isinstance(x, dict) and x.get("associatedUseName")}
-                u["pathogens"][name] = {"parameter": name, "status": par.get("parameterStatusName"), "ir_category": None,
-                                        "first_listed": _int(li.get("cycleFirstListedText")), "delisted": None,
-                                        "tmdl": False, "uses": uses, "use_groups": set()}
-            srcs = []
-            for s in a.get("probableSources") or []:
-                for c in s.get("associatedCauseNames") or [{}]:
-                    cause = str(c.get("causeName") or "").upper()
-                    if cause and not (cause in pathogen_names or PATHOGEN_NAME.search(cause)):
-                        continue
-                    srcs.append({"name": s.get("sourceName"), "cause": cause or None,
-                                 "confirmed": _yn(s.get("sourceConfirmedIndicator"))})
-            u["_sources"] = srcs
-            return u
-    return None
+            srcs.append({"name": _text_or_none(s.get("sourceName")), "cause": cause,
+                         "confirmed": _yn(s.get("sourceConfirmedIndicator"))})
+    u["_sources"] = srcs
+    return u
 
 
 # ---------------------------------------------------------------- the build
@@ -1222,6 +1432,31 @@ def _take(found: dict, units: dict, layer_units: dict, matches: dict) -> int:
     return n
 
 
+def _cached(fn):
+    seen: dict = {}
+
+    def f(t):
+        if t not in seen:
+            seen[t] = fn(t)
+        return seen[t]
+    return f
+
+
+def lost_states(states: list[str] | None, control: dict, geom_dir: Path, out: Path) -> list[str]:
+    """The states asked for (`states`), or by default the live states a run covered before (the geometry manifest and
+    the last assessment file's geometry_fetched), that the control table no longer names: an answer that lost states
+    is never read as fewer states."""
+    if states:
+        return sorted(st for st in states if st not in control)
+    before = set(read_manifest(geom_dir))
+    try:
+        prev = json.loads(out.read_text())
+        before |= set(((prev.get("source") or {}).get("geometry_fetched") or {}))
+    except (OSError, ValueError, AttributeError, TypeError):
+        pass
+    return sorted(st for st in before & set(live_states()) if st not in control)
+
+
 def build(states: list[str] | None = None, out: Path = OUT, raw_dir: Path = RAW_DIR, geom_dir: Path | None = None,
           client: Client | None = None, offline: bool = False, refresh_geometry: bool = False,
           waters: dict | None = None, geometry_of=None, now: datetime | None = None, log=print) -> dict:
@@ -1248,10 +1483,15 @@ def build(states: list[str] | None = None, out: Path = OUT, raw_dir: Path = RAW_
         files_meta = lookup_files(client)
         control = fetch_control(client)
         edits = layer_edits(client)
+        lost = lost_states(states, control, geom_dir, out)
+        if lost:
+            # a control table that lost states a run covered before is not read as fewer states: nothing is written
+            raise AttainsError(f"the control table lacks {', '.join(lost)}, covered before; {out.name} not written")
     if waters is None or geometry_of is None:
         waters, geometry_of = load_water_records()
     # default: the live states (data/rules.json live_states) that have a state organization in the control table
     want_states = sorted(states) if states else sorted(st for st in control if st in set(live_states()))
+    api_key = None if offline else api_key_from_env(log)
     slugs, wgeoms, tree = water_index(waters, geometry_of)
     log(f"attains: {len(waters):,} water records, {len(slugs):,} with an outline; states {', '.join(want_states)}")
     # the join, state by state
@@ -1293,7 +1533,7 @@ def build(states: list[str] | None = None, out: Path = OUT, raw_dir: Path = RAW_
         raise AttainsError(f"no geometry for {', '.join(failed_states)}; {out.name} not written")
     if coded:
         t1 = time.monotonic()
-        loc = read_units(paths["assessmentUnits"], set(coded))
+        loc = latest_units(read_units(paths["assessmentUnits"], set(coded)))
         for k, u in coded.items():
             u["match_name"] = (loc.get(k) or {}).get("location")
         rej = {}
@@ -1314,7 +1554,8 @@ def build(states: list[str] | None = None, out: Path = OUT, raw_dir: Path = RAW_
     t1 = time.monotonic()
     au_file = read_units(paths["assessmentUnits"], wanted)
     log(f"attains: assessment units read ({len(au_file):,} kept, {time.monotonic() - t1:.0f} s)")
-    # each organization's latest cycle in each file
+    # each organization's latest cycle in each file; every free-text string written passes through common.scrub_text
+    scrub = _cached(scrub_text)
     units_out: dict[tuple, dict] = {}
     from_layer, api_used = 0, 0
     for key, lay in layer_units.items():
@@ -1324,9 +1565,11 @@ def build(states: list[str] | None = None, out: Path = OUT, raw_dir: Path = RAW_
             a = {**a, "_cycle": a_org_max[org]}
         sc = s_org_max.get(org)
         srcs = sources.get(key + (sc,)) if sc else None
-        if a is None and api_used < API_MAX_CALLS and os.environ.get("ATTAINS_API_KEY") and not offline:
+        if a is None and api_used < API_MAX_CALLS and api_key:
             api_used += 1
-            got = api_fill(client, key, pathogen_names, raw_dir / "api", log=log)
+            newest = max((c for c in (_int(lay.get("cycle")), a_org_max.get(org), sc) if c), default=None)
+            got = api_fill(client, key, pathogen_names, raw_dir / "api", api_key=api_key, log=log,
+                           newest_known=newest, now=now)
             if got is not None:
                 a = got
                 srcs, sc = got.pop("_sources", None), got.get("_cycle")
@@ -1357,7 +1600,9 @@ def build(states: list[str] | None = None, out: Path = OUT, raw_dir: Path = RAW_
         recs = []
         for key, m in best.items():
             lay, a, srcs, sc = units_out[key]
-            recs.append(unit_record(key, lay, m, a, srcs, sc, au_file.get(key)))
+            cyc = unit_cycle(lay, a)
+            rec = unit_record(key, lay, m, a, srcs, sc, au_file.get(key + (cyc,)) if cyc else None)
+            recs.append(scrub_unit(rec, scrub))
         recs = sort_units(recs)
         waters_out[slug] = {"units": recs, "summary": summary(recs)}
     # per state counts (a water counts in its own state)
@@ -1390,10 +1635,14 @@ def build(states: list[str] | None = None, out: Path = OUT, raw_dir: Path = RAW_
         "waters": waters_out,
         # the candidates the geometry search found and the join did not take, and the units taken by several waters,
         # per water, with the reason (REJECT_REASONS, ambiguous_multi_water): for audit; never exported
-        "audit": {slug: sorted(lst, key=lambda x: (x["reason"], x["distance_m"] if x["distance_m"] is not None else 1e9,
-                                                   x["au_id"]))
+        "audit": {slug: [scrub_unit(x, scrub) for x in
+                         sorted(lst, key=lambda x: (x["reason"], x["distance_m"] if x["distance_m"] is not None else 1e9,
+                                                    x["au_id"]))]
                   for slug, lst in sorted(audit.items())},
     }
+    why = cache_problem(obj)
+    if why:             # the export would refuse it: the last good file stands
+        raise AttainsError(f"the assessment file would not have its form ({why}); {out.name} not written")
     write_json_atomic(out, obj)
     tot = Counter()
     for st, c in sorted(by_state.items()):
@@ -1423,7 +1672,13 @@ def main(argv=None) -> int:
     try:
         build(states, Path(a.out), offline=a.offline, refresh_geometry=a.refresh_geometry)
     except AttainsError as e:
-        print(f"::error::attains: {error_text(e)}")
+        print(f"::error::attains: {error_text(e)}", flush=True)
+        return 1
+    except Exception as e:  # noqa: BLE001 - the exception boundary: any failure (a request, a zip, a CSV, the disk)
+        # is printed through error_text, never in its own words (they can quote a header value, a key or a path);
+        # the frames (common.safe_traceback) go to stderr for the fix
+        print(f"::error::attains: {error_text(e)}", flush=True)
+        sys.stderr.write(safe_traceback(e))
         return 1
     return 0
 

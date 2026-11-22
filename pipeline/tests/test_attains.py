@@ -25,6 +25,8 @@ from build import attains as A  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 KEY = "test-key-value-not-real"
+MAIL = "pat" + "@" + "example.org"           # an e-mail address made up for the privacy fixtures
+PHONE = "901-555-0123"
 
 # ---------------------------------------------------------------- names
 
@@ -64,6 +66,12 @@ KEY = "test-key-value-not-real"
     ("Middle Tyger River", "MIDDLE TYGER RIVER AT HAMPTON RD"),
     ("A M Puett Reservoir", "Puett Reservoir."),                   # initials added; trailing punctuation
     ("Woods Lake", "Lake of the Woods"),
+    ("West Fork White River", "White River (West Fork)"),          # a fork in parentheses is the fork
+    ("North Branch Mill Creek", "Mill Creek (North Branch)"),
+    ("East Fork Lewis River", "Lewis River (E.F.)"),
+    ("White River (West Fork)", "West Fork White River"),          # the record's name with the fork in parentheses
+    ("White River (West Fork)", "WHITE RIVER - WEST FORK"),
+    ("Mill Creek (North Branch)", "Mill Creek, North Branch"),
 ])
 def test_names_agree_after_normalisation(water, au):
     assert A.names_agree([water], au)
@@ -94,6 +102,13 @@ def test_names_agree_after_normalisation(water, au):
     ("Cuyahoga River", "Sawyer Brook-Cuyahoga River"),             # a watershed named for a brook and the river
     ("Puett Reservoir", "Puett Creek"),
     ("Lanier Lake", "Lake Sidney Lanier"),
+    ("White River", "White River (West Fork)"),                    # a fork in parentheses is not the main stem
+    ("Mill Creek", "Mill Creek (North Branch)"),
+    ("Mill Creek", "MILL CREEK (N. BR.)"),
+    ("Lewis River", "Lewis River (E.F.)"),
+    ("White River (West Fork)", "White River"),                    # nor is the main stem the fork's record
+    ("Mill Creek (North Branch)", "Mill Creek"),
+    ("Mill Creek (North Branch)", "North Branch"),
 ])
 def test_names_that_name_another_water_do_not_agree(water, au):
     assert not A.names_agree([water], au)
@@ -292,7 +307,7 @@ U_HEADER = ["OBJECTID", "STATE", "ORGANIZATIONID", "ORGANIZATIONNAME", "WATERTYP
             "WATERSIZEUNITS"]
 UNIT_ROWS = [{"OBJECTID": "2", "STATE": "TN", "ORGANIZATIONID": "TDECWR", "ORGANIZATIONNAME": "Tennessee",
               "WATERTYPE": "STREAM", "ASSESSMENTUNITID": "TN020", "ASSESSMENTUNITNAME": "RL-0001",
-              "ASSESSMENTUNITSTATUS": "A", "REPORTINGCYCLE": "2024", "LOCATIONDESCRIPTION": "BLACK BAYOU AT MAIN ST",
+              "ASSESSMENTUNITSTATUS": "A", "REPORTINGCYCLE": "2026", "LOCATIONDESCRIPTION": "BLACK BAYOU AT MAIN ST",
               "WATERSIZE": "", "WATERSIZEUNITS": ""},
              {"OBJECTID": "1", "STATE": "TN", "ORGANIZATIONID": "TDECWR", "ORGANIZATIONNAME": "Tennessee",
               "WATERTYPE": "LAKE, FRESHWATER", "ASSESSMENTUNITID": "TN011", "ASSESSMENTUNITNAME": "Unnamed Pond",
@@ -325,52 +340,73 @@ class Resp:
             yield self.content[i:i + n]
 
 
+CONTROL = {"features": [{"attributes": {"state": "TN", "organizationid": "TDECWR", "organizationname": "Tennessee",
+                                        "reportingcycle": 2026, "createdon": 1787576054000}}]}
+
+
 class FakeEPA:
-    """The lookup, the map layers, the national files and the web services, from the world above."""
+    """The lookup, the map layers, the national files and the web services, from the world above. Options for the
+    failures: a layer answering 503, a control table answer, a page of a layer without its features list (page_fault
+    {layer: (page, "no_features" | "interrupted")}), a layer count off by some (count_off), the web services' answer
+    (api_answer, else api_status), the national files (files) and their timestamp."""
 
     BUCKET = "https://cg-example.s3-us-gov-west-1.amazonaws.com/national-downloads/1794790801/"
 
-    def __init__(self, fail_layer=None, api_status=500):
+    def __init__(self, fail_layer=None, api_status=500, api_answer=None, control=None, page_fault=None, count_off=0,
+                 layer_rows=None, files=None, timestamp="2026-11-14T01:30:17.000Z"):
         self.calls = []
         self.fail_layer = fail_layer
-        self.api_status = api_status
-        self.files = {"assessments": zipped("assessments.csv.zip", A_HEADER, ASSESSMENT_ROWS),
-                      "sources": zipped("sources.csv.zip", S_HEADER, SOURCE_ROWS),
-                      "assessmentUnits": zipped("assessment_units.csv.zip", U_HEADER, UNIT_ROWS)}
+        self.api_status, self.api_answer = api_status, api_answer
+        self.control = CONTROL if control is None else control
+        self.page_fault = page_fault or {}
+        self.count_off = count_off
+        self.layer_rows = LAYER_ROWS if layer_rows is None else layer_rows
+        self.timestamp = timestamp
+        self.files = files or {"assessments": zipped("assessments.csv.zip", A_HEADER, ASSESSMENT_ROWS),
+                               "sources": zipped("sources.csv.zip", S_HEADER, SOURCE_ROWS),
+                               "assessmentUnits": zipped("assessment_units.csv.zip", U_HEADER, UNIT_ROWS)}
+        self.pages = {}
 
     def get(self, url, params=None, headers=None, timeout=None, stream=False):
         self.calls.append({"url": url, "params": dict(params or {}), "headers": dict(headers or {})})
         if url == A.LOOKUP_URL:
-            return Resp(obj={"metadata": {k: {"url": self.BUCKET + A.FILES[k], "timestamp": "2026-11-14T01:30:17.000Z",
+            return Resp(obj={"metadata": {k: {"url": self.BUCKET + A.FILES[k], "timestamp": self.timestamp,
                                               "zipSize": len(b), "numRows": 5, "csvSize": 1}
                                           for k, b in self.files.items()}})
         for k, b in self.files.items():
             if url == self.BUCKET + A.FILES[k]:
                 return Resp(content=b)
         if url.startswith(A.API_URL):
-            return Resp(status=self.api_status)
+            return Resp(obj=self.api_answer) if self.api_answer is not None else Resp(status=self.api_status)
         m = re.fullmatch(re.escape(A.FS_URL) + r"/(\d+)(/query)?", url)
         assert m, url
         layer = int(m.group(1))
         if layer == A.CONTROL_TABLE:
-            return Resp(obj={"features": [{"attributes": {"state": "TN", "organizationid": "TDECWR",
-                                                          "organizationname": "Tennessee", "reportingcycle": 2026,
-                                                          "createdon": 1787576054000}}]})
+            return Resp(obj=self.control)
         if not m.group(2):
             return Resp(obj={"editingInfo": {"dataLastEditDate": 1788329282245}})
         if layer == self.fail_layer:
             return Resp(status=503)
+        rows = self.layer_rows.get(layer, [])
+        if params.get("returnCountOnly") == "true":
+            return Resp(obj={"count": len(rows) + self.count_off})
         last = int(re.search(r"OBJECTID>(\d+)", params["where"]).group(1))
+        page = self.pages[layer] = self.pages.get(layer, 0) + 1
+        fault = self.page_fault.get(layer)
+        if fault and fault[0] == page:
+            return Resp(obj={"exceededTransferLimit": True} if fault[1] == "no_features"
+                        else {"features": [], "exceededTransferLimit": True})
         feats = [{"attributes": {"OBJECTID": oid, "organizationid": "TDECWR", "assessmentunitidentifier": au,
                                  "assessmentunitname": name, "reportingcycle": 2026, "recreation_use": rec,
                                  "pathogens": pat, "cyclestatus": "EPA Final Action",
                                  "waterbodyreportlink": f"https://mywaterway.epa.gov/waterbody-report/TDECWR/{au}/2026"},
                   "geometry": g}
-                 for oid, au, name, rec, pat, g in LAYER_ROWS.get(layer, []) if oid > last][:2]   # pages of two
+                 for oid, au, name, rec, pat, g in sorted(rows) if oid > last][:2]   # pages of two
         return Resp(obj={"features": feats, "exceededTransferLimit": len(feats) == 2})
 
 
-def run_world(tmp_path, monkeypatch, epa=None, key=None, log=None):
+def run_world(tmp_path, monkeypatch, epa=None, key=None, log=None, states=("TN",), refresh_geometry=False,
+              now=None):
     if key:
         monkeypatch.setenv("ATTAINS_API_KEY", key)
     else:
@@ -379,8 +415,8 @@ def run_world(tmp_path, monkeypatch, epa=None, key=None, log=None):
     lines = log if log is not None else []
     client = A.Client(session=epa, pause=0, tries=2, sleep=lambda s: None, log=lines.append)
     out = tmp_path / "build" / "attains" / "attains-waters.json"
-    obj = A.build(["TN"], out, raw_dir=tmp_path / "raw", client=client, waters=WATERS, geometry_of=geometry_of,
-                  log=lines.append)
+    obj = A.build(list(states) if states else None, out, raw_dir=tmp_path / "raw", client=client, waters=WATERS,
+                  geometry_of=geometry_of, log=lines.append, refresh_geometry=refresh_geometry, now=now)
     return obj, epa, lines, out
 
 
@@ -475,12 +511,49 @@ def test_the_web_services_answer_fills_a_unit_the_files_lack():
                                              "associatedCauseNames": [{"causeName": "NITRATE"}]}]}]}]}
     u = A.parse_api(d, "TN011", {"ESCHERICHIA COLI (E. COLI)"})
     assert u["_cycle"] == 2026 and list(u["pathogens"]) == ["ESCHERICHIA COLI (E. COLI)"]
+    older = {"organizationIdentifier": "TDECWR", "organizationName": "Tennessee", "reportingCycleText": "2024",
+             "assessments": [{"assessmentUnitIdentifier": "TN011", "parameters": []}]}
+    both = {"items": [d["items"][0], older]}
+    assert A.parse_api(both, "TN011", set())["_cycle"] == 2026                 # the newest cycle, whatever the order
+    assert A.parse_api({"items": [older, d["items"][0]]}, "TN011", set())["_cycle"] == 2026
     assert A.public_pathogen(u["pathogens"]["ESCHERICHIA COLI (E. COLI)"]) == {
         "parameter": "ESCHERICHIA COLI (E. COLI)", "status": "Cause", "ir_category": None, "first_listed": 2008,
         "uses": ["Recreation"]}                                                  # no use group given: none written
     assert u["uses"]["Recreation"]["support"] == "Not Supporting"
     assert u["uses"]["Recreation"]["assessment_date"] == "2023-05-12"          # the services' nesting (2026-11-21)
     assert u["_sources"] == [{"name": "SEPTIC SYSTEMS", "cause": "ESCHERICHIA COLI (E. COLI)", "confirmed": True}]
+
+
+def api_sources(probable):
+    d = {"items": [{"organizationName": "Tennessee", "reportingCycleText": "2026",
+                    "assessments": [{"assessmentUnitIdentifier": "TN011", "probableSources": probable}]}]}
+    return A.parse_api(d, "TN011", {"ESCHERICHIA COLI (E. COLI)"})["_sources"]
+
+
+@pytest.mark.parametrize("probable", [
+    [{"sourceName": "SEPTIC SYSTEMS"}],                                          # no association
+    [{"sourceName": "SEPTIC SYSTEMS", "associatedCauseNames": []}],             # an empty one
+    [{"sourceName": "SEPTIC SYSTEMS", "associatedCauseNames": [{}]}],           # a cause without a name
+    [{"sourceName": "SEPTIC SYSTEMS", "associatedCauseNames": [{"causeName": " "}]}],
+    [{"sourceName": "SEPTIC SYSTEMS", "associatedCauseNames": [{"causeName": "NITRATE"}]}],   # another cause
+    [{"sourceName": "SEPTIC SYSTEMS", "associatedCauseNames": "ESCHERICHIA COLI (E. COLI)"}],  # not a list
+    ["SEPTIC SYSTEMS"],
+])
+def test_a_web_services_source_without_a_pathogen_cause_is_not_kept(probable):
+    assert api_sources(probable) == []
+
+
+def test_a_web_services_source_with_a_pathogen_cause_is_kept_and_counts_as_sewage():
+    got = api_sources([{"sourceName": "SEPTIC SYSTEMS", "associatedCauseNames": [{"causeName": "NITRATE"},
+                                                                                {"causeName": "Escherichia coli (E. coli)"}]}])
+    assert got == [{"name": "SEPTIC SYSTEMS", "cause": "ESCHERICHIA COLI (E. COLI)", "confirmed": None}]
+    rec = A.unit_record(("TDECWR", "TN011"), {"au_name": "Unnamed Pond", "cycle": 2026, "kind": "area"},
+                        {"method": "geometry_inside", "distance_m": 0}, {"_cycle": 2026, "pathogens": {}}, got, 2026, None)
+    assert [x["kind"] for x in rec["sewage_sources"]] == ["septic"] and A.summary([rec])["sewage_named"] == 1
+    none = A.unit_record(("TDECWR", "TN011"), {"au_name": "Unnamed Pond", "cycle": 2026, "kind": "area"},
+                         {"method": "geometry_inside", "distance_m": 0}, {"_cycle": 2026, "pathogens": {}},
+                         api_sources([{"sourceName": "SEPTIC SYSTEMS", "associatedCauseNames": []}]), 2026, None)
+    assert none["sewage_sources"] == [] and A.summary([none])["sewage_named"] == 0
 
 
 def test_a_failed_geometry_fetch_writes_nothing_and_its_error_names_no_address(tmp_path, monkeypatch):
@@ -562,11 +635,276 @@ def test_summary_counts():
                                 "states": ["MS", "TN"]}
 
 
+# ---------------------------------------------------------------- review fixes (Astra, 2026-11-21): the build
+
+
+def world_files(assessments=None, sources=None, units=None, stored=False):
+    """The three national files as FakeEPA serves them, from rows (the world's rows by default)."""
+    kind = zipfile.ZIP_STORED if stored else zipfile.ZIP_DEFLATED
+
+    def z(name, header, rows):
+        text = io.StringIO()
+        w = csv.DictWriter(text, fieldnames=header)
+        w.writeheader()
+        w.writerows(rows)
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", kind) as f:
+            f.writestr(name.replace(".zip", ""), text.getvalue())
+        return buf.getvalue()
+    return {"assessments": z("assessments.csv.zip", A_HEADER, ASSESSMENT_ROWS if assessments is None else assessments),
+            "sources": z("sources.csv.zip", S_HEADER, SOURCE_ROWS if sources is None else sources),
+            "assessmentUnits": z("assessment_units.csv.zip", U_HEADER, UNIT_ROWS if units is None else units)}
+
+
+def test_free_text_with_contact_details_is_scrubbed_in_the_cache_the_water_block_and_the_download(tmp_path, monkeypatch):
+    from datetime import UTC, datetime
+
+    from export import assessments as XA
+    loc = f"Black Bayou from Nonconnah Creek to headwaters; questions to {MAIL} or {PHONE}"
+    rows = [{**r, "LOCATIONDESCRIPTION": loc, "ORGANIZATIONNAME": f"Tennessee ({MAIL})"} for r in ASSESSMENT_ROWS]
+    srcs = [{**r, "SOURCENAME": f"{r['SOURCENAME']} (call {PHONE})"} for r in SOURCE_ROWS]
+    layers = {**LAYER_ROWS, 1: [(o, au, f"{n} {MAIL}" if au == "TN007" else n, rec, pat, g)
+                                for o, au, n, rec, pat, g in LAYER_ROWS[1]]}       # an audit entry's name
+    obj, epa, lines, out = run_world(tmp_path, monkeypatch, epa=FakeEPA(files=world_files(rows, srcs), layer_rows=layers))
+    text = out.read_text()
+    assert MAIL not in text and PHONE not in text
+    u = obj["waters"]["black-bayou-tn"]["units"][0]
+    assert u["location"] == ("Black Bayou from Nonconnah Creek to headwaters; questions to [email removed] or "
+                             "[phone removed]")
+    assert u["org_name"] == "Tennessee ([email removed])"
+    assert u["sewage_sources"][0]["kind"] == "sso" and "[phone removed]" in u["sewage_sources"][0]["name"]
+    audit = next(x for x in obj["audit"]["black-bayou-tn"] if x["au_id"] == "TN007")
+    assert audit["au_name"] == "Nonconnah Creek [email removed]"
+    # the export scrubs again (a cache written before this fix, or by hand): the water block and the download
+    raw = json.loads(text)
+    raw["waters"]["black-bayou-tn"]["units"][0]["location"] = loc
+    raw["waters"]["black-bayou-tn"]["units"][0]["au_name"] = f"Black Bayou {MAIL}"
+    raw["built"] = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    a = XA.public(raw, {"black-bayou-tn"})
+    block = json.dumps(XA.water_block(a, "black-bayou-tn"))
+    assert MAIL not in block and PHONE not in block and "[email removed]" in block
+    path = tmp_path / "out" / "csv" / "assessments.csv"
+    assert XA.write_csv(path, a, names={"black-bayou-tn": "Black Bayou"}) == 2
+    csv_text = path.read_text()
+    assert MAIL not in csv_text and PHONE not in csv_text
+    row = next(csv.DictReader(io.StringIO(csv_text)))
+    assert row["au_name"] == "Black Bayou [email removed]" and row["location"].endswith("[email removed] or [phone removed]")
+    assert "[phone removed]" in row["sewage_sources"]
+
+
+def test_a_malformed_key_is_never_sent_logged_or_saved_and_the_build_runs_without_it(tmp_path, monkeypatch):
+    bad = "part-one-not-real\npart-two-not-real"
+    obj, epa, lines, out = run_world(tmp_path, monkeypatch, key=bad)
+    assert not any(c["url"].startswith(A.API_URL) for c in epa.calls)
+    text = "\n".join(lines) + out.read_text()
+    assert "part-one" not in text and "part-two" not in text
+    assert any("not a usable key" in x for x in lines)
+    assert obj["waters"]["mill-lake-tn"]["units"][1]["from"] == "layer"
+
+
+def test_a_key_with_surrounding_whitespace_is_stripped_before_it_is_sent(tmp_path, monkeypatch):
+    obj, epa, lines, out = run_world(tmp_path, monkeypatch, key=f"  {KEY}\n")
+    api = [c for c in epa.calls if c["url"].startswith(A.API_URL)]
+    assert api and all(c["headers"]["X-Api-Key"] == KEY for c in api)
+
+
+def test_a_request_requests_refuses_never_quotes_the_header_value():
+    import requests
+
+    class NoSend(requests.adapters.BaseAdapter):
+        def send(self, *a, **k):
+            raise AssertionError("nothing may be sent")
+
+        def close(self):
+            pass
+    session = requests.Session()
+    session.mount("https://", NoSend())
+    c = A.Client(session=session, pause=0, tries=2, sleep=lambda s: None, log=lambda m: None)
+    for value in ("part-one-not-real\npart-two-not-real", " part-one-not-real"):
+        with pytest.raises(A.AttainsError) as ex:
+            c.get_json(A.API_URL + "assessments", headers={"X-Api-Key": value})
+        assert "part-one" not in str(ex.value) and "InvalidHeader" in str(ex.value)
+        assert "api.epa.gov" in str(ex.value) and "https://" not in str(ex.value)
+    # and the optional fill falls back to the layers
+    assert A.api_fill(c, ("TDECWR", "TN011"), set(), api_key="part-one-not-real\nx", log=lambda m: None,
+                      api_dir=Path("/nonexistent")) is None
+
+
+SECRET = "a-sec" + "ret-value\nb"       # built here, so no traceback line quotes it
+
+
+def test_the_command_line_prints_any_failure_through_error_text(tmp_path, monkeypatch, capsys):
+    import requests
+    hidden = tmp_path / ("private-" + "folder-name")
+    hidden.mkdir()
+    (hidden / "junk.zip").write_bytes(b"not a zip at all")
+
+    def invalid_header(*a, **k):        # raised by requests itself, its words quoting the header value
+        requests.Session().prepare_request(requests.Request("GET", A.API_URL, headers={"X-Api-Key": SECRET}))
+
+    def bad_zip(*a, **k):               # zipfile's own failure
+        zipfile.ZipFile(hidden / "junk.zip")
+
+    def missing(*a, **k):               # the disk's, quoting the path
+        (hidden / "none" / "x.csv.zip").read_bytes()
+    seen = []
+    for fail in (invalid_header, bad_zip, missing):
+        monkeypatch.setattr(A, "build", fail)
+        assert A.main(["--states", "TN"]) == 1
+        got = capsys.readouterr()
+        text = got.out + got.err
+        assert "a-secret" not in text and "private-folder" not in text and got.out.startswith("::error::attains: ")
+        seen.append(got.out)
+    assert "InvalidHeader" in seen[0] and "BadZipFile" in seen[1] and "missing file" in seen[2]
+
+
+def _previous_cache(tmp_path):
+    out = tmp_path / "build" / "attains" / "attains-waters.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text('{"built": "earlier"}')
+    return out
+
+
+@pytest.mark.parametrize("epa,why", [
+    (lambda: FakeEPA(control={}), "no features list"),                                   # an empty answer
+    (lambda: FakeEPA(control={"features": []}), "no state organization"),
+    (lambda: FakeEPA(control={"features": [{"no": "attributes"}]}), "no attributes"),
+    (lambda: FakeEPA(page_fault={1: (2, "no_features")}), "page 2: the answer has no features list"),
+    (lambda: FakeEPA(page_fault={1: (2, "interrupted")}), "interrupted"),
+    (lambda: FakeEPA(count_off=1), "the layer counts"),
+])
+def test_an_incomplete_answer_stops_the_run_and_keeps_the_previous_cache(tmp_path, monkeypatch, epa, why):
+    out = _previous_cache(tmp_path)
+    lines = []
+    with pytest.raises(A.AttainsError) as ex:
+        run_world(tmp_path, monkeypatch, epa=epa(), log=lines)
+    assert why in str(ex.value) + "\n".join(lines)
+    assert "page" not in why or "no geometry for TN" in str(ex.value)
+    assert out.read_text() == '{"built": "earlier"}'
+    assert not (tmp_path / "raw" / "geom" / "TN.json.gz").exists()           # no partial geometry cached either
+
+
+def test_a_failed_refetch_keeps_the_cached_geometry_of_the_state(tmp_path, monkeypatch):
+    run_world(tmp_path, monkeypatch)
+    geom = tmp_path / "raw" / "geom" / "TN.json.gz"
+    before = geom.read_bytes()
+    with pytest.raises(A.AttainsError):
+        run_world(tmp_path, monkeypatch, epa=FakeEPA(page_fault={1: (2, "no_features")}), refresh_geometry=True)
+    assert geom.read_bytes() == before
+
+
+def test_a_control_table_that_lost_a_state_covered_before_stops_the_run(tmp_path, monkeypatch):
+    first, *_ = run_world(tmp_path, monkeypatch)
+    out = tmp_path / "build" / "attains" / "attains-waters.json"
+    before = out.read_text()
+    m = json.loads((tmp_path / "raw" / "geom" / "manifest.json").read_text())
+    m["MS"] = {**m["TN"]}                                                      # a live state the last run covered
+    (tmp_path / "raw" / "geom" / "manifest.json").write_text(json.dumps(m))
+    with pytest.raises(A.AttainsError) as ex:
+        run_world(tmp_path, monkeypatch, states=None)                          # the control table names TN only
+    assert "lacks MS" in str(ex.value) and out.read_text() == before
+    with pytest.raises(A.AttainsError) as ex:
+        run_world(tmp_path, monkeypatch, states=("TN", "AL"))                  # asked for, and not in the table
+    assert "lacks AL" in str(ex.value)
+
+
+def test_unit_metadata_comes_from_the_assessments_cycle_only(tmp_path, monkeypatch):
+    blank = {"LOCATIONDESCRIPTION": "", "WATERTYPE": "", "WATERSIZE": "", "WATERSIZEUNITS": ""}
+    rows = [{**arow(2024, "TN001", "Black Bayou", "PATHOGENS", "FECAL COLIFORM", "Cause", "RECREATION_USE",
+                    "Recreation", "N"), **blank}]
+    new_lake = {"OBJECTID": "3", "STATE": "TN", "ORGANIZATIONID": "TDECWR", "ORGANIZATIONNAME": "Tennessee",
+                "WATERTYPE": "LAKE, FRESHWATER", "ASSESSMENTUNITID": "TN001", "ASSESSMENTUNITNAME": "Black Bayou",
+                "ASSESSMENTUNITSTATUS": "A", "REPORTINGCYCLE": "2026", "LOCATIONDESCRIPTION": "A new lake",
+                "WATERSIZE": "100", "WATERSIZEUNITS": "Acres"}
+    obj, *_ = run_world(tmp_path, monkeypatch, epa=FakeEPA(files=world_files(rows, [], [new_lake])))
+    u = next(x for x in obj["waters"]["black-bayou-tn"]["units"] if x["au_id"] == "TN001")
+    assert u["cycle"] == 2024 and u["report_url"].endswith("/TN001/2024")
+    assert (u["water_type"], u["size"], u["size_units"], u["location"]) == (None, None, None, None)   # not 2026's
+    same = {**new_lake, "REPORTINGCYCLE": "2024", "LOCATIONDESCRIPTION": "Black Bayou, 2024 segment",
+            "WATERTYPE": "RIVER", "WATERSIZE": "7.9", "WATERSIZEUNITS": "Miles"}
+    obj, *_ = run_world(tmp_path / "b", monkeypatch, epa=FakeEPA(files=world_files(rows, [], [new_lake, same])))
+    u = next(x for x in obj["waters"]["black-bayou-tn"]["units"] if x["au_id"] == "TN001")
+    assert (u["water_type"], u["size"], u["size_units"], u["location"]) == ("RIVER", 7.9, "Miles",
+                                                                            "Black Bayou, 2024 segment")
+
+
+def test_a_corrupt_download_of_the_same_size_keeps_the_previous_file(tmp_path, monkeypatch):
+    good = world_files(stored=True)
+    run_world(tmp_path, monkeypatch, epa=FakeEPA(files=good))
+    cached = tmp_path / "raw" / "assessments.csv.zip"
+    side = tmp_path / "raw" / "assessments.csv.zip.meta.json"
+    assert cached.read_bytes() == good["assessments"]
+    side_before = side.read_text()
+    i = good["assessments"].index(b"Elsewhere")
+    bad = good["assessments"][:i] + b"Elsewhera" + good["assessments"][i + 9:]     # same size, wrong CRC
+    assert len(bad) == len(good["assessments"])
+    epa = FakeEPA(files={**good, "assessments": bad}, timestamp="2026-11-21T01:30:17.000Z")
+    with pytest.raises(A.AttainsError) as ex:
+        run_world(tmp_path, monkeypatch, epa=epa)
+    assert "CRC" in str(ex.value) or "not a readable zip" in str(ex.value)
+    assert cached.read_bytes() == good["assessments"] and side.read_text() == side_before
+    assert not (tmp_path / "raw" / "assessments.csv.zip.part").exists()
+    # a file without the columns the readers use is refused the same way
+    headless = world_files([], stored=True)
+    headless["sources"] = zipped("sources.csv.zip", ["OBJECTID", "STATE"], [{"OBJECTID": "1", "STATE": "TN"}])
+    with pytest.raises(A.AttainsError) as ex:
+        run_world(tmp_path, monkeypatch, epa=FakeEPA(files=headless, timestamp="2026-11-22T01:30:17.000Z"))
+    assert "columns missing" in str(ex.value)
+    assert (tmp_path / "raw" / "sources.csv.zip").read_bytes() == good["sources"]     # the bad one never replaced it
+
+
+def api_answer(cycle, org_name="Tennessee"):
+    return {"items": [{"organizationIdentifier": "TDECWR", "organizationName": org_name,
+                       "reportingCycleText": str(cycle),
+                       "assessments": [{"assessmentUnitIdentifier": "TN011", "useAttainments": [
+                           {"useName": "Recreation", "useAttainmentCode": "N"}],
+                           "parameters": [{"parameterName": "ESCHERICHIA COLI (E. COLI)",
+                                           "parameterStatusName": "Cause"}],
+                           "probableSources": [{"sourceName": "SEPTIC SYSTEMS",
+                                                "associatedCauseNames": [{"causeName": "ESCHERICHIA COLI (E. COLI)"}]}]}]}]}
+
+
+def test_a_cached_web_services_answer_advances_when_a_newer_cycle_shows(tmp_path, monkeypatch):
+    from datetime import UTC, datetime
+    now = datetime(2026, 11, 21, 12, tzinfo=UTC)
+    api = tmp_path / "raw" / "api"
+    api.mkdir(parents=True)
+    entry = api / "TDECWR__TN011.json"
+    old = {"fetched_at": "2026-11-16T00:00:00Z", "cycle": 2024, "newest_known": 2024,
+           "unit": A.api_unit(api_answer(2024), "TN011", set())}
+    entry.write_text(json.dumps(old))
+    # the layers show TN011 in 2026: the 2024 entry is asked again, and the 2026 answer replaces it
+    obj, epa, lines, out = run_world(tmp_path, monkeypatch, key=KEY, now=now,
+                                     epa=FakeEPA(api_answer=api_answer(2026, org_name=f"Tennessee {MAIL}")))
+    assert any(c["url"].startswith(A.API_URL) and c["params"].get("assessmentUnitIdentifier") == "TN011"
+               for c in epa.calls)
+    u = next(x for x in obj["waters"]["mill-lake-tn"]["units"] if x["au_id"] == "TN011")
+    assert u["cycle"] == 2026 and u["from"] == "web services" and u["report_url"].endswith("/TN011/2026")
+    assert u["sewage_sources"][0]["kind"] == "septic"
+    saved = json.loads(entry.read_text())
+    assert saved["cycle"] == 2026 and saved["fetched_at"] == "2026-11-21T12:00:00Z" and MAIL not in entry.read_text()
+    assert KEY not in entry.read_text() and "items" not in saved                 # the parsed fields only
+    # a fresh entry of the newest cycle is used as it is; one older than 30 days is asked again
+    epa2 = FakeEPA(api_answer=api_answer(2026))
+    run_world(tmp_path, monkeypatch, key=KEY, now=now, epa=epa2)
+    assert not any(c["params"].get("assessmentUnitIdentifier") == "TN011" for c in epa2.calls)
+    epa3 = FakeEPA(api_answer=api_answer(2026))
+    run_world(tmp_path, monkeypatch, key=KEY, now=datetime(2027, 1, 5, tzinfo=UTC), epa=epa3)
+    assert any(c["params"].get("assessmentUnitIdentifier") == "TN011" for c in epa3.calls)
+
+
+def test_an_old_raw_web_services_answer_in_the_cache_is_not_used(tmp_path):
+    from datetime import UTC, datetime
+    p = tmp_path / "TDECWR__TN011.json"
+    p.write_text(json.dumps(api_answer(2024)))                                 # the format before entries had a time
+    assert A.api_cached(p, 2024, datetime(2026, 11, 21, tzinfo=UTC)) == (False, None)
+
+
 # ---------------------------------------------------------------- the export's block
 
 
 def cache(built="2026-11-20T00:00:00Z"):
-    unit = {"au_id": "TN001", "pathogens": [{"status": "Cause"}], "sewage_sources": []}
+    unit = {"org_id": "TDECWR", "au_id": "TN001", "pathogens": [{"status": "Cause"}], "sewage_sources": []}
     return {"built": built, "source": {"name": A.SOURCE_NAME},
             "waters": {"black-bayou-tn": {"units": [unit], "summary": {"units": 1, "pathogen_listed": 1}},
                        "old-name-tn": {"units": [unit], "summary": {"units": 1, "pathogen_listed": 1}},
@@ -621,6 +959,18 @@ def test_a_waters_block_carries_at_most_25_units_and_the_totals(tmp_path):
                             "units_total": 30, "pathogen_listed_total": 2, "sewage_named_total": 2}
     assert XA.meta(a)["waters_capped"] == 1 and "all_units" not in b
     assert XA.write_csv(tmp_path / "a.csv", a) == 30                         # the download keeps every unit
+    # 25 pathogen listings without a sewage source, then a sewage source on an unlisted unit (26th): the block
+    # carries no sewage source, its totals and meta.json count the water
+    many = [unit(i, listed=True) for i in range(25)] + [unit(40, sewage=True)] + [unit(i) for i in range(50, 53)]
+    c = {"built": now, "source": {"name": A.SOURCE_NAME}, "waters": {"long-river-tn": {"units": many, "summary": {}},
+                                                                     "short-creek-tn": {"units": [unit(1)]}}}
+    a = XA.public(c, {"long-river-tn", "short-creek-tn"})
+    s = XA.water_block(a, "long-river-tn")["summary"]
+    assert (s["units"], s["sewage_named"], s["sewage_named_total"], s["pathogen_listed_total"]) == (25, 0, 1, 25)
+    assert [u["au_id"] for u in XA.water_block(a, "long-river-tn")["units"]][-1] == "U24"
+    assert XA.meta(a) == {"built": now, "waters_with_units": 2, "waters_pathogen_listed": 1, "waters_sewage_named": 1,
+                          "waters_capped": 1, "unavailable": None}
+    assert XA.write_csv(tmp_path / "b.csv", a) == 30 and "COMBINED SEWER" in (tmp_path / "b.csv").read_text()
 
 
 def test_a_waters_block_cites_the_source_without_the_per_organization_tables():
@@ -667,10 +1017,13 @@ def tarball(path: Path, members: dict[str, bytes]) -> Path:
 
 
 def unpack(tmp_path, tb, *extra):
-    """The command line on a copy of the script in tmp_path/repo (it writes under its own checkout)."""
+    """The command line on a copy of the script in tmp_path/repo (it writes under its own checkout), with the
+    pipeline's common.py beside it as in the checkout (its error_text formats the failures)."""
     import shutil
     (tmp_path / "repo" / "scripts").mkdir(parents=True, exist_ok=True)
+    (tmp_path / "repo" / "pipeline").mkdir(parents=True, exist_ok=True)
     shutil.copy(ROOT / "scripts" / "state_paths.py", tmp_path / "repo" / "scripts" / "state_paths.py")
+    shutil.copy(ROOT / "pipeline" / "common.py", tmp_path / "repo" / "pipeline" / "common.py")
     return subprocess.run([sys.executable, "-I", str(tmp_path / "repo" / "scripts" / "state_paths.py"), "unpack-attains",
                            str(tb), *extra], capture_output=True, text=True, cwd=tmp_path)
 
@@ -700,6 +1053,28 @@ def test_unpack_attains_restores_the_cache_and_refuses_anything_else(tmp_path, m
                "cache")
     assert p.returncode == 0 and "restored 1 file" in p.stdout
     assert (tmp_path / "repo/data/build/attains/attains-waters.json").read_text() == "{}"
+
+
+def test_a_refused_archive_is_reported_by_category_and_count_never_by_member_name(tmp_path):
+    names = {"/home/" + "example/private.txt": b"x",                               # an absolute path
+             f"data/build/attains/{MAIL}.json": b"x",                              # an address as a file name
+             "data/build/attains/::error::injected.json": b"x",                    # a workflow command
+             "data/raw/attains/geom/../../../../etc/x.json": b"x"}                 # a way out
+    tb = tarball(tmp_path / "bad.tar.gz", {"data/build/attains/attains-waters.json": b"{}", **names})
+    p = unpack(tmp_path, tb, "--only", "cache")
+    out = p.stdout + p.stderr
+    assert p.returncode == 1 and not (tmp_path / "repo" / "data").exists()
+    for n in names:
+        assert n not in out
+    assert "example" not in out and MAIL not in out and "injected" not in out and "etc/" not in out
+    assert ("4 member(s) that may not be restored (a file that is not the cache's: 2; an absolute or odd path: 1; "
+            "an odd path: 1)") in out and "nothing was restored" in out
+    # a damaged object: the failure's category, not its words
+    junk = tmp_path / "junk.tar.gz"
+    junk.write_bytes(b"\x1f\x8b" + b"not really gzip " * 10)
+    p = unpack(tmp_path, junk, "--only", "cache")
+    assert p.returncode == 1 and "could not be read" in p.stdout and "junk.tar.gz" not in p.stdout + p.stderr
+    assert "Traceback" not in p.stdout + p.stderr
 
 
 def load_workflow(name):
