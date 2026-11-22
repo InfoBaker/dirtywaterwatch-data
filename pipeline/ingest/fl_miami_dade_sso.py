@@ -31,7 +31,7 @@ import math
 import re
 import sys
 from collections import Counter, defaultdict
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
@@ -225,6 +225,7 @@ def _clear_links(records):
         if '_miami_previous_parent_event_id' in raw:
             r['parent_event_id']=raw.pop('_miami_previous_parent_event_id')
         raw.pop('_miami_link_basis',None)
+        raw.pop('_miami_water_contribution',None)
 
 
 def _cite(a,b):
@@ -263,7 +264,7 @@ def _release_bounds(r):
     from build import status as S
     start, end = S.ev_time(r, 'started_at', 'FL'), S.ev_time(r, 'ended_at', 'FL')
     if end and S.end_precision(r) == 'day':
-        end = end.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+        end = S.end_of_local_day(end, TZ)
     # DEP's normalized times are dates. The WASD template may additionally state exact local times.
     text = (r.get('raw') or {}).get('INCIDENT_REPORT') or ''
     for field, label in (('start', r'Estimated\s+Time\s+Release\s+Started'),
@@ -295,11 +296,39 @@ def _intervals_agree(a,b):
     return not ((a1 and b0 and a1 < b0) or (b1 and a0 and b1 < a0))
 
 
+def _named_water_keys(text):
+    """Source water names, including waterways and numbered canals; generic kinds are not names.
+
+    The shared same-day duplicate heuristic deliberately limits names to six words and omits
+    waterway. These already-linked source reports need to retain longer names as evidence too.
+    """
+    from build import status as S
+    word = re.compile(S.WATER_WORD.pattern + r'|\bwaterways?\b', re.I)
+    keys = set()
+    for part in re.split(r'[;\n]', str(text or '')):
+        if not part.strip() or S.no_water_text(part) or S.stated_no_water(part): continue
+        toks = S.norm_name(part).split()
+        first = next((i for i, t in enumerate(toks) if word.fullmatch(t)), None)
+        if first is not None:
+            cut = next((i for i in range(first + 1, len(toks)) if toks[i] in S.WHERE_WORDS), len(toks))
+            toks = toks[:cut]
+        named = [t for t in toks if t not in S.UNSPECIFIC_WATER_WORDS]
+        if named and not all(word.fullmatch(t) for t in named):
+            keys.add(''.join(named))
+    return keys
+
+
 def _water_evidence(r):
     # Same dry-record safeguards as al_jefferson_county_soa.link_adem.
     from build import status as S
     if S.no_water_flag(r) or S.reached_no_water(r) or S.no_receiving_water(r): return 0
-    return 2 if S.specific_water_keys(r.get('waterbody_text')) else 1
+    return 2 if _named_water_keys(r.get('waterbody_text')) else 1
+
+
+def _waters_differ(a,b):
+    if _water_evidence(a) != 2 or _water_evidence(b) != 2: return False
+    ka, kb = _named_water_keys(a.get('waterbody_text')), _named_water_keys(b.get('waterbody_text'))
+    return not any(x in y or y in x for x in ka for y in kb)
 
 
 def link_pnp(county,pnp):
@@ -340,7 +369,6 @@ def link_pnp(county,pnp):
     for c,p,basis in fallback:
         if candidates_by_county[c['event_id']]==1 and _intervals_agree(c,p):
             pairs[c['event_id']].append(p); bases[(c['event_id'],p['event_id'])]=basis
-    from build import status as S
     by_id={c['event_id']:c for c in county}; n=dep_n=0
     for eid,ps in pairs.items():
         c=by_id[eid]
@@ -352,7 +380,7 @@ def link_pnp(county,pnp):
             primary['raw']['_miami_previous_duplicate_of']=primary['duplicate_of']; primary['duplicate_of']=None
         if primary.get('duplicate_of'): continue  # unrelated existing identity wins
         n+=1; dep_n+=len(ps)
-        active_ids={r['event_id'] for r in group if r is primary or S.waters_differ(r,primary)}
+        active_ids={r['event_id'] for r in group if r is primary or _waters_differ(r,primary)}
         for r in group:
             # A duplicate revision must not independently suppress the water-bearing representative.
             # Retain the original relation and restore it when these county links are recomputed.
@@ -362,10 +390,12 @@ def link_pnp(county,pnp):
         for p in ps:
             _cite(c,p); _cite(p,c)
         for r in group:
-            # Conflicting named waters keep their own status evidence, as in the neighbouring linker.
-            if r is primary or S.waters_differ(r,primary): continue
+            if r is primary: continue
             basis=bases[(eid, (primary if r is c else r)['event_id'])]
             _duplicate(r,primary,basis)
+            # One counting identity, but each different named water keeps this source's own status.
+            if r['event_id'] in active_ids:
+                r['raw']['_miami_water_contribution']=primary['event_id']
     return {'county_linked':n,'dep_records_linked':dep_n}
 
 

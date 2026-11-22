@@ -262,21 +262,23 @@ def test_fallback_rejects_disjoint_stated_intervals(reverse):
     assert not c['duplicate_of'] and not p['duplicate_of']
 
 
+@pytest.mark.parametrize('county_water', ['Biscayne Canal', 'Intracoastal Waterway', 'Mahi Waterway',
+                                          'Miami River', 'Biscayne Bay'])
 @pytest.mark.parametrize('dep_water, flag', [(None, False), (None, None), ('CANAL', True),
                                             ('Biscayne Canal', False)])
-def test_county_water_evidence_survives_linking_and_status(tmp_path, dep_water, flag):
+def test_county_water_evidence_survives_linking_and_status(tmp_path, dep_water, flag, county_water):
     from datetime import datetime
     from build import status as S
     from export.detail import links_of
     c, p = local(), pnp()[0]
-    c['waterbody_text'] = c['raw']['SURFWATNAME'] = 'Biscayne Canal'
+    c['waterbody_text'] = c['raw']['SURFWATNAME'] = county_water
     p['waterbody_text'] = dep_water
     p['raw']['reached_water'] = flag
     p['raw']['INCIDENT_REPORT'] += ' Waterbodies Impacted: N' if flag is False else ''
     evidence = copy.deepcopy([(r['waterbody_text'], r['raw']) for r in [c, p]])
     assert M.link_pnp([c], [p]) == {'county_linked': 1, 'dep_records_linked': 1}
-    slug = 'biscayne-canal-fl'
-    waters = {slug: {'slug': slug, 'name': 'Biscayne Canal', 'state': 'FL', 'kind': 'canal',
+    slug = 'test-' + county_water.lower().replace(' ', '-') + '-fl'
+    waters = {slug: {'slug': slug, 'name': county_water, 'state': 'FL', 'kind': 'canal',
                      'bbox': [-80.17, 25.68, -80.15, 25.69]}}
     for r in [c, p]:
         (tmp_path / (r['source_id'] + '.json')).write_text(json.dumps({
@@ -359,5 +361,54 @@ def test_different_named_waters_keep_both_status_records_and_citations():
     p['waterbody_text'] = 'Gratigny Canal'
     p['raw']['reached_water'] = True
     assert M.link_pnp([c], [p])['county_linked'] == 1
-    assert not c['duplicate_of'] and not p['duplicate_of']
+    assert c['duplicate_of'] == p['event_id'] and not p['duplicate_of']
+    assert c['raw']['_miami_water_contribution'] == p['event_id']
     assert p['raw']['_other_source_record'] == [c['event_id']]
+    assert c['raw']['_other_source_record'] == [p['event_id']]
+    before = copy.deepcopy([c, p])
+    M.link_pnp([c], [p])
+    assert [c, p] == before
+    M.link_pnp([c], [])
+    assert not c['duplicate_of'] and '_miami_water_contribution' not in c['raw']
+
+
+@pytest.mark.parametrize('day, midnight_offset, evening_offset, next_midnight', [
+    ('2026-11-03', '-05:00', '-05:00', '2026-11-04T05:00:00+00:00'),
+    ('2026-03-08', '-05:00', '-04:00', '2026-03-09T04:00:00+00:00'),
+    ('2026-11-01', '-04:00', '-05:00', '2026-11-02T05:00:00+00:00'),
+])
+def test_day_only_dep_end_covers_eastern_evening_and_dst(day, midnight_offset, evening_offset, next_midnight):
+    from datetime import datetime
+    c, p = fallback_pair()
+    c['started_at'], c['ended_at'] = day + 'T20:00:00' + evening_offset, day + 'T21:00:00' + evening_offset
+    p['started_at'] = p['ended_at'] = day + 'T00:00:00' + midnight_offset
+    p['time_precision'] = p['raw']['ended_at_precision'] = 'day'
+    before = copy.deepcopy([c, p])
+    assert M.link_pnp([c], [p])['county_linked'] == 1
+    assert sum(not r['duplicate_of'] for r in [c, p]) == 1
+    assert M._release_bounds(p)[1] == datetime.fromisoformat(next_midnight)
+    for r, old in zip([c, p], before):
+        assert (r['started_at'], r['ended_at'], r['time_precision']) == (old['started_at'], old['ended_at'], old['time_precision'])
+    after_day = copy.deepcopy(c)
+    after_day['started_at'] = after_day['ended_at'] = datetime.fromisoformat(next_midnight).replace(minute=1).isoformat()
+    assert not M._intervals_agree(after_day, p)
+
+
+@pytest.mark.parametrize('name', ['CANAL', 'RIVER', 'BAY', 'WATERWAY', 'Unnamed Waterway', 'Unnamed Canal'])
+def test_generic_water_is_not_specific_evidence(name):
+    c, p = local(), pnp()[0]
+    c['waterbody_text'] = name
+    p['waterbody_text'] = 'Mahi Waterway'
+    p['raw']['reached_water'] = True
+    assert M.link_pnp([c], [p])['county_linked'] == 1
+    assert c['duplicate_of'] == p['event_id'] and not p['duplicate_of']
+
+
+@pytest.mark.parametrize('name', ['Mahi Waterway', 'C-7 Canal', 'Canal 9', 'North Fork of the Middle Branch River'])
+def test_named_dep_water_wins_over_generic_county(name):
+    c, p = local(), pnp()[0]
+    p['waterbody_text'] = name
+    p['raw']['reached_water'] = True
+    assert M._water_evidence(p) == 2
+    assert M.link_pnp([c], [p])['county_linked'] == 1
+    assert c['duplicate_of'] == p['event_id'] and not p['duplicate_of']
