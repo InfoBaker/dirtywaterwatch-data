@@ -694,6 +694,22 @@ def red_intervals(ev: dict, state: str | None, now: datetime, capped: Counter, w
     return out
 
 
+def _cached_red_intervals(ev, state, now, capped, water, rules, cache):
+    # A build's buckets retain the same event objects, rules and evaluation clock.
+    # Discharger and state charts ask the identical question; water charts keep
+    # their own context and always use the original path. Nothing survives a build.
+    if cache is None or water is not None:
+        return red_intervals(ev, state, now, capped, water=water, rules=rules)
+    key = (id(ev), state)
+    if key not in cache:
+        counts = Counter()
+        intervals = red_intervals(ev, state, now, counts, rules=rules)
+        cache[key] = (intervals, counts)
+    intervals, counts = cache[key]
+    capped.update(counts)                 # each entity still counts its capped reports
+    return intervals
+
+
 def discharge_days(ev: dict) -> list:
     s = when(ev)
     e = parse_time(ev.get("ended_at"))
@@ -752,7 +768,8 @@ MEASURE_LABEL = {"gallons": ("Reported volume", "gallons"), "events": ("Discharg
                  "hours": ("Hours of discharge reported", "hours"), "event_days": ("Days with a combined sewer discharge", "days")}
 
 
-def build_entity(bucket: Bucket, data: Data, spans: dict, per: dict, name: str | None) -> dict:
+def build_entity(bucket: Bucket, data: Data, spans: dict, per: dict, name: str | None,
+                 interval_cache: dict | None = None) -> dict:
     now = data.now
     ln = local(now)
     y_now, m_now = ln.year, ln.month
@@ -926,7 +943,7 @@ def build_entity(bucket: Bucket, data: Data, spans: dict, per: dict, name: str |
             st, w0 = bucket.state, w_self
         else:
             st, w0 = event_state(ev), None
-        r = red_intervals(ev, st, now, capped, water=w0, rules=data.rules)
+        r = _cached_red_intervals(ev, st, now, capped, w0, data.rules, interval_cache)
         if not r:
             no_hours += 1
         d_ivs += r
@@ -1472,11 +1489,14 @@ def build(now: datetime | None = None, only: set | None = None, write: bool = Tr
              "two_class_sources": sorted(two_class), "selection": dict(stats),
              "water": {}, "discharger": {}, "state": {}}
     written = Counter()
+    interval_cache = {}
     for (kind, key), bk in sorted(buckets.items()):
         if only and f"{kind}:{key}" not in only:
             continue
         name = entity_name(kind, key, bk, data)
-        doc = build_entity(bk, data, spans, per, name)
+        if kind == "water":             # state/discharger buckets sort first; water contexts are not cached
+            interval_cache.clear()
+        doc = build_entity(bk, data, spans, per, name, interval_cache=interval_cache)
         fname = safe_name(key.upper() if kind == "state" else key)
         if write:
             write_json(CHARTS_DIR / kind / f"{fname}.json", doc)
