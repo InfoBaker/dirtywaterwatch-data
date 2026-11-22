@@ -5,10 +5,11 @@ this way. The shape of the miss: Hartford, Vermont's plant bypass (VT0101010, "C
 point) coloured the whole Vermont record of the river and drew no stretch, so New Hampshire's record of the same river
 showed nothing.
 
-2026-11-21, after review: the rule places only when nothing is in doubt (a wrong outlet is worse than none): any
-outfall the report names blocks it; the river must be named by the report; the outlet must start on that river and
-have a current open registry row; and the chosen outlet must be established upstream of every other candidate (its
-trace runs through their starts), or all of them start within 1 km along the network.
+2026-11-21, after review: the chosen outlet must start on the river, have a current open registry row, and be
+established upstream of every other candidate (its trace runs through their starts), or all of them start within 1 km
+along the network; otherwise nothing is placed. An outlet the report names that the registry holds is never stood in
+for; one it does not hold gives basis "permit_outlet_unmatched" and its own note. A river the placement took from the
+permit counts, and the note says so.
 
 Run from pipeline/: python -m pytest tests/test_permit_outlet_reach.py -q
 """
@@ -145,7 +146,7 @@ def test_a_plant_bypass_naming_no_outlet_is_drawn_from_the_most_upstream_outlet_
     assert p["reach"] == f"{VT}-004" and "reaches" not in p
     assert p["reach_basis"] == "permit_outlet_unnamed"
     assert p["reach_basis_outfalls"] == [{"water_slug": "conn-river-vt", "reach": f"{VT}-004", "permit": VT,
-                                          "outfall": "004", "candidates": 2}]
+                                          "outfall": "004", "candidates": 2, "water_named": True}]
     assert p["reach_basis_note"] == ("The report names no outlet. The stretch is drawn from the operator's most "
                                      "upstream registered outlet on this river (outfall 004 of 2); our choice, not "
                                      "the report's.")
@@ -311,32 +312,87 @@ def test_a_permit_with_no_traced_outfall_on_the_named_river_is_unchanged():
     assert [r["placement"] for r in st["waters"]["conn-river-vt"]["reasons"]] == ["unmodeled"]
 
 
-def test_a_report_naming_its_outfall_or_giving_a_point_is_not_drawn_from_another_outlet():
-    st, _ = build([vt_bypass("own", outfall_id="002"), vt_bypass("pt", lat=43.6, lon=-71.97)], vt_reaches(), VT_ROWS)
-    for eid in ("vt-dec:own", "vt-dec:pt"):
-        assert "reach_basis" not in placements_of(st, eid) and "reach" not in placements_of(st, eid)
+UNMATCHED_NOTE = ("The outlet the report names is not in our outlet records. The stretch is drawn from the operator's "
+                  "most upstream registered outlet on this river (outfall 004 of 2); our choice, not the report's.")
+
+
+def test_a_facility_name_in_the_outfall_name_is_not_an_outlet():
+    """Vermont's record gives "White River Junction" as its outfall name: the plant's place, no outlet."""
+    st, _ = build([vt_bypass("wrj", outfall_name="White River Junction")], vt_reaches(), VT_ROWS)
+    p = placements_of(st, "vt-dec:wrj")
+    assert p["reach"] == f"{VT}-004" and p["reach_basis"] == "permit_outlet_unnamed"
+    assert p["reach_basis_note"].startswith("The report names no outlet.")
+
+
+def test_an_outlet_the_registry_does_not_hold_is_drawn_from_the_upstream_outlet_and_said_so():
+    """Review finding 1, revised: an outlet the report names that the registry does not hold (an unresolved
+    outfall_id, an outfall number in its name or per-outfall volume, an outlet description) changes the basis and the
+    note; the note never quotes the report's outlet text."""
+    recs = [vt_bypass("id", outfall_id="002"),                                   # 002 is in no registry row
+            vt_bypass("nm", event_type="cso", outfall_name="CSO 999"),
+            vt_bypass("vol", event_type="cso", volume_text="999-0.2 MG 1405 to 1650",
+                      raw={"Final Volume": "999-0.2 MG 1405 to 1650"}),
+            vt_bypass("desc", event_type="cso", outfall_name="CSO outfall at 12 Elm Street")]
+    st, hist = build(recs, vt_reaches(), VT_ROWS)
+    for r in ("id", "nm", "vol", "desc"):
+        p = placements_of(st, f"vt-dec:{r}")
+        assert p["reach"] == f"{VT}-004" and p["reach_basis"] == "permit_outlet_unmatched", r
+        assert p["reach_basis_note"] == UNMATCHED_NOTE, r
+        assert "Elm" not in json.dumps(p) and "999" not in p["reach_basis_note"]
+    # the reach, its history and its active band carry the basis
+    assert st["reaches"][f"{VT}-004"]["reach_basis_events"]["vt-dec:id"]["reach_basis"] == "permit_outlet_unmatched"
+    assert any(iv[4] == "vt-dec:id" and iv[6:] == ["permit_outlet_unmatched"] for iv in hist["reach_intervals"][f"{VT}-004"])
+    a = [x for x in st["reach_events_active"] if x["event_id"] == "vt-dec:id"][0]
+    assert a["reach_basis"] == "permit_outlet_unmatched" and a["reach_basis_note"] == UNMATCHED_NOTE
+
+
+def test_an_unresolved_outfall_id_reaches_the_rule():
+    """An outfall_id the registry lacks finds no reach in event_reaches and is not placed by outfall: the record gets
+    as far as the rule (before: it stayed unmodeled)."""
+    e = vt_bypass("id", outfall_id="002")
+    assert S.event_reaches(e, {"water_slugs": ["conn-river-vt"]}, S.index_reaches(vt_reaches())) == []
+    st, _ = build([e], vt_reaches(), VT_ROWS)
+    assert placements_of(st, "vt-dec:id")["reach_basis"] == "permit_outlet_unmatched"
+
+
+def test_an_outlet_the_registry_holds_is_never_drawn_from_another_outlet():
+    """The registry holds outfall 001 (a plant outfall with no trace yet) and outfall 005 (closed): a report naming
+    either waits for its own outlet, by number or by the registry's outfall name; a point goes to needs_reach."""
+    rows = VT_ROWS + [{**row(VT, "008", "conn-river-vt"), "outfall_name": "Bridge Street Regulator"}]
+    recs = [vt_bypass("own", outfall_id="001"), vt_bypass("cls", event_type="cso", outfall_name="CSO 005"),
+            vt_bypass("byname", event_type="cso", outfall_name="Bridge Street Regulator"),
+            vt_bypass("pt", lat=43.6, lon=-71.97)]
+    st, _ = build(recs, vt_reaches(), rows)
+    for r in ("own", "cls", "byname", "pt"):
+        p = placements_of(st, f"vt-dec:{r}")
+        assert "reach_basis" not in p and "reach" not in p, r
     assert [n["event_id"] for n in st["needs_reach"]] == ["vt-dec:pt"]       # traced from its own point, as before
 
 
-def test_an_unresolved_outfall_named_in_the_name_or_the_volume_blocks_the_rule():
-    """Review finding 1: outfall 999 resolves to nothing, but the report names it: no other outlet stands for it."""
-    named = vt_bypass("nm", event_type="cso", outfall_name="CSO 999")
-    vol = vt_bypass("vol", event_type="cso", volume_text="999-0.2 MG 1405 to 1650",
-                    raw={"Final Volume": "999-0.2 MG 1405 to 1650"})
-    plant_named = vt_bypass("pn", outfall_name="Plant outfall")
-    st, _ = build([named, vol, plant_named], vt_reaches(), VT_ROWS)
-    for eid in ("vt-dec:nm", "vt-dec:vol", "vt-dec:pn"):
-        assert "reach_basis" not in placements_of(st, eid) and "reach" not in placements_of(st, eid), eid
-
-
-def test_a_report_that_names_no_river_is_not_drawn_on_its_permits_receiving_water():
-    """Review finding 2: with no water text and no water slugs, placement may infer the permit's receiving water;
-    the rule needs the river named by the report itself."""
+def test_a_river_taken_from_the_permit_is_drawn_from_the_permits_own_outlet_and_said_so():
+    """Review finding 2, reverted: a report naming no water, placed on the river its permit names ("inferred"), gets
+    the stretch of the permit's own outlet that starts on that river; the note says where the river comes from."""
     bare = vt_bypass("bare", water_slugs=[], waterbody_text=None)
     by_text = vt_bypass("text", water_slugs=[])
     st, _ = build([bare, by_text], vt_reaches(), VT_ROWS)
-    assert "reach_basis" not in placements_of(st, "vt-dec:bare")
-    assert placements_of(st, "vt-dec:text").get("reach") == f"{VT}-004"     # its waterbody text names the river
+    p = placements_of(st, "vt-dec:bare")
+    assert p["water_match"] == "inferred" and p["reach"] == f"{VT}-004"
+    assert p["reach_basis"] == "permit_outlet_unnamed" and p["reach_basis_outfalls"][0]["water_named"] is False
+    assert p["reach_basis_note"].endswith("(outfall 004 of 2); our choice, not the report's. The report names no "
+                                          "water; this river is the one the operator's permit names.")
+    t = placements_of(st, "vt-dec:text")
+    assert t["reach"] == f"{VT}-004" and t["reach_basis_outfalls"][0]["water_named"] is True
+    assert "permit names" not in t["reach_basis_note"]
+
+
+def test_the_note_names_the_rivers_the_report_does_not_name():
+    picks = [{"outfall": "001", "water_slugs": ["merrimack-river-nh"], "candidates": {"merrimack-river-nh": 2}},
+             {"outfall": "010", "water_slugs": ["piscataquog-river-nh"], "candidates": {"piscataquog-river-nh": 2}}]
+    some = S.permit_outlet_note(picks, WATERS, "permit_outlet_unnamed", {"merrimack-river-nh"})
+    assert some.endswith("The report does not name the Piscataquog River; the operator's permit does.")
+    none = S.permit_outlet_note(picks, WATERS, "permit_outlet_unmatched", set())
+    assert none.startswith("The outlet the report names is not in our outlet records. The stretches are drawn")
+    assert none.endswith("The report names no water; these rivers are the ones the operator's permit names.")
 
 
 def test_an_outlet_on_a_tributary_never_stands_for_the_named_river():

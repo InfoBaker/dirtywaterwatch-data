@@ -4129,35 +4129,80 @@ def event_reaches(ev: dict, pl: dict, reach_index: dict) -> list[tuple[dict, str
     return out
 
 
-# A report naming no outlet (no outfall_id, outfall name or per-outfall volume, no point) of an event type that by its
-# nature leaves through a permitted outlet, on a river the report itself names: its stretch is drawn from its permit's
-# most upstream registered outlet on that river (permit_outlet_reaches), marked reach_basis PERMIT_OUTLET_BASIS with
-# the outfall chosen, the count of candidates and PERMIT_OUTLET_NOTE. Sanitary sewer overflows are not here: a
-# collection-system spill can be anywhere on the system, and its place is never guessed. When the order of the
-# candidates is not established the record is not placed this way (a wrong outlet is worse than none). The event
-# record itself is never changed.
+# A report whose outlet is not identified, with no point, of an event type that by its nature leaves through a
+# permitted outlet: on each river it is placed on (named by the report, or taken from its permit), its stretch is
+# drawn from its permit's most upstream open registered outlet that starts on that river (permit_outlet_reaches), only
+# when that outlet is established upstream of the other candidates, so its stretch runs through their starts (a wrong
+# outlet is worse than none: otherwise nothing is placed). Basis PERMIT_OUTLET_BASIS when the report names no outlet,
+# PERMIT_OUTLET_UNMATCHED when it names one the outlet registry does not hold (named_outlet); a report naming an
+# outlet the registry holds waits for that outlet's own trace. The note (permit_outlet_note) says which, the outfall
+# chosen of how many, and where a river taken from the permit came from. Sanitary sewer overflows are not here: a
+# collection-system spill can be anywhere on the system, and its place is never guessed. The event record itself is
+# never changed.
 PERMIT_OUTLET_TYPES = {"cso", "bypass", "plant_bypass", "blended"}
-PERMIT_OUTLET_BASIS = "permit_outlet_unnamed"
+PERMIT_OUTLET_BASIS = "permit_outlet_unnamed"           # the report names no outlet
+PERMIT_OUTLET_UNMATCHED = "permit_outlet_unmatched"     # it names one that is not in the outlet registry
+PERMIT_OUTLET_BASES = (PERMIT_OUTLET_BASIS, PERMIT_OUTLET_UNMATCHED)
+# an outlet word in an outfall name: the name describes an outlet (NY DEC's "CSO outfall is farthest upstream ..."),
+# not a facility ("White River Junction")
+OUTLET_WORDS = re.compile(r"\b(?:csos?|outfalls?|outlets?|overflows?|regulators?)\b", re.I)
 PERMIT_OUTLET_NEAR_KM = 1.0     # candidates whose order is not established, all within this far along the network
-PERMIT_OUTLET_NOTE = ("The report names no outlet. The stretch is drawn from the operator's most upstream registered "
-                      "outlet on this river (outfall {outfall} of {n}); our choice, not the report's.")
-PERMIT_OUTLET_NOTE_MANY = ("The report names no outlet. The stretches are drawn from the operator's most upstream "
-                           "registered outlet on each river ({each}); our choice, not the report's.")
+# the note: what the report says of its outlet (never quoting it: an outlet description can hold an address), the
+# outlet chosen, and, for a river the placement took from the permit, where the river comes from
+PERMIT_OUTLET_LEAD = {PERMIT_OUTLET_BASIS: "The report names no outlet.",
+                      PERMIT_OUTLET_UNMATCHED: "The outlet the report names is not in our outlet records."}
+PERMIT_OUTLET_NOTE = ("{lead} The stretch is drawn from the operator's most upstream registered outlet on this river "
+                      "(outfall {outfall} of {n}); our choice, not the report's.")
+PERMIT_OUTLET_NOTE_MANY = ("{lead} The stretches are drawn from the operator's most upstream registered outlet on each "
+                           "river ({each}); our choice, not the report's.")
+PERMIT_OUTLET_INFERRED = "The report names no water; this river is the one the operator's permit names."
+PERMIT_OUTLET_INFERRED_MANY = "The report names no water; these rivers are the ones the operator's permit names."
+PERMIT_OUTLET_INFERRED_SOME = "The report does not name the {names}; the operator's permit does."
 
 
-def names_an_outlet(ev: dict, pl: dict) -> bool:
-    """Whether a report names any outfall, resolved or not: its outfall_id, an outfall number in its outfall name
-    (outfall_ids_of), any outfall name at all, a per-outfall volume text, or outfalls its placement used."""
+def permit_registry_ids(registry_rows: list | None) -> dict[str, dict]:
+    """permit -> {"keys": its registry outfall numbers (oid_key, else norm_oid), "names": its outfall names, folded}:
+    every row, open or closed, to tell an outlet the registry knows from one it does not."""
+    out: dict = {}
+    for o in registry_rows or []:
+        if not isinstance(o, dict) or not o.get("npdes_permit") or o.get("outfall") in (None, ""):
+            continue
+        d = out.setdefault(o["npdes_permit"], {"keys": set(), "names": set()})
+        k = oid_key(o["outfall"])
+        d["keys"].add(k if k else norm_oid(o["outfall"]))
+        if str(o.get("outfall_name") or "").strip():
+            d["names"].add(norm_name(o["outfall_name"]))
+    return out
+
+
+def named_outlet(ev: dict, pl: dict, permit_ids: dict) -> str | None:
+    """What a report says of its outlet, for the rule: None, it names none (no outfall id, no outfall number in its
+    name or a per-outfall volume, and an outfall name that is blank or a facility's: no outlet word, no registry
+    outfall's name); "unmatched", it names one the permit's registry does not hold (an unresolved outfall id or
+    number, an outlet description); "matched", it names one the registry holds (resolved before this rule, or waiting
+    for its trace): never drawn from another outlet."""
+    if pl.get("outfalls"):
+        return "matched"
     raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
-    return bool(ev.get("outfall_id") not in (None, "") or str(ev.get("outfall_name") or "").strip()
-                or outfall_ids_of(ev)[0] or pl.get("outfalls")
-                or any(volume_outfall_parts(raw.get(k)) for k in VOLUME_OUTFALL_KEYS)
-                or volume_outfall_parts(ev.get("volume_text")))
+    name = str(ev.get("outfall_name") or "").strip()
+    ids = ([str(ev["outfall_id"])] if ev.get("outfall_id") not in (None, "") else []) + outfall_ids_of(ev)[0] \
+        + outfall_ids_from_name(name) + [o for k in VOLUME_OUTFALL_KEYS for o, _ in volume_outfall_parts(raw.get(k))] \
+        + [o for o, _ in volume_outfall_parts(ev.get("volume_text"))]
+    reg = permit_ids.get(ev.get("npdes_permit")) or {"keys": set(), "names": set()}
+    for x in ids:
+        k = oid_key(x)
+        if (k if k else norm_oid(x)) in reg["keys"]:
+            return "matched"
+    if name and norm_name(name) in reg["names"]:
+        return "matched"
+    if ids or (name and OUTLET_WORDS.search(name)):
+        return "unmatched"
+    return None
 
 
 def report_named_rivers(ev: dict, resolver) -> set[str]:
     """The waters the report itself names: its own water_slugs and the waters of its state its waterbody text names
-    (by_name, kept by the guard); never a water inferred from its permit's receiving water."""
+    (by_name, kept by the guard). A river the placement took from the permit is not among them (the note says so)."""
     out = {s for s in ev.get("water_slugs") or [] if isinstance(s, str)}
     text = ev.get("waterbody_text")
     if text and str(text).strip():
@@ -4315,13 +4360,26 @@ def permit_outlet_reaches(ev: dict, named: list[str], index: dict, waters: dict,
     return list(picks.values())
 
 
-def permit_outlet_note(picks: list[dict], waters: dict) -> str:
-    """PERMIT_OUTLET_NOTE for one river, PERMIT_OUTLET_NOTE_MANY naming each river and its outfall for several."""
+def permit_outlet_note(picks: list[dict], waters: dict, basis: str = PERMIT_OUTLET_BASIS,
+                       named: set | None = None) -> str:
+    """The note: PERMIT_OUTLET_LEAD for the basis, then PERMIT_OUTLET_NOTE for one river or PERMIT_OUTLET_NOTE_MANY
+    naming each river and its outfall; and, for rivers the report does not name (named: those it does; None: all),
+    where they come from (PERMIT_OUTLET_INFERRED...)."""
+    lead = PERMIT_OUTLET_LEAD[basis]
     each = [(slug, p["outfall"], p["candidates"][slug]) for p in picks for slug in p["water_slugs"]]
     if len(each) == 1:
-        return PERMIT_OUTLET_NOTE.format(outfall=each[0][1], n=each[0][2])
-    return PERMIT_OUTLET_NOTE_MANY.format(each="; ".join(
-        f"{(waters.get(s) or {}).get('name') or s}: outfall {o} of {n}" for s, o, n in each))
+        text = PERMIT_OUTLET_NOTE.format(lead=lead, outfall=each[0][1], n=each[0][2])
+    else:
+        text = PERMIT_OUTLET_NOTE_MANY.format(lead=lead, each="; ".join(
+            f"{(waters.get(s) or {}).get('name') or s}: outfall {o} of {n}" for s, o, n in each))
+    if named is not None:
+        inferred = [s for s, _, _ in each if s not in named]
+        if inferred and not named:
+            text += " " + (PERMIT_OUTLET_INFERRED if len(inferred) == 1 else PERMIT_OUTLET_INFERRED_MANY)
+        elif inferred:
+            text += " " + PERMIT_OUTLET_INFERRED_SOME.format(
+                names=" or the ".join(str((waters.get(s) or {}).get("name") or s) for s in inferred))
+    return text
 
 
 def index_reaches(reaches: dict) -> dict:
@@ -5122,6 +5180,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     reach_index = index_reaches(reaches)
     outlet_index = permit_outlet_index(reaches, placement_outfalls)     # a report naming no outlet (PERMIT_OUTLET_TYPES)
     outlet_memo: dict = {}                                              # one selection per permit, preference, river
+    permit_ids = permit_registry_ids(placement_outfalls)                # the outlets each permit's registry knows
     if not rules.get("version"):
         problems.append("data/rules.json missing or without a version: no red windows, no caution windows")
     discharger_towns = load_discharger_towns() if discharger_towns is None else discharger_towns
@@ -5259,26 +5318,30 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         # rivers, and the shoreline lakes, whose stretches carry a report as a river reach does
         river_slugs = [x for x in pl["water_slugs"] if waters[x].get("kind") in RIVER_KINDS or x in shore_slugs]
         # a report naming no outlet and giving no point, of a type that leaves through a permitted outlet: the stretch
-        # of its permit's most upstream registered outlet on each river it names (PERMIT_OUTLET_BASIS); the record
+        # of its permit's most upstream registered outlet on each river it names (PERMIT_OUTLET_BASES); the record
         # itself is not changed
-        outlet_basis = False
-        if (not found and is_discharge and not stretched and not pl.get("no_receiving_water") and not future
-                and not coarse and ev.get("event_type") in PERMIT_OUTLET_TYPES and ev.get("npdes_permit") in outlet_index
-                and ev.get("lat") is None and not names_an_outlet(ev, pl)):
-            named = report_named_rivers(ev, resolver)
-            picks = permit_outlet_reaches(ev, [x for x in river_slugs if x in named and x not in shore_slugs
+        outlet_basis = None
+        said = (named_outlet(ev, pl, permit_ids)
+                if (not found and is_discharge and not stretched and not pl.get("no_receiving_water") and not future
+                    and not coarse and ev.get("event_type") in PERMIT_OUTLET_TYPES
+                    and ev.get("npdes_permit") in outlet_index and ev.get("lat") is None) else "matched")
+        if said != "matched":   # it names no outlet, or one the registry does not hold (a point: needs_reach)
+            # every river it is placed on, a river taken from the permit included: the outlet must be the same permit's
+            # and start on that river (permit_outlet_reaches), and the note says where a river came from
+            picks = permit_outlet_reaches(ev, [x for x in river_slugs if x not in shore_slugs
                                                and waters[x].get("kind") in RIVER_KINDS], outlet_index, waters,
                                           outlet_memo)
             if picks:
-                outlet_basis = True
+                outlet_basis = PERMIT_OUTLET_UNMATCHED if said == "unmatched" else PERMIT_OUTLET_BASIS
+                named = report_named_rivers(ev, resolver)
                 found = [(p["reach"], list(p["water_slugs"])) for p in picks]
-                placements[eid]["reach_basis"] = PERMIT_OUTLET_BASIS
+                placements[eid]["reach_basis"] = outlet_basis
                 placements[eid]["reach_basis_outfalls"] = [
                     {"water_slug": slug, "reach": p["reach"]["key"], "permit": p["reach"].get("permit"),
-                     "outfall": p["outfall"], "candidates": p["candidates"][slug]}
+                     "outfall": p["outfall"], "candidates": p["candidates"][slug], "water_named": slug in named}
                     for p in picks for slug in p["water_slugs"]]
-                placements[eid]["reach_basis_note"] = permit_outlet_note(picks, waters)
-        basis_tag = {"reach_basis": PERMIT_OUTLET_BASIS} if outlet_basis else {}
+                placements[eid]["reach_basis_note"] = permit_outlet_note(picks, waters, outlet_basis, named)
+        basis_tag = {"reach_basis": outlet_basis} if outlet_basis else {}
         # the river waters each reach carries: all of the record's (its own outfall or point), or the water of the
         # one registry outfall it starts at (a report naming several outfalls: one reach per outfall), or the waters
         # a permit's outlet was chosen for (a list: PERMIT_OUTLET_BASIS)
@@ -5610,7 +5673,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             # why a stretch is not traced (kept for any interval that carries it)
                             **({"stretch_fallback": iv["stretch_fallback"]} if iv.get("stretch_fallback") else {}),
                             "reach": iv.get("reach"), "category": iv.get("category") or "sewage",
-                            # the stretch is drawn from an outlet the report does not name (PERMIT_OUTLET_BASIS)
+                            # the stretch is drawn from an outlet the report does not name (PERMIT_OUTLET_BASES)
                             **({"reach_basis": iv["reach_basis"]} if iv.get("reach_basis") else {}),
                             "ended_at": iv["ended_at"],
                             # rain_likely: the radar total, the threshold and its basis (build/rain_likely.py)
@@ -5739,11 +5802,12 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                 "stretch": r.get("stretch"), "rule_applied": r.get("rule"),
                                 "stretch_trace": r.get("stretch_trace"), "state": r.get("state")}
                                if r.get("kind") == ADVISORY_STRETCH else {})}
-        # the records drawn on this stretch from an outlet they do not name (PERMIT_OUTLET_BASIS), with the note
+        # the records drawn on this stretch from an outlet they do not name (PERMIT_OUTLET_BASES), with the note
         based = sorted({iv["event_id"] for iv in ivs if iv.get("reach_basis")})
         if based:
             out_reaches[key]["reach_basis_events"] = {
-                e: {"reach_basis": PERMIT_OUTLET_BASIS, "reach_basis_note": (placements.get(e) or {}).get("reach_basis_note")}
+                e: {"reach_basis": (placements.get(e) or {}).get("reach_basis"),
+                    "reach_basis_note": (placements.get(e) or {}).get("reach_basis_note")}
                 for e in based}
         reach_strips[key] = paint(ivs, h0, h_end, n_hours)
         hist_cat = out_reaches[key].get("category") or "sewage"
@@ -5792,7 +5856,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     "started_at": by_id[eid].get("started_at"), "hours_since_start": round(elapsed, 1),
                     **{k: v for k, v in flow.items() if k != "q_ratio"}, "q_ratio": round(flow["q_ratio"], 3),
                     "segments": segs,
-                    # the stretch is drawn from an outlet the report does not name (PERMIT_OUTLET_BASIS)
+                    # the stretch is drawn from an outlet the report does not name (PERMIT_OUTLET_BASES)
                     **({"reach_basis": top["reach_basis"],
                         "reach_basis_note": (placements.get(eid) or {}).get("reach_basis_note")}
                        if top.get("reach_basis") else {}),

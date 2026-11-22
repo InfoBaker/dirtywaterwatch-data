@@ -41,19 +41,22 @@ Files:
                      marked whole (reach.shoreline.min_ring_km) as a segment of its own with islet true,
                      km 0 to 0 and no stop marker; the lake itself is drawn as an
                      outline (overlays display "outline", stretch_model "shoreline")
-                     A report that names no outlet (no outfall id, outfall name or per-outfall volume) and gives no
-                     point, a CSO, bypass, plant bypass or blend with a permit (never a sanitary sewer overflow), on a
-                     river the report itself names, is drawn from its permit's most upstream open registered outlet on
-                     that river, only when that outlet is established upstream of the others (build/status.py
-                     permit_outlet_reaches; otherwise it stays "unmodeled"). Its segment and stop features then carry
-                     reach_basis "permit_outlet_unnamed" and reach_basis_note (the plain sentence, also appended to
+                     A report whose outlet is not identified, with no point, a CSO, bypass, plant bypass or blend with
+                     a permit (never a sanitary sewer overflow), is drawn on each river it is placed on (named by the
+                     report or taken from its permit) from its permit's most upstream open registered outlet that starts
+                     on that river, only when that outlet is established upstream of the others (build/status.py
+                     permit_outlet_reaches; otherwise it stays "unmodeled"). reach_basis is "permit_outlet_unnamed" (the
+                     report names no outlet) or "permit_outlet_unmatched" (it names one the outlet registry does not
+                     hold; one the registry holds is never stood in for). Its segment and stop features then carry
+                     reach_basis and reach_basis_note (the plain sentence, also appended to
                      the segment label); the path feature of the stretch carries reach_basis_events ({event_id:
                      {reach_basis, reach_basis_note}}); its event record (events.json, events/<f>.json) carries
                      reach_basis, reach_basis_note and reach_basis_outfalls ([{water_slug, reach, permit, outfall,
-                     candidates}]: per river the outfall chosen and how many qualified); each of its active.json
+                     candidates, water_named}]: per river the outfall chosen, how many qualified, and whether the report
+                     names that river); each of its active.json
                      reasons on such a stretch carries reach_basis; and its history.json intervals (waters and
                      reach_intervals) carry the basis as a seventh item. The record's own outfall_id, lat and lon stay
-                     as published (empty). An event's detail file carries reach_band (the band of its `reach`) and,
+                     as published. An event's detail file carries reach_band (the band of its `reach`) and,
                      when it is drawn on several reaches, reach_bands (one per reach).
   reach-paths.geojson every traced outfall path with its status now (replay with history.json reaches)
   reaches/<st>.geojson the same per live state (write_reach_state_files): the traced paths (feature "path"), the
