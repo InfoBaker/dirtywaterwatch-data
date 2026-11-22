@@ -112,7 +112,7 @@ from pathlib import Path
 
 import requests
 
-from common import (DATA_DIR, BUILD_DIR, EVENTS_DIR, HEADERS, ROOT, event, now_iso, path_notes_to_meta, read_json,
+from common import (DATA_DIR, BUILD_DIR, EVENTS_DIR, HEADERS, ROOT, error_detail, error_text, event, now_iso, path_notes_to_meta, read_json,
                     save_raw, scrub_text, write_events, write_json)
 from ingest import ca_swrcb_ciwqs_spills as L
 
@@ -350,7 +350,7 @@ def build_record(key: str, row: dict, fetched_at: str, prev: dict | None, wdids:
         return rec
     except Exception as e:  # noqa: BLE001 - never drop a record
         return event(**base, event_type="sso", status="unknown", raw=raw, authority=AUTHORITY,
-                     parse_error=f"{type(e).__name__}: {e}")
+                     parse_error=f"{error_text(e)}")
 
 
 def _record(a: dict, base: dict, raw: dict, fetched_at: str, wdids: dict[str, str], names: dict[str, str],
@@ -685,8 +685,8 @@ def main(argv=None) -> int:
             content, modified = L.fetch(sess, state, FILE_URL)
     except Exception as e:  # noqa: BLE001
         write_json(STATE_FILE, state)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     if content is None:
         state["read_at"] = fetched_at
@@ -699,8 +699,8 @@ def main(argv=None) -> int:
         records, stats = build(rows, fetched_at, prev, live, file_modified=modified)
     except Exception as e:  # noqa: BLE001 - a read that fails keeps the previous records
         write_json(STATE_FILE, state)
-        write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     raw_path = state.get("raw_path")
     if not args.file:
