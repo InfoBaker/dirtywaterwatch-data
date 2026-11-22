@@ -1,0 +1,832 @@
+{
+  "checked": "2026-11-22",
+  "layer": "https://dpwview.baltimorecity.gov/agsprd/rest/services/SSO/MapServer/0",
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "SSOID",
+      "type": "esriFieldTypeInteger",
+      "alias": "SSOID",
+      "domain": null
+    },
+    {
+      "name": "SSO_DATE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATE",
+      "domain": null
+    },
+    {
+      "name": "STATUS",
+      "type": "esriFieldTypeString",
+      "alias": "STATUS",
+      "domain": {
+        "type": "codedValue",
+        "name": "WW_VVT_SSO_Status",
+        "description": "",
+        "codedValues": [
+          {
+            "name": "In Progress",
+            "code": "PROG"
+          },
+          {
+            "name": "5 Day Report Submitted",
+            "code": "5DAY"
+          },
+          {
+            "name": "24 Hour Report Submitted",
+            "code": "24HR"
+          },
+          {
+            "name": "Paper Form Submittal",
+            "code": "FORM"
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDefaultValue"
+      }
+    },
+    {
+      "name": "LOCATION",
+      "type": "esriFieldTypeString",
+      "alias": "LOCATION",
+      "domain": null
+    },
+    {
+      "name": "CAUSE_RAGS",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "CAUSE_RAGS",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "CAUSE_ROOTS",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "CAUSE_ROOTS",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "CAUSE_RAIN",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "CAUSE_RAIN",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "CAUSE_GREASE",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "CAUSE_GREASE",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "CAUSE_INFLIT",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "CAUSE_INFLIT",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "CAUSE_TRASH",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "CAUSE_TRASH",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "CAUSE_SGR",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "CAUSE_SGR",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "CAUSE_STRUCTURAL",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "CAUSE_STRUCTURAL",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "CAUSE_PLOSS",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "CAUSE_PLOSS",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "CAUSE_UNKNOWN",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "CAUSE_UNKNOWN",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "CAUSE_VANDAL",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "CAUSE_VANDAL",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "CAUSE_OTHER",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "CAUSE_OTHER",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "EST_VOLUME",
+      "type": "esriFieldTypeDouble",
+      "alias": "EST_VOLUME",
+      "domain": null
+    },
+    {
+      "name": "START_DATETIME",
+      "type": "esriFieldTypeDate",
+      "alias": "START_DATETIME",
+      "domain": null
+    },
+    {
+      "name": "END_DATETIME",
+      "type": "esriFieldTypeDate",
+      "alias": "END_DATETIME",
+      "domain": null
+    },
+    {
+      "name": "DURATION",
+      "type": "esriFieldTypeString",
+      "alias": "DURATION",
+      "domain": null
+    },
+    {
+      "name": "OVFL_REACH_WW",
+      "type": "esriFieldTypeSmallInteger",
+      "alias": "OVFL_REACH_WW",
+      "domain": {
+        "type": "codedValue",
+        "name": "BooleanSymbolValue",
+        "description": "Valid values are Yes and No.",
+        "codedValues": [
+          {
+            "name": "Yes",
+            "code": 1
+          },
+          {
+            "name": "No",
+            "code": 0
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDuplicate"
+      }
+    },
+    {
+      "name": "REC_WATERS",
+      "type": "esriFieldTypeString",
+      "alias": "REC_WATERS",
+      "domain": {
+        "type": "codedValue",
+        "name": "WW_VVT_Rec_Waters",
+        "description": "",
+        "codedValues": [
+          {
+            "name": "Argonne Run",
+            "code": "ARGO"
+          },
+          {
+            "name": "Armistead Creek",
+            "code": "ARMI"
+          },
+          {
+            "name": "Biddison Run",
+            "code": "BIDD"
+          },
+          {
+            "name": "Chinquapin Run",
+            "code": "CHIN"
+          },
+          {
+            "name": "Colgate Creek",
+            "code": "COLG"
+          },
+          {
+            "name": "Curtis Bay",
+            "code": "CRTB"
+          },
+          {
+            "name": "Curtis Creek",
+            "code": "CRTC"
+          },
+          {
+            "name": "Dead Run",
+            "code": "DEAD"
+          },
+          {
+            "name": "Gunpowder Falls",
+            "code": "GUNP"
+          },
+          {
+            "name": "Gwynns Falls",
+            "code": "GWYN"
+          },
+          {
+            "name": "Herring Run",
+            "code": "HERR"
+          },
+          {
+            "name": "Inner Harbor",
+            "code": "HARB"
+          },
+          {
+            "name": "Jones Falls",
+            "code": "JF"
+          },
+          {
+            "name": "Loch Raven Reservoir",
+            "code": "LRR"
+          },
+          {
+            "name": "Maidens Choice Creek",
+            "code": "MAID"
+          },
+          {
+            "name": "MIddle Branch",
+            "code": "MID"
+          },
+          {
+            "name": "Moores Run",
+            "code": "MOOR"
+          },
+          {
+            "name": "Mt Pleasant Run",
+            "code": "MTPL"
+          },
+          {
+            "name": "Northwest Harbor",
+            "code": "NWHB"
+          },
+          {
+            "name": "Patapsco River",
+            "code": "PAT"
+          },
+          {
+            "name": "Stonehouse Cove",
+            "code": "SHCV"
+          },
+          {
+            "name": "Stony Run",
+            "code": "SR"
+          },
+          {
+            "name": "Tiffany Run",
+            "code": "TIFF"
+          },
+          {
+            "name": "Western Run",
+            "code": "WEST"
+          },
+          {
+            "name": "N/A",
+            "code": "N/A"
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDefaultValue"
+      }
+    },
+    {
+      "name": "RESPONSIBILITY",
+      "type": "esriFieldTypeString",
+      "alias": "RESPONSIBILITY",
+      "domain": {
+        "type": "codedValue",
+        "name": "SSO_Resp",
+        "description": "Liable party",
+        "codedValues": [
+          {
+            "name": "DPW",
+            "code": "DPW"
+          },
+          {
+            "name": "Facility",
+            "code": "FAC"
+          },
+          {
+            "name": "Private",
+            "code": "PRI"
+          },
+          {
+            "name": "County",
+            "code": "CO"
+          },
+          {
+            "name": "Unknown",
+            "code": "UNK"
+          }
+        ],
+        "mergePolicy": "esriMPTDefaultValue",
+        "splitPolicy": "esriSPTDefaultValue"
+      }
+    },
+    {
+      "name": "Latitude",
+      "type": "esriFieldTypeDouble",
+      "alias": "Latitude",
+      "domain": null
+    },
+    {
+      "name": "Longitude",
+      "type": "esriFieldTypeDouble",
+      "alias": "Longitude",
+      "domain": null
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 17595,
+        "SSOID": 9021,
+        "SSO_DATE": null,
+        "START_DATETIME": null,
+        "END_DATETIME": null,
+        "STATUS": null,
+        "LOCATION": null,
+        "Latitude": null,
+        "Longitude": null,
+        "REC_WATERS": null,
+        "OVFL_REACH_WW": null,
+        "EST_VOLUME": null,
+        "DURATION": null,
+        "RESPONSIBILITY": null,
+        "CAUSE_RAGS": null,
+        "CAUSE_ROOTS": null,
+        "CAUSE_RAIN": null,
+        "CAUSE_GREASE": null,
+        "CAUSE_INFLIT": null,
+        "CAUSE_TRASH": null,
+        "CAUSE_SGR": null,
+        "CAUSE_STRUCTURAL": null,
+        "CAUSE_PLOSS": null,
+        "CAUSE_UNKNOWN": null,
+        "CAUSE_VANDAL": null,
+        "CAUSE_OTHER": null
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 22551,
+        "SSOID": 9021,
+        "SSO_DATE": 1758630000000,
+        "START_DATETIME": 1758630000000,
+        "END_DATETIME": 1758701880000,
+        "STATUS": "5DAY",
+        "LOCATION": "[house number removed] E Cold Spring Ln",
+        "Latitude": 39.346,
+        "Longitude": -76.61,
+        "REC_WATERS": "TIFF",
+        "OVFL_REACH_WW": 1,
+        "EST_VOLUME": 1198.0,
+        "DURATION": "1198",
+        "RESPONSIBILITY": "DPW",
+        "CAUSE_RAGS": 0,
+        "CAUSE_ROOTS": 0,
+        "CAUSE_RAIN": 0,
+        "CAUSE_GREASE": 1,
+        "CAUSE_INFLIT": 0,
+        "CAUSE_TRASH": 1,
+        "CAUSE_SGR": 0,
+        "CAUSE_STRUCTURAL": 0,
+        "CAUSE_PLOSS": 0,
+        "CAUSE_UNKNOWN": 0,
+        "CAUSE_VANDAL": 0,
+        "CAUSE_OTHER": 0
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 22762,
+        "SSOID": 9193,
+        "SSO_DATE": 1772446200000,
+        "START_DATETIME": 1772446200000,
+        "END_DATETIME": 1772461440000,
+        "STATUS": "5DAY",
+        "LOCATION": "[house number removed] Kelway Rd ",
+        "Latitude": 39.352,
+        "Longitude": -76.594,
+        "REC_WATERS": null,
+        "OVFL_REACH_WW": 0,
+        "EST_VOLUME": 381.0,
+        "DURATION": "254",
+        "RESPONSIBILITY": "DPW",
+        "CAUSE_RAGS": 1,
+        "CAUSE_ROOTS": 1,
+        "CAUSE_RAIN": 0,
+        "CAUSE_GREASE": 0,
+        "CAUSE_INFLIT": 0,
+        "CAUSE_TRASH": 0,
+        "CAUSE_SGR": 0,
+        "CAUSE_STRUCTURAL": 0,
+        "CAUSE_PLOSS": 0,
+        "CAUSE_UNKNOWN": 0,
+        "CAUSE_VANDAL": 0,
+        "CAUSE_OTHER": 0
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 23211,
+        "SSOID": 9306,
+        "SSO_DATE": 1779501900000,
+        "START_DATETIME": 1779501900000,
+        "END_DATETIME": 1779511800000,
+        "STATUS": "5DAY",
+        "LOCATION": "[house number removed] E Preston St - SSO Site #72",
+        "Latitude": 39.305,
+        "Longitude": -76.61,
+        "REC_WATERS": "JF",
+        "OVFL_REACH_WW": 1,
+        "EST_VOLUME": 58080.0,
+        "DURATION": "165",
+        "RESPONSIBILITY": "DPW",
+        "CAUSE_RAGS": 0,
+        "CAUSE_ROOTS": 0,
+        "CAUSE_RAIN": 1,
+        "CAUSE_GREASE": 0,
+        "CAUSE_INFLIT": 0,
+        "CAUSE_TRASH": 0,
+        "CAUSE_SGR": 0,
+        "CAUSE_STRUCTURAL": 0,
+        "CAUSE_PLOSS": 0,
+        "CAUSE_UNKNOWN": 0,
+        "CAUSE_VANDAL": 0,
+        "CAUSE_OTHER": 0
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 25170,
+        "SSOID": 9222,
+        "SSO_DATE": 1774174200000,
+        "START_DATETIME": 1774174200000,
+        "END_DATETIME": 1774216560000,
+        "STATUS": "5DAY",
+        "LOCATION": "[house number removed] Eastern Ave ",
+        "Latitude": 39.285,
+        "Longitude": -76.599,
+        "REC_WATERS": null,
+        "OVFL_REACH_WW": 0,
+        "EST_VOLUME": 7060.0,
+        "DURATION": "706",
+        "RESPONSIBILITY": "DPW",
+        "CAUSE_RAGS": 1,
+        "CAUSE_ROOTS": 0,
+        "CAUSE_RAIN": 0,
+        "CAUSE_GREASE": 1,
+        "CAUSE_INFLIT": 0,
+        "CAUSE_TRASH": 1,
+        "CAUSE_SGR": 0,
+        "CAUSE_STRUCTURAL": 0,
+        "CAUSE_PLOSS": 0,
+        "CAUSE_UNKNOWN": 0,
+        "CAUSE_VANDAL": 0,
+        "CAUSE_OTHER": 0
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 25987,
+        "SSOID": 9427,
+        "SSO_DATE": 1791717300000,
+        "START_DATETIME": 1791717300000,
+        "END_DATETIME": 1791741000000,
+        "STATUS": "5DAY",
+        "LOCATION": "[house number removed] E Preston St - SSO Site #72",
+        "Latitude": 39.305,
+        "Longitude": -76.61,
+        "REC_WATERS": "JF",
+        "OVFL_REACH_WW": 1,
+        "EST_VOLUME": 672000.07,
+        "DURATION": "395",
+        "RESPONSIBILITY": "DPW",
+        "CAUSE_RAGS": 0,
+        "CAUSE_ROOTS": 0,
+        "CAUSE_RAIN": 1,
+        "CAUSE_GREASE": 0,
+        "CAUSE_INFLIT": 0,
+        "CAUSE_TRASH": 0,
+        "CAUSE_SGR": 0,
+        "CAUSE_STRUCTURAL": 0,
+        "CAUSE_PLOSS": 0,
+        "CAUSE_UNKNOWN": 0,
+        "CAUSE_VANDAL": 0,
+        "CAUSE_OTHER": 0
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 26012,
+        "SSOID": 9449,
+        "SSO_DATE": 1793620389000,
+        "START_DATETIME": null,
+        "END_DATETIME": null,
+        "STATUS": "5DAY",
+        "LOCATION": "[house number removed] Braddish Ave",
+        "Latitude": 39.299,
+        "Longitude": -76.66,
+        "REC_WATERS": null,
+        "OVFL_REACH_WW": 0,
+        "EST_VOLUME": 2.0,
+        "DURATION": "",
+        "RESPONSIBILITY": "DPW",
+        "CAUSE_RAGS": 0,
+        "CAUSE_ROOTS": 1,
+        "CAUSE_RAIN": 0,
+        "CAUSE_GREASE": 0,
+        "CAUSE_INFLIT": 0,
+        "CAUSE_TRASH": 1,
+        "CAUSE_SGR": 0,
+        "CAUSE_STRUCTURAL": 0,
+        "CAUSE_PLOSS": 0,
+        "CAUSE_UNKNOWN": 0,
+        "CAUSE_VANDAL": 0,
+        "CAUSE_OTHER": 0
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 26014,
+        "SSOID": 9446,
+        "SSO_DATE": 1793542748000,
+        "START_DATETIME": null,
+        "END_DATETIME": null,
+        "STATUS": "5DAY",
+        "LOCATION": "[house number removed] Ashland Ave ",
+        "Latitude": 39.3,
+        "Longitude": -76.601,
+        "REC_WATERS": null,
+        "OVFL_REACH_WW": 0,
+        "EST_VOLUME": 2.0,
+        "DURATION": "",
+        "RESPONSIBILITY": "DPW",
+        "CAUSE_RAGS": 1,
+        "CAUSE_ROOTS": 0,
+        "CAUSE_RAIN": 0,
+        "CAUSE_GREASE": 0,
+        "CAUSE_INFLIT": 0,
+        "CAUSE_TRASH": 1,
+        "CAUSE_SGR": 0,
+        "CAUSE_STRUCTURAL": 0,
+        "CAUSE_PLOSS": 0,
+        "CAUSE_UNKNOWN": 0,
+        "CAUSE_VANDAL": 0,
+        "CAUSE_OTHER": 0
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 26017,
+        "SSOID": 9450,
+        "SSO_DATE": 1793622360000,
+        "START_DATETIME": 1793622360000,
+        "END_DATETIME": 1793656980000,
+        "STATUS": "5DAY",
+        "LOCATION": "[house number removed] Liberty Heights Ave",
+        "Latitude": 39.335,
+        "Longitude": -76.708,
+        "REC_WATERS": null,
+        "OVFL_REACH_WW": 0,
+        "EST_VOLUME": 2308.0,
+        "DURATION": "577",
+        "RESPONSIBILITY": "DPW",
+        "CAUSE_RAGS": 1,
+        "CAUSE_ROOTS": 0,
+        "CAUSE_RAIN": 0,
+        "CAUSE_GREASE": 0,
+        "CAUSE_INFLIT": 0,
+        "CAUSE_TRASH": 1,
+        "CAUSE_SGR": 0,
+        "CAUSE_STRUCTURAL": 0,
+        "CAUSE_PLOSS": 0,
+        "CAUSE_UNKNOWN": 0,
+        "CAUSE_VANDAL": 0,
+        "CAUSE_OTHER": 0
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 26022,
+        "SSOID": 9451,
+        "SSO_DATE": 1793715970000,
+        "START_DATETIME": null,
+        "END_DATETIME": null,
+        "STATUS": "5DAY",
+        "LOCATION": "[house number removed] S Caroline St",
+        "Latitude": 39.283,
+        "Longitude": -76.597,
+        "REC_WATERS": null,
+        "OVFL_REACH_WW": 0,
+        "EST_VOLUME": 2.0,
+        "DURATION": "",
+        "RESPONSIBILITY": "DPW",
+        "CAUSE_RAGS": 1,
+        "CAUSE_ROOTS": 0,
+        "CAUSE_RAIN": 0,
+        "CAUSE_GREASE": 0,
+        "CAUSE_INFLIT": 0,
+        "CAUSE_TRASH": 1,
+        "CAUSE_SGR": 0,
+        "CAUSE_STRUCTURAL": 0,
+        "CAUSE_PLOSS": 0,
+        "CAUSE_UNKNOWN": 0,
+        "CAUSE_VANDAL": 0,
+        "CAUSE_OTHER": 0
+      }
+    }
+  ]
+}

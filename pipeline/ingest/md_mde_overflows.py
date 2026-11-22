@@ -80,6 +80,7 @@ import sys
 from collections import Counter, defaultdict
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
 
 import requests
@@ -587,6 +588,9 @@ def match_baltimore(records: list[dict], rows_by_id: dict, dpw: list[dict]) -> i
             if d["discharger_id"] != r["discharger_id"]:
                 continue
             same_addr = bool(addr) and addr == norm_addr(d.get("outfall_name"), for_match=True)
+            fingerprint = (d.get("raw") or {}).get("_address_match_sha256")
+            if addr and fingerprint:
+                same_addr = same_addr or hashlib.sha256(addr.encode()).hexdigest() == fingerprint
             dist = None
             if r.get("lat") is not None and d.get("lat") is not None:
                 dist = metres(r["lat"], r["lon"], d["lat"], d["lon"])
@@ -599,11 +603,61 @@ def match_baltimore(records: list[dict], rows_by_id: dict, dpw: list[dict]) -> i
             gap, d, same_addr, dist = best
             how = "same address" if same_addr else f"{round(dist)} m apart"
             r["duplicate_of"] = d["event_id"]
+            # The existing exporter makes this link visible on both records. The
+            # MDE copy remains excluded from incident totals and keeps its figures.
+            r["raw"]["_other_source_record"] = d["event_id"]
+            row = rows_by_id[r["event_id"]]
+            history = r.get("source_id") == "md-mde-sewer-overflows-2005-2023"
+            dataset = "3rgd-zjxx" if history else DATASET
+            aliases = {"npdes_no": "npdes", "start_date": "date_discovered", "start_time": "time_discovered",
+                       "overflow_latitude": "latitude", "overflow_longitude": "longitude"} if history else {}
+            clauses = []
+            for field in ("npdes_no", "start_date", "start_time", "overflow_latitude", "overflow_longitude"):
+                value = row.get(field)
+                if value not in (None, ""):
+                    if field == "start_date":
+                        value = r["started_at"][:10] + "T00:00:00"
+                    value = str(value).replace("'", "''")
+                    clauses.append(f"{aliases.get(field, field)}='{value}'")
+            if row.get("npdes_no") and row.get("start_date") and row.get("start_time"):
+                # A record-filtered citation with no address or personal fields.
+                select = ("npdes,date_discovered,time_discovered,duration_days,duration_hours,duration_minutes,"
+                          "quantity_in_gallons_estimated" if history else
+                          "npdes_no,start_date,start_time,duration_day,duration_hour,duration_minute,discharge_volume")
+                r["source_url"] = f"https://opendata.maryland.gov/resource/{dataset}.json?" + urlencode({
+                    "$select": select, "$where": " AND ".join(clauses)})
             r["raw"]["_duplicate_basis"] = (f"Baltimore DPW SSO map record {d['event_id']}: same operator, same day, {how} "
                                             f"(DPW {d.get('volume_gal')} gal, start {d['started_at']}; this row "
                                             f"{r.get('volume_gal')} gal); the City's record carries the end time and point")
             n += 1
     return n
+
+
+def relink_baltimore_files(dpw: list[dict], events_dir: Path = EVENTS_DIR) -> None:
+    """Recheck stored MDE rows after City history expands, including the frozen
+    dataset whose version check skips its post hook. Preserve all source/fetch
+    clocks, health and metadata; this is only a relationship update.
+    """
+    from ingest.generic.transforms import md_history_row
+    for sid in (SOURCE_ID, "md-mde-sewer-overflows-2005-2023"):
+        path = events_dir / f"{sid}.json"
+        doc = read_json(path, None)
+        if not doc or not doc.get("records"):
+            continue
+        before = json.dumps(doc["records"], sort_keys=True)
+        records = doc["records"]
+        rows = {}
+        for r in records:
+            raw = r.setdefault("raw", {})
+            row = raw.get("row") or {}
+            rows[r["event_id"]] = md_history_row(row) if sid != SOURCE_ID else row
+            if str(r.get("duplicate_of") or "").startswith("md-baltimore-sso:"):
+                r["duplicate_of"] = None
+                raw.pop("_duplicate_basis", None)
+                raw.pop("_other_source_record", None)
+        match_baltimore(records, rows, dpw)
+        if json.dumps(records, sort_keys=True) != before:
+            write_json(path, doc)
 
 
 def carry_history(records: list[dict], prev: dict, fetched_at: str, allow: set[str] | None = None) -> Counter:

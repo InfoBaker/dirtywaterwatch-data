@@ -390,7 +390,7 @@ class FakeLayer:
         return FakeResp({"features": [{"attributes": {k: v for k, v in r.items() if k in out}} for r in self.rows]})
 
 
-ROW = {"OBJECTID": 7, "SSO_DATE": 1791717300000, "START_DATETIME": 1791717300000, "END_DATETIME": 1791741000000,
+ROW = {"OBJECTID": 7, "SSOID": 1007, "SSO_DATE": 1791717300000, "START_DATETIME": 1791717300000, "END_DATETIME": 1791741000000,
        "STATUS": "5DAY", "RESPONSIBILITY": "PRI", "LOCATION": "100 Example St", "Latitude": 39.30549853,
        "Longitude": -76.60973024, "WAIVER_REASON": "Other", "COMMENT_RELIEF_REQUEST_TYPE": "invented comment"}
 
@@ -431,7 +431,7 @@ def test_baltimore_malformed_or_partial_read_saves_nothing(tmp_path, monkeypatch
 
 
 def test_baltimore_asks_only_the_safe_fields_and_rounds_points_before_saving(tmp_path, monkeypatch):
-    old = B.to_record({**ROW, "OBJECTID": 6}, FETCHED, None)       # saved before the rules: eight decimals
+    old = B.to_record({**ROW, "OBJECTID": 6, "SSOID": 1006}, FETCHED, None)       # saved before the rules: eight decimals
     layer = FakeLayer(list(ROW), [ROW])
     rc, out, saved = baltimore_run(tmp_path, monkeypatch, layer, [old])
     assert rc == 0 and out["ok"] is True
