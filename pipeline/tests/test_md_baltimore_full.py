@@ -189,3 +189,124 @@ def test_city_can_fill_a_previously_missing_business_key_without_changing_identi
     result, _ = B.build([{**row, 'SSOID': 123456}], NOW, prev)
     assert result[0]['event_id'] == prev[0]['event_id']
     assert result[0]['raw']['SSOID'] == 123456
+
+
+def test_duplicate_ssoid_missing_on_second_refresh_stays_a_distinct_event():
+    from datetime import UTC, datetime
+    a = {**ROWS[0], 'OBJECTID': 70001, 'SSOID': 9021, 'START_DATETIME': None, 'END_DATETIME': None,
+         'SSO_DATE': int(datetime(2023, 1, 4, 12, tzinfo=UTC).timestamp() * 1000)}
+    b = {**a, 'OBJECTID': 70002, 'SSO_DATE': a['SSO_DATE'] + 86400000}
+    first, _ = B.build([a, b], '2026-11-21T15:00:00Z', [])
+    second, stats = B.build([a], NOW, first)
+    assert stats['kept_from_earlier_runs'] == 1
+    assert {r['event_id'] for r in second} == {r['event_id'] for r in first}
+    assert all(not r.get('duplicate_of') for r in second)
+    assert len({r['started_at'] for r in second}) == 2
+
+
+def overlapping_mde_copies():
+    from datetime import UTC, datetime
+    from ingest.generic import transforms as T
+    from ingest.generic.fieldmap import Ctx
+    stamp = int(datetime(2023, 1, 4, 12, tzinfo=UTC).timestamp() * 1000)
+    city = B.to_record({**next(r for r in ROWS if r['OBJECTID'] == 25987), 'START_DATETIME': stamp, 'SSO_DATE': stamp, 'END_DATETIME': None,
+                        'RESPONSIBILITY': 'DPW'}, NOW, None)
+    row = {'npdes_no': 'MDC021555', 'start_date': '01/04/2023', 'start_time': '12:00:00',
+           'overflow_address': 'Example Road'}
+    current = {'event_id': 'md-mde-overflows:example', 'source_id': M.SOURCE_ID, 'event_type': 'sso',
+               'started_at': city['started_at'], 'time_precision': 'minute', 'discharger_id': city['discharger_id'],
+               'lat': city['lat'], 'lon': city['lon'], 'volume_gal': 10, 'raw': {'row': row},
+               'fetched_at': '2026-11-01T00:00:00Z', 'source_updated_at': '2023-02-23T00:00:00Z',
+               'reported_at': None, 'published_at': None}
+    history = copy.deepcopy(current)
+    history.update(event_id='md-mde-sewer-overflows-2005-2023:example',
+                   source_id='md-mde-sewer-overflows-2005-2023')
+    history['raw']['row'] = {'npdes': row['npdes_no'], 'date_discovered': row['start_date'],
+                             'time_discovered': row['start_time'], 'location': row['overflow_address']}
+    M.match_baltimore([current], {current['event_id']: row}, [city])
+    ctx = Ctx(source_id=history['source_id'], fetched_at=NOW, block={}, tz=B.TZ,
+              extra={'md_mde_records': [current], 'md_baltimore_records': [city]})
+    T.md_mde_history_duplicates([history], ctx)
+    return city, current, history
+
+
+def test_city_date_correction_preserves_mde_dedup_on_unchanged_history(tmp_path, monkeypatch):
+    from ingest.generic import runner, socrata
+    city, current, history = overlapping_mde_copies()
+    assert current['duplicate_of'] == history['duplicate_of'] == city['event_id']
+    for r in (current, history):
+        (tmp_path / (r['source_id'] + '.json')).write_text(json.dumps(
+            {'records': [r], 'ok': True, 'fetched_at': r['fetched_at'], 'meta': {'table_version': '123'}}))
+    M.relink_baltimore_files([city], tmp_path)
+    corrected = {**city, 'started_at': '2023-01-05T12:00:00-05:00'}
+    M.relink_baltimore_files([corrected], tmp_path)
+    path = tmp_path / (history['source_id'] + '.json')
+    _, block = runner.load_source(history['source_id'])
+    monkeypatch.setattr(socrata, 'current_version', lambda b, s: '123')
+    assert 'unchanged' in runner.keep_unchanged(history['source_id'], block, path, NOW)
+    c = json.loads((tmp_path / (current['source_id'] + '.json')).read_text())['records'][0]
+    h = json.loads(path.read_text())['records'][0]
+    assert not c.get('duplicate_of')
+    assert h['duplicate_of'] == c['event_id']
+    assert not h['raw'].get('_other_source_record') and not c['raw'].get('_other_source_record')
+    for old, new in ((current, c), (history, h)):
+        for key in ('event_id', 'started_at', 'fetched_at', 'source_updated_at', 'published_at', 'reported_at'):
+            assert new[key] == old[key]
+
+
+def test_inherited_city_target_adds_history_citation_and_supporting_link():
+    city, current, history = overlapping_mde_copies()
+    assert history['duplicate_of'] == city['event_id']
+    assert history['raw']['_other_source_record'] == city['event_id']
+    assert '3rgd-zjxx.json?' in history['source_url']
+    assert 'date_discovered' in history['source_url'] and '%24where=' in history['source_url']
+    links = links_of([city, current, history])[city['event_id']]['linked_records']
+    assert {r['event_id'] for r in links} == {current['event_id'], history['event_id']}
+    assert history['started_at'] == current['started_at']
+    assert history['fetched_at'] == current['fetched_at'] == '2026-11-01T00:00:00Z'
+
+
+@pytest.mark.parametrize('wall,issue', [('2016-11-06T01:00:00', 'ambiguous'),
+                                         ('2016-03-13T02:30:00', 'nonexistent')])
+@pytest.mark.parametrize('field', ['SSO_DATE', 'START_DATETIME', 'END_DATETIME'])
+def test_dst_wall_times_keep_raw_and_export_only_the_day(wall, issue, field):
+    from datetime import UTC, datetime
+    stamp = int(datetime.fromisoformat(wall).replace(tzinfo=UTC).timestamp() * 1000)
+    row = {**ROWS[0], 'OBJECTID': 4380, 'START_DATETIME': None, 'END_DATETIME': None,
+           'SSO_DATE': stamp, 'STATUS': 'FORM', field: stamp}
+    r = B.to_record(row, NOW, None)
+    key = 'ended_at' if field == 'END_DATETIME' else 'started_at'
+    assert r['raw'][field] == stamp
+    assert r['raw']['_decoded_times'][field] == wall
+    assert r[key] == wall[:10]
+    assert r['raw']['_' + key + '_precision'] == 'day'
+    assert r['time_precision'] == 'day'
+    if field == 'END_DATETIME':
+        assert r['raw']['ended_at_precision'] == 'day'
+    assert issue in r['raw']['_time_basis']
+    assert issue in r['raw']['_time_uncertainty']
+    assert r['parse_error'] is None
+
+
+def test_mde_match_accepts_a_city_dst_date_without_assigning_an_offset():
+    city, current, _ = overlapping_mde_copies()
+    city['started_at'], city['time_precision'] = '2016-11-06', 'day'
+    current['started_at'] = '2016-11-06T01:00:00-05:00'
+    current['duplicate_of'] = None
+    assert M.match_baltimore([current], {current['event_id']: current['raw']['row']}, [city]) == 1
+    assert current['duplicate_of'] == city['event_id']
+    assert city['started_at'] == '2016-11-06'
+
+
+@pytest.mark.parametrize('wall', ['2016-11-06T01:00:00', '2016-03-13T02:30:00'])
+def test_dst_start_does_not_reduce_a_known_end_to_day_precision(wall):
+    from datetime import UTC, datetime
+    from build.status import end_precision
+    start = datetime.fromisoformat(wall).replace(tzinfo=UTC)
+    end = start.replace(hour=12)
+    r = B.to_record({**ROWS[0], 'START_DATETIME': int(start.timestamp() * 1000),
+                     'END_DATETIME': int(end.timestamp() * 1000), 'STATUS': 'FORM'}, NOW, None)
+    assert r['started_at'] == wall[:10] and r['time_precision'] == 'day'
+    assert r['ended_at'].startswith(wall[:10] + 'T12:')
+    assert end_precision(r) == 'minute'
+    assert r['parse_error'] is None

@@ -52,7 +52,7 @@ AUTHORITY = "Baltimore City Department of Public Works (Sewer Overflow Map)"
 DATE_FIELDS = ("SSO_DATE", "START_DATETIME", "END_DATETIME", "WAIVER_REQUESTED", "WAIVER_GRANTED",
                "WAIVER_CLOSED", "WAIVER_DENIED")
 TIME_BASIS = ("The layer stores local wall-clock time as if it were UTC: each epoch value is read as UTC and the "
-              "wall-clock time labelled America/New_York.")
+              "wall-clock time read in America/New_York when it identifies one instant.")
 # REC_WATERS coded values (the layer's domain; research/md/sources.json lists the same 24)
 REC_WATERS = {
     "ARGO": "Argonne Run", "ARMI": "Armistead Creek", "BIDD": "Biddison Run", "CHIN": "Chinquapin Run",
@@ -94,18 +94,31 @@ SITE_RE = re.compile(r"\bSSO\s+Site\s*#\s*(\d+)", re.I)
 
 
 def wall_clock(ms) -> datetime | None:
-    """An epoch-ms value that holds local wall-clock time stored as UTC -> aware America/New_York."""
+    """Decode local time; leave a DST fold or gap naive instead of choosing an offset."""
     if ms is None or ms == "":
         return None
     try:
         t = datetime.fromtimestamp(float(ms) / 1000, UTC)
     except (TypeError, ValueError, OverflowError, OSError):
         return None
-    return t.replace(tzinfo=None).replace(tzinfo=TZ)
+    local = t.replace(tzinfo=None)
+    return local if wall_clock_issue(local) else local.replace(tzinfo=TZ)
+
+
+def wall_clock_issue(local: datetime) -> str | None:
+    """A round trip distinguishes a skipped hour from a repeated hour."""
+    local = local.replace(tzinfo=None)
+    candidates = [local.replace(tzinfo=TZ, fold=fold) for fold in (0, 1)]
+    valid = [t for t in candidates if t.astimezone(UTC).astimezone(TZ).replace(tzinfo=None) == local]
+    if not valid:
+        return "nonexistent"
+    if len({t.utcoffset() for t in valid}) > 1:
+        return "ambiguous"
+    return None
 
 
 def iso(dt: datetime | None) -> str | None:
-    return dt.isoformat() if dt else None
+    return (dt.isoformat() if dt.tzinfo is not None else dt.date().isoformat()) if dt else None
 
 
 def fnum(v):
@@ -209,7 +222,8 @@ def query_layer(sess: requests.Session) -> tuple[list[dict], bytes, list[str]]:
 
 
 def decoded_dates(a: dict) -> dict:
-    return {k: iso(wall_clock(a.get(k))) for k in DATE_FIELDS if a.get(k) not in (None, "")}
+    return {k: (dt.isoformat() if (dt := wall_clock(a.get(k))) else None)
+            for k in DATE_FIELDS if a.get(k) not in (None, "")}
 
 
 def place(a: dict, lat, lon) -> tuple[str | None, list[str], str, dict]:
@@ -312,6 +326,20 @@ def build_record(a: dict, base: dict, raw: dict, prev: dict | None) -> dict:
             raw["_started_at_precision"] = (
                 "day" if a.get("START_DATETIME") in (None, "") and not (start.hour or start.minute or start.second or start.microsecond)
                 else "second" if start.second or start.microsecond else "minute")
+    # Preserve the source's exact wall time in raw, but publish only its date
+    # when neither offset (gap) or both offsets (fold) fit that local time.
+    issues = []
+    for field, value in raw["_decoded_times"].items():
+        if value and (dt := datetime.fromisoformat(value)).tzinfo is None:
+            issues.append(f"{field} {value} is {wall_clock_issue(dt)} in America/New_York")
+    if issues:
+        raw["_time_uncertainty"] = "; ".join(issues) + ". We show affected event times at day precision."
+        raw["_time_basis"] += " " + raw["_time_uncertainty"]
+    for key, dt in (("started_at", start), ("ended_at", end)):
+        if dt and dt.tzinfo is None:
+            raw[f"_{key}_precision"] = "day"
+    if raw.get("_ended_at_precision"):
+        raw["ended_at_precision"] = raw["_ended_at_precision"]
     code = (a.get("STATUS") or "").strip().upper()
     raw["_status_name"] = STATUS_NAMES.get(code)
     if code == "PROG":
@@ -322,7 +350,8 @@ def build_record(a: dict, base: dict, raw: dict, prev: dict | None) -> dict:
         status, ended_at = "ended", iso(end)
     else:
         status, ended_at = "unknown", None
-    if end is not None and start is not None and end < start:
+    if end is not None and start is not None and (
+            end.date() < start.date() if end.tzinfo is None or start.tzinfo is None else end < start):
         problems.append("END_DATETIME before START_DATETIME: ended_at left empty")
         ended_at = None
         if status == "ended":
@@ -389,14 +418,15 @@ def identity_location(a: dict) -> tuple | None:
     return loc, round(lat, 3), round(lon, 3)
 
 
-def crosswalk(features: list[dict], prev: dict) -> dict[int, tuple[dict, str]]:
+def crosswalk(features: list[dict], prev: dict, *, uniqueness_records: dict | None = None) -> dict[int, tuple[dict, str]]:
     """Only one-to-one links. A stored business key survives source OBJECTID reissues.
     Legacy rows lack SSOID, so require the observed street/point/time correction pattern.
     """
     result, claimed = {}, set()
     full = [a for a in features if "SSOID" in a]
     source_sso = Counter(a.get("SSOID") for a in full)
-    prev_sso = Counter((p.get("raw") or {}).get("SSOID") for p in prev.values())
+    prev_sso = Counter((p.get("raw") or {}).get("SSOID")
+                       for p in (prev if uniqueness_records is None else uniqueness_records).values())
     by_oid = {str((p.get("raw") or {}).get("OBJECTID", p.get("source_record_id"))): p for p in prev.values()}
     by_sso = {(p.get("raw") or {}).get("SSOID"): p for p in prev.values()}
     for a in full:
@@ -406,7 +436,7 @@ def crosswalk(features: list[dict], prev: dict) -> dict[int, tuple[dict, str]]:
             p = None  # reused OBJECTID is not the same business record
         basis = "The City's full and legacy layers use the same OBJECTID."
         if p is None and sid is not None and source_sso[sid] == prev_sso[sid] == 1:
-            p = by_sso[sid]
+            p = by_sso.get(sid)
             basis = "The City's unique SSOID links this reissued row to our earlier record."
         if p and p["event_id"] not in claimed:
             result[oid] = (p, basis)
@@ -460,7 +490,8 @@ def build(features: list[dict], fetched_at: str, prev_records: list[dict]) -> tu
         records.append(r)
     # Old polls may already have retained both sides of a City reissue. Keep
     # both published IDs, but count the overflow only once and link the evidence.
-    aliases = crosswalk(features, {eid: r for eid, r in prev.items() if eid not in seen})
+    aliases = crosswalk(features, {eid: r for eid, r in prev.items() if eid not in seen},
+                        uniqueness_records=prev)
     current = {r["raw"].get("OBJECTID"): r["event_id"] for r in records}
     alias_targets = {p["event_id"]: (current[oid], basis) for oid, (p, basis) in aliases.items() if oid in current}
     kept = 0
