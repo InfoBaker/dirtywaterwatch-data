@@ -135,7 +135,7 @@ def test_new_fields_are_named_plainly_and_reach_the_csv_as_its_last_columns():
     i = csv_export.COLUMNS.index("listed_without_colour")
     assert csv_export.COLUMNS[i + 1:i + 3] == ["resolution", "notes"]
     # every field has a column; New York's rate is written as its text (rate_text)
-    ny = {"description", "location_description", "rate"}
+    ny = {"description", "location_description", "rate", "water_reach"}   # and Baltimore's water_reach
     assert set(csv_export.DETAIL_COLUMNS) | set(csv_export.LATER_DETAIL_COLUMNS) | ny == set(D.FIELDS)
     assert {"description", "location_description", "rate_text"} <= set(csv_export.COLUMNS)
 

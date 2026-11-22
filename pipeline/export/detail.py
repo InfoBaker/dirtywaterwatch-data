@@ -25,6 +25,7 @@ FIELDS (every value is the source's own, never converted; a field the source doe
   volume_method         how the volume was determined, in the source's words ("Best Professional Judgement",
                         "flow meter")
   volume_to_water_gal   gallons the source says reached a water (a number, as the source gives it)
+  water_reach           whether the source says the overflow reached a waterway, in its domain words
   overflow_point        where the sewage came out, in the source's words ("Manhole", "Gravity Mainline")
   town                  the city or town the source names for the report
   resolution            how the source says the incident was resolved, in its words (CT DEEP's "How incident was
@@ -73,8 +74,8 @@ from common import (HOUSE_NUMBER_REMOVED, NAME_KEYS, PERSONAL_KEYS, ROUTE_BEFORE
 from export import estimates as estimates_mod  # noqa: E402
 
 FIELDS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
-          "volume_method", "volume_to_water_gal", "overflow_point", "town", "resolution", "notes", "description",
-          "location_description", "rate")
+          "volume_method", "volume_to_water_gal", "water_reach", "overflow_point", "town", "resolution", "notes",
+          "description", "location_description", "rate")
 NUMBER_FIELDS = {"volume_to_water_gal"}
 QUALIFIERS = ("estimated", "measured", "modeled", "verified by the operator")
 # a field whose value is a place description: its house numbers are removed as well as the usual scrub
@@ -380,6 +381,11 @@ SOURCES: dict[str, dict] = {
     "ct-deep": CT, "ct-deep-annual": CT, "ct-deep-archive": CT,
     "ny-dec-sprtk": NY, "ny-dec-sprtk-web": NY_WEB,
     "md-mde-overflows": {"cause": text("row.overflow_cause"), "duration_text": _md_duration},
+    "md-baltimore-sso": {"cause": text("_cause_text"), "duration_text": text("_duration_text"),
+                         "water_reach": text("_water_reach"),
+                         "notes": lambda r: " ".join(filter(None, (r.get("_water_reach_conflict"),
+                                                                  r.get("_time_uncertainty")))) or None,
+                         "volume_qualifier": lambda r: "estimated" if r.get("EST_VOLUME") is not None else None},
     "nc-dwr-sso-2022-2025": {"cause": text("incident_cause"), "volume_to_water_gal": number("volume_reach_water"),
                              "town": text("city")},
     # the five-day report's fields first, then the 24-hour report's (nc_dwr_sso keeps either naming)
