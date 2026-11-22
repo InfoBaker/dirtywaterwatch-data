@@ -18,7 +18,9 @@ segments and other unnecessary fields before saving. Only previously audited
 cause and affected-area strings are kept verbatim; new free text is withheld
 for review rather than risking a private name. The adjacent safe-text JSON
 contains all such strings inspected on 2026-11-22. Coordinates are rounded
-to three decimals. Affected areas that name no water remain in raw only.
+to three decimals. Ground and storm-sewer wording stays in waterbody_text so
+the resolver can classify records that name no receiving water. Generic private
+waters and other unresolved areas remain in raw only; no water reach is inferred.
 
 VolumeReleased is the source's gallons, without a measured/estimated claim.
 DurationHrs stays the source's figure; we compute no volume or end. The live
@@ -65,13 +67,14 @@ BOOL_FIELDS = ("HasStartDate", "HasStartTime", "HasEndDate", "HasEndTime", "EWSU
 NUMBER_FIELDS = ("VolumeReleased", "DurationHrs", "Latitude", "Longitude", "EventReasonID")
 SAFE_FIELDS = ("Id", *DATE_FIELDS, *TIME_FIELDS, *BOOL_FIELDS, *NUMBER_FIELDS,
                "CauseDescription", "AffectedArea", "EventReason")
-REQUIRED_FIELDS = {"Id", "StartDate", "StartDateTime", "EndDate", "EndDateTime",
+REQUIRED_FIELDS = {"Id", "StartDate", "StartDateTime", "StartTime", "EndDate", "EndDateTime", "EndTime",
                    "HasStartDate", "HasStartTime", "HasEndDate", "HasEndTime", "VolumeReleased",
                    "CauseDescription", "AffectedArea", "EventReasonID"}
-NO_NAMED_WATER = {"Ground", "Street", "Basement Floor", "Garage Floor", "Storm Sewer",
-                  "Ground / Storm Sewer", "Ground/Storm Sewer", "GROUND / STORM SEWER",
-                  "Detention Basin", "Storm Retention Pond", "Garage Floor Drain / Private Lake",
-                  "Ground/Private Lake"}
+# Keep the other audited area texts, including ground/street/storm-sewer terms:
+# status.no_receiving_water reads those words without asserting water was not reached.
+# These generic areas still give no water name the resolver can use.
+UNRESOLVED_AREAS = {"Garage Floor", "Detention Basin", "Storm Retention Pond",
+                    "Garage Floor Drain / Private Lake", "Ground/Private Lake"}
 STAMP_RE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?")
 CLOCK_RE = re.compile(r"\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?")
 
@@ -222,7 +225,7 @@ def to_record(source_row: dict, fetched_at: str, prev: dict | None = None) -> di
             problems.append("Source entry time could not be read")
     raw["entry_time_basis"] = "The utility's database entry time; publication and receipt times are not given."
     area = raw.get("AffectedArea")
-    water = area if area and area not in NO_NAMED_WATER else None
+    water = area if area and area not in UNRESOLVED_AREAS else None
     if not water:
         raw["_water_note"] = "The affected area names no receiving water."
     vol = raw.get("VolumeReleased")
@@ -256,7 +259,7 @@ def to_record(source_row: dict, fetched_at: str, prev: dict | None = None) -> di
                  time_precision=precision, waterbody_text=water,
                  lat=lat, lon=lon, coord_source="source" if lat is not None else None,
                  coord_precision_m=100 if lat is not None else None,
-                 volume_gal=vol, volume_text=f"{vol:g} gallons" if vol is not None else None,
+                 volume_gal=vol, volume_text=f"{vol} gallons" if vol is not None else None,
                  raw=raw, parse_error="; ".join(problems) or None)
 
 

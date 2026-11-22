@@ -772,7 +772,7 @@
   "license": "No map-specific license stated. The official homepage links city terms scoped to www.evansvillegov.org, limiting reuse to personal noncommercial use without permission; applicability to the separate cso.ewsu.com factual feed is not stated. https://www.evansvillegov.org/city/terms/",
   "legal_basis": null,
   "status": "used",
-  "status_reason": "Read by in_evansville_releases: stable source IDs, source gallons and cause, minute start/end and affected area. Invalid source ends stay unknown; non-water affected areas remain unplaced. Current CSO outfall status is a separate later source.",
+  "status_reason": "Read by in_evansville_releases: stable source IDs, source gallons and cause, minute start/end and affected area. Invalid source ends stay unknown. Placement uses only named waters; ground and storm-sewer areas are counted as naming no receiving water. Current CSO outfall status is a separate later source.",
   "verified": "fetched",
   "checked": "2026-11-22",
   "notes": "Full and yearly reads agreed on 729 IDs and safe values; year windows repeat 15 IDs. Central wall clocks (America/Chicago); 21 source ends precede starts. The entered field is not a publication stamp: 98 records have it, including all 33 recent records, whose median start-to-entry lag is 36.20 days. No receipt, publication or edit time is inferred. Safe fields only are saved, points rounded to three decimals, location/action/manhole fields discarded and new unaudited free text withheld. Revisions replace the same event ID and retain earlier safe values. Failed reads keep history. No overlap with Fort Wayne; ECHO monthly totals remain a separate aggregate series. No permit inferred from East/West system labels."
