@@ -241,3 +241,57 @@ def test_the_storm_event_column_is_read_under_its_real_header():
     assert "WAS_THE_SPILL_ASSOCIATED_WITH_A_STORM_EVENT_(YES_NO)?" in M.COLUMNS
     header = FIX.read_text(encoding="cp1252").split("\n", 1)[0].split("\t")
     assert all(c in header for c in M.COLUMNS), [c for c in M.COLUMNS if c not in header]
+
+
+def test_private_coordinates_are_rounded_before_raw_rows_and_records_are_saved():
+    row = {**rows()[0], "appearance_points": "Lateral Clean Out (Private)",
+           "lat": "37.812345", "lon": "-122.265432", "dest_lat_1": "37.813456", "dest_lon_1": "-122.266543"}
+    saved = M.scrubbed_row(row)
+    assert (saved["lat"], saved["lon"]) == ("37.812", "-122.265")
+    assert (saved["dest_lat_1"], saved["dest_lon_1"]) == ("37.813", "-122.267")
+    recs, _ = records(rs=[row])
+    r = recs[row["spill_event_id"]]
+    assert (r["raw"]["lat"], r["raw"]["lon"]) == ("37.812", "-122.265")
+    assert (r["lat"], r["lon"], r["coord_precision_m"]) == (37.812, -122.265, 150)
+    for exact in ("37.812345", "-122.265432", "37.813456", "-122.266543"):
+        assert exact not in json.dumps([saved, r])
+
+
+def test_saved_private_record_is_scrubbed_when_absent_from_next_file():
+    recs, _ = records()
+    old = recs["990002"]
+    old["raw"].update(lat="37.812345", lon="-122.265432", dest_lat_1="37.813456", dest_lon_1="-122.266543")
+    old.update(lat=37.812345, lon=-122.265432)
+    old["raw"]["destination_points"] = [{"lat": 37.813456, "lon": -122.266543}]
+    again, _ = records(prev=[old], rs=[])
+    r = again["990002"]
+    assert (r["raw"]["lat"], r["raw"]["lon"]) == ("37.812", "-122.265")
+    assert (r["lat"], r["lon"], r["coord_precision_m"]) == (37.812, -122.265, 150)
+    for exact in ("37.812345", "-122.265432", "37.813456", "-122.266543"):
+        assert exact not in json.dumps(r)
+    assert r["fetched_at"] == old["fetched_at"]
+
+
+def test_saved_private_record_is_scrubbed_on_not_modified_and_failed_fetch(tmp_path, monkeypatch):
+    import common
+
+    monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(M, "EVENTS_DIR", tmp_path)
+    monkeypatch.setattr(M, "STATE_FILE", tmp_path / "state.json")
+    for failed in (False, True):
+        recs, _ = records()
+        old = recs["990002"]
+        old["raw"].update(lat="37.812345", lon="-122.265432")
+        path = tmp_path / f"{M.SOURCE_ID}.json"
+        path.write_text(json.dumps({"records": [old], "last_ok_at": FETCHED}))
+        def fetch(*args):
+            if failed:
+                raise ValueError("unavailable")
+            return None, None
+        monkeypatch.setattr(M, "fetch", fetch)
+        assert M.main([]) == int(failed)
+        doc = json.loads(path.read_text())
+        assert doc["records"][0]["raw"]["lat"] == "37.812"
+        assert doc["ok"] is not failed
+        if failed:
+            assert doc["last_ok_at"] == FETCHED

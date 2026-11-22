@@ -215,8 +215,7 @@ def private_only(appearance_points) -> bool:
 
 def rounded(v) -> str | None:
     """A typed coordinate to three decimals (about 100 m), as text; None when it is not a number."""
-    f = L.fnum(v)
-    return None if f is None else str(round(f, 3))
+    return L.rounded(v)
 
 
 def scrubbed_row(r: dict) -> dict:

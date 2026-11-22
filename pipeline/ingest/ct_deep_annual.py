@@ -226,11 +226,12 @@ def sheet_rows(rows: list[list]) -> list[dict]:
     """Rows under the header line (the first row naming Request ID or a date column)."""
     out, header = [], None
     for i, r in enumerate(rows):
-        cells = [clean(x) for x in r]
+        cells = [re.sub(r"\s+", " ", clean(x)).strip() if clean(x) else None for x in r]
+        names = {c for c in cells if c}
+        if len(names & HEADER_KEYS) >= 2:
+            header = cells
+            continue
         if header is None:
-            names = {re.sub(r"\s+", " ", c).strip() for c in cells if c}
-            if len(names & HEADER_KEYS) >= 2:
-                header = [re.sub(r"\s+", " ", c).strip() if c else None for c in r]
             continue
         if not any(cells):
             continue
@@ -257,7 +258,27 @@ def to_dashboard_row(kind: str, rec: dict) -> dict:
     return row
 
 
+def is_header_or_section(row: dict) -> bool:
+    """Recognize workbook labels, without dropping an incident just because its date will not parse."""
+    values = {" ".join(v.split()) for k, v in row.items() if not k.startswith("_") and isinstance(v, str)}
+    if len(values & HEADER_KEYS) >= 2:
+        return True
+    for k in ("Request ID", "Date Activated", "Date Bypass Began or was Discovered",
+              "Regulator activated", "Bypass Began or Discovered"):
+        value = " ".join((clean(row.get(k)) or "").split())
+        if value in HEADER_KEYS or (value and re.match(r"^NO REPORTED BYPASSES\b", value, re.I)):
+            return True
+    return False
+
+
+def load_history() -> list[dict]:
+    saved = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
+    return [r for r in saved if not is_header_or_section(r.get("raw") or {})]
+
+
 def is_event_row(kind: str, row: dict) -> bool:
+    if is_header_or_section(row):
+        return False
     date_col = "Date Activated" if kind == "cso" else "Date Bypass Began or was Discovered"
     return bool(clean(row.get("Request ID")) or clean(row.get(date_col)))
 
@@ -308,6 +329,7 @@ def main(argv=None) -> int:
     s.headers.update(HEADERS)
     dash = {r["event_id"] for r in (read_json(EVENTS_DIR / "ct-deep.json", {}) or {}).get("records", [])}
 
+    previous = load_history()
     records, files_meta, totals = [], {}, {}
     seen_ids: Counter = Counter()
     try:
@@ -332,7 +354,7 @@ def main(argv=None) -> int:
                                                    dash, seen_ids))
     except Exception as e:
         print(f"ct_deep_annual: failed: {error_text(e)}", file=sys.stderr)
-        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        write_events(SOURCE_ID, previous, ok=False, partial=True, error=f"{error_text(e)}")
         return 1
 
     records.sort(key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)

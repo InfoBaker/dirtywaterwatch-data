@@ -38,6 +38,9 @@ Record rules (one sso record per ADEM report id, source_record_id "SSO-00215084"
     and never taken for the first notice; once set it is kept. The history layer gives no receipt time, so most
     reports have none. published_at and
     source_updated_at are null (the layers give no posting or edit time); raw._first_seen_at is our clock.
+  - raw.live keeps the last observed live detail, including the source version and receipt date, with
+    _live_last_seen_at. Absence sets _live_missing_since; a changed live row replaces the detail (including blank
+    corrections) and preserves superseded evidence in _live_revisions. Retained live detail supplies no current status.
   - Status: sso_ongoing_ind Yes -> ongoing, as ADEM marks it, however old the start (nine reports on 2026-11-07, one
     from 2018-03-18; raw._ongoing_days); the status build caps it (red 7 days from the start, unresolved to day 30,
     then a note that no end was reported: unresolved.* in data/rules.json); a stop time -> ended at it; otherwise unknown. A stop before the start is not used.
@@ -84,6 +87,7 @@ import json
 import re
 import sys
 from collections import Counter
+from copy import deepcopy
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from urllib.parse import quote
@@ -447,16 +451,36 @@ def to_record(a: dict, live: dict | None, fetched_at: str, prev: dict | None, op
                      parse_error=f"{error_text(e)}")
 
 
-def build_record(a, live, base, raw, prev, ops, known_ids) -> dict:
-    problems = []
-    raw["_time_basis"] = TIME_BASIS
-    start, stop = wall_clock(a.get("date_sso_began")), wall_clock(a.get("date_sso_stopped"))
-    if live:
+def retain_live(raw: dict, live: dict | None, fetched_at: str, prev: dict | None) -> None:
+    """Keep the last observed live row as evidence, never as current status input."""
+    p_raw = (prev or {}).get("raw") or {}
+    old = p_raw.get("live")
+    last_seen = p_raw.get("_live_last_seen_at") or (prev or {}).get("fetched_at")
+    revisions = deepcopy(p_raw.get("_live_revisions") or [])
+    if live is not None:
         lv = {k: live.get(k) for k in LIVE_FIELDS if k in live}
         for k in ("location_of_discharge", "receiving_stream", "cause_of_discharge", "facility_site"):
             if k in lv:
                 lv[k] = clean_text(lv[k])
+        if old is not None and old != lv:
+            revisions.append({"live": deepcopy(old), "last_seen_at": last_seen, "superseded_at": fetched_at})
         raw["live"] = lv
+        raw["_live_last_seen_at"] = fetched_at
+        raw.pop("_live_missing_since", None)
+    elif old is not None:
+        raw["live"] = deepcopy(old)
+        raw["_live_last_seen_at"] = last_seen
+        raw["_live_missing_since"] = p_raw.get("_live_missing_since") or fetched_at
+    if revisions:
+        raw["_live_revisions"] = revisions
+
+
+def build_record(a, live, base, raw, prev, ops, known_ids) -> dict:
+    problems = []
+    raw["_time_basis"] = TIME_BASIS
+    start, stop = wall_clock(a.get("date_sso_began")), wall_clock(a.get("date_sso_stopped"))
+    retain_live(raw, live, base["fetched_at"], prev)
+    if live:
         if start is None:
             start = live_time(live.get("date_sso_began"))
         if stop is None and live.get("date_sso_stopped"):
@@ -588,6 +612,8 @@ def build(hist_rows: list[dict], live_rows: list[dict], fetched_at: str, prev_re
     for eid, r in prev.items():
         if eid in seen:
             continue
+        r = deepcopy(r)
+        retain_live(r.setdefault("raw", {}), None, fetched_at, r)
         if full:
             r.setdefault("raw", {})
             r["raw"]["_missing_from_layer_since"] = r["raw"].get("_missing_from_layer_since") or fetched_at

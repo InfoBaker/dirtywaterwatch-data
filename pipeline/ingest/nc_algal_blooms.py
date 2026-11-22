@@ -17,7 +17,9 @@ Source
 
 Record rules
   - Only reports that include an algal bloom become records (event_type hab_advisory, category bloom); fish kill
-    reports alone are counted in meta.fish_kill_reports and are not events.
+    reports alone are counted in meta.fish_kill_reports and are not events. A negative finding in DWR's final
+    public comment or archive Confirmed=No is kept as an unknown record quoting the finding;
+    it produces no bloom caution. The same guard applies to records retained from earlier reads.
   - status "unknown" (a report, not an advisory): the status build shows a report for 7 days from the
     observation date as an unconfirmed bloom advisory, never red. started_at is the observation date
     (time_precision minute); no end. reported_at is the submission time where the layer has one (archive).
@@ -71,6 +73,47 @@ ROUND = 3
 BASIS = ("A report to NC DEQ of an algal bloom, with DWR's investigation status and public comment; not an advisory. "
          "The point is rounded to about 100 m.")
 ADVICE_RE = re.compile(r"[^.\n]*\b(avoid contact|stay out|keep (children|pets)|prevent children)[^.\n]*\.", re.I)
+
+# Match findings, not missing photos, unfinished tests or general advice about possible blooms.
+_BLOOM = r"(?:(?:active|algal|cyanobacterial)\s+)*blooms?"
+_TOXIN = r"(?:microcystins?|cyanotoxins?|toxins?|Abraxis)"
+NEGATIVE_FINDING = re.compile(
+    rf"\bno\s+{_BLOOM}(?: and algae accumulation)?\s+(?:(?:was|were)\s+)?(?:found|observed|detected)\b|"
+    rf"\b{_BLOOM}\s+(?:was|were|is)\s+not\s+(?:observed|found|detected)\b|"
+    rf"\bnot\s+an?\s+{_BLOOM}\b|"
+    rf"\bno\s+{_TOXIN}(?:\s+\(toxin\))?\s+(?:(?:was|were)\s+)?(?:found|observed|detected)\b|"
+    rf"\b{_TOXIN}\b[^.\n;]{{0,100}}?\b(?:negative|below (?:the )?detection limits?)\b|"
+    r"\bnot\s+(?:(?:harmful or )?toxic|toxin[- ]produc(?:ing|ers?))\b", re.I)
+POSITIVE_TOXIN = re.compile(
+    rf"\b{_TOXIN}\b[^.\n;]{{0,100}}?\b(?:(?:tested|showed|were|was|reported)\s+positive|"
+    r"(?:was|were)\s+detected)\b", re.I)
+NOT_A_RESULT = re.compile(r"\b(?:may|might|could|can|would)\b|\bnot\s+(?:yet\s+)?(?:negative|below)\b", re.I)
+
+
+def negative_finding(raw: dict) -> dict | None:
+    if clean(raw.get("Confirmed")).lower() == "no":
+        return {"field": "Confirmed", "value": clean(raw["Confirmed"])}
+    comment = str(raw.get("final_investigation_comments") or "")
+    findings = [m for m in NEGATIVE_FINDING.finditer(comment) if not NOT_A_RESULT.search(m.group())]
+    if not findings:
+        return None
+    last = findings[-1]
+    # Public comments may append follow-ups. A later positive toxin result defeats an earlier negative one.
+    if any(m.start() > last.start() for m in POSITIVE_TOXIN.finditer(comment)):
+        return None
+    return {"field": "final_investigation_comments", "value": last.group(0)}
+
+
+def apply_finding(record: dict) -> dict:
+    raw = record.get("raw") or {}
+    finding = negative_finding(raw)
+    if finding:
+        raw.update(_negative_finding=finding,
+                   _basis="DWR's negative investigation finding, retained as a listing.")
+        label = "Confirmed" if finding["field"] == "Confirmed" else "Final investigation public comments"
+        record.update(event_type="unknown", status="unknown",
+                      advice_text=f"NC DEQ Division of Water Resources, {label}: “{finding['value']}”")
+    return record
 
 
 def ms_iso(v) -> str | None:
@@ -133,7 +176,7 @@ def current_record(f: dict, fetched_at: str) -> dict:
     rid = clean(a.get("incident_id")) or clean(a.get("globalid")).strip("{}").lower()
     comment = a.get("final_investigation_comments")
     raw = {**a, "_basis": BASIS, "_layer": LAYER}
-    return event(
+    return apply_finding(event(
         source_id=SOURCE_ID, source_record_id=rid, event_type="hab_advisory", status="unknown",
         waterbody_text=clean(a.get("waterbody")) or None, water_slugs=[], water_match="none",
         lat=lat, lon=lon, coord_source="source" if lat is not None else None,
@@ -142,7 +185,7 @@ def current_record(f: dict, fetched_at: str) -> dict:
         fetched_at=fetched_at, material=None, authority=AUTHORITY, advice_text=advice(comment),
         source_url=f"{LAYER}/query?where=objectid%3D{a.get('objectid')}&outFields=*&f=json", raw=raw,
         parse_error=None if a.get("observation_date") else "no observation date",
-    )
+    ))
 
 
 def archive_record(f: dict, fetched_at: str) -> dict:
@@ -153,7 +196,7 @@ def archive_record(f: dict, fetched_at: str) -> dict:
     raw = {**a, "_basis": BASIS, "_layer": ARCHIVE_LAYER}
     if conf in ("yes", "no"):
         raw["_confirmed"] = conf == "yes"
-    return event(
+    return apply_finding(event(
         source_id=ARCHIVE_ID, source_record_id=rid, event_type="hab_advisory", status="unknown",
         waterbody_text=clean(a.get("Waterbody")) or None, water_slugs=[], water_match="none",
         lat=lat, lon=lon, coord_source="source" if lat is not None else None,
@@ -162,7 +205,7 @@ def archive_record(f: dict, fetched_at: str) -> dict:
         reported_at=ms_iso(a.get("CreationDate")), fetched_at=fetched_at, authority=AUTHORITY,
         source_url=f"{ARCHIVE_LAYER}/query?where=OBJECTID%3D{a.get('OBJECTID')}&outFields=*&f=json", raw=raw,
         parse_error=None if a.get("EventDate") else "no event date",
-    )
+    ))
 
 
 def build(features: list[dict], fetched_at: str, prev_records: list[dict], archive: bool = False) -> tuple[list[dict], dict]:
@@ -184,11 +227,12 @@ def build(features: list[dict], fetched_at: str, prev_records: list[dict], archi
         if p["event_id"] not in records:
             p.setdefault("raw", {})
             p["raw"]["_missing_from_layer_since"] = p["raw"].get("_missing_from_layer_since") or fetched_at
-            records[p["event_id"]] = p
+            records[p["event_id"]] = apply_finding(p)
             kept += 1
     out = sorted(records.values(), key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
     stats = {"layer_rows": len(features), "bloom_reports": len(out) - kept, "kept_from_earlier_runs": kept,
              "fish_kill_reports": fish_only, "report_types": dict(kinds),
+             "negative_findings": sum(bool((r.get("raw") or {}).get("_negative_finding")) for r in out),
              "with_coordinates": sum(1 for r in out if r.get("lat") is not None)}
     return out, stats
 
