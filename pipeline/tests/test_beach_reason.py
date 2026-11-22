@@ -80,7 +80,7 @@ def test_the_rule_is_on_with_its_rationale_and_every_beach_source_read():
     expected = {"al-adem-beach-monitoring", "ar-adh-swim-beach-status", "ca-beachwatch-advisories", "ca-sfpuc-beach-map",
                 "de-dnrec-recreational-water", "fl-doh-beaches", "ga-dnr-beaches", "hi-doh-cwb-events-api",
                 "il-idph-beachguard", "ks-kdhe-stream-advisories", "ky-dow-swimming-advisories", "md-aa-health-closings",
-                "me-healthy-beaches", "ms-mdeq-beach-monitoring", "ms-mdeq-water-contact-advisories", "nc-rwq-advisories",
+                "me-healthy-beaches", "mi-egle-beachguard", "ms-mdeq-beach-monitoring", "ms-mdeq-water-contact-advisories", "nc-rwq-advisories",
                 "ne-dwee-beachwatch", "nh-des-swimming", "nj-beaches", "notification-pages", "ny-parks-beaches",
                 "oh-odh-beachguard", "ok-nps-chickasaw-bacteria", "or-oha-beach-monitoring", "pa-erie-beaches",
                 "pr-drna-beach-notices", "ri-ridoh-beach-advisory-feed", "ri-ridoh-beaches", "sc-des-beach-monitoring",
