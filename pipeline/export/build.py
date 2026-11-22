@@ -220,6 +220,12 @@ def index_obj(rec: dict) -> dict:
     return o
 
 
+def index_row(rec: dict) -> list:
+    """The columnar index row, normalizing bounds, state and coordinates once per event."""
+    o = index_obj(rec)
+    return [o[k] for k in INDEX_FIELDS]
+
+
 def time_key(rec: dict) -> float:
     for k in ("started_at", "reported_at", "published_at", "sampled_at"):
         t = status_mod.parse_time(rec.get(k))
@@ -1411,7 +1417,11 @@ def monthly_props(w: dict) -> dict:
 
 
 def write_compact(path: Path, obj) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
+    # Event and water directories already exist: avoid a failed mkdir (and its
+    # follow-up stat) for each of the hundreds of thousands of records.
+    parent = path.parent
+    if not parent.is_dir():
+        parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
     tmp.write_text(json.dumps(obj, ensure_ascii=False, separators=(",", ":"), default=str))
     tmp.replace(path)
@@ -1814,7 +1824,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     by_event = {e["event_id"]: e for e in out_events}
     write_compact(OUT_DIR / "events-index.json", {
         "built": now_iso(), "fixtures_included": include_fixtures, "fields": INDEX_FIELDS, "count": len(out_events),
-        "rows": [[index_obj(e)[k] for k in INDEX_FIELDS] for e in out_events]})
+        "rows": [index_row(e) for e in out_events]})
     rain_block = st.get("rain_likely") or {}
     active = active_entries(active_now, by_event, rain_block)
     write_compact(OUT_DIR / "active.json", {"built": now_iso(), "fixtures_included": include_fixtures,
