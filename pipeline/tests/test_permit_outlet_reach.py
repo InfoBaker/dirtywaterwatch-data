@@ -5,6 +5,11 @@ this way. The shape of the miss: Hartford, Vermont's plant bypass (VT0101010, "C
 point) coloured the whole Vermont record of the river and drew no stretch, so New Hampshire's record of the same river
 showed nothing.
 
+2026-11-21, after review: the rule places only when nothing is in doubt (a wrong outlet is worse than none): any
+outfall the report names blocks it; the river must be named by the report; the outlet must start on that river and
+have a current open registry row; and the chosen outlet must be established upstream of every other candidate (its
+trace runs through their starts), or all of them start within 1 km along the network.
+
 Run from pipeline/: python -m pytest tests/test_permit_outlet_reach.py -q
 """
 from __future__ import annotations
@@ -124,46 +129,115 @@ def placements_of(st, eid):
     return st["placements"][eid]
 
 
+def r006_on_conn():
+    """006 as an outlet on the Connecticut itself: at the top of flowline 10, above 004 and 007."""
+    return reach(VT, "006", "conn-river-vt", [seg(10, C, 200, 0.0, 2.0, [[-71.99, 43.6], [-71.95, 43.6]]), tail(2.0)])
+
+
 # ---------------------------------------------------------------- the Vermont case
 
 def test_a_plant_bypass_naming_no_outlet_is_drawn_from_the_most_upstream_outlet_and_reaches_the_other_state():
     e = vt_bypass()
-    st, _ = build([e], vt_reaches(), VT_ROWS)
+    st, hist = build([e], vt_reaches(), VT_ROWS)
     p = placements_of(st, "vt-dec:hqs")
-    assert p["reach"] == f"{VT}-006" and "reaches" not in p
+    # 006's trace starts on the White River (a tributary): not an outlet on the Connecticut; 004 runs through 007's start
+    assert p["reach"] == f"{VT}-004" and "reaches" not in p
     assert p["reach_basis"] == "permit_outlet_unnamed"
-    assert p["reach_basis_outfalls"] == [{"water_slug": "conn-river-vt", "reach": f"{VT}-006", "permit": VT,
-                                          "outfall": "006", "candidates": 3}]
+    assert p["reach_basis_outfalls"] == [{"water_slug": "conn-river-vt", "reach": f"{VT}-004", "permit": VT,
+                                          "outfall": "004", "candidates": 2}]
     assert p["reach_basis_note"] == ("The report names no outlet. The stretch is drawn from the operator's most "
-                                     "upstream registered outlet on this river (outfall 006 of 3); our choice, not "
+                                     "upstream registered outlet on this river (outfall 004 of 2); our choice, not "
                                      "the report's.")
     vt, nh = st["waters"]["conn-river-vt"], st["waters"]["conn-river-nh"]
-    assert [r["placement"] for r in vt["reasons"]] == ["reach"] and vt["reasons"][0]["reach"] == f"{VT}-006"
+    assert [r["placement"] for r in vt["reasons"]] == ["reach"] and vt["reasons"][0]["reach"] == f"{VT}-004"
     # the river is the state line: New Hampshire's record of it now carries the same stretch
     assert nh["status"] == "red" and [r["placement"] for r in nh["reasons"]] == ["reach"]
     assert all(r["reach_basis"] == "permit_outlet_unnamed" for r in vt["reasons"] + nh["reasons"])
-    assert st["reaches"][f"{VT}-006"]["status"] == "red" and set(st["reaches"]) == {f"{VT}-006"}
+    assert "white-river-vt" not in st["waters"] or not st["waters"]["white-river-vt"]["reasons"]
+    assert set(st["reaches"]) == {f"{VT}-004"} and st["reaches"][f"{VT}-004"]["status"] == "red"
+    assert st["reaches"][f"{VT}-004"]["reach_basis_events"] == {
+        "vt-dec:hqs": {"reach_basis": "permit_outlet_unnamed", "reach_basis_note": p["reach_basis_note"]}}
     a = [x for x in st["reach_events_active"] if x["event_id"] == "vt-dec:hqs"]
     assert len(a) == 1 and a[0]["reach_basis"] == "permit_outlet_unnamed"
     assert a[0]["reach_basis_note"] == p["reach_basis_note"]
+    # history and replay keep the basis: a seventh item on the reach's and the waters' intervals
+    assert all(iv[4] != "vt-dec:hqs" or iv[6:] == ["permit_outlet_unnamed"]
+               for iv in hist["reach_intervals"][f"{VT}-004"])
+    assert any(iv[4] == "vt-dec:hqs" for iv in hist["reach_intervals"][f"{VT}-004"])
+    for slug in ("conn-river-vt", "conn-river-nh"):
+        mine = [iv for iv in hist["intervals"][slug] if iv[4] == "vt-dec:hqs"]
+        assert mine and all(iv[6:] == ["permit_outlet_unnamed"] for iv in mine)
     assert st["needs_reach"] == []
 
 
-def test_the_upstream_choice_follows_the_flowlines_not_the_key_or_latitude():
+def test_an_outlet_on_the_river_above_the_others_is_chosen():
     rs = vt_reaches()
-    assert S.most_upstream(list(rs.values()))["key"] == f"{VT}-006"
-    assert S.most_upstream([rs[f"{VT}-004"], rs[f"{VT}-007"]])["key"] == f"{VT}-004"   # longer run left on flowline 10
-    assert S._covers(rs[f"{VT}-006"], rs[f"{VT}-007"]) and not S._covers(rs[f"{VT}-007"], rs[f"{VT}-006"])
+    rs[f"{VT}-006"] = r006_on_conn()
+    st, _ = build([vt_bypass()], rs, VT_ROWS)
+    p = placements_of(st, "vt-dec:hqs")
+    assert p["reach"] == f"{VT}-006" and p["reach_basis_outfalls"][0]["candidates"] == 3
+    assert "(outfall 006 of 3)" in p["reach_basis_note"]
 
 
 def test_a_plant_outfall_comes_first_for_a_plant_bypass_and_never_for_a_cso():
     rs = vt_reaches()
+    rs[f"{VT}-006"] = r006_on_conn()
     r001 = reach(VT, "001", "conn-river-vt", [{**tail(0.0), "km_end": 6.0, "coords": [[-71.9, 43.6], [-71.85, 43.6]]}])
     rs[r001["key"]] = r001
     st, _ = build([vt_bypass(), vt_bypass("cso", event_type="cso")], rs, VT_ROWS)
     bypass, cso = placements_of(st, "vt-dec:hqs"), placements_of(st, "vt-dec:cso")
     assert bypass["reach"] == f"{VT}-001" and bypass["reach_basis_outfalls"][0]["candidates"] == 1
     assert cso["reach"] == f"{VT}-006" and cso["reach_basis_outfalls"][0]["candidates"] == 3
+
+
+# ---------------------------------------------------------------- the order of the candidates (review findings 3, 4)
+
+def _one(key, segs, cut="end_of_trace"):
+    return {**reach(VT, key, "conn-river-vt", segs), "cut_reason": cut}
+
+
+def test_an_upstream_outlet_whose_trace_stops_before_the_others_is_not_proof_of_order():
+    # a runs along flowline 10 and is cut at the cap inside flowline 11, where b starts: whether a reaches b is unknown
+    a = _one("a", [seg(10, C, 200, 0.0, 39.0, [[-72.0, 43.6], [-71.95, 43.6]]),
+                   seg(11, C, 100, 39.0, 40.0, [[-71.95, 43.6], [-71.94, 43.6]])], cut="cap_km")
+    b = _one("b", [seg(11, C, 100, 0.0, 3.0, [[-71.93, 43.6], [-71.9, 43.6]]),
+                   seg(12, C, 90, 3.0, 9.0, [[-71.9, 43.6], [-71.85, 43.6]])])
+    c = _one("c", [seg(12, C, 90, 0.0, 2.0, [[-71.88, 43.6], [-71.85, 43.6]])])
+    assert S._order(a, b) == (None, None)
+    assert S._order(b, c)[0] == 1
+    assert S.most_upstream([a, b, c]) is None         # the old count of covered starts chose b, a downstream outlet
+
+
+def test_two_capped_outlets_on_one_long_flowline_are_not_ordered():
+    a = _one("a", [seg(10, C, 200, 0.0, 40.0, [[-72.0, 43.6], [-71.95, 43.6]])], cut="cap_km")
+    b = _one("b", [seg(10, C, 200, 0.0, 40.0, [[-71.99, 43.6], [-71.95, 43.6]])], cut="cap_km")
+    assert S._order(a, b) == (None, None) and S.most_upstream([a, b]) is None
+
+
+def test_outlets_on_separate_branches_are_chosen_only_when_all_start_within_a_kilometre():
+    def branch(key, comid, run):
+        return _one(key, [seg(comid, C, 300 + comid, 0.0, run, [[-71.99, 43.61], [-71.99, 43.6]]),
+                          seg(10, C, 200, run, run + 2.0, [[-71.99, 43.6], [-71.95, 43.6]])])
+    far = [branch("a", 5, 3.0), branch("b", 6, 0.4)]
+    assert S._order(*far) == (None, 3.4) and S.most_upstream(far) is None
+    near = [branch("a", 5, 0.5), branch("b", 6, 0.3)]
+    assert S.most_upstream(near)["key"] == "a"        # farther above the flowline where they meet
+    assert S.most_upstream([branch("a", 5, 0.4), branch("b", 6, 0.4)])["key"] == "a"     # the same place: lower key
+
+
+def test_the_upstream_outlet_is_found_by_position_not_by_key():
+    rs = vt_reaches()
+    assert S.most_upstream([rs[f"{VT}-007"], rs[f"{VT}-004"]])["key"] == f"{VT}-004"
+    assert S._order(rs[f"{VT}-004"], rs[f"{VT}-007"])[0] == 1 and S._order(rs[f"{VT}-007"], rs[f"{VT}-004"])[0] == -1
+
+
+def test_the_selection_is_made_once_per_permit_preference_and_river(monkeypatch):
+    calls = []
+    real = S.most_upstream
+    monkeypatch.setattr(S, "most_upstream", lambda c: calls.append(1) or real(c))
+    rs = vt_reaches()
+    st, _ = build([vt_bypass(str(n)) for n in range(5)], rs, VT_ROWS)
+    assert len(calls) == 1 and all(placements_of(st, f"vt-dec:{n}")["reach"] == f"{VT}-004" for n in range(5))
 
 
 # ---------------------------------------------------------------- a CSO report naming two rivers
@@ -194,10 +268,13 @@ NH_ROWS = [row(NH, o, s) for o, s in (("001", "merrimack-river-nh"), ("002", "me
           [row(NH, "099", "merrimack-river-nh", kind="plant", status=None)]
 
 
+def manchester():
+    return event(source_id="vt-dec", source_record_id="mht", event_type="cso", status="ongoing", npdes_permit=NH,
+                 water_slugs=["merrimack-river-nh", "piscataquog-river-nh"], started_at=(NOW - 3 * H).isoformat())
+
+
 def test_a_cso_report_naming_two_rivers_gets_one_stretch_per_river():
-    e = event(source_id="vt-dec", source_record_id="mht", event_type="cso", status="ongoing", npdes_permit=NH,
-              water_slugs=["merrimack-river-nh", "piscataquog-river-nh"], started_at=(NOW - 3 * H).isoformat())
-    st, _ = build([e], nh_reaches(), NH_ROWS)
+    st, _ = build([manchester()], nh_reaches(), NH_ROWS)
     p = placements_of(st, "vt-dec:mht")
     assert p["reach"] == f"{NH}-001" and p["reaches"] == [f"{NH}-001", f"{NH}-010"]
     assert [(x["water_slug"], x["outfall"], x["candidates"]) for x in p["reach_basis_outfalls"]] == [
@@ -223,7 +300,8 @@ def test_a_sanitary_sewer_overflow_naming_no_outlet_is_never_placed_on_an_outlet
 
 
 def test_a_permit_with_no_traced_outfall_on_the_named_river_is_unchanged():
-    st, _ = build([vt_bypass("oth", water_slugs=["other-river-vt"])], vt_reaches(), VT_ROWS)
+    st, _ = build([vt_bypass("oth", water_slugs=["other-river-vt"], waterbody_text="Other River")],
+                  vt_reaches(), VT_ROWS)
     p = placements_of(st, "vt-dec:oth")
     assert "reach" not in p and "reach_basis" not in p
     assert [r["placement"] for r in st["waters"]["other-river-vt"]["reasons"]] == ["unmodeled"]
@@ -239,59 +317,139 @@ def test_a_report_naming_its_outfall_or_giving_a_point_is_not_drawn_from_another
     assert [n["event_id"] for n in st["needs_reach"]] == ["vt-dec:pt"]       # traced from its own point, as before
 
 
+def test_an_unresolved_outfall_named_in_the_name_or_the_volume_blocks_the_rule():
+    """Review finding 1: outfall 999 resolves to nothing, but the report names it: no other outlet stands for it."""
+    named = vt_bypass("nm", event_type="cso", outfall_name="CSO 999")
+    vol = vt_bypass("vol", event_type="cso", volume_text="999-0.2 MG 1405 to 1650",
+                    raw={"Final Volume": "999-0.2 MG 1405 to 1650"})
+    plant_named = vt_bypass("pn", outfall_name="Plant outfall")
+    st, _ = build([named, vol, plant_named], vt_reaches(), VT_ROWS)
+    for eid in ("vt-dec:nm", "vt-dec:vol", "vt-dec:pn"):
+        assert "reach_basis" not in placements_of(st, eid) and "reach" not in placements_of(st, eid), eid
+
+
+def test_a_report_that_names_no_river_is_not_drawn_on_its_permits_receiving_water():
+    """Review finding 2: with no water text and no water slugs, placement may infer the permit's receiving water;
+    the rule needs the river named by the report itself."""
+    bare = vt_bypass("bare", water_slugs=[], waterbody_text=None)
+    by_text = vt_bypass("text", water_slugs=[])
+    st, _ = build([bare, by_text], vt_reaches(), VT_ROWS)
+    assert "reach_basis" not in placements_of(st, "vt-dec:bare")
+    assert placements_of(st, "vt-dec:text").get("reach") == f"{VT}-004"     # its waterbody text names the river
+
+
+def test_an_outlet_on_a_tributary_never_stands_for_the_named_river():
+    """Review finding 5: the only outlet starts on the White River; a report naming the Connecticut gets none."""
+    rows = [row(VT, "006", "white-river-vt")]
+    rs = {f"{VT}-006": {**vt_reaches()[f"{VT}-006"], "water_slug": "white-river-vt"}}
+    st, _ = build([vt_bypass()], rs, rows)
+    assert "reach_basis" not in placements_of(st, "vt-dec:hqs")
+    assert "white-river-vt" not in st["waters"] or not st["waters"]["white-river-vt"]["reasons"]
+
+
+def test_a_cached_trace_without_a_current_registry_row_is_never_used():
+    """Review finding 6: outfall 004 left the registry; its cached trace stays out."""
+    rows = [r for r in VT_ROWS if r["outfall"] != "004"]
+    st, _ = build([vt_bypass()], vt_reaches(), rows)
+    p = placements_of(st, "vt-dec:hqs")
+    assert p["reach"] == f"{VT}-007" and p["reach_basis_outfalls"][0]["candidates"] == 1
+
+
 def test_closed_and_untraced_outfalls_are_skipped():
     rs = vt_reaches()
-    rows = [row(VT, "006", "conn-river-vt", status="CLS")] + [r for r in VT_ROWS if r["outfall"] != "006"]
-    st, _ = build([vt_bypass()], rs, rows)
-    p = placements_of(st, "vt-dec:hqs")
-    assert p["reach"] == f"{VT}-004" and p["reach_basis_outfalls"][0]["candidates"] == 2
-    rs[f"{VT}-004"] = {**rs[f"{VT}-004"], "cut_reason": "no_trace"}
+    rows = [row(VT, "004", "conn-river-vt", status="CLS")] + [r for r in VT_ROWS if r["outfall"] != "004"]
     st, _ = build([vt_bypass()], rs, rows)
     p = placements_of(st, "vt-dec:hqs")
     assert p["reach"] == f"{VT}-007" and p["reach_basis_outfalls"][0]["candidates"] == 1
+    rs[f"{VT}-007"] = {**rs[f"{VT}-007"], "cut_reason": "no_trace"}
+    st, _ = build([vt_bypass()], rs, rows)
+    assert "reach_basis" not in placements_of(st, "vt-dec:hqs")
     rs[f"{VT}-007"] = {**rs[f"{VT}-007"], "segments": [], "cut_reason": "tidal_at_outfall"}
     st, _ = build([vt_bypass()], rs, rows)
     assert "reach_basis" not in placements_of(st, "vt-dec:hqs")
 
 
-def test_a_monthly_total_or_a_future_start_gets_no_outlet_stretch():
+def test_a_monthly_total_gets_no_outlet_stretch():
     e = vt_bypass("mo", time_precision="month", started_at=(NOW - 40 * 24 * H).isoformat())
     st, _ = build([e], vt_reaches(), VT_ROWS)
-    assert "reach_basis" not in placements_of(st, "vt-dec:mo")
+    assert "reach_basis" not in placements_of(st, "vt-dec:mo") and "reach" not in placements_of(st, "vt-dec:mo")
+
+
+def test_a_future_start_gets_no_outlet_stretch():
+    e = vt_bypass("fut", started_at=(NOW + 5 * 24 * H).isoformat())
+    st, _ = build([e], vt_reaches(), VT_ROWS)
+    p = placements_of(st, "vt-dec:fut")
+    assert p.get("future_start") is True and "reach_basis" not in p and "reach" not in p
+    assert st["reaches"] == {}
 
 
 # ---------------------------------------------------------------- the export
 
+TOKEN = "Zqxname Privatesurname"
+
+
 class _Redactor:
+    """Removes a synthetic private name, as the export's redactor removes a blocklisted one."""
     def note(self, text, swaps=()):
-        return text
+        return text.replace(TOKEN, "[name withheld]") if isinstance(text, str) else text
 
 
-def test_the_export_carries_the_basis_on_the_record_the_reasons_and_the_segments():
+def _no_token(o):
+    assert TOKEN not in json.dumps(o)
+
+
+def test_the_export_carries_the_basis_and_redacts_the_note_on_every_path():
     from export import build as X
     e = vt_bypass()
     rs = vt_reaches()
     st, _ = build([e], rs, VT_ROWS)
-    rec = X.public_record({**e}, st["placements"]["vt-dec:hqs"], _Redactor())
-    assert rec["reach_basis"] == "permit_outlet_unnamed" and rec["reach"] == f"{VT}-006"
-    assert rec["reach_basis_outfalls"][0]["outfall"] == "006" and rec["reach_basis_outfalls"][0]["candidates"] == 3
+    # a note quoting a private name (a water named after a person, say): every copy must lose it
+    for a in st["reach_events_active"]:
+        a["reach_basis_note"] += f" {TOKEN}"
+    for b in st["reaches"][f"{VT}-004"]["reach_basis_events"].values():
+        b["reach_basis_note"] += f" {TOKEN}"
+    pl = {**st["placements"]["vt-dec:hqs"]}
+    pl["reach_basis_note"] += f" {TOKEN}"
+    X.redact_status_texts(st, _Redactor())
+    rec = X.public_record({**e}, pl, _Redactor())
+    _no_token(rec)
+    assert rec["reach_basis"] == "permit_outlet_unnamed" and rec["reach"] == f"{VT}-004"
+    assert rec["reach_basis_outfalls"][0]["outfall"] == "004" and rec["reach_basis_outfalls"][0]["candidates"] == 2
     assert rec["reach_basis_note"].startswith("The report names no outlet.")
     assert rec["outfall_id"] is None and rec["lat"] is None and rec["lon"] is None      # the record as published
     feats, paths = X.reach_features(st, {"vt-dec:hqs": {"started_at": e["started_at"]}}, cached=rs)
+    _no_token(feats), _no_token(paths)
     segs = [f["properties"] for f in feats if f["properties"]["feature"] == "segment"]
     stops = [f["properties"] for f in feats if f["properties"]["feature"] == "stop"]
-    assert segs and all(s["reach_basis"] == "permit_outlet_unnamed" and s["outfall"] == "006" for s in segs)
-    assert all(s["label"].endswith("our choice, not the report's.") for s in segs)
-    assert stops and stops[0]["reach_basis_note"] == rec["reach_basis_note"]
-    # a record naming its outfall keeps its features as before: no basis fields
-    plain = {"reach_events_active": [{**a, "reach_basis": None} for a in st["reach_events_active"]],
-             "reaches": st["reaches"]}
-    for a in plain["reach_events_active"]:
-        a.pop("reach_basis"), a.pop("reach_basis_note")
-    feats, _ = X.reach_features(plain, {"vt-dec:hqs": {"started_at": e["started_at"]}}, cached=rs)
-    assert all("reach_basis" not in f["properties"] for f in feats)
+    assert segs and all(s["reach_basis"] == "permit_outlet_unnamed" and s["outfall"] == "004" for s in segs)
+    assert all("our choice, not the report's." in s["label"] and "[name withheld]" in s["label"] for s in segs)
+    assert stops and stops[0]["reach_basis"] == "permit_outlet_unnamed"
+    path = [f["properties"] for f in paths if f["properties"]["reach"] == f"{VT}-004"][0]
+    assert path["reach_basis_events"]["vt-dec:hqs"]["reach_basis"] == "permit_outlet_unnamed"
+    assert all("reach_basis_events" not in f["properties"] for f in paths if f["properties"]["reach"] != f"{VT}-004")
+    bands = X.band_fields([a for a in st["reach_events_active"] if a["event_id"] == "vt-dec:hqs"], pl)
+    _no_token(bands)
+    assert bands["reach_band"]["reach"] == f"{VT}-004" and "reach_bands" not in bands
+    # a record drawn from its own outfall keeps its features as before: no basis fields
+    plain = {"reach_events_active": [{k: v for k, v in a.items() if not k.startswith("reach_basis")}
+                                     for a in st["reach_events_active"]],
+             "reaches": {k: {f: x for f, x in v.items() if f != "reach_basis_events"} for k, v in st["reaches"].items()}}
+    feats, paths = X.reach_features(plain, {"vt-dec:hqs": {"started_at": e["started_at"]}}, cached=rs)
+    assert all("reach_basis" not in f["properties"] and "reach_basis_events" not in f["properties"]
+               for f in feats + paths)
     rec = X.public_record({**e}, {"water_slugs": ["conn-river-vt"]}, _Redactor())
     assert "reach_basis" not in rec and "reach_basis_note" not in rec
+
+
+def test_a_record_on_two_rivers_exports_the_band_of_its_reach_and_one_per_reach():
+    """Review finding 9: the singular band is the singular reach's; every band is listed."""
+    from export import build as X
+    st, _ = build([manchester()], nh_reaches(), NH_ROWS)
+    pl = st["placements"]["vt-dec:mht"]
+    out = X.band_fields([a for a in st["reach_events_active"] if a["event_id"] == "vt-dec:mht"], pl)
+    assert out["reach_band"]["reach"] == pl["reach"] == f"{NH}-001"
+    assert sorted(b["reach"] for b in out["reach_bands"]) == [f"{NH}-001", f"{NH}-010"]
+    assert all(b["reach_basis"] == "permit_outlet_unnamed" for b in out["reach_bands"])
 
 
 def test_reported_outfalls_ignores_a_stretch_drawn_for_a_report_naming_no_outlet(tmp_path, monkeypatch):
