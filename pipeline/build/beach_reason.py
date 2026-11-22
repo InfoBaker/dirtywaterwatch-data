@@ -102,9 +102,13 @@ def judge(ev: dict, rules: dict | None) -> dict | None:
 
 
 def label(ev: dict, cfg: dict) -> str:
-    """The listing's words: "Beach closed; the source gives no reason" (labels.<event_type>)."""
+    """The listing's words: "Beach closed; the source gives no reason" (labels.<event_type>), or the source entry's own
+    (sources.<id>.labels.<event_type>: a source whose records give a reason that is not about water quality, such as
+    EPA's BEACON code OTHER with "Hurricane Rip Currents")."""
+    own = (((cfg.get("sources") or {}).get(ev.get("source_id")) or {}).get("labels") or {})
     labels = cfg.get("labels") or {}
-    return labels.get(ev.get("event_type")) or labels.get("default") or "Listed; the source gives no reason"
+    return (own.get(ev.get("event_type")) or labels.get(ev.get("event_type")) or labels.get("default")
+            or "Listed; the source gives no reason")
 
 
 def note(ev: dict, verdict: dict, rules: dict) -> dict:
