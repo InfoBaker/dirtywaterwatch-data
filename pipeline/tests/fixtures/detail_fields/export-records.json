@@ -1,0 +1,556 @@
+{
+ "note": "Trimmed real records from the export built 2026-11-14 (out/events/*.json): only the raw keys export/detail.py reads, values as the export has them. Read by tests/test_detail_fields.py.",
+ "records": [
+  {
+   "event_id": "ct-deep:10712",
+   "source_id": "ct-deep",
+   "source_record_id": "10712",
+   "event_type": "sso",
+   "started_at": "2026-05-28T07:45:00-04:00",
+   "volume_gal": 500,
+   "volume_text": "Approximately 500 gallons",
+   "raw": {
+    "Cause of Bypass": "Sewage Line Blockage - Grease",
+    "Cause of Bypass Other Explanation": "Backup came out of fresh air vent on sewer lateral on side of auto service station at 180 West Putnam Avenue",
+    "How incident was resolved": "Jetted the line to clear the partial blockage in the sewer main",
+    "Municipality": "Greenwich",
+    "Location of Bypass": "Lateral - Private",
+    "Weather Conditions": "Dry"
+   }
+  },
+  {
+   "event_id": "ct-deep:10753",
+   "source_id": "ct-deep",
+   "source_record_id": "10753",
+   "event_type": "sso",
+   "started_at": "2026-06-09T00:00:00-04:00",
+   "volume_gal": null,
+   "volume_text": "TEST TEST TEST TEST",
+   "raw": {
+    "Cause of Bypass": "Other",
+    "Cause of Bypass Other Explanation": "TEST TEST TEST TEST",
+    "How incident was resolved": null,
+    "Municipality": "Scotland",
+    "Location of Bypass": "Sewer Main",
+    "Weather Conditions": "Dry"
+   }
+  },
+  {
+   "event_id": "ct-deep:9384",
+   "source_id": "ct-deep",
+   "source_record_id": "9384",
+   "event_type": "plant_bypass",
+   "started_at": "2025-04-15T05:00:00-04:00",
+   "volume_gal": null,
+   "volume_text": "0.6136 mgd",
+   "raw": {
+    "Cause of Bypass": "Excessive Flows - Storm Event",
+    "Cause of Bypass Other Explanation": ".",
+    "How incident was resolved": "Rain event ended",
+    "Municipality": "New Haven",
+    "Location of Bypass": "Treatment Plant",
+    "Weather Conditions": "Rain less than 1\" per hour"
+   }
+  },
+  {
+   "event_id": "ct-deep:9768",
+   "source_id": "ct-deep",
+   "source_record_id": "9768",
+   "event_type": "plant_bypass",
+   "started_at": "2025-07-31T23:15:00-04:00",
+   "volume_gal": null,
+   "volume_text": "0.9389 MGD",
+   "raw": {
+    "Cause of Bypass": "Excessive Flows - Storm Event",
+    "Cause of Bypass Other Explanation": "Same as above",
+    "How incident was resolved": "Rain event ended",
+    "Municipality": "New Haven",
+    "Location of Bypass": "Treatment Plant",
+    "Weather Conditions": "Rain less than 1\" per hour"
+   }
+  },
+  {
+   "event_id": "ct-deep:9941",
+   "source_id": "ct-deep",
+   "source_record_id": "9941",
+   "event_type": "cso",
+   "started_at": "2025-09-24T06:45:00-04:00",
+   "volume_gal": 0,
+   "volume_text": "003-No release004-No release005-No release006-No release",
+   "raw": {
+    "Report Type": "CSO - Greater New Haven 5 Day Report"
+   }
+  },
+  {
+   "event_id": "ct-deep-annual:xda4608dde58d",
+   "source_id": "ct-deep-annual",
+   "source_record_id": "xda4608dde58d",
+   "event_type": "sso",
+   "started_at": null,
+   "volume_gal": null,
+   "volume_text": "Final Quantity",
+   "raw": {
+    "Cause of Bypass": "Cause of Bypass",
+    "Cause of Bypass Other Explanation": "Cause of Bypass Other Explanation",
+    "How incident was resolved": "How incident was resolved",
+    "Municipality": "Municipality"
+   }
+  },
+  {
+   "event_id": "ct-deep-annual:x35a448f555a5",
+   "source_id": "ct-deep-annual",
+   "source_record_id": "x35a448f555a5",
+   "event_type": "cso",
+   "started_at": "2021-10-26T00:20:00-04:00",
+   "volume_gal": null,
+   "volume_text": "20,001 - 50,000 gallons",
+   "raw": {
+    "Notes": "27102"
+   }
+  },
+  {
+   "event_id": "ct-deep-annual:xe96cdc6fe830",
+   "source_id": "ct-deep-annual",
+   "source_record_id": "xe96cdc6fe830",
+   "event_type": "cso",
+   "started_at": "2021-05-09T23:18:00-04:00",
+   "volume_gal": null,
+   "volume_text": "Over 1,000,000 gallons",
+   "raw": {
+    "Notes": "RAIN EVENT HAS ENDED"
+   }
+  },
+  {
+   "event_id": "ct-deep-archive:bypass-35965153",
+   "source_id": "ct-deep-archive",
+   "source_record_id": "bypass-35965153",
+   "event_type": "sso",
+   "started_at": "2020-05-05T14:15:00-04:00",
+   "volume_gal": null,
+   "volume_text": "50,001 - 100,000 gallons",
+   "raw": {
+    "BYPASS_CAUSE": "Sewer Line Blockage - Other",
+    "COMMENTS": "Force Main Break",
+    "REPORTING_TOWN": "Norwich"
+   }
+  },
+  {
+   "event_id": "nj-beaches:OC153101:beach_advisory:2026-08-12",
+   "source_id": "nj-beaches",
+   "source_record_id": "OC153101:beach_advisory:2026-08-12",
+   "event_type": "beach_advisory",
+   "started_at": "2026-08-12",
+   "volume_gal": null,
+   "volume_text": null,
+   "raw": {
+    "cause": null,
+    "reasons": [
+     "ELEV_BACT"
+    ],
+    "indicators": [
+     "ENTERO"
+    ],
+    "incident_rows": [
+     {
+      "Incident_Start_Date": "08/12/2026",
+      "Incident_End_Date": "08/13/2026",
+      "Beach_Act_Type_Name": "CONTAM_ADV",
+      "Beach_Reason_Type_Name": "ELEV_BACT",
+      "Beach_Reason_Type_Desc": "Monitoring that revealed elevated bacteria levels",
+      "Beach_Source_Type_Name": "UNKNOWN",
+      "Beach_Indicator_Type_Name": "ENTERO",
+      "Beach_Indicator_Type_Desc": "Enterococci",
+      "Incident_Additional_Comments": "First result that triggered an incident."
+     }
+    ],
+    "station": "OC153101"
+   }
+  },
+  {
+   "event_id": "nj-beaches:OC1048:beach_advisory:2026-08-17",
+   "source_id": "nj-beaches",
+   "source_record_id": "OC1048:beach_advisory:2026-08-17",
+   "event_type": "beach_advisory",
+   "started_at": "2026-08-17",
+   "volume_gal": null,
+   "volume_text": null,
+   "raw": {
+    "cause": "WILDLIFE",
+    "reasons": [
+     "OTHER"
+    ],
+    "indicators": [
+     "OTHER"
+    ],
+    "incident_rows": [
+     {
+      "Incident_Start_Date": "08/17/2026",
+      "Incident_End_Date": "08/18/2026",
+      "Beach_Act_Type_Name": "CONTAM_ADV",
+      "Beach_Reason_Type_Name": "OTHER",
+      "Beach_Reason_Type_Desc": "Other Please specify in the Description field",
+      "Beach_Source_Type_Name": "WILDLIFE",
+      "Beach_Indicator_Type_Name": "OTHER",
+      "Beach_Indicator_Type_Desc": "Other-Please specify in the Description field",
+      "Incident_Additional_Comments": "[Day #1] - Awaiting removal by NJ Fire Service coordination with Island Beach State Park facilities"
+     },
+     {
+      "Incident_Start_Date": "08/18/2026",
+      "Incident_End_Date": "08/19/2026",
+      "Beach_Act_Type_Name": "CONTAM_ADV",
+      "Beach_Reason_Type_Name": "OTHER",
+      "Beach_Reason_Type_Desc": "Other Please specify in the Description field",
+      "Beach_Source_Type_Name": "WILDLIFE",
+      "Beach_Indicator_Type_Name": "OTHER",
+      "Beach_Indicator_Type_Desc": "Other-Please specify in the Description field",
+      "Incident_Additional_Comments": "[Day #2] - Awaiting removal by NJ Fire Service coordination with Island Beach State Park facilities"
+     },
+     {
+      "Incident_Start_Date": "08/19/2026",
+      "Incident_End_Date": "08/20/2026",
+      "Beach_Act_Type_Name": "CONTAM_ADV",
+      "Beach_Reason_Type_Name": "OTHER",
+      "Beach_Reason_Type_Desc": "Other Please specify in the Description field",
+      "Beach_Source_Type_Name": "WILDLIFE",
+      "Beach_Indicator_Type_Name": "OTHER",
+      "Beach_Indicator_Type_Desc": "Other-Please specify in the Description field",
+      "Incident_Additional_Comments": "[Day #3] - Awaiting removal by NJ Fire Service coordination with Island Beach State Park facilities"
+     },
+     {
+      "Incident_Start_Date": "08/20/2026",
+      "Incident_End_Date": "08/21/2026",
+      "Beach_Act_Type_Name": "CONTAM_ADV",
+      "Beach_Reason_Type_Name": "OTHER",
+      "Beach_Reason_Type_Desc": "Other Please specify in the Description field",
+      "Beach_Source_Type_Name": "WILDLIFE",
+      "Beach_Indicator_Type_Name": "OTHER",
+      "Beach_Indicator_Type_Desc": "Other-Please specify in the Description field",
+      "Incident_Additional_Comments": "[Day #4] - Awaiting removal by NJ Fire Service coordination with Island Beach State Park facilities"
+     },
+     {
+      "Incident_Start_Date": "08/21/2026",
+      "Incident_End_Date": "08/22/2026",
+      "Beach_Act_Type_Name": "CONTAM_ADV",
+      "Beach_Reason_Type_Name": "OTHER",
+      "Beach_Reason_Type_Desc": "Other Please specify in the Description field",
+      "Beach_Source_Type_Name": "WILDLIFE",
+      "Beach_Indicator_Type_Name": "OTHER",
+      "Beach_Indicator_Type_Desc": "Other-Please specify in the Description field",
+      "Incident_Additional_Comments": "[Day #5] - Awaiting removal by NJ Fire Service coordination with Island Beach State Park facilities"
+     }
+    ],
+    "station": "OC1048"
+   }
+  },
+  {
+   "event_id": "nj-beaches:MC1096:beach_closure:2026-08-22",
+   "source_id": "nj-beaches",
+   "source_record_id": "MC1096:beach_closure:2026-08-22",
+   "event_type": "beach_closure",
+   "started_at": "2026-08-22",
+   "volume_gal": null,
+   "volume_text": null,
+   "raw": {
+    "cause": "CSO",
+    "reasons": [
+     "OTHER"
+    ],
+    "indicators": [
+     "PREEMPT"
+    ],
+    "incident_rows": [
+     {
+      "Incident_Start_Date": "08/22/2026",
+      "Incident_End_Date": "08/23/2026",
+      "Beach_Act_Type_Name": "CLOSURE",
+      "Beach_Reason_Type_Name": "OTHER",
+      "Beach_Reason_Type_Desc": "Other Please specify in the Description field",
+      "Beach_Source_Type_Name": "CSO",
+      "Beach_Indicator_Type_Name": "PREEMPT",
+      "Beach_Indicator_Type_Desc": "Preemptive",
+      "Incident_Additional_Comments": "[Day #1] - N/A"
+     }
+    ],
+    "station": "MC1096"
+   }
+  },
+  {
+   "event_id": "nj-beaches:SA171101:beach_closure:2025-07-03",
+   "source_id": "nj-beaches",
+   "source_record_id": "SA171101:beach_closure:2025-07-03",
+   "event_type": "beach_closure",
+   "started_at": "2025-07-03",
+   "volume_gal": null,
+   "volume_text": null,
+   "raw": {
+    "cause": "ALGAE",
+    "reasons": [
+     "HARMFUL_ALGAL_BLOOM"
+    ],
+    "indicators": [
+     "OTHER"
+    ],
+    "incident_rows": [
+     {
+      "Incident_Start_Date": "07/03/2025",
+      "Incident_End_Date": "07/04/2025",
+      "Beach_Act_Type_Name": "CLOSURE",
+      "Beach_Reason_Type_Name": "HARMFUL_ALGAL_BLOOM",
+      "Beach_Reason_Type_Desc": "Harmful Algal Bloom as present.",
+      "Beach_Source_Type_Name": "ALGAE",
+      "Beach_Indicator_Type_Name": "OTHER",
+      "Beach_Indicator_Type_Desc": "Other-Please specify in the Description field",
+      "Incident_Additional_Comments": "[Day #1] - N/A"
+     },
+     {
+      "Incident_Start_Date": "07/04/2025",
+      "Incident_End_Date": "07/05/2025",
+      "Beach_Act_Type_Name": "CLOSURE",
+      "Beach_Reason_Type_Name": "HARMFUL_ALGAL_BLOOM",
+      "Beach_Reason_Type_Desc": "Harmful Algal Bloom as present.",
+      "Beach_Source_Type_Name": "ALGAE",
+      "Beach_Indicator_Type_Name": "OTHER",
+      "Beach_Indicator_Type_Desc": "Other-Please specify in the Description field",
+      "Incident_Additional_Comments": "[Day #2] - N/A"
+     },
+     {
+      "Incident_Start_Date": "07/05/2025",
+      "Incident_End_Date": "07/06/2025",
+      "Beach_Act_Type_Name": "CLOSURE",
+      "Beach_Reason_Type_Name": "HARMFUL_ALGAL_BLOOM",
+      "Beach_Reason_Type_Desc": "Harmful Algal Bloom as present.",
+      "Beach_Source_Type_Name": "ALGAE",
+      "Beach_Indicator_Type_Name": "OTHER",
+      "Beach_Indicator_Type_Desc": "Other-Please specify in the Description field",
+      "Incident_Additional_Comments": "[Day #3] - N/A"
+     },
+     {
+      "Incident_Start_Date": "07/06/2025",
+      "Incident_End_Date": "07/07/2025",
+      "Beach_Act_Type_Name": "CLOSURE",
+      "Beach_Reason_Type_Name": "HARMFUL_ALGAL_BLOOM",
+      "Beach_Reason_Type_Desc": "Harmful Algal Bloom as present.",
+      "Beach_Source_Type_Name": "ALGAE",
+      "Beach_Indicator_Type_Name": "OTHER",
+      "Beach_Indicator_Type_Desc": "Other-Please specify in the Description field",
+      "Incident_Additional_Comments": "[Day #4] - N/A"
+     },
+     {
+      "Incident_Start_Date": "07/07/2025",
+      "Incident_End_Date": "07/08/2025",
+      "Beach_Act_Type_Name": "CLOSURE",
+      "Beach_Reason_Type_Name": "HARMFUL_ALGAL_BLOOM",
+      "Beach_Reason_Type_Desc": "Harmful Algal Bloom as present.",
+      "Beach_Source_Type_Name": "ALGAE",
+      "Beach_Indicator_Type_Name": "OTHER",
+      "Beach_Indicator_Type_Desc": "Other-Please specify in the Description field",
+      "Incident_Additional_Comments": "[Day #5] - N/A"
+     },
+     {
+      "Incident_Start_Date": "07/08/2025",
+      "Incident_End_Date": "07/09/2025",
+      "Beach_Act_Type_Name": "CLOSURE",
+      "Beach_Reason_Type_Name": "HARMFUL_ALGAL_BLOOM",
+      "Beach_Reason_Type_Desc": "Harmful Algal Bloom as present.",
+      "Beach_Source_Type_Name": "ALGAE",
+      "Beach_Indicator_Type_Name": "OTHER",
+      "Beach_Indicator_Type_Desc": "Other-Please specify in the Description field",
+      "Incident_Additional_Comments": "[Day #6] - N/A"
+     }
+    ],
+    "station": "SA171101"
+   }
+  },
+  {
+   "event_id": "hi-doh-cwb-events-api:1975",
+   "source_id": "hi-doh-cwb-events-api",
+   "source_record_id": "1975",
+   "event_type": "beach_advisory",
+   "started_at": "2026-02-13T13:48:41-10:00",
+   "volume_gal": null,
+   "volume_text": null,
+   "raw": {
+    "row": {
+     "cause": "Heavy rain",
+     "type": "Beach Advisory",
+     "title": "High Bacteria Count Advisory at Hanakaoo, Maui",
+     "id": 1975
+    }
+   }
+  },
+  {
+   "event_id": "hi-doh-cwb-events-api:1888",
+   "source_id": "hi-doh-cwb-events-api",
+   "source_record_id": "1888",
+   "event_type": "beach_advisory",
+   "started_at": "2025-02-04T00:00:00-10:00",
+   "volume_gal": null,
+   "volume_text": null,
+   "raw": {
+    "row": {
+     "cause": "Unknown",
+     "type": "Beach Notification",
+     "title": "High Bacteria Count Notification at Hanauma Beach Park, O‘ahu",
+     "id": 1888
+    }
+   }
+  },
+  {
+   "event_id": "ma-massdep:d1fda2c6-fd79-476a-9bf6-423574e1720b",
+   "source_id": "ma-massdep",
+   "source_record_id": "d1fda2c6-fd79-476a-9bf6-423574e1720b",
+   "event_type": "cso",
+   "started_at": "2026-03-22T13:55:00-04:00",
+   "volume_gal": 13000,
+   "volume_text": "13000",
+   "raw": {
+    "additionalInformation": "Aquasite notification not sent out from ADS.",
+    "reporterClass": "Verified Data Report",
+    "_report_class": "Verified Data Report",
+    "municipality": "SPRINGFIELD",
+    "incidentNumber": "26015877"
+   }
+  },
+  {
+   "event_id": "ma-massdep:be6cecc3-03bd-424b-b7a7-276f724fe0cc",
+   "source_id": "ma-massdep",
+   "source_record_id": "be6cecc3-03bd-424b-b7a7-276f724fe0cc",
+   "event_type": "cso",
+   "started_at": "2022-09-19T00:00:00-04:00",
+   "volume_gal": 17,
+   "volume_text": "17",
+   "raw": {
+    "additionalInformation": "estimates based on model",
+    "reporterClass": "Verified Data Report",
+    "_report_class": "Verified Data Report",
+    "municipality": "CHICOPEE",
+    "incidentNumber": "22000569-1"
+   }
+  },
+  {
+   "event_id": "me-healthy-beaches:123:beach_advisory:2025-07-15T17:00",
+   "source_id": "me-healthy-beaches",
+   "source_record_id": "123:beach_advisory:2025-07-15T17:00",
+   "event_type": "beach_advisory",
+   "started_at": "2025-07-15T17:00:00-04:00",
+   "volume_gal": null,
+   "volume_text": null,
+   "raw": {
+    "comment": "Recent enterococci bacteria results above Maine’s safety threshold (104 MPN/100ml).",
+    "status": "Elevated Bacteria Advisory",
+    "start_date": "07/15/2025"
+   }
+  },
+  {
+   "event_id": "me-healthy-beaches:145:beach_advisory:2026-07-15T15:00",
+   "source_id": "me-healthy-beaches",
+   "source_record_id": "145:beach_advisory:2026-07-15T15:00",
+   "event_type": "beach_advisory",
+   "started_at": "2026-07-15T15:00:00-04:00",
+   "volume_gal": null,
+   "volume_text": null,
+   "raw": {
+    "comment": "Little Beach was placed under advisory in error, the correct advisory is being placed on Riverside Beach.",
+    "status": "Elevated Bacteria Advisory",
+    "start_date": "07/15/2026"
+   }
+  },
+  {
+   "event_id": "me-healthy-beaches:153:rain_advisory:2024-08-09T17:05",
+   "source_id": "me-healthy-beaches",
+   "source_record_id": "153:rain_advisory:2024-08-09T17:05",
+   "event_type": "rain_advisory",
+   "started_at": "2024-08-09T17:05:00-04:00",
+   "volume_gal": null,
+   "volume_text": null,
+   "raw": {
+    "comment": "",
+    "status": "Precautionary Rainfall Advisory",
+    "start_date": "08/09/2024"
+   }
+  },
+  {
+   "event_id": "ca-swrcb-ciwqs-spills-flatfile:908028",
+   "source_id": "ca-swrcb-ciwqs-spills-flatfile",
+   "source_record_id": "908028",
+   "event_type": "sso",
+   "started_at": "2026-09-08T10:41:00-07:00",
+   "volume_gal": 290,
+   "volume_text": "290 gallons spilled (estimated total leaving the sewer system); 290 gallons reached surface water; 0 gallons recovered",
+   "raw": {
+    "spill_type": "Category 1 Spill",
+    "causes": "Fats, Oil and Grease (FOG)",
+    "appearance_points": "Manhole",
+    "volume_total_gal": "290",
+    "volume_to_surface_water_gal": "290",
+    "spill_event_id": "908028"
+   }
+  },
+  {
+   "event_id": "ca-swrcb-ciwqs-spills-flatfile:908897",
+   "source_id": "ca-swrcb-ciwqs-spills-flatfile",
+   "source_record_id": "908897",
+   "event_type": "sso",
+   "started_at": "2026-11-01T12:00:00-08:00",
+   "volume_gal": 10000,
+   "volume_text": "10,000 gallons spilled (estimated total leaving the sewer system); 0 gallons reached surface water; 0 gallons recovered",
+   "raw": {
+    "spill_type": "Category 1 Spill",
+    "causes": null,
+    "appearance_points": "Manhole",
+    "volume_total_gal": "10000",
+    "volume_to_surface_water_gal": "0",
+    "spill_event_id": "908897"
+   }
+  },
+  {
+   "event_id": "ca-swrcb-ciwqs-spills-flatfile:907277",
+   "source_id": "ca-swrcb-ciwqs-spills-flatfile",
+   "source_record_id": "907277",
+   "event_type": "sso",
+   "started_at": "2026-06-16T10:34:00-07:00",
+   "volume_gal": 76,
+   "volume_text": "76 gallons spilled (estimated total leaving the sewer system); 76 gallons recovered",
+   "raw": {
+    "spill_type": "Monthly Category 3 Spill",
+    "causes": "Debris-General",
+    "appearance_points": "Manhole",
+    "volume_total_gal": "76",
+    "volume_to_surface_water_gal": null,
+    "spill_event_id": "907277"
+   }
+  },
+  {
+   "event_id": "al-adem-sso-history:SSO-00214428",
+   "source_id": "al-adem-sso-history",
+   "source_record_id": "SSO-00214428",
+   "event_type": "sso",
+   "started_at": "2026-05-11T09:00:00-05:00",
+   "volume_gal": null,
+   "volume_text": "250,000 to 500,000 gallons (a range on ADEM's form)",
+   "raw": {
+    "live": {
+     "cause_of_discharge": "Equipment Failure",
+     "sso_report_id": "SSO-00214428"
+    },
+    "row": {
+     "sso_report_id": "SSO-00214428"
+    }
+   }
+  },
+  {
+   "event_id": "al-adem-sso-history:SSO-00214490",
+   "source_id": "al-adem-sso-history",
+   "source_record_id": "SSO-00214490",
+   "event_type": "sso",
+   "started_at": "2026-06-02T13:30:00-05:00",
+   "volume_gal": null,
+   "volume_text": "more than 50,000 gallons (a range on ADEM's form, cut short in the layer; the form's range from 50,000 goes to 75,000)",
+   "raw": {
+    "row": {
+     "sso_report_id": "SSO-00214490"
+    }
+   }
+  }
+ ]
+}

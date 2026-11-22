@@ -332,3 +332,9 @@ def test_p2_12_dst_gap_and_overlap_are_dated_to_the_day():
     for d, t in (("2026-03-08", "2:30"), ("2026-11-01", "1:30")):
         st, prec, note = M._start({"date": d, "time": t, "ampm": "AM"}, True)
         assert prec == "day" and "daylight" in note
+
+
+def test_the_cause_column_reaches_the_records_detail():
+    from export import detail as D
+    _, r = recs("q2_2026", "2026Q2", ["2026-04-01", "2026-06-30"])
+    assert D.detail_of(r["2026-04-27T0300PM:PATERD"]) == {"cause": "BROKEDOWN"}       # the table's word, as written

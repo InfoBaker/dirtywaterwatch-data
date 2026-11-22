@@ -588,3 +588,10 @@ def test_r7_the_status_build_counts_the_feeds_records_once(monkeypatch):
     out = _status(recs, {}, "2026-11-16T19:00:00+00:00")
     assert set(out["placements"]) == {r["event_id"] for r in recs} and len(recs) == len(ROWS)
     assert out["counts"]["events"] == len(ROWS) and out["counts"]["duplicates"] == 1
+
+
+def test_the_cause_reaches_the_records_detail():
+    # the list's dischargeDescription ("the type and the cause") in its words (export/detail.py; decision 46)
+    from export import detail as D
+    r = rec("newest")
+    assert D.detail_of(r)["cause"].startswith("A quarterly preventive maintenance task was completed at the pump station")

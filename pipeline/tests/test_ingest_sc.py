@@ -912,3 +912,15 @@ def test_the_shared_changes_leave_an_unflagged_record_as_it_was():
     d.origin, d.operator_short, d.water_links = (lambda ev: ("SC", None)), (lambda ev: "F"), (lambda ev: [("c", "local")])
     buckets, stats, _ = C.gather(d)
     assert len(buckets[("water", "c")].events) == 2 and not stats.get("advice_not_a_discharge")
+
+
+def test_florence_cause_reaches_the_records_detail():
+    # the detail map named "sc-florence-sso", which no module writes, until 2026-11-21
+    from export import detail as D
+    nid, p = notice()
+    st = {"notices": {}}
+    F.update_notice(st, "/news/x", nid, p, T0)
+    recs = florence_records(st)
+    assert D.detail_of(recs["1929"])["cause"].endswith("which was caused by excessive rainfall over the last 48 hours "
+                                                        "and by the inflow and infiltration of stormwater into the system.")
+    assert D.detail_of(recs["1929-advice"]) == {}

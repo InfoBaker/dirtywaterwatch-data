@@ -162,3 +162,9 @@ def test_water_contained_before_reaching_is_not_placed():
     assert F.water_of("Natural Dry Pond") is None
     assert F.water_of("Contained prior to reaching Salado Creek") is None
     assert F.water_of("Storm drain; did not reach Leon Creek") is None
+
+
+def test_the_suspected_cause_reaches_the_records_detail():
+    from export import detail as D
+    r = by_id(X.run([FEED], [], AT, pdfs)[0])["35579"]
+    assert D.detail_of(r) == {"cause": "Structural"}

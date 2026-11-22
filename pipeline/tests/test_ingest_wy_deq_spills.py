@@ -558,3 +558,10 @@ def test_r9_stderr_is_read_once_before_the_privacy_check(env, capsys):
     import inspect
     src = inspect.getsource(test_a_failed_read_keeps_every_record_and_fails_health)
     assert "err = capsys.readouterr().err" in src
+
+
+def test_the_cause_reaches_the_records_detail():
+    # the detail map named "wy-deq-spills", which no module writes, until 2026-11-21
+    from export import detail as D
+    recs, _, _ = built()
+    assert D.detail_of(recs["260923-1300-teton"]) == {"cause": "Equipment Failure"}
