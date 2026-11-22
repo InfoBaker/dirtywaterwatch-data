@@ -14,8 +14,8 @@ excluded; water names are scrubbed and points rounded before any data is saved.
 Placement uses existing named-water guards. Generic CANAL never supplies a water tie.
 
 Run after fl_dep_pnp (the Makefile's alphabetical module order). Confirmed duplicates
-are linked to the latest DEP notice, retaining that notice's placement and evidence;
-county details remain separately cited. Linking also runs on a failed county read,
+use receiving-water evidence before recency to choose the counted record;
+both statements remain separately cited. Linking also runs on a failed county read,
 against retained evidence, because DEP may have rewritten its records this run.
 No coordinates/dates-only match: an explicit tracking reference or a unique agreement
 on date, municipal utility, positive volume and rounded source point is required.
@@ -31,7 +31,7 @@ import math
 import re
 import sys
 from collections import Counter, defaultdict
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
@@ -222,6 +222,8 @@ def _clear_links(records):
             else: raw.pop('_other_source_record',None)
         if '_miami_previous_duplicate_of' in raw:
             r['duplicate_of']=raw.pop('_miami_previous_duplicate_of')
+        if '_miami_previous_parent_event_id' in raw:
+            r['parent_event_id']=raw.pop('_miami_previous_parent_event_id')
         raw.pop('_miami_link_basis',None)
 
 
@@ -256,13 +258,57 @@ def _point_volume_agree(c,p):
     return None not in coords and all(round(coords[i],3)==round(coords[i+2],3) for i in (0,1))
 
 
+def _release_bounds(r):
+    """Comparison bounds only: never change source times or turn day precision into a stated time."""
+    from build import status as S
+    start, end = S.ev_time(r, 'started_at', 'FL'), S.ev_time(r, 'ended_at', 'FL')
+    if end and S.end_precision(r) == 'day':
+        end = end.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
+    # DEP's normalized times are dates. The WASD template may additionally state exact local times.
+    text = (r.get('raw') or {}).get('INCIDENT_REPORT') or ''
+    for field, label in (('start', r'Estimated\s+Time\s+Release\s+Started'),
+                         ('end', r'Discharge\s+Stopped\s+On')):
+        matches = re.findall(label + r'\s*:\s*(\d{1,2}/\d{1,2}/\d{2,4}\s+\d{1,2}:\d{2}\s*[AP]M)\b', text, re.I)
+        times = set()
+        for value in matches:
+            value = ' '.join(value.upper().split())
+            fmt = '%m/%d/%Y %I:%M %p' if len(value.split()[0].split('/')[-1]) == 4 else '%m/%d/%y %I:%M %p'
+            try:
+                times.add(datetime.strptime(value, fmt).replace(tzinfo=TZ))
+            except ValueError:
+                return None
+        if len(times) > 1: return None  # contradictory template values cannot support a fallback
+        if times:
+            t = times.pop()
+            normalized = S.ev_time(r, 'started_at' if field == 'start' else 'ended_at', 'FL')
+            if normalized and normalized.astimezone(TZ).date() != t.date(): return None
+            if field == 'start': start = t
+            else: end = t
+    if start and end and end < start: return None
+    return start, end
+
+
+def _intervals_agree(a,b):
+    aa, bb = _release_bounds(a), _release_bounds(b)
+    if aa is None or bb is None: return False
+    a0,a1 = aa; b0,b1 = bb
+    return not ((a1 and b0 and a1 < b0) or (b1 and a0 and b1 < a0))
+
+
+def _water_evidence(r):
+    # Same dry-record safeguards as al_jefferson_county_soa.link_adem.
+    from build import status as S
+    if S.no_water_flag(r) or S.reached_no_water(r) or S.no_receiving_water(r): return 0
+    return 2 if S.specific_water_keys(r.get('waterbody_text')) else 1
+
+
 def link_pnp(county,pnp):
     """Link only unambiguous identity; never transfer one source's values into another's fields."""
     _clear_links(county+pnp)
     by_day=defaultdict(list)
     for c in county:
         if _day(c): by_day[_day(c)].append(c)
-    pairs=defaultdict(list); bases={}
+    pairs=defaultdict(list); bases={}; fallback=[]; candidates_by_county=Counter()
     for p in pnp:
         raw=p.get('raw') or {}
         if raw.get('_pnp_kind')=='citizen_complaint' or p.get('event_type') not in ('sso','bypass','plant_bypass','unknown'):
@@ -273,6 +319,7 @@ def link_pnp(county,pnp):
         matches=[c for c in candidates if (c.get('raw') or {}).get('UTILITYNAME')=='WASD'
                  and (c.get('raw') or {}).get('TRACKNUM') in refs]
         basis='We linked the county tracking number to the explicit WASD incident number in the DEP notice, on the same date.'
+        weak=False
         if not matches and not refs:
             n=str(raw.get('INCIDENT_NUMBER') or '')
             matches=[c for c in candidates if n and re.sub(r'[-\s]','',str((c.get('raw') or {}).get('TRACKNUM') or ''))==n
@@ -280,22 +327,46 @@ def link_pnp(county,pnp):
             basis='We linked the matching tracking and notice numbers, utility and start date.'
             if not matches:
                 matches=[c for c in candidates if _point_volume_agree(c,p)]
+                weak=True
                 basis='We linked a unique match on start date, utility, estimated discharged gallons and the source point rounded to three decimals.'
+        # Count all identity candidates before interval filtering, including ambiguous DEP notices.
+        # A conflicting interval must not make another weak candidate look unique.
+        candidates_by_county.update(c['event_id'] for c in matches)
         if len(matches)==1:
-            c=matches[0]; pairs[c['event_id']].append(p); bases[(c['event_id'],p['event_id'])]=basis
-    by_id={c['event_id']:c for c in county}; n=0
+            c=matches[0]
+            if weak: fallback.append((c,p,basis))
+            else:
+                pairs[c['event_id']].append(p); bases[(c['event_id'],p['event_id'])]=basis
+    for c,p,basis in fallback:
+        if candidates_by_county[c['event_id']]==1 and _intervals_agree(c,p):
+            pairs[c['event_id']].append(p); bases[(c['event_id'],p['event_id'])]=basis
+    from build import status as S
+    by_id={c['event_id']:c for c in county}; n=dep_n=0
     for eid,ps in pairs.items():
         c=by_id[eid]
-        primary=max(ps,key=lambda p:(p.get('reported_at') or '',p['event_id']))
-        # All notices of this exact county incident share one counting identity, including different SWO numbers.
+        group=[c]+ps
+        primary=max(group,key=lambda r:(_water_evidence(r), r is not c,
+                                        r.get('reported_at') or '',r['event_id']))
+        # Identity links may group different SWO numbers; weaker evidence is always one-to-one.
         if primary.get('duplicate_of') in {p['event_id'] for p in ps}:
             primary['raw']['_miami_previous_duplicate_of']=primary['duplicate_of']; primary['duplicate_of']=None
         if primary.get('duplicate_of'): continue  # unrelated existing identity wins
-        _duplicate(c,primary,bases[(eid,primary['event_id'])]); n+=1
+        n+=1; dep_n+=len(ps)
+        active_ids={r['event_id'] for r in group if r is primary or S.waters_differ(r,primary)}
+        for r in group:
+            # A duplicate revision must not independently suppress the water-bearing representative.
+            # Retain the original relation and restore it when these county links are recomputed.
+            if r.get('parent_event_id') in active_ids:
+                r['raw']['_miami_previous_parent_event_id']=r['parent_event_id']
+                r['parent_event_id']=None
         for p in ps:
             _cite(c,p); _cite(p,c)
-            if p is not primary: _duplicate(p,primary,bases[(eid,p['event_id'])])
-    return {'county_linked':n,'dep_records_linked':sum(len(v) for eid,v in pairs.items() if by_id[eid].get('duplicate_of'))}
+        for r in group:
+            # Conflicting named waters keep their own status evidence, as in the neighbouring linker.
+            if r is primary or S.waters_differ(r,primary): continue
+            basis=bases[(eid, (primary if r is c else r)['event_id'])]
+            _duplicate(r,primary,basis)
+    return {'county_linked':n,'dep_records_linked':dep_n}
 
 
 def link_only():

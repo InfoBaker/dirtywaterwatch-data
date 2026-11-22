@@ -227,3 +227,137 @@ def test_source_stated_secondary_effluent_is_retained_raw_but_excluded_from_sewa
     assert M.safe_attributes(a)['WATDISCTYPE']=='SECONDARY EFFLUENT'
     r=M.to_record({**a,'WATDISCTYPE':'RAW SEWAGE'},AT)
     assert r['material']=='RAW SEWAGE'
+
+
+def fallback_pair():
+    c, p = local(), pnp()[0]
+    p['raw']['INCIDENT_REPORT'] = 'A sewage overflow was reported.'
+    p['time_precision'] = p['raw']['ended_at_precision'] = 'minute'
+    p['started_at'], p['ended_at'] = c['started_at'], c['ended_at']
+    p['volume_gal'] = c['volume_gal']
+    p['lat'], p['lon'] = c['lat'], c['lon']
+    return c, p
+
+
+@pytest.mark.parametrize('later_interval', [False, True])
+def test_fallback_requires_unique_dep_candidate(later_interval):
+    c, p = fallback_pair()
+    other = copy.deepcopy(p)
+    other['event_id'] += '-distinct'
+    other['raw']['INCIDENT_NUMBER'] = 202699999
+    if later_interval:
+        other['started_at'] = '2026-11-03T18:00:00-05:00'
+        other['ended_at'] = '2026-11-03T19:00:00-05:00'
+    assert M.link_pnp([c], [p, other]) == {'county_linked': 0, 'dep_records_linked': 0}
+    assert all(not r['duplicate_of'] for r in [c, p, other])
+
+
+@pytest.mark.parametrize('reverse', [False, True])
+def test_fallback_rejects_disjoint_stated_intervals(reverse):
+    c, p = fallback_pair()
+    later = c if reverse else p
+    later['started_at'] = '2026-11-03T18:00:00-05:00'
+    later['ended_at'] = '2026-11-03T19:00:00-05:00'
+    assert M.link_pnp([c], [p])['county_linked'] == 0
+    assert not c['duplicate_of'] and not p['duplicate_of']
+
+
+@pytest.mark.parametrize('dep_water, flag', [(None, False), (None, None), ('CANAL', True),
+                                            ('Biscayne Canal', False)])
+def test_county_water_evidence_survives_linking_and_status(tmp_path, dep_water, flag):
+    from datetime import datetime
+    from build import status as S
+    from export.detail import links_of
+    c, p = local(), pnp()[0]
+    c['waterbody_text'] = c['raw']['SURFWATNAME'] = 'Biscayne Canal'
+    p['waterbody_text'] = dep_water
+    p['raw']['reached_water'] = flag
+    p['raw']['INCIDENT_REPORT'] += ' Waterbodies Impacted: N' if flag is False else ''
+    evidence = copy.deepcopy([(r['waterbody_text'], r['raw']) for r in [c, p]])
+    assert M.link_pnp([c], [p]) == {'county_linked': 1, 'dep_records_linked': 1}
+    slug = 'biscayne-canal-fl'
+    waters = {slug: {'slug': slug, 'name': 'Biscayne Canal', 'state': 'FL', 'kind': 'canal',
+                     'bbox': [-80.17, 25.68, -80.15, 25.69]}}
+    for r in [c, p]:
+        (tmp_path / (r['source_id'] + '.json')).write_text(json.dumps({
+            'source_id': r['source_id'], 'ok': True, 'last_ok_at': AT, 'records': [r]}))
+    st, _ = S.build(now=datetime.fromisoformat('2026-11-03T14:00:00-05:00'), write=False,
+                    events_dir=tmp_path, waters=waters, outfalls=[], registry={}, reaches={}, flows=({}, {}),
+                    discharger_towns={}, discharger_waters={}, discharger_aliases_map={}, placement_cache=False)
+    assert st['waters'][slug]['status'] == 'red'
+    assert not c['duplicate_of'] and p['duplicate_of'] == c['event_id']
+    assert st['placements'][c['event_id']]['water_slugs'] == [slug]
+    for r, original in zip([c, p], evidence):
+        assert r['waterbody_text'] == original[0]
+        assert all(r['raw'][k] == v for k, v in original[1].items())
+    links = links_of([c, p])
+    assert links[c['event_id']]['linked_records'][0]['event_id'] == p['event_id']
+    assert links[p['event_id']]['linked_records'][0]['event_id'] == c['event_id']
+    before = copy.deepcopy([c, p])
+    M.link_pnp([c], [p])
+    assert [c, p] == before
+
+
+def test_fallback_checks_dep_narrative_times_even_when_normalized_dates_are_day_only():
+    c, p = fallback_pair()
+    p['started_at'] = p['ended_at'] = '2026-11-03T00:00:00-05:00'
+    p['time_precision'] = p['raw']['ended_at_precision'] = 'day'
+    p['raw']['INCIDENT_REPORT'] = ('Estimated Time Release Started: 11/03/26 06:00 PM '
+                                    'Discharge Stopped On: 11/03/26 07:00 PM')
+    assert M.link_pnp([c], [p])['county_linked'] == 0
+
+
+def test_fallback_county_ambiguity_and_strong_competitor_do_not_link():
+    c, p = fallback_pair()
+    other = copy.deepcopy(c)
+    other['event_id'] += '-distinct'
+    assert M.link_pnp([c, other], [p])['county_linked'] == 0
+    explicit = pnp()[0]
+    explicit['event_id'] += '-explicit'
+    assert M.link_pnp([c], [p, explicit]) == {'county_linked': 1, 'dep_records_linked': 1}
+    assert not p['duplicate_of'] and not p['raw'].get('_other_source_record')
+
+
+@pytest.mark.parametrize('precision', ['day', 'minute'])
+def test_fallback_accepts_compatible_intervals_without_inventing_times(precision):
+    c, p = fallback_pair()
+    if precision == 'day':
+        p['started_at'] = p['ended_at'] = '2026-11-03T00:00:00-05:00'
+        p['time_precision'] = p['raw']['ended_at_precision'] = 'day'
+    before = [(r['started_at'], r['ended_at'], r['time_precision']) for r in [c,p]]
+    assert M.link_pnp([c], [p])['county_linked'] == 1
+    assert [(r['started_at'], r['ended_at'], r['time_precision']) for r in [c,p]] == before
+
+
+def test_wet_dep_notice_is_not_suppressed_by_dry_revision():
+    from build import status as S
+    c, p = local(), pnp()[0]
+    c['raw']['reached_water'] = False
+    c['waterbody_text'] = None
+    p['waterbody_text'] = 'Biscayne Canal'
+    p['raw']['reached_water'] = True
+    later = copy.deepcopy(p)
+    later['event_id'] += '-revision'
+    later['reported_at'] = '2026-11-05T12:00:00-05:00'
+    later['parent_event_id'] = p['event_id']
+    later['raw']['reached_water'] = False
+    later['waterbody_text'] = None
+    M.link_pnp([c], [p, later])
+    assert not p['duplicate_of'] and c['duplicate_of'] == later['duplicate_of'] == p['event_id']
+    superseded, _ = S.resolve_revisions([c,p,later], {r['event_id']:r for r in [c,p,later]})
+    assert p['event_id'] not in superseded
+    before = copy.deepcopy([c,p,later])
+    M.link_pnp([c], [p,later])
+    assert [c,p,later] == before
+    M.link_pnp([], [p,later])
+    assert later['parent_event_id'] == p['event_id'] and not later['duplicate_of']
+
+
+def test_different_named_waters_keep_both_status_records_and_citations():
+    c, p = local(), pnp()[0]
+    c['waterbody_text'] = 'Biscayne Canal'
+    p['waterbody_text'] = 'Gratigny Canal'
+    p['raw']['reached_water'] = True
+    assert M.link_pnp([c], [p])['county_linked'] == 1
+    assert not c['duplicate_of'] and not p['duplicate_of']
+    assert p['raw']['_other_source_record'] == [c['event_id']]
