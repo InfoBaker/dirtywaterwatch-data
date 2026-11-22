@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1754 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1755 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -27,7 +27,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | dc | 24 | 7 | 25 | 12 | 5 | 73 |
 | nc | 10 | 1 | 5 | 1 | 0 | 17 |
 | ga | 8 | 1 | 4 | 1 | 0 | 14 |
-| fl | 5 | 0 | 5 | 1 | 0 | 11 |
+| fl | 6 | 0 | 5 | 1 | 0 | 12 |
 | mi | 6 | 2 | 5 | 2 | 0 | 15 |
 | wa | 6 | 3 | 4 | 1 | 0 | 14 |
 | ca | 9 | 1 | 10 | 3 | 0 | 23 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **652** | **240** | **547** | **236** | **79** | **1754** |
+| **all** | **653** | **240** | **547** | **236** | **79** | **1755** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1371,7 +1371,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ga-wwals-archive` | WWALS Watershed Coalition archive of GA EPD daily spill reports | watch | search_only | prior_art | Daily HTML copies of the EPD report since Dec 2018 (e.g. pictures/spills/2026-02-02--GA-EPD-Sewage-Spills-Report.html). History source for back-fill, with credit; WWALS pushed EPD to post daily. Not built: EPD's own dated postings give the history from 2025-10-09 (ga-epd-spills --backfill); a WWALS back-fill for 2018 to 2025 is an open question (research/ga/profile.json). The archive page is watched for health as a register channel (ga-wwals-spill-archive). |
 | `ga-epd-geos` | Georgia EPD GEOS spill and bypass e-reporting | rejected | fetched | events | Login-only intake for permittees (GEOS Spill/Bypass E-Reporting guidance, July 2025). Not a public output. |
 
-## fl: Florida (11)
+## fl: Florida (12)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
@@ -1379,6 +1379,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `fl-dep-pnp-arcgis` | Florida DEP Public Notice of Pollution (PNP) ArcGIS feature service | used | fetched | events | Statewide, machine-readable notices under s. 403.077 with report time, release start and end dates, ongoing flag, facility, county and coordinates; wastewater notices use a structured text template (Wastewater Type, Cause, Spill Volume, Waterbodies Impacted). Ingested as fl-dep-pnp: layer 0 every run, layer 1 once for the history; sewage and wastewater notices only, with the reporter and contact fields never requested and the notice text scrubbed of names, phones and e-mails. |
 | `fl-doh-healthy-beaches` | Florida Department of Health Healthy Beaches program (beach detail pages; sampling-point layer) | used | fetched | advisories | Weekly or fortnightly enterococcus sampling at about 350 active coastal points; each sample row says whether an advisory followed (Advisory Yes/No). Ingested as fl-doh-beaches (one request per point, at most once a day). County DOH sewage-spill health advisories are issued separately and are not on these pages. |
 | `fl-law-403-077` | Fla. Stat. 403.077 Public notification of pollution | used | fetched | law | The public-notice law: operator notice to DEP within 24 hours; DEP publishes within 24 hours and runs a county email list. |
+| `fl-miami-dade-sso` | Miami-Dade County RER/DERM sanitary sewer overflows | used | fetched | events | Read by fl-miami-dade-sso. Preserves all county utilities and small spills, source cause codes, separately stated discharged and recovered gallons, and source end precision. Confirmed DEP overlaps link to one counted DEP event with both records cited; ambiguous matches remain separate. |
 | `fl-rule-62-604-550` | F.A.C. 62-604.550 Abnormal events (collection systems) and 62-620.610(20) | used | search_only | law | Regulator reporting: SSOs of 1,000 gallons or more to the State Watch Office (800-320-0519) within 24 hours; smaller ones to the DEP district within 24 hours. Rule text (a .doc) not read; wording from DEP 2021 SSO guidance. |
 | `fl-dep-pnp-email` | Florida DEP PNP email subscription by county | watch | fetched | events | Statutory email list (403.077(3)(b)) by county or district. The ArcGIS layer is the same data; subscribe only as a cross-check. |
 | `fl-dep-wastewater-historical-spills` | Florida DEP Wastewater Historical Spills (ArcGIS, frozen 2020) | watch | fetched | events | 13,988 State Watch Office wastewater incidents with structured cause, volume, waterbody affected and points; last edited 2020-10-07. Useful history; holds CALLER_NAME (personal) so must be field-filtered. |

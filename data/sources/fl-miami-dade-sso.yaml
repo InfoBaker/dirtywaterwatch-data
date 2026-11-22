@@ -1,0 +1,25 @@
+id: "fl-miami-dade-sso"
+name: "Miami-Dade County RER/DERM sanitary sewer overflows, all county utilities"
+url: "https://opendata.miamidade.gov/datasets/MDC::sewer-overflow/about"
+homepage: "https://www.miamidade.gov/global/service.page?Mduid_service=ser1495571905689513"
+kind: "arcgis"
+level: "municipal"
+# Feed row: ingest/fl_miami_dade_sso.py. Full history; runs after fl_dep_pnp and links overlaps.
+cadence: "1 week"
+license: "Miami-Dade County data provided as is; approximate locations, no accuracy or completeness warranty. Public download and API use offered by the county's Open Data Hub."
+attribution: "Miami-Dade County Regulatory and Economic Resources, DERM; Miami-Dade County GIS Technical Support Group"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["FL"]
+registry_ids: ["fl-miami-dade-sso"]
+access: ["arcgis"]
+access_detail: "Anonymous FeatureServer/0 query; named fields only, shared OBJECTID cursor paging, count and edit checks before and after reading. INCIDENTID is stable identity."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-22"
+arcgis_item_id: "868a052504a449a4b0fa965b9e49e7c3"
+service_url: "https://services.arcgis.com/8Pc9XBTAsYuxx9Ny/arcgis/rest/services/SewerOverflow_gdb/FeatureServer"
+layer_id: 0
+publisher: "Miami-Dade County RER/DERM"
+notes: "Eastern wall-clock values encoded as UTC. Midnight values conservatively have day precision; INCDNTDATE is the fallback date. Creation is entry, not publication or receipt. Estimated discharged gallons and recovered gallons are separate. Explicit secondary effluent stays in sanitized raw snapshots and is excluded from sewage events. Cause codes are retained as published; the layer has no domains. DEP overlaps are linked, with one DEP notice counted and both sources cited. Named-water placement only; generic CANAL never selects a nearby water. Contact, street-address and narrative fields are excluded; points rounded before saving."
