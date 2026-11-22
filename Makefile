@@ -3,8 +3,10 @@
 #   make ingest    run every feed module in pipeline/ingest/ (helpers marked "not a feed" and
 #                  INGEST_SKIP are left out), then the modules in INGEST_EXTRA (conditions); one
 #                  failing feed does not stop the others. New York: ny_beaches_habs, ny_sprtk,
-#                  ny_sprtk_web, nyc_dep_advisories (sorted order matters: ny_sprtk_web dedupes
-#                  against the ny_sprtk events file, so it must run after ny_sprtk). Pennsylvania:
+#                  ny_sprtk_history, ny_sprtk_web, nyc_dep_advisories (sorted order matters:
+#                  ny_sprtk_history and ny_sprtk_web dedupe against the ny_sprtk events file, so they
+#                  must run after ny_sprtk; ny_sprtk_history, the older workbook of 2013 to August 2021,
+#                  asks DEC at most weekly with If-Modified-Since). Pennsylvania:
 #                  pa_alcosan (SOAK log pages 1-3 + news posts; `--backfill` once to load 2025-),
 #                  pa_crw (stub: licence, fetches nothing), pa_erie (last 30 days; `--backfill` from
 #                  2025-01-01), pa_habs_beaches (PA DOH HAB layer + Erie County beach sheets),
