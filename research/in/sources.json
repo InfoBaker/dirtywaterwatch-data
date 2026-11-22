@@ -676,12 +676,13 @@
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://www.ewsu.com/",
+  "url": "https://cso.ewsu.com/",
   "access": [
-   "html"
+   "html",
+   "json"
   ],
-  "access_detail": null,
-  "machine_readable": false,
+  "access_detail": "The official EWSU combined sewer overflow page links this map. Anonymous GET https://cso.ewsu.com/Location/GetCSOs returns Success and a Result array of 19 outfall status rows.",
+  "machine_readable": true,
   "sample_record": null,
   "fields": [],
   "fills_event_fields": [],
@@ -693,10 +694,88 @@
   "license": null,
   "legal_basis": "327 IAC 5-2.1; 327 IAC 5-2.2 / 40 CFR 122.38 in the Great Lakes basin",
   "status": "watch",
-  "status_reason": "Homepage links a Combined Sewer Overflow page; notification channel not traced.",
+  "status_reason": "Current CSO status is traced but its snapshot adapter is deferred. Sanitary release history is read separately by in-evansville-releases.",
   "verified": "fetched",
-  "checked": "2026-11-03",
-  "notes": ""
+  "checked": "2026-11-22",
+  "notes": "Nov. 22, 2026: all 19 outfalls Inactive, newest LastActive Nov. 4. UI distinguishes Active, Recently Active, Inactive and Disabled. Recency window and missed-episode semantics are not established. This endpoint is not read by the sanitary release module."
+ },
+ {
+  "id": "in-evansville-releases",
+  "name": "Evansville Water and Sewer Utility sanitary release history (SSO/CSSR)",
+  "jurisdiction": "IN",
+  "operator": "Evansville Water and Sewer Utility",
+  "operator_type": "utility",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "Affected areas named by EWSU; some are ground, buildings or storm sewers rather than receiving waters.",
+  "water_slugs": [],
+  "url": "https://cso.ewsu.com/",
+  "access": [
+   "json"
+  ],
+  "access_detail": "Anonymous GET https://cso.ewsu.com/Location/SearchCSSR/01.01.2015/11.23.2026/*; Success boolean, Result a JSON-encoded array. No paging metadata; full history checked against the deduplicated union of yearly windows. The official CSO page at https://ewsu.com/water-sewer/sewer-wastewater/combined-sewer-overflow/ links this utility-hosted map.",
+  "machine_readable": true,
+  "sample_record": {
+   "Id": 3839,
+   "StartDateTime": "2021-01-01T08:30:00",
+   "EndDateTime": "2021-01-01T16:45:00",
+   "AffectedArea": "Carpentier Creek Tributary"
+  },
+  "fields": [
+   "Id",
+   "StartDate",
+   "StartTime",
+   "StartDateTime",
+   "EndDate",
+   "EndTime",
+   "EndDateTime",
+   "HasStartDate",
+   "HasStartTime",
+   "HasEndDate",
+   "HasEndTime",
+   "VolumeReleased",
+   "AffectedArea",
+   "EventReasonID",
+   "EventReason",
+   "CauseDescription",
+   "entered",
+   "DurationHrs",
+   "EWSUSystem",
+   "PrivateProperty",
+   "Latitude",
+   "Longitude"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "started_at",
+   "ended_at",
+   "time_precision",
+   "volume_gal",
+   "waterbody_text",
+   "lat",
+   "lon",
+   "raw"
+  ],
+  "cannot_fill": [
+   "reported_at",
+   "published_at",
+   "source_updated_at",
+   "npdes_permit",
+   "outfall_id"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "Hourly read; entries may appear weeks after the event.",
+  "history": "729 unique releases, Jan. 3, 2015, to Sept. 6, 2026; 33 in the preceding 12 months as read Nov. 22, 2026.",
+  "license": "No map-specific license stated. The official homepage links city terms scoped to www.evansvillegov.org, limiting reuse to personal noncommercial use without permission; applicability to the separate cso.ewsu.com factual feed is not stated. https://www.evansvillegov.org/city/terms/",
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Read by in_evansville_releases: stable source IDs, source gallons and cause, minute start/end and affected area. Invalid source ends stay unknown. Placement uses only named waters; ground and storm-sewer areas are counted as naming no receiving water. Current CSO outfall status is a separate later source.",
+  "verified": "fetched",
+  "checked": "2026-11-22",
+  "notes": "Full and yearly reads agreed on 729 IDs and safe values; year windows repeat 15 IDs. Central wall clocks (America/Chicago); 21 source ends precede starts. The entered field is not a publication stamp: 98 records have it, including all 33 recent records, whose median start-to-entry lag is 36.20 days. No receipt, publication or edit time is inferred. Safe fields only are saved, points rounded to three decimals, location/action/manhole fields discarded and new unaudited free text withheld. Revisions replace the same event ID and retain earlier safe values. Failed reads keep history. No overlap with Fort Wayne; ECHO monthly totals remain a separate aggregate series. No permit inferred from East/West system labels."
  },
  {
   "id": "in-highland-sso-reports",
