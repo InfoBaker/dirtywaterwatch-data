@@ -84,7 +84,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 
-from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events, write_json
+from common import BUILD_DIR, HEADERS, error_detail, event, now_iso, read_json, save_raw, write_events, write_json
 import zones
 
 SOURCE_ID = "mi-egle-beachguard"
@@ -438,8 +438,8 @@ def main(argv=None) -> int:
         check_rows(rows, state)
         sites = load_sites(sess, rows, now)
     except (requests.RequestException, ReadError, ValueError, TypeError, OSError) as e:
-        write_events(SOURCE_ID, [], ok=False, error=f"export: {type(e).__name__}: {str(e)[:300]}")
-        print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
+        write_events(SOURCE_ID, [], ok=False, error=f"export: {error_detail(e)}")
+        print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     save_raw(SOURCE_ID, json.dumps(rows), "json")        # the kept fields only: AdvisoryComments never reaches it
     recs, meta = build(rows, sites, state, now)
