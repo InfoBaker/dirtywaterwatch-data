@@ -105,14 +105,20 @@ def wall_clock(ms) -> datetime | None:
     return local if wall_clock_issue(local) else local.replace(tzinfo=TZ)
 
 
-def wall_clock_issue(local: datetime) -> str | None:
-    """A round trip distinguishes a skipped hour from a repeated hour."""
+def wall_clock_instants(local: datetime) -> list[datetime]:
+    """Return possible UTC instants, excluding offsets that fail the local round trip."""
     local = local.replace(tzinfo=None)
     candidates = [local.replace(tzinfo=TZ, fold=fold) for fold in (0, 1)]
-    valid = [t for t in candidates if t.astimezone(UTC).astimezone(TZ).replace(tzinfo=None) == local]
+    return sorted({t.astimezone(UTC) for t in candidates
+                   if t.astimezone(UTC).astimezone(TZ).replace(tzinfo=None) == local})
+
+
+def wall_clock_issue(local: datetime) -> str | None:
+    """A round trip distinguishes a skipped hour from a repeated hour."""
+    valid = wall_clock_instants(local)
     if not valid:
         return "nonexistent"
-    if len({t.utcoffset() for t in valid}) > 1:
+    if len(valid) > 1:
         return "ambiguous"
     return None
 
@@ -326,6 +332,12 @@ def build_record(a: dict, base: dict, raw: dict, prev: dict | None) -> dict:
             raw["_started_at_precision"] = (
                 "day" if a.get("START_DATETIME") in (None, "") and not (start.hour or start.minute or start.second or start.microsecond)
                 else "second" if start.second or start.microsecond else "minute")
+    reversed_end = False
+    if start is not None and end is not None:
+        starts, ends = wall_clock_instants(start), wall_clock_instants(end)
+        # Reject only when no pairing can be valid. Gaps have no possible
+        # instant, so retain their existing date-only comparison.
+        reversed_end = ends[-1] < starts[0] if starts and ends else end.date() < start.date()
     # Preserve the source's exact wall time in raw, but publish only its date
     # when neither offset (gap) or both offsets (fold) fit that local time.
     issues = []
@@ -350,8 +362,7 @@ def build_record(a: dict, base: dict, raw: dict, prev: dict | None) -> dict:
         status, ended_at = "ended", iso(end)
     else:
         status, ended_at = "unknown", None
-    if end is not None and start is not None and (
-            end.date() < start.date() if end.tzinfo is None or start.tzinfo is None else end < start):
+    if reversed_end:
         problems.append("END_DATETIME before START_DATETIME: ended_at left empty")
         ended_at = None
         if status == "ended":

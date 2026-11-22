@@ -310,3 +310,27 @@ def test_dst_start_does_not_reduce_a_known_end_to_day_precision(wall):
     assert r['ended_at'].startswith(wall[:10] + 'T12:')
     assert end_precision(r) == 'minute'
     assert r['parse_error'] is None
+
+
+@pytest.mark.parametrize('start_wall,end_wall,valid', [
+    ('01:30:00', '00:30:00', False),
+    ('02:30:00', '01:30:00', False),
+    ('01:30:00', '01:15:00', True),  # First start occurrence can precede the second end occurrence.
+])
+def test_dst_fold_interval_checks_possible_instants(start_wall, end_wall, valid):
+    from datetime import UTC, datetime
+    stamps = [int(datetime.fromisoformat('2016-11-06T' + wall).replace(tzinfo=UTC).timestamp() * 1000)
+              for wall in (start_wall, end_wall)]
+    r = B.to_record({**ROWS[0], 'START_DATETIME': stamps[0],
+                     'END_DATETIME': stamps[1], 'STATUS': 'FORM'}, NOW, None)
+    assert r['raw']['START_DATETIME'] == stamps[0]
+    assert r['raw']['END_DATETIME'] == stamps[1]
+    if valid:
+        assert r['started_at'] == r['ended_at'] == '2016-11-06'
+        assert r['time_precision'] == r['raw']['ended_at_precision'] == 'day'
+        assert r['status'] == 'ended'
+        assert r['parse_error'] is None
+    else:
+        assert r['ended_at'] is None
+        assert r['status'] == 'unknown'
+        assert r['parse_error'] == 'END_DATETIME before START_DATETIME: ended_at left empty'
