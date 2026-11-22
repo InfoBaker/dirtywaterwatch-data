@@ -143,7 +143,7 @@ INDEX_FIELDS = ["event_id", "event_type", "status", "state", "started_at", "ende
                 "time_precision", "ended_at_precision"]
 WATER_EVENT_EXTRA = ["source_id", "waterbody_text", "outfall_name", "volume_text", "water_match", "superseded",
                      "duplicate_of", "file", "estimate_flag", "detail", "later_volume", "linked_notices",
-                     "volume_estimate", "end_estimate"]
+                     "volume_estimate", "end_estimate", "ended_at_ours"]
 # the report tables' part of an operator's e-mail notice linked to a record (build.status.linked_notices); the event's
 # own file carries the notice whole (its advice and how the volume was estimated)
 LINKED_NOTICE_CELL = ("event_id", "source_id", "published_at", "ended_at", "volume_gal", "volume_text", "estimate_flag")
