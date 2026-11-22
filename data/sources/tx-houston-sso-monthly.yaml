@@ -60,8 +60,10 @@ checked: "2026-11-22"
 # TCEQ descriptions with an explicit Houston SSO ID can link without an inferred operator; existing date, volume,
 # street and water conflict checks still apply. Old TCEQ batches are reread once for the new reference parser.
 # Void notices are held separately from monthly reports and recovered from previous events before merging.
-# Each record retains its citation. meta.history.query_template plus EXCURSIONID reproduces its query.
-# Unused BASIN, WWTP, NOTOBSERVED and GPM fields are neither requested nor retained.
+# Each history citation queries that record's EXCURSIONID; monthly rows also retain their PDF citation.
+# BASIN, WWTP, NOTOBSERVED and GPM remain source evidence. BASIN and WWTP identify sewer infrastructure,
+# not receiving waters. GPM supplies average_flow_gpm on history-only records; monthly rows keep their own flow.
+# The history cache version forces one complete reread to restore previously omitted fields.
 # UTC date epochs represent Houston dates; separate time epochs use December 1899. Decode both in America/Chicago
 # before combining their local date and clock. Missing clocks keep day precision; missing ends remain absent.
 # Source TOTALVOLLOST is retained as published, even when unlike GPM * DURATION (source minutes); no calculation

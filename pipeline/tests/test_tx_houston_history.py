@@ -306,18 +306,25 @@ def test_exact_tceq_reference_retains_conflict_checks(conflict):
     assert t['duplicate_of'] is None
 
 
-def test_history_payload_keeps_citations_without_repeated_queries_or_time_prose():
-    out = H.enrich_history([recs('2026-09')['68784']], history(), {})
-    for r in out:
+def test_history_payload_keeps_public_source_facts_without_time_prose():
+    from export.build import public_event
+    hist = history()
+    for f in hist['features']:
+        f['attributes']['WWTP'] = 'Treatment plant code'
+    out = H.enrich_history([recs('2026-09')['68784']], hist, {})
+    for original in out:
+        r = public_event(original)
         raw = r['raw']; h = raw['history']
         assert 'time_basis' not in h
         if not raw.get('report_month'):
             assert 'timezone_note' not in raw
-        assert not {'BASIN', 'WWTP', 'NOTOBSERVED', 'GPM'} & h['attributes'].keys()
-        assert len(r['source_url']) < 220
-        if raw.get('report_month'):
-            assert h['url'] == H.HISTORY_LAYER
-        else:
+        expected = next(f['attributes'] for f in hist['features']
+                        if H.history_id(f['attributes']) == r['source_record_id'])
+        for key in ('BASIN', 'WWTP', 'NOTOBSERVED', 'GPM'):
+            assert h['attributes'][key] == expected[key]
+            assert json.dumps(raw).count('\"' + key + '\":') == 1
+        if not raw.get('report_month'):
+            assert raw['average_flow_gpm'] == expected['GPM']
             assert 'url' not in h
         assert h['attributes']['EXCURSIONID'] == int(r['source_record_id'])
 
@@ -336,24 +343,38 @@ def test_tceq_unchanged_cache_must_refresh_when_reference_parser_changes(tmp_pat
 def test_explicit_reference_survives_safe_snapshot_reprocessing():
     from ingest.generic import fieldmap as F, runner as R
     _, block = R.load_source(H.TCEQ_SOURCE)
-    row = {'incident_number': '451100', 'incident_description': 'SSO ID#65766',
+    row = {'incident_number': '451100', 'incident_description': 'Houston SSO ID# 65766 at Westhollow Dr',
            'start_date': '2025-12-23', 'county': 'HARRIS', 'material_type': 'Sewage'}
     safe, _ = F.safe_row(row, block)
-    records, _ = R.build(H.TCEQ_SOURCE, block, [safe], AT, (), None)
+    assert '65766' not in safe['incident_description']
+    assert safe['_houston_sso_ids'] == ['65766']
+    replayed, _ = F.safe_row(json.loads(json.dumps(safe)), block)
+    assert replayed == safe
+    direct, _ = R.build(H.TCEQ_SOURCE, block, [row], AT, (), None)
+    records, _ = R.build(H.TCEQ_SOURCE, block, [replayed], AT, (), None)
+    assert records == direct
     assert records[0]['raw']['houston_sso_ids'] == ['65766']
+    f = copy.deepcopy(FEATURES[1])
+    f['attributes']['EXCURSIONID'] = 65766
+    h = H.history_record(f, history([f]))
+    h['started_at'] = records[0]['started_at']
+    for built in (direct, records):
+        assert H.link_tceq([copy.deepcopy(h)], built)['linked'] == 1
+        assert built[0]['duplicate_of'] == h['event_id']
 
 
-def test_cached_history_drops_unused_fields_without_changing_evidence_times():
+def test_cached_history_keeps_source_facts_without_changing_evidence_times():
     held = history()
     held.update(last_edit=123, current_count=len(FEATURES), parser_version=H.HISTORY_VERSION)
     for f in held['features']:
         f.update(fetched_at=AT, layer_updated_at='2026-11-18T00:00:00Z')
-        f['attributes'].update(BASIN='unused', WWTP='unused', NOTOBSERVED='unused', GPM=4)
+        f['attributes'].update(BASIN='AS085', WWTP='Treatment plant code', NOTOBSERVED='Active', GPM=4)
     get, calls = getter([], len(FEATURES))
     refreshed = H.read_history(held, '2026-11-23T00:00:00Z', get)
     assert len(calls) == 2
     for f in refreshed['features']:
-        assert not {'BASIN', 'WWTP', 'NOTOBSERVED', 'GPM'} & f['attributes'].keys()
+        assert {k: f['attributes'][k] for k in ('BASIN', 'WWTP', 'NOTOBSERVED', 'GPM')} == {
+            'BASIN': 'AS085', 'WWTP': 'Treatment plant code', 'NOTOBSERVED': 'Active', 'GPM': 4}
         assert f['fetched_at'] == AT and f['layer_updated_at'] == '2026-11-18T00:00:00Z'
 
 
@@ -364,3 +385,28 @@ def test_reproduction_query_template_accepts_record_id(tmp_path):
     H.run(AT, tmp_path/'state.json', out, get=get, tceq_path=None, pages_of=_fake_pages)
     template = json.loads(out.read_text())['meta']['history']['query_template']
     assert parse_qs(urlsplit(template.format(source_record_id='68784')).query)['where'] == ['EXCURSIONID=68784']
+
+
+def test_public_history_citations_query_each_records_own_identity():
+    from export.build import public_event
+    for original in H.enrich_history([recs('2026-09')['68784']], history(), {}):
+        r = public_event(original)
+        citation = r['raw']['history']['url'] if r['raw'].get('report_month') else r['source_url']
+        url = urlsplit(citation)
+        assert url.path == urlsplit(H.HISTORY_LAYER).path + '/query'
+        assert parse_qs(url.query) == {'f': ['pjson'], 'where': ['EXCURSIONID=' + r['source_record_id']],
+                                      'outFields': ['*'], 'returnGeometry': ['false']}
+        assert len(citation) < 220
+        assert json.dumps(r).count(citation) == 1
+
+
+def test_history_cache_refresh_restores_previously_omitted_source_fields():
+    held = history(FEATURES[:2])
+    held.update(last_edit=123, current_count=2, parser_version=1)
+    for f in held['features']:
+        for key in ('BASIN', 'WWTP', 'NOTOBSERVED', 'GPM'):
+            f['attributes'].pop(key, None)
+    get, calls = getter([{'features': FEATURES[:2]}], 2)
+    refreshed = H.read_history(held, AT, get)
+    assert any('resultOffset' in q for q in calls)
+    assert refreshed['features'][1]['attributes']['BASIN'] == 'CC002'

@@ -90,7 +90,8 @@ History enrichment (verified live 2026-11-22; one source, not a second event fee
   selected fields and WGS84 geometry in complete, ordered, count-checked pages (maxRecordCount 2000). The numeric
   fields called LATITUDE/LONGITUDE are projected coordinates and must not be used as degrees. Source points are
   rounded to three decimals before persistence. Names, addresses with house numbers and narrative fields are not
-  saved. Unused BASIN, WWTP, NOTOBSERVED and GPM fields are not requested or retained. The layer has no
+  saved. BASIN, WWTP, NOTOBSERVED and GPM remain source evidence; BASIN and WWTP identify sewer infrastructure.
+  GPM also supplies average_flow_gpm on history-only records, as the monthly table does on monthly records. The layer has no
   receiving-water-name field. Building backups follow the monthly reader: retain the report, including explicit
   containment, with reached_water false for contained flow; containment never colours a water.
   EXCURSIONID is the existing SSO ID. A monthly row keeps its event ID, reported values and PDF citation; missing
@@ -106,7 +107,7 @@ History enrichment (verified live 2026-11-22; one source, not a second event fee
   clocks remain day precision. A nonmidnight date epoch can itself provide a time if no separate clock exists.
   Cache by layer edit time and count, checked hourly. Failed/incomplete reads keep earlier enrichment and mark
   the source unhealthy. Disappeared history rows retain their original evidence times and a missing-since mark.
-  Each record keeps its source citation; meta.history.query_template and EXCURSIONID reproduce the layer query.
+  Each history citation queries its own EXCURSIONID. Monthly rows also retain their PDF citation.
   Void notices persist separately from monthly reports and are recovered from previous event metadata.
 
 Privacy: the cover letter is never read; no house number, name, telephone or e-mail is kept: the state file holds the
@@ -151,8 +152,8 @@ HISTORY_LAYER = "https://services.arcgis.com/NummVBqZSIJKUeVR/ArcGIS/rest/servic
 # Neither LATITUDE/LONGITUDE (projected coordinates despite their names) nor narrative/contact fields are read.
 HISTORY_FIELDS = ("OBJECTID", "EXCURSIONID", "ADDRESS", "STARTDATE", "STARTTIME",
                   "ENDDATE", "ENDTIME", "TOTALVOLLOST", "DURATION", "STRUCTURETYPE", "FLOWLOCATION",
-                  "SYSTEM", "CAUSE")
-HISTORY_VERSION = 1
+                  "SYSTEM", "CAUSE", "BASIN", "WWTP", "NOTOBSERVED", "GPM")
+HISTORY_VERSION = 2  # Reread caches whose earlier field selection discarded public source facts.
 STATE_PATH = BUILD_DIR / "tx-houston-sso-monthly-state.json"
 TCEQ_SOURCE = "tx-tceq-sso-opendata"
 TCEQ_EVENTS = EVENTS_DIR / f"{TCEQ_SOURCE}.json"
@@ -1127,7 +1128,7 @@ def history_record(f: dict, hist: dict) -> dict:
     raw = {"state": "TX", "time_zone": TZ_NAME, "sso_id": sid, "tpdes_permit": None,
            "location": a.get("ADDRESS"), "cause": a.get("CAUSE"), "structure_type": a.get("STRUCTURETYPE"),
            "flow_location": a.get("FLOWLOCATION"), "system": a.get("SYSTEM"),
-           "duration_minutes": a.get("DURATION"),
+           "duration_minutes": a.get("DURATION"), "average_flow_gpm": a.get("GPM"),
            "report_kind": "SSO history", "_placement": "named_water_only"}
     if ended and started and (ended[:10] < started[:10] or (
             precision == end_precision == "minute" and datetime.fromisoformat(ended) < datetime.fromisoformat(started))):
@@ -1150,7 +1151,8 @@ def history_record(f: dict, hist: dict) -> dict:
     if "not cont" not in flow and ("cont'd" in flow or "contained" in flow or "cont’d" in flow):
         raw["reached_water"] = False
         raw["_no_water_reason"] = "The City's history layer describes the flow as contained on site: " + a["FLOWLOCATION"]
-    url = HISTORY_LAYER
+    url = HISTORY_LAYER + "/query?" + urlencode({
+        "f": "pjson", "where": f"EXCURSIONID={sid}", "outFields": "*", "returnGeometry": "false"})
     updated = _epoch(hist.get("last_edit"))
     raw["history"] = {"attributes": a, "geometry": f.get("geometry"),
                       "fetched_at": f.get("fetched_at") or hist.get("read_at"),
@@ -1202,7 +1204,7 @@ def enrich_history(records: list[dict], hist: dict, voided: dict) -> list[dict]:
             if raw.get("monthly_end_note"):
                 raw["end_note"] = raw["monthly_end_note"]
         raw["history_fields"] = []
-        raw["history"] = {**h["raw"]["history"], "url": HISTORY_LAYER}
+        raw["history"] = {**h["raw"]["history"], "url": h["source_url"]}
         for k in ("system", "duration_minutes"):
             raw[k] = h["raw"].get(k)
         raw["report_kind"] = "Monthly SSO Report and SSO history"

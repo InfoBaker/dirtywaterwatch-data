@@ -591,6 +591,11 @@ def safe_row(row: dict, block: dict) -> tuple[dict, list[str]]:
     if block.get("transform") == "ingest.tx_transforms.tx_tceq_record":
         ids = re.findall(r"\bSSO\s*ID\s*#?\s*(\d{1,6})\b",
                          str(out.get("incident_description") or ""), re.I)
+        # Saved safe payloads have already lost these numbers from their description.
+        # Accept only the numeric string list we write, never arbitrary saved objects/text.
+        saved = row.get("_houston_sso_ids")
+        if isinstance(saved, list):
+            ids.extend(i for i in saved if isinstance(i, str) and re.fullmatch(r"[0-9]{1,6}", i))
         if ids:
             out["_houston_sso_ids"] = sorted({str(int(i)) for i in ids if int(i) > 0})
     mode = block.get("free_text_scrub")
