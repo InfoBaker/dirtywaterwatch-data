@@ -50,6 +50,7 @@ def r2(tmp_path, monkeypatch):
     monkeypatch.setenv("FAKE_R2", str(bucket))
     monkeypatch.setenv("FAKE_R2_FAIL_PUT", "")
     monkeypatch.setenv("STATE_FETCH_RETRY_S", "0")
+    monkeypatch.setenv("STATE_JOB_START_FILE", str(tmp_path / "no-job-start"))   # no job limit unless a test sets one
     return bucket
 
 
