@@ -72,6 +72,7 @@ WINDOW_YEARS = 5                 # monthly charts: January of (this year - 4) to
 SEASON_MONTHS = (5, 10)          # May to October, inclusive
 TOP_OUTFALLS = 10
 MAX_EVENT_DAYS = 31
+MAX_CACHED_INTERVALS = 65536
 MAX_EVENT_GALLONS = 5e9          # a single report above this is an entry error (largest real ones: ~1e9)
 ARCHIVE_GAP_DAYS = 90
 FIRST_YEAR = 2000                # yearly charts never start before this
@@ -701,12 +702,17 @@ def _cached_red_intervals(ev, state, now, capped, water, rules, cache):
     if cache is None or water is not None:
         return red_intervals(ev, state, now, capped, water=water, rules=rules)
     key = (id(ev), state)
-    if key not in cache:
-        counts = Counter()
-        intervals = red_intervals(ev, state, now, counts, rules=rules)
-        cache[key] = (intervals, counts)
-    intervals, counts = cache[key]
-    capped.update(counts)                 # each entity still counts its capped reports
+    if key in cache:
+        intervals, increment = cache[key]
+        if increment:
+            capped["long"] += increment   # each entity still counts its capped reports
+        return intervals
+    # Retain the first bounded subset so a later sequential scan can reuse it
+    # without evicting entries just before they would be needed.
+    before = capped["long"]
+    intervals = red_intervals(ev, state, now, capped, rules=rules)
+    if len(cache) < MAX_CACHED_INTERVALS:
+        cache[key] = (intervals, capped["long"] - before)
     return intervals
 
 

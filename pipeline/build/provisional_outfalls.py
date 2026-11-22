@@ -516,7 +516,12 @@ def build_places(events: list[dict], outlines: dict | None = None, key: dict | N
         except (TypeError, ValueError):
             prob = coord_problem(ev.get("lat"), ev.get("lon"), state, outlines)
         else:
-            prob = check_point(lat, lon, state)
+            # Malformed registry states must reach the validator in its original
+            # order: a bad point can be rejected before state is ever inspected.
+            if state is None or isinstance(state, str):
+                prob = check_point(lat, lon, state)
+            else:
+                prob = coord_problem(ev.get("lat"), ev.get("lon"), state, outlines)
         if prob:
             drops[f"point {prob}" if not prob.startswith("outside") else "point outside the report's state"] += 1
             unlocated.append({**ev, "_op": op, "_state": state, "_coord_problem": prob})

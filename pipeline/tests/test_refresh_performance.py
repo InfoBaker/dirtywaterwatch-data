@@ -38,6 +38,16 @@ def reference_places():
     return ns
 
 
+@pytest.mark.parametrize('state', [['CT'], {'code': 'CT'}, 7])
+def test_malformed_registry_state_preserves_coordinate_rejection(state):
+    ev = dict(records()[0], event_id='synthetic:zero', source_id='synthetic',
+              discharger_id='synthetic', npdes_permit=None, raw={}, water_slugs=[], lat=0, lon=0)
+    kwargs = dict(outlines={}, key={}, by_id={'synthetic': {'state': state}})
+    expected = reference_places()['build_places']([ev], **kwargs)
+    assert expected[1] == Counter({'point at (0, 0)': 1})
+    assert P.build_places([ev], **kwargs) == expected
+
+
 def test_place_checks_scale_with_distinct_points_and_names(monkeypatch):
     counts = Counter()
     for name in ('coord_problem', 'safe_place_name', 'person_like'):
@@ -55,6 +65,14 @@ def test_place_checks_scale_with_distinct_points_and_names(monkeypatch):
 def provisional_world(monkeypatch, tmp_path):
     evs = records()
     evs += [dict(evs[0], event_id='ct-synthetic:unknown', lat=None, lon=None)]
+    # Identical geolocation text, but eligibility and privacy remain per record.
+    for i, raw in enumerate([{'reached_water': True}, {'reached_water': False},
+                             {'reached_water': False}, {'BYPASS_PRIV_PUB': 'Yes'},
+                             {'reached_water': True}, {'reached_water': True}]):
+        evs.append(dict(evs[0], event_id=f'ct-synthetic:geo-{i}', lat=None, lon=None,
+                        outfall_name='Pump Station, Sample Road',
+                        waterbody_text='Sample Canal' if i >= 4 else 'Sample River',
+                        raw={'state': 'CT', **raw}))
     # Distinct strings may scrub/truncate to the same public text; counts and tie order must survive.
     for i, e in enumerate(evs[:10]):
         e['outfall_name'] = ['Pump  station', 'Pump station', None, ['malformed'], 'Main station'][i % 5]
@@ -86,12 +104,24 @@ def provisional_world(monkeypatch, tmp_path):
 
 @pytest.mark.parametrize('stage_flags', [False, True])
 def test_provisional_complete_file_matches_original(monkeypatch, tmp_path, stage_flags):
-    original = reference_places()['build_places']
+    original = reference_places()
     args = provisional_world(monkeypatch, tmp_path)
+    geo_groups, geo_rows = [], []
     if stage_flags:
         from build import report_geolocate as RG, llm_judge as LJ
         monkeypatch.setattr(RG, 'time', SimpleNamespace(monotonic=lambda: 1000.))
         monkeypatch.setattr(RG, 'GEO_CACHE', tmp_path / 'absent-geo-cache.json')
+        monkeypatch.setattr(RG, 'resolve', lambda *a, **kw: {
+            'status': 'placed', 'lat': 41.32, 'lon': -73., 'step': 'b',
+            'confidence': 'medium', 'detail': 'Synthetic offline lookup', 'precision_m': 50})
+        changed_place_row = P.place_row
+        def track_changed_place_row(op, oprow, permits, group):
+            row = changed_place_row(op, oprow, permits, group)
+            if any(e.get('coord_source') == 'geocode' for _, _, e in group):
+                geo_groups.append([e for _, _, e in group])
+                geo_rows.append(row)
+            return row
+        monkeypatch.setattr(P, 'place_row', track_changed_place_row)
         monkeypatch.setattr(LJ, 'env_value', lambda name: None)
         judge = LJ.Judge
         monkeypatch.setattr(LJ, 'Judge', lambda **kw: judge(**kw, cache_path=tmp_path / 'absent-model.json',
@@ -100,9 +130,20 @@ def test_provisional_complete_file_matches_original(monkeypatch, tmp_path, stage
         args.geo_budget_s, args.llm_cap_usd, args.llm_budget_s = 30, .25, 60
     monkeypatch.setattr(P, 'OUT', tmp_path / 'new.json')
     P.run(args)
-    monkeypatch.setattr(P, 'build_places', original)
+    if stage_flags:
+        assert geo_groups
+        geocoded = {e['event_id']: e for group in geo_groups for e in group}
+        assert all(f'ct-synthetic:geo-{i}' in geocoded for i in (0, 1, 2, 4, 5))
+        assert 'ct-synthetic:geo-3' not in geocoded
+        assert {bool(S.reached_no_water(geocoded[f'ct-synthetic:geo-{i}'])) for i in range(3)} == {False, True}
+        # Counting the repeated dry-land text would incorrectly put River first.
+        assert geo_rows[0]['reports_water_text'] == ['Sample Canal', 'Sample River']
+    changed_geo_calls = len(geo_groups)
+    monkeypatch.setattr(P, 'build_places', original['build_places'])
+    monkeypatch.setattr(P, 'place_row', original['place_row'])
     monkeypatch.setattr(P, 'OUT', tmp_path / 'old.json')
     P.run(args)
+    assert len(geo_groups) == changed_geo_calls, 'reference geolocation must use original place_row'
     assert (tmp_path / 'new.json').read_bytes() == (tmp_path / 'old.json').read_bytes()
     assert sorted(p.name for p in tmp_path.iterdir()) == ['new.json', 'old.json']
 
@@ -149,6 +190,7 @@ def test_chart_complete_files_match_original_uncached_intervals(monkeypatch, tmp
     now = chart_world(monkeypatch, tmp_path)
     monkeypatch.setattr(C, 'CHARTS_DIR', tmp_path / 'new')
     if refresh:
+        monkeypatch.setattr(C, 'MAX_CACHED_INTERVALS', 3)
         C.build(now=now)
         now += timedelta(days=9)
         rules = copy.deepcopy(S.load_rules())
@@ -198,6 +240,31 @@ def test_interval_cache_keeps_state_and_event_identity_and_counts():
         got = C._cached_red_intervals(event, state, now, got_count, water, rules, cache)
         assert got == want and got_count == want_count
     assert len(cache) == 3
+
+
+def test_interval_cache_bounds_retained_results(monkeypatch):
+    monkeypatch.setattr(C, 'MAX_CACHED_INTERVALS', 3, raising=False)
+    events = records()[:10]
+    events[0]['ended_at'] = '2026-05-01T12:00:00Z'
+    events[5]['ended_at'] = '2026-05-01T12:00:00Z'
+    cache = {}
+    now, rules = datetime.fromisoformat(NOW), S.load_rules()
+    # Saturate, then repeat: capped counts and intervals must also survive misses.
+    for ev in events + events:
+        want_count, got_count = Counter(), Counter()
+        want = C.red_intervals(ev, 'CT', now, want_count, rules=rules)
+        got = C._cached_red_intervals(ev, 'CT', now, got_count, None, rules, cache)
+        assert got == want and dict(got_count) == dict(want_count)
+        assert len(cache) <= 3
+
+
+def test_interval_cache_retains_scalar_cap_increment():
+    ev = records()[0]
+    ev['ended_at'] = '2026-05-01T12:00:00Z'
+    cache = {}
+    C._cached_red_intervals(ev, 'CT', datetime.fromisoformat(NOW), Counter(), None, S.load_rules(), cache)
+    _, increment = cache[(id(ev), 'CT')]
+    assert type(increment) is int and increment == 1
 
 
 def test_point_cache_does_not_survive_outline_changes():
