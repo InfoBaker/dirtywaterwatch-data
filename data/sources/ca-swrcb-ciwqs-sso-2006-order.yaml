@@ -1,0 +1,35 @@
+id: "ca-swrcb-ciwqs-sso-2006-order"
+name: "State Water Board CIWQS Sanitary Sewer System spill data under Order 2006-0003-DWQ, 2007 to June 5, 2023: SSO.txt (flat file)"
+url: "https://www.waterboards.ca.gov/water_issues/programs/sso/docs/data_files/SSO.txt"
+homepage: "https://www.waterboards.ca.gov/water_issues/programs/sso/docs/index.php"
+kind: "csv"
+level: "state"
+# Feed row: the source id written by pipeline/ingest/ca_swrcb_ciwqs_sso_2006.py
+#   (data/build/events/ca-swrcb-ciwqs-sso-2006-order.json). The spills from June 5, 2023, under Order WQ
+#   2022-0103-DWQ, are the feed ca-swrcb-ciwqs-spills-flatfile (Cat1-2-3-Spills.txt).
+# Built 2026-11-21: the file is history (the index page's note 10: spill data "submitted from January 2007 to
+#   June 5, 2023"), though the Board writes it again each night. A run asks for it at most once every 7 days, with
+#   If-Modified-Since (about 52 MB), and keeps the records between reads; every spill is read on each read, so
+#   `--backfill` reads the whole file at once. Only the safe columns are read (never the certifier, the operator's
+#   name and phone, or the narratives); house numbers are cut from the location; a point on private property is
+#   rounded. Category 1 spills become records (10,536 on 2026-11-21); Categories 2 and 3 (spills to land) are
+#   counted in the events file's meta and make no record. A spill also in Cat1-2-3-Spills.txt (same WDID and start
+#   minute, plus the same SPILL ID or a nearby point and the same volume) is kept with duplicate_of that file's
+#   record; a weaker match is a possible copy, both listed. The file names no receiving water: records carry the point.
+# Read 2026-11-21: 69,321 rows, 66 header columns (the last empty), Windows-1252; Category 1 10,537, Category 2
+#   2,820, Category 3 55,964; Category 1 starts 2006-11-15 to 2023-06-02 (one more typed as 2002, not used);
+#   10,531 Category 1 spills with a point. Every Category 1 spill gives a volume reaching surface water above zero
+#   and no Category 2 or 3 spill does.
+cadence: "frozen: reporting under the 2006 order ended June 5, 2023; the Board writes the file again nightly, and the feed reads it at most weekly"
+license: "No licence statement on the file listing; State Water Board public records. Quote as found: none."
+attribution: "State Water Resources Control Board"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["CA"]
+registry_ids: ["ca-swrcb-ciwqs-sso-2006-order"]
+access: ["csv"]
+access_detail: "Tab-delimited text, 66 header columns (the last empty), Windows-1252, about 52 MB, no auth. Listed on https://www.waterboards.ca.gov/water_issues/programs/sso/docs/index.php (note 10: spill data submitted from January 2007 to June 5, 2023, per WDID); Last-Modified moves nightly (2026-11-20 06:00 Pacific on the listing read 2026-11-21). Columns include the certifier's name, title, location and ID and the operator's name and phone, never read. No receiving-water name column; the water texts (BEACH IMPACT, SURFACE WATER IMPACT) are operator narratives, never read."
+machine_readable: true
+legal_basis: "Order 2006-0003-DWQ (Statewide General Waste Discharge Requirements for Sanitary Sewer Systems) and its Monitoring and Reporting Program as amended by Order WQ 2013-0058-EXEC"
+checked: "2026-11-21"
