@@ -400,3 +400,168 @@ def test_run_token(monkeypatch):
     for bad in ("../x", "a/b", "-x", "x" * 41):
         with pytest.raises(ValueError):
             SP.run_token(bad)
+
+
+# ---------------------------------------------------------------- Astra review 2026-11-21 (state generations)
+
+def test_p1_1_guard_with_no_build_folder_holds_the_restored_archive(tmp_path, r2, capsys):
+    """A refresh that removed data/build whole: every restored source is gone, and the restored archive is held."""
+    import shutil
+    b, arch, counts = restored_state(tmp_path, {"a": 100, "b": 3})
+    shutil.rmtree(b)
+    drops = SP.guard(counts, b, tmp_path / "history-guard.json", arch, "5", SAT)
+    assert [(d["source"], d["why"]) for d in drops] == [("a", "events file gone"), ("b", "events file gone")]
+    assert puts(r2) == ["state/held/build-2026-11-21-5.tar.gz"]
+    assert not b.exists()                                                     # the guard never makes the folder
+
+
+def test_p1_1_plan_never_creates_a_missing_build_folder(tmp_path, capsys):
+    rec = tmp_path / "gone" / "build" / "state-generations.json"
+    assert SP.generations_plan(rec, "1", SAT) == []
+    assert not (tmp_path / "gone").exists()
+    assert "::warning::" in capsys.readouterr().out
+    assert SP.main(["generations", "plan", "--record", str(rec)]) == 0 and not (tmp_path / "gone").exists()
+
+
+@pytest.mark.parametrize("now,restored,ok", [
+    ({"a": 3}, {"a": 3, "b": 1}, True),          # events files there: the guard's business, the save goes on
+    (None, {"a": 3}, False),                      # data/build/events missing
+    ({}, {"a": 3}, False),                        # data/build/events empty
+    ("nofolder", {"a": 3}, False),                # data/build missing whole
+    ({}, {}, True),                               # the restored state had no events file either
+])
+def test_p1_1_save_check_refuses_to_save_over_a_history_with_nothing(tmp_path, capsys, now, restored, ok):
+    import shutil
+    b, arch, counts = restored_state(tmp_path, restored)
+    shutil.rmtree(b / "events")
+    if now == "nofolder":
+        shutil.rmtree(b)
+    elif now is not None:
+        build_dir(tmp_path / "ws", now)
+    args = ["save-check", str(counts), "--build", str(b), "--restored", str(arch)]
+    assert SP.main(args) == (0 if ok else 1)
+    out = capsys.readouterr().out
+    assert ("::error::" in out) is (not ok)
+    # the counts missing: the kept archive is counted instead, with the same answer
+    counts.unlink()
+    assert SP.main(args) == (0 if ok else 1)
+
+
+def test_p1_1_save_check_on_a_first_run_passes(tmp_path):
+    b = tmp_path / "ws" / "data" / "build"
+    b.mkdir(parents=True)
+    assert SP.main(["save-check", str(tmp_path / "none.json"), "--build", str(b),
+                    "--restored", str(tmp_path / "none.tar.gz")]) == 0
+
+
+STALL = r"""#!/bin/sh
+# stand-in: hangs (a stalled upload or read); its sleep's pid is written so the test can see it killed
+sleep 60 & echo $! > "$STALL_PID"; wait
+"""
+
+
+def stalled(tmp_path: Path, monkeypatch) -> Path:
+    w = tmp_path / "stall" / "wrangler"
+    w.parent.mkdir()
+    w.write_text(STALL)
+    w.chmod(0o755)
+    monkeypatch.setenv("WRANGLER", str(w))
+    monkeypatch.setenv("STALL_PID", str(tmp_path / "stall" / "pid"))
+    monkeypatch.setenv("STATE_FETCH_RETRY_S", "0")
+    return tmp_path / "stall" / "pid"
+
+
+def gone(pid_file: Path) -> bool:
+    import os
+    import time
+    pid = int(pid_file.read_text())
+    for _ in range(50):
+        try:
+            os.kill(pid, 0)
+        except ProcessLookupError:
+            return True
+        time.sleep(0.1)
+    return False
+
+
+@pytest.mark.parametrize("op", ["put", "fetch"])
+def test_p1_2_a_stalled_operation_is_killed_at_its_total_deadline(tmp_path, monkeypatch, op):
+    import time
+    pid = stalled(tmp_path, monkeypatch)
+    src = tmp_path / "f"
+    src.write_bytes(b"x")
+    t0 = time.monotonic()
+    if op == "put":
+        assert SP.put("state/daily/build-Sat.tar.gz", src, tries=3, budget_s=1.5) == SP.FAILED
+    else:
+        assert SP.fetch("state/daily/build-Sat.json", tmp_path / "m.json", tries=3, budget_s=1.5) == SP.FAILED
+    assert time.monotonic() - t0 < 10                                       # retries included
+    assert gone(pid)                                                        # the whole process group killed
+
+
+def test_p1_2_optional_operations_are_skipped_close_to_the_job_limit(tmp_path, r2, monkeypatch, capsys):
+    import time
+    start = tmp_path / "job-started"
+    monkeypatch.setenv("STATE_JOB_START_FILE", str(start))
+    start.write_text(str(int(time.time()) - 90 * 60))                      # 90 of the 100 minutes gone
+    assert SP.optional_budget("held") < SP.MIN_OPTIONAL_S
+    b, arch, counts = restored_state(tmp_path, {"a": 100})
+    (b / "events" / "a.json").unlink()
+    SP.guard(counts, b, tmp_path / "history-guard.json", arch, "5", SAT)
+    out = capsys.readouterr().out
+    assert "skipped" in out and "::warning::history guard: the restored state could not be held" in out
+    rec, src = tmp_path / "state-generations.json", tmp_path / "build.tar.gz"
+    src.write_bytes(b"archive")
+    assert SP.generations_plan(rec, "1", SAT) and SP.generations_put(src, rec, "1", SAT) == []
+    assert puts(r2) == []
+    # with time to spare, each operation still has its own cap
+    start.write_text(str(int(time.time()) - 84 * 60))                      # a minute before the reserve
+    assert SP.MIN_OPTIONAL_S <= SP.optional_budget("copy") <= 61
+    start.write_text(str(int(time.time())))
+    assert SP.optional_budget("copy") == SP.OPTIONAL_CAP_S["copy"]
+
+
+def test_p2_3_an_unreadable_restored_file_that_vanishes_is_a_drop(tmp_path, r2, capsys):
+    assert [(d["source"], d["why"]) for d in SP.history_drops({"lost": {"unreadable": True}}, {})] == \
+        [("lost", "events file gone")]
+    b, arch, counts = restored_state(tmp_path, {"a": 3})
+    (b / "events" / "lost.json").write_text('{"records": [')
+    SP.write_counts(b, counts, SAT)
+    (b / "events" / "lost.json").unlink()
+    SP.guard(counts, b, tmp_path / "history-guard.json", arch, "5", SAT)
+    out = capsys.readouterr().out
+    assert "::warning::history guard: lost: events file gone, an unknown number of record(s) restored" in out
+    assert puts(r2) == ["state/held/build-2026-11-21-5.tar.gz"]
+
+
+@pytest.mark.parametrize("bad", [
+    {"daily": None, "monthly": None},
+    {"daily": [], "monthly": "x"},
+    {"daily": {"Sat": None, "Funday": {"date": "2026-11-21"}}, "monthly": {"2026-11": None, "x": {}}},
+    {"daily": {"Sat": {"date": 5}}, "monthly": {"2026-13": {"date": "2026-11-01"}}},
+])
+def test_p2_4_a_malformed_record_is_repaired_and_copies_go_on(tmp_path, r2, bad):
+    rec, src = tmp_path / "state-generations.json", tmp_path / "build.tar.gz"
+    src.write_bytes(b"archive")
+    # the previous run left the day's daily pending (with a junk entry beside it), and its marker says it uploaded
+    (r2 / "state/daily").mkdir(parents=True)
+    (r2 / "state/daily/build-Sat.json").write_text(json.dumps(
+        {"key": "state/daily/build-Sat.tar.gz", "date": "2026-11-21", "run": "1"}))
+    rec.write_text(json.dumps({**bad, "pending": {"run": "1", "copies": [
+        {"kind": "daily", "slot": "Sat", "date": "2026-11-21"}, "junk", {"kind": "held", "slot": "x"}]}}))
+    assert run_day(rec, src, SAT + timedelta(hours=1), "2") == (["state/monthly/build-2026-11.tar.gz"],
+                                                                ["state/monthly/build-2026-11.tar.gz"])
+    r = json.loads(rec.read_text())                                         # repaired and saved that way
+    assert r["daily"] == {"Sat": {"date": "2026-11-21", "run": "1"}} and isinstance(r["monthly"], dict)
+    assert all(isinstance(v, dict) for v in r["monthly"].values())
+    assert run_day(rec, src, SAT + timedelta(hours=2), "3") == ([], [])     # the next run: recorded, none due
+    assert list(json.loads(rec.read_text())["monthly"]) == ["2026-11"]
+
+
+@pytest.mark.parametrize("bad", ["[]", "null", '"text"', '{"pending": "x"}', '{"pending": {"run": 5, "copies": 3}}'])
+def test_p2_4_a_record_of_the_wrong_shape_starts_again(tmp_path, r2, bad):
+    rec, src = tmp_path / "state-generations.json", tmp_path / "build.tar.gz"
+    src.write_bytes(b"archive")
+    rec.write_text(bad)
+    assert len(run_day(rec, src, SAT, "2")[1]) == 2
+    assert run_day(rec, src, SAT + timedelta(hours=1), "3") == ([], [])

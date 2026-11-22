@@ -45,6 +45,8 @@ echo '{"response": "new answer"}' > data/raw/nhd-waters/nldi/new.json
 echo '{}' > data/raw/va-deq-prep/bulk.json
 # REFRESH_DROPS: a module rewrites its events file from a short window and another's file is gone
 [ -z "$REFRESH_DROPS" ] || { echo '{"records": [{"event_id": "ca:1"}]}' > data/build/events/ca-spills.json; rm -f data/build/events/gone.json; }
+# REFRESH_WIPES: a refresh that removes data/build whole and still ends well
+[ -z "$REFRESH_WIPES" ] || rm -rf data/build
 [ -z "$REFRESH_FAILS" ] || exit 1
 """
 BATCH_STANDIN = """
@@ -96,6 +98,7 @@ DATE = r"""#!/bin/sh
 case "$*" in
   *+%H*) echo "${FAKE_HOUR:-12}" ;;
   *+%u*) echo "${FAKE_DOW:-3}" ;;
+  *+%s*) if [ -n "$FAKE_EPOCH" ]; then echo "$FAKE_EPOCH"; else exec REAL_DATE "$@"; fi ;;
   *) exec REAL_DATE "$@" ;;
 esac
 """.replace("REAL_DATE", shutil.which("date") or "/bin/date")
@@ -788,3 +791,30 @@ def test_refresh_generations_never_run_after_a_failed_save(tmp_path):
     assert next(v for k, v in r["results"].items() if k.startswith("State generations")) == "skipped"
     assert puts(tmp) == ["put state/out.tar.gz"]
     assert not (tmp / "r2/state/daily").exists() and not (tmp / "r2/state/monthly").exists()
+
+
+# ---------------------------------------------------------------- Astra review 2026-11-21: P1-1 and P1-2 in the workflow
+
+def test_p1_1_a_refresh_that_removes_data_build_holds_the_history_and_saves_nothing_over_it(tmp_path):
+    tmp = checkout(tmp_path)
+    seed(tmp, generations=False, events={"ca-spills": 300, "steady": 10})
+    before = (tmp / "r2/state/build.tar.gz").read_bytes()
+    r = simulate("refresh.yml", tmp, {"REFRESH_WIPES": "1"})
+    assert r["failed"], r["log"]
+    held = "state/held/build-2026-11-21-1234.tar.gz"
+    assert puts(tmp) == ["put state/out.tar.gz", f"put {held}"]                # no state save, no copy
+    assert (tmp / "r2" / held).read_bytes() == before
+    assert (tmp / "r2/state/build.tar.gz").read_bytes() == before            # the stored state stands
+    assert "::error::data/build/events is missing" in r["log"]
+    assert next(v for k, v in r["results"].items() if k.startswith("Save pipeline state")) == "failure"
+    assert not (tmp / "data/build").exists()                                 # nothing remade it
+
+
+def test_p1_2_a_run_close_to_its_time_limit_skips_the_optional_uploads_and_still_saves(tmp_path):
+    import time
+    tmp = checkout(tmp_path)
+    seed(tmp, generations=False, events={"ca-spills": 300})
+    r = simulate("refresh.yml", tmp, {"REFRESH_DROPS": "1", "FAKE_EPOCH": str(int(time.time()) - 88 * 60)})
+    assert not r["failed"], r["log"]
+    assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
+    assert "skipped" in r["log"] and "the restored state could not be held" in r["log"]
