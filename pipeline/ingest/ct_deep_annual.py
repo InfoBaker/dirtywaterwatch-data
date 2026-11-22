@@ -228,9 +228,11 @@ def sheet_rows(rows: list[list]) -> list[dict]:
     for i, r in enumerate(rows):
         cells = [re.sub(r"\s+", " ", clean(x)).strip() if clean(x) else None for x in r]
         names = {c for c in cells if c}
-        candidate = {h: (cells[j] if j < len(cells) else None)
-                     for j, h in enumerate(header or []) if h}
-        if len(names & HEADER_KEYS) >= 2 and (header is None or is_header_or_section(candidate)):
+        # Replacement headers can add or reorder columns. Recognize their labels
+        # without mapping them through the previous positions; any independent
+        # value (including an ID or date) keeps an incident from becoming a header.
+        known_labels = HEADER_KEYS | set(header or [])
+        if len(names & HEADER_KEYS) >= 2 and (header is None or names <= known_labels):
             header = cells
             continue
         if header is None:

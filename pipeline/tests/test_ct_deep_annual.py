@@ -92,3 +92,46 @@ def test_header_like_cells_do_not_replace_sheet_header_when_incident_evidence_re
     assert [r["Request ID"] for r in rows] == ["90001", "90002"]
     assert all(M.is_event_row("sso", r) for r in rows)
     assert M.is_event_row("sso", {cols[1]: "Example Utility", cols[2]: cols[2]})
+
+
+@pytest.mark.parametrize("initial_cols,initial_values,replacement_cols,replacement_values", [
+    (["Reporting Utility", "Date Bypass Began or was Discovered"],
+     ["Example Utility", "11/20/2026"],
+     ["Request ID", "Reporting Utility", "Date Bypass Began or was Discovered"],
+     ["90001", "Example Utility", "11/21/2026"]),
+    (["Request ID", "Reporting Utility", "Date Bypass Began or was Discovered"],
+     ["90000", "Example Utility", "11/20/2026"],
+     ["Date Bypass Began or was Discovered", "Request ID", "Reporting Utility"],
+     ["11/21/2026", "90001", "Example Utility"]),
+])
+def test_replacement_header_remaps_added_or_reordered_columns(
+        initial_cols, initial_values, replacement_cols, replacement_values):
+    from collections import Counter
+    from datetime import datetime
+
+    rows = M.sheet_rows([initial_cols, initial_values, replacement_cols, replacement_values])
+    assert rows == [dict(zip(initial_cols, initial_values), _row=2),
+                    dict(zip(replacement_cols, replacement_values), _row=4)]
+    raw = rows[1]
+    row = M.to_dashboard_row("sso", raw)
+    assert M.is_event_row("sso", row)
+    record = M.make_record("sso", row, raw, raw["_row"], "test.xlsx", "SSO", 2026, None,
+                           "2026-11-22T14:00:00Z", datetime(2026, 11, 22, tzinfo=M.TZ), set(), Counter())
+    assert record["source_record_id"] == "90001"
+    assert record["started_at"] == "2026-11-21T00:00:00-05:00"
+
+
+@pytest.mark.parametrize("cols,values", [
+    (["Reporting Utility", "Date Bypass Began or was Discovered"],
+     ["Reporting Utility", "11/21/2026"]),
+    (["Request ID", "Reporting Utility", "Date Bypass Began or was Discovered"],
+     ["90001", "Reporting Utility", "unreadable"]),
+    (["Request ID", "Reporting Utility", "Date Bypass Began or was Discovered"],
+     ["Request ID", "Reporting Utility", "11/21/2026"]),
+])
+def test_incident_header_words_preserve_id_or_date_evidence(cols, values):
+    following = ["Example Utility" if col == "Reporting Utility" else
+                 "90002" if col == "Request ID" else "11/22/2026" for col in cols]
+    rows = M.sheet_rows([cols, values, following])
+    assert rows == [dict(zip(cols, values), _row=2), dict(zip(cols, following), _row=3)]
+    assert all(M.is_event_row("sso", row) for row in rows)
