@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1735 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1754 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -11,7 +11,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | area | used | candidate | watch | rejected | unreachable | total |
 |---|---:|---:|---:|---:|---:|---:|
 | science | 137 | 29 | 7 | 20 | 11 | 204 |
-| federal | 25 | 17 | 24 | 14 | 1 | 81 |
+| federal | 31 | 22 | 25 | 21 | 1 | 100 |
 | ma | 20 | 34 | 21 | 6 | 3 | 84 |
 | ct | 19 | 17 | 14 | 16 | 2 | 68 |
 | ri | 27 | 12 | 11 | 14 | 3 | 67 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **646** | **235** | **546** | **229** | **79** | **1735** |
+| **all** | **652** | **240** | **547** | **236** | **79** | **1754** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -276,17 +276,23 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `wef-accesswater-springfield-paper` | WEF/Access Water conference paper on Springfield-area CSO modeling (id -279494) | unreachable | search_only | science | HTTP 403; may contain receiving-water E. coli modeling. |
 | `who-2021-recreational-guidelines` | WHO Guidelines on recreational water quality, Volume 1: coastal and fresh waters (2021) | unreachable | search_only | science | iris.who.int returned a JavaScript application, no PDF; enterococci categories known only from secondary sources. |
 
-## federal: Federal (EPA, USGS, NOAA, law) (81)
+## federal: Federal (EPA, USGS, NOAA, law) (100)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
+| `fed-beacon2-beach-actions-reports` | EPA BEACON 2.0 reports (Beach Actions / Advisories and Closures; Monitoring; Beach Profile) | used | fetched | advisories | Authoritative history of coastal beach advisories and their stated cause, but a season late; state/local beach feeds are needed for current status. Read since 2026-11-21 by pipeline/ingest/fed_beacon_beach_actions.py (source fed-beacon-beach-actions: the Beach Actions report and its detailed report for the current and previous year, history only); the beach registry data/beaches-epa.json is built from the Beach Attributes, Swim Season, WQS Criteria and Possible Pollution Sources reports (scripts/build_epa_beach_registry.py). |
 | `fed-datagov-cso-datasets` | data.gov catalog search for national CSO/SSO datasets | used | fetched | outfalls | Confirms the ECHO inventory and SOBE downloads are the only national federal datasets. |
+| `fed-echo-icis-npdes-national-dataset` | ICIS-NPDES National Dataset Part 1 (npdes_downloads.zip) and Part 2 effluent violations (npdes_eff_downloads.zip) | used | fetched | permits | Supplement to the discharge-points file: ICIS_PERMITS lists 18,833 active POTW permits, 1,849 of which the discharge-points file omits (WI 162, GA 161, OR 147, MA 110, SD 97, MN 94 ...); their points come from NPDES_PERM_FEATURE_COORDS (types from the limits file) or the ICIS_FACILITIES geocode. |
+| `fed-echo-npdes-attains-catchment` | ECHO NPDES Catchment Indexing and Assessed Waters Download | used | search_only | hydrography | Gives each plant outfall its NHD reach code (reach_id; 21,014 of 23,047 rows) and the reach GNIS name, the outfall-level equivalent of the CSO inventory's PF_REACH_ID; and FRS registry ids for the ECHO link. |
+| `fed-echo-npdes-discharge-points` | ICIS-NPDES Discharge Points (npdes_outfalls_layer.zip) and ECHO NPDES Discharge Points FeatureServer | used | fetched | outfalls | The only national bulk file with a coordinate per permitted feature AND its feature type (External Outfall vs internal, influent, monitoring) AND the coordinate type (permitted feature vs facility) AND the POTW permit component, SIC and NAICS. Source of data/outfalls-plants-us.json. |
+| `fed-echo-npdes-limits` | ICIS-NPDES National Permit Limit Dataset (npdes_limits.zip) | used | fetched | permits | Its LIMIT_SET_NAME is the only bulk text that says what a plant feature is; used to hold back 21 features named as combined sewer overflows that the CSO inventory lacks, to flag 5 plant outfalls that also carry CSO limit sets, and to give each plant row has_limits and limit_set_names. |
 | `fed-epa-2004-rtc-cso-sso` | EPA 2004 Report to Congress: Impacts and Control of CSOs and SSOs (EPA 833-R-04-001) | used | fetched | science | Historical baseline; Appendix D is a 2004 permit list, superseded by the national inventory. |
 | `fed-epa-beach-tech-submitting-data` | EPA 'Submitting Data to EPA' (eBeaches: WQX monitoring, PRAWN notification, verification tool) | used | fetched | advisories | Explains the data path and why BEACON lags a season. |
 | `fed-epa-cso-outfall-location-pages` | EPA 'Where CSO outfalls are located' and CSO program pages | used | fetched | outfalls | Official caveats for the national inventory. |
 | `fed-epa-national-beach-guidance-2014` | EPA National Beach Guidance and Required Performance Criteria for Grants (2014 edition) | used | fetched | law | Federal expectation for beach notices after sewage spills (grant condition, not a discharge-notice rule). |
 | `fed-epa-nmc-guidance-1995` | EPA Combined Sewer Overflows: Guidance for Nine Minimum Controls (EPA 832-B-95-003), Chapter 9 public notification | used | fetched | law | Interpretive guidance on NMC #8. |
 | `fed-epa-phase2-alternate-deadlines` | EPA Approved Alternate Phase 2 Compliance Deadlines page | used | fetched | law | Explains why Maine and Vermont SSO/CSO event reports are absent from the federal dataset until 2028; CT absence is unexplained. |
+| `fed-frs-interests-npdes-featureserver` | EPA FRS "National Pollutant Discharge Elimination System Sites" FeatureServer (FRS_INTERESTS_NPDES) | used | fetched | permits | FRS registry id for each plant row's ECHO Detailed Facility Report link. |
 | `fed-law-40cfr122-38-great-lakes` | 40 CFR 122.38 Public notification requirements for CSO discharges to the Great Lakes Basin (83 FR 712, Jan 8, 2018) | used | fetched | law | Does not apply anywhere in New England (Lake Champlain drains to the St. Lawrence inside Québec, outside the defined basin; EPA's state list excludes New England). Useful benchmark: 4-hour notice, 7-day update, annual report. |
 | `fed-law-40cfr122-41-reporting` | 40 CFR 122.41(l)(4), (l)(6), (l)(7), (m), (n): NPDES standard conditions (DMRs, 24-hour and 5-day noncompliance reporting, bypass, upset) | used | fetched | law | Federal baseline: reports go to "the Director" (EPA or the state), never to the public. Gives the site the regulator deadline (24 h oral, 5 days written), not a public-notice deadline. |
 | `fed-law-40cfr127-erule` | NPDES Electronic Reporting Rule, 40 CFR part 127 (80 FR 64064, Oct 22, 2015; Phase 2 deadline moved by 85 FR 69189, Nov 2, 2020) | used | fetched | law | Why ECHO now has an SSO/CSO/bypass event dataset, and why its coverage is partial until as late as Dec 21, 2028. |
@@ -322,13 +328,14 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `fed-usgs-water-data-ogcapi` | USGS Water Data OGC API (api.waterdata.usgs.gov: monitoring-locations, latest-continuous, continuous, daily) | candidate | fetched | hydrography | Flow context and dilution proxy near outfalls; sibling project already registers it. |
 | `fed-waters-point-indexing` | EPA WATERS Point Indexing service (outfall coordinate to NHDPlus COMID / reach code) | candidate | fetched | hydrography | Gives the NHDPlus COMID needed for NWM forecasts (NWPS reaches) and for up/downstream navigation from an outfall. |
 | `fed-waters-upstream-downstream` | EPA WATERS Upstream/Downstream search (NHDPlus navigation with NPDES and other program events) | candidate | fetched | hydrography | Lets the site list which launches/waters lie downstream of an outfall within N km; must be labelled modeled, not an affected-area verdict. |
+| `st-al-adem-sso-map` | Alabama ADEM Sanitary Sewer Overflow map service (SSO_Service MapServer) | candidate | fetched | events | Live statewide SSO points with NPDES permit, lift station / manhole text and receiving stream. |
+| `st-ca-swrcb-sanitary-sewer-system-spills` | California State Water Board CIWQS "Sanitary Sewer System Spills" FeatureServer | candidate | fetched | events | The largest public SSO location dataset found: every California spill with its own point and address. |
+| `st-fl-dep-public-notice-of-pollution` | Florida DEP Public Notice of Pollution (PNP) FeatureServer | candidate | fetched | events | Statewide notices with a point per release; sewage must be picked out by text. |
+| `st-ga-epd-spill-summary` | Georgia EPD "Spill_Summary_Continuous_Update" FeatureServer (spills map) and 30-day spill report | candidate | fetched | events | Spill points with NPDES permit and overflow address; poll and keep. |
+| `st-nc-dwr-sso-featureserver` | North Carolina DWR "Sanitary Sewer Overflows since Jan 2026" and "September 2022 through December 2025" FeatureServers | candidate | fetched | events | Statewide SSO and bypass points with address and receiving water, 2022 to now. |
 | `fed-attains-api` | EPA ATTAINS public web services API | watch | fetched | science | Cause-level and TMDL detail only needed beyond the MapServer flags; key required. |
-| `fed-beacon2-beach-actions-reports` | EPA BEACON 2.0 reports (Beach Actions / Advisories and Closures; Monitoring; Beach Profile) | watch | fetched | advisories | Authoritative history of coastal beach advisories and their stated cause, but a season late; state/local beach feeds are needed for current status. |
 | `fed-cwns-2022` | Clean Watersheds Needs Survey 2022 (Report to Congress and data dashboard) | watch | fetched | science | Capital-needs context per facility (CSO correction dollars), not locations or events. |
-| `fed-echo-icis-npdes-national-dataset` | ICIS-NPDES National Dataset Part 1 (npdes_downloads.zip) and Part 2 effluent violations (npdes_eff_downloads.zip) | watch | fetched | permits | Permitted-feature coordinates here carry no CSO characteristic code; the CSO inventory already joins that. Keep for effluent-violation context. |
 | `fed-echo-notify` | ECHO Notify (weekly email of compliance/enforcement changes) | watch | fetched | permits | Owner could subscribe for the New England CSO permits to hear of new violations or enforcement; not a discharge feed. |
-| `fed-echo-npdes-attains-catchment` | ECHO NPDES Catchment Indexing and Assessed Waters Download | watch | search_only | hydrography | Precomputed permit-to-reach linkage; the CSO inventory already carries PF_REACH_ID per outfall. |
-| `fed-echo-npdes-discharge-points` | ICIS-NPDES Discharge Points (npdes_outfalls_layer.zip) and ECHO NPDES Discharge Points FeatureServer | watch | fetched | outfalls | No CSO characteristic, so CSO outfalls cannot be told from treatment-plant outfalls; the CSO inventory is the right layer. Useful for SSO/bypass events whose permitted_feature_identifier points at a plant outfall. |
 | `fed-echo-npdes-national-dmr-downloads` | ECHO national DMR datasets by fiscal year (npdes_dmrs_fy2026.zip etc.) and DMR/limit data by jurisdiction | watch | fetched | monitoring | Bulk alternative to the effluent-chart API if many permits are tracked; the API is enough for New England's ~20 CSO permits with DMR lines. |
 | `fed-echo-whats-new-known-problems` | ECHO What's New and Known Data Problems pages | watch | fetched | permits | Check before trusting completeness per state. |
 | `fed-epa-beach-grants` | EPA BEACH Act grants page and budget documents | watch | fetched | law | If grants end, state beach monitoring and BEACON reporting in CT, MA, RI, NH, ME could shrink. |
@@ -336,6 +343,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `fed-epa-erule-phase2-dashboard` | EPA NPDES eRule Phase 2 Implementation Dashboard | watch | fetched | permits | Answers which states will flow SSO/CSO event reports to EPA; read it by hand when planning coverage. |
 | `fed-epa-recreational-water-quality-criteria` | EPA 2012 Recreational Water Quality Criteria (E. coli, enterococci) | watch | inferred | science | Criteria belong to the science agent; BEACH Act 303(i)/304(a)(9) tie-in noted. |
 | `fed-epa-state-reported-habs` | EPA 'Harmful Algal Blooms in the US' (state-reported freshwater HAB advisories) FeatureServer | watch | inferred | advisories | HAB advisories are another agent's topic; listed so the federal checklist is complete. |
+| `fed-frs-wastewater-featureserver` | EPA FRS "ICIS Wastewater Treatment Plants" FeatureServer (FRS_Wastewater) | watch | fetched | permits | Facility points only (the plant, not the outfall); a cross-check of the POTW universe. |
 | `fed-law-40cfr123-45-public-reports` | 40 CFR 123.45: EPA quarterly and annual public noncompliance reports from eRule data (due Dec 21, 2026) | watch | fetched | law | A new EPA public report including sewer-overflow reporting failures may appear after Dec 21, 2026. |
 | `fed-law-cwa-221-osg` | CWA 221 Sewer Overflow and Stormwater Reuse Municipal Grants (OSG), incl. public notification systems | watch | fetched | law | Federal money that states can steer to public notification systems; authorization lapsed after FY2026 unless renewed. |
 | `fed-nws-alerts` | NWS API active alerts (Flood Watch/Warning, Flash Flood, Coastal Flood) | watch | inferred | advisories | Flood warnings coincide with CSO activations; context only. |
@@ -345,9 +353,17 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `fed-r1-merrimack-river` | EPA Merrimack River pages (environmental challenges; links to city CSO notification pages) | watch | fetched | permits | Index of Merrimack CSO community notification pages; state agents should capture the city feeds. |
 | `fed-reginfo-unified-agenda` | Unified Agenda / reginfo.gov EPA NPDES items (Fall 2025 and current lists) | watch | fetched | law | Watch 2040-AG39 for any change to 122.41 reporting text. |
 | `fed-waters-geoservices` | EPA WATERS ArcGIS services (watersgeo.epa.gov) | watch | fetched | hydrography | Reach addressing layers; sibling project already evaluated. |
+| `fed-waters-rad-npdes` | EPA WATERS Reach Address Database (RAD): NPDES facility and pipe-schedule reach addresses | watch | search_only | hydrography | ECHO's weekly NPDES_CATCHMENTS.csv already gives the reach code per permitted feature. |
 | `fed-wqp-wqx3` | Water Quality Portal WQX 3.0 Result service (E. coli, enterococci results) | watch | fetched | monitoring | Good for historical bacteria context and to show who samples where; far too slow for event alerts. |
+| `st-fl-dep-wafr-spills-2014-2020` | Florida DEP WRM_WAFR_Spills MapServer layer 1 "Wastewater Spill Records from 2014 to September 2020" | watch | search_only | events | Historical spill points 2014-2020 (backfill only); host is a dev server. |
+| `st-hi-doh-cwb-wastewater-advisories` | Hawaii DOH Clean Water Branch wastewater discharge advisories map | watch | search_only | advisories | Advisory map with affected areas; not opened this session. |
+| `st-wa-ecology-sewage-spills-page` | Washington Ecology sewage spills page (RCW 90.48.632 / 90.48.636) | watch | fetched | events | New statewide list; locations generalized; the data source behind the table not yet found. |
+| `fed-echo-dfr-rest` | ECHO Detailed Facility Report REST (dfr_rest_services.get_dfr) | rejected | fetched | permits | One permit per call and no outfall points; facility-level only. |
 | `fed-echo-exporter` | ECHO Exporter (all-program facility file) | rejected | fetched | permits | Duplicates CWA REST and ICIS downloads at far larger size. |
+| `fed-echo-loading-tool` | ECHO Water Pollutant Loading Tool (DMR loads by facility and outfall) | rejected | search_only | monitoring | Loads, not locations; its outfall points come from the same ICIS permitted-feature coordinates. |
+| `fed-echo-npdes-facilities-outfalls-2022-item` | "NPDES Outfalls Regulated Facilities (EPA 2022)" ArcGIS item (oeca__echo__npdes_facilities_outfalls FeatureServer) | rejected | fetched | outfalls | A stale, partial copy of the weekly ECHO discharge-points file. |
 | `fed-echo-sewer-overflow-report-page` | ECHO per-permit Sewer Overflow/Bypass report page (SbePermitReportUrl) | rejected | fetched | events | Login wall; the public daily download carries the same events. |
+| `fed-emef-efpoints-water-dischargers` | EPA EnviroMapper efpoints MapServer, layer 2 "Water dischargers" | rejected | fetched | permits | Facility points, not outfalls. |
 | `fed-epa-2001-rtc-cso-policy` | EPA Report to Congress: Implementation and Enforcement of the CSO Control Policy (EPA 833-R-01-003, Dec 2001) | rejected | fetched | science | Historical; no current data. |
 | `fed-epa-great-lakes-cso-pages` | EPA Great Lakes CSO public notification rule page and 'Combined Sewer Overflows in the Great Lakes Basin' page | rejected | fetched | events | No portal exists; the rule left notification to permittees' own channels. Outside New England (relevant later for national expansion and the NY agent). |
 | `fed-epa-net-sewer-overflow-netdmr` | EPA NeT-SewerOverflow and NetDMR submission tools (CDX) | rejected | inferred | events | Submission side only; not a public data source. |
@@ -360,6 +376,9 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `fed-r1-cso-factsheet-2000` | EPA New England 'Combined Sewer Overflows' fact sheet (c. 2000) | rejected | fetched | science | Out of date; superseded by the 2022 Region 1 layers and the national inventory. |
 | `fed-usgs-legacy-waterservices` | USGS legacy WaterServices (waterservices.usgs.gov/nwis/iv, dv) | rejected | fetched | hydrography | Retiring Q1 2027; build only on api.waterdata.usgs.gov. |
 | `fed-usgs-wateralert` | USGS WaterAlert (email/text threshold alerts for gauges) | rejected | inferred | hydrography | Gauge thresholds only; API polling is better. |
+| `st-ia-dnr-bypass-reports` | Iowa DNR wastewater bypass reports | rejected | search_only | events | No public bypass database found; written reports go to DNR field offices; news releases only. |
+| `st-in-icis-npdes-cso-outfalls` | Indiana GIS: ICIS_NPDES_CSO_Outfalls (state mirror of ICIS) | rejected | fetched | outfalls | A state copy of ICIS data already in the national files; example of state layers that mirror ICIS. |
+| `st-nj-njpdes-cso-layer` | NJDEP Utilities MapServer layer 0 "NJPDES Combined Sewer Overflow (CSO)" | rejected | fetched | outfalls | CSO outfalls only (covered by the CSO registry); no treatment-plant outfall layer. |
 | `fed-r1-cso-web-pages` | EPA Region 1 CSO web pages (guessed URLs) | unreachable | fetched | permits | No live Region 1 CSO page or community list found on epa.gov; the ArcGIS layers above are the only Region 1 list. |
 
 ## ma: Massachusetts (84)
