@@ -1,5 +1,5 @@
 id: "md-baltimore-sso"
-name: "Baltimore City DPW Sewer Overflow Map (SSO_Points2 map service)"
+name: "Baltimore City DPW Sewer Overflow Map (All SSOs)"
 url: "https://experience.arcgis.com/experience/f064b1b0addd4017ac179f1652e182e0"
 homepage: "https://www.baltimorecity.gov/publicworks/interactive-maps"
 kind: "api"
@@ -8,7 +8,7 @@ level: "municipal"
 #   (data/build/events/md-baltimore-sso.json). It describes the same source as the research row(s) in
 #   registry_ids, whose files hold the research notes, access detail and fill lists.
 # Cadence (pipeline/ingest/md_baltimore_sso.py docstring): hourly (a record started at 12:20 was on
-#   the layer the same day); the layer keeps about four months, so the events file keeps the history.
+#   the layer the same day). The module now reads the full table and retains vanished records.
 cadence: "1 hour"
 license: "None stated (copyrightText empty; the interactive-maps page links terms not read)."
 attribution: "Baltimore City Department of Public Works"
@@ -18,12 +18,13 @@ event_types: ["sso"]
 states: ["MD"]
 registry_ids: ["md-baltimore-dpw-sso-map"]
 access: ["arcgis"]
-access_detail: "https://dpwdata.baltimorecity.gov/pubgis/rest/services/Public/SSO_Points2/MapServer/0/query?where=1%3D1&outFields=*&f=json (no auth). Date fields hold local wall-clock time stored as UTC."
+access_detail: "https://dpwview.baltimorecity.gov/agsprd/rest/services/SSO/MapServer/0 (All SSOs, no auth; named fields and complete paging). Same feed and legacy event IDs; SSOID is an additional, nonunique business key. Dates encode Eastern wall time. Cause flags use the City's Yes/No domain; duration has mixed notation and no stated unit."
 machine_readable: true
 legal_basis: "COMAR 26.08.10; Modified Consent Decree (Civil Action JFM-02-1524)"
-checked: "2026-11-02"
-# Generic ingester port (docs/generic-ingesters.md): the same feed as a fetch block. live: false, so make ingest
-#   still runs the module; tests/test_generic_parity.py compares the two record by record, over two runs.
+checked: "2026-11-22"
+# Legacy SSO_Points2 parity block, retained only for old fixtures. live: false.
+# Production uses ingest.md_baltimore_sso and its All SSOs allowlist; this block
+# does not implement the full-table identity migration or enrichment.
 fetch:
   platform: "arcgis"
   live: false
@@ -71,7 +72,7 @@ fetch:
     outfall_id: {field: LOCATION, regex: "\\bSSO\\s+Site\\s*#\\s*(\\d+)", replace: "SSO Site #\\1"}
     volume: {field: EST_VOLUME, estimate: estimated, text: "{EST_VOLUME|num} gallons (EST_VOLUME)"}
     authority: {const: "Baltimore City Department of Public Works (Sewer Overflow Map)"}
-    source_url: {template: "https://dpwdata.baltimorecity.gov/pubgis/rest/services/Public/SSO_Points2/MapServer/0/query?where=OBJECTID%3D{OBJECTID}&outFields=*&f=json"}
+    source_url: {template: "https://dpwdata.baltimorecity.gov/pubgis/rest/services/Public/SSO_Points2/MapServer/0/query?where=OBJECTID%3D{OBJECTID}&outFields=OBJECTID,SSO_DATE,LOCATION,EST_VOLUME,EST_FLOW,STATUS,REC_WATERS,WATERSHED,START_DATETIME,END_DATETIME,RESPONSIBILITY,Latitude,Longitude,SITE_TYPE,SENSITIVE_AREA,WAIVER_REQUESTED,WAIVER_GRANTED,PENALTY,WAIVER_CLOSED,WAIVER_DENIED,ENTER_STORM,CLEANUP_REQ,STIPULATED_PENALTY_WAIVED,STIPULATED_PENALTY_ASSESSED,ANNUAL_ADJUSTMENT&returnGeometry=false&f=json"}
   waters:
     matcher: "ingest.generic.transforms.state_waters"
     state: "MD"

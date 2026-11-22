@@ -80,6 +80,7 @@ import sys
 from collections import Counter, defaultdict
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
 
 import requests
@@ -568,6 +569,32 @@ def mark_duplicates(records: list[dict], rows_by_id: dict) -> Counter:
     return n
 
 
+def baltimore_evidence(r: dict, row: dict, target: str) -> None:
+    """Cite an existing City relationship, including one inherited through MDE."""
+    # The existing exporter makes this link visible on both records. The
+    # MDE copy remains excluded from incident totals and keeps its figures.
+    r["raw"]["_other_source_record"] = target
+    history = r.get("source_id") == "md-mde-sewer-overflows-2005-2023"
+    dataset = "3rgd-zjxx" if history else DATASET
+    aliases = {"npdes_no": "npdes", "start_date": "date_discovered", "start_time": "time_discovered",
+               "overflow_latitude": "latitude", "overflow_longitude": "longitude"} if history else {}
+    clauses = []
+    for field in ("npdes_no", "start_date", "start_time", "overflow_latitude", "overflow_longitude"):
+        value = row.get(field)
+        if value not in (None, ""):
+            if field == "start_date":
+                value = r["started_at"][:10] + "T00:00:00"
+            value = str(value).replace("'", "''")
+            clauses.append(f"{aliases.get(field, field)}='{value}'")
+    if row.get("npdes_no") and row.get("start_date") and row.get("start_time"):
+        # A record-filtered citation with no address or personal fields.
+        select = ("npdes,date_discovered,time_discovered,duration_days,duration_hours,duration_minutes,"
+                  "quantity_in_gallons_estimated" if history else
+                  "npdes_no,start_date,start_time,duration_day,duration_hour,duration_minute,discharge_volume")
+        r["source_url"] = f"https://opendata.maryland.gov/resource/{dataset}.json?" + urlencode({
+            "$select": select, "$where": " AND ".join(clauses)})
+
+
 def match_baltimore(records: list[dict], rows_by_id: dict, dpw: list[dict]) -> int:
     """An MDE row of the same operator that starts the same local day at the same address, or within
     200 m, is duplicate_of the Baltimore DPW record (the closest start wins)."""
@@ -575,9 +602,13 @@ def match_baltimore(records: list[dict], rows_by_id: dict, dpw: list[dict]) -> i
     for d in dpw:
         if d.get("event_type") != "sso" or not d.get("started_at") or not d.get("discharger_id") or d.get("duplicate_of"):
             continue
-        by_day[datetime.fromisoformat(d["started_at"]).astimezone(TZ).date()].append(d)
+        dt = datetime.fromisoformat(d["started_at"])
+        by_day[(dt.astimezone(TZ) if dt.tzinfo else dt).date()].append(d)
     n = 0
     for r in records:
+        target = r.get("duplicate_of")
+        if str(target or "").startswith("md-baltimore-sso:"):
+            baltimore_evidence(r, rows_by_id[r["event_id"]], target)
         if r.get("duplicate_of") or not r.get("started_at") or not r.get("discharger_id"):
             continue
         t = datetime.fromisoformat(r["started_at"]).astimezone(TZ)
@@ -587,23 +618,67 @@ def match_baltimore(records: list[dict], rows_by_id: dict, dpw: list[dict]) -> i
             if d["discharger_id"] != r["discharger_id"]:
                 continue
             same_addr = bool(addr) and addr == norm_addr(d.get("outfall_name"), for_match=True)
+            fingerprint = (d.get("raw") or {}).get("_address_match_sha256")
+            if addr and fingerprint:
+                same_addr = same_addr or hashlib.sha256(addr.encode()).hexdigest() == fingerprint
             dist = None
             if r.get("lat") is not None and d.get("lat") is not None:
                 dist = metres(r["lat"], r["lon"], d["lat"], d["lon"])
             if not same_addr and (dist is None or dist > NEAR_M):
                 continue
-            gap = abs((datetime.fromisoformat(d["started_at"]) - t).total_seconds())
+            dt = datetime.fromisoformat(d["started_at"])
+            # A date can match the local day, but supplies no closest instant.
+            gap = abs((dt - t).total_seconds()) if dt.tzinfo else float("inf")
             if best is None or gap < best[0]:
                 best = (gap, d, same_addr, dist)
         if best:
             gap, d, same_addr, dist = best
             how = "same address" if same_addr else f"{round(dist)} m apart"
             r["duplicate_of"] = d["event_id"]
+            baltimore_evidence(r, rows_by_id[r["event_id"]], d["event_id"])
             r["raw"]["_duplicate_basis"] = (f"Baltimore DPW SSO map record {d['event_id']}: same operator, same day, {how} "
                                             f"(DPW {d.get('volume_gal')} gal, start {d['started_at']}; this row "
                                             f"{r.get('volume_gal')} gal); the City's record carries the end time and point")
             n += 1
     return n
+
+
+def relink_baltimore_files(dpw: list[dict], events_dir: Path = EVENTS_DIR) -> None:
+    """Recheck stored MDE rows after City history expands, including the frozen
+    dataset whose version check skips its post hook. Preserve all source/fetch
+    clocks, health and metadata; this is only a relationship update.
+    """
+    from ingest.generic.transforms import md_history_row, md_mde_history_duplicates
+    from ingest.generic.fieldmap import Ctx
+    newer = []
+    for sid in (SOURCE_ID, "md-mde-sewer-overflows-2005-2023"):
+        path = events_dir / f"{sid}.json"
+        doc = read_json(path, None)
+        if not doc or not doc.get("records"):
+            continue
+        before = json.dumps(doc["records"], sort_keys=True)
+        records = doc["records"]
+        rows = {}
+        for r in records:
+            raw = r.setdefault("raw", {})
+            row = raw.get("row") or {}
+            rows[r["event_id"]] = md_history_row(row) if sid != SOURCE_ID else row
+            if str(r.get("duplicate_of") or "").startswith("md-baltimore-sso:"):
+                r["duplicate_of"] = None
+                raw.pop("_duplicate_basis", None)
+                raw.pop("_other_source_record", None)
+        # Rebuild the MDE relationships before applying the City's current links.
+        # Frozen history may skip its ingestion hook indefinitely after this call.
+        if sid == SOURCE_ID:
+            mark_duplicates(records, rows)
+            match_baltimore(records, rows, dpw)
+            newer = records
+        else:
+            ctx = Ctx(source_id=sid, fetched_at=doc.get("fetched_at"), block={}, tz=TZ,
+                      extra={"md_mde_records": newer, "md_baltimore_records": dpw})
+            md_mde_history_duplicates(records, ctx)
+        if json.dumps(records, sort_keys=True) != before:
+            write_json(path, doc)
 
 
 def carry_history(records: list[dict], prev: dict, fetched_at: str, allow: set[str] | None = None) -> Counter:

@@ -250,4 +250,8 @@ def md_mde_history_duplicates(records: list[dict], ctx: F.Ctx) -> Counter:
         r["raw"]["_duplicate_basis"] = (f"same start day, address and type as {hit['event_id']} in MDE's 2023 table{via}, "
                                         f"which carries the report on")
         n["in_2023_table"] += 1
+    dpw = ctx.extra.get("md_baltimore_records")
+    if dpw is None:
+        dpw = (read_json((ctx.extra.get("events_dir") or EVENTS_DIR) / "md-baltimore-sso.json", {}) or {}).get("records", [])
+    n["baltimore_dpw"] = M.match_baltimore(records, rows_by_id, dpw)
     return n
