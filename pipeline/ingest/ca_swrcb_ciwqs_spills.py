@@ -213,10 +213,13 @@ def decode(content: bytes) -> str:
 REQUIRED = ("SPILL_EVENT_ID", "SPILL_REPORT_VERSION", "SPILL_TYPE", "WDID", "ESTIMATED_SPILL_START_DATE_AND_TIME")
 
 
-def read_rows(text: str, columns: dict[str, str] | None = None, required: tuple[str, ...] | None = None) -> list[dict]:
+def read_rows(text: str, columns: dict[str, str] | None = None, required: tuple[str, ...] | None = None,
+              strict: bool = False) -> list[dict]:
     """Rows of the file with only the read columns (COLUMNS, or `columns`: file header -> short key), under their
     short keys. Raises when a needed column (REQUIRED, or `required`) is missing (a changed layout must not pass
-    silently). ingest/ca_swrcb_ciwqs_sso_2006.py reads the 2006 order's file with its own columns."""
+    silently). strict: a data row with fewer fields than the header's last named column also raises, naming how many
+    rows and the first one's line, never their content (a file cut short; ingest/ca_swrcb_ciwqs_sso_2006.py, which
+    reads the 2006 order's file with its own columns)."""
     columns = COLUMNS if columns is None else columns
     required = REQUIRED if required is None else required
     csv.field_size_limit(10 ** 8)
@@ -229,12 +232,20 @@ def read_rows(text: str, columns: dict[str, str] | None = None, required: tuple[
     missing = [c for c in required if c not in idx]
     if missing:
         raise ValueError(f"the file lacks the columns {missing}")
-    out = []
+    need = max(idx.values()) + 1
+    out, short, first = [], 0, None
     for cells in reader:
         if not any(c.strip() for c in cells):
             continue
+        if strict and len(cells) < need:
+            short += 1
+            first = first or reader.line_num
+            continue
         out.append({key: clean(cells[idx[col]]) if col in idx and idx[col] < len(cells) else ""
                     for col, key in columns.items()})
+    if short:
+        raise ValueError(f"{short:,} data row{'s' if short != 1 else ''} {'have' if short != 1 else 'has'} fewer fields "
+                         f"than the header (the first at line {first}): the file looks cut short")
     return out
 
 

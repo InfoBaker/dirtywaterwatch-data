@@ -13,8 +13,9 @@ level: "state"
 #   `--backfill` reads the whole file at once. Only the safe columns are read (never the certifier, the operator's
 #   name and phone, or the narratives); house numbers are cut from the location; a point on private property is
 #   rounded. Category 1 spills become records (10,536 on 2026-11-21); Categories 2 and 3 (spills to land) are
-#   counted in the events file's meta and make no record. A spill also in Cat1-2-3-Spills.txt is kept only there
-#   (one on 2026-11-21: same WDID, date and point). The file names no receiving water: records carry the point.
+#   counted in the events file's meta and make no record. A spill also in Cat1-2-3-Spills.txt (same WDID and start
+#   minute, plus the same SPILL ID or a nearby point and the same volume) is kept with duplicate_of that file's
+#   record; a weaker match is a possible copy, both listed. The file names no receiving water: records carry the point.
 # Read 2026-11-21: 69,321 rows, 66 header columns (the last empty), Windows-1252; Category 1 10,537, Category 2
 #   2,820, Category 3 55,964; Category 1 starts 2006-11-15 to 2023-06-02 (one more typed as 2002, not used);
 #   10,531 Category 1 spills with a point. Every Category 1 spill gives a volume reaching surface water above zero

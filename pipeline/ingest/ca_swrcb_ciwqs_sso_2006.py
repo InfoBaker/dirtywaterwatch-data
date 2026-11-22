@@ -31,7 +31,8 @@ What is read (privacy)
   leaves); a value that is only a person's name becomes "[name removed]". When the spill appeared only on private
   property (a private lateral clean-out, a private upper or lower lateral, a backflow prevention device, or a
   building or structure) its point is rounded to three decimals (about 100 m), coord_precision_m 150, so it does not
-  mark a home. common.strip_personal runs on every raw (in common.event) and build.redact over the records last. The
+  mark a home; the typed point is rounded in scrubbed_row, so raw.lat, raw.lon and the saved page hold only the
+  rounded digits. common.strip_personal runs on every raw (in common.event) and build.redact over the records last. The
   saved raw page (data/raw/<source>/) holds only the scrubbed short-key rows of the Category 1 spills, never the
   file. tests/test_ca_swrcb_ciwqs_sso_2006.py proves that the certifier, the operator's name and phone and a
   narrative never reach a record or the saved page.
@@ -46,15 +47,19 @@ Which reports are shown
   counted in meta (by_category, category_1_flags, category_2_3_marked_reached_surface) and make no record.
 
 Record rules
-  - Key: SPILL ID. Rows sharing a SPILL ID with the same WDID and start are versions of one spill: the certified row
+  - Key: SPILL ID. Rows sharing a SPILL ID, WDID and start minute are versions of one spill: the certified row
     with the latest certification date is the record, the others are listed in raw._versions. Rows sharing a SPILL
-    ID with a different start are different spills: each gets the key "<SPILL ID>-<start as YYYYMMDDHHMM>"
-    (raw._key_basis says so).
-  - A spill also in the 2022 order's file is kept only there: the same SPILL ID, the same WDID and start time, or the
-    same WDID, the same start date and origin points within OVERLAP_DEG (about 150 m). It is read from the 2022
-    source's events file (ca_swrcb_ciwqs_spills runs first in the sorted ingest loop); meta.overlap_with_2022_order
-    lists each. On 2026-11-21 no spill matched by SPILL ID or by WDID and start; one matched by WDID, date and point
-    (the same volume, start and end typed twelve hours apart).
+    ID with another WDID or start are different spills: each gets the key "<SPILL ID>-<WDID>-<YYYYMMDDHHMM>"
+    (raw._key_basis says so). Keys never move: when an ID that was one spill becomes several, the spill whose WDID
+    and start match the earlier record keeps the plain key, and a split key a previous record holds is kept. A row
+    with no SPILL ID is kept under "noid-<WDID>-<YYYYMMDDHHMM>" with a parse_error saying so (meta
+    rows_without_spill_id counts them). Two records under one event id fail the read (check_unique).
+  - No history record is dropped for the 2022 order's file (read from its events file: ca_swrcb_ciwqs_spills runs
+    first in the sorted ingest loop). A copy (the same WDID and start minute, plus the same SPILL ID, or origin points
+    within OVERLAP_DEG, about 150 m, and the same volume) gets duplicate_of, that file's event id, and
+    raw._duplicate_basis: the status build lists the spill from that file. The same WDID and start date with a nearby
+    point is a possible copy only: both are listed, raw._possible_copy_of {event_id, reason}. The same SPILL ID
+    under another WDID or in another year is never a match. meta.overlap_with_2022_order counts both kinds.
   - Times are Pacific local time as typed ("MM/DD/YYYY HH:MM"), written with their offset, time_precision "minute"
     (a start typed as midnight with no end, or an end also at midnight, is read at day precision). started_at = START
     DT, ended_at = EST END DT. A start after the read, or before 2006 (the order's year: a typing error in the year),
@@ -86,8 +91,9 @@ Reading (what each run costs)
   whole file (about 52 MB, less when the server compresses it) and builds the records in about 20 seconds, most of
   it the shared scrub and redaction; every spill is read (no window), so `--backfill` reads the whole file at once,
   without If-Modified-Since or the seven-day wait. A spill on record that leaves the file keeps its record with
-  raw._missing_from_file_since. The overlap with the 2022 order's events file is checked again on every run, so a
-  spill it gains later is dropped here without a new read. meta.frozen is true (the status build never calls the
+  raw._missing_from_file_since. A data row with fewer fields than the header (a file cut short) or a repeated event
+  id fails the read: the previous records are kept (ok false) and the error names how many rows, never their
+  content. The links to the 2022 order's events file are made again on every run, without a new read. meta.frozen is true (the status build never calls the
   feed stale for its age, only for a failed read) and meta.statewide false (history watches no water now, so the
   feed is not counted as covering every California outfall).
 
@@ -201,14 +207,29 @@ def day(v) -> date | None:
     return dt.date() if dt else None
 
 
+def private_only(appearance_points) -> bool:
+    """Whether the spill appeared only on private property (PRIVATE_ONLY)."""
+    apps = {x.strip().lower() for x in L.clean(appearance_points).split(";") if x.strip()}
+    return bool(apps) and apps <= PRIVATE_ONLY
+
+
+def rounded(v) -> str | None:
+    """A typed coordinate to three decimals (about 100 m), as text; None when it is not a number."""
+    f = L.fnum(v)
+    return None if f is None else str(round(f, 3))
+
+
 def scrubbed_row(r: dict) -> dict:
     """The kept fields as the record keeps them (see the docstring): the location loses its house numbers, the
-    pick-list texts pass common.scrub_text."""
+    pick-list texts pass common.scrub_text, and the point of a spill on private property is rounded here, so no
+    record or saved page holds its typed digits (review 2026-11-21 P1-1)."""
     out = {k: r.get(k, "") for k in KEYS}
     out["location_name"] = L.location_name(out.get("location_name"))
     for k in ("appearance_points", "destinations", "causes", "failure_location", "county", "caloes_control_number"):
         if isinstance(out.get(k), str) and out[k]:
             out[k] = scrub_text(out[k])
+    if private_only(out.get("appearance_points")):
+        out["lat"], out["lon"] = rounded(out.get("lat")), rounded(out.get("lon"))
     return {k: (v if v != "" else None) for k, v in out.items()}
 
 
@@ -218,29 +239,67 @@ def report_rank(r: dict) -> tuple:
             day(r.get("first_certified_on")) or date.min)
 
 
-def spills(rows: list[dict]) -> tuple[list[tuple[str, dict, list[dict], str | None]], int]:
-    """[(record key, the row, its other versions, key note)] and the number of rows folded as versions. Rows with one
-    SPILL ID, WDID and start are one spill; one SPILL ID with several starts is several spills (keyed with the
-    start)."""
+def stamp(start) -> str:
+    """A typed start as YYYYMMDDHHMM (Pacific, as typed); the digits as typed when it does not read; "nostart"."""
+    dt, _ = L.parse_local(start)
+    if dt is not None:
+        return dt.strftime("%Y%m%d%H%M")
+    return re.sub(r"[^0-9]", "", L.clean(start)) or "nostart"
+
+
+def identity(r: dict) -> tuple[str, str]:
+    """(WDID, start stamp) of a row, or of a record's raw (both keep the typed wdid and start_at)."""
+    return L.clean(r.get("wdid")).upper(), stamp(r.get("start_at"))
+
+
+def spills(rows: list[dict], prev_records: list[dict] | None = None
+           ) -> tuple[list[tuple[str, dict, list[dict], str | None]], int, int]:
+    """[(record key, the row, its other versions, key note)], the number of rows folded as versions and the number
+    of rows with no SPILL ID. Rows with one SPILL ID, WDID and start minute are one spill. One SPILL ID with several
+    WDIDs or starts is several spills: each is keyed "<SPILL ID>-<WDID>-<YYYYMMDDHHMM>", except the one a previous
+    record keyed with the SPILL ID alone holds (same WDID and start), which keeps that key; a spill keeps a split key
+    a previous record holds even when it is alone again (keys never move). A row with no SPILL ID is keyed
+    "noid-<WDID>-<YYYYMMDDHHMM>"."""
+    prev_ids = {}
+    for r in prev_records or []:
+        key = str(r.get("source_record_id") or "")
+        if key:
+            prev_ids[key] = identity(r.get("raw") or {})
     by: dict[str, dict[tuple, list[dict]]] = {}
+    no_id = 0
     for r in rows:
         sid = L.clean(r.get("spill_id"))
-        if sid:
-            by.setdefault(sid, {}).setdefault((L.clean(r.get("wdid")).upper(), L.clean(r.get("start_at"))), []).append(r)
+        if not sid:
+            no_id += 1
+        by.setdefault(sid, {}).setdefault(identity(r), []).append(r)
     out, folded = [], 0
     for sid, groups in by.items():
-        for (_, start), rs in groups.items():
+        for (wdid, st), rs in groups.items():
             rs = sorted(rs, key=report_rank)
             folded += len(rs) - 1
-            if len(groups) == 1:
-                out.append((sid, rs[-1], rs[:-1], None))
-                continue
-            dt, _ = L.parse_local(start)
-            key = f"{sid}-{dt.strftime('%Y%m%d%H%M')}" if dt else f"{sid}-{re.sub(r'[^0-9]', '', start) or 'nostart'}"
-            out.append((key, rs[-1], rs[:-1],
-                        f"the file gives SPILL ID {sid} to {len(groups)} spills with different starts; this one is "
-                        "keyed with its start"))
-    return out, folded
+            split = f"{sid}-{wdid or 'nowdid'}-{st}"
+            if not sid:
+                out.append((f"noid-{wdid or 'nowdid'}-{st}", rs[-1], rs[:-1],
+                            "the file gives no SPILL ID for this spill; it is keyed by its WDID and start"))
+            elif prev_ids.get(split) == (wdid, st):
+                out.append((split, rs[-1], rs[:-1], "keyed with its WDID and start, as when it was first read"))
+            elif len(groups) == 1 or prev_ids.get(sid) == (wdid, st):
+                note = None if len(groups) == 1 else (f"the file gives SPILL ID {sid} to {len(groups)} spills; this "
+                                                      "one keeps the key it had")
+                out.append((sid, rs[-1], rs[:-1], note))
+            else:
+                out.append((split, rs[-1], rs[:-1],
+                            f"the file gives SPILL ID {sid} to {len(groups)} spills (different WDIDs or starts); this "
+                            "one is keyed with its WDID and start"))
+    return out, folded, no_id
+
+
+def check_unique(records: list[dict]) -> None:
+    """Two records under one event id would lose one spill downstream: such a read is not used."""
+    rep_ = [k for k, n in Counter(r["event_id"] for r in records).items() if n > 1]
+    if rep_:
+        raise ValueError(f"{len(rep_):,} event id{'s' if len(rep_) != 1 else ''} would repeat (first {rep_[0]}); "
+                         "the read is not used")
 
 
 def operator_names(live_records: list[dict]) -> dict[str, str]:
@@ -284,7 +343,11 @@ def build_record(key: str, row: dict, fetched_at: str, prev: dict | None, wdids:
     if key_note:
         raw["_key_basis"] = key_note
     try:
-        return _record(a, base, raw, fetched_at, wdids, names, live_names)
+        rec = _record(a, base, raw, fetched_at, wdids, names, live_names)
+        if not L.clean(a.get("spill_id")):
+            rec["parse_error"] = "; ".join(x for x in ("the file gives no SPILL ID; keyed by WDID and start",
+                                                       rec.get("parse_error")) if x)
+        return rec
     except Exception as e:  # noqa: BLE001 - never drop a record
         return event(**base, event_type="sso", status="unknown", raw=raw, authority=AUTHORITY,
                      parse_error=f"{type(e).__name__}: {e}")
@@ -302,7 +365,8 @@ def _record(a: dict, base: dict, raw: dict, fetched_at: str, wdids: dict[str, st
                            "receiving water")
     start, n1 = L.parse_local(a.get("start_at"))
     end, n2 = L.parse_local(a.get("end_at"))
-    notes += [n for n in (n1, n2) if n]
+    oes, n3 = L.parse_local(a.get("caloes_control_at"))
+    notes += [f"{field}: {n}" for field, n in (("START DT", n1), ("EST END DT", n2), ("OES CONTROL DT", n3)) if n]
     if a.get("start_at") and start is None:
         problems.append(f"start not read: {a.get('start_at')!r}")
     if a.get("end_at") and end is None:
@@ -348,7 +412,6 @@ def _record(a: dict, base: dict, raw: dict, fetched_at: str, wdids: dict[str, st
         raw["_time_notes"] = notes
     raw["_time_basis"] = "Pacific local time as the file gives it, written with its UTC offset"
 
-    oes, _ = L.parse_local(a.get("caloes_control_at"))
     draft, first, cert, created = (day(a.get(k)) for k in ("draft_submitted_on", "first_certified_on",
                                                              "certified_on", "created_on"))
     if oes is not None:
@@ -369,8 +432,7 @@ def _record(a: dict, base: dict, raw: dict, fetched_at: str, wdids: dict[str, st
     elif pnote:
         raw["_coords_repaired"] = pnote
     precision_m = None
-    apps = {x.strip().lower() for x in L.clean(a.get("appearance_points")).split(";") if x.strip()}
-    if lat is not None and apps and apps <= PRIVATE_ONLY:
+    if lat is not None and private_only(a.get("appearance_points")):
         lat, lon, precision_m = round(lat, 3), round(lon, 3), 150
         raw["_coords_rounded"] = ("the spill appeared only on private property (a private lateral, a building or "
                                   "structure): its point is rounded to about 100 m so it does not mark a home")
@@ -418,52 +480,84 @@ def _time(v) -> datetime | None:
         return None
 
 
-def overlap_index(live_records: list[dict]) -> dict:
-    """The 2022 order's records by SPILL ID, by (WDID, start) and by (WDID, start date) with their points."""
-    ids, starts, days = {}, {}, {}
-    for r in live_records:
-        sid = L.clean(r.get("source_record_id"))
-        if sid:
-            ids[sid] = sid
-        w, t = L.clean(r.get("npdes_permit")).upper(), _time(r.get("started_at"))
-        if w and t is not None:
-            starts[(w, t)] = sid
-            days.setdefault((w, t.date()), []).append((r.get("lat"), r.get("lon"), sid))
-    return {"ids": ids, "starts": starts, "days": days}
+def _near(a: dict, b: dict) -> bool:
+    la, lo, la2, lo2 = a.get("lat"), a.get("lon"), b.get("lat"), b.get("lon")
+    return None not in (la, lo, la2, lo2) and abs(la - la2) <= OVERLAP_DEG and abs(lo - lo2) <= OVERLAP_DEG
 
 
-def overlap_of(rec: dict, idx: dict) -> dict | None:
-    """{spill_id, spill_id_2022, basis} when the record is a spill the 2022 order's file also holds, else None."""
-    raw = rec.get("raw") or {}
-    sid = L.clean(raw.get("spill_id"))
-    if sid and sid in idx["ids"]:
-        return {"spill_id": sid, "spill_id_2022": sid, "basis": "same SPILL ID"}
-    w, t = L.clean(rec.get("npdes_permit")).upper(), _time(rec.get("started_at"))
-    if not w or t is None:
+def relation(rec: dict, live: dict) -> tuple[str, str] | None:
+    """("copy" | "possible", basis) for a history record and a record of the 2022 order's file, else None.
+    A copy: the same WDID and start minute, plus the same SPILL ID, or origin points within about 150 m and the same
+    volume. A possible copy: the same WDID and start date with origin points within about 150 m (what is missing for
+    a copy is said). The same SPILL ID under another WDID or in another year is a contradiction, never a match."""
+    sid = L.clean((rec.get("raw") or {}).get("spill_id"))
+    w, cw = L.clean(rec.get("npdes_permit")).upper(), L.clean(live.get("npdes_permit")).upper()
+    t, ct = _time(rec.get("started_at")), _time(live.get("started_at"))
+    same_id = bool(sid) and L.clean(live.get("source_record_id")) == sid
+    if same_id and (w != cw or (t is not None and ct is not None and t.year != ct.year)):
         return None
-    if (w, t) in idx["starts"]:
-        return {"spill_id": sid, "spill_id_2022": idx["starts"][(w, t)], "basis": "same WDID and start"}
-    la, lo = rec.get("lat"), rec.get("lon")
-    if la is None or lo is None:
+    if not w or w != cw or t is None or ct is None:
         return None
-    for la2, lo2, sid2 in idx["days"].get((w, t.date()), []):
-        if la2 is not None and lo2 is not None and abs(la - la2) <= OVERLAP_DEG and abs(lo - lo2) <= OVERLAP_DEG:
-            return {"spill_id": sid, "spill_id_2022": sid2,
-                    "basis": "same WDID, same start date and origin points within about 150 m"}
+    same_minute = t == ct
+    near = _near(rec, live)
+    same_volume = rec.get("volume_gal") is not None and rec.get("volume_gal") == live.get("volume_gal")
+    if same_minute and same_id:
+        return "copy", "the same WDID, start minute and SPILL ID"
+    if same_minute and near and same_volume:
+        return "copy", "the same WDID and start minute, origin points within about 150 m and the same volume"
+    if t.astimezone(L.TZ).date() == ct.astimezone(L.TZ).date() and near:
+        lt, lct = t.astimezone(L.TZ), ct.astimezone(L.TZ)
+        differs = (f"the starts differ ({lt:%H:%M} and {lct:%H:%M})" if not same_minute else
+                   f"the volumes differ ({rec.get('volume_gal')} and {live.get('volume_gal')} gallons)")
+        return "possible", (f"the same WDID and start date and origin points within about 150 m, but {differs}: "
+                            "both are listed")
     return None
 
 
-def drop_overlap(records: list[dict], live_records: list[dict]) -> tuple[list[dict], list[dict]]:
-    """(records the 2022 order's file does not hold, the overlaps found)."""
-    idx = overlap_index(live_records)
-    kept, found = [], []
+def link_copies(records: list[dict], live_records: list[dict]) -> dict:
+    """Mark each history record the 2022 order's file also holds (relation): a copy gets duplicate_of (that file's
+    event id; the status build lists the spill from that file) and raw._duplicate_basis; a possible copy keeps no
+    link but raw._possible_copy_of {event_id, reason}. No record is dropped. Links are made afresh on every run.
+    Returns the meta block."""
+    by_id, by_day = {}, {}
+    for c in live_records:
+        cs, cw, ct = L.clean(c.get("source_record_id")), L.clean(c.get("npdes_permit")).upper(), _time(c.get("started_at"))
+        if cs:
+            by_id.setdefault(cs, []).append(c)
+        if cw and ct is not None:
+            by_day.setdefault((cw, ct.astimezone(L.TZ).date()), []).append(c)
+    links, copies, possible = [], 0, 0
     for r in records:
-        o = overlap_of(r, idx)
-        if o:
-            found.append(o)
-        else:
-            kept.append(r)
-    return kept, found
+        raw = r.setdefault("raw", {})
+        r["duplicate_of"] = None
+        raw.pop("_duplicate_basis", None)
+        raw.pop("_possible_copy_of", None)
+        sid = L.clean(raw.get("spill_id"))
+        w, t = L.clean(r.get("npdes_permit")).upper(), _time(r.get("started_at"))
+        cands = list(by_id.get(sid, [])) if sid else []
+        if w and t is not None:
+            cands += by_day.get((w, t.astimezone(L.TZ).date()), [])
+        found = {}
+        for c in cands:
+            rel = relation(r, c)
+            if rel and rel[0] not in found:
+                found[rel[0]] = (c, rel[1])
+        if "copy" in found:
+            c, basis = found["copy"]
+            eid = c.get("event_id") or f"{L.SOURCE_ID}:{c.get('source_record_id')}"
+            r["duplicate_of"] = eid
+            raw["_duplicate_basis"] = (f"the State Water Board's current spill file holds this spill as {eid} "
+                                       f"({basis}); it is listed from that file")
+            copies += 1
+            links.append({"event_id": r["event_id"], "duplicate_of": eid, "basis": basis})
+        elif "possible" in found:
+            c, reason = found["possible"]
+            eid = c.get("event_id") or f"{L.SOURCE_ID}:{c.get('source_record_id')}"
+            raw["_possible_copy_of"] = {"event_id": eid, "reason": reason}
+            possible += 1
+            links.append({"event_id": r["event_id"], "possible_copy_of": eid, "reason": reason})
+    return {"duplicate_of": copies, "possible_copy_of": possible, "checked_against": len(live_records),
+            "links": links[:200]}
 
 
 # ---------------------------------------------------------------- the build
@@ -478,7 +572,7 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], live_reco
     live_records = live_records or []
     live_names = operator_names(live_records)
     prev = {r["event_id"]: r for r in prev_records}
-    current, folded = spills(rows)
+    current, folded, no_id = spills(rows, prev_records)
     cats = Counter(L.category(r.get("spill_type")) for _, r, _, _ in current)
     flags = Counter()
     marked_other = 0
@@ -508,17 +602,19 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], live_reco
         raw["_missing_from_file_since"] = raw.get("_missing_from_file_since") or fetched_at
         records.append(r)
         kept += 1
-    records, overlaps = drop_overlap(records, live_records)
+    overlap = link_copies(records, live_records)
+    check_unique(records)
     records.sort(key=lambda r: (r.get("started_at") or r.get("reported_at") or "", r["event_id"]), reverse=True)
     starts = sorted(r["started_at"] for r in records if r.get("started_at"))
     stats = {"rows_read": len(rows), "spills_in_file": len(current), "versions_folded": folded,
+             "rows_without_spill_id": no_id,
              "by_category": {f"Category {k}" if k else "not read": v for k, v in sorted(cats.items(), key=str)},
-             "shown_category_1": len(records),
+             "records": len(records),
+             "shown_category_1": sum(1 for r in records if not r.get("duplicate_of")),
              "not_kept": {"Category 2": cats.get("2", 0), "Category 3": cats.get("3", 0)},
              "category_1_flags": dict(sorted(flags.items())),
              "category_2_3_marked_reached_surface": marked_other,
-             "overlap_with_2022_order": {"count": len(overlaps), "checked_against": len(live_records),
-                                         "spills": overlaps[:200]},
+             "overlap_with_2022_order": overlap,
              "kept_missing_from_file": kept,
              "by_status": dict(Counter(r["status"] for r in records)),
              "by_report_step": dict(Counter(L.clean((r.get("raw") or {}).get("report_step")) for r in records)),
@@ -534,6 +630,14 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], live_reco
 
 # ---------------------------------------------------------------- fetching and main
 
+def read_file(text: str) -> list[dict]:
+    """The file's rows (short keys); a missing column or a row cut short fails the read (ValueError)."""
+    rows = L.read_rows(text, COLUMNS, REQUIRED, strict=True)
+    if not rows:
+        raise ValueError("the file holds no spill rows")
+    return rows
+
+
 def due(state: dict, now: datetime) -> bool:
     """Whether the file is asked for this run: REREAD_DAYS after the last read (or never read)."""
     t = _time(str(state.get("read_at") or "").replace("Z", "+00:00"))
@@ -544,18 +648,14 @@ def keep(prev_doc: dict, prev: list[dict], fetched_at: str, state: dict, why: di
     """A run that reads nothing: the records are kept (the overlap with the 2022 order's file checked again)."""
     from build import redact
     live = (read_json(LIVE_EVENTS, {}) or {}).get("records", [])
-    records, overlaps = drop_overlap(prev, live)
-    meta = {**(prev_doc.get("meta") or {}), **why, "checked_at": fetched_at}
-    if overlaps:
-        old = meta.get("overlap_with_2022_order") or {}
-        meta["overlap_with_2022_order"] = {"count": int(old.get("count") or 0) + len(overlaps),
-                                           "checked_against": len(live),
-                                           "spills": ((old.get("spills") or []) + overlaps)[:200]}
-        meta["shown_category_1"] = len(records)
+    records = list(prev)
+    overlap = link_copies(records, live)
+    meta = {**(prev_doc.get("meta") or {}), **why, "checked_at": fetched_at, "overlap_with_2022_order": overlap,
+            "records": len(records), "shown_category_1": sum(1 for r in records if not r.get("duplicate_of"))}
     write_events(SOURCE_ID, redact.redact_events(records), ok=True, error=None, meta=meta)
     write_json(STATE_FILE, {**state, "checked_at": fetched_at})
-    print(f"{SOURCE_ID}: {said}; {len(records)} records kept"
-          + (f", {len(overlaps)} more found in the 2022 order's file" if overlaps else ""))
+    print(f"{SOURCE_ID}: {said}; {len(records)} records kept ({overlap['duplicate_of']} listed from the 2022 order's "
+          f"file, {overlap['possible_copy_of']} possible copies)")
     return 0
 
 
@@ -592,15 +692,16 @@ def main(argv=None) -> int:
         state["read_at"] = fetched_at
         return keep(prev_doc, prev, fetched_at, state, {"file_not_modified_since": modified, "last_read_at": fetched_at},
                     f"file not modified since {modified}")
+    live = (read_json(LIVE_EVENTS, {}) or {}).get("records", [])
     try:
-        rows = L.read_rows(L.decode(content), COLUMNS, REQUIRED)
-        if not rows:
-            raise ValueError("the file holds no spill rows")
-    except Exception as e:  # noqa: BLE001
+        rows = read_file(L.decode(content))
+        del content
+        records, stats = build(rows, fetched_at, prev, live, file_modified=modified)
+    except Exception as e:  # noqa: BLE001 - a read that fails keeps the previous records
+        write_json(STATE_FILE, state)
         write_events(SOURCE_ID, [], ok=False, error=f"{type(e).__name__}: {e}")
         print(f"{SOURCE_ID}: FAILED {e}", file=sys.stderr)
         return 1
-    del content
     raw_path = state.get("raw_path")
     if not args.file:
         safe = [scrubbed_row(r) for r in rows if L.category(r.get("spill_type")) == "1"]
@@ -611,8 +712,6 @@ def main(argv=None) -> int:
                    "rows": safe}
             raw_path = str(save_raw(SOURCE_ID, json.dumps(doc, ensure_ascii=False), "json").relative_to(ROOT))
             state.update(sha256=sha, raw_path=raw_path, saved_at=fetched_at)
-    live = (read_json(LIVE_EVENTS, {}) or {}).get("records", [])
-    records, stats = build(rows, fetched_at, prev, live, file_modified=modified)
     records = redact.redact_events(records)
     state.update(fetched_at=fetched_at, last_modified=modified)
     if not args.file:
@@ -624,17 +723,20 @@ def main(argv=None) -> int:
     meta = {**stats, "newest_report": newest, "file_last_modified": modified, "raw_path": raw_path, "file": FILE_URL,
             "page": INDEX_URL, "time_basis": "Pacific local time as the file gives it, written with its UTC offset",
             "credit": CREDIT, "registry_ids": [SOURCE_ID], "reread_days": REREAD_DAYS, "backfill": state.get("backfill"),
-            "overlap_basis": ("a spill also in the State Water Board's current spill file (the same SPILL ID, the same "
-                              "WDID and start, or the same WDID, start date and origin point within about 150 m) is "
-                              "listed from that file only"),
+            "overlap_basis": ("A spill also in the State Water Board's current spill file is listed from that file: "
+                              "the same WDID and start minute, with the same SPILL ID or an origin point within about "
+                              "150 m and the same volume. A match by WDID, date and place alone is noted as a "
+                              "possible copy, and both reports are listed."),
             "shown_note": SHOWN_NOTE}
     if not live:
         meta["overlap_note"] = "the current spill file's records were not found, so no overlap was checked this run"
     path_notes_to_meta(records, meta)
     path = write_events(SOURCE_ID, records, ok=True, error=None, meta=meta)
+    o = stats["overlap_with_2022_order"]
     print(f"{SOURCE_ID}: {stats['spills_in_file']} spills in the file, {len(records)} Category 1 records; categories "
-          f"{stats['by_category']}; overlap with the 2022 order {stats['overlap_with_2022_order']['count']}; "
-          f"with a point {stats['with_point']}; starts {stats['start_range']} -> {path}")
+          f"{stats['by_category']}; listed from the 2022 order's file {o['duplicate_of']}, possible copies "
+          f"{o['possible_copy_of']}; no SPILL ID {stats['rows_without_spill_id']}; with a point "
+          f"{stats['with_point']}; starts {stats['start_range']} -> {path}")
     return 0
 
 

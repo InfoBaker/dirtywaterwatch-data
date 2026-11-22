@@ -97,21 +97,27 @@ ROWS = [
     row(**{"SPILL ID": "970007", "START DT": "02/02/2010 00:00", "EST END DT": "02/02/2010 08:35"}),
     row(**{"SPILL ID": "970007", "START DT": "07/10/2011 09:00", "EST END DT": "07/10/2011 09:30"}),
     row(**{"SPILL ID": "970008", "START DT": "12/31/2002 10:28", "EST END DT": "12/31/2002 11:00"}),
-    # in the 2022 order's file too: the same WDID and start
+    # in the 2022 order's file too: the same WDID and start minute, a point within 150 m and the same volume
     row(**{"SPILL ID": "970009", "START DT": "06/01/2023 09:15", "EST END DT": "06/01/2023 10:00"}),
     row(**{"SPILL ID": "970010", "START DT": "05/05/2012 00:00", "EST END DT": ""}),
-    # in the 2022 order's file too: the same WDID and day, the point within 150 m, the time typed twelve hours apart
+    # perhaps in the 2022 order's file: the same WDID and day, the point within 150 m, the start twelve hours apart
     row(**{"SPILL ID": "970011", "START DT": "03/13/2023 02:15", "EST END DT": "03/13/2023 02:45",
            "LATTITUDE DECIMAL DEGREES": "34.1498", "LONGITUDE DECIMAL DEGREES": "-118.0743"}),
 ]
 
+LIVE_ID = "ca-swrcb-ciwqs-spills-flatfile"
+
+
+def live(sid, wdid, start, lat=None, lon=None, volume=None, name="Sampleton City") -> dict:
+    """A record of the 2022 order's events file, as ingest/ca_swrcb_ciwqs_spills.py writes it (the fields used)."""
+    return {"event_id": f"{LIVE_ID}:{sid}", "source_id": LIVE_ID, "source_record_id": sid, "npdes_permit": wdid,
+            "started_at": start, "lat": lat, "lon": lon, "volume_gal": volume, "discharger_name": name}
+
+
 LIVE = [
-    {"source_record_id": "990009", "npdes_permit": "2SSO99001", "started_at": "2023-06-01T09:15:00-07:00",
-     "lat": 37.9, "lon": -122.1, "discharger_name": "Sampleton City"},
-    {"source_record_id": "990011", "npdes_permit": "2SSO99001", "started_at": "2023-03-13T14:15:00-07:00",
-     "lat": 34.1499, "lon": -118.0744, "discharger_name": "Sampleton City"},
-    {"source_record_id": "990012", "npdes_permit": "2SSO99003", "started_at": "2024-01-01T10:00:00-08:00",
-     "lat": 34.0, "lon": -118.0, "discharger_name": "Sample Valley Sewer Authority"},
+    live("990009", "2SSO99001", "2023-06-01T09:15:00-07:00", 37.8004, -122.2703, 1500),
+    live("990011", "2SSO99001", "2023-03-13T14:15:00-07:00", 34.1499, -118.0744, 1500),
+    live("990012", "2SSO99003", "2024-01-01T10:00:00-08:00", 34.0, -118.0, None, "Sample Valley Sewer Authority"),
 ]
 
 
@@ -179,7 +185,7 @@ def test_only_category_1_makes_records_and_categories_2_and_3_are_counted():
     assert stats["category_2_3_marked_reached_surface"] == 1
     assert stats["category_1_flags"]["reached surface water: no; storm drain, sewage not returned"] == 1
     assert stats["rows_read"] == 13 and stats["spills_in_file"] == 12 and stats["versions_folded"] == 1
-    assert stats["shown_category_1"] == len(recs) == 8
+    assert len(recs) == 10 and stats["shown_category_1"] == 9          # 970009 is the 2022 file's copy
 
 
 def test_a_draft_on_private_property_is_rounded_repaired_and_says_its_end_is_the_drafts():
@@ -227,9 +233,9 @@ def test_versions_of_one_spill_fold_and_one_id_for_two_spills_keys_each_by_its_s
     assert r["raw"]["report_step"] == "Certified" and r["volume_gal"] == 950
     assert r["raw"]["_versions"] == [{"report_step": "Amend", "certified_on": "11/01/2017", "spill_type": "Category 1"}]
     assert "970007" not in recs
-    a, b = recs["970007-201002020000"], recs["970007-201107100900"]
+    a, b = recs["970007-2SSO99001-201002020000"], recs["970007-2SSO99001-201107100900"]
     assert a["started_at"].startswith("2010-02-02") and b["started_at"].startswith("2011-07-10")
-    assert "different starts" in a["raw"]["_key_basis"]
+    assert "different WDIDs or starts" in a["raw"]["_key_basis"]
 
 
 def test_a_start_before_the_order_is_not_used():
@@ -239,23 +245,52 @@ def test_a_start_before_the_order_is_not_used():
     assert r["status"] == "ended" and r["ended_at"] == "2002-12-31T11:00:00-08:00"
 
 
-def test_a_spill_in_the_2022_orders_file_is_kept_only_there():
+def test_a_confirmed_copy_in_the_2022_file_is_kept_with_duplicate_of_and_a_weaker_match_is_a_possible_copy():
+    """Review 2026-11-21 P1-2: a history record is never dropped. Same WDID and start minute plus the same SPILL ID, or
+    a point within 150 m and the same volume, is a copy (duplicate_of); the same WDID and day with a nearby point is
+    a possible copy only."""
     recs, stats = records()
-    assert "970009" not in recs and "970011" not in recs
+    assert len(recs) == 10
+    r = recs["970009"]
+    assert r["duplicate_of"] == f"{LIVE_ID}:990009" and "same volume" in r["raw"]["_duplicate_basis"]
+    assert "_possible_copy_of" not in r["raw"]
+    p = recs["970011"]
+    assert p["duplicate_of"] is None
+    assert p["raw"]["_possible_copy_of"]["event_id"] == f"{LIVE_ID}:990011"
+    assert "start" in p["raw"]["_possible_copy_of"]["reason"]
     o = stats["overlap_with_2022_order"]
-    assert o["count"] == 2 and o["checked_against"] == 3
-    by = {x["spill_id"]: x for x in o["spills"]}
-    assert by["970009"] == {"spill_id": "970009", "spill_id_2022": "990009", "basis": "same WDID and start"}
-    assert by["970011"]["spill_id_2022"] == "990011" and "150 m" in by["970011"]["basis"]
-    recs2, stats2 = records(live=[{"source_record_id": "970001", "npdes_permit": "2SSO99009",
-                                   "started_at": "2024-01-01T10:00:00-08:00"}])
-    assert "970001" not in recs2 and stats2["overlap_with_2022_order"]["spills"][0]["basis"] == "same SPILL ID"
+    assert o["duplicate_of"] == 1 and o["possible_copy_of"] == 1 and o["checked_against"] == 3
+    # the same SPILL ID, WDID and start minute: a copy, with no point needed
+    recs2, _ = records(live=[live("970001", "2SSO99001", "2015-10-01T08:15:00-07:00")])
+    assert recs2["970001"]["duplicate_of"] == f"{LIVE_ID}:970001"
+    assert "SPILL ID" in recs2["970001"]["raw"]["_duplicate_basis"]
     recs3, stats3 = records(live=[])
-    assert "970009" in recs3 and "970011" in recs3 and stats3["overlap_with_2022_order"]["count"] == 0
-    # far apart on the same day: two spills
-    far = [dict(LIVE[1], lat=34.3, lon=-118.3)]
-    recs4, _ = records(live=far)
-    assert "970011" in recs4
+    assert all(r["duplicate_of"] is None and "_possible_copy_of" not in r["raw"] for r in recs3.values())
+    assert stats3["overlap_with_2022_order"]["duplicate_of"] == 0
+
+
+def test_the_false_joins_the_review_reproduced_are_never_copies():
+    """Review 2026-11-21 P1-2: contradictory identity is never a match; date and nearness alone never make a copy."""
+    # the same SPILL ID under another WDID in another year
+    recs, _ = records(live=[live("970001", "2SSO99003", "2024-01-15T10:00:00-08:00", 37.8, -122.27, 1500)])
+    assert recs["970001"]["duplicate_of"] is None and "_possible_copy_of" not in recs["970001"]["raw"]
+    # the same SPILL ID and WDID in another year
+    recs, _ = records(live=[live("970001", "2SSO99001", "2016-10-01T08:15:00-07:00", 37.8, -122.27, 1500)])
+    assert recs["970001"]["duplicate_of"] is None and "_possible_copy_of" not in recs["970001"]["raw"]
+    # the same SPILL ID and start minute under another WDID
+    recs, _ = records(live=[live("970001", "2SSO99002", "2015-10-01T08:15:00-07:00", 37.8, -122.27, 1500)])
+    assert recs["970001"]["duplicate_of"] is None and "_possible_copy_of" not in recs["970001"]["raw"]
+    # another SPILL ID, the same WDID and start minute, points hundreds of kilometres apart
+    recs, _ = records(live=[live("990100", "2SSO99001", "2015-10-01T08:15:00-07:00", 34.05, -118.25, 1500)])
+    assert recs["970001"]["duplicate_of"] is None and "_possible_copy_of" not in recs["970001"]["raw"]
+    # the same WDID, start minute and point, another volume: a possible copy, not a copy
+    recs, _ = records(live=[live("990101", "2SSO99001", "2015-10-01T08:15:00-07:00", 37.8003, -122.2702, 40)])
+    assert recs["970001"]["duplicate_of"] is None
+    assert recs["970001"]["raw"]["_possible_copy_of"]["event_id"] == f"{LIVE_ID}:990101"
+    # a morning and an evening spill of one operator at one place: both kept, the link only possible
+    recs, _ = records(live=[live("990102", "2SSO99001", "2015-10-01T19:40:00-07:00", 37.8001, -122.2701, 1500)])
+    assert recs["970001"]["duplicate_of"] is None
+    assert "990102" in recs["970001"]["raw"]["_possible_copy_of"]["event_id"]
 
 
 def test_the_operator_name_comes_from_the_registry_else_the_2022_file():
@@ -350,8 +385,10 @@ def test_a_run_reads_at_most_weekly_and_keeps_the_records_between_reads(monkeypa
         raise AssertionError("asked for the file within the week")
     (tmp_path / "build" / "events" / "live.json").write_text(json.dumps({"records": LIVE}))
     rc, doc, _ = run_main(monkeypatch, tmp_path, [], no_fetch)
-    assert rc == 0 and doc["ok"] and doc["count"] == 8                           # the overlap checked again
-    assert doc["meta"]["overlap_with_2022_order"]["count"] == 2
+    assert rc == 0 and doc["ok"] and doc["count"] == 10                          # never dropped: linked again
+    by = {r["source_record_id"]: r for r in doc["records"]}
+    assert by["970009"]["duplicate_of"] == f"{LIVE_ID}:990009" and "_possible_copy_of" in by["970011"]["raw"]
+    assert doc["meta"]["overlap_with_2022_order"]["duplicate_of"] == 1
 
 
 def test_a_304_keeps_the_records_and_backfill_reads_the_whole_file_without_if_modified_since(monkeypatch, tmp_path):
@@ -392,3 +429,97 @@ def test_a_failed_read_exits_1_and_keeps_the_records(monkeypatch, tmp_path):
         return b"REGION\tWDID\n2\t2SSO99001\n", None
     rc, doc, _ = run_main(monkeypatch, tmp_path, ["--backfill"], broken)
     assert rc == 1 and doc["ok"] is False and doc["count"] == 10
+
+
+def test_private_property_digits_never_reach_the_raw_or_the_saved_page(monkeypatch, tmp_path):
+    """Review 2026-11-21 P1-1: raw.lat and raw.lon kept the exact private-property point."""
+    recs, _ = records()
+    out = json.dumps(redact.redact_events([recs["970002"]]))
+    saved = json.dumps([M.scrubbed_row(r) for r in rows_read()])
+    for digits in ("812345", "265432"):
+        assert digits not in out and digits not in saved
+    assert recs["970002"]["raw"]["lat"] == "37.812" and recs["970002"]["raw"]["lon"] == "122.265"
+    assert recs["970001"]["raw"]["lat"] == "37.8"                       # a manhole's point as typed
+
+    def fetch(sess, state, url=None):
+        return file_bytes(), None
+    run_main(monkeypatch, tmp_path, [], fetch)
+    page = next((tmp_path / "raw" / M.SOURCE_ID).glob("*.json")).read_text()
+    assert "812345" not in page and "265432" not in page
+
+
+def cut(rows, spill_id, after_column) -> str:
+    """The file's text with one data row cut after a column (the rest of that line lost)."""
+    lines = text(rows).split("\n")
+    for i, line in enumerate(lines[1:], 1):
+        cells = line.split("\t")
+        if len(cells) > 3 and cells[3] == spill_id:
+            lines[i] = "\t".join(cells[:HEADER.index(after_column) + 1])
+            break
+    return "\n".join(lines)
+
+
+def test_a_row_cut_short_is_a_failed_read_that_keeps_the_records(monkeypatch, tmp_path):
+    """Review 2026-11-21 P2-3: a row cut after SPILL ID dropped the record; one cut after SPILL TYPE blanked it."""
+    for col in ("SPILL ID", "SPILL TYPE"):
+        with pytest.raises(ValueError) as e:
+            M.read_file(cut(ROWS, "970001", col))
+        assert "1 data row" in str(e.value) and "970001" not in str(e.value)
+
+    def fetch(sess, state, url=None):
+        return file_bytes(), None
+    run_main(monkeypatch, tmp_path, [], fetch)
+    for col in ("SPILL ID", "SPILL TYPE"):
+        def short(sess, state, url=None, col=col):
+            return cut(ROWS, "970001", col).encode("cp1252"), None
+        rc, doc, _ = run_main(monkeypatch, tmp_path, ["--backfill"], short)
+        assert rc == 1 and doc["ok"] is False and doc["count"] == 10 and "fewer fields" in doc["error"]
+        r = {x["source_record_id"]: x for x in doc["records"]}["970001"]
+        assert r["started_at"] == "2015-10-01T08:15:00-07:00" and r["volume_gal"] == 1500
+
+
+def test_two_operators_under_one_spill_id_get_two_keys_and_a_repeated_event_id_fails_the_read():
+    """Review 2026-11-21 P2-4."""
+    rs = rows_read([row(), row(**{"WDID": "2SSO99002"})])
+    recs, _ = records(rs, live=[])
+    assert set(recs) == {"970001-2SSO99001-201510010815", "970001-2SSO99002-201510010815"}
+    assert recs["970001-2SSO99002-201510010815"]["discharger_id"] == "ca-sample-bay-sd"
+    r = recs["970001-2SSO99001-201510010815"]
+    with pytest.raises(ValueError, match="event id"):
+        M.check_unique([r, dict(r)])
+
+
+def test_keys_stay_stable_when_a_second_spill_appears_under_an_id_and_after_a_later_short_read():
+    """Review 2026-11-21 P2-5: a second start moved the first spill to a new key and left a third record."""
+    first, _ = records(rows_read([row()]), live=[])
+    assert set(first) == {"970001"}
+    two = rows_read([row(), row(**{"START DT": "03/03/2016 06:00", "EST END DT": "03/03/2016 07:00"})])
+    second, stats = records(two, prev=list(first.values()), live=[], fetched="2026-11-28T10:00:00Z")
+    assert set(second) == {"970001", "970001-2SSO99001-201603030600"}
+    assert stats["kept_missing_from_file"] == 0 and second["970001"]["raw"]["_first_seen_at"] == FETCHED
+    assert "_missing_from_file_since" not in second["970001"]["raw"]
+    # a later read with only the new spill: it keeps its key, the first is kept and marked
+    only = rows_read([row(**{"START DT": "03/03/2016 06:00", "EST END DT": "03/03/2016 07:00"})])
+    third, _ = records(only, prev=list(second.values()), live=[], fetched="2026-12-05T10:00:00Z")
+    assert set(third) == {"970001", "970001-2SSO99001-201603030600"}
+    assert third["970001"]["raw"]["_missing_from_file_since"] == "2026-12-05T10:00:00Z"
+    assert third["970001-2SSO99001-201603030600"]["started_at"] == "2016-03-03T06:00:00-08:00"
+
+
+def test_a_row_with_no_spill_id_is_kept_under_its_wdid_and_start_and_counted():
+    """Review 2026-11-21 P2-6."""
+    rs = rows_read([row(**{"SPILL ID": ""}), row(**{"SPILL ID": "", "SPILL TYPE": "Category 3",
+                                                    "START DT": "10/02/2015 08:00"})])
+    recs, stats = records(rs, live=[])
+    assert set(recs) == {"noid-2SSO99001-201510010815"}
+    r = recs["noid-2SSO99001-201510010815"]
+    assert "no SPILL ID" in r["parse_error"] and r["started_at"] == "2015-10-01T08:15:00-07:00"
+    assert stats["rows_without_spill_id"] == 2 and stats["by_category"] == {"Category 1": 1, "Category 3": 1}
+
+
+def test_a_cal_oes_time_at_the_clock_change_keeps_the_parsers_note():
+    """Review 2026-11-21 P2-7."""
+    recs, _ = records(rows_read([row(**{"OES CONTROL DT": "11/01/2015 01:30"})]), live=[])
+    r = recs["970001"]
+    assert r["reported_at"] == "2015-11-01T01:30:00-07:00"
+    assert any(n.startswith("OES CONTROL DT") and "twice" in n for n in r["raw"]["_time_notes"])
