@@ -76,7 +76,7 @@ def test_a_changed_record_or_a_changed_water_places_it_again(tmp_path, monkeypat
     placed.clear()
     waters = {**WATERS, "test-river-ma": {**WATERS["test-river-ma"], "towns": ["Springfield", "Chicopee"]}}
     S.build(**world(tmp_path, rs, waters))
-    assert len(placed) == 4                                # a water record changed: every record placed again
+    assert sorted(placed) == ["ma-test:new", "ma-test:old0", "ma-test:old1"]  # unrelated miss stays cached
 
 
 def test_the_cache_is_off_for_a_build_that_does_not_write_the_shared_outputs(tmp_path, monkeypatch):

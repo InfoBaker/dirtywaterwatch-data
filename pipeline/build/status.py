@@ -2234,7 +2234,12 @@ class Resolver:
     def __init__(self, waters: dict, outfalls: list[dict], discharger_towns: dict | None = None,
                  discharger_waters: dict | None = None, placement_rules: dict | None = None):
         """placement_rules: data/rules.json "placement" (None: read it)."""
+        # Stable ties and name-index order across equivalent writer payloads. Town order is retained:
+        # the guard quotes the first towns in its note. Alias order carries no such meaning.
+        waters = {s: {**w, **{k: sorted(set(w.get(k) or [])) for k in ("aliases", "slug_aliases")}}
+                  for s, w in sorted(waters.items())}
         self.waters = waters
+        self.dependencies = None
         self.slug_alias = slug_aliases(waters)          # an older slug of a record -> the record (P2-1)
         self.slug_alias.update(remainder_parents(waters))   # Oregon: a river's remainder read as the river (P2-2)
         pr = (load_rules().get("placement") or {}) if placement_rules is None else placement_rules
@@ -2289,6 +2294,8 @@ class Resolver:
         """Names contained in already-normalised, space-padded text. Only this pure text lookup is cached:
         point, town, county, island, qualification and placement guards still run for each report.
         Persisted entries are admitted only under placement_stamp; keep only keys used this build."""
+        if self.dependencies:
+            self.dependencies.observe(("matching", state, text, stems))
         key = json.dumps([state, text, stems], ensure_ascii=False)
         if self.cache_name_matches:
             if key in self.name_matches:
@@ -2358,6 +2365,8 @@ class Resolver:
             return None
         best = None
         for s in slugs:
+            if self.dependencies:
+                self.dependencies.observe(("waters", s))
             g = water_geometry(s, self.waters)
             if g is None:
                 continue
@@ -2664,13 +2673,28 @@ class Resolver:
         kept, aside, _ = self.guard_detail(slugs, ev)
         return kept, aside
 
+    def point_candidates(self, lat, lon, state):
+        # Rechecking saved spatial queries must not scan the national catalog once per old point.
+        # The tree only filters boxes; the original inclusive comparisons still decide membership.
+        from shapely.geometry import Point, box
+        from shapely.strtree import STRtree
+        if not hasattr(self, "_point_index"):
+            rows = [(s, w) for s, w in self.waters.items() if w.get("bbox")]
+            boxes = [box(w["bbox"][0] - .01, w["bbox"][1] - .01,
+                         w["bbox"][2] + .01, w["bbox"][3] + .01) for _, w in rows]
+            self._point_index = rows, STRtree(boxes)
+        rows, tree = self._point_index
+        candidates = [rows[i] for i in sorted(tree.query(Point(lon, lat)))]
+        return [s for s, w in candidates if (state is None or w.get("state") == state)
+                and w["bbox"][0] - .01 <= lon <= w["bbox"][2] + .01
+                and w["bbox"][1] - .01 <= lat <= w["bbox"][3] + .01]
+
     def by_point(self, lat, lon, state):
         if lat is None or lon is None:
             return None
-        pad = 0.01
-        cands = [s for s, w in self.waters.items()
-                 if (state is None or w.get("state") == state) and w.get("bbox")
-                 and w["bbox"][0] - pad <= lon <= w["bbox"][2] + pad and w["bbox"][1] - pad <= lat <= w["bbox"][3] + pad]
+        if self.dependencies:
+            self.dependencies.observe(("point", lat, lon, state))
+        cands = self.point_candidates(lat, lon, state)
         near = self.nearest(cands, lat, lon)
         if near and near[0] <= GEOMETRY_MATCH_M:
             return near
@@ -2689,18 +2713,28 @@ class Resolver:
         d = row.get("distance_m")
         return f"{step}, " + (f"{d} m from the point" if d is not None else "no point") + f"; {by}"
 
+    @staticmethod
+    def row_water_key(row):
+        """The memo identity, also used when replaying selective-cache dependencies."""
+        permit_ = str(row.get("npdes_permit") or "")
+        eff_state = (row.get("state") or (permit_[:2] if re.match(r"[A-Z]{2}\d", permit_) else "") or "").upper()
+        text_ = (row.get("receiving_water") or row.get("receiving_water_echo") or row.get("water_name") or "").strip()
+        # Include every row input read by row_water and registry_how, including note-only fields.
+        # Caller-supplied rows can share permit/outfall IDs but need different answers and observations.
+        # Effective state/text preserve the fallback semantics; retrieval metadata is immaterial.
+        # Distance is quoted in notes: numerically equal 1 and 1.0 produce different text.
+        distance = row.get("distance_m")
+        return (row.get("_file"), row.get("npdes_permit"), row.get("outfall"), row.get("lat"), row.get("lon"),
+                eff_state, text_, row.get("water_slug"), row.get("water_matched_by"), row.get("no_water_reason"),
+                row.get("city"), row.get("county"), row.get("match"), row.get("water_match"),
+                str(distance) if distance is not None else None)
+
     def row_water(self, row) -> tuple[str | None, str]:
         """(slug, how) for one registry outfall. A row the registry pass matched (water_matched_by; PLACE_STEPS
         registry_first): its water_slug, or no water when the pass found none (no_water_reason). Otherwise its
         water_slug, else its receiving water's name in its state (checked against the outfall's own point by the
         guard), else the water at its point."""
-        permit_ = str(row.get("npdes_permit") or "")
-        eff_state = (row.get("state") or (permit_[:2] if re.match(r"[A-Z]{2}\d", permit_) else "") or "").upper()
-        text_ = (row.get("receiving_water") or row.get("receiving_water_echo") or row.get("water_name") or "").strip()
-        # the effective state and the text are part of the key: a Puerto Rico row's answer never reaches the same row
-        # read as another state's (review 2026-11-15 P1), nor rows with no identifiers but another text
-        key = (row.get("_file"), row.get("npdes_permit"), row.get("outfall"), row.get("lat"), row.get("lon"),
-               eff_state, text_, row.get("water_slug"))
+        key = self.row_water_key(row)
         if key in self._row_water:
             return self._row_water[key]
         if PLACE_STEPS["registry_first"] and row.get("water_matched_by"):
@@ -3081,6 +3115,8 @@ class Resolver:
             return {"water_slugs": [], "water_match": "none", "note": None, "unknown_slugs": unknown,
                     "unplaced_reason": elsewhere}
         text0 = ev.get("waterbody_text")
+        if self.dependencies and isinstance(text0, str):
+            self.dependencies.observe(("person", text0))
         if isinstance(text0, str) and text0.strip() \
                 and (not re.sub(r"[\W_]+", "", text0.replace(REDACTED, "")) or person_shaped(text0)) \
                 and not self.mentions_water(text0, event_state(ev)):
@@ -5144,8 +5180,8 @@ def source_health(sid: str, f: dict, reg: dict, now: datetime) -> dict:
 PLACEMENT_CACHE = BUILD_DIR / "placement-cache.json"
 PLACEMENT_CACHE_DAYS = 120      # records that began longer ago than this reuse their placement while nothing changed
 # Resolver inputs, not the source documents' fetch/run metadata. Keep these beside the stamp so a new
-# placement input has an explicit cache dependency. Lists whose order chooses a tie or appears in a note
-# stay ordered; JSON object key order and unrelated registry rows do not affect the stamp.
+# placement input has an explicit cache dependency. Waters and aliases use canonical order; town lists
+# and within-permit registry rows retain the order quoted in placement notes.
 PLACEMENT_WATER_KEYS = ("name", "state", "kind", "towns", "bbox", "aliases", "slug_aliases", "covers_part_of")
 PLACEMENT_OUTFALL_KEYS = ("npdes_permit", "outfall", "outfall_name", "outfall_status", "state", "lat", "lon",
                           "water_slug", "receiving_water", "receiving_water_echo", "water_name", "city", "county",
@@ -5173,7 +5209,7 @@ def outline_files(waters) -> list:
     return out
 
 
-def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules, states, parts=None) -> str:
+def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules, states, parts=None, water_hashes=None) -> str:
     """Content dependencies of Resolver.resolve, independent of fetch/run times and filesystem metadata.
 
     Colour/reach rules are evaluated afresh outside the cached resolver. person_shaped reads the reference
@@ -5183,8 +5219,14 @@ def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules
     import hashlib
     import sys as _sys
     from build import redact as _redact
+    from build import placement_cache as _pc
     from ingest import hi_doh_cwb_events as _hi
-    water_inputs = [(s, {k: w.get(k) for k in PLACEMENT_WATER_KEYS}) for s, w in waters.items()]
+    water_inputs = [(s, {k: sorted(set(w.get(k) or [])) if k in ("aliases", "slug_aliases") else w.get(k)
+                        for k in PLACEMENT_WATER_KEYS}) for s, w in sorted(waters.items())]
+    outlines = outline_files(waters)
+    if water_hashes is not None:
+        shapes = dict(outlines)
+        water_hashes.update({s: _pc.digest([w, shapes[s]]) for s, w in water_inputs})
     # Resolver groups by permit; ordering between different permits is immaterial, but ordering within a
     # permit determines its fallback and the order of outfalls in the placement note.
     by_permit = defaultdict(list)
@@ -5193,21 +5235,27 @@ def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules
             by_permit[o["npdes_permit"]].append({k: o.get(k) for k in PLACEMENT_OUTFALL_KEYS})
     towns = {k: sorted({norm_town(t) for t in v or []}) for k, v in discharger_towns.items()}
     operator_waters = {k: {f: v.get(f) for f in ("state", "names", "slugs")} for k, v in discharger_waters.items()}
-    # Hash the same memoized vocabulary person_shaped reads. Each hourly stage runs in a fresh process;
+    # Project the same memoized vocabulary person_shaped reads. Each hourly stage runs in a fresh process;
     # callers changing reference files within one process clear the redactor's caches as well.
-    reference_names = [sorted(v) for v in _redact._reference_norm(str(_redact.DATA_DIR))]
+    known, reference_towns = _redact._reference_norm(str(_redact.DATA_DIR))
+    # person_shaped only consults whole names after these lexical gates. Water/utility words,
+    # ordinary names without a common first name and non-first-name towns cannot change its answer.
+    excluded = _redact.KILL | _redact.WATER_WORDS | set(_redact.FUNCTION) | set(_redact.STATES) | set(_redact.HEADER_WORDS)
+    reference_names = [sorted(n for n in known if 2 <= len(n.split()) <= 4
+                              and n.split()[0] in _redact.FIRST_NAMES and not set(n.split()) & excluded),
+                       sorted(reference_towns & _redact.FIRST_NAMES)]
     counties = {}
     for state, filename in COUNTY_STATES.items():
         doc = read_json(DATA_DIR / "reference" / filename) or {}
         counties[state] = [{k: c.get(k) for k in ("geoid", "county", "geometry")} for c in doc.get("counties") or []]
-    inputs = {"waters": water_inputs, "outlines": outline_files(waters), "outfalls": by_permit,
+    inputs = {"waters": water_inputs, "outlines": outlines, "outfalls": by_permit,
               "operator_towns": towns, "operator_waters": operator_waters,
               "placement_rules": bool((rules.get("placement") or {}).get("no_outfall_all_waters")),
               "states": sorted(states), "steps": PLACE_STEPS, "reference_names": reference_names, "counties": counties}
     fingerprints = {k: hashlib.sha256(json.dumps(v, sort_keys=True, default=str).encode()).hexdigest()
                     for k, v in inputs.items()}
     code = hashlib.sha256()
-    for f in (Path(__file__), Path(_redact.__file__), Path(_sys.modules["common"].__file__), Path(_hi.__file__)):
+    for f in (Path(__file__), Path(_redact.__file__), Path(_sys.modules["common"].__file__), Path(_hi.__file__), Path(_pc.__file__)):
         code.update(f.read_bytes() if f.exists() else b"-")
     fingerprints["code"] = code.hexdigest()
     if parts is not None:
@@ -5233,7 +5281,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     None and rules.rain_likely.enabled is true. Placement reads every outfall registry file
     (load_registry_outfalls) when outfalls is None, else the outfalls given.
     placement_cache: a record that began more than PLACEMENT_CACHE_DAYS ago keeps the placement the last run made
-    for it when the record and everything placement reads are unchanged (placement_stamp, record_hash): with the
+    for it when its record and observed placement inputs are unchanged (placement_stamp, record_hash): with the
     history of a state on file (Michigan from 2001, some 55,000 records) placing every record again took 30 s an
     hour. Everything else (intervals, colours, counts) is computed for every record as before. True: the file
     PLACEMENT_CACHE when this build writes the shared outputs (write and the default events directory); a path: that
@@ -5303,20 +5351,27 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         placement_cache = PLACEMENT_CACHE if write and Path(events_dir) == Path(EVENTS_DIR) else None
     resolver.cache_name_matches = bool(placement_cache)
     cache_old, cache_new, cache_stamp = {}, {}, None
-    cache_parts = {}
+    cache_parts, water_hashes = {}, {}
+    dependencies = None
     if placement_cache:
         cache_stamp = placement_stamp(waters, placement_outfalls, discharger_towns, discharger_waters, rules, _STATES,
-                                      parts=cache_parts)
+                                      parts=cache_parts, water_hashes=water_hashes)
         try:
             c = read_json(Path(placement_cache)) or {}
         except (OSError, ValueError):
             c = {}
-        if c.get("stamp") == cache_stamp:
-            cache_old = c.get("placements") or {}
-            resolver.name_matches_old = c.get("name_matches") or {}
-        elif c.get("inputs"):
-            changed = [k for k, v in cache_parts.items() if c["inputs"].get(k) != v]
+        unchanged = c.get("stamp") == cache_stamp
+        changed = [k for k, v in cache_parts.items() if (c.get("inputs") or {}).get(k) != v]
+        if not unchanged and c.get("inputs"):
             print("status: placement cache inputs changed: " + ", ".join(changed))
+        # Query observations cover water content, outlines and reference-name predicates. All remaining
+        # dependencies still invalidate globally. A legacy cache has no observations and starts cold.
+        if not set(changed) - {"waters", "outlines", "reference_names"}:
+            cache_old = c.get("placements") or {}
+        if unchanged:
+            resolver.name_matches_old = c.get("name_matches") or {}
+        from build.placement_cache import Dependencies
+        dependencies = Dependencies(resolver, water_hashes, c.get("dependencies"), unchanged)
     cache_before = (now - timedelta(days=PLACEMENT_CACHE_DAYS)) if placement_cache else None
     cache_hits = 0
 
@@ -5373,12 +5428,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         if began is not None and began < cache_before and agency_extent(ev) is None:
             h = record_hash(ev)
             hit = cache_old.get(eid)
-            if hit and hit[0] == h:
+            if hit and hit[0] == h and len(hit) == 3 and dependencies.valid(hit[2]):
                 pl = copy.deepcopy(hit[1])
+                group = dependencies.import_group(hit[2])
                 cache_hits += 1
             else:
-                pl = resolver.resolve(ev)
-            cache_new[eid] = [h, copy.deepcopy(pl)]
+                pl, group = dependencies.resolve(ev)
+            cache_new[eid] = [h, copy.deepcopy(pl), group]
         else:
             pl = resolver.resolve(ev)
         placements[eid] = {k: v for k, v in pl.items() if k != "unknown_slugs"}
@@ -6078,7 +6134,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         p.parent.mkdir(parents=True, exist_ok=True)
         tmp = p.with_suffix(p.suffix + ".tmp")
         tmp.write_text(json.dumps({"stamp": cache_stamp, "inputs": cache_parts, "built": iso(now), "placements": cache_new,
-                                  "name_matches": resolver.name_matches},
+                                  "name_matches": resolver.name_matches, "dependencies": dependencies.saved()},
                                   separators=(",", ":"), default=str))
         tmp.replace(p)
         print(f"status: placement reused for {cache_hits} of {len(cache_new)} records that began over "

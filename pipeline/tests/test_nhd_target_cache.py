@@ -123,7 +123,7 @@ def test_target_cache_reuses_and_invalidates(tmp_path, monkeypatch, change):
         N.TARGET_PLACEMENTS.write_text("{")
     unplaced = []
     warm = encoded(N.collect_targets(waters, records, verbose=False, unplaced=unplaced), unplaced)
-    assert len(calls) == {"fetch": 0, "record": 1, "water": 4, "removed": 0, "corrupt": 4}[change]
+    assert len(calls) == {"fetch": 0, "record": 1, "water": 2, "removed": 0, "corrupt": 4}[change]
     saved = json.loads(N.TARGET_PLACEMENTS.read_text())
     assert set(saved["placements"]) == {r["event_id"] for r in records}
     N.TARGET_PLACEMENTS.unlink()

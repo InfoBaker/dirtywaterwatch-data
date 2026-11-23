@@ -110,7 +110,8 @@ def test_real_placement_inputs_invalidate(tmp_path, monkeypatch, capsys, change)
             {"geoid": "00001", "county": "Example", "geometry": geom}]}))
     S._GEOM_CACHE.clear()
     S.build(**kw)
-    assert "placement reused for 0 of 3" in capsys.readouterr().out
+    hits = 2 if change in ("outline", "geometry_lines") else 0
+    assert f"placement reused for {hits} of 3" in capsys.readouterr().out
     cached = snapshot(output)
     S._GEOM_CACHE.clear()
     S.build(**{**kw, "placement_cache": None})
@@ -139,9 +140,9 @@ def test_stamp_ignores_object_order_and_inter_permit_order_but_keeps_meaningful_
     waters["test-river-ma"] = dict(reversed(list(waters["test-river-ma"].items())))
     outfalls.reverse()
     assert stamp() == base
-    # Tied nearest waters and multi-outfall notes use input order. Ignoring it would return stale bytes.
+    # Resolver uses canonical slug order for water ties; multi-outfall notes retain permit order.
     waters = dict(reversed(list(waters.items())))
-    assert stamp() != base
+    assert stamp() == base
     outfalls[0]["npdes_permit"] = outfalls[1]["npdes_permit"]
     base = stamp()
     outfalls.reverse()
