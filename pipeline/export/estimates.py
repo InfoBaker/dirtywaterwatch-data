@@ -37,6 +37,7 @@ from __future__ import annotations
 import math
 import re
 from datetime import UTC, datetime, timedelta
+from zoneinfo import ZoneInfo
 
 from common import end_after
 
@@ -408,19 +409,32 @@ def end_estimate_of(e: dict) -> dict | None:
     dur = _stated(spec, inp)
     if not dur:
         return None
-    end, _ = end_after(st, timedelta(minutes=dur["minutes"]), e.get("time_precision"))
     prec = "minute" if e.get("time_precision") == "minute" else "day"
+    stored_day = e.get("source_id") == "ny-dec-sprtk" and prec == "day"
+    if stored_day:
+        # DEC's stored date may be one day early. Count from the end of the next calendar day,
+        # including 23/25-hour DST days, then add the elapsed duration through common.end_after.
+        day = st.astimezone(ZoneInfo("America/New_York")).date() + timedelta(days=2)
+        latest = datetime(day.year, day.month, day.day, tzinfo=ZoneInfo("America/New_York"))
+        end, _ = end_after(latest, timedelta(minutes=dur["minutes"]), "minute")
+    else:
+        end, _ = end_after(st, timedelta(minutes=dur["minutes"]), prec)
     noun = inp.get("noun") or "report"
     what = EXPECTS[dur["from"]].format(noun=noun)
     dw = duration_words(dur["minutes"])
     if prec == "minute":
         basis = f"We added {what}, {dw}, to its start time."
         at = end.isoformat(timespec="seconds")
+    elif stored_day:
+        basis = (f"The start can be DEC's stored date or the day after. We added {what}, {dw}, to the end of "
+                 "that later day and show the last day the duration allows.")
+        at = end.date().isoformat()
     else:
         basis = (f"We added {what}, {dw}, to the day it gives as the start. The {noun} gives no time of day, so this is "
                  "the last day the duration allows.")
         at = end.date().isoformat()
-    return {"at": at, "precision": prec, "basis": basis, "basis_short": f"start + {dw} {SHORT[dur['from']]}",
+    short_start = "end of day after stored date" if stored_day else "start"
+    return {"at": at, "precision": prec, "basis": basis, "basis_short": f"{short_start} + {dw} {SHORT[dur['from']]}",
             "inputs": {"started_at": e.get("started_at"), "duration_minutes": _clean_num(round(dur["minutes"], 2)),
                        "duration_from": dur["from"], "duration_text": dur["text"]}}
 

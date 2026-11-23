@@ -196,8 +196,8 @@ def test_starts_we_do_not_trust_give_no_estimate(recs):
 def test_a_start_known_only_to_the_day_gives_a_day(recs):
     e = {**wb(recs, "2345603510134952"), "started_at": "2024-02-18T00:00:00-05:00", "time_precision": "day"}
     end = E.end_estimate_of(e)
-    assert end["at"] == "2024-02-19" and end["precision"] == "day"   # the last day 4 hours after that day allows
-    assert "gives no time of day" in end["basis"]
+    assert end["at"] == "2024-02-20" and end["precision"] == "day"   # stored date or the following day
+    assert "DEC's stored date or the day after" in end["basis"]
     assert E.volume_estimate_of(e)["inputs"]["duration_from"] == "duration_expected"   # a day start is no span
 
 
@@ -446,3 +446,46 @@ def test_review_9_a_short_basis_names_the_inputs_for_the_report_cell(recs):
     D.enrich([e])
     s = X.slim_event({**e, "file": "events/x.json", "fixture": False})
     assert s["volume_estimate"]["basis_short"] and s["end_estimate"]["basis_short"]
+
+
+@pytest.mark.parametrize("start, want", [
+    ("2021-03-02T00:00:00-05:00", "2021-03-04"),
+    ("2021-03-13T00:00:00-05:00", "2021-03-15"),
+    ("2021-11-06T00:00:00-04:00", "2021-11-08"),
+])
+def test_stored_date_end_estimate_uses_end_of_the_next_calendar_day(recs, start, want):
+    e = wb(recs, "2345603510134952")
+    e.update(started_at=start, time_precision="day")
+    e["raw"]["row"]["dischargeDuration"] = "30 Minutes - Ongoing"
+    end = E.end_estimate_of(e)
+    assert end["at"] == want and end["precision"] == "day"
+    assert "DEC's stored date or the day after" in end["basis"]
+    assert end["inputs"]["started_at"] == start
+    assert e["started_at"] == start and e["ended_at"] is None
+
+
+def test_real_stored_date_duration_uses_later_day_only_when_no_end_is_reported():
+    from ingest import ny_sprtk as M
+    row = json.loads((FIXTURE.parent / "ny_sprtk_clocks.json").read_text())["rows"]["early_morning"]
+    notices, _, _ = M.notices_from([{"tab": row["tab"], "rows": [row["values"]]}])
+    n = notices[0]
+    M.parse_notice(n)
+    ctx = {"fetched_at": "2026-11-22T20:00:00Z", "echo": {}, "dischargers": {}, "cso_permits": set(),
+           "place_cache": {}}
+    e = M.to_record(n, "clock", [n], 0, None, ctx)
+    assert E.end_estimate_of(e) is None  # the source-stated end wins
+    # Exercise the no-reported-end case with this real row's unchanged start and duration.
+    e["ended_at"] = None
+    end = E.end_estimate_of(e)
+    assert end["at"] == "2021-09-25" and end["precision"] == "day"
+    assert end["inputs"]["duration_minutes"] == 495
+    assert end["inputs"]["started_at"] == "2021-09-23T00:00:00-04:00"
+    assert "DEC's stored date or the day after" in end["basis"]
+
+
+def test_the_dec_web_message_day_clock_is_unchanged(recs):
+    e = copy.deepcopy(recs["ny-dec-sprtk-web:NYS900021-20261106T162658Z"])
+    e.update(started_at="2021-03-02T00:00:00-05:00", time_precision="day", ended_at=None)
+    end = E.end_estimate_of(e)
+    assert end["at"] == "2021-03-03" and end["precision"] == "day"
+    assert "gives no time of day" in end["basis"]

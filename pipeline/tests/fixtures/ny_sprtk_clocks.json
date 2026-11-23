@@ -1,0 +1,54 @@
+{
+  "source_url": "https://www.dec.ny.gov/fs/data/SPRTK_Data.xlsx",
+  "read_url": "https://web.archive.org/web/20261012004317id_/https://extapps.dec.ny.gov/fs/data/SPRTK_Data.xlsx",
+  "checked_on": "2026-11-22",
+  "sha256": "036edfb92094b11d33906247f6267bdba8fb07046cecf716d420ad70f4c7608f",
+  "note": "Only clock, duration and agency identifier columns retained. The early-morning description is its first sentence only. No addresses or personal data.",
+  "rows": {
+    "website": {
+      "tab": "May _website",
+      "row": 22,
+      "values": {
+        "sprtk id": "NY0026255",
+        "start time": "44319.837500000001",
+        "duration": "Intermitted 24"
+      }
+    },
+    "website_winter": {
+      "tab": "May _website",
+      "row": 2,
+      "values": {
+        "sprtk id": "NY0099091",
+        "start time": "44250.5",
+        "duration": "2007"
+      }
+    },
+    "id_notice": {
+      "tab": "May 2021",
+      "row": 30,
+      "values": {
+        "POTW/POSS ID": "NY0026255",
+        "Discharge Start Date": "2021-05-03",
+        "Discharge End Date": "2021-05-05",
+        "Duration": "Intermitted 24 Hours - Ongoing",
+        "Notifcation Sent Date": "2021-05-04",
+        "Notification ID": "982830251250626",
+        "Notification Status": "New"
+      }
+    },
+    "early_morning": {
+      "tab": "September 2021",
+      "row": 136,
+      "values": {
+        "POTW/POSS ID": "NY0026018",
+        "Discharge Start Date": "2021-09-23",
+        "Discharge End Date": "2021-09-24",
+        "Duration": "8.25 Hours - Ended",
+        "Discharge Description": "Heavy rainfall caused a permitted wet weather discharge from 00:40 - 09:00 hrs on 9/24.",
+        "Notifcation Sent Date": "2021-09-24",
+        "Notification ID": "1792483126150553",
+        "Notification Status": "New"
+      }
+    }
+  }
+}
