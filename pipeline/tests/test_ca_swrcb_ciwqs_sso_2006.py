@@ -523,3 +523,52 @@ def test_a_cal_oes_time_at_the_clock_change_keeps_the_parsers_note():
     r = recs["970001"]
     assert r["reported_at"] == "2015-11-01T01:30:00-07:00"
     assert any(n.startswith("OES CONTROL DT") and "twice" in n for n in r["raw"]["_time_notes"])
+
+
+def exact_private_history(category):
+    return common.event(source_id=M.SOURCE_ID, source_record_id="retained-private", event_type="sso",
+        lat=37.812345, lon=-122.265432, fetched_at=FETCHED,
+        raw={"appearance_points": category, "lat": "37.812345", "lon": "-122.265432"})
+
+
+def assert_private_history_rounded(records):
+    assert len(records) == 1
+    r = records[0]
+    assert (r["lat"], r["lon"], r["coord_precision_m"]) == (37.812, -122.265, 150)
+    assert (r["raw"]["lat"], r["raw"]["lon"]) == ("37.812", "-122.265")
+    assert "37.812345" not in json.dumps(records) and "122.265432" not in json.dumps(records)
+
+
+@pytest.mark.parametrize("category", sorted(M.PRIVATE_ONLY))
+def test_retained_2006_history_rounds_every_private_category(category):
+    old = exact_private_history(category)
+    records, _ = M.build([], FETCHED, [old], [], wdids={}, names={})
+    assert_private_history_rounded(records)
+    assert old["lat"] == 37.812345  # caller's evidence is not mutated
+
+
+@pytest.mark.parametrize("path", ["cadence", "304", "fetch_failure", "parse_failure"])
+def test_2006_retention_write_paths_scrub_saved_private_coordinates(monkeypatch, tmp_path, path):
+    events = tmp_path / "build" / "events"
+    events.mkdir(parents=True)
+    old = exact_private_history("Building or Structure")
+    (events / f"{M.SOURCE_ID}.json").write_text(json.dumps({
+        "records": [old], "last_ok_at": FETCHED}))
+    (tmp_path / "build" / "state.json").write_text(json.dumps({
+        "read_at": FETCHED if path == "cadence" else "2020-01-01T00:00:00Z"}))
+    monkeypatch.setattr(M, "now_iso", lambda: FETCHED)
+    calls = []
+    def fetch(*args, **kwargs):
+        calls.append(True)
+        if path == "fetch_failure":
+            raise ValueError("file unavailable")
+        if path == "parse_failure":
+            return b"invalid layout", None
+        return None, FETCHED
+    rc, doc, _ = run_main(monkeypatch, tmp_path, [], fetch)
+    assert rc == (1 if path.endswith("failure") else 0)
+    assert bool(calls) == (path != "cadence")
+    assert_private_history_rounded(doc["records"])
+    assert doc["records"][0]["fetched_at"] == FETCHED
+    if rc:
+        assert doc["ok"] is False and doc["last_ok_at"] == FETCHED
