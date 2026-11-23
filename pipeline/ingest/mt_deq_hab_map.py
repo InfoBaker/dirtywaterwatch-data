@@ -14,12 +14,16 @@ Source
   advisories had all been lifted or lapsed).
 
 Safe fields (requested by name; nothing else is read or saved): globalid, name, county, agency, sample_date,
-  advisory_lvl, advisory_issued, advisory_lifted, date_observed, microcystin, anatoxin, public_accessible and the point
+  advisory_lvl, advisory_issued, advisory_lifted, date_observed, microcystin, anatoxin, cyano_density, public_accessible and the point
   (0.001 degree, WGS84). Never requested: desc_bloom (the reporter's description), pic_url, the illness questions and
   the survey's other answers. The advisory_issued and advisory_lifted texts can name people ("reported by ..."): only
   the dates read from them and the words caution, closure and toxin are kept; the text itself is never stored or saved.
   sample_date, microcystin and anatoxin are free text too: they are kept to their dates, numbers and the result
   vocabulary (safe_result: any other word withheld, decimals of a typed point rounded) on every save path.
+
+cyano_density is retained as a typed sample_results item: analyte, text, value, units, qualifier and sample date,
+  with its field/layer citation. The 2026-11-22 read gives qualitative text, no numeric cell counts with units;
+  value and units remain null. A partial or multiple sample date stays in sample_date_text without an invented date.
 
 Record rules
   - A row is a record when advisory_issued gives a date and does not say no advisory was issued, and DEQ's level is not
@@ -63,7 +67,7 @@ SOURCE_ID = "mt-deq-hab-map"
 LAYER = ("https://gis.mtdeq.us/hosting/rest/services/Hosted/Harmful_Algal_Bloom_Survey_(Public_Web_Map)/FeatureServer/0")
 DASHBOARD = "https://gis.mtdeq.us/portal/apps/dashboards/10c34f5c7da24c4188b9ddc220d43970"
 FIELDS = ("globalid,name,county,agency,sample_date,advisory_lvl,advisory_issued,advisory_lifted,date_observed,"
-          "microcystin,anatoxin,public_accessible")
+          "microcystin,anatoxin,cyano_density,public_accessible")
 AUTHORITY = "Montana Department of Environmental Quality (harmful algal bloom map)"
 TZ = "America/Denver"
 LICENCE = ("Data intended for reference and planning purposes only. DEQ takes no responsibility for misuse of data "
@@ -228,7 +232,11 @@ RESULT_WORDS = frozenset("""detect detects detected detection nondetect non not 
     ppb ppm per test tests tested testing strip strips kit lab laboratory sample samples sampled sampling result
     results pending based on as of at and or from for in new info id identification taxa taxon photo photos visual
     observed observation toxin toxins microcystin microcystins anatoxin cylindrospermopsin saxitoxin cyano
-    cyanobacteria bloom elisa qpcr pcr water beach shore shoreline open surface dock ramp""".split())
+    cyanobacteria bloom elisa qpcr pcr water beach shore shoreline open surface dock ramp
+    cell cells density dolichospermum aphanizomenon microcystis dominated by some until only algae green
+    anabaena oscillatoria lyngbya sp taxa shows producing toxic non low sparse very absent dissipated
+    identified description professional provided initial report active concentrated yellowish swirled coloration
+    boat launch slight micro""".split())
 _WITHHELD = "[withheld]"
 
 
@@ -251,12 +259,29 @@ def safe_result(v):
     return " ".join(t.split()) or None
 
 
+def density_results(raw: dict) -> list[dict]:
+    """DEQ's cyano_density is free text, usually qualitative. Never turn dates or presence into a count.
+    A single, fully dated sample field can be normalized; partial/multiple dates remain source text only.
+    """
+    text = safe_result(raw.get("cyano_density"))
+    if text is None or str(text).strip().lower() in {"", "na", "n/a"}:
+        return []
+    sample = safe_result(raw.get("sample_date"))
+    ds = dates_in(str(sample or ""), None) if re.fullmatch(
+        r"(?:\d{1,2}[/.-]\d{1,2}[/.-](?:\d{4}|\d{2})|\d{4}[/.-]\d{2}[/.-]\d{2})", str(sample or "")) else []
+    # No numeric density/unit pair is published in the checked layer (2026-11-22).
+    # Keep the typed slots null until a source-backed numeric shape is established.
+    return [{"analyte": "Cyanobacteria", "value": None, "units": None, "qualifier": None,
+             "text": str(text), "sample_date": ds[0] if len(ds) == 1 else None,
+             "sample_date_text": sample, "source_field": "cyano_density", "source_url": LAYER}]
+
+
 def slug(v: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", (v or "").lower()).strip("-") or "water"
 
 
 RAW_KEPT = ("water", "place", "county", "time_zone", "advisory_level_at_read", "issued_dates", "lifted_dates", "words",
-            "agency_field", "sample_date", "microcystin", "anatoxin", "licence", "dashboard", "start_basis",
+            "agency_field", "sample_date", "microcystin", "anatoxin", "cyano_density", "licence", "dashboard", "start_basis",
             "text_note", "point_withheld", "ended_at_precision", "end_basis", "_last_seen_in_source")
 
 
@@ -276,7 +301,7 @@ def sanitized(r: dict) -> dict:
     for k in ("water", "place"):
         if raw.get(k):
             raw[k] = safe_name(raw[k], private)
-    for k in ("sample_date", "microcystin", "anatoxin"):
+    for k in ("sample_date", "microcystin", "anatoxin", "cyano_density"):
         if k in raw:
             raw[k] = safe_result(raw[k])
     if raw.get("agency_field"):
@@ -288,6 +313,7 @@ def sanitized(r: dict) -> dict:
         r["lat"], r["lon"] = round(float(r["lat"]), 3), round(float(r["lon"]), 3)
     if "retained" in (r.get("raw") or {}):
         raw["retained"] = r["raw"]["retained"]
+    raw["sample_results"] = density_results(raw)
     r["raw"] = raw
     return r
 
@@ -343,9 +369,10 @@ def build(doc: dict, fetched: str, previous: list[dict] | None = None,
                "lifted_dates": lifts, "words": words,
                "agency_field": scrub(clean(a.get("agency")) or "") or None,
                "sample_date": safe_result(a.get("sample_date")), "microcystin": safe_result(a.get("microcystin")),
-               "anatoxin": safe_result(a.get("anatoxin")), "licence": LICENCE, "dashboard": DASHBOARD,
+               "anatoxin": safe_result(a.get("anatoxin")), "cyano_density": safe_result(a.get("cyano_density")), "licence": LICENCE, "dashboard": DASHBOARD,
                "start_basis": "the earliest date in DEQ's advisory_issued field (its issue date)",
                "text_note": "DEQ's advisory notes are not reproduced: they can name the people who reported a bloom"}
+        raw["sample_results"] = density_results(raw)
         if private:
             raw["point_withheld"] = "the report says the water is not publicly accessible: its county only"
         gid = seen_gids[-1]
@@ -429,7 +456,7 @@ def build(doc: dict, fetched: str, previous: list[dict] | None = None,
 
 
 SAVED_ATTRS = ("globalid", "county", "sample_date", "advisory_lvl", "advisory_issued", "advisory_lifted",
-               "date_observed", "microcystin", "anatoxin", "public_accessible", "name", "agency")
+               "date_observed", "microcystin", "anatoxin", "cyano_density", "public_accessible", "name", "agency")
 
 
 def safe_rows(doc: dict) -> dict:
@@ -447,7 +474,7 @@ def safe_rows(doc: dict) -> dict:
             a["name"] = safe_name(a.get("name") or "", private)
         if a.get("agency") not in (None, ""):
             a["agency"] = scrub(clean(a.get("agency")) or "") or None
-        for k in ("sample_date", "microcystin", "anatoxin"):
+        for k in ("sample_date", "microcystin", "anatoxin", "cyano_density"):
             if k in a:
                 a[k] = safe_result(a[k])
         t = str(a.get("advisory_issued") or "")

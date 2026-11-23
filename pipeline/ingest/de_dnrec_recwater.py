@@ -107,12 +107,14 @@ def scrub_carried(prev: dict) -> dict:
     prev = json.loads(json.dumps(prev or {}))
     for v in (prev.get("polls") or {}).values():
         v["name"] = scrub_unit_name(v.get("name"))
+        if v.get("description"):
+            v["description"] = scrub_text(v["description"])
     for r in (prev.get("history") or {}).values():
         for k in ("outfall_name", "waterbody_text"):
             r[k] = scrub_unit_name(r.get(k))
         raw = r.get("raw") or {}
         raw["unit_name"] = scrub_unit_name(raw.get("unit_name"))
-        for k in ("advisory_description",):
+        for k in ("advisory_description", "unit_description"):
             if raw.get(k):
                 raw[k] = scrub_text(raw[k])
         if r.get("advice_text"):
@@ -123,7 +125,7 @@ SOURCE_ID = "de-dnrec-recreational-water"
 SOCRATA = ("https://data.delaware.gov/resource/ever-58ni.json?$select=advisoryid,advstartdate,advenddate,advdesc,"
            "advcomment,advreason,advtype,unitname&$order=advisoryid&$limit=50000")
 STATIONS = ("https://enterprise.firstmap.delaware.gov/arcgis/rest/services/Environmental/DE_DNREC_Monitoring_Network/"
-            "FeatureServer/2/query?where=1%3D1&outFields=OBJECTID,UnitName,UnitID,CurrentAdvisory,ShowInMapID,BeachID,"
+            "FeatureServer/2/query?where=1%3D1&outFields=OBJECTID,UnitName,UnitDesc,UnitID,CurrentAdvisory,ShowInMapID,BeachID,"
             "Latitude,Longitude&returnGeometry=false&f=json")
 DATASET_URL = "https://data.delaware.gov/Energy-and-Environment/Recreational-Water-Advisories/ever-58ni"
 MAP_URL = "https://recwaters.dnrec.delaware.gov/"
@@ -179,6 +181,16 @@ BEACH_WATERS = [
     (re.compile(r"^Lake Como", re.I), "Lake Como"),
     (re.compile(r"^(Holt's Landing|James Farm)", re.I), "Indian River Bay"),
 ]
+
+
+def description_water(description: str | None) -> str | None:
+    """Read the water from DNREC's station-description template, without supplying a name.
+    Generic descriptions such as "a Pond" give no named water. Normal placement uses the water registry.
+    """
+    m = re.fullmatch(r"This is an? .+? (?:along|in) (?:the )?(.+?)\.?", description or "")
+    if not m or m[1].lower() in {"a pond", "a lake", "a bay", "a river", "pond", "water"}:
+        return None
+    return m[1]
 
 
 def beach_water(unit: str | None) -> str | None:
@@ -268,8 +280,16 @@ def history_records(rows: list[dict], stations: dict[str, dict], today: date, fe
             raw["status_basis"] = f"no end date given and the start is more than {OPEN_NO_END_DAYS} days old"
         else:
             status = "advisory_active"
-        water = beach_water(r.get("unitname")) or r.get("unitname")
-        if water != r.get("unitname"):
+        description = scrub_text((st or {}).get("UnitDesc") or "") or None
+        source_water = description_water(description)
+        water = source_water or beach_water(r.get("unitname")) or r.get("unitname")
+        if description:
+            raw["unit_description"] = description
+            raw["unit_description_observed_at"] = fetched_at
+            raw["unit_description_url"] = STATIONS.split("/query")[0]
+        if source_water:
+            raw["water_basis"] = "DNREC's station description (UnitDesc)"
+        if not source_water and water != r.get("unitname"):
             raw["water_basis"] = "the water the beach lies on, by the beach's name"
         if lat is not None:
             raw["point_basis"] = "DNREC's sampling station for this beach (FirstMap, Recreational Water Sampling Location)"
@@ -340,12 +360,16 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
                 key, n = f"{base}-{n}", n + 1
             lat, lon = point(s)
             state[key] = {"unit_id": uid, "code": code, "name": s.get("UnitName"), "started_at": fetched_at,
-                          "lat": lat, "lon": lon}
+                          "lat": lat, "lon": lon, "description": scrub_text(s.get("UnitDesc") or ""),
+                          "description_observed_at": fetched_at if s.get("UnitDesc") else None}
         else:
             # a read after an unread gap opens a new observation period (verify3 P1-1)
             cur["listed_periods"] = extend_periods(cur.get("listed_periods"), fetched_at, cur["started_at"],
                                                    cur.get("last_seen_at"))
             cur["last_seen_at"] = fetched_at
+            if s.get("UnitDesc"):
+                cur["description"] = scrub_text(s["UnitDesc"])
+                cur["description_observed_at"] = fetched_at
     for key, v in state.items():
         if v.get("ended_at"):
             continue
@@ -382,6 +406,12 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
                "start_basis": "the first poll of DNREC's map that showed this status; DNREC's issue time is not on the map",
                "_last_seen_in_source": v.get("last_seen_at") or v["started_at"],
                "point_basis": "DNREC's sampling station for this beach (FirstMap, Recreational Water Sampling Location)"}
+        if v.get("description"):
+            raw["unit_description"] = scrub_text(v["description"])
+            raw["unit_description_observed_at"] = v.get("description_observed_at")
+            raw["unit_description_url"] = STATIONS.split("/query")[0]
+            if description_water(raw["unit_description"]):
+                raw["water_basis"] = "DNREC's station description (UnitDesc)"
         if v.get("ended_at"):
             raw.update(ended_at_precision="poll", end_basis="the first poll of DNREC's map that showed another status")
         if v.get("missing_since"):
@@ -406,7 +436,8 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
         else:
             status = "advisory_lifted" if v.get("ended_at") else "advisory_active"
         recs.append(event(source_id=SOURCE_ID, source_record_id=key, event_type=etype, status=status,
-                          waterbody_text=beach_water(v["name"]) or v["name"], outfall_name=v["name"], lat=lat, lon=lon, coord_source="station",
+                          waterbody_text=description_water(v.get("description")) or beach_water(v["name"]) or v["name"],
+                          outfall_name=v["name"], lat=lat, lon=lon, coord_source="station",
                           coord_precision_m=100, started_at=v["started_at"], ended_at=v.get("ended_at"),
                           time_precision="poll", fetched_at=fetched_at, authority=AUTHORITY,
                           source_url=BEACH_URL.format(v["unit_id"]), raw=raw,
@@ -458,7 +489,7 @@ META = {"credit": "Delaware Department of Natural Resources and Environmental Co
 
 
 SAFE_ROW_FIELDS = ("advisoryid", "advstartdate", "advenddate", "advdesc", "advcomment", "advreason", "advtype", "unitname")
-SAFE_STATION_FIELDS = ("OBJECTID", "UnitName", "UnitID", "CurrentAdvisory", "ShowInMapID", "BeachID")
+SAFE_STATION_FIELDS = ("OBJECTID", "UnitName", "UnitDesc", "UnitID", "CurrentAdvisory", "ShowInMapID", "BeachID")
 
 
 def safe_rows(rows: list[dict]) -> list[dict]:
@@ -488,6 +519,8 @@ def safe_stations(stations: list[dict]) -> list[dict]:
         x = {k: s.get(k) for k in SAFE_STATION_FIELDS}
         if x.get("UnitName"):
             x["UnitName"] = scrub_unit_name(x["UnitName"])        # verify2 P1-3
+        if x.get("UnitDesc"):
+            x["UnitDesc"] = scrub_text(x["UnitDesc"])
         lat, lon = point(s)
         x["Latitude"], x["Longitude"] = lat, lon
         out.append(x)
