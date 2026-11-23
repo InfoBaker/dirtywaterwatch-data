@@ -99,9 +99,9 @@ def test_unfilled_volume_and_the_cautious_reading_of_reached_water():
     assert r["status"] == "ended" and r["raw"]["_end_basis"]
 
 
-def test_rows_before_2026_are_left_to_the_history_layer_only_when_it_holds_them():
+def test_rows_before_2026_retain_their_source_ends_even_when_history_holds_them():
     recs, stats = records(hist={"202500025"})
-    assert "c58469d9" not in recs and stats["left_to_history_layer"] == 1     # 2025-01-01, incident 202500025
+    assert recs["c58469d9"]["ended_at"] and stats["left_to_history_layer"] == 0  # incident 202500025
     recs, stats = records(hist={"202500024"})
     assert recs["c58469d9"]["raw"]["_kept_basis"] and stats["before_2026_not_in_history"] == 1
     # review 2026-11-16 P2: an empty or unreadable history file proves nothing, so the row is kept

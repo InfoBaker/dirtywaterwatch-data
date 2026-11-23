@@ -152,10 +152,10 @@ def test_history_has_no_end_times_marks_this_years_copies_and_withholds_private_
     assert p["raw"]["_owner_kind"] == "private or not stated" and "_owner_public" not in p["raw"]
     assert p["started_at"] is None and p["reported_at"] and p["raw"]["reached_water"] is False
     d = by["202601742"]
-    assert d["duplicate_of"] == "nc-dwr-sso-2026:aaaaaaaa-0000-4000-8000-000000000002"
+    assert d["duplicate_of"] is None  # the current copy is ongoing without an end; retain both cautions
     assert d["discharger_id"] == "nc-charlotte-water"
     assert {"202502056-14", "202502056-15"} <= set(by)          # a repeated incident number takes the object id
-    assert stats["duplicate_of_this_year"] == 1 and stats["without_start"] == 3
+    assert stats["duplicate_of_this_year"] == 0 and stats["without_start"] == 3
     assert no_placeholder(recs) == []
 
 

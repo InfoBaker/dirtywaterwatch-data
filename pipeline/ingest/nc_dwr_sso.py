@@ -39,8 +39,8 @@ Source
       Continuity: the old layer's records stay (raw._missing_from_layer_since) and, by the BIMS incident number both
       layers carry (checked: the 76 incidents of 2026 in the history layer have the same start and facility in both),
       are duplicate_of the new layer's record (link_incidents; the Survey123 layer's copy stands). Rows that start
-      before 2026 are the history layer's (all 2,811 were on 2026-11-16) and are left to it, unless the history events
-      file lacks the incident number. 80 reports of the old layer are not in the new one: kept as they were.
+      before 2026 are retained too. join_history links unique incident numbers and permits where the times are
+      compatible and Survey123 gives an uncontradicted end. Each source keeps its own times and citation.
   Every reportable overflow appears: 1,000 gallons or more to the ground, or any amount reaching surface
   water (the DWR reporting rule; permit conditions). No licence; the item says the data "cannot be construed
   to be a legal document". Credit: NC DEQ Division of Water Resources.
@@ -653,9 +653,8 @@ def build(rows: list[tuple[str, dict]], fetched_at: str, prev_records: list[dict
           permits: dict[str, str] | None = None, hist_incidents: set[str] | None = None,
           schemas: dict[str, str] | None = None) -> tuple[list[dict], dict]:
     """rows: (layer url, attributes); schemas: layer url -> the schema its description showed (else decided by the
-    row's keys). Returns the records (earlier records that left the layers kept) and stats. A Survey123 row that starts
-    before 2026 is left to the history layer (nc-dwr-sso-2022-2025) only when the history file (hist_incidents) holds
-    its incident number; when the file holds nothing or cannot be read, the row is kept."""
+    row's keys). Returns the records (earlier records that left the layers kept) and stats. Pre-2026 Survey123 rows
+    retain their source ends; join_history reconciles them with retained history separately."""
     schemas = schemas or {}
     permits = permit_index() if permits is None else permits
     prev = {r["event_id"]: r for r in prev_records}
@@ -667,18 +666,15 @@ def build(rows: list[tuple[str, dict]], fetched_at: str, prev_records: list[dict
         survey = schemas[layer] == "survey123" if layer in schemas else is_survey(a)
         early = survey and before_2026(a)
         if early:
-            if hist_incidents and clean(a.get("incident_number")) in hist_incidents:
-                left_to_history += 1
-                continue
-            kept_early += 1
+            if not hist_incidents or clean(a.get("incident_number")) not in hist_incidents:
+                kept_early += 1
         eid = f"{SOURCE_ID}:{gid}"
         if eid in seen:
             continue
         seen.add(eid)
         rec = build_record(a, layer, fetched_at, prev.get(eid), permits, survey)
         if early:
-            rec["raw"]["_kept_basis"] = ("starts before 2026, but the history events file does not hold its incident "
-                                         "number" + ("" if hist_incidents else " (the file holds none or was not read)"))
+            rec["raw"]["_kept_basis"] = "DWR's Survey123 report is retained with its own start and end fields."
         records.append(rec)
     kept = 0
     for eid, r in prev.items():
@@ -725,7 +721,10 @@ def link_incidents(records: list[dict], seen: set[str]) -> int:
             groups.setdefault(inc, []).append(r)
     n = 0
     for inc, rs in groups.items():
-        if len(rs) < 2:
+        # Several rows with this identity in one layer are ambiguous, not copies from different layers.
+        layers = Counter(r["raw"].get("_layer") for r in rs if r["event_id"] in seen)
+        permits = {clean(r.get("npdes_permit")).upper() for r in rs if r.get("npdes_permit")}
+        if len(rs) < 2 or max(layers.values(), default=0) > 1 or len(permits) > 1:
             continue
         keep = max(rs, key=lambda r: (r["event_id"] in seen, year(r), r["raw"].get("_first_seen_at") or "", r["event_id"]))
         for r in rs:
@@ -735,6 +734,68 @@ def link_incidents(records: list[dict], seen: set[str]) -> int:
             r["raw"]["_duplicate_basis"] = (f"DWR incident number {inc} is also on {keep['event_id']}, the copy in "
                                             "the layer DWR publishes now")
             n += 1
+    return n
+
+
+def join_history(history: list[dict], current: list[dict]) -> int:
+    """Link unique DWR incident + permit identities, retaining both source records unchanged.
+
+    History often repeats Survey123's end as both start and end. Do not require equal starts, but require its
+    timestamp to lie in Survey123's reported envelope. Missing/contradictory ends and ambiguous identities keep
+    both records standing, so an uncertain match cannot shorten history's caution. No source timestamp is copied.
+    """
+    def key(r):
+        inc, permit = incident(r), clean(r.get("npdes_permit")).upper()
+        return (inc, permit) if inc and permit else None
+
+    def stamp(v):
+        try:
+            t = datetime.fromisoformat(v.replace("Z", "+00:00")) if v else None
+            return t if t is not None and t.tzinfo is not None else None
+        except (TypeError, ValueError):
+            return None
+
+    hg, cg = {}, {}
+    for r in history:
+        raw = r.setdefault("raw", {})
+        # Recompute this module's links, including old incident-number-only matches.
+        if raw.pop("_duplicate_basis", None) is not None:
+            r["duplicate_of"] = None
+        raw.pop("_history_join", None)
+        if k := key(r):
+            hg.setdefault(k, []).append(r)
+    for r in current:
+        r.setdefault("raw", {}).pop("_history_join", None)
+        if k := key(r):
+            cg.setdefault(k, []).append(r)
+    n = 0
+    for k, hs in hg.items():
+        cs = cg.get(k, [])
+        cs = ([r for r in cs if (r.get("raw") or {}).get("_layer") == SURVEY_LAYER]
+              or [r for r in cs if not r.get("duplicate_of")])
+        if len(hs) != 1 or len(cs) != 1:
+            continue
+        h, c = hs[0], cs[0]
+        cr = c.get("raw") or {}
+        start, end = stamp(c.get("started_at")), stamp(c.get("ended_at"))
+        hstart, hend = stamp(h.get("started_at")), stamp(h.get("ended_at"))
+        fetched = stamp(c.get("fetched_at"))
+        if (c.get("duplicate_of") or not start or not end or end <= start
+                or not fetched or end > fetched
+                or cr.get("_ongoing_flag_with_end") or c.get("status") != "ended"
+                or (hstart and not start <= hstart <= end) or (hend and hend != end)):
+            continue
+        basis = "The same DWR incident number and permit appear once in each source; their reported times are compatible."
+        h["duplicate_of"] = c["event_id"]
+        h["raw"]["_duplicate_basis"] = basis
+        for record, other in ((h, c), (c, h)):
+            record["raw"]["_history_join"] = {
+                "event_id": other["event_id"], "source_url": other.get("source_url"),
+                "started_at": other.get("started_at"), "ended_at": other.get("ended_at"),
+                "fetched_at": other.get("fetched_at"), "source_updated_at": other.get("source_updated_at"),
+                "basis": basis,
+            }
+        n += 1
     return n
 
 
@@ -805,11 +866,6 @@ def hist_record(a: dict, fetched_at: str, rid: str, permits: dict[str, str], dup
 def build_history(rows: list[dict], fetched_at: str, current: list[dict],
                   permits: dict[str, str] | None = None) -> tuple[list[dict], dict]:
     permits = permit_index() if permits is None else permits
-    by_inc = {}
-    for r in current:
-        inc = incident(r)
-        if inc and not r.get("duplicate_of"):
-            by_inc.setdefault(inc, r["event_id"])
     counts = Counter(clean(a.get("incident_number")) for a in rows)
     out, ids = [], set()
     for a in rows:
@@ -818,7 +874,8 @@ def build_history(rows: list[dict], fetched_at: str, current: list[dict],
         if rid in ids:
             continue
         ids.add(rid)
-        out.append(hist_record(a, fetched_at, rid, permits, by_inc.get(inc) if inc else None))
+        out.append(hist_record(a, fetched_at, rid, permits, None))
+    join_history(out, current)
     out.sort(key=lambda r: (r.get("started_at") or r.get("reported_at") or "", r["event_id"]), reverse=True)
     stats = {"layer_rows": len(rows), "records": len(out),
              "duplicate_of_this_year": sum(1 for r in out if r.get("duplicate_of")),
@@ -922,6 +979,12 @@ def main(argv=None) -> int:
     permits = permit_index()
     prev = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
     records, stats = build(rows, fetched_at, prev, permits, history_incidents(), schemas)
+    history_path = EVENTS_DIR / f"{HIST_ID}.json"
+    history = read_json(history_path, None)
+    if isinstance(history, dict) and isinstance(history.get("records"), list):
+        stats["history_joins"] = join_history(history["records"], records)
+        # A link update is not a new read of the frozen source: keep its fetch time and health.
+        write_json(history_path, history)
     records = redact.redact_events(records)
     newest = max((r.get("reported_at") or "" for r in records), default="") or None
     stats["newest_start"] = max((r.get("started_at") or "" for r in records if not r.get("duplicate_of")),
@@ -961,6 +1024,12 @@ def main(argv=None) -> int:
                            "December 2025", "registry_ids": [HIST_ID]}
         path_notes_to_meta(hrecs, hmeta)
         hp = write_events(HIST_ID, hrecs, ok=True, error=None, meta=hmeta)
+        # build_history also adds the reciprocal citation to the current records. Persist it on this first
+        # backfill, keeping the successful current read's metadata and times.
+        current_doc = read_json(path, {})
+        current_doc["records"] = records
+        current_doc["meta"]["history_joins"] = hstats["duplicate_of_this_year"]
+        write_json(path, current_doc)
         print(f"{HIST_ID}: {hstats['records']} records, {hstats['duplicate_of_this_year']} duplicates of this year's "
               f"layer, {hstats['without_start']} without a start -> {hp}")
     return 0
