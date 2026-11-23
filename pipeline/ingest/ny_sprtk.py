@@ -522,11 +522,29 @@ def notices_from(tabs: list[dict]) -> tuple[list[dict], list[dict], Counter]:
     return list(by_id.values()), website, stats
 
 
-def parse_notice(n: dict) -> dict:
-    """Times (with their clock), status, facility and address key of one notice -> n["p"]."""
+TIME_FIELDS = (("airDateTime", "air"), ("startDateTime", "start"), ("endDateTime", "end"), ("lastModified", "modified"))
+
+
+def parse_notice(n: dict, clock=None) -> dict:
+    """Times (with their clock), status, facility and address key of one notice -> n["p"]. clock: for another
+    workbook with its own clock rules (ingest/ny_sprtk_history.py), a function of one time value returning
+    (aware UTC datetime or date or None, precision, basis) and raising ValueError for a value it cannot read;
+    None reads this workbook's clocks (parse_dt, row_era, resolve)."""
     f, problems = n["f"], []
+    if clock is not None:
+        p = {"problems": problems, "near_cutover": False, "basis": {}}
+        for key, short in TIME_FIELDS:
+            try:
+                val, prec, basis = clock(f.get(key))
+            except ValueError as e:
+                val, prec, basis = None, None, None
+                problems.append(f"{key}: {error_detail(e)}")
+            p[short], p[short + "_prec"] = val, prec
+            if basis:
+                p["basis"][short] = basis
+        return _notice_fields(n, f, p, problems)
     raw_vals = {}
-    for key in ("airDateTime", "startDateTime", "endDateTime", "lastModified"):
+    for key, _short in TIME_FIELDS:
         try:
             raw_vals[key] = parse_dt(f.get(key))
         except ValueError as e:
@@ -534,8 +552,7 @@ def parse_notice(n: dict) -> dict:
             problems.append(f"{key}: {error_detail(e)}")
     era, near = row_era(*raw_vals["airDateTime"])
     p = {"problems": problems, "near_cutover": near, "basis": {}}
-    for key, short in (("airDateTime", "air"), ("startDateTime", "start"), ("endDateTime", "end"),
-                       ("lastModified", "modified")):
+    for key, short in TIME_FIELDS:
         v, fam = raw_vals[key]
         val, prec, basis = resolve(v, fam, era)
         if n["tab"] == "April-June23" and basis == "dmon_shifted":
@@ -543,6 +560,11 @@ def parse_notice(n: dict) -> dict:
         p[short], p[short + "_prec"] = val, prec
         if basis:
             p["basis"][short] = basis
+    return _notice_fields(n, f, p, problems)
+
+
+def _notice_fields(n: dict, f: dict, p: dict, problems: list) -> dict:
+    """Status, facility and address key of one notice into p, and p into n["p"]."""
     st = str(f.get("notificationStatus") or "").strip().title() or None
     if st and st not in STATUS_RANK:
         problems.append(f"notificationStatus {st!r} not recognised")
@@ -573,9 +595,11 @@ def sort_key(n: dict):
     return (t, STATUS_RANK.get(p["status"], 1), len(n["id"]), n["id"])
 
 
-def build_chains(notices: list[dict]) -> dict[str, list[dict]]:
+def build_chains(notices: list[dict], merge_edited: bool = True) -> dict[str, list[dict]]:
     """chain id -> notices in order. incidentId first; then facility + address + start (minute), which
-    also joins a later notice to an incidentId chain with the same key."""
+    also joins a later notice to an incidentId chain with the same key. merge_edited: join a chain that opens
+    without a New notice to an open chain at the same place (merge_edited_starts); off for a workbook with no
+    evidence of revisions (ingest/ny_sprtk_history.py)."""
     chains: dict[str, list[dict]] = {}
     key_to_chain: dict[str, str] = {}
     for n in notices:
@@ -602,7 +626,8 @@ def build_chains(notices: list[dict]) -> dict[str, list[dict]]:
         n["chain_basis"] = basis
     for lst in chains.values():
         lst.sort(key=sort_key)
-    merge_edited_starts(chains)
+    if merge_edited:
+        merge_edited_starts(chains)
     return chains
 
 
@@ -763,9 +788,11 @@ def first(f: dict, *keys):
 
 
 def to_record(n: dict, chain_id: str, chain: list[dict], pos: int, parent: str | None, ctx: dict) -> dict:
+    """One notice's record. ctx may name another feed that reuses this one (ingest/ny_sprtk_history.py):
+    source_id, source_url and basis_text (time basis -> its text); this feed's own values otherwise."""
     f, p = n["f"], n["p"]
-    base = dict(source_id=SOURCE_ID, source_record_id=n["id"], parent_event_id=parent,
-                fetched_at=ctx["fetched_at"], source_url=SOURCE_URL)
+    base = dict(source_id=ctx.get("source_id") or SOURCE_ID, source_record_id=n["id"], parent_event_id=parent,
+                fetched_at=ctx["fetched_at"], source_url=ctx.get("source_url") or SOURCE_URL)
     raw = {"row": n["row_raw"], "_tab": n["tab"], "_row": n["row"]}
     try:
         return build_record(n, f, p, chain_id, chain, pos, base, raw, ctx)
@@ -779,7 +806,8 @@ def build_record(n, f, p, chain_id, chain, pos, base, raw, ctx) -> dict:
         raw["_other_tabs"] = n["other_tabs"]
     if n["synthetic_id"]:
         raw["_id_note"] = "this tab has no notificationId; the record id is built from the incident id and the row's fields"
-    raw["_time_basis"] = {k: BASIS_TEXT.get(v, v) for k, v in p["basis"].items()}
+    texts = ctx.get("basis_text") or BASIS_TEXT
+    raw["_time_basis"] = {k: texts.get(v, v) for k, v in p["basis"].items()}
     if p["near_cutover"]:
         raw["_time_basis_uncertain"] = "aired within a day of the switch from local time to UTC (2025-05-23/24)"
     if p.get("basis_unverified"):
@@ -837,8 +865,9 @@ def build_record(n, f, p, chain_id, chain, pos, base, raw, ctx) -> dict:
     advice = first(f, "additionalInstructions", "sprtkAdditionalInstructions")
 
     head, last = chain[0], chain[-1]
+    sid = base["source_id"]
     ch = {"id": chain_id, "basis": n.get("chain_basis"), "position": pos + 1, "of": len(chain),
-          "head": f"{SOURCE_ID}:{head['id']}", "latest": f"{SOURCE_ID}:{last['id']}"}
+          "head": f"{sid}:{head['id']}", "latest": f"{sid}:{last['id']}"}
     if n is last:
         ch["notices"] = [{"id": x["id"], "status": x["p"]["status"], "aired": local_iso(x["p"]["air"])} for x in chain]
     if head["p"]["status"] != "New":

@@ -354,6 +354,28 @@ NY_WEB = {
     "rate": _rate("ny-dec-sprtk-web"),
 }
 
+
+def _ny_history_qualifier(raw: dict):
+    """The older SPRTK workbook's estimate column in each layout's words ("Estimated", "(Estimated)", "Estimate", or the
+    flag 1); "Actual" is not taken for measured, as in the newer workbook."""
+    row = raw.get("row") if isinstance(raw.get("row"), dict) else {}
+    word = str(row.get("estimated indicator") or row.get("Estimate/Actual") or row.get("Estimate or Actual") or "")
+    if re.match(r"\W*estimat", word, re.I) or str(row.get("estimated_ind") or "").strip() == "1":
+        return "estimated"
+    return None
+
+
+# the older workbook, Sewage_Discharge_Reports.xlsx, as ny_sprtk_history reads it: raw.row in each tab's own columns
+# (four layouts; the narrative columns are never read), raw._notice_kind.word the headline's UPDATE or ENDED,
+# raw._duration_text the duration with its units
+NY_HISTORY = {
+    "report_kind": text("_notice_kind.word"),
+    "cause": text("row.reasons for discharge", "row.reason for discharge1", "row.reason for discharge",
+                  "row.Reason for Discharge", "row.Reason For Discharge", cut=re.compile(r"[;,\s]+$")),
+    "duration_text": text("_duration_text"), "volume_qualifier": _ny_history_qualifier,
+    "town": text("row.city", "row.Town/City"),
+}
+
 # source id -> {field: reader of the record's raw}. A source not listed gets no detail (its raw stays on the page as
 # the source data); add a source here with the source key named.
 SOURCES: dict[str, dict] = {
@@ -378,7 +400,7 @@ SOURCES: dict[str, dict] = {
     # the notice's own form fields as the ingester reads them from its text (fl_dep_pnp.template_fields: "Cause:")
     "fl-dep-pnp": {"cause": text("_template.cause"), "town": text("FACILITY_CITY")},
     "ct-deep": CT, "ct-deep-annual": CT, "ct-deep-archive": CT,
-    "ny-dec-sprtk": NY, "ny-dec-sprtk-web": NY_WEB,
+    "ny-dec-sprtk": NY, "ny-dec-sprtk-web": NY_WEB, "ny-dec-sprtk-2013-2021": NY_HISTORY,
     "md-mde-overflows": {"cause": text("row.overflow_cause"), "duration_text": _md_duration},
     "nc-dwr-sso-2022-2025": {"cause": text("incident_cause"), "volume_to_water_gal": number("volume_reach_water"),
                              "town": text("city")},
