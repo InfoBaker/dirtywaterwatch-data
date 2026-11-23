@@ -152,7 +152,8 @@ def test_wisconsin_invalid_or_different_episode_end_is_not_used(issued):
     g.update(BEACH_ACTION='End', ISSUED=issued)
     rows, _, _ = W.records(fs, state, AT)
     r = next(r for r in rows if r['raw']['beach_seq_no'] == 474)
-    assert r['ended_at'] == AT and r['raw']['ended_at_precision'] == 'poll'
+    assert r['ended_at'] is None and r['status'] == 'advisory_active'
+    assert r['raw']['unattributed_lift_evidence'][-1]['issued_text'] == issued
 
 
 def test_missouri_late_dissipation_date_replaces_poll_end_of_same_episode():
@@ -191,3 +192,212 @@ def test_wisconsin_reissue_after_source_day_end_is_a_separate_episode():
     assert len(rows) == 2
     assert {r['started_at'] for r in rows} == {'2026-09-17', '2026-09-21'}
     assert sum(r['status'] == 'advisory_active' for r in rows) == 1
+
+
+def or_refreshes():
+    from datetime import datetime
+    sid = 'or-oha-hab-advisories'
+    block, rows = generic(sid, FIX / 'lifts' / f'{sid}.json')
+    held = []
+
+    def refresh(issue, at, lifted=False):
+        nonlocal held
+        row = dict(rows[0], AdvisoryStatus='Advisory/Precaution Lifted' if lifted else 'Advisory',
+                   Issue_Date=int(datetime.fromisoformat(issue).timestamp() * 1000)) if issue else None
+        held, _ = runner.build(sid, block, [row] if row else [], at, held)
+        return copy.deepcopy(held)
+    return refresh
+
+
+def test_review_ky_warning_with_end_remains_open_across_refreshes():
+    sid = 'ky-dow-hab-viewer'
+    block, rows = generic(sid, FIX / 'ky_dow_hab.json')
+    active = rows[-1]
+    before, _ = runner.build(sid, block, [active], '2026-11-14T12:00:00Z', [])
+    conflict = dict(active, HABSTATUS='Warning', HABEND=1794960000000)
+    for at in [AT, '2026-11-23T18:00:00Z']:
+        before, _ = runner.build(sid, block, [conflict], at, before)
+        r = before[0]
+        assert r['status'] == 'advisory_active' and r['ended_at'] is None
+        assert r['raw']['source_ended_at'] == '2026-11-18'
+        assert 'Warning' in r['advice_text'] and 'HABEND' in r['advice_text'] and '2026-11-18' in r['advice_text']
+
+
+def test_review_or_old_lift_with_retained_predecessor_keeps_new_episode_open():
+    refresh = or_refreshes()
+    old = refresh('2026-08-19T00:00:00-07:00', '2026-08-20T18:00:00Z')[0]
+    refresh('2026-11-19T00:00:00-08:00', '2026-11-19T18:00:00Z', True)
+    refresh('2026-11-21T00:00:00-08:00', '2026-11-21T18:00:00Z')
+    for at in [AT, '2026-11-23T18:00:00Z']:
+        rows = refresh('2026-11-19T00:00:00-08:00', at, True)
+        new = next(r for r in rows if r['event_id'] != old['event_id'])
+        assert new['ended_at'] is None and '_unlisted_since' not in new['raw']
+        assert new['raw']['lift_evidence']['row']['AdvisoryStatus'] == 'Advisory/Precaution Lifted'
+
+
+def test_review_or_earlier_time_on_same_day_is_not_a_lift():
+    refresh = or_refreshes()
+    refresh('2026-11-19T12:00:00-08:00', '2026-11-19T21:00:00Z')
+    for at in [AT, '2026-11-23T18:00:00Z']:
+        r = refresh('2026-11-19T09:00:00-08:00', at, True)[0]
+        assert r['ended_at'] is None and r['status'] == 'advisory_active'
+        assert '_unlisted_since' not in r['raw'] and r['raw']['lift_evidence']
+
+
+def test_review_or_unlisted_history_is_not_resurrected_by_new_lift():
+    refresh = or_refreshes()
+    old = refresh('2026-08-19T00:00:00-07:00', '2026-08-20T18:00:00Z')[0]
+    missing = refresh(None, '2026-10-01T18:00:00Z')[0]
+    refresh('2026-11-01T00:00:00-07:00', '2026-11-02T18:00:00Z')
+    for at in [AT, '2026-11-23T18:00:00Z']:
+        rows = refresh('2026-11-19T00:00:00-08:00', at, True)
+        historical = next(r for r in rows if r['event_id'] == old['event_id'])
+        new = next(r for r in rows if r['event_id'] != old['event_id'])
+        assert historical['raw']['_unlisted_since'] == missing['raw']['_unlisted_since']
+        assert historical['raw']['_last_seen_in_source'] == old['raw']['_last_seen_in_source']
+        assert new['ended_at'][:10] == '2026-11-19'
+
+
+def test_review_or_corrected_lift_replaces_end_and_keeps_previous_row():
+    refresh = or_refreshes()
+    refresh('2026-08-19T00:00:00-07:00', '2026-08-20T18:00:00Z')
+    old = refresh('2026-11-19T00:00:00-08:00', '2026-11-19T18:00:00Z', True)[0]
+    revised = refresh('2026-11-20T00:00:00-08:00', AT, True)[0]
+    assert revised['ended_at'][:10] == '2026-11-20'
+    assert revised['event_id'] == old['event_id']
+    history = revised['raw']['end_observations']
+    assert history[-1]['ended_at'] == old['ended_at'] and history[-1]['row'] == old['raw']['row']
+    assert refresh('2026-11-20T00:00:00-08:00', '2026-11-23T18:00:00Z', True)[0]['raw']['end_observations'] == history
+
+
+def wi_sequence():
+    fs = wi_features()
+    a = next(f['attributes'] for f in fs if f['attributes']['BEACH_SEQ_NO'] == 474)
+    state = {}
+
+    def refresh(at, **changes):
+        nonlocal state
+        a.update(changes)
+        rows, state, _ = W.records(fs, state, at)
+        return [r for r in rows if r['raw']['beach_seq_no'] == 474]
+    return refresh
+
+
+def test_review_wi_second_lift_with_reused_issue_date_never_rewrites_predecessor():
+    refresh = wi_sequence()
+    first = refresh('2026-09-18T18:00:00Z')[0]
+    refresh('2026-09-21T18:00:00Z', BEACH_ACTION='End', ISSUED='17-SEP-26 - 20-SEP-26')
+    refresh('2026-10-01T18:00:00Z', BEACH_ACTION='Advisory', ISSUED='17-SEP-26 - ')
+    for at in ['2026-10-06T18:00:00Z', '2026-10-07T18:00:00Z']:
+        rows = refresh(at, BEACH_ACTION='End', ISSUED='17-SEP-26 - 05-OCT-26')
+        old = next(r for r in rows if r['event_id'] == first['event_id'])
+        new = next(r for r in rows if r['event_id'] != first['event_id'])
+        assert old['ended_at'] == '2026-09-20'
+        assert new['started_at'] == '2026-10-01T18:00:00Z' and new['ended_at'] == '2026-10-05'
+
+
+@pytest.mark.parametrize('changes', [dict(BEACH_ACTION='Closed'), dict(STATUS='E. coli')])
+def test_review_wi_active_transition_never_consumes_contradictory_end(changes):
+    refresh = wi_sequence()
+    first = refresh('2026-09-18T18:00:00Z')[0]
+    for at in ['2026-09-22T18:00:00Z', '2026-09-23T18:00:00Z']:
+        rows = refresh(at, ISSUED='17-SEP-26 - 20-SEP-26', **changes)
+        old = next(r for r in rows if r['event_id'] == first['event_id'])
+        new = next(r for r in rows if r['event_id'] != first['event_id'])
+        assert old['ended_at'] == '2026-09-22T18:00:00Z' and old['raw']['ended_at_precision'] == 'poll'
+        assert new['ended_at'] is None and new['raw']['source_ended_at'] == '2026-09-20'
+        assert old['raw']['unattributed_lift_evidence'][-1]['issued_text'] == '17-SEP-26 - 20-SEP-26'
+
+
+def test_review_wi_replayed_old_end_does_not_close_returned_episode():
+    refresh = wi_sequence()
+    refresh('2026-09-18T18:00:00Z')
+    refresh('2026-09-21T18:00:00Z', BEACH_ACTION='End', ISSUED='17-SEP-26 - 20-SEP-26')
+    refresh('2026-10-01T18:00:00Z', BEACH_ACTION='Advisory', ISSUED='17-SEP-26 - ')
+    for at in ['2026-10-02T18:00:00Z', '2026-10-03T18:00:00Z']:
+        rows = refresh(at, BEACH_ACTION='End', ISSUED='17-SEP-26 - 20-SEP-26')
+        new = next(r for r in rows if r['started_at'] == '2026-10-01T18:00:00Z')
+        assert new['ended_at'] is None and new['raw']['unattributed_lift_evidence']
+
+
+def test_review_or_revision_after_unlisting_keeps_unattributed_evidence():
+    refresh = or_refreshes()
+    refresh('2026-08-19T00:00:00-07:00', '2026-08-20T18:00:00Z')
+    ended = refresh('2026-09-19T00:00:00-07:00', '2026-09-20T18:00:00Z', True)[0]
+    missing = refresh(None, '2026-10-01T18:00:00Z')[0]
+    revised = refresh('2026-11-20T00:00:00-08:00', AT, True)[0]
+    assert revised['ended_at'] == ended['ended_at']
+    assert revised['raw']['_unlisted_since'] == missing['raw']['_unlisted_since']
+    assert revised['raw']['_last_seen_in_source'] == ended['raw']['_last_seen_in_source']
+    assert revised['raw']['lift_evidence']['row']['Issue_Date'] != ended['raw']['row']['Issue_Date']
+
+
+def test_review_wi_day_end_compares_with_local_return_day():
+    refresh = wi_sequence()
+    refresh('2026-09-18T18:00:00Z')
+    refresh('2026-09-21T18:00:00Z', BEACH_ACTION='End', ISSUED='17-SEP-26 - 20-SEP-26')
+    # 11 p.m. Oct. 1 in Wisconsin: the day-only Oct. 1 end can belong to this return.
+    refresh('2026-10-02T04:00:00Z', BEACH_ACTION='Advisory', ISSUED='17-SEP-26 - ')
+    rows = refresh('2026-10-03T18:00:00Z', BEACH_ACTION='End', ISSUED='17-SEP-26 - 01-OCT-26')
+    new = next(r for r in rows if r['started_at'] == '2026-10-02T04:00:00Z')
+    assert new['ended_at'] == '2026-10-01'
+
+
+@pytest.mark.parametrize('change', [dict(_x=-122.0), dict(WaterbodyName='Another Lake')])
+def test_review_or_lift_with_changed_identity_stays_unattributed(change):
+    sid = 'or-oha-hab-advisories'
+    block, rows = generic(sid, FIX / 'lifts' / f'{sid}.json')
+    active = dict(rows[0], AdvisoryStatus='Advisory', Issue_Date=1787122800000)
+    held, _ = runner.build(sid, block, [active], '2026-08-20T18:00:00Z', [])
+    for at in [AT, '2026-11-23T18:00:00Z']:
+        held, _ = runner.build(sid, block, [dict(rows[0], **change)], at, held)
+        assert held[0]['ended_at'] is None and '_unlisted_since' not in held[0]['raw']
+        assert held[0]['raw']['lift_evidence']['row'].items() >= change.items()
+
+
+def test_review_wi_closed_season_text_cannot_consume_end_of_retained_advisory():
+    refresh = wi_sequence()
+    refresh('2026-09-18T18:00:00Z')
+    for at in ['2026-09-22T18:00:00Z', '2026-09-23T18:00:00Z']:
+        rows = refresh(at, BEACH_ACTION='Closed', STATUS='Closed for season', ISSUED='17-SEP-26 - 20-SEP-26')
+        assert rows[0]['ended_at'] is None and rows[0]['raw']['unattributed_lift_evidence']
+
+
+@pytest.mark.parametrize('start,end,expected', [
+    ('2026-11-01T01:45:00-07:00', '2026-11-01T01:30:00-08:00', True),  # fall-back: later instant
+    ('2026-11-01T01:30:00-08:00', '2026-11-01T01:45:00-07:00', False),
+    ('2026-11-19T12:00:00-08:00', '2026-11-19T00:00:00-08:00', True),  # day-only lift
+])
+def test_review_or_timed_offsets_and_day_precision(start, end, expected):
+    refresh = or_refreshes()
+    refresh(start, '2026-11-20T18:00:00Z')
+    for at in [AT, '2026-11-23T18:00:00Z']:
+        r = refresh(end, at, True)[0]
+        assert bool(r['ended_at']) == expected
+        if not expected:
+            assert '_unlisted_since' not in r['raw'] and r['raw']['lift_evidence']
+
+
+def test_review_or_changed_lift_cannot_jump_across_return():
+    refresh = or_refreshes()
+    first = refresh('2026-08-19T00:00:00-07:00', '2026-08-20T18:00:00Z')[0]
+    ended = refresh('2026-11-19T00:00:00-08:00', '2026-11-19T18:00:00Z', True)[0]
+    refresh('2026-11-21T00:00:00-08:00', '2026-11-21T18:00:00Z')
+    for at in ['2026-11-23T18:00:00Z', '2026-11-24T18:00:00Z']:
+        rows = refresh('2026-11-22T00:00:00-08:00', at, True)
+        old = next(r for r in rows if r['event_id'] == first['event_id'])
+        new = next(r for r in rows if r['event_id'] != first['event_id'])
+        assert old['ended_at'] == ended['ended_at']
+        assert new['ended_at'] is None and '_unlisted_since' not in new['raw']
+        assert new['raw']['lift_evidence']
+
+
+def test_review_or_observed_absence_and_same_issue_return_is_not_crossed():
+    refresh = or_refreshes()
+    refresh('2026-08-19T00:00:00-07:00', '2026-08-20T18:00:00Z')
+    refresh(None, '2026-10-01T18:00:00Z')
+    back = refresh('2026-08-19T00:00:00-07:00', '2026-11-01T18:00:00Z')[0]
+    for at in [AT, '2026-11-23T18:00:00Z']:
+        r = refresh('2026-11-19T00:00:00-08:00', at, True)[0]
+        assert r['ended_at'] is None and r['raw']['_absences'] == back['raw']['_absences']
+        assert r['raw']['lift_evidence'] and '_unlisted_since' not in r['raw']

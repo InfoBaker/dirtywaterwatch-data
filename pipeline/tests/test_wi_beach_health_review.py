@@ -279,10 +279,16 @@ def test_an_advisory_at_a_beach_with_no_point_is_a_record_without_a_point(monkey
     st = _points([r], T0)
     assert r["event_id"] in st["placements"] and not [p for p in st["advisory_points"] if p["event_id"] == r["event_id"]]
     assert colours_on(r, T0, T0) == {"red"}
-    # a later complete table read without it ends it at that read
+    # The unchanged table carries a September end, which cannot end this November advisory.
     rc, out, _ = run_with(monkeypatch, tmp_path, d["layer"], d["count"], T1)
     t = [x for x in out["records"] if x["raw"].get("read_from") == "report_table"][0]
-    assert t["status"] == "advisory_lifted" and t["ended_at"] == T1 and t["raw"]["ended_at_precision"] == "poll"
+    assert t["status"] == "advisory_active" and t["ended_at"] is None
+    assert t["raw"]["unattributed_lift_evidence"][-1]["issued_text"] == "08-SEP-26 - 08-SEP-26"
+    # A later read with no disputed source end retains the ordinary poll-end behavior.
+    html = _table_with("Big Pete Beach", "End", "E. coli", "10-NOV-26 - ")
+    rc, out, _ = run_with(monkeypatch, tmp_path, d["layer"], d["count"], T2, html=html)
+    t = [x for x in out["records"] if x["raw"].get("read_from") == "report_table"][0]
+    assert t["status"] == "advisory_lifted" and t["ended_at"] == T2 and t["raw"]["ended_at_precision"] == "poll"
 
 
 @pytest.mark.parametrize("bad", [RuntimeError("timeout"), "<html>Service unavailable</html>",

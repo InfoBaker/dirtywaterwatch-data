@@ -53,7 +53,8 @@ Records (rules only; the layer is read as a sequence of polls)
   - A complete healthy read that no longer shows the advisory (another action, another reason category, another
     Date of Advisory, or the beach no longer on the layer) ends it at that read (advisory_lifted, raw.
     ended_at_precision poll), or at the second ISSUED date when it is valid and its first date matches this
-    episode. The original text and superseded poll end remain available. A beach listed again later is a new record. Each read that lists it confirms it
+    episode and no later episode intervenes. A disputed source date stays separate and keeps an unmatched advisory
+    open. The original text and superseded end remain available. A beach listed again later is a new record. Each read that lists it confirms it
     (raw._last_seen_in_source; raw.listed_periods after an unread gap of more than 14 days).
   - A read is complete only when the layer answers with a feature list, no exceededTransferLimit, every field asked
     for on every beach and of its type (OBJECTID and BEACH_SEQ_NO integers, SAMPLEDATE a number or null, the texts
@@ -142,6 +143,8 @@ def _s(v) -> str:
 
 
 def local_day(at: str) -> date:
+    if len(at) == 10:
+        return date.fromisoformat(at)
     return datetime.fromisoformat(at.replace("Z", "+00:00")).astimezone(TZ).date()
 
 
@@ -168,7 +171,7 @@ def issued_end(text, at: str, start: str | None = None) -> str | None:
     """A valid source end, never before this episode or after the read's local day."""
     first, tail = parse_issued(text, at)
     end, _ = parse_issued(f"{tail} - ", at) if tail else (None, None)
-    return end if first and end and first <= end and (not start or start[:10] <= end) else None
+    return end if first and end and first <= end and (not start or local_day(start).isoformat() <= end) else None
 
 
 def sample_result(value, sampled_at):
@@ -373,7 +376,7 @@ def _iso(t: datetime) -> str:
 def advance(state: dict, current: dict, listed: set, blank: set, now: str, key_of) -> dict:
     """One complete read applied to the held records of one list (the layer's or the table's): each observation
     continues the open record of the same item, kind, type and issue text, or opens a new one; an open record the read
-    no longer shows ends at this read (a blank action holds it)."""
+    no longer shows ends at this read (a blank action or disputed source end holds it)."""
     from copy import deepcopy
     state = deepcopy(state)
 
@@ -417,35 +420,70 @@ def advance(state: dict, current: dict, listed: set, blank: set, now: str, key_o
                     v[k] = o[k]
             v.pop("missing_since", None)
         matched.add(key)
+    # Resolve each inactive observation once, within the retained episode's boundaries. Reused first
+    # ISSUED dates are common on returns and cannot identify an episode on their own.
+    attributed = {}
+    for iid, es in listed.items() if isinstance(listed, dict) else ():
+        if (iid in current or iid in blank
+                or any(ADVISORY.match(_s(es.get(k))) or CLOSED.match(_s(es.get(k)))
+                       for k in ('action', 'map_status'))):
+            continue
+        end = issued_end(es.get('issued_text'), now)
+        if not end:
+            continue
+        candidates = []
+        for key, v in state.items():
+            if (v['iid'] != iid or issued_start_text(es.get('issued_text')) != v.get('issued_start')
+                    or not issued_end(es.get('issued_text'), now, v['started_at'])):
+                continue
+            # An observed end bounds late corrections. A source-only end can be revised within that boundary.
+            observed_end = v.get('end_seen_at')
+            if not observed_end and v.get('ended_at_precision', 'poll') == 'poll':
+                observed_end = v.get('ended_at')
+            if observed_end and end > local_day(observed_end).isoformat():
+                continue
+            others = [o for k, o in state.items() if k != key and o['iid'] == iid]
+            if any(datetime.fromisoformat(o['first_seen_at'].replace('Z', '+00:00'))
+                   > datetime.fromisoformat(v['first_seen_at'].replace('Z', '+00:00'))
+                   and local_day(o['started_at']).isoformat() <= end for o in others):
+                continue
+            candidates.append(key)
+        if len(candidates) == 1:
+            attributed[candidates[0]] = end
+
     for key, v in state.items():
         es = listed.get(v['iid'], {}) if isinstance(listed, dict) else {}
-        source_end = issued_end(es.get('issued_text'), now, v['started_at'])
-        if (v.get('ended_at') and v['iid'] not in current and v['iid'] not in blank and source_end
-                and issued_start_text(es.get('issued_text')) == v.get('issued_start')
-                and source_end != v['ended_at']):
-            v.setdefault('end_observations', []).append({'ended_at': v['ended_at'],
-                'precision': v.get('ended_at_precision', 'poll'), 'replaced_at': now})
-            v.update(ended_at=source_end, ended_at_precision='day', end_seen=es,
+        _, end_text = parse_issued(es.get('issued_text'), now)
+        end = attributed.get(key)
+        if end_text and not end:
+            evidence = {**deepcopy(es), 'seen_at': now}
+            history = v.setdefault('unattributed_lift_evidence', [])
+            if not history or any(history[-1].get(k) != val for k, val in es.items()):
+                history.append(evidence)
+        if end:
+            if v.get('ended_at') and v['ended_at'] != end:
+                v.setdefault('end_observations', []).append({
+                    'ended_at': v['ended_at'], 'precision': v.get('ended_at_precision', 'poll'),
+                    'end_seen': deepcopy(v.get('end_seen')),
+                    'seen_at': v.get('source_end_seen_at') or v.get('end_seen_at'), 'replaced_at': now})
+            v.update(ended_at=end, ended_at_precision='day', end_seen=deepcopy(es),
+                     end_seen_at=v.get('end_seen_at') or now, source_end_seen_at=now,
                      end_basis="The Department's second ISSUED date for this advisory")
-        if v.get("ended_at") or key in matched:
+            v.pop('missing_since', None)
             continue
-        if v["iid"] in blank:
-            v["missing_since"] = v.get("missing_since") or now    # a blank action: not a lift
+        if v.get('ended_at') or key in matched:
             continue
-        v["ended_at"] = now                            # a complete read that no longer shows it
-        v.pop("missing_since", None)
-        v["end_seen"] = listed.get(v["iid"]) if isinstance(listed, dict) else None
-        if v["end_seen"] is None:
-            v["end_seen"] = {"absent": True}
-        es = v['end_seen']
-        end = issued_end(es.get('issued_text'), now, v['started_at'])
-        # A source end belongs only to the same issued start; a later episode must not close an older one.
-        if end and issued_start_text(es.get('issued_text')) == v.get('issued_start'):
-            v['ended_at'] = end
-            v['ended_at_precision'] = 'day'
-            v['end_basis'] = "The Department's second ISSUED date for this advisory"
-        else:
-            v['ended_at_precision'] = 'poll'
+        if v['iid'] in blank:
+            v['missing_since'] = v.get('missing_since') or now
+            continue
+        # An inactive row carrying a disputed date cannot close an unmatched episode at the poll either.
+        if end_text and v['iid'] not in current:
+            continue
+        v['ended_at'] = now
+        v['ended_at_precision'] = 'poll'
+        v['end_seen_at'] = now
+        v.pop('missing_since', None)
+        v['end_seen'] = deepcopy(es) if es else {'absent': True}
     return state
 
 
@@ -473,7 +511,7 @@ def records(features: list[dict], prev: dict, now: str, table: list[dict] | None
             counts[key][v] = counts[key].get(v, 0) + 1
         seq = a["BEACH_SEQ_NO"]
         listed[seq] = {"action": _s(a.get("BEACH_ACTION")) or None, "reason": _s(a.get("STATUS")) or None,
-                       "issued_text": _s(a.get("ISSUED")) or None}
+                       "issued_text": _s(a.get("ISSUED")) or None, "map_status": _s(a.get("MAP_STATUS")) or None}
         lat, lon = _pt(f.get("geometry"))
         o = _observation(a.get("BEACH_ACTION"), a.get("STATUS"), a.get("MAP_STATUS"), a.get("ISSUED"),
                          a.get("OGW_BEACH_NAME_TEXT"), now, lat=lat, lon=lon, sample_at=_epoch(a.get("SAMPLEDATE")),
@@ -588,12 +626,15 @@ def _record(key: str, v: dict, now: str) -> dict:
                                                     "unread time between is not confirmed"))
     if v.get("missing_since"):
         raw["_missing_from_source_since"] = v["missing_since"]
+    if v.get('unattributed_lift_evidence'):
+        raw['unattributed_lift_evidence'] = v['unattributed_lift_evidence']
     if v.get('end_observations'):
         raw['end_observations'] = v['end_observations']
     if v.get("revisions"):
         raw["revisions"] = v["revisions"]
     if v.get("ended_at"):
         es = v.get("end_seen") or {}
+        raw['end_seen'] = es
         raw.update(ended_at_precision=v.get("ended_at_precision", "poll"),
                    end_basis=("the first complete read of the Department's list that no longer listed the beach"
                               if es.get("absent") else
@@ -605,6 +646,19 @@ def _record(key: str, v: dict, now: str) -> dict:
         _, end_text = parse_issued(es.get("issued_text"), now)
         if end_text:
             raw["source_end_text"] = scrub(end_text)
+    if v.get('ended_at_precision') == 'day' and v.get('ended_at'):
+        es = v.get('end_seen') or {}
+        _, end_text = parse_issued(es.get('issued_text'), now)
+        raw['source_end_observation'] = {
+            'date': v['ended_at'], 'text': scrub(end_text),
+            'action': scrub(es.get('action')), 'map_status': scrub(es.get('map_status')),
+            'issued_text': scrub(es.get('issued_text')),
+            'seen_at': v.get('source_end_seen_at') or v.get('end_seen_at')}
+    elif not v.get('ended_at') and raw.get('source_ended_at'):
+        raw['source_end_observation'] = {
+            'date': raw['source_ended_at'], 'text': raw.get('issued_end_text'),
+            'action': raw['beach_action'], 'map_status': raw['map_status'],
+            'issued_text': raw['issued_text'], 'seen_at': v.get('last_seen_at')}
     if kind == "label":
         # our caution while the Department lists a value we do not know, never its advisory, even after it ends
         # (data/rules.json unresolved.sample_caution; Astra review P1-5)

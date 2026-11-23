@@ -52,6 +52,7 @@ fetch:
     source_url: {const: "https://www.oregon.gov/oha/ph/healthyenvironments/recreation/harmfulalgaeblooms/pages/blue-greenalgaeadvisories.aspx"}
   transform: "ingest.or_transforms.or_hab_record"
   post: "ingest.or_transforms.or_hab_episodes"
+  after_history: "ingest.or_transforms.or_hab_lift_history"
   dedupe: {repeats: suffix}
   history:
     revisions: true

@@ -174,8 +174,9 @@ def test_hab_point_in_a_central_county_and_the_divisions_end():
     row.update(HABSTATUS="Warning", OBJECTID=1, HABEND=1790553600000)           # 2026-09-28
     _, (recs, _) = _habs([row])
     r = next(x for x in recs if x["source_record_id"].startswith("1-"))
-    assert r["raw"]["time_zone"] == "America/Chicago" and r["status"] == "advisory_lifted"
-    assert r["started_at"] == "2026-09-09" and r["ended_at"] == "2026-09-28"
+    assert r["raw"]["time_zone"] == "America/Chicago" and r["status"] == "advisory_active"
+    assert r["started_at"] == "2026-09-09" and r["ended_at"] is None
+    assert r["raw"]["source_ended_at"] == "2026-09-28"
 
 
 # ---------------------------------------------------------------- SD1's rain trigger

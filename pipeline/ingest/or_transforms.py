@@ -83,46 +83,122 @@ def or_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     notes["_started_basis"] = STARTED_BASIS
 
 
+# A lift is not a listing of the original advisory. Preserve its observed listing boundaries
+# through generic history, which otherwise treats every emitted record as freshly listed.
+_LISTING_KEYS = ('_unlisted_since', '_missing_from_source_since', '_last_seen_in_source', '_absences')
+
+
+def _before(a, ap, b, bp, zone, *, same_day=False):
+    """Compare timed evidence as aware instants; mixed/day evidence by the local calendar day."""
+    if not a or not b:
+        return False
+    try:
+        def parsed(value):
+            t = datetime.fromisoformat(value.replace('Z', '+00:00'))
+            return t if t.tzinfo else t.replace(tzinfo=ZoneInfo(zone))
+        x, y = parsed(a), parsed(b)
+        if ap == 'day' or bp == 'day' or len(a) == 10 or len(b) == 10:
+            x, y = x.astimezone(ZoneInfo(zone)).date(), y.astimezone(ZoneInfo(zone)).date()
+            return x <= y if same_day else x < y
+        return x < y
+    except (ValueError, TypeError):
+        return False
+
+
 @F.hook
 def or_hab_episodes(records: list[dict], ctx: F.Ctx) -> None:
-    """A lift's Issue_Date dates the lift, not a new advisory. Match one retained spell by source point and name.
+    """Attribute a lift within one retained episode's issue, unlisting and successor boundaries.
 
-    Ambiguous matches retain every caution and the lift evidence. A lift without a retained start creates no spell.
+    Every still-listed unmatched episode stays open. Historical listing evidence is never refreshed by a lift.
+    A date revision cannot move a previously attributed lift across a recorded return.
     """
     from copy import deepcopy
 
+    snapshots = ctx.extra.setdefault('or_lift_listing_history', {})
     for r in list(records):
         row = r['raw']['row']
         if F.clean(row.get('AdvisoryStatus')).lower() != 'advisory/precaution lifted':
             continue
         records.remove(r)
-        end = r.get('started_at')
+        end, ep = r.get('started_at'), r.get('time_precision')
+        zone = r['raw'].get('time_zone') or 'America/Los_Angeles'
         matching = [p for p in ctx.previous_records
-                      if all((p.get('raw', {}).get('row') or {}).get(k) == row.get(k)
-                             for k in ('OBJECTID', 'WaterbodyName'))]
-        candidates = [p for p in matching if p.get('started_at') and end and p['started_at'][:10] <= end[:10]
-                      and (p.get('status') == 'advisory_active' or p.get('ended_at') == end)]
-        if len(candidates) == 1:
-            p = candidates[0]
+                    if row.get('OBJECTID') is not None
+                    and (p.get('raw', {}).get('row') or {}).get('OBJECTID') == row['OBJECTID']]
+
+        def eligible(p):
+            raw = p.get('raw') or {}
+            if (not F.clean(row.get('WaterbodyName')) or raw.get('row', {}).get('WaterbodyName') != row['WaterbodyName']
+                    or (p.get('lat'), p.get('lon')) != (r.get('lat'), r.get('lon'))):
+                return False
+            if not _before(p.get('started_at'), p.get('time_precision'), end, ep, zone, same_day=True):
+                return False
+            boundaries = [raw.get('_unlisted_since'), raw.get('_missing_from_source_since')]
+            boundaries += [a.get('missing_since') for a in raw.get('_absences', [])]
+            # An observed absence/return is a hard boundary, even when the source reuses its issue date.
+            if any(b and not _before(end, ep, b, 'minute', zone) for b in boundaries):
+                return False
+            for other in matching:
+                if other['event_id'] == p['event_id']:
+                    continue
+                if (_before(p.get('started_at'), p.get('time_precision'), other.get('started_at'),
+                            other.get('time_precision'), zone)
+                        and not _before(end, ep, other.get('started_at'), other.get('time_precision'), zone)):
+                    return False
+            return p.get('status') in {'advisory_active', 'advisory_lifted'}
+
+        candidates = [p for p in matching if eligible(p)]
+        # After a recorded return, a changed lift date alone cannot distinguish a revision of the old lift
+        # from a lift of the new episode. Keep that evidence without transferring the old lift to the new one.
+        if len(candidates) == 1 and any(p.get('ended_at') and p['event_id'] != candidates[0]['event_id']
+                and _before(p.get('started_at'), p.get('time_precision'), candidates[0].get('started_at'),
+                            candidates[0].get('time_precision'), zone) for p in matching):
+            candidates = []
+        chosen = candidates[0] if len(candidates) == 1 else None
+        if chosen:
+            p = chosen
+            raw = deepcopy(p['raw'])
+            raw.update(r['raw'])
+            if p.get('ended_at') and p['ended_at'] != end:
+                raw.setdefault('end_observations', []).append({
+                    'ended_at': p['ended_at'], 'precision': p['raw'].get('ended_at_precision'),
+                    'row': deepcopy(p['raw']['row']), 'replaced_at': ctx.fetched_at})
             r.update(event_id=p['event_id'], source_record_id=p['source_record_id'], started_at=p['started_at'],
                      time_precision=p['time_precision'], status='advisory_lifted', ended_at=end,
-                     authority=p.get('authority'))
-            r['raw'].update(ended_at_precision='day' if len(end) == 10 or end[11:19] == '00:00:00' else 'minute',
-                            end_basis="OHA's Issue_Date on its Advisory/Precaution Lifted row",
-                            _started_basis=p.get('raw', {}).get('_started_basis'))
+                     authority=p.get('authority'), raw=raw)
+            raw.update(ended_at_precision=ep, end_basis="OHA's Issue_Date on its Advisory/Precaution Lifted row",
+                       _started_basis=p['raw'].get('_started_basis'))
             for key in ('advisory_noun', '_interval_label'):
                 if key in p['raw']:
-                    r['raw'][key] = p['raw'][key]
+                    raw[key] = p['raw'][key]
+            snapshots[p['event_id']] = {k: deepcopy(p['raw'][k]) for k in _LISTING_KEYS if k in p['raw']}
             records.append(r)
-        else:
-            # Do not let generic missing-row handling shorten an uncertain spell at this poll.
-            for p in matching:
-                if p.get('status') != 'advisory_active':
-                    continue
-                held = deepcopy(p)
-                held['fetched_at'] = ctx.fetched_at
-                held['raw']['lift_evidence'] = {'row': row, 'seen_at': ctx.fetched_at,
-                                               'basis': 'This lift does not identify one retained advisory episode; we keep the caution.'}
-                held['raw'].pop('_unlisted_since', None)
-                held['raw'].pop('_missing_from_source_since', None)
-                records.append(held)
+        for p in matching:
+            if chosen and p['event_id'] == chosen['event_id']:
+                continue
+            if (p.get('status') != 'advisory_active' or p['raw'].get('_unlisted_since')
+                    or p['raw'].get('_missing_from_source_since')):
+                snapshots[p['event_id']] = {k: deepcopy(p['raw'][k]) for k in _LISTING_KEYS if k in p['raw']}
+            if any(x['event_id'] == p['event_id'] for x in records):
+                continue
+            held = deepcopy(p)
+            held['fetched_at'] = ctx.fetched_at
+            evidence = {'row': deepcopy(row), 'seen_at': ctx.fetched_at,
+                        'basis': 'This lift does not identify this advisory episode; we retain it as separate evidence.'}
+            prior = held['raw'].get('lift_evidence')
+            if prior and prior['row'] != row:
+                held['raw'].setdefault('lift_evidence_history', []).append(prior)
+            held['raw']['lift_evidence'] = evidence
+            records.append(held)
+
+
+@F.hook
+def or_hab_lift_history(records: list[dict], ctx: F.Ctx) -> None:
+    """An attributed lift may revise an end, but cannot erase or refresh an advisory's listing history."""
+    snapshots = ctx.extra.get('or_lift_listing_history', {})
+    for r in records:
+        if r['event_id'] not in snapshots:
+            continue
+        for k in _LISTING_KEYS:
+            r['raw'].pop(k, None)
+        r['raw'].update(snapshots[r['event_id']])
