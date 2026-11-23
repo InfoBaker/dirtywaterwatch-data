@@ -1,11 +1,78 @@
 """Progressive water builds must not evict unrelated historical placements."""
 import copy
+import json
+from datetime import timedelta
 
 import pytest
 
 from build import status as S
 from tests.test_placement_cache import recs, world
 from tests.test_placement_steps import NOW, WATERS
+
+
+@pytest.mark.parametrize('reverse', [False, True])
+@pytest.mark.parametrize('variants', [
+    [{'water_matched_by': 'checked'}, {'water_matched_by': 'verified'}],
+    [{'water_matched_by': 'checked', 'water_slug': None, 'no_water_reason': reason}
+     for reason in ('unmapped', 'no outline')],
+    [{'water_matched_by': 'ingest.outfall_waters', 'water_match': step}
+     for step in ('geometry: checked', 'name: checked')],
+    [{'match': 'geometry'}, {'match': 'name_only'}],
+    [{'distance_m': 1}, {'distance_m': 1.0}],
+], ids=['matched-by', 'no-water-reason', 'water-match', 'match', 'distance'])
+def test_registry_memo_keeps_each_rows_placement_note(variants, reverse):
+    waters = {'example-ma': dict(name='Example Creek', state='MA', kind='stream')}
+    row = dict(npdes_permit='MA0000001', outfall='C01', state='MA',
+               water_slug='example-ma', receiving_water='Example Creek')
+    rows = [{**row, **v} for v in variants]
+    if reverse:
+        rows.reverse()
+    expected = [S.Resolver(waters, [], {}, {}, {}).row_water(r) for r in rows]
+    assert expected[0] != expected[1]
+    resolver = S.Resolver(waters, rows, {}, {}, {})
+    assert [resolver.row_water(r) for r in rows] == expected
+
+
+@pytest.mark.parametrize('reverse_initial', [False, True], ids=['a-first', 'b-first'])
+@pytest.mark.parametrize('reverse_refresh', [False, True], ids=['keep-order', 'reverse-order'])
+def test_distinct_registry_rows_keep_own_placement_after_water_addition(
+        tmp_path, monkeypatch, capsys, reverse_initial, reverse_refresh):
+    """Caller-supplied rows may share permit/outfall IDs but require different water lookups."""
+    from tests.test_placement_steps import ev
+    monkeypatch.setattr(S, 'now_iso', lambda: NOW.isoformat())
+    monkeypatch.setattr(S, '_GEOM_CACHE', {})
+    monkeypatch.setattr(S, '_STATES', None)
+    monkeypatch.setattr(S, 'OBL_WATER_DIR', tmp_path / 'outlines')
+    monkeypatch.setattr(S, 'BUILD_DIR', tmp_path / 'output')
+    row = dict(npdes_permit='MA0000001', outfall='C01', state='MA', receiving_water='Example Creek')
+    outfalls = [dict(row, outfall_name='MWR001: First', water_matched_by='checked', no_water_reason='unmapped'),
+               dict(row, outfall_name='MWR002: Second')]
+    common = dict(npdes_permit='MA0000001', waterbody_text='Unmapped', raw={'state': 'MA'},
+                  started_at=(NOW - timedelta(days=400)).isoformat(),
+                  ended_at=(NOW - timedelta(days=399)).isoformat())
+    records = [ev('a', **common, outfall_id='MWR001', water_slugs=['future-ma'], water_match='geometry'),
+               ev('b', **common, outfall_id='MWR002')]
+    if reverse_initial:
+        records.reverse()
+    kw = world(tmp_path, records, {'example-ma': dict(name='Example Creek', state='MA', kind='stream')})
+    kw.update(outfalls=outfalls, write=True, rain={}, discharger_aliases_map={})
+    S.build(**kw)
+    capsys.readouterr()
+    kw['waters']['future-ma'] = dict(name='New Reach', state='MA', kind='stream')
+    if reverse_refresh:
+        path = kw['events_dir'] / 'ma-test.json'
+        doc = json.loads(path.read_text())
+        doc['records'].reverse()
+        path.write_text(json.dumps(doc))
+    warm, _ = S.build(**kw)
+    assert 'placement reused for 1 of 2' in capsys.readouterr().out
+    warm_bytes = {p.name: p.read_bytes() for p in S.BUILD_DIR.glob('*.json')}
+    cold, _ = S.build(**{**kw, 'placement_cache': False})
+    assert set(warm_bytes) == {'status.json', 'history.json'}
+    assert warm_bytes == {p.name: p.read_bytes() for p in S.BUILD_DIR.glob('*.json')}
+    assert warm['placements'] == cold['placements']
+    assert warm['placements']['ma-test:a']['water_slugs'] == ['future-ma']
+    assert warm['placements']['ma-test:b']['water_slugs'] == ['example-ma']
 
 
 @pytest.mark.parametrize('change,hits', [('unchanged', 3), ('other_state', 3), ('same_state', 3),

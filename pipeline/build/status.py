@@ -2710,10 +2710,15 @@ class Resolver:
         permit_ = str(row.get("npdes_permit") or "")
         eff_state = (row.get("state") or (permit_[:2] if re.match(r"[A-Z]{2}\d", permit_) else "") or "").upper()
         text_ = (row.get("receiving_water") or row.get("receiving_water_echo") or row.get("water_name") or "").strip()
-        # the effective state and the text are part of the key: a Puerto Rico row's answer never reaches the same row
-        # read as another state's (review 2026-11-15 P1), nor rows with no identifiers but another text
+        # Include every row input read by row_water and registry_how, including note-only fields.
+        # Caller-supplied rows can share permit/outfall IDs but need different answers and observations.
+        # Effective state/text preserve the fallback semantics; retrieval metadata is immaterial.
+        # Distance is quoted in notes: numerically equal 1 and 1.0 produce different text.
+        distance = row.get("distance_m")
         return (row.get("_file"), row.get("npdes_permit"), row.get("outfall"), row.get("lat"), row.get("lon"),
-               eff_state, text_, row.get("water_slug"))
+                eff_state, text_, row.get("water_slug"), row.get("water_matched_by"), row.get("no_water_reason"),
+                row.get("city"), row.get("county"), row.get("match"), row.get("water_match"),
+                str(distance) if distance is not None else None)
 
     def row_water(self, row) -> tuple[str | None, str]:
         """(slug, how) for one registry outfall. A row the registry pass matched (water_matched_by; PLACE_STEPS
