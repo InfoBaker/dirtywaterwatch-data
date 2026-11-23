@@ -69,7 +69,9 @@ COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id"
            # our own figures, apart from the source's (export/estimates.py): a volume computed from the record's rate
            # and duration, and an end estimated from its start and the duration it gives, each with its basis
            "volume_estimate_gal", "volume_estimate_low_gal", "volume_estimate_high_gal", "volume_estimate_bound",
-           "volume_estimate_basis", "end_estimate_at", "end_estimate_basis"]
+           "volume_estimate_basis", "end_estimate_at", "end_estimate_basis",
+           # whether the source says the overflow reached a waterway, in its words (export/detail.py)
+           "water_reach"]
 DETAIL_COLUMNS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
                   "volume_method", "volume_to_water_gal", "overflow_point", "town")
 LATER_DETAIL_COLUMNS = ("resolution", "notes")
@@ -461,6 +463,7 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
         ee = {"at": e["ended_at"], "basis": e["ended_at_ours"].get("basis")}      # the record's own end, worked out by us
     row += [_number(ve.get("gallons")), _number(ve.get("low")), _number(ve.get("high")), _text(ve.get("bound")),
             _text(ve.get("basis")), _text(ee.get("at")), _text(ee.get("basis"))]
+    row += [_text(d.get("water_reach"))]
     return row, ops
 
 
