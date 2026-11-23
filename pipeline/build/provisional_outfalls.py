@@ -73,6 +73,7 @@ import time
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime, timedelta
+from functools import lru_cache
 from pathlib import Path
 
 from build import status as S
@@ -483,6 +484,12 @@ def build_places(events: list[dict], outlines: dict | None = None, key: dict | N
     outlines = state_outlines() if outlines is None else outlines
     if key is None or by_id is None:
         key, by_id = operator_index()
+    # Repeated reports often carry the same exact point. Keep the outline check local
+    # to this build, so changed outlines are always read on the next run.
+    @lru_cache(maxsize=8192)
+    def check_point(lat, lon, state):
+        return coord_problem(lat, lon, state, outlines)
+
     drops = Counter()
     kept, unlocated = [], []
     for ev in events:
@@ -504,7 +511,17 @@ def build_places(events: list[dict], outlines: dict | None = None, key: dict | N
                 continue
             unlocated.append({**ev, "_op": op, "_state": state})
             continue
-        prob = coord_problem(ev.get("lat"), ev.get("lon"), state, outlines)
+        try:
+            lat, lon = float(ev["lat"]), float(ev["lon"])
+        except (TypeError, ValueError):
+            prob = coord_problem(ev.get("lat"), ev.get("lon"), state, outlines)
+        else:
+            # Malformed registry states must reach the validator in its original
+            # order: a bad point can be rejected before state is ever inspected.
+            if state is None or isinstance(state, str):
+                prob = check_point(lat, lon, state)
+            else:
+                prob = coord_problem(ev.get("lat"), ev.get("lon"), state, outlines)
         if prob:
             drops[f"point {prob}" if not prob.startswith("outside") else "point outside the report's state"] += 1
             unlocated.append({**ev, "_op": op, "_state": state, "_coord_problem": prob})
@@ -540,19 +557,28 @@ def place_row(op: str, oprow: dict, permits: list[str], group: list) -> dict:
     overflows = {e.get("parent_event_id") or e["event_id"] for e in evs}
     reach = Counter(reached(e) for e in evs)
     reach_sum = "yes" if reach["yes"] else ("no" if reach["no"] == len(evs) else "unknown")
-    names = Counter(n for n in (safe_place_name(e.get("outfall_name")) for e in evs) if n)
+    # Check each distinct text once, retaining first-occurrence order for ties and
+    # adding counts when different source strings yield the same public text.
+    names = Counter()
+    for text, count in Counter(e["outfall_name"] for e in evs if isinstance(e.get("outfall_name"), str)).items():
+        name = safe_place_name(text)
+        if name:
+            names[name] += count
     oids = Counter(i for e in evs for i in outfall_ids(e))
     cso_named = defaultdict(set)              # outfall id -> the distinct CSO overflows naming it here
     for e in evs:
         if e.get("event_type") == "cso":
             for i in outfall_ids(e):
                 cso_named[i].add(e.get("parent_event_id") or e["event_id"])
-    texts = Counter(strip_personal(str(e["waterbody_text"]).strip())[:120] for e in evs
-                    if isinstance(e.get("waterbody_text"), str) and e["waterbody_text"].strip()
-                    and not S.reached_no_water(e) and not ADDRESS_LIKE.search(e["waterbody_text"])
-                    and not re.search(r"\bprivate\b|\bresident'?s?\b|\bhomeowner|\bbackyard|\byard\b",
-                                      e["waterbody_text"], re.I)
-                    and not re.search(r"\b\d{5}\b", e["waterbody_text"]) and not person_like(e["waterbody_text"]))
+    texts = Counter()
+    water_texts = Counter(e["waterbody_text"] for e in evs
+                         if isinstance(e.get("waterbody_text"), str) and e["waterbody_text"].strip()
+                         and not S.reached_no_water(e))
+    for text, count in water_texts.items():
+        if not ADDRESS_LIKE.search(text) \
+                and not re.search(r"\bprivate\b|\bresident'?s?\b|\bhomeowner|\bbackyard|\byard\b", text, re.I) \
+                and not re.search(r"\b\d{5}\b", text) and not person_like(text):
+            texts[strip_personal(text.strip())[:120]] += count
     slugs = Counter(s for e in evs for s in (e.get("water_slugs") or []))
     states = Counter(e.get("_state") for e in evs if e.get("_state"))
     names_seen = Counter(e.get("discharger_name") for e in evs if e.get("discharger_name"))

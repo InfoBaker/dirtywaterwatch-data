@@ -1,0 +1,112 @@
+# Original functions at 3d9767d3, before refresh performance changes.
+
+def build_places(events: list[dict], outlines: dict | None = None, key: dict | None = None,
+                 by_id: dict | None = None) -> tuple[list[dict], Counter, list[dict]]:
+    """(places, drops, unlocated): one place per operator and 50 m, from the reports with a usable point; drops
+    counts the reports left out by reason; unlocated are the reports kept (operator, privacy) that have no usable
+    point (the geolocation step's input)."""
+    outlines = state_outlines() if outlines is None else outlines
+    if key is None or by_id is None:
+        key, by_id = operator_index()
+    drops = Counter()
+    kept, unlocated = [], []
+    for ev in events:
+        if ev.get("duplicate_of"):
+            drops["a copy of another source's report (duplicate_of)"] += 1
+            continue
+        op = operator_of(ev, key)
+        if not op:
+            drops["no operator named"] += 1
+            continue
+        why = privacy_reason(ev)
+        if why:
+            drops["private property or building backup"] += 1
+            continue
+        state = S.event_state(ev) or (by_id.get(op) or {}).get("state") or permit_state(ev.get("npdes_permit") or op)
+        if ev.get("lat") is None or ev.get("lon") is None:
+            if named_water_only(ev):
+                drops["placed by its named water only (the source's placement rule): not geolocated"] += 1
+                continue
+            unlocated.append({**ev, "_op": op, "_state": state})
+            continue
+        prob = coord_problem(ev.get("lat"), ev.get("lon"), state, outlines)
+        if prob:
+            drops[f"point {prob}" if not prob.startswith("outside") else "point outside the report's state"] += 1
+            unlocated.append({**ev, "_op": op, "_state": state, "_coord_problem": prob})
+            continue
+        kept.append((float(ev["lat"]), float(ev["lon"]), {**ev, "_op": op, "_state": state}))
+    # a point three or more operators share is a town or county centroid
+    ops_at = defaultdict(set)
+    for lat, lon, ev in kept:
+        ops_at[(round(lat, CENTROID_ROUND), round(lon, CENTROID_ROUND))].add(ev["_op"])
+    shared = {p for p, ops in ops_at.items() if len(ops) >= CENTROID_OPERATORS}
+    by_op = defaultdict(list)
+    for lat, lon, ev in kept:
+        if (round(lat, CENTROID_ROUND), round(lon, CENTROID_ROUND)) in shared:
+            drops[f"point shared by {CENTROID_OPERATORS} or more operators (a town or county centroid)"] += 1
+            continue
+        by_op[ev["_op"]].append((lat, lon, ev))
+    places = []
+    for op in sorted(by_op):
+        evs = [e for _, _, e in by_op[op]]
+        permits = operator_permits(op, evs, by_id)
+        row = by_id.get(op) or {}
+        for group in cluster_points(by_op[op]):
+            places.append(place_row(op, row, permits, group))
+    return places, drops, unlocated
+
+def place_row(op: str, oprow: dict, permits: list[str], group: list) -> dict:
+    lat, lon = group[0][0], group[0][1]
+    evs = [it for _, _, it in group]
+    times = [(report_time(e), e) for e in evs]
+    dated = sorted((t, e["event_id"]) for t, e in times if t)
+    latest_first = [eid for _, eid in sorted(dated, reverse=True)] + [e["event_id"] for t, e in times if not t]
+    overflows = {e.get("parent_event_id") or e["event_id"] for e in evs}
+    reach = Counter(reached(e) for e in evs)
+    reach_sum = "yes" if reach["yes"] else ("no" if reach["no"] == len(evs) else "unknown")
+    names = Counter(n for n in (safe_place_name(e.get("outfall_name")) for e in evs) if n)
+    oids = Counter(i for e in evs for i in outfall_ids(e))
+    cso_named = defaultdict(set)              # outfall id -> the distinct CSO overflows naming it here
+    for e in evs:
+        if e.get("event_type") == "cso":
+            for i in outfall_ids(e):
+                cso_named[i].add(e.get("parent_event_id") or e["event_id"])
+    texts = Counter(strip_personal(str(e["waterbody_text"]).strip())[:120] for e in evs
+                    if isinstance(e.get("waterbody_text"), str) and e["waterbody_text"].strip()
+                    and not S.reached_no_water(e) and not ADDRESS_LIKE.search(e["waterbody_text"])
+                    and not re.search(r"\bprivate\b|\bresident'?s?\b|\bhomeowner|\bbackyard|\byard\b",
+                                      e["waterbody_text"], re.I)
+                    and not re.search(r"\b\d{5}\b", e["waterbody_text"]) and not person_like(e["waterbody_text"]))
+    slugs = Counter(s for e in evs for s in (e.get("water_slugs") or []))
+    states = Counter(e.get("_state") for e in evs if e.get("_state"))
+    names_seen = Counter(e.get("discharger_name") for e in evs if e.get("discharger_name"))
+    cs = Counter(e.get("coord_source") or "source" for e in evs)
+    return {
+        "id": place_id(op, lat, lon),
+        "source_id": SOURCE_ID,
+        "discharger_id": op,
+        "permittee": oprow.get("name") or (names_seen.most_common(1)[0][0] if names_seen else None),
+        "npdes_permit": permits[0] if permits else None,
+        "npdes_permits": permits,
+        "state": (oprow.get("state") or (states.most_common(1)[0][0] if states else None)
+                  or next((x[:2] for x in permits if x[:2] in S.states()), None)),
+        "lat": round(lat, 6), "lon": round(lon, 6),
+        "coord_source": cs.most_common(1)[0][0],
+        "coord_sources": dict(cs),
+        "coord_spread_m": round(max(dist_m(lat, lon, a, b) for a, b, _ in group)),
+        "report_count": len(evs),
+        "overflow_count": len(overflows),
+        "first_report_at": S.iso(dated[0][0]) if dated else None,
+        "last_report_at": S.iso(dated[-1][0]) if dated else None,
+        "event_types": dict(Counter(e.get("event_type") for e in evs)),
+        "sources": dict(Counter(e.get("source_id") for e in evs)),
+        "outfall_ids": [i for i, _ in oids.most_common(10)],
+        "cso_outfall_overflows": {i: len(v) for i, v in cso_named.items()},
+        "place_names": [n for n, _ in names.most_common(5)],
+        "reached_water": reach_sum,
+        "reached_counts": dict(reach),
+        "reports_water_text": [t for t, _ in texts.most_common(3)],
+        "reports_water_slugs": [s for s, _ in slugs.most_common(5)],
+        "event_ids": latest_first[:MAX_EVENT_IDS],
+        "_all_event_ids": latest_first,
+    }
