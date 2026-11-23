@@ -1,0 +1,38 @@
+{
+  "provenance": "Both DWR source rows read live 2026-11-22 using only identifiers, permit and dates. Survey123 dates also match the existing nc_dwr_sso_survey123.json fixture; its public utility name is from that fixture.",
+  "history": {
+    "event_id": "nc-dwr-sso-2022-2025:202500025",
+    "source_id": "nc-dwr-sso-2022-2025",
+    "source_record_id": "202500025",
+    "event_type": "sso",
+    "status": "ended",
+    "npdes_permit": "WQCS00007",
+    "started_at": "2025-01-01T21:00:00-05:00",
+    "ended_at": null,
+    "time_precision": "minute",
+    "fetched_at": "2026-11-23T01:04:06Z",
+    "source_url": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_September_2022_through_December_2025/FeatureServer/0/query?where=OBJECTID%3D2355&outFields=*&f=json",
+    "authority": "NC DEQ Division of Water Resources (Sanitary Sewer Overflow Tracking Map)",
+    "duplicate_of": null,
+    "raw": {
+      "OBJECTID": 2355,
+      "incident_number": "202500025",
+      "permit_id": "WQCS00007",
+      "start_date": 1735783200000,
+      "end_date": 1735783200000,
+      "_layer": "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_September_2022_through_December_2025/FeatureServer/0",
+      "_end_basis": "end_date repeats start_date on every row of this layer, so it is not an end time; the incident is closed but its end is not published here"
+    }
+  },
+  "survey": {
+    "objectid": 2046,
+    "globalid": "c58469d9-e0ea-4328-8801-95421e3c47c9",
+    "incident_number": "202500025",
+    "permit_with_name": "WQCS00007 - PWC/Fayetteville Collection System",
+    "start_date": 1735776000000,
+    "end_date": 1735783200000,
+    "ongoing": "No",
+    "report_date": null,
+    "EditDate": 1794498354050
+  }
+}

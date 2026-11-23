@@ -288,7 +288,36 @@ def _ridoh_computed_end(e: dict, raw: dict) -> dict | None:
                      "no reopening date.", "basis_short": "closure date + number of days closed"}
 
 
+def _duration_hours_input(e: dict, value, field: str) -> dict:
+    """Preserve the source value and its citation; add hours only to a bare number in an hours field."""
+    text = str(value).strip() if value is not None and not isinstance(value, bool) else ""
+    if re.fullmatch(_N, text):
+        text += " hours"
+    return {"duration_text": text, "duration_field": field, "duration_value": value,
+            "duration_field_unit": "hours", "source_record_id": e.get("source_record_id"), "source_url": e.get("source_url")}
+
+
+def _ct_archive(e: dict, raw: dict) -> dict:
+    # Both frozen layers' numeric durations are hours (checked against their start/stop intervals).
+    field, stop = ("CSO_DURATION", "STOP_FLOW_DATETIME") if "CSO_DURATION" in raw else ("DURATION", "STOP_DATETIME")
+    inp = _duration_hours_input(e, raw.get(field), field)
+    inp["source_end_given"] = raw.get(stop) is not None
+    return inp
+
+
+def _wa_ecology(e: dict, raw: dict) -> dict:
+    row = raw.get("row") if isinstance(raw.get("row"), dict) else {}
+    inp = _duration_hours_input(e, row.get("final_event_duration_hours"), "row.final_event_duration_hours")
+    inp["source_end_given"] = row.get("end_event_timedate") is not None
+    # Active-flow duration need not span intermittent releases. Midnight starts may be day-only.
+    if str(row.get("was_the_spill_continuous") or "").strip().lower() == "intermittent" or raw.get("_start_at_midnight"):
+        inp["duration_text"] = None
+    return inp
+
+
 SOURCES = {
+    "ct-deep-archive": {"inputs": _ct_archive, "duration": parse_ny_duration},
+    "wa-ecology-sewage-spills": {"inputs": _wa_ecology, "duration": parse_ny_duration},
     "ny-dec-sprtk": {"inputs": _ny_workbook, "rate": parse_ny_rate, "duration": parse_ny_duration},
     "ny-dec-sprtk-web": {"inputs": _ny_web, "rate": parse_ny_rate, "duration": parse_ny_duration,
                          "computed_end": _ny_web_computed_end},
@@ -508,7 +537,7 @@ def end_estimate_of(e: dict) -> dict | None:
     if e.get("ended_at"):
         return None
     spec, inp = _spec(e)
-    if not spec:
+    if not spec or inp.get("source_end_given"):
         return None
     st = _start_ok(e)
     if st is None or e.get("time_precision") not in ("minute", "day"):
@@ -541,9 +570,14 @@ def end_estimate_of(e: dict) -> dict | None:
                  "the last day the duration allows.")
         at = end.date().isoformat()
     short_start = "end of day after stored date" if stored_day else "start"
-    return {"at": at, "precision": prec, "basis": basis, "basis_short": f"{short_start} + {dw} {SHORT[dur['from']]}",
-            "inputs": {"started_at": e.get("started_at"), "duration_minutes": _clean_num(round(dur["minutes"], 2)),
-                       "duration_from": dur["from"], "duration_text": dur["text"]}}
+    out = {"at": at, "precision": prec, "basis": basis, "basis_short": f"{short_start} + {dw} {SHORT[dur['from']]}",
+           "inputs": {"started_at": e.get("started_at"), "duration_minutes": _clean_num(round(dur["minutes"], 2)),
+                      "duration_from": dur["from"], "duration_text": dur["text"]}}
+    if inp.get("duration_field"):
+        out["formula"] = "start + stated duration"
+        out["inputs"].update({k: inp[k] for k in ("duration_field", "duration_value", "duration_field_unit",
+                                                "source_record_id", "source_url")})
+    return out
 
 
 def ended_at_ours_of(e: dict) -> dict | None:
