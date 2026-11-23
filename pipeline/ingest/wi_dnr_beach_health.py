@@ -92,6 +92,7 @@ from common import BUILD_DIR, HEADERS, event, now_iso, read_json, save_raw, writ
 from common import error_text
 from ingest.de_dnrec_derns import scrub
 from ingest.de_sc_periods import extend as extend_periods
+from ingest import lift_dates
 
 SOURCE_ID = "wi-dnr-beach-health"
 FIELDS = ("OBJECTID", "BEACH_SEQ_NO", "OGW_BEACH_NAME_TEXT", "STATUS", "BEACH_ACTION", "MAP_STATUS", "ISSUED",
@@ -431,10 +432,26 @@ def advance(state: dict, current: dict, listed: set, blank: set, now: str, key_o
         end = issued_end(es.get('issued_text'), now)
         if not end:
             continue
+        episodes = [v for v in state.values() if v['iid'] == iid]
+        observations = []
+        for v in episodes:
+            for o in v.get('lift_observations', []):
+                lift_dates.remember(observations, o['date'], o['precision'], o['seen_at'])
+            # Older saved state already has the consumed lift's own observation.
+            if v.get('ended_at_precision') == 'day' and v.get('ended_at'):
+                lift_dates.remember(observations, v['ended_at'], 'day',
+                                    v.get('source_end_seen_at') or v.get('end_seen_at') or v['first_seen_at'])
+        seen_at = lift_dates.remember(observations, end, 'day', now)
+        for v in episodes:
+            v['lift_observations'] = deepcopy(observations)
+
+        def follows_start(v):
+            return lift_dates.follows(end, 'day', v['started_at'], v['precision'], str(TZ), seen_at)
+
         candidates = []
         for key, v in state.items():
             if (v['iid'] != iid or issued_start_text(es.get('issued_text')) != v.get('issued_start')
-                    or not issued_end(es.get('issued_text'), now, v['started_at'])):
+                    or not follows_start(v)):
                 continue
             # An observed end bounds late corrections. A source-only end can be revised within that boundary.
             observed_end = v.get('end_seen_at')
@@ -445,7 +462,7 @@ def advance(state: dict, current: dict, listed: set, blank: set, now: str, key_o
             others = [o for k, o in state.items() if k != key and o['iid'] == iid]
             if any(datetime.fromisoformat(o['first_seen_at'].replace('Z', '+00:00'))
                    > datetime.fromisoformat(v['first_seen_at'].replace('Z', '+00:00'))
-                   and local_day(o['started_at']).isoformat() <= end for o in others):
+                   and follows_start(o) for o in others):
                 continue
             candidates.append(key)
         if len(candidates) == 1:
@@ -467,7 +484,8 @@ def advance(state: dict, current: dict, listed: set, blank: set, now: str, key_o
                     'end_seen': deepcopy(v.get('end_seen')),
                     'seen_at': v.get('source_end_seen_at') or v.get('end_seen_at'), 'replaced_at': now})
             v.update(ended_at=end, ended_at_precision='day', end_seen=deepcopy(es),
-                     end_seen_at=v.get('end_seen_at') or now, source_end_seen_at=now,
+                     end_seen_at=v.get('end_seen_at') or now,
+                     source_end_seen_at=next(o['seen_at'] for o in v['lift_observations'] if o['date'] == end),
                      end_basis="The Department's second ISSUED date for this advisory")
             v.pop('missing_since', None)
             continue

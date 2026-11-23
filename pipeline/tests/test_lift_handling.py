@@ -378,7 +378,7 @@ def test_review_or_timed_offsets_and_day_precision(start, end, expected):
             assert '_unlisted_since' not in r['raw'] and r['raw']['lift_evidence']
 
 
-def test_review_or_changed_lift_cannot_jump_across_return():
+def test_review_or_later_lift_closes_return_without_rewriting_predecessor():
     refresh = or_refreshes()
     first = refresh('2026-08-19T00:00:00-07:00', '2026-08-20T18:00:00Z')[0]
     ended = refresh('2026-11-19T00:00:00-08:00', '2026-11-19T18:00:00Z', True)[0]
@@ -388,16 +388,124 @@ def test_review_or_changed_lift_cannot_jump_across_return():
         old = next(r for r in rows if r['event_id'] == first['event_id'])
         new = next(r for r in rows if r['event_id'] != first['event_id'])
         assert old['ended_at'] == ended['ended_at']
-        assert new['ended_at'] is None and '_unlisted_since' not in new['raw']
-        assert new['raw']['lift_evidence']
+        assert new['ended_at'][:10] == '2026-11-22' and new['status'] == 'advisory_lifted'
 
 
-def test_review_or_observed_absence_and_same_issue_return_is_not_crossed():
+def test_review_or_lift_after_same_issue_return_preserves_absence_history():
     refresh = or_refreshes()
     refresh('2026-08-19T00:00:00-07:00', '2026-08-20T18:00:00Z')
     refresh(None, '2026-10-01T18:00:00Z')
     back = refresh('2026-08-19T00:00:00-07:00', '2026-11-01T18:00:00Z')[0]
     for at in [AT, '2026-11-23T18:00:00Z']:
         r = refresh('2026-11-19T00:00:00-08:00', at, True)[0]
-        assert r['ended_at'] is None and r['raw']['_absences'] == back['raw']['_absences']
-        assert r['raw']['lift_evidence'] and '_unlisted_since' not in r['raw']
+        assert r['ended_at'][:10] == '2026-11-19' and r['status'] == 'advisory_lifted'
+        assert r['raw']['_absences'] == back['raw']['_absences'] and '_unlisted_since' not in r['raw']
+
+
+def assert_current_red(record, state, at):
+    from datetime import datetime
+    from build import status as S
+    t = datetime.fromisoformat(at.replace('Z', '+00:00'))
+    assert record['status'] == 'advisory_active' and record['ended_at'] is None
+    assert S.status_at(S.event_intervals(record, state, t), t)[0] == 'red'
+
+
+@pytest.mark.parametrize('lift,closes', [('2026-09-20', False), ('2026-11-02', True)])
+def test_final_or_lift_must_follow_latest_observed_return(lift, closes):
+    refresh = or_refreshes()
+    issue = '2026-08-19T00:00:00-07:00'
+    refresh(issue, '2026-08-20T18:00:00Z')
+    refresh(None, '2026-10-01T18:00:00Z')
+    back = refresh(issue, '2026-11-01T18:00:00Z')[0]
+    assert back['raw']['_absences'][-1]['returned_at'] == '2026-11-01T18:00:00Z'
+    for at in ['2026-11-02T18:00:00Z', '2026-11-03T18:00:00Z']:
+        r = refresh(lift + 'T00:00:00-08:00', at, True)[0]
+        assert r['event_id'] == back['event_id']
+        assert r['raw']['_absences'] == back['raw']['_absences']
+        if closes:
+            assert r['status'] == 'advisory_lifted' and r['ended_at'][:10] == lift
+        else:
+            assert_current_red(r, 'OR', at)
+            assert r['raw']['lift_evidence']['row']['AdvisoryStatus'] == 'Advisory/Precaution Lifted'
+            assert '_unlisted_since' not in r['raw']
+
+
+@pytest.mark.parametrize('lift,closes', [('20-SEP-26', False), ('21-SEP-26', True)])
+def test_final_wi_consumed_lift_cannot_cross_same_day_return(lift, closes):
+    refresh = wi_sequence()
+    first = refresh('2026-09-18T18:00:00Z')[0]
+    refresh('2026-09-20T15:00:00Z', BEACH_ACTION='End', ISSUED='17-SEP-26 - 20-SEP-26')
+    refresh('2026-09-20T18:00:00Z', BEACH_ACTION='Advisory', ISSUED='17-SEP-26 - ')
+    for at in ['2026-09-21T18:00:00Z', '2026-09-22T18:00:00Z']:
+        rows = refresh(at, BEACH_ACTION='End', ISSUED='17-SEP-26 - ' + lift)
+        old = next(r for r in rows if r['event_id'] == first['event_id'])
+        new = next(r for r in rows if r['event_id'] != first['event_id'])
+        assert old['ended_at'] == '2026-09-20'
+        assert old['raw']['source_end_observation']['seen_at'] == '2026-09-20T15:00:00Z'
+        if closes:
+            assert new['status'] == 'advisory_lifted' and new['ended_at'] == '2026-09-21'
+        else:
+            assert_current_red(new, 'WI', at)
+            assert new['raw']['unattributed_lift_evidence']
+
+
+@pytest.mark.parametrize('lift,closes', [('2023-07-14', False), ('2023-08-02', True)])
+def test_final_mo_dated_lift_resolves_episode_before_poll_closure(lift, closes):
+    from datetime import datetime, timezone
+    doc = json.loads((FIX / 'lifts/mo.json').read_text())
+    active = copy.deepcopy(doc)
+    active['features'][0]['attributes'].update(BloomStat='advise', DissDat=None)
+    rows, _ = M.run(active, [], '2023-06-06T18:00:00Z')
+    first = rows[0]['event_id']
+    rows, _ = M.run(doc, rows, '2023-07-14T18:00:00Z')
+    rows, _ = M.run(active, rows, '2023-08-01T18:00:00Z')
+    doc['features'][0]['attributes']['DissDat'] = int(datetime.fromisoformat(lift).replace(tzinfo=timezone.utc).timestamp()*1000)
+    for at in ['2023-08-02T18:00:00Z', '2023-08-03T18:00:00Z']:
+        rows, stats = M.run(doc, rows, at)
+        old = next(r for r in rows if r['event_id'] == first)
+        new = next(r for r in rows if r['event_id'] != first)
+        assert old['ended_at'] == '2023-07-14'
+        if closes:
+            assert new['status'] == 'advisory_lifted' and new['ended_at'] == lift
+        else:
+            assert_current_red(new, 'MO', at)
+            assert '_unlisted_since' not in new['raw'] and stats['lifted'] == 0
+            assert new['raw']['dissolved_on'] == lift
+
+
+@pytest.mark.parametrize('replay', [True, False])
+def test_final_or_same_day_return_uses_lifts_own_observation(replay):
+    refresh = or_refreshes()
+    issue = '2026-08-19T00:00:00-07:00'
+    refresh(issue, '2026-08-20T18:00:00Z')
+    if replay:
+        refresh('2026-09-20T00:00:00-07:00', '2026-09-20T15:00:00Z', True)
+    refresh(issue, '2026-09-20T18:00:00Z')
+    for at in ['2026-09-21T18:00:00Z', '2026-09-22T18:00:00Z']:
+        r = refresh('2026-09-20T00:00:00-07:00', at, True)[0]
+        if replay:
+            assert_current_red(r, 'OR', at)
+        else:
+            assert r['ended_at'][:10] == '2026-09-20'
+
+
+@pytest.mark.parametrize('replay', [True, False])
+def test_final_mo_same_day_return_uses_lifts_own_observation(replay):
+    from datetime import datetime, timezone
+    doc = json.loads((FIX / 'lifts/mo.json').read_text())
+    active = copy.deepcopy(doc)
+    active['features'][0]['attributes'].update(BloomStat='advise', DissDat=None)
+    rows, _ = M.run(active, [], '2023-06-06T18:00:00Z')
+    rows, _ = M.run(doc, rows, '2023-07-14T15:00:00Z')
+    returned = '2023-07-14T18:00:00Z' if replay else '2023-08-01T18:00:00Z'
+    rows, _ = M.run(active, rows, returned)
+    if not replay:
+        doc['features'][0]['attributes']['DissDat'] = int(datetime(2023, 8, 1, tzinfo=timezone.utc).timestamp()*1000)
+    for at in (["2023-07-15T18:00:00Z", "2023-07-16T18:00:00Z"] if replay
+               else ["2023-08-02T18:00:00Z", "2023-08-03T18:00:00Z"]):
+        rows, _ = M.run(doc, rows, at)
+        r = next(r for r in rows if r['started_at'] == returned)
+        if replay:
+            assert_current_red(r, 'MO', at)
+        else:
+            assert r['ended_at'] == '2023-08-01'

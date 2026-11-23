@@ -20,6 +20,7 @@ from zoneinfo import ZoneInfo
 
 import zones
 from ingest.generic import fieldmap as F
+from ingest import lift_dates
 
 WINDOW_BASIS = ("Oregon Health Authority: in effect while OHA's layer lists the water under an advisory or a precaution; "
                 "OHA lifts it after its own sampling and sets no fixed period")
@@ -110,14 +111,24 @@ def or_hab_episodes(records: list[dict], ctx: F.Ctx) -> None:
     """Attribute a lift within one retained episode's issue, unlisting and successor boundaries.
 
     Every still-listed unmatched episode stays open. Historical listing evidence is never refreshed by a lift.
-    A date revision cannot move a previously attributed lift across a recorded return.
+    A replay cannot move a previously attributed lift across a recorded return.
     """
     from copy import deepcopy
 
     snapshots = ctx.extra.setdefault('or_lift_listing_history', {})
+    # Generic history rebuilds active rows; carry dated-lift observations through actual returns.
+    previous = {p['event_id']: p for p in ctx.previous_records}
     for r in list(records):
         row = r['raw']['row']
         if F.clean(row.get('AdvisoryStatus')).lower() != 'advisory/precaution lifted':
+            p = previous.get(r['event_id'], {})
+            prior = p.get('raw', {})
+            if prior.get('lift_observations'):
+                r['raw']['lift_observations'] = deepcopy(prior['lift_observations'])
+            if prior.get('returned_at'):
+                r['raw']['returned_at'] = prior['returned_at']
+            if p.get('status') == 'advisory_lifted':
+                r['raw']['returned_at'] = ctx.fetched_at
             continue
         records.remove(r)
         end, ep = r.get('started_at'), r.get('time_precision')
@@ -126,39 +137,49 @@ def or_hab_episodes(records: list[dict], ctx: F.Ctx) -> None:
                     if row.get('OBJECTID') is not None
                     and (p.get('raw', {}).get('row') or {}).get('OBJECTID') == row['OBJECTID']]
 
+        observations = []
+        for p in matching:
+            for o in p['raw'].get('lift_observations', []):
+                lift_dates.remember(observations, o['date'], o['precision'], o['seen_at'])
+        seen_at = lift_dates.remember(observations, end, ep, ctx.fetched_at)
+
+        def latest_start(p):
+            starts = [(p['started_at'], p.get('time_precision'))]
+            if p['raw'].get('returned_at'):
+                starts.append((p['raw']['returned_at'], 'poll'))
+            starts += [(a['returned_at'], 'poll') for a in p['raw'].get('_absences', []) if a.get('returned_at')]
+            return max(starts, key=lambda s: lift_dates.instant(s[0], zone))
+
+        def follows_start(p):
+            start, precision = latest_start(p)
+            return lift_dates.follows(end, ep, start, precision, zone, seen_at)
+
         def eligible(p):
             raw = p.get('raw') or {}
             if (not F.clean(row.get('WaterbodyName')) or raw.get('row', {}).get('WaterbodyName') != row['WaterbodyName']
                     or (p.get('lat'), p.get('lon')) != (r.get('lat'), r.get('lon'))):
                 return False
-            if not _before(p.get('started_at'), p.get('time_precision'), end, ep, zone, same_day=True):
+            if not follows_start(p):
                 return False
             boundaries = [raw.get('_unlisted_since'), raw.get('_missing_from_source_since')]
-            boundaries += [a.get('missing_since') for a in raw.get('_absences', [])]
-            # An observed absence/return is a hard boundary, even when the source reuses its issue date.
+            # Completed absences precede the latest return; only a current absence bounds its end.
             if any(b and not _before(end, ep, b, 'minute', zone) for b in boundaries):
                 return False
             for other in matching:
                 if other['event_id'] == p['event_id']:
                     continue
-                if (_before(p.get('started_at'), p.get('time_precision'), other.get('started_at'),
-                            other.get('time_precision'), zone)
-                        and not _before(end, ep, other.get('started_at'), other.get('time_precision'), zone)):
+                if (lift_dates.instant(latest_start(other)[0], zone) > lift_dates.instant(latest_start(p)[0], zone)
+                        and follows_start(other)):
                     return False
             return p.get('status') in {'advisory_active', 'advisory_lifted'}
 
         candidates = [p for p in matching if eligible(p)]
-        # After a recorded return, a changed lift date alone cannot distinguish a revision of the old lift
-        # from a lift of the new episode. Keep that evidence without transferring the old lift to the new one.
-        if len(candidates) == 1 and any(p.get('ended_at') and p['event_id'] != candidates[0]['event_id']
-                and _before(p.get('started_at'), p.get('time_precision'), candidates[0].get('started_at'),
-                            candidates[0].get('time_precision'), zone) for p in matching):
-            candidates = []
         chosen = candidates[0] if len(candidates) == 1 else None
         if chosen:
             p = chosen
             raw = deepcopy(p['raw'])
             raw.update(r['raw'])
+            raw['lift_observations'] = deepcopy(observations)
             if p.get('ended_at') and p['ended_at'] != end:
                 raw.setdefault('end_observations', []).append({
                     'ended_at': p['ended_at'], 'precision': p['raw'].get('ended_at_precision'),
@@ -182,6 +203,7 @@ def or_hab_episodes(records: list[dict], ctx: F.Ctx) -> None:
             if any(x['event_id'] == p['event_id'] for x in records):
                 continue
             held = deepcopy(p)
+            held['raw']['lift_observations'] = deepcopy(observations)
             held['fetched_at'] = ctx.fetched_at
             evidence = {'row': deepcopy(row), 'seen_at': ctx.fetched_at,
                         'basis': 'This lift does not identify this advisory episode; we retain it as separate evidence.'}

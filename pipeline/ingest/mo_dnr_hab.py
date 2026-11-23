@@ -46,7 +46,7 @@ from pathlib import Path
 import requests
 
 import common
-from ingest import poll_periods
+from ingest import poll_periods, lift_dates
 from common import HEADERS, event, now_iso, read_json, save_raw, write_events
 from common import error_detail
 
@@ -172,32 +172,59 @@ def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
             poll_periods.revise_place(r, at, name=x["name"], lat=x["lat"], lon=x["lon"], county=x["county"])
         _source_evidence(r, source_rows[rid], at)
         poll_periods.seen(r, at)
+    # Resolve dated dissipation before any poll closure. A stale date belongs to its
+    # historical spell and cannot close the returned spell at this fetch time.
+    attributed = {}
+    dated = set()
+    for rid, a in source_rows.items():
+        end = day(a.get('DissDat'))
+        if str(a.get('BloomStat') or '').lower() != 'dissap' or not end:
+            continue
+        dated.add(rid)
+        episodes = [r for r in recs.values() if r['raw'].get('report_id') == rid]
+        observations = []
+        for r in episodes:
+            for o in r['raw'].get('lift_observations', []):
+                lift_dates.remember(observations, o['date'], o['precision'], o['seen_at'])
+            if r['raw'].get('ended_at_precision') == 'day' and r.get('ended_at'):
+                lift_dates.remember(observations, r['ended_at'], 'day',
+                                    r['raw'].get('source_fields_seen_at') or r['raw'].get('_unlisted_since')
+                                    or r['fetched_at'])
+        seen_at = lift_dates.remember(observations, end, 'day', at)
+
+        def follows_start(r):
+            return lift_dates.follows(end, 'day', r['started_at'], r['time_precision'], 'America/Chicago', seen_at)
+
+        candidates = [r for r in episodes if end <= at[:10] and follows_start(r)
+                      and not any(lift_dates.instant(o['started_at'], 'America/Chicago')
+                                  > lift_dates.instant(r['started_at'], 'America/Chicago') and follows_start(o)
+                                  for o in episodes)]
+        if len(candidates) == 1:
+            attributed[candidates[0]['event_id']] = end
+        for r in episodes:
+            r['raw']['lift_observations'] = deepcopy(observations)
+            # Retain the contradictory date on unmatched open spells without confirming a listing.
+            if r['status'] == 'advisory_active' or r['event_id'] in attributed:
+                _source_evidence(r, a, at)
     for rid, r in open_by.items():
         if rid not in now:
+            if rid in dated and r['event_id'] not in attributed:
+                continue
             r.update(status="advisory_lifted", ended_at=at)
             r["raw"].update(ended_at_precision="poll", _unlisted_since=at,
                             end_basis="the first read at which DNR's map no longer showed it as present or closed; "
                                       "not DNR's own date")
             stats["lifted"] += 1
-    # A date can arrive after a poll-observed lift. Only the latest spell receives the current row.
-    latest = {}
+    # A late date can replace a poll end, but only on the spell it was attributed to.
     for r in recs.values():
-        rid = r['raw'].get('report_id')
-        if rid not in latest or r['started_at'] > latest[rid]['started_at']:
-            latest[rid] = r
-    for rid, r in latest.items():
-        a = source_rows.get(rid)
-        if a and r['status'] == 'advisory_lifted':
-            _source_evidence(r, a, at)
-            end = day(a.get('DissDat'))
-            if (str(a.get('BloomStat') or '').lower() == 'dissap' and end
-                    and r['started_at'][:10] <= end <= at[:10]):
-                if r.get('ended_at') != end:
-                    r['raw'].setdefault('end_observations', []).append({
-                        'ended_at': r.get('ended_at'), 'precision': r['raw'].get('ended_at_precision'),
-                        'basis': r['raw'].get('end_basis'), 'replaced_at': at})
-                r['ended_at'] = end
-                r['raw'].update(ended_at_precision='day', end_basis="DNR's DissDat on its dissipated bloom report")
+        end = attributed.get(r['event_id'])
+        if end and r['status'] == 'advisory_lifted':
+            if r.get('ended_at') != end:
+                r['raw'].setdefault('end_observations', []).append({
+                    'ended_at': r.get('ended_at'), 'precision': r['raw'].get('ended_at_precision'),
+                    'basis': r['raw'].get('end_basis'), 'replaced_at': at})
+            r['ended_at'] = end
+            r['raw'].update(ended_at_precision='day', end_basis="DNR's DissDat on its dissipated bloom report")
     for r in recs.values():
         r["fetched_at"] = at
         r["raw"]["_poll_confirmed"] = True
