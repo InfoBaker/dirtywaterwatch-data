@@ -4300,7 +4300,7 @@ PERMIT_OUTLET_NEAR_KM = 1.0     # candidates whose order is not established, all
 PERMIT_OUTLET_LEAD = {PERMIT_OUTLET_BASIS: "The report names no outlet.",
                       PERMIT_OUTLET_UNMATCHED: "The outlet the report names is not in our outlet records."}
 PERMIT_OUTLET_NOTE = ("{lead} The stretch is drawn from the operator's most upstream registered outlet on this river "
-                      "(outfall {outfall} of {n}); our choice, not the report's.")
+                      "({which}); our choice, not the report's.")
 PERMIT_OUTLET_NOTE_MANY = ("{lead} The stretches are drawn from the operator's most upstream registered outlet on each "
                            "river ({each}); our choice, not the report's.")
 PERMIT_OUTLET_INFERRED = "The report names no water; this river is the one the operator's permit names."
@@ -4508,6 +4508,31 @@ def permit_outlet_reaches(ev: dict, named: list[str], index: dict, waters: dict,
     return list(picks.values())
 
 
+def outlet_basis_summary(placements: dict) -> str:
+    """The status step's one line on the records drawn from an outlet the build chose (reach_basis): how many under
+    each basis, on how many reaches, and how many of them have a river taken from the permit. Counts only."""
+    by, reaches, inferred = Counter(), set(), 0
+    for pl in (placements or {}).values():
+        b = pl.get("reach_basis")
+        if not b:
+            continue
+        by[b] += 1
+        outs = pl.get("reach_basis_outfalls") or []
+        reaches.update(o.get("reach") for o in outs if o.get("reach"))
+        inferred += any(o.get("water_named") is False for o in outs)
+    n = sum(by.values())
+    if not n:
+        return "status: no record drawn from an outlet chosen for it (reach_basis)"
+    return (f"status: {n} records drawn from an outlet chosen for them (reach_basis) {dict(sorted(by.items()))} "
+            f"on {len(reaches)} reaches; {inferred} with a river taken from the permit")
+
+
+def outlet_among(outfall, n: int, where: str = "on this river") -> str:
+    """"outfall 004, one of its 2 outlets on this river"; "outfall 039, its only outlet on this river". Never
+    "outfall 004 of 2", which reads as the fourth of two."""
+    return f"outfall {outfall}, its only outlet {where}" if n == 1 else f"outfall {outfall}, one of its {n} outlets {where}"
+
+
 def permit_outlet_note(picks: list[dict], waters: dict, basis: str = PERMIT_OUTLET_BASIS,
                        named: set | None = None) -> str:
     """The note: PERMIT_OUTLET_LEAD for the basis, then PERMIT_OUTLET_NOTE for one river or PERMIT_OUTLET_NOTE_MANY
@@ -4516,10 +4541,10 @@ def permit_outlet_note(picks: list[dict], waters: dict, basis: str = PERMIT_OUTL
     lead = PERMIT_OUTLET_LEAD[basis]
     each = [(slug, p["outfall"], p["candidates"][slug]) for p in picks for slug in p["water_slugs"]]
     if len(each) == 1:
-        text = PERMIT_OUTLET_NOTE.format(lead=lead, outfall=each[0][1], n=each[0][2])
+        text = PERMIT_OUTLET_NOTE.format(lead=lead, which=outlet_among(each[0][1], each[0][2]))
     else:
         text = PERMIT_OUTLET_NOTE_MANY.format(lead=lead, each="; ".join(
-            f"{(waters.get(s) or {}).get('name') or s}: outfall {o} of {n}" for s, o, n in each))
+            f"{(waters.get(s) or {}).get('name') or s}: {outlet_among(o, n, 'there')}" for s, o, n in each))
     if named is not None:
         inferred = [s for s, _, _ in each if s not in named]
         if inferred and not named:
@@ -6188,6 +6213,7 @@ def main() -> None:
     print(f"status: {len(status['waters'])} tracked waters {dict(by)}; {status['counts']['events']} events "
           f"({status['counts']['unplaced']} unplaced, {status['counts']['no_receiving_water']} name no receiving "
           f"water); fixtures {'in' if status['fixtures_included'] else 'out'}")
+    print(outlet_basis_summary(status.get("placements")))
     cov = status.get("outlines") or {}
     print("status: water records with an outline here, by state: "
           + ", ".join(f"{st} {c['with_outline']}/{c['records']}" for st, c in cov.items()))
