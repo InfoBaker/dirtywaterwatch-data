@@ -261,7 +261,8 @@ def safe_result(v):
 
 def density_results(raw: dict) -> list[dict]:
     """DEQ's cyano_density is free text, usually qualitative. Never turn dates or presence into a count.
-    A single, fully dated sample field can be normalized; partial/multiple dates remain source text only.
+    A single, fully dated sample field can be normalized only when the narrative does not give
+    multiple dates or a conflicting observation date. Keep the row's sample text separately.
     """
     text = safe_result(raw.get("cyano_density"))
     if text is None or str(text).strip().lower() in {"", "na", "n/a"}:
@@ -269,6 +270,13 @@ def density_results(raw: dict) -> list[dict]:
     sample = safe_result(raw.get("sample_date"))
     ds = dates_in(str(sample or ""), None) if re.fullmatch(
         r"(?:\d{1,2}[/.-]\d{1,2}[/.-](?:\d{4}|\d{2})|\d{4}[/.-]\d{2}[/.-]\d{2})", str(sample or "")) else []
+    mentions = list(DATE.finditer(normal_dates(str(text))))
+    if ds and mentions:
+        # A partial inline date may agree with the row's full date, but never supplies a year
+        # for a separate observation. Preserve multi-date narratives intact, without dating
+        # the whole narrative from one row-level sample field (Lake Helena and Hauser Lake).
+        if len(mentions) != 1 or dates_in(mentions[0].group(0), int(ds[0][:4])) != ds:
+            ds = []
     # No numeric density/unit pair is published in the checked layer (2026-11-22).
     # Keep the typed slots null until a source-backed numeric shape is established.
     return [{"analyte": "Cyanobacteria", "value": None, "units": None, "qualifier": None,

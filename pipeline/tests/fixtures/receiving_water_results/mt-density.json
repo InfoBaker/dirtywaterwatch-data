@@ -47,6 +47,22 @@
         "public_accessible": "Yes",
         "microcystin": null
       }
+    },
+    {
+      "attributes": {
+        "globalid": "{8AA1C647-CA58-4BBE-88E8-FA502B003913}",
+        "county": "LEWIS & CLARK",
+        "sample_date": "2023/08/18",
+        "advisory_lvl": "NA",
+        "advisory_issued": "8/18/2023",
+        "advisory_lifted": "lifted 9/7/2023",
+        "date_observed": 1692554400000,
+        "microcystin": "absent (08/24 & 08/18)",
+        "anatoxin": "absent (08/24 & 08/18)",
+        "cyano_density": "Absent (09/12; 09/07). Present based on photos (08/18)",
+        "public_accessible": "Yes",
+        "name": "Hauser Lake (Clark's Bay area)"
+      }
     }
   ]
 }

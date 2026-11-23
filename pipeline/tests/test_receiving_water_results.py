@@ -3,6 +3,8 @@ import json
 from datetime import date
 from pathlib import Path
 
+import pytest
+
 from ingest import de_dnrec_recwater as D, fl_doh_beaches as F, id_deq_cyanohab as I, mt_deq_hab_map as M
 
 FIX = Path(__file__).parent / 'fixtures'
@@ -24,12 +26,19 @@ def test_delaware_description_survives_and_names_the_source_water():
     assert rec['waterbody_text'] == 'Delaware Bay'
     assert rec['raw']['unit_description'] == lewes['UnitDesc']
     assert rec['raw']['water_basis'] == "DNREC's station description (UnitDesc)"
+    assert rec['raw']['_placement'] == 'named_water_only'
+    # An earlier saved history row gains the same guard when carried through a failed read.
+    old = json.loads(json.dumps(rec))
+    old['raw'].pop('_placement')
+    carried = D.scrub_carried({'history': {old['event_id']: old}})['history'][old['event_id']]
+    assert carried['raw']['_placement'] == 'named_water_only'
     recs, state = D.poll_records([dict(st, CurrentAdvisory=0)], [], {}, AT, date(2026, 11, 22))
     assert recs[0]['waterbody_text'] == 'Rehoboth Bay'
     assert recs[0]['raw']['unit_description'] == st['UnitDesc']
     again, _ = D.poll_records([], [], state, '2026-11-23T23:00:00Z', date(2026, 11, 23))
     assert again[0]['waterbody_text'] == 'Rehoboth Bay' and again[0]['ended_at'] is None
     assert again[0]['raw']['unit_description_observed_at'] == AT
+    assert again[0]['raw']['_placement'] == 'named_water_only'
 
 
 def test_florida_street_location_uses_only_a_county_qualified_registry_alias(monkeypatch):
@@ -80,6 +89,50 @@ def test_montana_density_is_a_typed_source_result_on_every_save_path():
     ambiguous = next(r for r in records if r['source_record_id'] == '021d3031-5841-4d88-a0fc-b3c999df4539')
     assert ambiguous['raw']['sample_results'][0]['sample_date'] is None
     assert ambiguous['raw']['sample_results'][0]['sample_date_text'] == '7/8'
+
+
+@pytest.mark.parametrize('gid,sample,text', [
+    ('aa4a9fee-efa8-408c-87b7-5b3336dad0e2', '6/26/2026',
+     '7/9: Aphanizomenon present, 6/30: Present: Dominated by Aphanizomenon; some Dolichospermum'),
+    ('8aa1c647-ca58-4bbe-88e8-fa502b003913', '2023/08/18',
+     'Absent (09/12; 09/07). Present based on photos (08/18)'),
+])
+def test_montana_dated_narrative_does_not_inherit_the_rows_sample_date(gid, sample, text):
+    doc = fixture('mt-density.json')
+    for records in (M.build(doc, AT)[0], M.build(M.safe_rows(doc), AT)[0]):
+        rec = next(r for r in records if r['source_record_id'] == gid)
+        for saved in (rec, M.sanitized(rec), M.retained(rec, 'row absent')):
+            assert saved['raw']['sample_date'] == sample
+            results = saved['raw']['sample_results']
+            assert len(results) == 1
+            assert results[0]['text'] == text
+            assert results[0]['sample_date_text'] == sample
+            assert results[0]['sample_date'] is None
+
+
+@pytest.mark.parametrize('text,expected', [
+    ('Present', '2026-06-26'),
+    ('6/26: Present', '2026-06-26'),
+    ('2026-06-26: Present', '2026-06-26'),
+    ('6/30: Present', None),
+    ('6/26/2025: Present', None),
+    ('6/26: Present; 6/26: Absent', None),
+])
+def test_montana_result_date_requires_one_consistent_observation(text, expected):
+    result = M.density_results({'cyano_density': text, 'sample_date': '6/26/2026'})[0]
+    assert result['sample_date'] == expected
+
+
+@pytest.mark.parametrize('unit_id', [363680, 363701])
+def test_delaware_named_bay_cannot_fall_back_to_another_water(unit_id):
+    from build import status as S
+    stations = D.safe_stations([f['attributes'] for f in fixture('de-stations.json')['features']])
+    st = next(s for s in stations if s['UnitID'] == unit_id)
+    rec = D.poll_records([dict(st, CurrentAdvisory=0)], [], {}, AT, date(2026, 11, 22))[0][0]
+    waters = {k: w for k, w in S.load_waters().items()
+              if S.water_state(k, w) == 'DE' and k != 'rehoboth-bay-de'}
+    placed = S.Resolver(waters, []).resolve(rec)
+    assert placed['water_slugs'] == []
 
 
 def test_idaho_failed_map_read_preserves_detail_time_and_closed_episode():

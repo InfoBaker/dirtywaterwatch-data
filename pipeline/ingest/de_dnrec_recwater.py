@@ -117,6 +117,8 @@ def scrub_carried(prev: dict) -> dict:
         for k in ("advisory_description", "unit_description"):
             if raw.get(k):
                 raw[k] = scrub_text(raw[k])
+        if description_water(raw.get("unit_description")):
+            raw["_placement"] = "named_water_only"
         if r.get("advice_text"):
             r["advice_text"] = scrub_text(r["advice_text"])
     return prev
@@ -289,6 +291,7 @@ def history_records(rows: list[dict], stations: dict[str, dict], today: date, fe
             raw["unit_description_url"] = STATIONS.split("/query")[0]
         if source_water:
             raw["water_basis"] = "DNREC's station description (UnitDesc)"
+            raw["_placement"] = "named_water_only"
         if not source_water and water != r.get("unitname"):
             raw["water_basis"] = "the water the beach lies on, by the beach's name"
         if lat is not None:
@@ -412,6 +415,8 @@ def poll_records(stations: list[dict], history: list[dict], prev: dict, fetched_
             raw["unit_description_url"] = STATIONS.split("/query")[0]
             if description_water(raw["unit_description"]):
                 raw["water_basis"] = "DNREC's station description (UnitDesc)"
+                # A missing named-water record must not place this station on a neighboring bay.
+                raw["_placement"] = "named_water_only"
         if v.get("ended_at"):
             raw.update(ended_at_precision="poll", end_basis="the first poll of DNREC's map that showed another status")
         if v.get("missing_since"):
