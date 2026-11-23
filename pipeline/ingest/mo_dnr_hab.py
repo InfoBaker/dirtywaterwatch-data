@@ -6,7 +6,8 @@ Source
   WQM_HAB_POINTS_PUBLIC layer behind DNR's "HAB Public Viewer" (the map on
   https://dnr.mo.gov/water/alerts-hazards/harmful-algal-bloom-hab-reports-map). Public ArcGIS map service, no key; the
   privately owned waters are only counted by county in layer 5 (not read). One point per report with BloomStat (DNR's
-  code), WBName, HABODat (the day the bloom was observed), CaseStatus, HABCo (county) and globalid. DNR's map draws
+  code), WBName, HABODat (the day the bloom was observed), CaseStatus, HABCo (county), globalid, DissDat (dissolved
+  date) and IConfMet (confirmation method, source codes). DNR's map draws
   "advise" as "Harmful Algal Bloom Present" and "closed" as "Waterbody is CLOSED" whatever their age; "notice"
   (suspected), "dissap" (dissipated), "notthr" and "notver" (not threatening, not verified) only for 14 days after the
   observation, then as expired; "report" is an investigation pending. Read 2026-11-15 (UTC): 283 reports from 2017 to
@@ -22,7 +23,10 @@ Record rules (the accuracy-first clock, as Kansas's HAB layer, ingest/ks_kdhe_ha
     raw.case_status is DNR's case status, kept as DNR states it ("Closed" cases can still be shown as present).
   - Each poll that shows it confirms the record (raw._last_seen_in_source; raw._poll_confirmed, so the colour ages out
     14 days after the last read that showed it, build/status.py). The first poll that no longer shows it under
-    "advise" or "closed" ends it at that poll (raw.ended_at_precision "poll"). A failed read changes nothing: an error,
+    "advise" or "closed" ends it at that poll (raw.ended_at_precision "poll"), unless the same report supplies
+    a valid DissDat under "dissap": then its source day is the end. A DissDat alongside a shown status is
+    contradictory evidence, retained without closing the advisory. Confirmation codes stay as DNR gives them.
+    A failed read changes nothing: an error,
     a truncated answer, a row without its id, a code DNR does not use or a shown row without a point inside Missouri
     fails the read (check), never lifts every advisory.
   - The point, kept to 0.001 degree before any save; raw.time_zone America/Chicago.
@@ -50,7 +54,7 @@ SOURCE_ID = "mo-dnr-hab-map"
 LAYER = "https://gis.dnr.mo.gov/host/rest/services/wqm/HAB_SUBMIT_POINTS/MapServer/6"
 PAGE = "https://dnr.mo.gov/water/alerts-hazards/harmful-algal-bloom-hab-reports-map"
 AUTHORITY = "Missouri Department of Natural Resources (harmful algal bloom map)"
-FIELDS = "globalid,BloomStat,WBName,HABODat,CaseStatus,HABCo"
+FIELDS = "globalid,BloomStat,WBName,HABODat,CaseStatus,HABCo,DissDat,IConfMet"
 SHOWN = {"advise": "Harmful Algal Bloom Present", "closed": "Waterbody is CLOSED"}
 OTHER = {"notice", "dissap", "notthr", "notver", "report", ""}
 MO_BOX = (35.9, 40.7, -95.8, -89.0)
@@ -112,11 +116,36 @@ def shown(doc: dict) -> tuple[dict[str, dict], dict]:
     return out, counts
 
 
+def _source_evidence(r: dict, a: dict, at: str) -> None:
+    raw = r['raw']
+    fields = {k: a.get(k) for k in ('BloomStat', 'DissDat', 'IConfMet')}
+    if raw.get('source_fields') and raw['source_fields'] != fields:
+        raw.setdefault('source_field_history', []).append({'fields': raw['source_fields'],
+                                                          'seen_at': raw.get('source_fields_seen_at')})
+    raw['source_fields'] = fields
+    raw['source_fields_seen_at'] = at
+    raw['confirmation_method'] = common.scrub_text(str(a.get('IConfMet') or '')) or None
+    raw['dissolved_on'] = day(a.get('DissDat'))
+    if str(a.get('BloomStat') or '').lower() == 'dissap':
+        r['advice_text'] = f"DNR reports BloomStat \"dissap\" and DissDat \"{raw['dissolved_on'] or 'not given'}\"."
+    elif raw.get('dnr_code') in SHOWN:
+        r['advice_text'] = f"DNR's map: {SHOWN[raw['dnr_code']]}."
+    if raw['dissolved_on'] and str(a.get('BloomStat') or '').lower() in SHOWN:
+        raw['end_conflict'] = (f"DNR gives DissDat {raw['dissolved_on']} and BloomStat {a['BloomStat']}; "
+                               "we keep the advisory while DNR still shows the bloom as present or closed.")
+        r['advice_text'] += ' ' + raw['end_conflict']
+    else:
+        raw.pop('end_conflict', None)
+
+
 def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
     check(doc)
-    recs = {r["event_id"]: r for r in prev}
+    from copy import deepcopy
+    recs = {r["event_id"]: deepcopy(r) for r in prev}
     open_by = {r["raw"].get("report_id"): r for r in recs.values() if r["status"] == "advisory_active"}
     now, counts = shown(doc)
+    source_rows = {str(f['attributes']['globalid']).strip('{} ').lower(): f['attributes']
+                   for f in doc['features']}
     stats = {"reports": len(doc["features"]), "shown": len(now), "opened": 0, "confirmed": 0, "lifted": 0,
              "by_code": dict(sorted(counts.items()))}
     for rid, x in now.items():
@@ -141,6 +170,7 @@ def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
                 r["advice_text"] = f"DNR's map: {SHOWN[x['code']]}."
             r["raw"]["case_status"] = x["case_status"]
             poll_periods.revise_place(r, at, name=x["name"], lat=x["lat"], lon=x["lon"], county=x["county"])
+        _source_evidence(r, source_rows[rid], at)
         poll_periods.seen(r, at)
     for rid, r in open_by.items():
         if rid not in now:
@@ -149,6 +179,25 @@ def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
                             end_basis="the first read at which DNR's map no longer showed it as present or closed; "
                                       "not DNR's own date")
             stats["lifted"] += 1
+    # A date can arrive after a poll-observed lift. Only the latest spell receives the current row.
+    latest = {}
+    for r in recs.values():
+        rid = r['raw'].get('report_id')
+        if rid not in latest or r['started_at'] > latest[rid]['started_at']:
+            latest[rid] = r
+    for rid, r in latest.items():
+        a = source_rows.get(rid)
+        if a and r['status'] == 'advisory_lifted':
+            _source_evidence(r, a, at)
+            end = day(a.get('DissDat'))
+            if (str(a.get('BloomStat') or '').lower() == 'dissap' and end
+                    and r['started_at'][:10] <= end <= at[:10]):
+                if r.get('ended_at') != end:
+                    r['raw'].setdefault('end_observations', []).append({
+                        'ended_at': r.get('ended_at'), 'precision': r['raw'].get('ended_at_precision'),
+                        'basis': r['raw'].get('end_basis'), 'replaced_at': at})
+                r['ended_at'] = end
+                r['raw'].update(ended_at_precision='day', end_basis="DNR's DissDat on its dissipated bloom report")
     for r in recs.values():
         r["fetched_at"] = at
         r["raw"]["_poll_confirmed"] = True
@@ -181,7 +230,9 @@ def main(argv=None) -> int:
         "credit": "Missouri Department of Natural Resources, Harmful Algal Bloom reports map",
         "caveat": ("DNR's public map of bloom reports: a water DNR shows as having a harmful algal bloom present, or as "
                    "closed, is shown from the first time this site read it so and ends at the first read that no longer "
-                   "does. DNR gives no advisory dates; privately owned waters are not on the public map."),
+                   "does, or on DNR's dissolved date when its report confirms dissipation. A dissolved date beside "
+                   "a still-shown bloom does not close it. DNR gives no advisory start dates; privately owned waters "
+                   "are not on the public map."),
         "cadence": "every refresh"})
     print(f"{SOURCE_ID}: {len(recs)} records ({ {k: v for k, v in stats.items() if k != 'by_code'} }) -> {out}")
     return 0

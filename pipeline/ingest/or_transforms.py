@@ -3,8 +3,9 @@
 or_hab_record: the Oregon Health Authority's cyanobacteria (harmful algae bloom) recreational use advisories layer
 (data/sources/or-oha-hab-advisories.yaml). Each row is one water OHA has an advisory, a precaution, a result below its
 recreational use value or a lifted advisory for, with the issue date, the toxin result and OHA's own words (Details).
-The block keeps only "Advisory" and "Precaution" (OHA issues both); "Below Human RUV" and "Advisory/Precaution Lifted"
-are no current advisory, never a record (grey: no report). A precaution is labelled a precaution (authority and
+The block reads "Advisory", "Precaution" and "Advisory/Precaution Lifted". A lift closes one retained episode
+with the same point id and water name, keeping its original id and start; ambiguous matches keep their caution.
+A lift without a retained start and "Below Human RUV" samples create no advisory. A precaution is labelled a precaution (authority and
 raw.advisory_noun, OHA's own word), never an advisory; both are shown as blooms. A compound name is split for the water
 batch (water_names; OHA's name kept as raw._water_as_given). The hook sets the record's clock from the row's county and
 point (zones.oregon_zone: Malheur County north of township 35 South is Mountain time), the issue day in that clock, the
@@ -80,3 +81,48 @@ def or_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     if link:
         notes["_advisory_link"] = link
     notes["_started_basis"] = STARTED_BASIS
+
+
+@F.hook
+def or_hab_episodes(records: list[dict], ctx: F.Ctx) -> None:
+    """A lift's Issue_Date dates the lift, not a new advisory. Match one retained spell by source point and name.
+
+    Ambiguous matches retain every caution and the lift evidence. A lift without a retained start creates no spell.
+    """
+    from copy import deepcopy
+
+    for r in list(records):
+        row = r['raw']['row']
+        if F.clean(row.get('AdvisoryStatus')).lower() != 'advisory/precaution lifted':
+            continue
+        records.remove(r)
+        end = r.get('started_at')
+        matching = [p for p in ctx.previous_records
+                      if all((p.get('raw', {}).get('row') or {}).get(k) == row.get(k)
+                             for k in ('OBJECTID', 'WaterbodyName'))]
+        candidates = [p for p in matching if p.get('started_at') and end and p['started_at'][:10] <= end[:10]
+                      and (p.get('status') == 'advisory_active' or p.get('ended_at') == end)]
+        if len(candidates) == 1:
+            p = candidates[0]
+            r.update(event_id=p['event_id'], source_record_id=p['source_record_id'], started_at=p['started_at'],
+                     time_precision=p['time_precision'], status='advisory_lifted', ended_at=end,
+                     authority=p.get('authority'))
+            r['raw'].update(ended_at_precision='day' if len(end) == 10 or end[11:19] == '00:00:00' else 'minute',
+                            end_basis="OHA's Issue_Date on its Advisory/Precaution Lifted row",
+                            _started_basis=p.get('raw', {}).get('_started_basis'))
+            for key in ('advisory_noun', '_interval_label'):
+                if key in p['raw']:
+                    r['raw'][key] = p['raw'][key]
+            records.append(r)
+        else:
+            # Do not let generic missing-row handling shorten an uncertain spell at this poll.
+            for p in matching:
+                if p.get('status') != 'advisory_active':
+                    continue
+                held = deepcopy(p)
+                held['fetched_at'] = ctx.fetched_at
+                held['raw']['lift_evidence'] = {'row': row, 'seen_at': ctx.fetched_at,
+                                               'basis': 'This lift does not identify one retained advisory episode; we keep the caution.'}
+                held['raw'].pop('_unlisted_since', None)
+                held['raw'].pop('_missing_from_source_since', None)
+                records.append(held)

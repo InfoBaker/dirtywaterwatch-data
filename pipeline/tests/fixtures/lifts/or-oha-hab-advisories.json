@@ -1,0 +1,27 @@
+{
+  "_note": "Trimmed safe fields from public agency query, 2026-11-22.",
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 142,
+        "WaterbodyName": "Phillips Lake",
+        "AdvisoryStatus": "Advisory/Precaution Lifted",
+        "Toxin": null,
+        "ToxinLevel_ppb": null,
+        "ToxinLevel": null,
+        "Details": "Initial precaution had been issued due to visible bloom on 8/19.",
+        "AdvisoryLink": null,
+        "Issue_Date": 1795075200000,
+        "County_1": "Baker",
+        "County_2": null,
+        "StatusSort": "4Lifted",
+        "Above_PetRUV": null,
+        "EditDate": 1795124744086
+      },
+      "geometry": {
+        "x": -118.06533460045026,
+        "y": 44.68267758368949
+      }
+    }
+  ]
+}
