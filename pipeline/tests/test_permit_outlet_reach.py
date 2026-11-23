@@ -148,7 +148,7 @@ def test_a_plant_bypass_naming_no_outlet_is_drawn_from_the_most_upstream_outlet_
     assert p["reach_basis_outfalls"] == [{"water_slug": "conn-river-vt", "reach": f"{VT}-004", "permit": VT,
                                           "outfall": "004", "candidates": 2, "water_named": True}]
     assert p["reach_basis_note"] == ("The report names no outlet. The stretch is drawn from the operator's most "
-                                     "upstream registered outlet on this river (outfall 004 of 2); our choice, not "
+                                     "upstream registered outlet on this river (outfall 004, one of its 2 outlets on this river); our choice, not "
                                      "the report's.")
     vt, nh = st["waters"]["conn-river-vt"], st["waters"]["conn-river-nh"]
     assert [r["placement"] for r in vt["reasons"]] == ["reach"] and vt["reasons"][0]["reach"] == f"{VT}-004"
@@ -178,7 +178,7 @@ def test_an_outlet_on_the_river_above_the_others_is_chosen():
     st, _ = build([vt_bypass()], rs, VT_ROWS)
     p = placements_of(st, "vt-dec:hqs")
     assert p["reach"] == f"{VT}-006" and p["reach_basis_outfalls"][0]["candidates"] == 3
-    assert "(outfall 006 of 3)" in p["reach_basis_note"]
+    assert "(outfall 006, one of its 3 outlets on this river)" in p["reach_basis_note"]
 
 
 def test_a_plant_outfall_comes_first_for_a_plant_bypass_and_never_for_a_cso():
@@ -282,8 +282,8 @@ def test_a_cso_report_naming_two_rivers_gets_one_stretch_per_river():
     assert [(x["water_slug"], x["outfall"], x["candidates"]) for x in p["reach_basis_outfalls"]] == [
         ("merrimack-river-nh", "001", 2), ("piscataquog-river-nh", "010", 2)]
     assert p["reach_basis_note"] == ("The report names no outlet. The stretches are drawn from the operator's most "
-                                     "upstream registered outlet on each river (Merrimack River: outfall 001 of 2; "
-                                     "Piscataquog River: outfall 010 of 2); our choice, not the report's.")
+                                     "upstream registered outlet on each river (Merrimack River: outfall 001, one of its 2 outlets there; "
+                                     "Piscataquog River: outfall 010, one of its 2 outlets there); our choice, not the report's.")
     for slug in ("merrimack-river-nh", "piscataquog-river-nh"):
         assert {r["placement"] for r in st["waters"][slug]["reasons"]} == {"reach"}
         assert len(st["waters"][slug]["reasons"]) == 1               # one record colours a water once
@@ -313,7 +313,7 @@ def test_a_permit_with_no_traced_outfall_on_the_named_river_is_unchanged():
 
 
 UNMATCHED_NOTE = ("The outlet the report names is not in our outlet records. The stretch is drawn from the operator's "
-                  "most upstream registered outlet on this river (outfall 004 of 2); our choice, not the report's.")
+                  "most upstream registered outlet on this river (outfall 004, one of its 2 outlets on this river); our choice, not the report's.")
 
 
 def test_a_facility_name_in_the_outfall_name_is_not_an_outlet():
@@ -378,7 +378,7 @@ def test_a_river_taken_from_the_permit_is_drawn_from_the_permits_own_outlet_and_
     p = placements_of(st, "vt-dec:bare")
     assert p["water_match"] == "inferred" and p["reach"] == f"{VT}-004"
     assert p["reach_basis"] == "permit_outlet_unnamed" and p["reach_basis_outfalls"][0]["water_named"] is False
-    assert p["reach_basis_note"].endswith("(outfall 004 of 2); our choice, not the report's. The report names no "
+    assert p["reach_basis_note"].endswith("(outfall 004, one of its 2 outlets on this river); our choice, not the report's. The report names no "
                                           "water; this river is the one the operator's permit names.")
     t = placements_of(st, "vt-dec:text")
     assert t["reach"] == f"{VT}-004" and t["reach_basis_outfalls"][0]["water_named"] is True
@@ -535,3 +535,10 @@ def test_the_status_summary_counts_the_records_drawn_from_a_chosen_outlet():
         "status: 3 records drawn from an outlet chosen for them (reach_basis) "
         "{'permit_outlet_unmatched': 1, 'permit_outlet_unnamed': 2} on 4 reaches; "
         "1 with a river taken from the permit")
+
+
+def test_the_note_never_reads_as_the_fourth_of_two():
+    from build.status import outlet_among
+    assert outlet_among("004", 2) == "outfall 004, one of its 2 outlets on this river"
+    assert outlet_among("039", 1) == "outfall 039, its only outlet on this river"
+    assert outlet_among("031", 14, "there") == "outfall 031, one of its 14 outlets there"
