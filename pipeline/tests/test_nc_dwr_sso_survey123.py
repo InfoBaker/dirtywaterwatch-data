@@ -170,34 +170,32 @@ def test_a_layer_whose_later_row_lacks_a_key_field_is_not_read_and_held_records_
     assert out["ok"] is False and out["records"] == old and "start_date absent from 1 row" in out["error"]
 
 
-def test_no_duplicate_and_no_loss_across_the_layer_switch():
+def test_layer_switch_keeps_reports_without_matching_placement_evidence():
     old = held()
     recs, stats = S.build(rows(), FETCHED, old, PERMITS, None)
     by = {r["event_id"]: r for r in recs}
-    # the 2026 layer's copies of incidents 202600200 and 202600196 are duplicates of the new layer's records
+    # The trimmed held records lack the new reports' water/point evidence. Identity and equal times alone
+    # cannot prove they colour the same places; keep both until placement can be established.
     for o, new_gid in ((old[0], "1fe6ff92"), (old[1], "c8ff6787")):
         kept = by[o["event_id"]]
         new = next(r for r in recs if r["source_record_id"].startswith(new_gid))
-        assert kept["duplicate_of"] == new["event_id"] and new["duplicate_of"] is None
+        assert kept["duplicate_of"] is None and new["duplicate_of"] is None
         assert kept["started_at"] == new["started_at"]                 # the same start in both layers
         assert kept["raw"]["_missing_from_layer_since"] == FETCHED
     # a held report the new layer does not have stays as it was: ongoing, not ended, not a duplicate
     rock = by[old[2]["event_id"]]
     assert rock["status"] == "ongoing" and rock["ended_at"] is None and rock["duplicate_of"] is None
-    assert stats["duplicates"] == 2 and stats["kept_from_earlier_runs"] == 3
-    standing = [r for r in recs if not r.get("duplicate_of")]
-    assert len({S.incident(r) for r in standing}) == len(standing)
-    # a second run links the same way (recomputed, not stacked)
+    assert stats["duplicates"] == 0 and stats["kept_from_earlier_runs"] == 3
+    # A second run still retains both sources independently.
     again, _ = S.build(rows(), "2026-11-16T17:00:00Z", recs, PERMITS, None)
-    assert sum(1 for r in again if r.get("duplicate_of")) == 2
+    assert all(r['duplicate_of'] is None for r in again)
 
 
-def test_history_copies_point_at_the_new_layers_record_on_a_backfill():
+def test_backfill_does_not_ignore_an_unresolved_retained_candidate():
     recs, _ = S.build(rows(), FETCHED, held(), PERMITS, None)
     hist = [{"OBJECTID": 1, "incident_number": "202600200", "start_date": 1771059600000, "permit_id": "WQCS00042"}]
     h, _ = S.build_history(hist, FETCHED, recs, PERMITS)
-    new = next(r for r in recs if r["source_record_id"].startswith("1fe6ff92"))
-    assert h[0]["duplicate_of"] == new["event_id"]
+    assert h[0]["duplicate_of"] is None
 
 
 def test_only_safe_fields_are_requested_kept_and_linked():
