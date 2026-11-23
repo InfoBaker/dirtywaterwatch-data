@@ -159,6 +159,32 @@
    "barrier": null
   },
   {
+   "id": "fl-miami-dade-sso",
+   "state": "FL",
+   "operator_id": null,
+   "agency": "Miami-Dade County RER/DERM",
+   "name": "Miami-Dade County sanitary sewer overflows",
+   "permit": null,
+   "channel_kind": "feed",
+   "urls": [
+    "https://services.arcgis.com/8Pc9XBTAsYuxx9Ny/arcgis/rest/services/SewerOverflow_gdb/FeatureServer/0"
+   ],
+   "method": "json",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "notices",
+   "note": "County publication of reported sanitary sewer overflows from all utilities, including small spills. We link confirmed overlaps with DEP notices and retain both citations. The county states that it updates this layer weekly. No duty to publish this particular map is asserted.",
+   "checked": "2026-11-22",
+   "feed_source_id": "fl-miami-dade-sso",
+   "sources": [
+    "fl-miami-dade-sso"
+   ],
+   "barrier": null,
+   "records": false
+  },
+  {
    "id": "fl-sarasota-spill-layer",
    "state": "FL",
    "operator_id": null,

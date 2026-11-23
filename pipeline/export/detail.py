@@ -402,6 +402,10 @@ SOURCES: dict[str, dict] = {
                                "notes": text("system_note", "system")},
     # the notice's own form fields as the ingester reads them from its text (fl_dep_pnp.template_fields: "Cause:")
     "fl-dep-pnp": {"cause": text("_template.cause"), "town": text("FACILITY_CITY")},
+    # County codes as published (no domain labels); recovered gallons remain separate from discharged gallons.
+    "fl-miami-dade-sso": {"cause": joined(text("DISCCAUSECAT"), text("DISCHARGECAUSE")),
+                           "volume_qualifier": const("estimated"),
+                           "notes": with_unit("ESTGALRECOVER", "gallons recovered (estimated)")},
     "ct-deep": CT, "ct-deep-annual": CT, "ct-deep-archive": CT,
     "ny-dec-sprtk": NY, "ny-dec-sprtk-web": NY_WEB, "ny-dec-sprtk-2013-2021": NY_HISTORY,
     "md-mde-overflows": {"cause": text("row.overflow_cause"), "duration_text": _md_duration},

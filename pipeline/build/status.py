@@ -493,6 +493,9 @@ def ev_time(ev: dict, key: str, state: str | None = None, tz: ZoneInfo | None = 
     return parse_time(v, tz or event_zone(ev, state))
 
 
+DAY_END_SAME_DATE_SOURCES = {"fl-miami-dade-sso", "fl-dep-pnp"}   # end_not_credible: same-date day ends
+
+
 def end_precision(ev: dict) -> str | None:
     """The precision of the record's end: raw.ended_at_precision where the ingester gives the end its own (an exact
     end borrowed from another report, a lift seen at a poll: minute, hour, poll, bound), else time_precision. Only an
@@ -536,7 +539,13 @@ def end_not_credible(ev: dict, now: datetime | None = None, rules: dict | None =
     if en is None:
         return None
     st = ev_time(ev, "started_at", tz=tz)
-    if st and en < st:
+    # A source giving only the end date can end after a timed start on that date: compare local dates at day
+    # precision, keep ended_at unchanged (windows count a day-precision end from the end of that day). Limited to the
+    # Miami-Dade and Florida DEP pair for now (2026-11-22); other sources' same-day ends are counted before it widens.
+    before = (en.astimezone(tz).date() < st.astimezone(tz).date()
+              if st and end_precision(ev) == "day" and ev.get("source_id") in DAY_END_SAME_DATE_SOURCES
+              else bool(st and en < st))
+    if before:
         return f"ended_at {ev.get('ended_at')} is before started_at {ev.get('started_at')}; the end is ignored"
     if now is None or ev.get("event_type") in ADVISORY_TYPES or ev.get("status") in ("advisory_active", "advisory_lifted"):
         return None
@@ -1649,6 +1658,22 @@ def shown_over_links(events: list[dict], duplicates: dict) -> dict:
 # notice and the MassDEP portal's record of the same overflow are one event; the portal leaves the volume blank)
 LINKED_NOTICE_FIELDS = ("event_id", "source_id", "published_at", "started_at", "ended_at", "status", "volume_gal",
                         "volume_text", "estimate_flag", "advice_text", "advice_window_hours")
+
+
+def retained_water_contributions(events: list[dict], duplicates: dict) -> set[str]:
+    """Confirmed Miami-Dade identities count once while their distinct named waters keep source status.
+
+    Only the county/DEP linker writes this target-valued marker. Ordinary duplicates still suppress
+    colour; a stale marker, missing counterpart or other source cannot enable this exception.
+    """
+    sources = {"fl-miami-dade-sso", "fl-dep-pnp"}
+    by_id = {ev["event_id"]: ev for ev in events}
+    return {ev["event_id"] for ev in events
+            if ev.get("source_id") in sources
+            and (target := duplicates.get(ev["event_id"])) in by_id
+            and target != ev["event_id"] and target not in duplicates
+            and by_id[target].get("source_id") in sources
+            and (ev.get("raw") or {}).get("_miami_water_contribution") == target}
 
 
 def linked_notices(events: list[dict], duplicates: dict) -> dict:
@@ -5409,6 +5434,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         if ev.get("duplicate_of") and ev["duplicate_of"] != ev["event_id"]:
             duplicates[ev["event_id"]] = ev["duplicate_of"]
     duplicates = shown_over_links(events, duplicates)
+    water_contributions = retained_water_contributions(events, duplicates)
     linked = linked_notices(events, duplicates)
     beach_reason = annotate_beach_reasons(events, by_id, duplicates, rules)
     for sid, n in (beach_reason.get("unlisted_sources") or {}).items():
@@ -5473,7 +5499,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             unknown_slugs[s] += 1
         eff = effective.get(eid, ev)
         point_on, river_point, outline_less = [], [], []
-        live = eid not in superseded and eid not in duplicates
+        live = eid not in superseded and (eid not in duplicates or eid in water_contributions)
         if live and listed_without_reason(eff, rules):
             placements[eid]["no_stated_reason"] = BR.note(eff, beach_verdict(eff, rules), rules)
         is_discharge = ev.get("event_type") in DISCHARGE_TYPES or (
@@ -5636,7 +5662,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                "why": (COUNTY_RECORD_POINT_WHY if event_state(ev) in COUNTY_RECORD_POINT_STATES
                                        else RECORD_POINT_WHY)})
         # beach, rain and HAB advisories that colour no water: a marker of their own
-        if ((ev.get("event_type") in POINT_ADVISORY_TYPES or point_on) and eid not in superseded and eid not in duplicates
+        if ((ev.get("event_type") in POINT_ADVISORY_TYPES or point_on) and live
                 and ev.get("lat") is not None and ev.get("lon") is not None
                 and (point_on or not pl["water_slugs"])):
             ivs = event_intervals(eff, event_state(ev), now, rules=rules)
