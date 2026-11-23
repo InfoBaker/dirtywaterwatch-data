@@ -173,13 +173,15 @@ def plain_inches(*paths: str):
     return read
 
 
-def with_unit(path: str, unit: str):
+def with_unit(path: str, unit: str, singular: str | None = None):
     """A bare number from a field whose unit is in its name ("duration_hours"): the number as written and the unit."""
     def read(raw: dict):
         v = text(path)(raw)
         if not v:
             return None
-        return f"{v} {unit}" if re.fullmatch(r"\d*\.?\d+", v) else v
+        if re.fullmatch(r"\d*\.?\d+", v):
+            return f"{v} {singular if singular and float(v) == 1 else unit}"
+        return v
     return read
 
 
@@ -377,7 +379,9 @@ SOURCES: dict[str, dict] = {
                                "volume_method": text("volume_note")},
     # the notice's own form fields as the ingester reads them from its text (fl_dep_pnp.template_fields: "Cause:")
     "fl-dep-pnp": {"cause": text("_template.cause"), "town": text("FACILITY_CITY")},
-    "ct-deep": CT, "ct-deep-annual": CT, "ct-deep-archive": CT,
+    "ct-deep": CT, "ct-deep-annual": CT,
+    "ct-deep-archive": {**CT, "duration_text": lambda raw: with_unit(
+        "CSO_DURATION" if "CSO_DURATION" in raw else "DURATION", "hours", singular="hour")(raw)},
     "ny-dec-sprtk": NY, "ny-dec-sprtk-web": NY_WEB,
     "md-mde-overflows": {"cause": text("row.overflow_cause"), "duration_text": _md_duration},
     "nc-dwr-sso-2022-2025": {"cause": text("incident_cause"), "volume_to_water_gal": number("volume_reach_water"),
@@ -398,12 +402,13 @@ SOURCES: dict[str, dict] = {
                     "rainfall_label": lambda raw: "Precipitation" if plain_inches("sewage[].precipitation_in")(raw) else None,
                     "overflow_point": text("sewage[].component"), "town": text("report.city")},
     "ga-epd-spills": {"cause": text("row.cause"), "overflow_point": text("row.spill_source"), "town": text("row.city")},
-    "wa-ecology-sewage-spills": {"duration_text": with_unit("row.final_event_duration_hours", "hours")},
+    "wa-ecology-sewage-spills": {"duration_text": with_unit("row.final_event_duration_hours", "hours", singular="hour")},
     "oh-bowling-green-cso-events": {"rainfall_in": plain_inches("row.RAINFALL_BEFORE_EVENT"),
                                     "rainfall_label": lambda raw: "Rainfall before the event" if plain_inches("row.RAINFALL_BEFORE_EVENT")(raw) else None},
     "oh-clyde-cso-notification": {"cause": text("row.cause"), "rainfall_in": plain_inches("row.rain_total_in"),
                                   "rainfall_label": lambda raw: "Total rainfall" if plain_inches("row.rain_total_in")(raw) else None},
-    "oh-neorsd-cso-notification-map": {"volume_qualifier": _neorsd_qualifier},
+    "oh-neorsd-cso-notification-map": {"volume_qualifier": _neorsd_qualifier,
+                                      "duration_text": with_unit("duration_h", "hours", singular="hour")},
     "va-richmond-cso": {"rainfall_in": plain_inches("rain_in"),
                         "rainfall_label": lambda raw: "Rainfall" if plain_inches("rain_in")(raw) else None,
                         "duration_text": with_unit("overflow_duration_hours", "hours")},
