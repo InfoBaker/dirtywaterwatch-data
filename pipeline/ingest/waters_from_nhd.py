@@ -907,16 +907,21 @@ class TargetPlacements:
     def __init__(self, resolver):
         self.resolver = resolver
         self.path = TARGET_PLACEMENTS
+        self.parts, water_hashes = {}, {}
         self.stamp = S.placement_stamp(resolver.waters,
                                        [r for rows in resolver.by_permit.values() for r in rows],
                                        resolver.discharger_towns, resolver.discharger_waters,
                                        {"placement": {"no_outfall_all_waters": resolver.no_outfall_all_waters}},
-                                       S.states())
+                                       S.states(), parts=self.parts, water_hashes=water_hashes)
         try:
             saved = read_json(self.path) or {}
         except (OSError, ValueError):
             saved = {}
-        self.old = saved.get("placements", {}) if saved.get("stamp") == self.stamp else {}
+        changed = {k for k, v in self.parts.items() if (saved.get("inputs") or {}).get(k) != v}
+        self.old = saved.get("placements", {}) if not changed - {"waters", "outlines", "reference_names"} else {}
+        from build.placement_cache import Dependencies
+        self.dependencies = Dependencies(resolver, water_hashes, saved.get("dependencies"),
+                                         saved.get("stamp") == self.stamp)
         self.new = {}
 
     def resolve(self, ev):
@@ -924,18 +929,20 @@ class TargetPlacements:
             return self.resolver.resolve(ev)
         key, digest = ev["event_id"], S.record_hash(ev)
         held = self.old.get(key)
-        if held and held[0] == digest:
+        if held and held[0] == digest and len(held) == 3 and self.dependencies.valid(held[2]):
             result = held[1]
+            group = self.dependencies.import_group(held[2])
         else:
-            pl = self.resolver.resolve(ev)
+            pl, group = self.dependencies.resolve(ev)
             result = {"water_slugs": bool(pl["water_slugs"]), "no_receiving_water": pl.get("no_receiving_water")}
-        self.new[key] = [digest, result]
+        self.new[key] = [digest, result, group]
         return result
 
     def save(self):
         self.path.parent.mkdir(parents=True, exist_ok=True)
         tmp = self.path.with_suffix(".json.tmp")
-        tmp.write_text(json.dumps({"stamp": self.stamp, "placements": self.new}, separators=(",", ":")))
+        tmp.write_text(json.dumps({"stamp": self.stamp, "inputs": self.parts, "placements": self.new,
+                                   "dependencies": self.dependencies.saved()}, separators=(",", ":")))
         tmp.replace(self.path)
 
 
