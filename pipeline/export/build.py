@@ -121,7 +121,9 @@ import json
 import os
 import re
 import shutil
-from collections import Counter, defaultdict
+from collections import Counter, defaultdict, deque
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import contextmanager
 from pathlib import Path
 
 from build import status as status_mod
@@ -1432,6 +1434,25 @@ def write_compact(path: Path, obj) -> None:
     tmp.replace(path)
 
 
+@contextmanager
+def compact_writes(*, workers: int = 4, max_pending: int = 32):
+    """Bound independent atomic writes in flight and join them before publishing dependent files.
+
+    Each path must be unique and its object must remain unchanged until this context exits.
+    Worker failures propagate; executor shutdown joins all workers even on an error.
+    """
+    pending = deque()
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        def emit(path, obj):
+            pending.append(pool.submit(write_compact, path, obj))
+            if len(pending) >= max_pending:
+                pending.popleft().result()
+
+        yield emit
+        for future in pending:
+            future.result()
+
+
 def round_coords(c):
     if isinstance(c, (list, tuple)):
         if c and isinstance(c[0], (int, float)):
@@ -1832,21 +1853,22 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         shutil.rmtree(ev_dir)
     ev_dir.mkdir(parents=True)
     wording = Counter()                     # placement texts still carrying internal wording (self-check)
-    for e in events:
-        if e["event_id"] in seen:
-            continue
-        seen.add(e["event_id"])
-        pl = placements.get(e["event_id"]) or {}
-        rec = public_record(e, pl, redactor, swaps_of.get(e["event_id"], ()))
-        wording.update(note_wording(rec))
-        full = dict(rec)
-        full["status_effects"] = effects.get(e["event_id"], [])
-        full["active_now"] = active_now.get(e["event_id"], [])
-        full["reach"] = pl.get("reach")
-        full.update(band_fields(bands_of.get(e["event_id"]) or [], pl))
-        write_compact(OUT_DIR / rec["file"], publicize(full))
-        csv_events.append(rec)
-        out_events.append(slim_event(rec))
+    with compact_writes() as write_event:
+        for e in events:
+            if e["event_id"] in seen:
+                continue
+            seen.add(e["event_id"])
+            pl = placements.get(e["event_id"]) or {}
+            rec = public_record(e, pl, redactor, swaps_of.get(e["event_id"], ()))
+            wording.update(note_wording(rec))
+            full = dict(rec)
+            full["status_effects"] = effects.get(e["event_id"], [])
+            full["active_now"] = active_now.get(e["event_id"], [])
+            full["reach"] = pl.get("reach")
+            full.update(band_fields(bands_of.get(e["event_id"]) or [], pl))
+            write_event(OUT_DIR / rec["file"], publicize(full))
+            csv_events.append(rec)
+            out_events.append(slim_event(rec))
     out_events.sort(key=time_key, reverse=True)
     by_event = {e["event_id"]: e for e in out_events}
     write_compact(OUT_DIR / "events-index.json", {

@@ -35,6 +35,7 @@ module path).
 from __future__ import annotations
 
 import csv
+import io
 import math
 import re
 import shutil
@@ -491,12 +492,25 @@ def start_precision_text(e: dict) -> str | None:
     return f"{p or 'not stated'}; on or before ({b['started_at_kind']})"
 
 
-def _write(path: Path, rows: list[list[str]]) -> None:
+class _CsvEncoder:
+    """Encode each public row once, then reuse its exact UTF-8 bytes in every download."""
+
+    def __init__(self):
+        self.buffer = io.StringIO(newline="")
+        self.writer = csv.writer(self.buffer)
+
+    def row(self, cells: list[str]) -> bytes:
+        self.buffer.seek(0)
+        self.buffer.truncate(0)
+        self.writer.writerow(cells)
+        return self.buffer.getvalue().encode("utf-8")
+
+
+def _write(path: Path, rows: list[bytes]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as f:
-        w = csv.writer(f)           # comma, quote only where needed, quote doubled, CRLF line ends (RFC 4180)
-        w.writerow(COLUMNS)
-        w.writerows(rows)
+    with path.open("wb") as f:
+        f.write(_CsvEncoder().row(COLUMNS))
+        f.writelines(rows)
 
 
 def year_of(row: list[str]) -> str | None:
@@ -508,10 +522,16 @@ def year_of(row: list[str]) -> str | None:
 def by_year(rows: list[list[str]], idx, latest: str) -> dict[str, list[int]]:
     """{year: row positions}, newest year first; rows with no start or sample date go in the latest year's file (the
     latest year among these rows, else `latest`). Positions keep the newest-first order of `rows`."""
+    idx = sorted(set(idx))
+    return _by_year({i: year_of(rows[i]) for i in idx}, idx, latest)
+
+
+def _by_year(years, idx, latest):
+    """Group positions using years already read while encoding the rows."""
     dated: dict[str, list[int]] = defaultdict(list)
     undated = []
     for i in sorted(set(idx)):
-        y = year_of(rows[i])
+        y = years[i]
         (dated[y] if y else undated).append(i)
     last = max(dated, default=latest)
     dated[last] = sorted(dated[last] + undated)
@@ -554,10 +574,13 @@ def write_csvs(events: list[dict], waters, dischargers: list[dict], out_dir, *, 
                    source_names if source_names is not None else source_labels(uniq),
                    SiteLinks(uniq, wrows, dischargers, pages, as_of, source_states), seen)
 
-    rows, by_id, by_state, by_operator = [], {}, defaultdict(list), defaultdict(list)
+    rows, row_years, by_id, by_state, by_operator = [], [], {}, defaultdict(list), defaultdict(list)
+    encoder = _CsvEncoder()
+    header_size = len(encoder.row(COLUMNS))
     for i, e in enumerate(uniq):
         row, ops = event_row(e, ctx)
-        rows.append(row)
+        rows.append(encoder.row(row))
+        row_years.append(year_of(row))
         by_id[e["event_id"]] = i
         if row[3]:
             by_state[row[3]].append(i)
@@ -569,7 +592,7 @@ def write_csvs(events: list[dict], waters, dischargers: list[dict], out_dir, *, 
     counts = {"files": 0, "water": 0, "operator": 0, "state": 0, "events": len(rows), "all_reports": [], "split": [],
               "oversize": []}
     # the year undated reports go to when nothing else says: the newest start year in the data, else this year
-    latest = max((y for y in map(year_of, rows) if y), default=None) or \
+    latest = max((y for y in row_years if y), default=None) or \
         str((status_mod.parse_time(as_of) or datetime.now(UTC)).year)
 
     def emit(rel: str, idx) -> None:
@@ -582,23 +605,23 @@ def write_csvs(events: list[dict], waters, dischargers: list[dict], out_dir, *, 
         """stem.csv, or stem-<year>.csv per year when the file would pass SPLIT_BYTES."""
         counts[kind] += 1
         path = tmp / f"{stem}.csv"
-        _write(path, [rows[i] for i in sorted(set(idx))])
-        size = path.stat().st_size
-        years = by_year(rows, idx, latest) if size > SPLIT_BYTES else {}
+        idx = sorted(set(idx))
+        size = header_size + sum(len(rows[i]) for i in idx)
+        years = _by_year(row_years, idx, latest) if size > SPLIT_BYTES else {}
         if len(years) > 1:
-            path.unlink()
             counts["split"].append(f"{stem}.csv")
             print(f"export: csv {stem}.csv would be {size / 1048576:.1f} MiB (over 24 MiB); "
                   f"written as {stem}-<year>.csv for {', '.join(years)}")
             for y, ids in years.items():
                 emit(f"{stem}-{y}.csv", ids)
         else:
+            _write(path, [rows[i] for i in idx])
             counts["files"] += 1
             if size > MAX_FILE_BYTES:
                 counts["oversize"].append(f"{stem}.csv")
 
     try:
-        for y, ids in by_year(rows, range(len(rows)), latest).items():
+        for y, ids in _by_year(row_years, range(len(rows)), latest).items():
             emit(f"{ALL_REPORTS}-{y}.csv", ids)
             counts["all_reports"].append(f"{ALL_REPORTS}-{y}.csv")
         placed = defaultdict(list)

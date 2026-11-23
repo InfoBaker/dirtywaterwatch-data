@@ -63,6 +63,7 @@ import json
 import re
 import sys
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
 
 if __package__ in (None, ""):
@@ -543,12 +544,13 @@ def _same(a, b) -> bool:
     return bool(norm(a)) and norm(a) == norm(b)
 
 
-def detail_of(e: dict) -> dict:
+def detail_of(e: dict, *, clean=None) -> dict:
     """The named detail fields of one record (FIELDS, in that order), empty when its source is not mapped."""
     spec = SOURCES.get(e.get("source_id") or "")
     raw = e.get("raw") if isinstance(e.get("raw"), dict) else {}
     if not spec or not raw:
         return {}
+    clean = clean or _clean
     out = {}
     for f in FIELDS:
         fn = spec.get(f)
@@ -573,7 +575,7 @@ def detail_of(e: dict) -> dict:
             if not v:
                 continue
         else:
-            v = _clean(str(v), address=f in ADDRESS_FIELDS)
+            v = clean(str(v), address=f in ADDRESS_FIELDS)
         out[f] = v
     if "rainfall_in" not in out:
         out.pop("rainfall_label", None)
@@ -676,6 +678,26 @@ def states_total(e: dict) -> bool:
             and not (isinstance(e.get("raw"), dict) and estimates_mod.rate_of(e)))
 
 
+def _latest_in_families(by_id, family_of, times, eligible):
+    """Latest eligible member per family, retaining input order for equal publication times.
+
+    All recipients ask for the same maximum; rescanning a family per recipient makes a long
+    notice history quadratic. The lists returned by family_of are shared within this call.
+    """
+    latest = {}
+    for eid in by_id:
+        family = family_of(eid)
+        if family is None or id(family) in latest:
+            continue
+        best = None
+        for e in family:
+            t = times[e["event_id"]]
+            if t is not None and eligible(e) and (best is None or t > times[best["event_id"]]):
+                best = e
+        latest[id(family)] = best
+    return latest
+
+
 def later_totals(events: list[dict], duplicates: set[str] | frozenset = frozenset()) -> set[str]:
     """event ids of the records a later record of the same event (linked as links_of links them) gives a total for, as
     a figure or in words: our computed volume yields to it (a stated total wins; review 6). A record carrying
@@ -683,20 +705,17 @@ def later_totals(events: list[dict], duplicates: set[str] | frozenset = frozense
     by_id = {e["event_id"]: e for e in events if e.get("event_id")}
     dup = lambda x: bool(x.get("duplicate_of")) or x["event_id"] in duplicates   # noqa: E731
     _children, family_of = _families(by_id)
+    times = {eid: _t(e) for eid, e in by_id.items() if family_of(eid)}
+    latest = _latest_in_families(
+        by_id, family_of, times,
+        lambda x: not dup(x) and (x["_states_total"] if "_states_total" in x else states_total(x)))
     out = set()
     for eid, e in by_id.items():
         fam = family_of(eid)
-        mine = _t(e) if fam else None
-        if not fam or mine is None:
-            continue
-        for x in fam:
-            if x is e or dup(x):
-                continue
-            tx = _t(x)
-            total = x["_states_total"] if "_states_total" in x else states_total(x)
-            if tx is not None and tx > mine and total:
-                out.add(eid)
-                break
+        mine = times.get(eid)
+        x = latest.get(id(fam))
+        if x is not None and mine is not None and times[x["event_id"]] > mine:
+            out.add(eid)
     return out
 
 
@@ -709,6 +728,8 @@ def links_of(events: list[dict], duplicates: set[str] | frozenset = frozenset())
     times = {eid: _t(e) for eid, e in by_id.items()}
     # families: the records joined by parent links within one source (union-find)
     children, family_of = _families(by_id)
+    latest = _latest_in_families(
+        by_id, family_of, times, lambda x: isinstance(x.get("volume_gal"), (int, float)) and not dup(x))
     # another source's record of the same event, as the pipeline paired them (Georgia EPD and EPA's eRule report)
     other = defaultdict(set)
     for e in by_id.values():
@@ -742,10 +763,8 @@ def links_of(events: list[dict], duplicates: set[str] | frozenset = frozenset())
         fam = family_of(eid)
         if fam and e.get("event_type") in DISCHARGE_TYPES and not dup(e):
             mine = times[eid]
-            later = [x for x in fam if x is not e and isinstance(x.get("volume_gal"), (int, float)) and not dup(x)
-                     and mine is not None and times[x["event_id"]] is not None and times[x["event_id"]] > mine]
-            if later:
-                x = max(later, key=lambda x: times[x["event_id"]])
+            x = latest.get(id(fam))
+            if x is not None and mine is not None and times[x["event_id"]] > mine:
                 q = _qualifier(x)
                 if not (x["volume_gal"] == e.get("volume_gal") and q == _qualifier(e)):
                     add["later_volume"] = {k: v for k, v in {
@@ -780,8 +799,11 @@ def estimate_cell(v: dict | None) -> dict | None:
 def enrich(events: list[dict], duplicates: set[str] | frozenset = frozenset()) -> None:
     """Writes `detail` (only when the source gives a mapped field), `later_volume`, `linked_records`, and our own
     `volume_estimate` and `end_estimate` (export/estimates.py) onto each record in place. duplicates: as links_of."""
+    # Source labels and reasons recur across history files. The scrub is a pure text transform;
+    # bound its memo and discard it after this pass, without retaining records or changing raw.
+    clean = lru_cache(maxsize=4096)(_clean)
     for e in events:
-        d = detail_of(e)
+        d = detail_of(e, clean=clean)
         if d:
             e["detail"] = d
         else:

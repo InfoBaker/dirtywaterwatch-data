@@ -331,6 +331,38 @@ def test_a_failed_run_keeps_the_previous_files(tmp_path, monkeypatch):
     assert (out / "all-reports-2026.csv").read_bytes() == before and not (tmp_path / "csv.tmp").exists()
 
 
+def test_split_csvs_only_write_final_files(tmp_path, monkeypatch):
+    monkeypatch.setattr(csv_export, "SPLIT_BYTES", 1)
+    real, paths = csv_export._write, []
+
+    def record(path, rows):
+        paths.append(path.relative_to(tmp_path / "csv.tmp"))
+        return real(path, rows)
+
+    monkeypatch.setattr(csv_export, "_write", record)
+    out, counts = write(tmp_path, [ev("old", "2025-05-01T00:00:00Z"), ev("new")])
+    assert set(paths) == {p.relative_to(out) for p in out.rglob("*.csv")}
+    assert len(paths) == counts["files"]
+
+
+@pytest.mark.parametrize("offset", [-1, 0, 1])
+def test_split_threshold_uses_exact_utf8_csv_bytes(tmp_path, monkeypatch, offset):
+    # Quoting, CRLF, multibyte text and formula protection all contribute to the size.
+    rows = [ev("old", "2025-05-01T00:00:00Z", outfall_name='Rivière, "é"\r\nworks'),
+            ev("new", outfall_name="=é")]
+    out, _ = write(tmp_path / "whole", rows)
+    original = (out / "state/ma.csv").read_bytes()
+    monkeypatch.setattr(csv_export, "SPLIT_BYTES", len(original) + offset)
+    other, counts = write(tmp_path / "threshold", rows)
+    if offset < 0:
+        assert "state/ma.csv" in counts["split"]
+        header, *body = original.split(b"\r\n", 1)
+        pieces = [(other / f"state/ma-{y}.csv").read_bytes() for y in (2026, 2025)]
+        assert pieces[0] + pieces[1][len(header) + 2:] == original
+    else:
+        assert (other / "state/ma.csv").read_bytes() == original
+
+
 def test_a_file_over_the_hosts_limit_is_reported(tmp_path, monkeypatch):
     monkeypatch.setattr(csv_export, "MAX_FILE_BYTES", len(",".join(HEADER)) + 10)       # a header-only file fits
     _, counts = write(tmp_path, [ev("1")])
