@@ -1,0 +1,20 @@
+{
+  "_note": "Trimmed safe fields from public agency query, 2026-11-22.",
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 3526,
+        "HABSTART": 1793145600000,
+        "HABEND": null,
+        "HABSTATUS": "NoDetect",
+        "HABNAME": "Old Springfield Reservoir",
+        "HABSTATDES": "No cyanotoxins detected. Recreational Public Health Advisory lifted 11/18/2026. Microcystins on 10/26/2026: 17.1 \u00b5g/L; on 11/6/2026: 7.20 \u00b5g/L; No cyanotoxins detected on 11/17/2026.",
+        "HABYEARS": "2026"
+      },
+      "geometry": {
+        "x": -85.23158800034058,
+        "y": 37.68857400038352
+      }
+    }
+  ]
+}

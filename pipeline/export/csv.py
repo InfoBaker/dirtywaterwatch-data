@@ -47,6 +47,7 @@ from zoneinfo import ZoneInfo
 from build import status as status_mod
 
 SITE = "https://dirtywaterwatch.org"
+LIFT_DETAIL_COLUMNS = ('confirmation_method', 'source_end_date', 'source_end_text', 'source_status', 'sample_analyte', 'sample_result_text', 'sample_unit', 'sample_qualifier', 'sample_date')
 COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id", "outlet_id", "outlet_name",
            "event_type", "category", "status", "started_at", "ended_at", "end_reported", "volume_gal", "volume_text", "lat", "lon",
            "towns", "source_id", "source_name", "record_id", "published_at", "reported_at", "source_updated_at",
@@ -71,7 +72,7 @@ COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id"
            "volume_estimate_gal", "volume_estimate_low_gal", "volume_estimate_high_gal", "volume_estimate_bound",
            "volume_estimate_basis", "end_estimate_at", "end_estimate_basis",
            # whether the source says the overflow reached a waterway, in its words (export/detail.py)
-           "water_reach"]
+           "water_reach"] + list(LIFT_DETAIL_COLUMNS)
 DETAIL_COLUMNS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
                   "volume_method", "volume_to_water_gal", "overflow_point", "town")
 LATER_DETAIL_COLUMNS = ("resolution", "notes")
@@ -429,7 +430,9 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     sample_date_end = e.get("source_id") in {"pa-erie-beaches", "ny-parks-beaches"}
     # an end the pipeline worked out (export/estimates.py ended_at_ours) is ours, not the source's report
     end_reported = (bool(e.get("ended_at")) and not (e.get("sampled_at") and ended_precision == "poll")
-                    and not sample_date_end and not isinstance(e.get("ended_at_ours"), dict))
+                    and not sample_date_end and not isinstance(e.get("ended_at_ours"), dict)
+                    and not (e.get("source_id") in {"mo-dnr-hab-map", "wi-dnr-beach-health"}
+                             and ended_precision == "poll"))
     notice = linked_notice(e)
     row = [
         _text(eid), _text(water), _text(LIST_SEP.join(slugs)), _text(state), _text(operator), _text(operator_id),
@@ -467,6 +470,7 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     row += [_number(ve.get("gallons")), _number(ve.get("low")), _number(ve.get("high")), _text(ve.get("bound")),
             _text(ve.get("basis")), _text(ee.get("at")), _text(ee.get("basis"))]
     row += [_text(d.get("water_reach"))]
+    row += [_text(d.get(k)) for k in LIFT_DETAIL_COLUMNS]
     return row, ops
 
 

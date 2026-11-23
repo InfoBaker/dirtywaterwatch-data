@@ -73,9 +73,11 @@ from common import (HOUSE_NUMBER_REMOVED, NAME_KEYS, PERSONAL_KEYS, ROUTE_BEFORE
                     strip_house_numbers)
 from export import estimates as estimates_mod  # noqa: E402
 
+LIFT_FIELDS = ('confirmation_method', 'source_end_date', 'source_end_text', 'source_status', 'sample_analyte', 'sample_result_text', 'sample_unit', 'sample_qualifier', 'sample_date')
+
 FIELDS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
           "volume_method", "volume_to_water_gal", "water_reach", "overflow_point", "town", "resolution", "notes",
-          "description", "location_description", "rate")
+          "description", "location_description", "rate") + LIFT_FIELDS
 NUMBER_FIELDS = {"volume_to_water_gal"}
 QUALIFIERS = ("estimated", "measured", "modeled", "verified by the operator")
 # a field whose value is a place description: its house numbers are removed as well as the usual scrub
@@ -84,7 +86,7 @@ ADDRESS_FIELDS = {"location_description", "description", "overflow_point"}
 OBJECT_FIELDS = {"rate"}
 # the fields the report tables carry (slim rows): the cell's cause, description and duration, the qualifier of its
 # volume, and a rate given in place of a volume
-CELL_FIELDS = ("cause", "description", "duration_text", "volume_qualifier", "rate")
+CELL_FIELDS = ("cause", "description", "duration_text", "volume_qualifier", "rate") + LIFT_FIELDS
 DISCHARGE_TYPES = {"cso", "sso", "bypass", "blended", "plant_bypass", "unknown"}
 MAX_TEXT = 300          # a field longer than this is cut at a word with "…" (the record's raw keeps the whole text)
 MAX_LINKED = 12
@@ -382,6 +384,23 @@ NY_HISTORY = {
 # source id -> {field: reader of the record's raw}. A source not listed gets no detail (its raw stays on the page as
 # the source data); add a source here with the source key named.
 SOURCES: dict[str, dict] = {
+    "mo-dnr-hab-map": {
+        "confirmation_method": text("confirmation_method"),
+        "source_end_date": text("dissolved_on"),
+        "source_status": text("source_fields.BloomStat"),
+    },
+    "wi-dnr-beach-health": {
+        "source_end_date": text("source_end_observation.date"),
+        "source_end_text": text("source_end_observation.text"),
+        "source_status": lambda raw: (joined(text("action"), text("map_status"))(raw["source_end_observation"])
+                                      if raw.get("source_end_observation") else
+                                      joined(text("beach_action"), text("map_status"))(raw)),
+        "sample_analyte": text("sample_result.analyte"),
+        "sample_result_text": text("sample_result.text"),
+        "sample_unit": text("sample_result.unit"),
+        "sample_qualifier": text("sample_result.qualifier"),
+        "sample_date": text("sample_result.sampled_at"),
+    },
     "ma-massdep": {
         "report_kind": _ma_kind, "rainfall_in": plain_inches("rainfallData"),
         "rainfall_label": lambda raw: "Rainfall" if plain_inches("rainfallData")(raw) else None,

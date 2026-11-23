@@ -133,9 +133,9 @@ def test_a_later_read_confirms_and_a_complete_read_that_shows_end_ends_it_at_tha
     recs, st, _ = W.records(feats({GILE: {"BEACH_ACTION": "End", "STATUS": "Closed for season",
                                           "ISSUED": "17-SEP-26 - 15-NOV-26"}}), st, T2)
     g = by_seq(recs)[GILE][0]
-    assert g["status"] == "advisory_lifted" and g["ended_at"] == T2 and g["raw"]["ended_at_precision"] == "poll"
+    assert g["status"] == "advisory_lifted" and g["ended_at"] == "2026-11-15" and g["raw"]["ended_at_precision"] == "day"
     assert g["raw"]["_last_seen_in_source"] == T1 and g["raw"]["source_end_text"] == "15-NOV-26"
-    assert "no longer showed" in g["raw"]["end_basis"]
+    assert "second ISSUED date" in g["raw"]["end_basis"]
     assert by_seq(recs)[KEGONSA][0]["status"] == "advisory_active"
 
 
@@ -284,7 +284,7 @@ def test_only_the_needed_fields_are_asked_for_and_saved_rounded(monkeypatch, tmp
         f["attributes"].update(STATIONNAME="Pat Example", ECOLIVALUE="12")   # a server that sends more than asked
     rc, out, raw, urls = run_with(monkeypatch, tmp_path, d["layer"], d["count"], T0)
     assert rc == 0 and urls[0] == W.QUERY and "returnCountOnly=true" in urls[1]
-    assert "outFields=OBJECTID,BEACH_SEQ_NO,OGW_BEACH_NAME_TEXT,STATUS,BEACH_ACTION,MAP_STATUS,ISSUED,SAMPLEDATE&" \
+    assert "outFields=OBJECTID,BEACH_SEQ_NO,OGW_BEACH_NAME_TEXT,STATUS,BEACH_ACTION,MAP_STATUS,ISSUED,SAMPLEDATE,ECOLIVALUE&" \
         in W.QUERY and "BEACH_MONITORING_LOCATIONS/MapServer/1/" in W.QUERY
     body = json.loads(raw[0])
     assert {k for f in body["beaches"] for k in f["attributes"]} == set(W.FIELDS)

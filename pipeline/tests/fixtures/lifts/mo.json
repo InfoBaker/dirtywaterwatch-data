@@ -1,0 +1,21 @@
+{
+  "_note": "Trimmed safe fields from public agency query, 2026-11-22.",
+  "features": [
+    {
+      "attributes": {
+        "globalid": "{2727D61A-C1C5-47B5-8CEE-185468CA04CB}",
+        "BloomStat": "dissap",
+        "WBName": "Jackrabbit",
+        "HABODat": 1685962800000,
+        "CaseStatus": "Closed",
+        "HABCo": "Jackson County",
+        "DissDat": 1689332400000,
+        "IConfMet": "visual"
+      },
+      "geometry": {
+        "x": -94.323,
+        "y": 38.888
+      }
+    }
+  ]
+}
