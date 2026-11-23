@@ -1,6 +1,6 @@
 {
  "state": "SC",
- "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
  "count": 213,
  "waters": [
   {
@@ -3137,12 +3137,13 @@
    "gnis_id": null,
    "geometry_hash": "505c77912f7afe3b59cd66c9789c882fed9bdafa0ba6af6f1cd0ba9b1f32a392",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "lake-edgar-brown-sc",
