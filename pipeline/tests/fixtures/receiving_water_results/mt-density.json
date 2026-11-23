@@ -1,0 +1,68 @@
+{
+  "features": [
+    {
+      "attributes": {
+        "advisory_lifted": "2026-07-07",
+        "globalid": "{867F568F-1C6D-487A-BFB1-EAEBA070AED6}",
+        "county": "CARBON",
+        "anatoxin": "6/25 non-detect",
+        "cyano_density": "Present: Dolichospermum",
+        "advisory_lvl": "NA",
+        "name": "Cooney Reservoir",
+        "sample_date": "6/23/2026",
+        "advisory_issued": "2026-06-23",
+        "date_observed": 1782237600000,
+        "public_accessible": "Yes",
+        "microcystin": "6/25 non-detect"
+      }
+    },
+    {
+      "attributes": {
+        "advisory_lifted": "2026-08-03",
+        "globalid": "{AA4A9FEE-EFA8-408C-87B7-5B3336DAD0E2}",
+        "county": "LEWIS & CLARK",
+        "anatoxin": null,
+        "cyano_density": "7/9: Aphanizomenon present, 6/30: Present: Dominated by Aphanizomenon; some Dolichospermum",
+        "advisory_lvl": "NA",
+        "name": "Lake Helena - Causeway",
+        "sample_date": "6/26/2026",
+        "advisory_issued": "2026-07-09 2026-06-25",
+        "date_observed": 1782410400000,
+        "public_accessible": "Yes",
+        "microcystin": null
+      }
+    },
+    {
+      "attributes": {
+        "advisory_lifted": "",
+        "globalid": "{021D3031-5841-4D88-A0FC-B3C999DF4539}",
+        "county": "LEWIS & CLARK",
+        "anatoxin": null,
+        "cyano_density": "7/9: Present, Aphanizomenon",
+        "advisory_lvl": "NA",
+        "name": "Upper Holter Lake",
+        "sample_date": "7/8",
+        "advisory_issued": "2026-07-08",
+        "date_observed": 1783533600000,
+        "public_accessible": "Yes",
+        "microcystin": null
+      }
+    },
+    {
+      "attributes": {
+        "globalid": "{8AA1C647-CA58-4BBE-88E8-FA502B003913}",
+        "county": "LEWIS & CLARK",
+        "sample_date": "2023/08/18",
+        "advisory_lvl": "NA",
+        "advisory_issued": "8/18/2023",
+        "advisory_lifted": "lifted 9/7/2023",
+        "date_observed": 1692554400000,
+        "microcystin": "absent (08/24 & 08/18)",
+        "anatoxin": "absent (08/24 & 08/18)",
+        "cyano_density": "Absent (09/12; 09/07). Present based on photos (08/18)",
+        "public_accessible": "Yes",
+        "name": "Hauser Lake (Clark's Bay area)"
+      }
+    }
+  ]
+}

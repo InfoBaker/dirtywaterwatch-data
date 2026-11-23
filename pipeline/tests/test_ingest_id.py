@@ -164,7 +164,7 @@ def test_points_are_dhws_own_rounded_and_named_arms_keep_their_place():
 def test_layer_query_never_asks_for_staff_fields():
     fields = H.LAYER_QUERY.split("outFields=")[1].split("&")[0].split(",")
     assert fields == ["objectid", "LocationDiscription", "RiskTier", "DisplayOnWebsite", "Issue", "Issue_other",
-                      "WebNote"]
+                      "WebNote", "Toxin", "LongInfoURL"]
     raw = (FIX / "dhw-layer.json").read_text()
     for k in ("Email", "Creator", "Editor", "InternalNote", "ContactInfo", '"Name"'):
         assert k not in raw
