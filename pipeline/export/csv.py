@@ -424,9 +424,12 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     towns = _join_towns(_own_towns(e) or d.get("towns") or [])
     eid = e["event_id"]
     ended_precision = status_mod.end_precision(e) if e.get("ended_at") else None
+    # These legacy beach feeds end episodes at the next sample/status observation, not an agency lift time.
+    # They store sample dates as day-precision start/end fields without sampled_at.
+    sample_date_end = e.get("source_id") in {"pa-erie-beaches", "ny-parks-beaches"}
     # an end the pipeline worked out (export/estimates.py ended_at_ours) is ours, not the source's report
     end_reported = (bool(e.get("ended_at")) and not (e.get("sampled_at") and ended_precision == "poll")
-                    and not isinstance(e.get("ended_at_ours"), dict))
+                    and not sample_date_end and not isinstance(e.get("ended_at_ours"), dict))
     notice = linked_notice(e)
     row = [
         _text(eid), _text(water), _text(LIST_SEP.join(slugs)), _text(state), _text(operator), _text(operator_id),
