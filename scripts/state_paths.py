@@ -63,7 +63,7 @@ stops the save is save-check's: data/build/events missing or holding no events f
 the save step then fails and the stored state stands.
 Time. The held copy, the copies, their markers and the marker reads are optional: each has a total deadline, retries
 included (OPTIONAL_CAP_S: 10 minutes for an archive, 1 for a marker), its process group killed when it runs out, and
-none runs past SAVE_RESERVE_S (15 minutes) before the job's 100-minute limit, counted from the job's start the restore
+none runs past SAVE_RESERVE_S (15 minutes) before the job's limit (refresh.yml timeout-minutes, read by job_limit_s), counted from the job's start the restore
 step writes to job-started; with less time left an operation is skipped with a warning.
 The generation record, data/build/state-generations.json, travels with the state. Before the archive is made,
 generations plan records the copies the previous run left pending whose markers name that run (one small read each),
@@ -889,7 +889,8 @@ GENERATIONS_FILE = ROOT / BUILD_DIR / "state-generations.json"
 # none runs past SAVE_RESERVE_S before the job's limit (refresh.yml timeout-minutes), counted from the start the
 # restore step writes to JOB_START_FILE
 JOB_START_FILE = ROOT / "job-started"
-JOB_LIMIT_S = 100 * 60
+REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "refresh.yml"
+DEFAULT_JOB_LIMIT_S = 100 * 60   # used only when refresh.yml cannot be read and JOB_LIMIT_MIN is not set
 SAVE_RESERVE_S = 15 * 60
 OPTIONAL_CAP_S = {"held": 600.0, "copy": 600.0, "marker": 60.0}
 MIN_OPTIONAL_S = 20.0
@@ -1022,15 +1023,31 @@ def job_start() -> float | None:
         return None
 
 
+def job_limit_s(workflow: Path | None = None) -> float:
+    """The refresh job's time limit in seconds: JOB_LIMIT_MIN in the environment when set, else the first
+    timeout-minutes in refresh.yml (one place to change it: 100 until 2026-11-22, then 150), else DEFAULT_JOB_LIMIT_S."""
+    env = os.environ.get("JOB_LIMIT_MIN")
+    if env:
+        try:
+            return float(env) * 60
+        except ValueError:
+            pass
+    try:
+        m = re.search(r"^\s*timeout-minutes:\s*(\d+)", Path(workflow or REFRESH_WORKFLOW).read_text(), re.M)
+    except OSError:
+        m = None
+    return float(m.group(1)) * 60 if m else float(DEFAULT_JOB_LIMIT_S)
+
+
 def optional_budget(kind: str) -> float:
     """Seconds an optional R2 operation (OPTIONAL_CAP_S: held, copy, marker) may take, retries included: its own cap,
-    and never past SAVE_RESERVE_S before the job's limit (JOB_LIMIT_S from the start on file), so the state save and
+    and never past SAVE_RESERVE_S before the job's limit (job_limit_s, from the start on file), so the state save and
     the steps after it keep their time. Below MIN_OPTIONAL_S the operation is skipped."""
     cap = OPTIONAL_CAP_S[kind]
     start = job_start()
     if start is None:
         return cap
-    return min(cap, start + JOB_LIMIT_S - SAVE_RESERVE_S - time.time())
+    return min(cap, start + job_limit_s() - SAVE_RESERVE_S - time.time())
 
 
 def put(key: str, src: Path, tries: int = 2, wrangler: str | None = None, budget_s: float | None = None) -> int:

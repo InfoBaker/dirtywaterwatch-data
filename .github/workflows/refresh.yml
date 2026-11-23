@@ -126,7 +126,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           JOB_STARTED: ${{ steps.release.outputs.started }}
         run: |
-          # the optional history uploads stop 15 minutes before the job's 100-minute limit (state_paths.py optional_budget)
+          # the optional history uploads stop 15 minutes before the job's limit, timeout-minutes above (state_paths.py optional_budget)
           echo "${JOB_STARTED:-$(date -u +%s)}" > job-started
           # a missing object is a first run; one that is there but cannot be fetched or unpacked stops the run here, so
           # nothing is published without the history and the blocklist and the stored state is never saved over.

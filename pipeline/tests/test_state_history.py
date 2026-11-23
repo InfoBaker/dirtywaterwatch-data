@@ -506,6 +506,7 @@ def test_p1_2_optional_operations_are_skipped_close_to_the_job_limit(tmp_path, r
     import time
     start = tmp_path / "job-started"
     monkeypatch.setenv("STATE_JOB_START_FILE", str(start))
+    monkeypatch.setenv("JOB_LIMIT_MIN", "100")                             # a 100-minute job for this test
     start.write_text(str(int(time.time()) - 90 * 60))                      # 90 of the 100 minutes gone
     assert SP.optional_budget("held") < SP.MIN_OPTIONAL_S
     b, arch, counts = restored_state(tmp_path, {"a": 100})
@@ -521,6 +522,29 @@ def test_p1_2_optional_operations_are_skipped_close_to_the_job_limit(tmp_path, r
     start.write_text(str(int(time.time()) - 84 * 60))                      # a minute before the reserve
     assert SP.MIN_OPTIONAL_S <= SP.optional_budget("copy") <= 61
     start.write_text(str(int(time.time())))
+    assert SP.optional_budget("copy") == SP.OPTIONAL_CAP_S["copy"]
+
+
+def test_the_job_limit_is_the_workflows_own_timeout(tmp_path, monkeypatch):
+    """The reserve counts back from refresh.yml's timeout-minutes (raised from 100 to 150 on 2026-11-22 after the history
+    feeds made runs reach 96 to 100 minutes), so a longer limit does not make every run skip its history copies."""
+    import re
+    import time
+    monkeypatch.delenv("JOB_LIMIT_MIN", raising=False)
+    wf = (Path(SP.__file__).resolve().parent.parent / ".github" / "workflows" / "refresh.yml").read_text()
+    minutes = int(re.search(r"^\s*timeout-minutes:\s*(\d+)", wf, re.M).group(1))
+    assert SP.job_limit_s() == minutes * 60
+    fake = tmp_path / "refresh.yml"
+    fake.write_text("jobs:\n  refresh:\n    timeout-minutes: 150\n")
+    assert SP.job_limit_s(fake) == 150 * 60
+    assert SP.job_limit_s(tmp_path / "missing.yml") == SP.DEFAULT_JOB_LIMIT_S
+    monkeypatch.setenv("JOB_LIMIT_MIN", "120")
+    assert SP.job_limit_s(fake) == 120 * 60
+    # 100 minutes into a 150-minute job the copies still run (the old constant skipped them past 85 minutes)
+    monkeypatch.setenv("JOB_LIMIT_MIN", "150")
+    start = tmp_path / "job-started"
+    monkeypatch.setenv("STATE_JOB_START_FILE", str(start))
+    start.write_text(str(int(time.time()) - 100 * 60))
     assert SP.optional_budget("copy") == SP.OPTIONAL_CAP_S["copy"]
 
 
