@@ -292,7 +292,10 @@ def _epoch_minutes(s) -> int | None:
 
 
 def _ny_day(minutes: int) -> str:
-    return datetime.fromtimestamp(minutes * 60, UTC).astimezone(NY).strftime("%Y-%m-%d")
+    day = datetime.fromtimestamp(minutes * 60, UTC).astimezone(NY)
+    # strftime consults locale for every row; ISO formatting is identical for
+    # four-digit years. Preserve platform-specific padding of earlier years.
+    return day.date().isoformat() if day.year >= 1000 else day.strftime("%Y-%m-%d")
 
 
 class SiteLinks:
