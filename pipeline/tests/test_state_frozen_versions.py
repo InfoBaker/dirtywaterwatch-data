@@ -1,4 +1,4 @@
-"""Version keys come from the ingesters, never event timestamps or a whole-file hash."""
+"""Source version keys come from ingesters; exact file digests separately gate archive reuse."""
 import json
 
 import pytest
@@ -23,7 +23,7 @@ def test_history_state_versions_and_poll_checkpoints(tmp_path, sid, state_file, 
     archive = tmp_path / 'frozen.tar.gz'; SP.pack_frozen(archive, tmp_path)
     baseline = tmp_path / 'baseline.json'; SP.frozen_baseline(baseline, tmp_path)
     state['read_at'] = 'read2'; (b / state_file).write_text(json.dumps(state))
-    assert SP.pack_frozen(tmp_path / 'unused.gz', tmp_path, baseline) == 3
+    assert SP.pack_frozen(tmp_path / 'clock-changed.gz', tmp_path, baseline) == 0
     hot = tmp_path / 'build.tar.gz'; SP.pack_build(hot, tmp_path, saved_frozen=archive)
     fresh = tmp_path / 'fresh'; SP.unpack_build(hot, fresh); SP.unpack_frozen(archive, fresh)
     assert json.loads((fresh / 'data/build' / state_file).read_text())['read_at'] == 'read2'
@@ -118,6 +118,5 @@ def test_invalid_hot_checkpoint_marker_cannot_overwrite_newer_history(tmp_path, 
     hot = tmp_path / 'hot.gz'; SP.pack_build(hot, tmp_path)
     fresh = tmp_path / 'retry'; SP.unpack_build(hot, fresh)
     (fresh / 'data/build' / SP.FROZEN_HOT).write_text(marker)
-    with pytest.raises(SP.Unreadable):
-        SP.unpack_frozen(frozen, fresh)
+    SP.unpack_frozen(frozen, fresh)
     assert SP.event_counts(fresh / 'data/build')[sid]['records'] == 11

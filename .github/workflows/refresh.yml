@@ -348,6 +348,8 @@ jobs:
           if [ "$keep_frozen" = 0 ] && [ -f frozen.tar.gz ]; then
             # Exclusion is authorized only by the restored or successfully uploaded object.
             python3 -I scripts/state_paths.py pack-build build.tar.gz --saved-frozen frozen.tar.gz
+          elif [ -f restored-frozen.tar.gz ]; then
+            python3 -I scripts/state_paths.py pack-build build.tar.gz --saved-frozen restored-frozen.tar.gz
           else
             python3 -I scripts/state_paths.py pack-build build.tar.gz
           fi

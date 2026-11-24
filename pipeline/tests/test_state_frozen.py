@@ -36,9 +36,11 @@ def test_split_migration_roundtrip_and_unchanged_versions(tmp_path):
     SP.unpack_frozen(frozen, fresh)
     assert SP.event_counts(fresh / 'data/build') == before
     SP.frozen_baseline(tmp_path / 'baseline.json', fresh)
+    assert SP.pack_frozen(tmp_path / 'unused.gz', fresh, tmp_path / 'baseline.json') == 3
     p = fresh / 'data/build/events' / f'{MD}.json'
     d = json.loads(p.read_text()); d['meta']['checked_at'] = 'later'; p.write_text(json.dumps(d))
-    assert SP.pack_frozen(tmp_path / 'unused.gz', fresh, tmp_path / 'baseline.json') == 3
+    # Even an operational clock changes the exact bytes that must survive in one primary archive.
+    assert SP.pack_frozen(tmp_path / 'clock-changed.gz', fresh, tmp_path / 'baseline.json') == 0
     d['meta']['table_version'] = 1677163935; p.write_text(json.dumps(d))
     assert SP.pack_frozen(tmp_path / 'changed.gz', fresh, tmp_path / 'baseline.json') == 0
 
@@ -382,3 +384,178 @@ def test_frozen_recovery_keeps_original_and_damaged_bytes(tmp_path, split, damag
     with tarfile.open(checkpoint) as tf:
         assert any(tf.extractfile(m).read() == damaged_bytes for m in tf
                    if m.isfile() and '/history-recovery/' in m.name)
+
+
+def test_interrupted_demotion_then_repromotion_keeps_saved_history(tmp_path, monkeypatch):
+    a = checkout(tmp_path / 'a'); seed(a, events={MD: 10, 'live': 2}, versions={MD: 1677163934})
+    assert not simulate('refresh.yml', a)['failed']
+    b = next_run(tmp_path, a)
+    script = b / 'scripts/state_paths.py'
+    script.write_text(script.read_text().replace('FROZEN_MANIFEST =', f'FROZEN_FEEDS.pop({MD!r})\nFROZEN_MANIFEST =', 1))
+    monkeypatch.setitem(STANDINS, 'Refresh (', REFRESH_STANDIN + f'''\npython3 - <<'PY'
+import json
+from pathlib import Path
+p = Path('data/build/events/{MD}.json')
+d = json.loads(p.read_text()); d['records'].append({{'event_id': '{MD}:later'}}); p.write_text(json.dumps(d))
+PY
+''')
+    assert simulate('refresh.yml', b, {'FAKE_R2_FAIL_PUT': 'state/frozen.tar.gz'})['failed']
+    assert SP.event_counts(b / 'r2/state/build.tar.gz')[MD]['records'] == 11
+    assert SP.event_counts(b / 'r2/state/frozen.tar.gz')[MD]['records'] == 10
+    c = next_run(tmp_path, b, 'repromoted')  # original configuration promotes Maryland again
+    monkeypatch.setitem(STANDINS, 'Refresh (', REFRESH_STANDIN)
+    assert not simulate('refresh.yml', c)['failed']
+    assert SP.event_counts(c / 'data/build')[MD]['records'] == 11
+    assert 'put state/frozen.tar.gz' in workflow_puts(c)
+    assert SP.event_counts(c / 'r2/state/frozen.tar.gz')[MD]['records'] == 11
+
+
+@pytest.mark.parametrize('marker', [None, '{"members": {}}', 'partial'])
+def test_incomplete_hot_map_restore_counts_and_recovery_keep_hot(tmp_path, marker):
+    b = source(tmp_path, version=1)
+    source(tmp_path, NY)
+    state = b / SP.FROZEN_FEEDS[MD][0]; state.parent.mkdir()
+    state.write_text('{"read_at": "old"}')
+    frozen = tmp_path / 'frozen.gz'; SP.pack_frozen(frozen, tmp_path)
+    source(tmp_path, n=11, version=2)
+    state.write_text('{"read_at": "new"}')
+    hot = tmp_path / 'hot.gz'; SP.pack_build(hot, tmp_path)
+    # Simulate legacy/incomplete metadata in the successfully saved hot object itself.
+    if marker == 'partial':
+        checkpoint = json.loads((b / SP.FROZEN_HOT).read_text())
+        checkpoint['members'].pop(f'events/{MD}.json')
+        checkpoint['members'].pop(SP.FROZEN_FEEDS[MD][0])
+        marker = json.dumps(checkpoint)
+    if marker is None:
+        (b / SP.FROZEN_HOT).unlink()
+    else:
+        (b / SP.FROZEN_HOT).write_text(marker)
+    with tarfile.open(hot, 'w:gz') as tf:
+        tf.add(b, arcname=SP.BUILD_DIR)
+    fresh = tmp_path / 'retry'; SP.unpack_build(hot, fresh)
+    restored = fresh / SP.BUILD_DIR
+    expected = (restored / f'events/{MD}.json').read_bytes()
+    SP.unpack_frozen(frozen, fresh)
+    assert (restored / f'events/{MD}.json').read_bytes() == expected
+    assert (restored / SP.FROZEN_FEEDS[MD][0]).read_bytes() == state.read_bytes()
+    counts = tmp_path / 'missing-counts.json'
+    assert SP.restored_baseline(counts, hot, frozen)[MD]['records'] == 11
+    baseline = tmp_path / 'baseline.json'; SP.frozen_baseline(baseline, fresh)
+    replacement = tmp_path / 'replacement.gz'
+    assert SP.pack_frozen(replacement, fresh, baseline) == 0
+    saved = tmp_path / 'saved.gz'; SP.pack_build(saved, fresh, saved_frozen=replacement)
+    retry = tmp_path / 'next'; SP.unpack_build(saved, retry); SP.unpack_frozen(replacement, retry)
+    assert (retry / SP.BUILD_DIR / f'events/{MD}.json').read_bytes() == expected
+    (restored / f'events/{MD}.json').unlink()
+    assert SP.save_status(counts, restored, hot, frozen) == 3
+    assert (restored / f'events/{MD}.json').read_bytes() == expected
+    assert (restored / SP.FROZEN_FEEDS[MD][0]).read_bytes() == state.read_bytes()
+
+
+@pytest.mark.parametrize('changed', ['records', 'whitespace', 'companion', 'clock'])
+def test_exclusion_requires_exact_saved_bytes_and_mismatch_forces_replacement(tmp_path, changed):
+    b = source(tmp_path)
+    state = b / SP.FROZEN_FEEDS[MD][0]; state.parent.mkdir()
+    state.write_text('{"read_at": "old"}')
+    frozen = tmp_path / 'old.gz'; SP.pack_frozen(frozen, tmp_path)
+    baseline = tmp_path / 'baseline.json'; SP.frozen_baseline(baseline, tmp_path)
+    event = b / f'events/{MD}.json'
+    target = state if changed == 'companion' else event
+    if changed == 'records': source(tmp_path, n=11)
+    elif changed == 'companion': state.write_text('{"read_at": "new"}')
+    elif changed == 'clock':
+        doc = json.loads(event.read_text()); doc['meta']['checked_at'] = 'later'; event.write_text(json.dumps(doc))
+    else: event.write_bytes(event.read_bytes() + b'\n')
+    hot = tmp_path / 'hot.gz'; SP.pack_build(hot, tmp_path, saved_frozen=frozen)
+    with tarfile.open(hot) as tf:
+        assert tf.extractfile(f'{SP.BUILD_DIR}/{target.relative_to(b)}').read() == target.read_bytes()
+    replacement = tmp_path / 'new.gz'
+    assert SP.pack_frozen(replacement, tmp_path, baseline) == 0
+    SP.pack_build(hot, tmp_path, saved_frozen=replacement)
+    with tarfile.open(hot) as tf:
+        assert f'{SP.BUILD_DIR}/{target.relative_to(b)}' not in tf.getnames()
+
+
+def test_frozen_drop_uses_restored_archive_for_identical_hot_exclusions(tmp_path, monkeypatch):
+    a = checkout(tmp_path / 'a'); seed(a, events={MD: 10, 'live': 2}, versions={MD: 1677163934})
+    assert not simulate('refresh.yml', a)['failed']
+    b = next_run(tmp_path, a)
+    monkeypatch.setitem(STANDINS, 'Refresh (', REFRESH_STANDIN + f'\nrm data/build/events/{MD}.json\n')
+    assert simulate('refresh.yml', b)['failed']
+    assert MD not in SP.event_counts(b / 'r2/state/build.tar.gz')
+    assert SP.event_counts(b / 'r2/state/frozen.tar.gz')[MD]['records'] == 10
+
+
+@pytest.mark.parametrize('random_seed', range(12))
+def test_random_membership_upload_and_restore_sequences_preserve_saved_records(tmp_path, monkeypatch, random_seed):
+    """A seeded state-machine property: every committed record survives every later successful save.
+
+    Only append records; membership changes and failed uploads must never remove committed history.
+    Check record identities across both primary objects, not just counts or the restored directory.
+    """
+    import io
+    import random
+    rng = random.Random(random_seed)
+    feeds = dict(SP.FROZEN_FEEDS)
+    hot, frozen = tmp_path / 'saved-hot.gz', tmp_path / 'saved-frozen.gz'
+    ever_saved = set()
+
+    def records(archive):
+        if not archive.exists(): return set()
+        with tarfile.open(archive) as tf:
+            return {r['event_id'] for m in tf if m.isfile() and m.name.startswith(f'{SP.BUILD_DIR}/events/')
+                    for r in json.load(tf.extractfile(m))['records']}
+
+    def upload(candidate, archive):
+        if archive == hot:
+            # Legacy or incomplete checkpoint maps are metadata, never overwrite authority.
+            map_kind = rng.choice(['intact', 'missing', 'empty', 'partial'])
+            rewritten = candidate.with_suffix('.map.gz')
+            with tarfile.open(candidate) as src, tarfile.open(rewritten, 'w:gz') as dst:
+                for member in src:
+                    payload = src.extractfile(member) if member.isfile() else None
+                    if member.name == f'{SP.BUILD_DIR}/{SP.FROZEN_HOT}' and map_kind != 'intact':
+                        if map_kind == 'missing': continue
+                        mapping = json.load(payload)['members']
+                        mapping = dict(list(mapping.items())[::2]) if map_kind == 'partial' else {}
+                        content = json.dumps({'members': mapping}).encode()
+                        member.size = len(content); payload = io.BytesIO(content)
+                    dst.addfile(member, payload)
+            candidate = rewritten
+        shutil.copyfile(candidate, archive)
+        present = records(hot) | records(frozen)
+        assert ever_saved <= present, (random_seed, step, failure, ever_saved - present)
+        ever_saved.update(present)
+
+    for step in range(30):
+        run = tmp_path / f'run-{step}'
+        monkeypatch.setattr(SP, 'FROZEN_FEEDS', {sid: states for sid, states in feeds.items() if rng.choice([True, False])})
+        if hot.exists(): SP.unpack_build(hot, run)
+        if frozen.exists(): SP.unpack_frozen(frozen, run)
+        build = run / SP.BUILD_DIR
+        restored_ids = {r['event_id'] for p in (build / 'events').glob('*.json')
+                        for r in json.loads(p.read_text())['records']}
+        assert ever_saved <= restored_ids
+        baseline = run / 'baseline.json'; SP.frozen_baseline(baseline, run)
+        for sid, states in feeds.items():
+            path = build / f'events/{sid}.json'
+            if not path.exists(): source(run, sid, n=0)
+            doc = json.loads(path.read_text())
+            if rng.randrange(3) == 0 or step == 0:
+                doc['records'].append({'event_id': f'{sid}:{step}'})
+            if rng.randrange(4) == 0: doc['meta']['table_version'] += 1
+            path.write_text(json.dumps(doc))
+            state = build / states[0]; state.parent.mkdir(parents=True, exist_ok=True)
+            state.write_text(json.dumps({'sha256': 'a' * 64, 'last_modified': '2026-11-20T00:00:00Z'}))
+        # Periodic guaranteed successes ensure the property covers saves after interruptions.
+        failure = rng.choice(['checkpoint', 'frozen', 'final-hot', None]) if step % 4 else None
+        candidate = run / 'frozen.gz'
+        rc = SP.pack_frozen(candidate, run, baseline)
+        if rc == 0:
+            checkpoint = run / 'checkpoint.gz'; SP.pack_build(checkpoint, run)
+            if failure == 'checkpoint': continue
+            upload(checkpoint, hot)
+            if failure == 'frozen': continue
+            upload(candidate, frozen)
+        final = run / 'hot.gz'; SP.pack_build(final, run, saved_frozen=frozen if frozen.exists() else None)
+        if failure != 'final-hot': upload(final, hot)
