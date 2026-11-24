@@ -42,6 +42,37 @@ is never saved. Both are restored at the start and saved only after a run that e
 runs without them and leaves the stored ones as they are. The raw caches are capped at 200 MB; the `data/build` archive
 warns over 200 MB and is still saved up to the storage upload limit.
 
+**History copies.** Object storage keeps no earlier versions, so each save of the `data/build` archive
+(`state/build.tar.gz`) replaces the last one. The refresh keeps three kinds of copy of it, private like it and only
+under `state/daily/`, `state/monthly/` and `state/held/` (`scripts/state_paths.py` has the detail):
+
+- `state/daily/build-<Mon..Sun>.tar.gz`: the first save of each UTC day, a ring of seven keys overwritten weekly.
+- `state/monthly/build-<YYYY-MM>.tar.gz`: the first save of each month, kept.
+- `state/held/build-<date>-<run>.tar.gz`: before each save a history guard compares every feed's record count with
+  the restored archive. A feed that lost at least 1% and at least 5 of its records, or whose events file is gone, is
+  a warning in the run log and in `data/build/history-guard.json`, and the restored archive is kept here, so the
+  history before the run can be recovered. The save still goes on, unless `data/build/events` is missing or empty
+  while the restored state had files: then the save step fails and the stored state stands.
+
+These uploads are optional: each has its own time limit, and none runs within 15 minutes of the job's time
+limit, so the state save keeps its time.
+
+Each daily and monthly copy is followed by a small marker (`build-<...>.json` beside it). The next run reads the
+marker and only then records the copy in `data/build/state-generations.json`, so the record never names a copy whose
+upload failed, and a failed copy is made again by the next run.
+
+At list prices (storage $0.015 per GB-month, Class A operations $4.50 per million, Class B $0.36 per million, no free
+allowance netted out) and a 123 MB archive, the ring holds 0.86 GB ($0.013 a month), each monthly copy adds 0.123 GB
+($0.0018 a month), the copies and markers are about 63 uploads a month ($0.0003) and the marker reads about 31
+($0.00001): about $0.015 a month at first, $0.035 a month after a year. A held copy adds one upload and 0.123 GB until
+it is deleted. The figures grow with the archive.
+
+To roll back, by hand: put any small file at `state/PAUSE`, wait until a running refresh has ended (a run already
+past its pause check still saves), copy the chosen daily, monthly or held object over `state/build.tar.gz`
+(`python3 -I scripts/state_paths.py counts FILE OUT` shows a copy's records per feed), then delete `state/PAUSE`. The
+next run makes the day's daily copy again, and the month's monthly copy when the restored archive predates it; copy
+either to a `state/held/` key first to keep it as it was.
+
 A state's water records are built by a separate, on-demand workflow (`.github/workflows/state-build.yml`), never
 inside the hourly run, because a state takes hours of rate-limited requests:
 
