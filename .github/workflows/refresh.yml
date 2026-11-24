@@ -138,13 +138,29 @@ jobs:
             # kept, with its records per source, for the history guard before the save (held in R2 when a source
             # lost records; scripts/state_paths.py guard)
             mv build.tar.gz restored-build.tar.gz
-            python3 -I scripts/state_paths.py counts data/build restored-counts.json \
-              || echo "::warning::the restored records could not be counted; the history guard counts the kept archive instead"
           elif [ "$rc" = 3 ]; then
             echo "no state yet"
           else
             echo "::error::state/build.tar.gz is in R2 but could not be fetched; nothing is published or saved this run"; exit 1
           fi
+          rc=0; python3 -I scripts/state_paths.py fetch state/frozen.tar.gz frozen.tar.gz || rc=$?
+          if [ "$rc" = 0 ]; then
+            python3 -I scripts/state_paths.py unpack-frozen frozen.tar.gz || { echo "::error::frozen restore failed; nothing is published or saved"; exit 1; }
+            mv frozen.tar.gz restored-frozen.tar.gz
+          elif [ "$rc" = 3 ]; then
+            needed=0; python3 -I scripts/state_paths.py frozen-required || needed=$?
+            [ "$needed" = 3 ] || { echo "::error::split state requires the missing frozen object; nothing is published or saved"; exit 1; }
+            echo "legacy or first run: frozen history will migrate on this save"
+          else
+            echo "::error::frozen state could not be fetched; nothing is published or saved"; exit 1
+          fi
+          mkdir -p data/build
+          # Both archives are now present in the same events tree; count before any feed runs.
+          if [ -f restored-build.tar.gz ] || [ -f restored-frozen.tar.gz ]; then
+            python3 -I scripts/state_paths.py counts data/build restored-counts.json \
+              || echo "::warning::restored counts could not be written; the guard will count both kept archives"
+          fi
+          python3 -I scripts/state_paths.py frozen-baseline restored-frozen.json
           find data/build -name '._*' -delete 2>/dev/null || true   # AppleDouble files from a tarball made on a Mac
       - name: Restore the state assessments from R2 (state/attains.tar.gz, the weekly ATTAINS job's output; read only)
         if: steps.pause.outputs.paused != '1'
@@ -283,7 +299,7 @@ jobs:
       - name: History guard (records per source against the restored state, before the save)
         # a source whose records fell by at least 1% and at least 5 records, or whose events file is gone, is
         # a warning with its counts and data/build/history-guard.json, and the restored archive is held in R2 at
-        # state/held/build-<date>-<run>.tar.gz; the save goes on either way (scripts/state_paths.py guard)
+        # state/held/{build,frozen}-<date>-<run>.tar.gz; frozen drops retain frozen, save hot, then fail
         if: success() && steps.pause.outputs.paused != '1' && steps.refresh.outputs.skipped != '1'
         continue-on-error: true
         env:   # R2 for the held copy only (state/held/, the S3 route as the save step)
@@ -301,16 +317,46 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           # never saved over the history with no events file at all (the stored state stands; the step fails)
-          python3 -I scripts/state_paths.py save-check restored-counts.json --restored restored-build.tar.gz
+          keep_frozen=0
+          python3 -I scripts/state_paths.py save-check restored-counts.json --restored restored-build.tar.gz --keep-frozen || keep_frozen=$?
+          [ "$keep_frozen" = 0 ] || [ "$keep_frozen" = 3 ] || exit 1
           # the generation record (data/build/state-generations.json, travels with the state): the previous run's copies
           # whose markers name it are recorded, and the copies this save is due for written as pending before the
           # archive is made; the next step makes them
           python3 -I scripts/state_paths.py generations plan \
             || echo "::warning::the state generations could not be planned; none is made this run"
-          tar -czf build.tar.gz data/build
+          # Frozen daily and monthly copies have a separate record in hot state, so an unchanged object still gets copies.
+          python3 -I scripts/state_paths.py generations plan --archive frozen --record data/build/frozen-generations.json \
+            || echo "::warning::the frozen generations could not be planned; none is made this run"
+          rc=3
+          if [ "$keep_frozen" = 0 ]; then
+            rc=0; python3 -I scripts/state_paths.py pack-frozen frozen.tar.gz || rc=$?
+          fi
+          if [ "$rc" = 0 ]; then
+            python3 -I scripts/state_paths.py check-size frozen.tar.gz --hard-mb 314
+            # Copy first: every member is saved in hot state before frozen membership can shrink.
+            # Its checkpoint prevents an older frozen copy overwriting newer hot records on retry.
+            python3 -I scripts/state_paths.py pack-build build.tar.gz
+            python3 -I scripts/state_paths.py check-size build.tar.gz --hard-mb 314
+            wrangler r2 object put dirtywaterwatch-data/state/build.tar.gz --file build.tar.gz --remote
+            wrangler r2 object put dirtywaterwatch-data/state/frozen.tar.gz --file frozen.tar.gz --remote
+          elif [ "$rc" = 3 ]; then
+            [ ! -f restored-frozen.tar.gz ] || cp restored-frozen.tar.gz frozen.tar.gz
+          else
+            echo "::error::frozen pack failed; neither state object is saved"; exit 1
+          fi
+          if [ "$keep_frozen" = 0 ] && [ -f frozen.tar.gz ]; then
+            # Exclusion is authorized only by the restored or successfully uploaded object.
+            python3 -I scripts/state_paths.py pack-build build.tar.gz --saved-frozen frozen.tar.gz
+          elif [ -f restored-frozen.tar.gz ]; then
+            python3 -I scripts/state_paths.py pack-build build.tar.gz --saved-frozen restored-frozen.tar.gz
+          else
+            python3 -I scripts/state_paths.py pack-build build.tar.gz
+          fi
           # over 200 MB a warning (the history is still saved); over wrangler's 300 MiB upload limit, an error
           python3 -I scripts/state_paths.py check-size build.tar.gz --hard-mb 314
           wrangler r2 object put dirtywaterwatch-data/state/build.tar.gz --file build.tar.gz --remote
+          [ "$keep_frozen" = 0 ] || { echo "::error::frozen history dropped; hot history saved and stored frozen object retained"; exit 1; }
       - name: State generations (the day's first save to the daily ring, the month's to its monthly copy)
         # the archive just saved to state/daily/build-<weekday>.tar.gz (seven keys, overwritten weekly) and
         # state/monthly/build-<YYYY-MM>.tar.gz (kept), each followed by its .json marker, which the next run's plan
@@ -321,6 +367,10 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          if [ -f frozen.tar.gz ]; then
+            python3 -I scripts/state_paths.py generations put frozen.tar.gz --archive frozen --record data/build/frozen-generations.json \
+              || echo "::warning::frozen generation failed; the next run retries it"
+          fi
           python3 -I scripts/state_paths.py generations put build.tar.gz \
             || echo "::warning::the state generations did not run to their end; the next run makes them"
       - name: Save the raw caches to R2 (state/raw-cache.tar.gz; the same rule)

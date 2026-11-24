@@ -677,8 +677,10 @@ def test_state_build_workflow_restores_the_openboatlaunch_object():
     # the refresh saves the folder only when the API changed it (pack-obl), before the build state, rolled back on
     # a failed upload (obl-not-saved)
     rt = (ROOT / ".github/workflows/refresh.yml").read_text()
+    # the build state is packed by state_paths.py pack-build since the frozen-history split (2026-11-24), by tar before it
+    pack = next(rt.index(w) for w in ("state_paths.py pack-build build.tar.gz", "tar -czf build.tar.gz data/build") if w in rt)
     assert rt.index("state_paths.py pack-obl") < rt.index("object put dirtywaterwatch-data/state/obl-water.tar.gz") \
-        < rt.index("state_paths.py obl-not-saved") < rt.index("tar -czf build.tar.gz data/build")
+        < rt.index("state_paths.py obl-not-saved") < pack
 
 
 def test_extract_never_overwrites_a_regional_water_file(tmp_path):

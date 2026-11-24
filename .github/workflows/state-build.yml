@@ -126,6 +126,17 @@ jobs:
           else
             echo "::error::state/build.tar.gz is in R2 but could not be fetched"; exit 1
           fi
+          rc=0; python3 -I scripts/state_paths.py fetch state/frozen.tar.gz frozen.tar.gz || rc=$?
+          if [ "$rc" = 0 ]; then
+            python3 -I scripts/state_paths.py unpack-frozen frozen.tar.gz || { echo "::error::frozen restore failed; nothing is published or saved"; exit 1; }
+            mv frozen.tar.gz restored-frozen.tar.gz
+          elif [ "$rc" = 3 ]; then
+            needed=0; python3 -I scripts/state_paths.py frozen-required || needed=$?
+            [ "$needed" = 3 ] || { echo "::error::split state requires the missing frozen object; nothing is published or saved"; exit 1; }
+            echo "legacy or first run: frozen history remains in the restored build"
+          else
+            echo "::error::frozen state could not be fetched; nothing is published or saved"; exit 1
+          fi
           find data/build -name '._*' -delete 2>/dev/null || true
       - name: openboatlaunch's water records and outlines (its API, else the last good copy in R2)
         env:

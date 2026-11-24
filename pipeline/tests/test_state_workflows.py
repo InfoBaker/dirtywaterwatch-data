@@ -182,7 +182,7 @@ GENS = json.dumps({"daily": {"Sat": {"date": "2026-11-21", "run": "1200"}},
                    "monthly": {"2026-11": {"date": "2026-11-01", "run": "900"}}})
 
 
-def seed(tmp: Path, generations: bool = True, events: dict | None = None) -> None:
+def seed(tmp: Path, generations: bool = True, events: dict | None = None, versions: dict | None = None) -> None:
     """Stored objects as a good earlier run left them. generations: the record holds the day's daily and the month's
     monthly (NOW), so a run makes no copy; events: {source: number of records} in data/build/events."""
     src = tmp / "seed"
@@ -195,7 +195,7 @@ def seed(tmp: Path, generations: bool = True, events: dict | None = None) -> Non
         (src / "data/build/events").mkdir()
         for sid, n in events.items():
             recs = [{"event_id": f"{sid}:{i}", "raw": {"note": "RECORD-TEXT-SENTINEL"}} for i in range(n)]
-            (src / f"data/build/events/{sid}.json").write_text(json.dumps({"source_id": sid, "records": recs}))
+            (src / f"data/build/events/{sid}.json").write_text(json.dumps({"source_id": sid, "records": recs, "meta": {"table_version": (versions or {}).get(sid)}}))
     with tarfile.open(tmp / "r2/state/build.tar.gz", "w:gz") as tf:
         tf.add(src / "data", arcname="data")
     (src / "data/raw/nhd-waters/nldi").mkdir(parents=True)
