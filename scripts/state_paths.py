@@ -5,16 +5,17 @@ State objects:
   state/frozen.tar.gz      Maryland's 2005-2023 Socrata table, California's 2006-order SSOs and New York's
                            2013-2021 workbook: events plus their own state files (FROZEN_FEEDS). Restored into
                            data/build beside the hot state every run, before counts, guard or ingestion. Saved
-                           only on migration or a changed source version: MD meta.table_version, CA history
-                           state's last_modified and sha256, NY history state's sha256. Checked/read clocks
+                           on migration, changed membership, unknown markers or a changed source version:
+                           MD meta.table_version, CA state's last_modified and sha256, NY state's sha256. Checked/read clocks
                            are not source versions. Michigan, Baltimore, Houston and Miami-Dade remain hot:
                            those histories still include changing/current reports.
                            A manifest checks every member digest and requires every named events file before
                            extraction. A fetch/unpack failure stops the run. Missing is allowed only before the
                            first split; frozen-required.json in hot state makes subsequent absence fatal.
                            Frozen records never move out of data/build/events. pack-build excludes them while
-                           save-check and guard see the whole tree. Any frozen source drop, missing or unreadable
-                           events file blocks BOTH saves; the guard holds both restored objects first.
+                           save-check and guard see the whole tree. A frozen source drop holds both restored
+                           objects, retains the frozen primary, saves recovered hot state, then fails the step.
+                           Damaged local files are also retained under data/build/history-recovery/.
                            A tiny frozen-runtime.json in hot state carries metadata and state checkpoints so
                            weekly read schedules and 304 checks survive hours with no frozen upload. It is
                            applied only when its source versions match the restored frozen manifest; no records
@@ -23,7 +24,8 @@ State objects:
                            correction requiring persistence before the source changes needs the operator to pause,
                            validate the corrected complete tree, and explicitly repack/upload frozen with --baseline
                            naming an absent scratch file; keep the prior object under a held key first. Never automate that override.
-                           Monthly copies state/monthly/frozen-YYYY-MM.tar.gz (+ .json markers) use the same
+                           Seven daily copies state/daily/frozen-<weekday>.tar.gz and monthly copies
+                           state/monthly/frozen-YYYY-MM.tar.gz (+ .json markers) use the same
                            bounded retry/confirmation protocol as build; frozen-generations.json stays hot.
                            Copies use the restored archive even on a run that does not upload the primary object.
   state/build.tar.gz       data/build except the frozen manifest and files (pack-build): the ingesters' history and snapshot files, the reach traces
@@ -80,8 +82,9 @@ records per source (counts: restored-counts.json; both in the runner's workspace
 save, guard counts data/build/events again. A source whose records fell by at least DROP_MIN_PERCENT percent and at
 least DROP_MIN_RECORDS records, or whose events file disappeared or can no longer be read, is a drop: one ::warning::
 per source with its counts, the restored archive held, and data/build/history-guard.json written (time, run, each
-drop's counts, the held key and whether it uploaded; earlier drop runs kept below it). For hot-source drops the save still goes on; any frozen-source drop blocks both saves. No drop: nothing uploaded. No
-restored state (a first run): nothing compared. A missing data/build counts as every source gone. Another case that
+drop's counts, the held key and whether it uploaded; earlier drop runs kept below it). Hot-source drops still save.
+Frozen-source drops retain frozen and save recovered hot history before failing. No drop: nothing held.
+No restored state (a first run): nothing compared. A missing data/build counts as every source gone. Another case that
 stops the save is save-check's: data/build/events missing or holding no events file while the restored state had some;
 the save step then fails and the stored state stands.
 Time. The held copy, the copies, their markers and the marker reads are optional: each has a total deadline, retries
@@ -102,10 +105,14 @@ uploads are about 63 Class A operations a month (31 copies and 31 markers), $0.0
 Class B operations, $0.00001. A held copy is one more Class A operation and 0.123 GB ($0.0018 a month) until someone
 deletes it. In all about $0.015 a month at first, $0.035 a month after a year and $0.30 over the first year; every
 figure grows in step with the archive.
-Migration: when no frozen object exists and the restored build has no frozen-required.json, the first good run
-packs the frozen files without moving them, uploads frozen FIRST, then saves the reduced build. A failed frozen
-upload leaves the old complete build intact. A failed build upload leaves the old complete build and a valid frozen
-object; the next run overlays it and retries the split. No production object is changed by deployment alone.
+Migration and membership changes: before replacing frozen, save a COMPLETE hot checkpoint. Only after the
+frozen upload succeeds may pack-build --saved-frozen exclude its confirmed members. Without that argument it
+saves all files. frozen-hot.json records hashes of the included histories; both readers preserve these hot copies
+when overlaying an older frozen object after an interrupted save. Historical schemas stay accepted independently
+of FROZEN_FEEDS. Demoted feeds therefore reach saved hot state before their frozen copy is retired. A failed
+checkpoint leaves both stored objects intact; a later failure leaves a complete hot checkpoint and old/new frozen.
+Missing/invalid version markers always force a save. Baseline membership and versions come from the restored
+frozen manifest, separately from the complete in-memory history used by the guard.
 
 Rollback, by hand (never automated): the owner's operator sets state/PAUSE and waits for any running refresh to
 finish. Preserve both current objects under private held keys first. To restore split-code history, choose a build
@@ -135,15 +142,16 @@ that cannot be read is replaced by the next good run's.
                                                             absolute or '..' paths, AppleDouble '._*' files and
                                                             anything else are skipped and counted (a tarball made
                                                             elsewhere, or by an older list, cannot widen the set)
-    python3 -I scripts/state_paths.py pack-build FILE       hot archive; excludes frozen members without moving them
+    python3 -I scripts/state_paths.py pack-build FILE [--saved-frozen FILE]
+                                                            full hot checkpoint, or exclude confirmed frozen members
     python3 -I scripts/state_paths.py pack-frozen FILE [--baseline restored-frozen.json]
                                                             exit 0 packed after migration/source-version change;
                                                             3 unchanged (no primary upload); 1 invalid/incomplete
     python3 -I scripts/state_paths.py unpack-frozen FILE    validate and restore frozen members into data/build
-    python3 -I scripts/state_paths.py frozen-baseline FILE snapshot versions after both restores, before ingestion
+    python3 -I scripts/state_paths.py frozen-baseline FILE snapshot saved manifest and combined membership before ingestion
     python3 -I scripts/state_paths.py frozen-required      exit 0 split marker present, 3 legacy/first-run state
     python3 -I scripts/state_paths.py generations plan|put [FILE] --archive frozen --record data/build/frozen-generations.json
-                                                            monthly frozen copies, even when the primary is unchanged
+                                                            daily/monthly frozen copies, even when the primary is unchanged
     python3 -I scripts/state_paths.py unpack-build FILE     restore state/build.tar.gz: the whole archive is read and
                                                             checked first; only data/build and regular files and
                                                             folders under it; a link, special file, absolute or '..'
@@ -202,9 +210,9 @@ that cannot be read is replaced by the next good run's.
                                                             the history guard (above) against COUNTS, the counts taken
                                                             at the restore; FILE (default restored-build.tar.gz) is
                                                             held on a drop; exit 0 (the save goes on)
-    python3 -I scripts/state_paths.py save-check COUNTS [--restored FILE] [--build DIR]
-                                                            exit 1 (an ::error::) when data/build/events is missing or
-                                                            empty while the restored state had events files
+    python3 -I scripts/state_paths.py save-check COUNTS [--restored FILE] [--build DIR] [--keep-frozen]
+                                                            exit 1 on unsafe loss; --keep-frozen recovers frozen-only
+                                                            drops and exits 3: retain frozen, save full hot, then fail
     python3 -I scripts/state_paths.py generations plan|put [FILE] [--record FILE] [--run-id ID]
                                                             plan: record the previous run's copies their markers name,
                                                             print the copies due and write them as pending; put FILE:
@@ -1141,8 +1149,15 @@ def restored_baseline(restored_counts: Path, restored: Path | None, frozen: Path
     try:
         before = event_counts(Path(restored))
         if frozen and Path(frozen).is_file():
-            before.update(event_counts(Path(frozen)))
-    except (OSError, EOFError, tarfile.TarError, zlib.error) as ex:
+            frozen_counts = event_counts(Path(frozen))
+            with tarfile.open(restored, "r:gz") as tf:
+                try:
+                    checkpoint = json.load(tf.extractfile(f"{BUILD_DIR}/{FROZEN_HOT}")).get("members", {})
+                except KeyError:
+                    checkpoint = {}
+            before.update({sid: counts for sid, counts in frozen_counts.items()
+                           if f"events/{sid}.json" not in checkpoint or sid not in before})
+    except (OSError, EOFError, ValueError, TypeError, tarfile.TarError, zlib.error) as ex:
         print(f"::warning::the restored state could not be counted ({type(ex).__name__})", flush=True)
         return None
     say(f"the restored records were counted from {Path(restored).name}")
@@ -1152,12 +1167,12 @@ def restored_baseline(restored_counts: Path, restored: Path | None, frozen: Path
 def frozen_state_drops(before: dict, build: Path, restored: Path | None, frozen: Path | None) -> list[dict]:
     """Companion state files are as irreplaceable as events. Inspect the restored archive's membership, not a
     mutable current manifest, so deleting both a state file and the manifest cannot hide the loss."""
-    archive = frozen if frozen and Path(frozen).is_file() else restored
-    if archive is None or not Path(archive).is_file():
-        return []
-    owners = {f"{BUILD_DIR}/{path}": sid for sid, states in FROZEN_FEEDS.items() for path in states}
-    with tarfile.open(archive, "r:gz") as tf:
-        expected = {m.name for m in tf if m.isfile() and m.name in owners}
+    owners = {f"{BUILD_DIR}/{path}": sid for sid, states in accepted_frozen_feeds().items() for path in states}
+    expected = set()
+    for archive in (restored, frozen):
+        if archive is not None and Path(archive).is_file():
+            with tarfile.open(archive, "r:gz") as tf:
+                expected.update(m.name for m in tf if m.isfile() and m.name in owners)
     drops = []
     for name in sorted(expected):
         path = Path(build) / name.removeprefix(BUILD_DIR + "/")
@@ -1202,7 +1217,8 @@ def guard(restored_counts: Path, build: Path = ROOT / BUILD_DIR, out: Path = GUA
     if frozen and Path(frozen).is_file():
         frozen_key = f"state/held/frozen-{now.strftime('%Y-%m-%d')}-{run}.tar.gz"
         frozen_held = {"key": frozen_key, "uploaded": put(frozen_key, frozen, wrangler=wrangler) == FETCHED}
-    save_message = "state save blocked" if any(d["source"] in FROZEN_FEEDS for d in drops) else "the state is saved as usual"
+    save_message = ("stored frozen history is retained; hot history is saved before the step fails"
+                    if any(d["source"] in accepted_frozen_feeds() for d in drops) else "the state is saved as usual")
     for d in drops:
         b, a = d["before"].get("records"), (d["after"] or {}).get("records")
         b = b if isinstance(b, int) and not d["before"].get("unreadable") else "an unknown number of"
@@ -1239,7 +1255,7 @@ def save_check(restored_counts: Path, build: Path = ROOT / BUILD_DIR, restored: 
     if before is not None:
         drops = history_drops(before, event_counts(build) if Path(build).is_dir() else {})
         drops += frozen_state_drops(before, build, restored, frozen)
-        if any(d["source"] in FROZEN_FEEDS for d in drops):
+        if any(d["source"] in accepted_frozen_feeds() for d in drops):
             print("::error::frozen history lost records or became unreadable; neither state archive is saved", flush=True)
             return False
     events = Path(build) / "events"
@@ -1259,6 +1275,52 @@ def save_check(restored_counts: Path, build: Path = ROOT / BUILD_DIR, restored: 
     return False
 
 
+def save_status(restored_counts: Path, build: Path, restored: Path, frozen: Path) -> int:
+    """0 normal save, 3 keep frozen and save recovered hot history then fail, 1 unsafe whole-tree loss.
+
+    Preserve damaged local bytes as well as the restored good copy. This covers first migration and demotion,
+    where the stored frozen object alone might not contain the dropped source. No record content is logged.
+    """
+    before = restored_baseline(restored_counts, restored, frozen)
+    after = event_counts(build) if build.is_dir() else {}
+    if before is None or not after:
+        return 0 if save_check(restored_counts, build, restored, frozen) else 1
+    feeds = accepted_frozen_feeds()
+    drops = history_drops(before, after) + frozen_state_drops(before, build, restored, frozen)
+    affected = {d["source"] for d in drops if d["source"] in feeds}
+    if not affected:
+        return 0 if save_check(restored_counts, build, restored, frozen) else 1
+    paths = frozen_paths({sid: feeds[sid] for sid in affected})
+    # The combined baseline may prefer a newer hot checkpoint, so match that same restore order.
+    checkpoint = read_json_dict(build / FROZEN_HOT).get("members", {})
+    recovered = {}
+    for archive in (restored, frozen):
+        if not archive.is_file():
+            continue
+        with tarfile.open(archive, "r:gz") as tf:
+            for member in tf:
+                path = member.name.removeprefix(BUILD_DIR + "/")
+                if (member.isfile() and path in paths
+                        and not (archive == frozen and path in checkpoint and path in recovered)):
+                    recovered[path] = tf.extractfile(member).read()
+    for sid in affected:
+        if f"events/{sid}.json" not in recovered:
+            raise Unreadable("dropped frozen history cannot be recovered")
+    for path, content in recovered.items():
+        dest = build / path
+        if any(p.is_symlink() for p in (dest, *dest.parents)):
+            raise Unreadable("a recovery destination is a link")
+        if dest.is_file():
+            damaged = dest.read_bytes()
+            backup = build / "history-recovery" / hashlib.sha256(damaged).hexdigest() / path
+            backup.parent.mkdir(parents=True, exist_ok=True)
+            backup.write_bytes(damaged)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(content)
+    print("::warning::frozen history drop: stored frozen object retained; save hot history, then fail the step", flush=True)
+    return 3
+
+
 def generation_key(kind: str, slot: str, mark: bool = False, archive: str = "build") -> str:
     """state/<kind>/build-<slot>.tar.gz, the copy, or with mark its .json marker (written only after the copy)."""
     key = f"state/{kind}/{archive}-{slot}.{'json' if mark else 'tar.gz'}"
@@ -1274,7 +1336,7 @@ def generations_due(rec: dict, now: datetime, archive: str = "build") -> list[di
     daily = rec.get("daily") if isinstance(rec.get("daily"), dict) else {}
     monthly = rec.get("monthly") if isinstance(rec.get("monthly"), dict) else {}
     due = []
-    if archive == "build" and (daily.get(slot) or {}).get("date") != day:
+    if (daily.get(slot) or {}).get("date") != day:
         due.append({"kind": "daily", "slot": slot, "date": day, "key": generation_key("daily", slot, archive=archive)})
     if month not in monthly:
         due.append({"kind": "monthly", "slot": month, "date": day, "key": generation_key("monthly", month, archive=archive)})
@@ -1449,24 +1511,36 @@ def obl_not_saved(state_file: Path = OBL_CHANGES, src: Path = OBL_OUT) -> int:
 
 # Only feeds whose own ingestion protocol identifies a frozen/rarely revised source.
 # The other large histories (MI, Baltimore, Houston, Miami-Dade) include current reports.
-FROZEN_FEEDS = {
+FROZEN_SCHEMAS = {1: {
     "md-mde-sewer-overflows-2005-2023": ("generic/md-mde-sewer-overflows-2005-2023-fetch.json",),
     "ca-swrcb-ciwqs-sso-2006-order": ("ca-swrcb-ciwqs-sso-2006-state.json",),
     "ny-dec-sprtk-2013-2021": ("ny-sprtk-history-state.json",),
-}
+}}
+# Never remove a historical schema when changing the current packing configuration.
+FROZEN_FEEDS = {sid: FROZEN_SCHEMAS[1][sid] for sid in (
+    "md-mde-sewer-overflows-2005-2023",
+    "ca-swrcb-ciwqs-sso-2006-order",
+    "ny-dec-sprtk-2013-2021",
+)}
+FROZEN_HOT = "frozen-hot.json"
 FROZEN_MANIFEST = "frozen-manifest.json"
 FROZEN_REQUIRED = "frozen-required.json"
 FROZEN_RUNTIME = "frozen-runtime.json"
 
 
-def frozen_paths() -> set[str]:
-    return {p for sid, states in FROZEN_FEEDS.items() for p in (f"events/{sid}.json", *states)}
+def accepted_frozen_feeds() -> dict:
+    return {**{sid: states for schema in FROZEN_SCHEMAS.values() for sid, states in schema.items()}, **FROZEN_FEEDS}
 
 
-def frozen_versions(root: Path = ROOT) -> dict:
+def frozen_paths(feeds: dict | None = None) -> set[str]:
+    return {p for sid, states in (FROZEN_FEEDS if feeds is None else feeds).items()
+            for p in (f"events/{sid}.json", *states)}
+
+
+def check_frozen_inputs(root: Path, paths: set[str]) -> None:
+    """Check fixed paths and every parent before reading; never follow a link into another file tree."""
     build = root / BUILD_DIR
-    # Check fixed paths and every parent before reading; never follow a link into another file tree.
-    for rel in frozen_paths():
+    for rel in paths:
         path = build / rel
         for part in (path, *path.parents):
             if part == root:
@@ -1475,6 +1549,11 @@ def frozen_versions(root: Path = ROOT) -> dict:
                 raise Unreadable("a frozen input or parent is a link")
         if path.exists() and not path.is_file():
             raise Unreadable("a frozen input is not a regular file")
+
+
+def frozen_versions(root: Path = ROOT) -> dict:
+    build = root / BUILD_DIR
+    check_frozen_inputs(root, frozen_paths())
     versions = {}
     for sid, states in FROZEN_FEEDS.items():
         event = build / f"events/{sid}.json"
@@ -1498,11 +1577,37 @@ def frozen_versions(root: Path = ROOT) -> dict:
     return versions
 
 
+def reliable_versions(versions: dict) -> bool:
+    """Unknown markers are never evidence of unchanged content."""
+    for sid, version in versions.items():
+        if not isinstance(version, dict):
+            return False
+        if sid.startswith("md-"):
+            value = version.get("table_version")
+            if not isinstance(value, (str, int)) or isinstance(value, bool) or not re.fullmatch(r"[1-9][0-9]*", str(value)):
+                return False
+        else:
+            digest = version.get("sha256")
+            if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
+                return False
+            if sid.startswith("ca-"):
+                try:
+                    value = version.get("last_modified")
+                    if not isinstance(value, str) or datetime.fromisoformat(value.replace("Z", "+00:00")).tzinfo is None:
+                        return False
+                except ValueError:
+                    return False
+    return True
+
+
 def frozen_baseline(out: Path, root: Path = ROOT) -> None:
-    """Run only after both restores. No volatile checked_at/read_at in the source version."""
-    write_json(out, {"versions": frozen_versions(root),
-                     "members": sorted(p for p in frozen_paths() if (root / BUILD_DIR / p).is_file()),
-                     "restored": (root / BUILD_DIR / FROZEN_MANIFEST).is_file()})
+    """Keep saved membership/versions separate from the combined history's membership."""
+    build = root / BUILD_DIR
+    manifest = read_json_dict(build / FROZEN_MANIFEST)
+    write_json(out, {"versions": manifest.get("versions", {}),
+                     "members": sorted(manifest.get("members", {})),
+                     "history_members": sorted(p for p in frozen_paths() if (build / p).is_file()),
+                     "restored": bool(manifest)})
 
 
 def pack_frozen(out: Path, root: Path = ROOT, baseline: Path | None = None) -> int:
@@ -1511,7 +1616,7 @@ def pack_frozen(out: Path, root: Path = ROOT, baseline: Path | None = None) -> i
     before = read_json_dict(baseline) if baseline else {}
     versions = frozen_versions(root)
     paths = sorted(p for p in frozen_paths() if (build / p).is_file())
-    if set(before.get("members", [])) - set(paths):
+    if set(before.get("history_members", [])) - set(paths):
         raise Unreadable("a restored frozen member disappeared; neither archive may be saved")
     # Small operational state travels hourly, so unchanged weekly 304 reads do not become hourly downloads.
     # Apply only to the same source versions after restoring the frozen base; records stay in frozen.tar.gz.
@@ -1527,10 +1632,11 @@ def pack_frozen(out: Path, root: Path = ROOT, baseline: Path | None = None) -> i
                     runtime["states"][path] = json.loads((build / path).read_text())
     if versions:
         write_json(build / FROZEN_RUNTIME, runtime)
-    if before.get("restored") and before.get("versions") == versions:
+    if (before.get("restored") and before.get("versions") == versions
+            and set(before.get("members", [])) == set(paths) and reliable_versions(versions)):
         say("frozen source versions unchanged; state/frozen.tar.gz is not uploaded")
         return ABSENT
-    if not versions:
+    if not versions and not before.get("restored"):
         return ABSENT
     manifest = {"schema": 1, "versions": versions,
                 "members": {p: hashlib.sha256((build / p).read_bytes()).hexdigest() for p in paths}}
@@ -1544,8 +1650,8 @@ def pack_frozen(out: Path, root: Path = ROOT, baseline: Path | None = None) -> i
     return FETCHED
 
 
-def unpack_frozen(src: Path, root: Path = ROOT) -> dict:
-    """Validate the complete gzip, allowlist, manifest and every digest before writing any member."""
+def frozen_manifest(src: Path) -> dict:
+    """Validate the complete gzip, historical allowlist, manifest and every digest without extraction."""
     try:
         with gzip.open(src, "rb") as gz:
             while gz.read(1 << 20):
@@ -1553,19 +1659,19 @@ def unpack_frozen(src: Path, root: Path = ROOT) -> dict:
         with tarfile.open(src, "r:gz") as tf:
             members = tf.getmembers()
             names = [m.name for m in members]
-            allowed_paths = {f"{BUILD_DIR}/{p}" for p in frozen_paths() | {FROZEN_MANIFEST}}
+            allowed_paths = {f"{BUILD_DIR}/{p}" for p in frozen_paths(accepted_frozen_feeds()) | {FROZEN_MANIFEST}}
             if len(names) != len(set(names)) or any(not m.isfile() or m.name not in allowed_paths for m in members):
                 raise Unreadable("unexpected or duplicate frozen archive member")
             manifest = json.load(tf.extractfile(f"{BUILD_DIR}/{FROZEN_MANIFEST}"))
             if not isinstance(manifest, dict):
                 raise Unreadable("invalid frozen manifest")
             hashes = manifest.get("members")
-            if manifest.get("schema") != 1 or not isinstance(hashes, dict) or not hashes:
+            if manifest.get("schema") != 1 or not isinstance(hashes, dict):
                 raise Unreadable("missing frozen manifest")
             if set(names) != {f"{BUILD_DIR}/{p}" for p in hashes} | {f"{BUILD_DIR}/{FROZEN_MANIFEST}"}:
                 raise Unreadable("frozen manifest members missing")
             expected = manifest.get("versions")
-            if not isinstance(expected, dict) or not expected or set(expected) - FROZEN_FEEDS.keys():
+            if not isinstance(expected, dict) or set(expected) - accepted_frozen_feeds().keys():
                 raise Unreadable("invalid frozen source versions")
             for sid in expected:
                 if f"events/{sid}.json" not in hashes:
@@ -1580,17 +1686,41 @@ def unpack_frozen(src: Path, root: Path = ROOT) -> dict:
                     raise Unreadable("frozen events unreadable")
     except (OSError, EOFError, ValueError, KeyError, TypeError, tarfile.TarError, zlib.error):
         raise Unreadable("frozen archive could not be validated") from None
+    return manifest
+
+
+def unpack_frozen(src: Path, root: Path = ROOT) -> dict:
+    """An interrupted full hot checkpoint takes precedence over the older frozen copy."""
+    manifest = frozen_manifest(src)
+    build = root / BUILD_DIR
+    checkpoint_path = build / FROZEN_HOT
+    check_frozen_inputs(root, {FROZEN_HOT})
+    hot = read_json_dict(checkpoint_path).get("members") if checkpoint_path.is_file() else {}
+    if not isinstance(hot, dict):
+        raise Unreadable("invalid hot checkpoint")
+    preserved = {}
+    for path, digest in hot.items():
+        if path not in frozen_paths(accepted_frozen_feeds()):
+            raise Unreadable("invalid hot checkpoint member")
+        target = build / path
+        if any(p.is_symlink() for p in (target, *target.parents)):
+            raise Unreadable("a hot checkpoint member is a link")
+        content = target.read_bytes()
+        if hashlib.sha256(content).hexdigest() != digest:
+            raise Unreadable("hot checkpoint digest mismatch")
+        preserved[path] = content
     # Existing unpacker enforces extraction safety, including destination symlinks.
     result = unpack_build(src, root)
-    build = root / BUILD_DIR
+    for path, content in preserved.items():
+        (build / path).write_bytes(content)
     write_json(build / FROZEN_REQUIRED, {"schema": 1})
     runtime = read_json_dict(build / FROZEN_RUNTIME)
-    if runtime.get("versions") == manifest["versions"]:
+    if runtime.get("versions") == manifest["versions"] and reliable_versions(manifest["versions"]):
         for path, state in (runtime.get("states") or {}).items():
-            if path in frozen_paths() and not path.startswith("events/"):
+            if path in frozen_paths() and path not in preserved and not path.startswith("events/"):
                 write_json(build / path, state)
         for sid, meta in (runtime.get("meta") or {}).items():
-            if sid in FROZEN_FEEDS:
+            if sid in FROZEN_FEEDS and f"events/{sid}.json" not in preserved:
                 path = build / f"events/{sid}.json"
                 doc = read_json_dict(path)
                 if doc:
@@ -1598,10 +1728,23 @@ def unpack_frozen(src: Path, root: Path = ROOT) -> dict:
     return result
 
 
-def pack_build(out: Path, root: Path = ROOT) -> None:
+def pack_build(out: Path, root: Path = ROOT, saved_frozen: Path | None = None) -> None:
     """Archive the hot state without moving/deleting any file the guard or exporter reads."""
     build = root / BUILD_DIR
-    excluded = frozen_paths() | {FROZEN_MANIFEST} if (build / FROZEN_REQUIRED).is_file() else set()
+    # Only the caller's successfully uploaded (or restored) object authorizes exclusion.
+    # No confirmation means a complete hot checkpoint, including every frozen member.
+    saved = frozen_manifest(saved_frozen) if saved_frozen else {}
+    excluded = (set(saved.get("members", {})) & frozen_paths()) | {FROZEN_MANIFEST}
+    retained = frozen_paths(accepted_frozen_feeds()) - excluded
+    check_frozen_inputs(root, retained | {FROZEN_HOT, FROZEN_HOT + ".tmp", FROZEN_REQUIRED, FROZEN_REQUIRED + ".tmp"})
+    write_json(build / FROZEN_HOT, {"members": {
+        p: hashlib.sha256((build / p).read_bytes()).hexdigest()
+        for p in sorted(retained) if (build / p).is_file() and not (build / p).is_symlink()}})
+    if saved_frozen:
+        write_json(build / FROZEN_REQUIRED, {"schema": 1})
+    else:
+        (build / FROZEN_REQUIRED).unlink(missing_ok=True)
+
     def keep(info):
         if build_member_problem(info):
             raise Unreadable("invalid build archive member")
@@ -1626,6 +1769,8 @@ def main(argv=None) -> int:
     for name in ("pack-build", "pack-frozen", "unpack-frozen", "frozen-baseline"):
         s = sub.add_parser(name)
         s.add_argument("file")
+        if name == "pack-build":
+            s.add_argument("--saved-frozen")
         if name == "pack-frozen":
             s.add_argument("--baseline", default="restored-frozen.json")
     sub.add_parser("frozen-required")
@@ -1663,6 +1808,7 @@ def main(argv=None) -> int:
     s.add_argument("--frozen", default="restored-frozen.tar.gz")
     s.add_argument("--run-id")
     s = sub.add_parser("save-check", help="refuse to save over the history with no events file")
+    s.add_argument("--keep-frozen", action="store_true")
     s.add_argument("restored_counts")
     s.add_argument("--restored", default="restored-build.tar.gz")
     s.add_argument("--frozen", default="restored-frozen.tar.gz")
@@ -1685,7 +1831,7 @@ def main(argv=None) -> int:
             if a.cmd == "frozen-required":
                 return 0 if (ROOT / BUILD_DIR / FROZEN_REQUIRED).exists() else 3
             if a.cmd == "pack-build":
-                pack_build(Path(a.file))
+                pack_build(Path(a.file), saved_frozen=Path(a.saved_frozen) if a.saved_frozen else None)
                 return 0
             if a.cmd == "pack-frozen":
                 return pack_frozen(Path(a.file), baseline=Path(a.baseline))
@@ -1705,6 +1851,12 @@ def main(argv=None) -> int:
             return 1
         return 0
     if a.cmd == "save-check":
+        if a.keep_frozen:
+            try:
+                return save_status(Path(a.restored_counts), Path(a.build), Path(a.restored), Path(a.frozen))
+            except Exception as ex:  # noqa: BLE001 - no record contents in errors
+                print(f"::error::history recovery failed ({safe_error(ex)})", flush=True)
+                return 1
         return 0 if save_check(Path(a.restored_counts), Path(a.build), Path(a.restored) if a.restored else None, Path(a.frozen)) else 1
     if a.cmd == "guard":
         guard(Path(a.restored_counts), Path(a.build), Path(a.out), Path(a.restored) if a.restored else None, run, frozen=Path(a.frozen))
