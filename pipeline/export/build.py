@@ -1101,10 +1101,44 @@ def _blocklist_parallel(paths, names, clean, cache, workers):
             yield from pending.popleft().result()
 
 
+def publication_paths(out_dir: Path) -> list[Path]:
+    """The publication manifest is the entire out/ tree.
+
+    refresh.yml archives all of out/ for the site; the dataset release excludes
+    csv/ but the site serves those downloads too. upload-current.sh publishes a
+    subset of this same tree. Enumerate files, not an extension/name allowlist,
+    so new outputs are checked automatically. Keep the legacy hit order first,
+    then append newly covered files in path order. One walk avoids a second
+    traversal of the hundreds of thousands of event files.
+    """
+    import os
+
+    out_dir = Path(out_dir)
+    fixed = ("events.json",) + PUBLIC_PAYLOADS
+    waters, events, reaches, additional = [], [], [], []
+    for directory, _dirs, files in os.walk(out_dir):
+        parent = Path(directory)
+        relative = parent.relative_to(out_dir).as_posix()
+        for name in files:
+            if relative == "." and name in fixed:
+                continue
+            if relative == "waters" and name.endswith(".json"):
+                group = waters
+            elif relative == "events" and name.endswith(".json"):
+                group = events
+            elif relative == REACH_STATE_DIR and name.endswith(".geojson"):
+                group = reaches
+            else:
+                group = additional
+            group.append(parent / name)
+    return ([out_dir / name for name in fixed] + sorted(waters) + sorted(events)
+            + sorted(reaches) + sorted(additional))
+
+
 def blocklist_hits(out_dir: Path, names: list[str], cache: Path | None = None,
                    *, stats: dict | None = None, observed: BlocklistWrites | None = None,
                    workers: int | None = None) -> list[str]:
-    """The original ordered file selection and exact BlockScan matches.
+    """Every published file, with legacy hit order and exact BlockScan matches.
 
     Clean digests are keyed by names, scanner source and cache semantics. ASCII
     digits may be made equivalent only when no name contains one (BlockScan's
@@ -1127,9 +1161,7 @@ def blocklist_hits(out_dir: Path, names: list[str], cache: Path | None = None,
     if observed is not None and (observed.stamp != stamp or observed.out_dir != out_dir or observed.cache != cache):
         observed = None
     clean_now: set[str] = set()
-    # Keep exactly the original selection and order, including missing-file behavior.
-    paths = [out_dir / n for n in ("events.json",) + PUBLIC_PAYLOADS] + sorted((out_dir / "waters").glob("*.json")) \
-        + sorted((out_dir / "events").glob("*.json")) + sorted((out_dir / REACH_STATE_DIR).glob("*.geojson"))
+    paths = publication_paths(out_dir)
     def serial():
         for p in paths:
             result = None
@@ -1208,6 +1240,7 @@ def shown_path(p: Path) -> str:
         return str(p)
 
 
+# Legacy ordering only; publication_paths derives coverage from the published tree.
 PUBLIC_PAYLOADS = ("waters.json", "active.json", "monthly-outfalls.json", "overlays.geojson", "advisory-points.geojson",
                    "reaches.geojson", "reach-paths.geojson", "rain.json", "coverage.json", "dischargers.json",
                    "outfalls.json", "rain-levels.json", "assessments.json")

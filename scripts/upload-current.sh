@@ -24,11 +24,9 @@ put() {   # put <path under out/>: every file goes through this one check (prese
   done
   echo "uploaded current/$f"
 }
-# the outfalls export imports the status build (build/status.py, build/shoreline.py: shapely and numpy), so it runs
-# on the pipeline's venv where one exists; the system python3 on the runners has neither
-PY="$(pwd)/pipeline/.venv/bin/python"
-[ -x "$PY" ] || PY=python3
-"$PY" -I scripts/export-outfalls.py || echo "outfalls export failed"
+# Export already wrote and checked outfalls.json. Upload those exact bytes: a
+# registry change here must not regenerate an unchecked payload after that check.
+# A blocklist hit warns during export and still uploads, like every other file.
 for f in outfalls.json meta.json waters.json active.json rules.json overlays.geojson reaches.geojson advisory-points.geojson launches.geojson history.json events-index.json sources.json dischargers.json; do
   put "$f" || failed="$failed $f"
 done

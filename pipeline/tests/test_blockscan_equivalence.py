@@ -84,9 +84,10 @@ def test_every_original_path_and_order(tmp_path):
         (tmp_path / d).mkdir()
     paths = ['events.json', *X.PUBLIC_PAYLOADS, 'waters/a.json', 'events/a.json',
              f'{X.REACH_STATE_DIR}/MA.geojson']
-    for name in paths + ['ignored.json', 'events/ignored.txt']:
+    added = ['events/new.txt', 'new.json']
+    for name in paths + added:
         (tmp_path / name).write_text('Zorbel Quillfeather')
-    assert X.blocklist_hits(tmp_path, ['Zorbel Quillfeather']) == paths
+    assert X.blocklist_hits(tmp_path, ['Zorbel Quillfeather']) == paths + added
 
 
 def test_clean_text_never_needs_per_name_search(monkeypatch):
@@ -107,19 +108,21 @@ def test_long_name_and_overlapping_prefixes():
 
 
 def test_cache_stats_invalid_and_changed_stamp(tmp_path, monkeypatch):
-    (tmp_path / 'events.json').write_text('river')
+    out = tmp_path / 'out'
+    out.mkdir()
+    (out / 'events.json').write_text('river')
     cache = tmp_path / 'cache.json'
     stats = {}
     names = ['Zorbel Quillfeather']
-    X.blocklist_hits(tmp_path, names, cache, stats=stats)
+    X.blocklist_hits(out, names, cache, stats=stats)
     assert stats == dict(files=1, scanned=1, cache_hits=0, cache_state='missing', in_memory=0)
-    X.blocklist_hits(tmp_path, names, cache, stats=stats)
+    X.blocklist_hits(out, names, cache, stats=stats)
     assert stats == dict(files=1, scanned=0, cache_hits=1, cache_state='loaded', in_memory=0)
     monkeypatch.setattr(X, 'scan_stamp', lambda names: 'new semantics')
-    X.blocklist_hits(tmp_path, names, cache, stats=stats)
+    X.blocklist_hits(out, names, cache, stats=stats)
     assert stats['scanned'] == 1 and stats['cache_state'] == 'stamp_changed'
     cache.write_text('{broken')
-    X.blocklist_hits(tmp_path, names, cache, stats=stats)
+    X.blocklist_hits(out, names, cache, stats=stats)
     assert stats['scanned'] == 1 and stats['cache_state'] == 'unreadable'
 
 
