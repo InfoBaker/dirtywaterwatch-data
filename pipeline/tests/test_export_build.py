@@ -26,6 +26,12 @@ def test_normal_export_keeps_calculated_end_basis_in_water_json(tmp_path, monkey
                         "DATA_DIR": tmp_path / "data", "BLOCKED_MARK": tmp_path / "blocked.json",
                         "HITS_MARK": tmp_path / "hits.json", "SCAN_CACHE": tmp_path / "scan.json"}.items():
         monkeypatch.setattr(X, name, value)
+    # redactor_for's default is bound to the repository data directory; isolate
+    # it explicitly as well, so this export never reads a real private list.
+    X.DATA_DIR.mkdir()
+    (X.DATA_DIR / "name-blocklist.json").write_text(json.dumps({"names": ["Zorbel Quillfeather"]}))
+    redactor_for = X.redactor_for
+    monkeypatch.setattr(X, "redactor_for", lambda events: redactor_for(events, X.DATA_DIR))
     monkeypatch.setattr(S, "_STATES", {"RI"})
     monkeypatch.setattr(S, "load_waters", lambda: {slug: water})
     monkeypatch.setattr(S, "load_registry_outfalls", lambda **kw: [])
@@ -45,7 +51,10 @@ def test_normal_export_keeps_calculated_end_basis_in_water_json(tmp_path, monkey
     monkeypatch.setattr(X, "perf_counter", lambda: next(ticks), raising=False)
 
     meta = X.export()
-    timing_lines = [line for line in capsys.readouterr().out.splitlines() if line.startswith('timing:')]
+    output = capsys.readouterr().out
+    timing_lines = [line for line in output.splitlines() if line.startswith('timing:')]
+    published_count = sum(p.is_file() for p in X.OUT_DIR.rglob("*"))
+    assert f"; files {published_count};" in output
     assert timing_lines == [f'timing: export.{phase} 2 s' for phase in (
         'status', 'inputs', 'redaction', 'enrichment', 'per_event_files', 'events', 'assessments',
         'waters', 'advisory_points', 'reaches', 'history', 'dischargers', 'outfalls', 'feeds',

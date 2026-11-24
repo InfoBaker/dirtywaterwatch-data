@@ -3,6 +3,7 @@
 """
 from __future__ import annotations
 
+import ast
 import inspect
 import json
 import sys
@@ -149,7 +150,14 @@ def test_p1_1_the_blocklist_self_check_finds_a_name_in_out_and_fails_the_export(
 def test_p1_1_the_export_checks_what_it_wrote_last_and_the_refresh_stops_on_the_mark():
     src = inspect.getsource(X.export)
     assert src.index("redact_status_texts(st, redactor") < src.index("public_record(e, pl, redactor")
-    assert src.index('write_compact(OUT_DIR / "meta.json", meta)') < src.index("enforce_blocklist(OUT_DIR)")
+    calls = [n for n in ast.walk(ast.parse(src)) if isinstance(n, ast.Call)]
+    checks = [n for n in calls if isinstance(n.func, ast.Name) and n.func.id == "enforce_blocklist"]
+    assert len(checks) == 1
+    check = checks[0]
+    assert isinstance(check.args[0], ast.Name) and check.args[0].id == "OUT_DIR"
+    writes = [n for n in calls if isinstance(n.func, ast.Name) and n.func.id in
+              {"write_compact", "write_json", "write_reach_state_files", "write_csvs"}]
+    assert writes and max(n.lineno for n in writes) < check.lineno
     # the refresh script: scripts/refresh.sh here, scripts/refresh-data.sh in the public data repository
     candidates = [Path(X.ROOT) / "scripts" / n for n in ("refresh.sh", "refresh-data.sh")]
     refresh = next(p for p in candidates if p.exists()).read_text()

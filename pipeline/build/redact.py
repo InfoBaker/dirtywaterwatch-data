@@ -863,18 +863,77 @@ _SCAN_WORDS = re.compile(r"[^\W\d_]+")
 
 
 class BlockScan:
-    """Finds the blocklisted names in a text with the redactor's own phrase rule (_phrase_re), fast enough for the
-    whole of out/: a text is searched for a name only when it holds every word of that name."""
+    """Exact legacy matches, with one prefix-factored compiled pattern rejecting clean text.
+
+    The word prefilter remains authoritative: its lower()/Unicode behavior is subtly
+    different from re.I. Only a possible phrase hit needs tokenization and the original
+    per-name checks (which preserve overlapping names, duplicates and input order).
+    """
 
     def __init__(self, names):
         self.phrases = [(n, frozenset(_SCAN_WORDS.findall(n.lower())), _phrase_re([n])) for n in names if n.strip()]
         self.words = frozenset().union(*(ws for _, ws, _ in self.phrases)) if self.phrases else frozenset()
+        # Search in the direction with fewer initial characters. Surnames often
+        # share suffixes; factoring them avoids a wide branch at every position.
+        phrases = [" ".join(n.split()) for n, _, _ in self.phrases]
+        self._reverse = len({n[-1].lower() for n in phrases}) < len({n[0].lower() for n in phrases})
+        trie = {}
+        for phrase in phrases:
+            node = trie
+            # These are exactly _phrase_re's literal characters and space runs.
+            for c in phrase[::-1] if self._reverse else phrase:
+                node = node.setdefault(c, {})
+            node[None] = {}
+
+        # Wide alternations can cost more than the cheap word filter on text
+        # containing no name words. Keep that rejection first in this case.
+        self._word_first = len(trie) > 4
+        # Bottom-up construction avoids recursion for unusually long entries.
+        stack, bodies = [(trie, False)], {}
+        while stack:
+            node, ready = stack.pop()
+            if not ready:
+                stack.append((node, True))
+                stack.extend((child, False) for c, child in node.items() if c is not None)
+                continue
+            branches = [(r"[ ]{1,3}" if c == " " else re.escape(c)) + bodies.pop(id(child))
+                        for c, child in node.items() if c is not None]
+            body = branches[0] if len(branches) == 1 else "(?:" + "|".join(branches) + ")"
+            bodies[id(node)] = ("(?:" + body + ")?" if None in node else body) if branches else ""
+        try:
+            # No assertions here: this is a conservative rejection filter. The
+            # original regexes below enforce boundaries, including apostrophes.
+            self._any = re.compile(bodies[id(trie)], re.I) if self.phrases else None
+        except (RecursionError, re.error):
+            # A pathological deeply branching trie can exceed the regex parser's
+            # nesting limit. The flat union is still an exact rejection filter.
+            self._reverse = False
+            self._any = _phrase_re(n for n, _, _ in self.phrases)
+        # A digit cannot be part of any literal phrase in this mode; replacing it
+        # with another digit preserves both boundary assertions and _SCAN_WORDS.
+        self._digits = (re.compile(r"[1-9]")
+                        if not any(re.search(r"[0-9]", n) for n, _, _ in self.phrases) else None)
+
+    def cache_text(self, text: str) -> str:
+        """Match-equivalent cache input, without dropping any field or decoding JSON.
+
+        If a name contains a digit, use exact text. Otherwise all ASCII digits are
+        interchangeable: none can match a literal name character, all are word characters,
+        and all separate _SCAN_WORDS tokens. Length and punctuation stay intact.
+        """
+        return self._digits.sub("0", text) if self._digits is not None else text
 
     def found(self, text: str) -> list[str]:
         """The blocklisted names in the text (as listed), [] when none."""
-        if not self.phrases or not text:
+        if not text or self._any is None:
             return []
-        have = self.words.intersection(_SCAN_WORDS.findall(text.lower()))
+        have = self.words.intersection(_SCAN_WORDS.findall(text.lower())) if self._word_first else None
+        if have is not None and (not have or not any(ws <= have for _, ws, _ in self.phrases)):
+            return []
+        if not self._any.search(text[::-1] if self._reverse else text):
+            return []
+        if have is None:
+            have = self.words.intersection(_SCAN_WORDS.findall(text.lower()))
         if not have:
             return []
         return [n for n, ws, rx in self.phrases if ws <= have and rx.search(text)]
