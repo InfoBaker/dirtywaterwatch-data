@@ -121,8 +121,14 @@ import json
 import os
 import re
 import shutil
-from collections import Counter, defaultdict
+from collections import Counter, defaultdict, deque
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import contextmanager
+from functools import lru_cache
 from pathlib import Path
+from time import perf_counter
+from unicodedata import normalize
+from uuid import uuid4
 
 from build import status as status_mod
 from build.redact import BlockScan, Redactor, blocklist, quote_swaps, redact_events, redactor_for
@@ -1427,9 +1433,51 @@ def write_compact(path: Path, obj) -> None:
     parent = path.parent
     if not parent.is_dir():
         parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(obj, ensure_ascii=False, separators=(",", ":"), default=str))
-    tmp.replace(path)
+    tmp = parent / f".export-{uuid4().hex}.tmp"
+    file = tmp.open("x", encoding="utf-8")
+    try:
+        with file:
+            file.write(json.dumps(obj, ensure_ascii=False, separators=(",", ":"), default=str))
+        tmp.replace(path)
+    except BaseException:
+        tmp.unlink(missing_ok=True)
+        raise
+
+
+@contextmanager
+def compact_writes(*, workers: int = 4, max_pending: int = 32):
+    """Bound independent atomic writes in flight and join them before publishing dependent files.
+
+    Aliased destinations finish in input order, including on case-insensitive filesystems.
+    Each object must remain unchanged until this context exits.
+    Worker failures propagate; executor shutdown joins all workers even on an error.
+    """
+    pending = deque()
+    destinations = {}
+
+    @lru_cache(maxsize=max_pending)
+    def resolved_parent(parent):
+        return parent.resolve()
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        def emit(path, obj):
+            # Compare directory entries, resolving parent aliases and canonical Unicode.
+            # Cache only a bounded number of parents to avoid resolving the event directory per row.
+            key = normalize("NFC", str(resolved_parent(path.parent) / path.name)).casefold()
+            if key in destinations:
+                destinations[key].result()
+            future = pool.submit(write_compact, path, obj)
+            destinations[key] = future
+            pending.append((key, future))
+            if len(pending) >= max_pending:
+                old_key, old_future = pending.popleft()
+                old_future.result()
+                if destinations[old_key] is old_future:
+                    del destinations[old_key]
+
+        yield emit
+        for _, future in pending:
+            future.result()
 
 
 def round_coords(c):
@@ -1758,10 +1806,19 @@ def advisory_point_features(st: dict, by_event: dict) -> list[dict]:
 
 
 def export(include_fixtures: bool = False, include_restricted: bool = False) -> dict:
+    phase_started = perf_counter()
+
+    def phase_done(name):
+        nonlocal phase_started
+        finished = perf_counter()
+        print(f"timing: export.{name} {int(finished - phase_started)} s", flush=True)
+        phase_started = finished
+
     if include_fixtures and os.environ.get("DWW_ALLOW_FIXTURES") != "1":
         raise SystemExit("export: refusing to write out/ with research fixture events; "
                          "set DWW_ALLOW_FIXTURES=1 for a development export")
     st, hist = ensure_status(include_fixtures, include_restricted)
+    phase_done("status")
     waters = status_mod.live_waters(status_mod.load_waters())   # the live states' records only (rules.json live_states)
     # the outfall registry (every data/outfalls-*.json, national), kept to the live states for every public output
     outfalls = status_mod.live_outfalls(status_mod.load_registry_outfalls(provisional=True))
@@ -1788,6 +1845,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     if n_alias_events or n_alias_status:
         print(f"export: {n_alias_events} events and {n_alias_status} status records carried a registry alias as "
               f"discharger_id; written with the registry id")
+    phase_done("inputs")
     # names of private individuals in quoted source text -> "[name removed]" before any record is written
     # (build/redact.py; owner's lists data/name-allowlist.json, data/name-blocklist.json; review: build/name_review.py).
     # The same redactor then runs over the placement texts and status lines that quote a record (public_record,
@@ -1797,12 +1855,14 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     swaps_of = {r["event_id"]: s for e, r in zip(events, redacted)
                 if (s := quote_swaps(as_read.get(r["event_id"], e), r))}
     events = redacted
+    phase_done("redaction")
     # what each source says beyond the common fields, as named fields, and the later records of the same event
     # (export/detail.py): read from the redacted records, so a removed name stays removed
     detail_mod.enrich(events, duplicates={i for i, pl in placements.items() if (pl or {}).get("duplicate_of")})
     n_status = redact_status_texts(st, redactor, swaps_of)
     if n_status:
         print(f"export: {n_status} status lines quoted a removed name or contact; written redacted")
+    phase_done("enrichment")
 
     # intervals each event set (from the history), by event
     effects = defaultdict(list)
@@ -1832,21 +1892,23 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         shutil.rmtree(ev_dir)
     ev_dir.mkdir(parents=True)
     wording = Counter()                     # placement texts still carrying internal wording (self-check)
-    for e in events:
-        if e["event_id"] in seen:
-            continue
-        seen.add(e["event_id"])
-        pl = placements.get(e["event_id"]) or {}
-        rec = public_record(e, pl, redactor, swaps_of.get(e["event_id"], ()))
-        wording.update(note_wording(rec))
-        full = dict(rec)
-        full["status_effects"] = effects.get(e["event_id"], [])
-        full["active_now"] = active_now.get(e["event_id"], [])
-        full["reach"] = pl.get("reach")
-        full.update(band_fields(bands_of.get(e["event_id"]) or [], pl))
-        write_compact(OUT_DIR / rec["file"], publicize(full))
-        csv_events.append(rec)
-        out_events.append(slim_event(rec))
+    with compact_writes() as write_event:
+        for e in events:
+            if e["event_id"] in seen:
+                continue
+            seen.add(e["event_id"])
+            pl = placements.get(e["event_id"]) or {}
+            rec = public_record(e, pl, redactor, swaps_of.get(e["event_id"], ()))
+            wording.update(note_wording(rec))
+            full = dict(rec)
+            full["status_effects"] = effects.get(e["event_id"], [])
+            full["active_now"] = active_now.get(e["event_id"], [])
+            full["reach"] = pl.get("reach")
+            full.update(band_fields(bands_of.get(e["event_id"]) or [], pl))
+            write_event(OUT_DIR / rec["file"], publicize(full))
+            csv_events.append(rec)
+            out_events.append(slim_event(rec))
+    phase_done("per_event_files")
     out_events.sort(key=time_key, reverse=True)
     by_event = {e["event_id"]: e for e in out_events}
     write_compact(OUT_DIR / "events-index.json", {
@@ -1873,6 +1935,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         (OUT_DIR / "rain-levels-sso.json").unlink(missing_ok=True)
     write_compact(OUT_DIR / "events.json", {"built": now_iso(), "fixtures_included": include_fixtures,
                                             "count": len(out_events), "events": out_events})
+    phase_done("events")
 
     # outfalls by water, by permit and by operator: every registry outfall in a live state (outfall_lists)
     outfalls_by_water, outfalls_by_permit, outfalls_by_operator = outfall_lists(outfalls, aliases)
@@ -1883,6 +1946,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     # the state's own Clean Water Act assessment (export/assessments.py), beside the status, never changing it; its
     # free text through the same redactor as the records'
     assessments = public_assessments(st, redactor)
+    phase_done("assessments")
 
     # waters.json and overlays
     health = st.get("sources") or {}
@@ -1989,6 +2053,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         {"type": "Feature", "id": lo["slug"], "geometry": {"type": "Point", "coordinates": [lo["lon"], lo["lat"]]},
          "properties": {k: v for k, v in lo.items() if k not in ("lat", "lon")}}
         for lo in launch_feats.values() if lo["lat"] is not None and lo["lon"] is not None]})
+    phase_done("waters")
 
     # advisory markers: beach, rain and HAB advisories that colour no water
     pts = advisory_point_features(st, by_event)
@@ -1997,6 +2062,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     # them into out/outfalls.json (`status: "monthly"`, days, month, received_at, label) for the map's points
     write_compact(OUT_DIR / "monthly-outfalls.json", {"built": now_iso(), "status_now": st.get("now"),
                                                       "outfalls": publicize(st.get("monthly_outfalls") or [])})
+    phase_done("advisory_points")
 
     # modeled reaches: active events x segments, the stop markers, and every traced path for replay
     from build import reaches as reaches_mod
@@ -2010,12 +2076,14 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     if no_state:
         print(f"export: {len(no_state)} reach(es) touch no live state and are only in the national files: "
               f"{', '.join(no_state[:5])}{' ...' if len(no_state) > 5 else ''}")
+    phase_done("reaches")
 
     # history: only tracked waters (all are, by construction)
     hist_out = dict(hist)
     hist_out["waters"] = {s: v for s, v in hist["waters"].items() if s in st["waters"]}
     hist_out["intervals"] = {s: v for s, v in (hist.get("intervals") or {}).items() if s in st["waters"]}
     write_compact(OUT_DIR / "history.json", hist_out)
+    phase_done("history")
 
     # dischargers (loaded above; event counts by the canonical discharger_id, else by permit)
     ev_by_permit = defaultdict(list)
@@ -2042,6 +2110,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     unknown_permits = sorted(p for p in ev_by_permit if p not in dis_permits)
     write_compact(OUT_DIR / "dischargers.json", {"built": now_iso(), "from": dis_from, "count": len(dis),
                                                  "permits_with_events_not_listed": unknown_permits, "dischargers": dis})
+    phase_done("dischargers")
     # the map's outfall points and the live layer's lookups (export/outfalls.py): the same registry rows, the operator
     # by permit, the rain caution and the monthly marks; official combined sewer outfalls with no point and no water apart ("unplaced":
     # counted and listed on the state page, never drawn)
@@ -2053,6 +2122,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     outfalls_mod.write(outfall_points, OUT_DIR, now_iso(), outfall_unplaced)
     print(f"export: {outfalls_mod.summary(outfall_points)}; {len(outfall_unplaced)} official combined sewer outfalls "
           "with no point and no water (unplaced)")
+    phase_done("outfalls")
 
     # sources
     feed_of = {}
@@ -2079,6 +2149,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                       "waters_covered": sum(1 for w in st["waters"].values() if sid in w["covered_by"])})
     feeds = live_feeds(feeds, kept_rids)
     write_compact(OUT_DIR / "sources.json", {"built": now_iso(), "feeds": feeds, "registry": reg_rows})
+    phase_done("feeds")
 
     # what is reported, state by state and water by water (docs/plan.md §2.y; export/coverage.py), with where the
     # "discharge likely" caution is computed (rain_caution_states: build/rain_likely.caution_coverage)
@@ -2095,6 +2166,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     if rain_sso.enabled(status_mod.load_rules()):
         # each state's grade for the separate sewer caution's timeliness rule (build/rain_sso.py), pipeline state only
         rain_sso.write_grades(cov)
+    phase_done("coverage")
 
     # CSV downloads of the reports per water, operator and state, and all of them (export/csv.py,
     # docs/data-downloads.md). The same public records as above; a failure is logged and the export goes on.
@@ -2126,6 +2198,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     except Exception as exc:
         print(f"export: CSV files not written ({error_text(exc)})")
         problems.append(f"csv export failed: {error_text(exc)}")
+    phase_done("csv")
 
     # meta
     by_state_status = defaultdict(lambda: Counter())
@@ -2209,10 +2282,12 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         print(f"export: {note}")
         meta["problems"].append(note)
         write_compact(OUT_DIR / "meta.json", meta)
+    phase_done("metadata")
     # the owner's blocklist, checked in what was written: a name in events.json, waters/*.json or the full
     # records fails the export (review 2026-11-03 P1-1; scripts/refresh.sh then uploads and deploys nothing)
     checked = enforce_blocklist(OUT_DIR)
     print(f"export: blocklist self-check passed ({checked} files)")
+    phase_done("blocklist_self_check")
     return meta
 
 
