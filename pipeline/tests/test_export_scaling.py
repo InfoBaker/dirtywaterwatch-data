@@ -108,6 +108,95 @@ def test_compact_writes_propagate_failure_and_join_workers(tmp_path, monkeypatch
     assert second_finished.is_set()
 
 
+@pytest.mark.parametrize('max_pending', [2, 32])
+@pytest.mark.parametrize('alias', ['case', 'parent', 'unicode'])
+def test_compact_writes_serialize_aliases_in_input_order(tmp_path, monkeypatch, max_pending, alias):
+    from threading import Event
+
+    first = tmp_path / 'feed~3AA.json'
+    second = tmp_path / 'feed~3Aa.json'
+    if alias == 'parent':
+        (tmp_path / 'alias').symlink_to(tmp_path, target_is_directory=True)
+        second = tmp_path / 'alias' / second.name
+    elif alias == 'unicode':
+        first, second = tmp_path / 'caf\u00e9.json', tmp_path / 'cafe\u0301.json'
+    second_started, first_finished = Event(), Event()
+    calls, overlaps, public = [], [], {}
+
+    def write(path, obj):
+        calls.append(obj['order'])
+        if obj['order'] == 1:
+            # Force the later write to finish first if aliases run concurrently.
+            # A serial writer can finish after this bounded wait without the later job.
+            second_started.wait(0.1)
+        else:
+            if not first_finished.is_set():
+                overlaps.append(obj['order'])
+            second_started.set()
+        public['aliased destination'] = obj
+        if obj['order'] == 1:
+            first_finished.set()
+
+    monkeypatch.setattr(X, 'write_compact', write)
+    with X.compact_writes(workers=2, max_pending=max_pending) as emit:
+        emit(first, {'order': 1})
+        emit(second, {'order': 2})
+        emit(first, {'order': 3})
+    assert calls == [1, 2, 3]
+    assert overlaps == []
+    assert public['aliased destination'] == {'order': 3}
+
+
+def test_compact_writes_use_unique_temps_and_keep_complete_json_on_failure(tmp_path, monkeypatch):
+    from pathlib import Path
+
+    target = tmp_path / 'feed~3AA.json'
+    target.write_bytes(b'{"previous":true}')
+    original_open, original_replace = Path.open, Path.replace
+    temps = []
+
+    class PartialWrite:
+        def __init__(self, file):
+            self.file = file
+
+        def __enter__(self):
+            self.file.__enter__()
+            return self
+
+        def __exit__(self, *args):
+            return self.file.__exit__(*args)
+
+        def write(self, text):
+            if '"fail":true' in text:
+                self.file.write('{')
+                self.file.flush()
+                raise OSError('synthetic partial write')
+            return self.file.write(text)
+
+    def open_file(path, mode='r', *args, **kwargs):
+        file = original_open(path, mode, *args, **kwargs)
+        if mode in ('w', 'x'):
+            temps.append(path)
+            return PartialWrite(file)
+        return file
+
+    def replace(path, destination):
+        # Only complete JSON may become public.
+        import json
+        json.loads(path.read_text())
+        return original_replace(path, destination)
+
+    monkeypatch.setattr(Path, 'open', open_file)
+    monkeypatch.setattr(Path, 'replace', replace)
+    with pytest.raises(OSError, match='synthetic partial write'):
+        with X.compact_writes(workers=2) as emit:
+            emit(target, {'complete': True})
+            emit(target, {'fail': True})
+    assert target.read_bytes() == b'{"complete":true}'
+    assert len(temps) == 2 and len({str(p).casefold() for p in temps}) == 2
+    assert not list(tmp_path.glob('*.tmp'))
+
+
 @pytest.mark.parametrize('reverse', [False, True])
 def test_family_summary_matches_exhaustive_selection(reverse):
     events = chain(75)

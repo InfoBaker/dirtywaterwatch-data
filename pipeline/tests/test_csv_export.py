@@ -345,6 +345,22 @@ def test_split_csvs_only_write_final_files(tmp_path, monkeypatch):
     assert len(paths) == counts["files"]
 
 
+@pytest.mark.parametrize('kind', ['water', 'operator'])
+def test_split_removes_whole_filename_colliding_with_earlier_year(tmp_path, monkeypatch, kind):
+    monkeypatch.setattr(csv_export, 'SPLIT_BYTES', 1)
+    waters = [{**WATERS[0], 'slug': slug} for slug in ('river', 'river-2026')]
+    operators = [{**DISCHARGERS[0], 'id': did} for did in ('river', 'river-2026')]
+    events = [ev(f'{slug}-{year}', f'{year}-05-01T00:00:00Z', water_slugs=[slug],
+                 discharger_id=slug) for slug in ('river', 'river-2026') for year in (2025, 2026)]
+    out, counts = write(tmp_path, events, waters=waters, dischargers=operators)
+    folder = out / kind
+    assert {p.name for p in folder.glob('*.csv')} == {
+        'river-2025.csv', 'river-2026-2025.csv', 'river-2026-2026.csv'}
+    for year in (2025, 2026):
+        assert [r['record_id'] for r in read(folder / f'river-2026-{year}.csv')] == [f'river-2026-{year}']
+    assert f'{kind}/river-2026.csv' in counts['split']
+
+
 @pytest.mark.parametrize("offset", [-1, 0, 1])
 def test_split_threshold_uses_exact_utf8_csv_bytes(tmp_path, monkeypatch, offset):
     # Quoting, CRLF, multibyte text and formula protection all contribute to the size.

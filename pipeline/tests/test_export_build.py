@@ -6,7 +6,7 @@ from common import event
 from export import build as X, coverage, outfalls
 
 
-def test_normal_export_keeps_calculated_end_basis_in_water_json(tmp_path, monkeypatch):
+def test_normal_export_keeps_calculated_end_basis_in_water_json(tmp_path, monkeypatch, capsys):
     slug = "third-beach-ri"
     e = event(
         source_id="ri-ridoh-beaches", source_record_id="third-beach:middletown:2025-08-26",
@@ -40,8 +40,16 @@ def test_normal_export_keeps_calculated_end_basis_in_water_json(tmp_path, monkey
     monkeypatch.setattr(outfalls, "ma_layer_rows", lambda: [])
     monkeypatch.setattr(coverage, "load_notification_pages", lambda: None)
     monkeypatch.setattr(coverage, "load_register", lambda: None)
+    # Distinct phase durations, not cumulative elapsed time; the public clock is independent.
+    ticks = iter(i * 2.5 for i in range(100))
+    monkeypatch.setattr(X, "perf_counter", lambda: next(ticks), raising=False)
 
     meta = X.export()
+    timing_lines = [line for line in capsys.readouterr().out.splitlines() if line.startswith('timing:')]
+    assert timing_lines == [f'timing: export.{phase} 2 s' for phase in (
+        'status', 'inputs', 'redaction', 'enrichment', 'per_event_files', 'events', 'assessments',
+        'waters', 'advisory_points', 'reaches', 'history', 'dischargers', 'outfalls', 'feeds',
+        'coverage', 'csv', 'metadata', 'blocklist_self_check')]
     assert meta["counts"]["events"] == 1
     full = json.loads((X.OUT_DIR / "events" / X.event_file_name(e["event_id"])).read_text())
     slim = json.loads((X.OUT_DIR / "events.json").read_text())["events"][0]

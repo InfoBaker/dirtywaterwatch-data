@@ -609,6 +609,7 @@ def write_csvs(events: list[dict], waters, dischargers: list[dict], out_dir, *, 
         size = header_size + sum(len(rows[i]) for i in idx)
         years = _by_year(row_years, idx, latest) if size > SPLIT_BYTES else {}
         if len(years) > 1:
+            path.unlink(missing_ok=True)
             counts["split"].append(f"{stem}.csv")
             print(f"export: csv {stem}.csv would be {size / 1048576:.1f} MiB (over 24 MiB); "
                   f"written as {stem}-<year>.csv for {', '.join(years)}")
