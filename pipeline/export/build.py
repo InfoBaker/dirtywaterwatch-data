@@ -1602,7 +1602,7 @@ def monthly_props(w: dict) -> dict:
             "label": r.get("monthly_label") or r.get("short"), "monthly_reports": len(ms)}
 
 
-def write_compact(path: Path, obj) -> None:
+def write_compact(path: Path, obj, *, blocklist_check: BlocklistWrites | None = None) -> None:
     # Event and water directories already exist: avoid a failed mkdir (and its
     # follow-up stat) for each of the hundreds of thousands of records.
     parent = path.parent
@@ -1612,15 +1612,19 @@ def write_compact(path: Path, obj) -> None:
     file = tmp.open("x", encoding="utf-8")
     try:
         with file:
-            file.write(json.dumps(obj, ensure_ascii=False, separators=(",", ":"), default=str))
+            text = json.dumps(obj, ensure_ascii=False, separators=(",", ":"), default=str)
+            file.write(text)
         tmp.replace(path)
+        if blocklist_check is not None:
+            blocklist_check.observe(path, text)
     except BaseException:
         tmp.unlink(missing_ok=True)
         raise
 
 
 @contextmanager
-def compact_writes(*, workers: int = 4, max_pending: int = 32):
+def compact_writes(*, workers: int = 4, max_pending: int = 32,
+                   blocklist_check: BlocklistWrites | None = None):
     """Bound independent atomic writes in flight and join them before publishing dependent files.
 
     Aliased destinations finish in input order, including on case-insensitive filesystems.
@@ -1641,7 +1645,8 @@ def compact_writes(*, workers: int = 4, max_pending: int = 32):
             key = normalize("NFC", str(resolved_parent(path.parent) / path.name)).casefold()
             if key in destinations:
                 destinations[key].result()
-            future = pool.submit(write_compact, path, obj)
+            kwargs = {"blocklist_check": blocklist_check} if blocklist_check is not None else {}
+            future = pool.submit(write_compact, path, obj, **kwargs)
             destinations[key] = future
             pending.append((key, future))
             if len(pending) >= max_pending:
@@ -2067,7 +2072,10 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         shutil.rmtree(ev_dir)
     ev_dir.mkdir(parents=True)
     wording = Counter()                     # placement texts still carrying internal wording (self-check)
-    with compact_writes() as write_event:
+    with (
+        BlocklistWrites(OUT_DIR, blocklist(DATA_DIR), SCAN_CACHE, workers=min(4, os.cpu_count() or 1)) as blocklist_check,
+        compact_writes(blocklist_check=blocklist_check) as write_event,
+    ):
         for e in events:
             if e["event_id"] in seen:
                 continue
@@ -2460,7 +2468,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     phase_done("metadata")
     # the owner's blocklist, checked in what was written: a name in events.json, waters/*.json or the full
     # records fails the export (review 2026-11-03 P1-1; scripts/refresh.sh then uploads and deploys nothing)
-    checked = enforce_blocklist(OUT_DIR)
+    checked = enforce_blocklist(OUT_DIR, observed=blocklist_check)
     print(f"export: blocklist self-check passed ({checked} files)")
     phase_done("blocklist_self_check")
     return meta
