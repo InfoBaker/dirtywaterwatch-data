@@ -956,55 +956,225 @@ def scan_stamp(names: list[str]) -> str:
     from build import redact as _redact
     h = hashlib.sha256(json.dumps(sorted(names)).encode())
     h.update(Path(_redact.__file__).read_bytes())
+    h.update(b"blocklist-cache-digit-equivalence-v1")
     return h.hexdigest()
 
 
-def blocklist_hits(out_dir: Path, names: list[str], cache: Path | None = None) -> list[str]:
-    """The files of out_dir that carry a name of the owner's blocklist (data/build/name-blocklist.json),
-    relative to out_dir: events.json, waters/*.json and the full records events/*.json (which the site serves as
-    /event/<id>/ and /data/records/<month>.json). The names are never printed, only where they are.
-    cache: a file of the content digests of texts found clean under the same names and scanning code (scan_stamp);
-    such a text is not searched again (2026-11-07 refresh-time profile: searching all 155,000 files took 290 of the
-    export's 730 s an hour, and nearly all are the same text as the hour before). A text with a hit is always searched;
-    the cache keeps only this run's clean digests, and holds digests only, never a name or a text."""
-    scan = BlockScan(names)
-    if not scan.phrases:
-        return []
+def _blocklist_cache(cache: Path | None, stamp: str | None) -> tuple[set[str], str]:
+    if cache is None:
+        return set(), "disabled"
+    try:
+        c = json.loads(Path(cache).read_text())
+        if not isinstance(c, dict) or c.get("stamp") != stamp:
+            return set(), "stamp_changed"
+        return {d for d in c.get("clean", [])
+                if isinstance(d, str) and re.fullmatch(r"[0-9a-f]{32}", d)}, "loaded"
+    except FileNotFoundError:
+        return set(), "missing"
+    except (OSError, ValueError, TypeError):
+        return set(), "unreadable"
+
+
+def _blocklist_text(scan: BlockScan, text: str, clean: set[str], cache: bool) -> tuple[str, bool, bool]:
     import hashlib
-    out_dir = Path(out_dir)
-    stamp = scan_stamp(names) if cache else None
-    clean_before: set[str] = set()
-    if cache:
-        try:
-            c = json.loads(Path(cache).read_text())
-            if isinstance(c, dict) and c.get("stamp") == stamp:
-                clean_before = set(c.get("clean") or [])
-        except (OSError, ValueError):
-            pass
-    clean_now: list[str] = []
-    # the map and list payloads too: the monthly marks, overlays, advisory points, reaches, active rows, rain and
-    # coverage files carry labels and names copied from records (review 2026-11-03 SOL P1-1)
-    paths = [out_dir / n for n in ("events.json",) + PUBLIC_PAYLOADS] + sorted((out_dir / "waters").glob("*.json")) \
-        + sorted((out_dir / "events").glob("*.json")) + sorted((out_dir / REACH_STATE_DIR).glob("*.geojson"))
-    hits = []
+    digest = hashlib.blake2b(scan.cache_text(text).encode("utf-8"), digest_size=16).hexdigest() if cache else ""
+    reused = bool(cache and digest in clean)
+    return digest, False if reused else bool(scan.found(text)), reused
+
+
+def _blocklist_file_version(path: Path) -> tuple[int, ...]:
+    s = path.stat()
+    return s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns
+
+
+class BlocklistWrites:
+    """Check serialized JSON while the writer holds it; retain only results and file versions.
+
+    The writer calls observe *after* its atomic replacement. Final enumeration is
+    unchanged, and any changed/replaced file or different blocklist is read again.
+    No texts or names are persisted. This object belongs to one export, never a global.
+    """
+
+    def __init__(self, out_dir: Path, names: list[str], cache: Path | None = None, *, workers: int = 1):
+        self.out_dir = Path(out_dir)
+        self.scan = BlockScan(names)
+        self.stamp = scan_stamp(names)
+        self.cache = cache
+        self.clean, _ = _blocklist_cache(cache, self.stamp)
+        self.results = {}
+        self._pool = None
+        self._batch = []
+        self._batch_chars = 0
+        self._pending = deque()
+        self._limit = max(1, workers) * 2
+        from threading import Lock
+        self._lock = Lock()
+        if workers > 1 and self.scan.phrases:
+            from concurrent.futures import ProcessPoolExecutor
+            from multiprocessing import get_context
+            self._pool = ProcessPoolExecutor(max_workers=workers, mp_context=get_context("spawn"),
+                                             initializer=_blocklist_worker_init,
+                                             initargs=(names, self.clean, cache is not None))
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        self.finish()
+
+    def _collect(self):
+        for path, version, result in self._pending.popleft().result():
+            self.results[path] = version, result
+
+    def finish(self):
+        """Join before final enumeration; also release workers after writer errors."""
+        with self._lock:
+            if self._pool is None:
+                return
+            try:
+                if self._batch:
+                    self._pending.append(self._pool.submit(_blocklist_text_batch, self._batch))
+                    self._batch = []
+                    self._batch_chars = 0
+                while self._pending:
+                    self._collect()
+            finally:
+                self._pool.shutdown(wait=True, cancel_futures=True)
+                self._pool = None
+
+    def observe(self, path: Path, text: str) -> None:
+        if not self.scan.phrases:
+            return
+        path = Path(path)
+        version = _blocklist_file_version(path)
+        with self._lock:
+            if self._pool is None:
+                result = _blocklist_text(self.scan, text, self.clean, self.cache is not None)
+                self.results[path] = version, result
+            else:
+                self._batch.append((path, version, text))
+                self._batch_chars += len(text)
+                # Bound count and characters; a large aggregate is sent alone.
+                if len(self._batch) >= 256 or self._batch_chars >= 1_048_576:
+                    self._pending.append(self._pool.submit(_blocklist_text_batch, self._batch))
+                    self._batch = []
+                    self._batch_chars = 0
+                    if len(self._pending) >= self._limit:
+                        self._collect()
+
+
+def _blocklist_worker_init(names, clean, cache):
+    global _blocklist_worker
+    _blocklist_worker = BlockScan(names), clean, cache
+
+
+def _blocklist_text_batch(rows):
+    scan, clean, cache = _blocklist_worker
+    return [(p, version, _blocklist_text(scan, text, clean, cache)) for p, version, text in rows]
+
+
+def _blocklist_read_batch(paths):
+    scan, clean, cache = _blocklist_worker
+    results = []
     for p in paths:
         try:
             text = p.read_text(encoding="utf-8")
         except OSError:
             continue
-        if cache:
-            d = hashlib.blake2b(text.encode("utf-8"), digest_size=16).hexdigest()
-            if d in clean_before:
-                clean_now.append(d)
-                continue
-        if scan.found(text):
+        results.append((p, _blocklist_text(scan, text, clean, cache)))
+    return results
+
+
+def _blocklist_parallel(paths, names, clean, cache, workers):
+    from concurrent.futures import ProcessPoolExecutor
+    from multiprocessing import get_context
+    # Spawn is safe even if a caller has threads. Bound IPC and pending paths on
+    # Python 3.12 too (Executor.map's buffersize only exists in newer versions).
+    with ProcessPoolExecutor(max_workers=workers, mp_context=get_context("spawn"),
+                             initializer=_blocklist_worker_init, initargs=(names, clean, cache)) as pool:
+        pending = deque()
+        for start in range(0, len(paths), 256):
+            pending.append(pool.submit(_blocklist_read_batch, paths[start:start + 256]))
+            if len(pending) >= workers * 2:
+                yield from pending.popleft().result()
+        while pending:
+            yield from pending.popleft().result()
+
+
+def blocklist_hits(out_dir: Path, names: list[str], cache: Path | None = None,
+                   *, stats: dict | None = None, observed: BlocklistWrites | None = None,
+                   workers: int | None = None) -> list[str]:
+    """The original ordered file selection and exact BlockScan matches.
+
+    Clean digests are keyed by names, scanner source and cache semantics. ASCII
+    digits may be made equivalent only when no name contains one (BlockScan's
+    proof); no fields are omitted and serialized JSON is never decoded. A bounded
+    cache may evict clean entries, which are then searched again. File versions
+    allow reuse of checks performed on the writer's exact serialized text.
+    """
+    metrics = {"files": 0, "cache_hits": 0, "scanned": 0, "cache_state": "disabled", "in_memory": 0}
+    if stats is not None:
+        stats.update(metrics)
+        metrics = stats
+    if observed is not None:
+        observed.finish()
+    scan = BlockScan(names)
+    if not scan.phrases:
+        return []
+    out_dir = Path(out_dir)
+    stamp = scan_stamp(names) if cache or observed else None
+    clean_before, metrics["cache_state"] = _blocklist_cache(cache, stamp)
+    if observed is not None and (observed.stamp != stamp or observed.out_dir != out_dir or observed.cache != cache):
+        observed = None
+    clean_now: set[str] = set()
+    # Keep exactly the original selection and order, including missing-file behavior.
+    paths = [out_dir / n for n in ("events.json",) + PUBLIC_PAYLOADS] + sorted((out_dir / "waters").glob("*.json")) \
+        + sorted((out_dir / "events").glob("*.json")) + sorted((out_dir / REACH_STATE_DIR).glob("*.geojson"))
+    def serial():
+        for p in paths:
+            result = None
+            if observed is not None and p in observed.results:
+                try:
+                    version, prior = observed.results[p]
+                    if version == _blocklist_file_version(p):
+                        result = prior
+                        metrics["in_memory"] += 1
+                except OSError:
+                    pass
+            if result is None:
+                try:
+                    text = p.read_text(encoding="utf-8")
+                except OSError:
+                    continue
+                result = _blocklist_text(scan, text, clean_before, cache is not None)
+            yield p, result
+
+    if workers is None:
+        import os
+        workers = min(4, os.cpu_count() or 1) if len(paths) >= 10_000 and observed is None else 1
+    results = (_blocklist_parallel(paths, names, clean_before, cache is not None, workers)
+               if workers > 1 and observed is None else serial())
+    hits = []
+    for p, result in results:
+        digest, hit, reused = result
+        metrics["files"] += 1
+        metrics["cache_hits"] += int(reused)
+        metrics["scanned"] += int(not reused)
+        if hit:
             hits.append(str(p.relative_to(out_dir)))
         elif cache:
-            clean_now.append(d)
+            clean_now.add(digest)
     if cache:
+        # Full 128-bit digests, bounded state; eviction only costs a rescan.
+        import gzip
+        clean = sorted(clean_now)[:200_000]
+        payload = json.dumps({"stamp": stamp, "clean": clean}, separators=(",", ":"))
+        while len(gzip.compress(payload.encode(), compresslevel=1, mtime=0)) >= 5_000_000:
+            clean = clean[:len(clean) // 2]
+            payload = json.dumps({"stamp": stamp, "clean": clean}, separators=(",", ":"))
         Path(cache).parent.mkdir(parents=True, exist_ok=True)
         tmp = Path(cache).with_suffix(".tmp")
-        tmp.write_text(json.dumps({"stamp": stamp, "clean": sorted(set(clean_now))}, separators=(",", ":")))
+        tmp.write_text(payload)
         tmp.replace(cache)
     return hits
 
@@ -1046,14 +1216,19 @@ HITS_MARK = BUILD_DIR / "blocklist-hits.json"        # the files (never the name
 SCAN_CACHE = BUILD_DIR / "blocklist-scan-cache.json"  # digests of out/ texts found clean (blocklist_hits), saved state
 
 
-def enforce_blocklist(out_dir: Path = OUT_DIR, names: list[str] | None = None) -> int:
+def enforce_blocklist(out_dir: Path = OUT_DIR, names: list[str] | None = None,
+                      *, observed: BlocklistWrites | None = None) -> int:
     """The export's last step. A blocklisted name in out/ (blocklist_hits) is a warning, not a stop (owner,
     2026-11-05: operations are not disrupted for public-record text that can be corrected): the files are named in
     HITS_MARK and on the console, never the name, the run goes on and uploads, and the record is fixed with a rule
     on the next run. The old hard-stop mark is removed so the scripts never hold a publish. Returns the files checked."""
     names = blocklist(DATA_DIR) if names is None else names
     # the clean-text cache only for the real out/ (a test's folder never writes into data/build)
-    hits = blocklist_hits(out_dir, names, cache=SCAN_CACHE if Path(out_dir) == OUT_DIR else None)
+    stats = {}
+    hits = blocklist_hits(out_dir, names, cache=SCAN_CACHE if Path(out_dir) == OUT_DIR else None,
+                          stats=stats, observed=observed)
+    print(f"export: blocklist cache {stats['cache_state']}; files {stats['files']}; "
+          f"cache hits {stats['cache_hits']}; scanned {stats['scanned']}; in memory {stats['in_memory']}", flush=True)
     BLOCKED_MARK.unlink(missing_ok=True)
     if hits:
         write_json(HITS_MARK, {"at": now_iso(), "files": hits,
@@ -1063,7 +1238,7 @@ def enforce_blocklist(out_dir: Path = OUT_DIR, names: list[str] | None = None) -
               f"{' ...' if len(hits) > 5 else ''}); uploaded anyway; see {shown_path(HITS_MARK)}")
     else:
         HITS_MARK.unlink(missing_ok=True)
-    return 1 + len(list((Path(out_dir) / "waters").glob("*.json"))) + len(list((Path(out_dir) / "events").glob("*.json")))
+    return stats["files"]
 
 
 def public_rules(o):

@@ -118,7 +118,7 @@ def test_the_export_writes_the_state_files_beside_the_unchanged_national_ones():
     assert 'write_compact(OUT_DIR / "reaches.geojson", {"type": "FeatureCollection", "features": reach_feats})' in src
     assert 'write_compact(OUT_DIR / "reach-paths.geojson", {"type": "FeatureCollection", "features": path_feats})' in src
     assert src.index('OUT_DIR / "reach-paths.geojson"') < src.index("write_reach_state_files(") \
-        < src.index("enforce_blocklist(OUT_DIR)")
+        < src.index("enforce_blocklist(OUT_DIR")
 
 
 # ---------------------------------------------------------------- scripts/upload-current.sh

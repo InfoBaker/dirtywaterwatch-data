@@ -21,7 +21,7 @@ def make_out(tmp_path):
     X.write_compact(out / "events.json", {"events": [{"event_id": "a", "waterbody_text": "Test River"}]})
     X.write_compact(out / "waters" / "test-river-ma.json", {"events": []})
     for i in range(20):
-        X.write_compact(out / "events" / f"e{i}.json", {"placement_note": f"placed by name {i}"})
+        X.write_compact(out / "events" / f"e{i}.json", {"placement_note": f"placed by name {chr(97 + i)}"})
     return out
 
 
