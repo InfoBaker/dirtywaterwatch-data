@@ -1,0 +1,7 @@
+These are trimmed public agency rows read on Nov. 22, 2026. Only each reader's requested safe fields and its point are retained. Missouri's point is rounded to three decimals.
+
+- `or-oha-hab-advisories.json`: [OHA point layer](https://services.arcgis.com/uUvqNMGPm7axC2dD/arcgis/rest/services/HABs_Advisories_(Points)/FeatureServer/0), OBJECTID 142, Phillips Lake. The source's lift row says the initial precaution was issued Aug. 19 and gives Nov. 19 in Issue_Date. Tests construct the earlier active version by changing status/date only; the Nov. 14 export separately verifies that earlier episode.
+- `ky-dow-hab-viewer.json`: [Division of Water observation points](https://watermaps.ky.gov/arcgis/rest/services/WebMapServices/HABService/MapServer/0), OBJECTID 3526, Old Springfield Reservoir. HABEND is null; HABSTATDES explicitly dates the advisory lift Nov. 18. The existing `ky_dow_hab.json` fixture supplies its earlier Warning row.
+- `mo.json`: [DNR public bloom reports](https://gis.dnr.mo.gov/host/rest/services/wqm/HAB_SUBMIT_POINTS/MapServer/6), globalid 2727D61A-C1C5-47B5-8CEE-185468CA04CB. DissDat is July 14, 2023; IConfMet is `visual`. Tests change only status/date to exercise an earlier observed active episode; this is a transition simulation, not a claim that we observed it in 2023.
+
+Wisconsin tests use the existing `wi/dnr_beach_layer.json` agency fixture (Nov. 16 runner read). End/status and ECOLIVALUE variants are identified in the tests. No new live Wisconsin result was available from this Mac; units and sentinel meanings remain unspecified.

@@ -35,9 +35,9 @@ fetch:
   safe_fields: [OBJECTID, WaterbodyName, AdvisoryStatus, Toxin, ToxinLevel_ppb, ToxinLevel, Details, AdvisoryLink,
                 Issue_Date, County_1, County_2, StatusSort, Above_PetRUV, EditDate, _x, _y]
   free_text: [Details]
-  # OHA's "Below Human RUV" (sampled, below its recreational use value) and "Advisory/Precaution Lifted" are no current
-  # advisory: not records (grey, no report)
-  filter: [{field: AdvisoryStatus, regex: "^\\s*(advisory|precaution)\\s*$"}]
+  # Lift rows close a uniquely matched retained episode; an unmatched lift creates no advisory.
+  # Below Human RUV rows are samples, not advisories.
+  filter: [{field: AdvisoryStatus, regex: "^\\s*(advisory|precaution|advisory/precaution lifted)\\s*$"}]
   record:
     source_record_id: {template: "{OBJECTID}-{@started_at|compact|default:nodate}"}
     started_at: {field: Issue_Date, parse: epoch_ms, midnight: date}
@@ -51,8 +51,11 @@ fetch:
     authority: {const: "Oregon Health Authority"}       # the hook adds OHA's level: advisory or precaution
     source_url: {const: "https://www.oregon.gov/oha/ph/healthyenvironments/recreation/harmfulalgaeblooms/pages/blue-greenalgaeadvisories.aspx"}
   transform: "ingest.or_transforms.or_hab_record"
+  post: "ingest.or_transforms.or_hab_episodes"
+  after_history: "ingest.or_transforms.or_hab_lift_history"
   dedupe: {repeats: suffix}
   history:
+    revisions: true
     keep_missing: true
     confirm_while_listed: true
     track:
