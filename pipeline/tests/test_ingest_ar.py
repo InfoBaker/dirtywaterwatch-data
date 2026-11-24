@@ -632,7 +632,9 @@ def _other_feeds_history():
 
 def test_other_feeds_history_is_unchanged_from_the_integration_commit():
     """Verification 2 P2-1: the reviewed-link rule is Arkansas's blooms' alone; Maryland's, Tennessee's and
-    Kentucky's history handling gives exactly what it gave at 2b1184a (fixture written from that commit's runner)."""
+    Kentucky's history handling gives exactly what it gave at 2b1184a (fixture written from that commit's runner).
+    Kentucky's entry was rewritten on 2026-11-24 for its own revision tracking (the lift handling: a changed row is
+    counted as revised with its old values kept); Maryland's and Tennessee's are unchanged."""
     golden = json.loads((FIX / "ar_other_feeds_history_2b1184a.json").read_text())
     assert _other_feeds_history() == golden
 

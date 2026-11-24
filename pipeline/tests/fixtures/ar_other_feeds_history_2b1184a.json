@@ -2,7 +2,8 @@
  "ky-dow-hab-viewer": {
   "counts": {
    "kept_missing": 3,
-   "new": 3
+   "new": 3,
+   "revised": 1
   },
   "records": [
    {
@@ -77,6 +78,16 @@
     "raw": {
      "_first_seen_at": "2026-11-01T12:00:00Z",
      "_last_seen_in_source": "2026-11-02T12:00:00Z",
+     "_revisions": [
+      {
+       "old_values": {
+        "extra": null
+       },
+       "replaced_at": "2026-11-02T12:00:00Z",
+       "seen_until": "2026-11-01T12:00:00Z",
+       "source_updated_at_before": null
+      }
+     ],
      "_status_seen": [
       {
        "first_seen_at": "2026-11-02T12:00:00Z",
