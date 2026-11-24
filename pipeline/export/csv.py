@@ -35,6 +35,7 @@ module path).
 from __future__ import annotations
 
 import csv
+import json
 import math
 import re
 import shutil
@@ -72,7 +73,8 @@ COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id"
            "volume_estimate_gal", "volume_estimate_low_gal", "volume_estimate_high_gal", "volume_estimate_bound",
            "volume_estimate_basis", "end_estimate_at", "end_estimate_basis",
            # whether the source says the overflow reached a waterway, in its words (export/detail.py)
-           "water_reach"] + list(LIFT_DETAIL_COLUMNS)
+           "water_reach"] + list(LIFT_DETAIL_COLUMNS) + [
+           "toxin", "release_url", "result_source_url", "result_observed_at", "sample_results_json"]
 DETAIL_COLUMNS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
                   "volume_method", "volume_to_water_gal", "overflow_point", "town")
 LATER_DETAIL_COLUMNS = ("resolution", "notes")
@@ -471,6 +473,9 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
             _text(ve.get("basis")), _text(ee.get("at")), _text(ee.get("basis"))]
     row += [_text(d.get("water_reach"))]
     row += [_text(d.get(k)) for k in LIFT_DETAIL_COLUMNS]
+    row += [_text(d.get(k)) for k in ("toxin", "release_url", "result_source_url", "result_observed_at")]
+    results = d.get("sample_results")
+    row.append(json.dumps(results, ensure_ascii=False, separators=(",", ":")) if isinstance(results, list) and results else "")
     return row, ops
 
 

@@ -1,0 +1,59 @@
+{
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 4,
+        "UnitName": "Broadkill Beach",
+        "UnitDesc": "This is an Unguarded beach along Delaware Bay.",
+        "UnitID": 288,
+        "CurrentAdvisory": 3,
+        "Latitude": 38.82889661851971,
+        "Longitude": -75.21166523908643
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 13,
+        "UnitName": "Lake Como Beach",
+        "UnitDesc": "This is an Unguarded beach along a Pond.",
+        "UnitID": 285,
+        "CurrentAdvisory": 3,
+        "Latitude": 39.29513853595485,
+        "Longitude": -75.60015016822447
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 42,
+        "UnitName": "Savage Ditch Kayak Launch Area",
+        "UnitDesc": "This is an Unguarded area along Rehoboth Bay.",
+        "UnitID": 363680,
+        "CurrentAdvisory": 3,
+        "Latitude": 38.629175654924765,
+        "Longitude": -75.07182926563328
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 132,
+        "UnitName": "New Road (Delaware Seashore State Park)",
+        "UnitDesc": "This is an Unguarded beach along Rehoboth Bay.",
+        "UnitID": 363701,
+        "CurrentAdvisory": 3,
+        "Latitude": 38.67088364552754,
+        "Longitude": -75.07247026362784
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 14,
+        "UnitName": "Lewes Beach (Savannah Beach)",
+        "UnitDesc": "This is a Guarded beach along Delaware Bay.",
+        "UnitID": 25025,
+        "CurrentAdvisory": 3,
+        "Latitude": 38.782548624632916,
+        "Longitude": -75.13071325058321
+      }
+    }
+  ]
+}

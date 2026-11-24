@@ -40,6 +40,12 @@ house number never leaves; the record's raw keeps the whole text.
   description           the discharge as the source describes it ("Sanitary sewer overflowing into storm sewer")
   location_description  the place as the source describes it ("Manhole is in the street at the intersection of ...");
                         house numbers removed (common.strip_house_numbers)
+  toxin                 the agency's named toxin (not a concentration)
+  release_url           the agency's health-advisory link, apart from the record's source URL
+  result_source_url     the layer supplying the named toxin/link
+  result_observed_at    our observation time for that layer detail, not publication or sample time
+  sample_results        typed source observations: analyte, value/text, units, qualifier, sample date/text,
+                        source field/URL/record and observation time; missing counts/units stay null
   rate                  a rate the source states in place of a volume, as a value (export/estimates.py rate_of):
                         {text, unit, low, high, bound?, qualifier?}; the source's own figure, never a volume
 
@@ -77,7 +83,7 @@ LIFT_FIELDS = ('confirmation_method', 'source_end_date', 'source_end_text', 'sou
 
 FIELDS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
           "volume_method", "volume_to_water_gal", "water_reach", "overflow_point", "town", "resolution", "notes",
-          "description", "location_description", "rate") + LIFT_FIELDS
+          "description", "location_description", "rate") + LIFT_FIELDS + ("toxin", "release_url", "result_source_url", "result_observed_at", "sample_results")
 NUMBER_FIELDS = {"volume_to_water_gal"}
 QUALIFIERS = ("estimated", "measured", "modeled", "verified by the operator")
 # a field whose value is a place description: its house numbers are removed as well as the usual scrub
@@ -86,7 +92,7 @@ ADDRESS_FIELDS = {"location_description", "description", "overflow_point"}
 OBJECT_FIELDS = {"rate"}
 # the fields the report tables carry (slim rows): the cell's cause, description and duration, the qualifier of its
 # volume, and a rate given in place of a volume
-CELL_FIELDS = ("cause", "description", "duration_text", "volume_qualifier", "rate") + LIFT_FIELDS
+CELL_FIELDS = ("cause", "description", "duration_text", "volume_qualifier", "rate") + LIFT_FIELDS + ("toxin", "release_url", "result_source_url", "result_observed_at", "sample_results")
 DISCHARGE_TYPES = {"cso", "sso", "bypass", "blended", "plant_bypass", "unknown"}
 MAX_TEXT = 300          # a field longer than this is cut at a word with "…" (the record's raw keeps the whole text)
 MAX_LINKED = 12
@@ -383,6 +389,25 @@ NY_HISTORY = {
 
 # source id -> {field: reader of the record's raw}. A source not listed gets no detail (its raw stays on the page as
 # the source data); add a source here with the source key named.
+def _id_toxin(raw):
+    from ingest.id_deq_cyanohab import TOXINS
+    return raw.get("dhw_toxin") if raw.get("dhw_toxin") in TOXINS else None
+
+
+def _id_release(raw):
+    from ingest.id_deq_cyanohab import release_url
+    return release_url(raw.get("dhw_release_url"))
+
+
+def _mt_density(raw, record):
+    from ingest.mt_deq_hab_map import density_results
+    return [dict(result, source_record_id=record.get("source_record_id"), observed_at=record.get("fetched_at"))
+            for result in density_results(raw)] or None
+
+
+_mt_density.with_record = True
+
+
 SOURCES: dict[str, dict] = {
     "mo-dnr-hab-map": {
         "confirmation_method": text("confirmation_method"),
@@ -401,6 +426,10 @@ SOURCES: dict[str, dict] = {
         "sample_qualifier": text("sample_result.qualifier"),
         "sample_date": text("sample_result.sampled_at"),
     },
+    "id-deq-cyanohab-risk-table": {"toxin": _id_toxin, "release_url": _id_release,
+                                  "result_source_url": text("dhw_detail_source_url"),
+                                  "result_observed_at": text("dhw_detail_observed_at")},
+    "mt-deq-hab-map": {"sample_results": _mt_density},
     "ma-massdep": {
         "report_kind": _ma_kind, "rainfall_in": plain_inches("rainfallData"),
         "rainfall_label": lambda raw: "Rainfall" if plain_inches("rainfallData")(raw) else None,
@@ -591,6 +620,10 @@ def detail_of(e: dict) -> dict:
                 continue
         elif f == "volume_qualifier":
             if v not in QUALIFIERS:
+                continue
+        elif f == "sample_results":
+            # The source-specific reader constructs typed, scrubbed observations; never stringify the list.
+            if not isinstance(v, list) or not v:
                 continue
         elif f in OBJECT_FIELDS:
             v = _rate_checked(v)
