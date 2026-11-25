@@ -181,7 +181,10 @@ def test_name_review_lists_candidates_with_verdicts(data_dir):
 def test_export_removes_names_before_writing_records():
     src = inspect.getsource(X.export)
     assert "redact_events(" in src
-    assert src.index("redact_events(") < src.index("write_compact(OUT_DIR / rec[\"file\"]")
+    # the record files are written by write_event since the export speed-up (2026-11-24), write_compact before it
+    writes = [src.index(w) for w in ('write_event(OUT_DIR / rec["file"]', 'write_compact(OUT_DIR / rec["file"]') if w in src]
+    assert writes, "no record-file write found in export()"
+    assert src.index("redact_events(") < min(writes)
 
 
 def test_a_marked_name_is_removed_in_lower_case_text_and_before_a_job_title(data_dir):

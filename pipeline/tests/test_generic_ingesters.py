@@ -812,3 +812,20 @@ def test_optional_after_history_runs_after_carried_rows_without_changing_post_or
     runner.build("x-test", b, [{"report_id": "A1", "start": "2026-10-02", "kind": "CSO"}],
                  "2026-11-05T12:00:00Z", previous)
     assert calls == ["post", "after_history"]
+
+
+@pytest.mark.parametrize('saved,expected', [
+    (['065766', '65766', '0', '1234567', 'bad', {}, None, True, 12, '６５７６６'], ['65766', '68784']),
+    ('65766', ['68784']),
+    ({'65766': True}, ['68784']),
+])
+def test_saved_houston_ids_are_validated_merged_and_scoped(saved, expected):
+    b = block(safe_fields=['incident_description'], free_text=['incident_description'],
+              free_text_scrub='strict_names', transform='ingest.tx_transforms.tx_tceq_record')
+    row = {'incident_description': 'Houston SSO ID# 68784', '_houston_sso_ids': saved}
+    safe, dropped = F.safe_row(row, b)
+    assert safe['_houston_sso_ids'] == expected
+    assert dropped == []
+    assert F.safe_row(safe, b)[0] == safe
+    b.pop('transform')
+    assert '_houston_sso_ids' not in F.safe_row(row, b)[0]

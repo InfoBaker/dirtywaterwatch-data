@@ -236,7 +236,7 @@
   },
   {
     "id": "tx-houston-sso-monthly",
-    "name": "City of Houston Public Works monthly SSO reports (consent decree Paragraph 61)",
+    "name": "City of Houston Public Works monthly SSO reports and history",
     "jurisdiction": "TX",
     "operator": "City of Houston, Houston Public Works",
     "operator_type": "municipal",
@@ -248,10 +248,11 @@
     "water_slugs": [],
     "url": "https://www.houstonpublicworks.org/wastewater-cd",
     "access": [
-      "pdf"
+      "pdf",
+      "api"
     ],
-    "access_detail": "HTML page https://www.houstonpublicworks.org/wastewater-cd linking one PDF per month (\"Monthly SSO Report - <Month YYYY>\", April 2021 to September 2026 on 2026-11-17; irregular file names, the month read from the link title), filed under the 2021 wastewater consent decree (U.S. and Texas v. City of Houston, 4:18-cv-03368, S.D. Tex.; the cover letter cites Paragraph 61). Table: SSO ID, TPDES permit, address, flow location, reached waters of the US (Yes/No), estimated gallons, structure type, cause, start and end date and time, average flow (GPM), corrective action; the month's total, notifications to the public and the City's notes under it; a map page of points.",
-    "machine_readable": false,
+    "access_detail": "HTML page https://www.houstonpublicworks.org/wastewater-cd linking one PDF per month (\"Monthly SSO Report - <Month YYYY>\", April 2021 to September 2026 on 2026-11-17; irregular file names, the month read from the link title), filed under the 2021 wastewater consent decree (U.S. and Texas v. City of Houston, 4:18-cv-03368, S.D. Tex.; the cover letter cites Paragraph 61). Table: SSO ID, TPDES permit, address, flow location, reached waters of the US (Yes/No), estimated gallons, structure type, cause, start and end date and time, average flow (GPM), corrective action; the month's total, notifications to the public and the City's notes under it; a map page of points. History enrichment: https://services.arcgis.com/NummVBqZSIJKUeVR/ArcGIS/rest/services/RSSO_Package/FeatureServer/0, City of Houston GIS item f10546c4604a4d38bbc397549925f0f4. Selected fields and WGS84 geometry; complete ordered resultOffset pages of 2,000, checked against the count. Same source, EXCURSIONID equals monthly SSO ID.",
+    "machine_readable": true,
     "sample_record": "SSO 68784, September 2026: WQ0010495003, Graustark St (house number removed), Storm Sewer (not contained), reached waters of the US: Yes, 567 gallons, Manhole, Grease Blockage, 9/10/2026 9:33 AM to 12:15 PM, 4 GPM, Cleaned and Disinfected; Cleared Main Line",
     "fields": [
       "SSO ID",
@@ -263,7 +264,12 @@
       "cause",
       "start",
       "end",
-      "corrective action"
+      "corrective action",
+      "EXCURSIONID",
+      "TOTALVOLLOST",
+      "DURATION (minutes)",
+      "SYSTEM (public/private)",
+      "WGS84 geometry"
     ],
     "fills_event_fields": [
       "started_at (minute)",
@@ -272,23 +278,26 @@
       "volume",
       "outfall_name (street, no house number)",
       "reached water (Yes/No)",
-      "cause, structure type, flow location, corrective action"
+      "cause, structure type, flow location, corrective action",
+      "source point rounded to about 100 meters",
+      "source duration in minutes",
+      "public/private system"
     ],
     "cannot_fill": [
-      "the receiving water (taken from TCEQ's record of the same overflow where it names one)",
-      "coordinates (the map is a PDF; no geocoding of the street)"
+      "the receiving water (taken from linked TCEQ records; sewer basin and treatment plant are not receiving waters)",
+      "the owner or permit of a history-only overflow"
     ],
-    "has_coordinates": false,
+    "has_coordinates": true,
     "has_outfall_ids": false,
     "cadence": "monthly, two to seven weeks after the month ends (September 2026 posted October 16, 2026)",
-    "history": "April 2021 to date on the page; read from January 2024",
-    "license": "none stated",
+    "history": "Layer: 2018 through October 2026 on November 22, 2026; monthly PDFs listed from April 2021, read from January 2024",
+    "license": "City GIS history: public domain, copying permitted and citation appreciated (https://mycity.houstontx.gov/about.html); monthly PDFs: none stated",
     "legal_basis": "Consent decree",
     "status": "used",
-    "status_reason": "Read hourly by pipeline/ingest/tx_houston_sso_monthly.py from 2026-11-17 (--backfill for the months from January 2024): one record per row, start and end to the minute, the City's reached-water flag kept. 33 reports read on 2026-11-17, 4,407 rows (1,409 marked as reaching waters of the US), each month's count equal to its stated total. TCEQ's record of the same overflow (3,017 rows met one on TCEQ's Harris County rows from 2023) is linked as the same event, the City's row shown.",
+    "status_reason": "We enrich the existing monthly source by exact SSO ID from the City GIS history layer. Live check November 22, 2026: all 4,494 monthly records match; 29,313 records after excluding the monthly report's voided SSO, a gain of 24,819. We preserve monthly values and TCEQ links, add source points and keep private-system rows marked. No end or volume is computed.",
     "verified": "fetched",
-    "checked": "2026-11-17",
-    "notes": ""
+    "checked": "2026-11-22",
+    "notes": "Dates and separate clocks are UTC epochs decoded independently in America/Chicago before combining; clocks use an 1899 base date. Zero volume is unknown. TOTALVOLLOST is the City's published figure, even when it differs from GPM times duration. Source layer edit time, PDF publication time and our fetch times stay separate. Source points are rounded to three decimals; no house numbers or personal narrative fields are saved."
   },
   {
     "id": "tx-epa-sobe",

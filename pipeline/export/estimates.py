@@ -26,7 +26,7 @@ The rules, all of them:
   - An estimated end only where the record gives no end: its start plus the duration it states (common.end_after, so a
     start known only to the day gives a day, never a clock time). The status rules do not read it: the map's windows,
     ageing and colours are unchanged.
-  - Where a record's own ended_at is one the pipeline worked out (ny_sprtk_web: start + duration on an ENDED notice),
+  - Where a record's own ended_at is one the pipeline worked out (start + duration, including a linked report's end),
     `ended_at_ours` gives its basis, so the end is shown as ours; the end itself and the status are unchanged.
   - The basis is a sentence for the public: what we did, with the inputs, in the editors' guide's voice ("we", "our").
 
@@ -37,6 +37,7 @@ from __future__ import annotations
 import math
 import re
 from datetime import UTC, datetime, timedelta
+from zoneinfo import ZoneInfo
 
 from common import end_after
 
@@ -188,10 +189,146 @@ def _ny_web_computed_end(e: dict, raw: dict) -> bool:
     return bool(e.get("ended_at")) and str(raw.get("_ended_at_basis") or "").startswith("computed")
 
 
+def _given_minutes(*parts: tuple[object, float]) -> float | None:
+    """Read stored numeric duration inputs for the label; no limits on an already computed end."""
+    total, found = 0.0, False
+    for value, multiplier in parts:
+        if value is None or str(value).strip() == "":
+            continue
+        try:
+            n = float(str(value).replace(",", ""))
+        except ValueError:
+            return None
+        if not math.isfinite(n) or n < 0:
+            return None
+        total += n * multiplier
+        found = True
+    return total if found and math.isfinite(total) else None
+
+
+def _duration_end(noun: str, minutes: float | None, *, day: bool = False, estimated: bool = False) -> dict:
+    """Describe existing arithmetic only; day bounds must not read as calculated clock times."""
+    duration = "estimated duration" if estimated else "duration"
+    amount = f", {duration_words(minutes)}," if minutes is not None else ""
+    basis = f"We added the {duration} the {noun} gives{amount} to its start {'day' if day else 'time'}."
+    if day:
+        basis += " We show the last day the duration allows, at day precision."
+    short = f"start + {duration_words(minutes) if minutes is not None else duration}"
+    if day:
+        short += "; last possible day"
+    return {"basis": basis, "basis_short": short}
+
+
+def _massdep_computed_end(e: dict, raw: dict) -> dict | None:
+    basis = str(raw.get("_ended_at_basis") or "")
+    parent = "parent notice's verified end ("
+    inherited = basis.startswith(parent) and basis.endswith(")")
+    if inherited:
+        basis = basis[len(parent):-1]
+    direct = re.fullmatch(r"computed: started_at \+ verified duration (\S+) h (\S+) min \(Verified Data Report\)", basis)
+    linked = re.fullmatch(r"from Verified Data Report ([\w-]+): its start \+ verified duration", basis)
+    # In particular, leave 'end of the verified period ... that covers this notice' alone.
+    if direct:
+        label = _duration_end("Verified Data Report", _given_minutes((direct[1], 60), (direct[2], 1)))
+    elif linked:
+        label = {"basis": f"We worked out this end from Verified Data Report {linked[1]}, using that report's start "
+                          "plus its verified duration.",
+                 "basis_short": f"Verified Data Report {linked[1]}: start + verified duration"}
+    else:
+        return None
+    if inherited:
+        label["basis"] += " We carried that calculated end from the parent notice to this update."
+    return label
+
+
+def _mde_computed_end(e: dict, raw: dict) -> dict | None:
+    if not str(raw.get("_ended_at_basis") or "").startswith("start + duration_day/hour/minute ("):
+        return None
+    row = raw.get("row") if isinstance(raw.get("row"), dict) else {}
+    minutes = _given_minutes((row.get("duration_day"), 1440), (row.get("duration_hour"), 60),
+                             (row.get("duration_minute"), 1))
+    return _duration_end("report", minutes, day=e.get("time_precision") == "day")
+
+
+def _prep_computed_end(e: dict, raw: dict) -> dict | None:
+    # from_api/from_export normalize incidentEndDateTime to report.incident_end.
+    report = raw.get("report") if isinstance(raw.get("report"), dict) else {}
+    own_end = report.get("incident_end")
+    if own_end is not None and str(own_end).strip():
+        return None
+    m = re.fullmatch(r"incident time \+ duration (\S+) h \(sewage report\)", str(raw.get("_ended_at_basis") or ""))
+    return _duration_end("sewage report", _given_minutes((m[1], 60))) if m else None
+
+
+def _somerville_computed_end(e: dict, raw: dict) -> dict | None:
+    if ": the start plus the table's duration (" in str(raw.get("_ended_at_basis") or ""):
+        return _duration_end("table", _given_minutes((raw.get("duration_min"), 1)))
+    return None
+
+
+def _waterloo_computed_end(e: dict, raw: dict) -> dict | None:
+    if raw.get("end_basis") == "the notice's start plus the duration it states":
+        return _duration_end("notice", _given_minutes((raw.get("duration_minutes_as_stated"), 1)))
+    return None
+
+
+def _memphis_computed_end(e: dict, raw: dict) -> dict | None:
+    basis = str(raw.get("ended_at_basis") or "")
+    if raw.get("ended_at_precision") == "day" and "(the report's estimated duration, " in basis:
+        return _duration_end("report", _given_minutes((raw.get("duration_hours_as_written"), 60)), day=True, estimated=True)
+    return None
+
+
+def _ridoh_computed_end(e: dict, raw: dict) -> dict | None:
+    if raw.get("ended_at_basis") != "Closed On + Number of Days Closed (Re-Opened blank)":
+        return None
+    days = _given_minutes((raw.get("Number of Days Closed"), 1))
+    amount = f", {fmt_num(days)} {'day' if days == 1 else 'days'}," if days is not None else ""
+    return {"basis": f"We added the number of days closed in the sheet{amount} to its closure date. The sheet gives "
+                     "no reopening date.", "basis_short": "closure date + number of days closed"}
+
+
+def _duration_hours_input(e: dict, value, field: str) -> dict:
+    """Preserve the source value and its citation; add hours only to a bare number in an hours field."""
+    text = str(value).strip() if value is not None and not isinstance(value, bool) else ""
+    if re.fullmatch(_N, text):
+        text += " hours"
+    return {"duration_text": text, "duration_field": field, "duration_value": value,
+            "duration_field_unit": "hours", "source_record_id": e.get("source_record_id"), "source_url": e.get("source_url")}
+
+
+def _ct_archive(e: dict, raw: dict) -> dict:
+    # Both frozen layers' numeric durations are hours (checked against their start/stop intervals).
+    field, stop = ("CSO_DURATION", "STOP_FLOW_DATETIME") if "CSO_DURATION" in raw else ("DURATION", "STOP_DATETIME")
+    inp = _duration_hours_input(e, raw.get(field), field)
+    inp["source_end_given"] = raw.get(stop) is not None
+    return inp
+
+
+def _wa_ecology(e: dict, raw: dict) -> dict:
+    row = raw.get("row") if isinstance(raw.get("row"), dict) else {}
+    inp = _duration_hours_input(e, row.get("final_event_duration_hours"), "row.final_event_duration_hours")
+    inp["source_end_given"] = row.get("end_event_timedate") is not None
+    # Active-flow duration need not span intermittent releases. Midnight starts may be day-only.
+    if str(row.get("was_the_spill_continuous") or "").strip().lower() == "intermittent" or raw.get("_start_at_midnight"):
+        inp["duration_text"] = None
+    return inp
+
+
 SOURCES = {
+    "ct-deep-archive": {"inputs": _ct_archive, "duration": parse_ny_duration},
+    "wa-ecology-sewage-spills": {"inputs": _wa_ecology, "duration": parse_ny_duration},
     "ny-dec-sprtk": {"inputs": _ny_workbook, "rate": parse_ny_rate, "duration": parse_ny_duration},
     "ny-dec-sprtk-web": {"inputs": _ny_web, "rate": parse_ny_rate, "duration": parse_ny_duration,
                          "computed_end": _ny_web_computed_end},
+    # Provenance only: these sources gain no new volume or end calculations.
+    "ma-massdep": {"computed_end": _massdep_computed_end},
+    "md-mde-overflows": {"computed_end": _mde_computed_end},
+    "va-deq-prep": {"computed_end": _prep_computed_end},
+    "ma-somerville-cso-table": {"computed_end": _somerville_computed_end},
+    "ia-waterloo-sso-notices": {"computed_end": _waterloo_computed_end},
+    "tn-memphis-cd-quarterly": {"computed_end": _memphis_computed_end},
+    "ri-ridoh-beaches": {"computed_end": _ridoh_computed_end},
 }
 
 
@@ -245,7 +382,7 @@ def _time(v) -> datetime | None:
 def _spec(e: dict):
     spec = SOURCES.get(e.get("source_id") or "")
     raw = e.get("raw") if isinstance(e.get("raw"), dict) else {}
-    if not spec or not raw:
+    if not spec or not raw or "inputs" not in spec:
         return None, None
     return spec, spec["inputs"](e, raw)
 
@@ -400,7 +537,7 @@ def end_estimate_of(e: dict) -> dict | None:
     if e.get("ended_at"):
         return None
     spec, inp = _spec(e)
-    if not spec:
+    if not spec or inp.get("source_end_given"):
         return None
     st = _start_ok(e)
     if st is None or e.get("time_precision") not in ("minute", "day"):
@@ -408,30 +545,53 @@ def end_estimate_of(e: dict) -> dict | None:
     dur = _stated(spec, inp)
     if not dur:
         return None
-    end, _ = end_after(st, timedelta(minutes=dur["minutes"]), e.get("time_precision"))
     prec = "minute" if e.get("time_precision") == "minute" else "day"
+    stored_day = e.get("source_id") == "ny-dec-sprtk" and prec == "day"
+    if stored_day:
+        # DEC's stored date may be one day early. Count from the end of the next calendar day,
+        # including 23/25-hour DST days, then add the elapsed duration through common.end_after.
+        day = st.astimezone(ZoneInfo("America/New_York")).date() + timedelta(days=2)
+        latest = datetime(day.year, day.month, day.day, tzinfo=ZoneInfo("America/New_York"))
+        end, _ = end_after(latest, timedelta(minutes=dur["minutes"]), "minute")
+    else:
+        end, _ = end_after(st, timedelta(minutes=dur["minutes"]), prec)
     noun = inp.get("noun") or "report"
     what = EXPECTS[dur["from"]].format(noun=noun)
     dw = duration_words(dur["minutes"])
     if prec == "minute":
         basis = f"We added {what}, {dw}, to its start time."
         at = end.isoformat(timespec="seconds")
+    elif stored_day:
+        basis = (f"The start can be DEC's stored date or the day after. We added {what}, {dw}, to the end of "
+                 "that later day and show the last day the duration allows.")
+        at = end.date().isoformat()
     else:
         basis = (f"We added {what}, {dw}, to the day it gives as the start. The {noun} gives no time of day, so this is "
                  "the last day the duration allows.")
         at = end.date().isoformat()
-    return {"at": at, "precision": prec, "basis": basis, "basis_short": f"start + {dw} {SHORT[dur['from']]}",
-            "inputs": {"started_at": e.get("started_at"), "duration_minutes": _clean_num(round(dur["minutes"], 2)),
-                       "duration_from": dur["from"], "duration_text": dur["text"]}}
+    short_start = "end of day after stored date" if stored_day else "start"
+    out = {"at": at, "precision": prec, "basis": basis, "basis_short": f"{short_start} + {dw} {SHORT[dur['from']]}",
+           "inputs": {"started_at": e.get("started_at"), "duration_minutes": _clean_num(round(dur["minutes"], 2)),
+                      "duration_from": dur["from"], "duration_text": dur["text"]}}
+    if inp.get("duration_field"):
+        out["formula"] = "start + stated duration"
+        out["inputs"].update({k: inp[k] for k in ("duration_field", "duration_value", "duration_field_unit",
+                                                "source_record_id", "source_url")})
+    return out
 
 
 def ended_at_ours_of(e: dict) -> dict | None:
-    """{basis} where the record's own ended_at is one the pipeline worked out (ny_sprtk_web: start + the duration an ENDED
-    notice gives), so it is shown as our estimate, not as the source's end (review 3). The status build reads that end
-    as before; only its label changes."""
-    spec, inp = _spec(e)
-    if not spec or not spec.get("computed_end") or not spec["computed_end"](e, e.get("raw") or {}):
+    """Label a stored computed end as ours. The end itself and the status are unchanged."""
+    spec = SOURCES.get(e.get("source_id") or "")
+    raw = e.get("raw") if isinstance(e.get("raw"), dict) else {}
+    if not e.get("ended_at") or not spec or not spec.get("computed_end"):
         return None
+    computed = spec["computed_end"](e, raw)
+    if not computed:
+        return None
+    if isinstance(computed, dict):
+        return computed
+    spec, inp = _spec(e)
     dur = _stated(spec, inp)
     if not dur:
         return {"basis": f"We worked out this end from the {inp.get('noun') or 'report'}'s start and the duration it gives.",

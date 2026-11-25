@@ -906,11 +906,9 @@ def test_out_rules_read_as_the_tidal_switch_stands():
         assert "tidal_river" not in pub["reach"]
 
 
-def test_tidal_river_off_leaves_the_status_build_and_its_placement_stamp_alone():
-    """Second review P1: rules with no tidal-river record leave the status build's constants and its placement stamp
-    (which hashes the whole rules file) as they were before the rule; a record that is not enabled is never written
-    to the file for that reason. Turning the rule on is a change of rules: the constants show the record as the file
-    holds it, and placements are worked out again once."""
+def test_tidal_river_rule_changes_constants_but_not_resolver_stamp():
+    """Reach rules change the freshly built constants, not Resolver's placement inputs. The reach cache
+    handles retracing separately; an actual placement-rule change still invalidates saved placements."""
     import json as _json
     from common import DATA_DIR
     shipped = _json.loads((DATA_DIR / "rules.json").read_text())
@@ -921,7 +919,10 @@ def test_tidal_river_off_leaves_the_status_build_and_its_placement_stamp_alone()
     st_on, _ = S.build(now=NOW, write=False, rules=on, **world(tmp_events([])))
     assert st_on["constants"]["reach"].get("tidal_river") == {"enabled": True}
     stamp = lambda r: S.placement_stamp({}, [], {}, {}, r, {"MA"})      # noqa: E731
-    assert stamp(on) != stamp(bare)
+    assert stamp(on) == stamp(bare)
+    changed = {**on, "placement": {**on.get("placement", {}), "no_outfall_all_waters": not bool(
+        on.get("placement", {}).get("no_outfall_all_waters"))}}
+    assert stamp(changed) != stamp(on)
 
 
 def test_a_record_of_an_earlier_tidal_rule_is_traced_again_on_or_off():

@@ -46,8 +46,9 @@ Records (beach_advisory; a beach record, never a sewage record)
   signs are not on the page: advice_text is null. Dates are days of the point's own clock: Central time west of the
   Apalachicola River (zones.florida_zone; the Panhandle, raw.time_zone), Eastern elsewhere (wave 1 P1-3).
   event_id = fl-doh-beaches:<EPA beach id or county-location>:<sample period ID of the opening sample>.
-  waterbody_text = the sampling location as DOH names it (a beach or street end); water_slugs stay empty until
-  Florida's water records are built. Coordinates: the point's SPLat/SPLong.
+  waterbody_text = the water from an exact county-qualified registry alias, when available; otherwise the
+  sampling location as DOH names it. raw.location and outfall_name retain that source label, and raw.water_basis
+  labels our registry match. Water slugs are assigned by the normal placement step. Coordinates: the point's SPLat/SPLong.
 
 Cadence: daily (results are posted within days of each weekly or fortnightly sample).
 Run from pipeline/:  python -m ingest.fl_doh_beaches [--force] [--budget-s S] [--limit N] [--file saved.json]
@@ -63,6 +64,7 @@ import re
 import sys
 import time
 from collections import Counter, defaultdict
+from functools import lru_cache
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from urllib.parse import parse_qsl, urlsplit
@@ -210,6 +212,24 @@ def lift_end(lift: dict, before: dict | None, fetched_at: str, tz: ZoneInfo) -> 
     return out
 
 
+@lru_cache(maxsize=1)
+def _registry_waters() -> dict:
+    # Use the same registry and alias merge as placement; never maintain a second beach-to-water table.
+    from build.status import load_waters
+    return {slug: {"name": w["name"], "state": w.get("state"), "aliases": w.get("aliases", [])}
+            for slug, w in load_waters().items() if w.get("state") == "FL"}
+
+
+def receiving_water(p: dict) -> str | None:
+    """Only an exact, county-qualified registry alias supplies a water for a beach/street label."""
+    if not p.get("SPLocation") or not p.get("County"):
+        return None
+    name = f"{p['SPLocation']}, {p['County']} County".casefold()
+    matches = [w["name"] for w in _registry_waters().values()
+               if name in {a.casefold() for a in w.get("aliases", [])}]
+    return matches[0] if len(matches) == 1 else None
+
+
 def make(p: dict, ep: dict, lift: dict | None, fetched_at: str, prev: dict | None = None) -> dict:
     o = ep["open"]
     tz = point_tz(p)
@@ -222,6 +242,10 @@ def make(p: dict, ep: dict, lift: dict | None, fetched_at: str, prev: dict | Non
     raw = {"county": p.get("County"), "epa_beach_id": p.get("EPAbeachID"), "storet_station": p.get("STORET_Sta"),
            "location": p.get("SPLocation"), "samples": ep["samples"], "start_basis": START_BASIS,
            "detail_page": p.get("Link")}
+    water = receiving_water(p)
+    if water:
+        raw["water_basis"] = "Our water registry matches the sampling location and county."
+        raw["water_alias"] = f"{p['SPLocation']}, {p['County']} County"
     status = "advisory_lifted" if lift else "advisory_active"
     if tz is not TZ:
         raw["time_zone"] = tz.key
@@ -235,7 +259,7 @@ def make(p: dict, ep: dict, lift: dict | None, fetched_at: str, prev: dict | Non
     return event(
         source_id=SOURCE_ID, source_record_id=f"{point_id(p)}:{o['period']}", fetched_at=fetched_at,
         source_url=p.get("Link") or PAGE_URL, event_type="beach_advisory", status=status,
-        waterbody_text=p.get("SPLocation"), water_slugs=[], water_match="none", outfall_name=p.get("SPLocation"),
+        waterbody_text=water or p.get("SPLocation"), water_slugs=[], water_match="none", outfall_name=p.get("SPLocation"),
         lat=lat, lon=lon, coord_source="source" if lat is not None else None, coord_precision_m=10 if lat is not None else None,
         started_at=day(o["date"], tz), ended_at=ended_at, time_precision="day",
         reported_at=None, published_at=None, source_updated_at=day(ep["last"]["date"], tz),

@@ -640,6 +640,8 @@ def keep_unchanged(source_id: str, block: dict, path: Path, checked_at: str) -> 
     meta = prev.get("meta") or {}
     if not prev.get("ok") or not prev.get("records") or not meta.get("table_version"):
         return None
+    if meta.get("parser_version") != (block.get("meta") or {}).get("parser_version"):
+        return None
     mod = platform(block["platform"])
     try:
         now = mod.current_version(block, session(block))

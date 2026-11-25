@@ -456,6 +456,15 @@ def end_of_local_day(dt: datetime, tz: ZoneInfo | None = None) -> datetime:
     return datetime(d.year, d.month, d.day, tzinfo=tz).astimezone(UTC)
 
 
+def latest_start_for_windows(ev: dict, start: datetime, state: str | None = None) -> datetime:
+    """NY SPRTK's date-only start can be the stored date or the next day. Windows count from the
+    end of that later calendar day; the record and the beginning of the interval retain the stored date."""
+    if ev.get("source_id") == "ny-dec-sprtk" and ev.get("time_precision") == "day" and ev.get("started_at"):
+        tz = event_zone(ev, state)
+        return end_of_local_day(end_of_local_day(start, tz), tz)
+    return start
+
+
 @functools.lru_cache(maxsize=64)
 def _zone(name: str) -> ZoneInfo | None:
     try:
@@ -482,6 +491,9 @@ def ev_time(ev: dict, key: str, state: str | None = None, tz: ZoneInfo | None = 
     if not v:
         return None
     return parse_time(v, tz or event_zone(ev, state))
+
+
+DAY_END_SAME_DATE_SOURCES = {"fl-miami-dade-sso", "fl-dep-pnp"}   # end_not_credible: same-date day ends
 
 
 def end_precision(ev: dict) -> str | None:
@@ -527,7 +539,13 @@ def end_not_credible(ev: dict, now: datetime | None = None, rules: dict | None =
     if en is None:
         return None
     st = ev_time(ev, "started_at", tz=tz)
-    if st and en < st:
+    # A source giving only the end date can end after a timed start on that date: compare local dates at day
+    # precision, keep ended_at unchanged (windows count a day-precision end from the end of that day). Limited to the
+    # Miami-Dade and Florida DEP pair for now (2026-11-22); other sources' same-day ends are counted before it widens.
+    before = (en.astimezone(tz).date() < st.astimezone(tz).date()
+              if st and end_precision(ev) == "day" and ev.get("source_id") in DAY_END_SAME_DATE_SOURCES
+              else bool(st and en < st))
+    if before:
         return f"ended_at {ev.get('ended_at')} is before started_at {ev.get('started_at')}; the end is ignored"
     if now is None or ev.get("event_type") in ADVISORY_TYPES or ev.get("status") in ("advisory_active", "advisory_lifted"):
         return None
@@ -578,7 +596,7 @@ def end_assumed(ev: dict, now: datetime, rules: dict) -> datetime | None:
     begin = ev_time(ev, "started_at", tz=tz) or ev_time(ev, "reported_at", tz=tz) or ev_time(ev, "published_at", tz=tz)
     if begin is None:
         return None
-    at = begin + timedelta(days=unresolved_days(rules))
+    at = latest_start_for_windows(ev, begin) + timedelta(days=unresolved_days(rules))
     return at if at <= now else None
 
 
@@ -1642,6 +1660,22 @@ LINKED_NOTICE_FIELDS = ("event_id", "source_id", "published_at", "started_at", "
                         "volume_text", "estimate_flag", "advice_text", "advice_window_hours")
 
 
+def retained_water_contributions(events: list[dict], duplicates: dict) -> set[str]:
+    """Confirmed Miami-Dade identities count once while their distinct named waters keep source status.
+
+    Only the county/DEP linker writes this target-valued marker. Ordinary duplicates still suppress
+    colour; a stale marker, missing counterpart or other source cannot enable this exception.
+    """
+    sources = {"fl-miami-dade-sso", "fl-dep-pnp"}
+    by_id = {ev["event_id"]: ev for ev in events}
+    return {ev["event_id"] for ev in events
+            if ev.get("source_id") in sources
+            and (target := duplicates.get(ev["event_id"])) in by_id
+            and target != ev["event_id"] and target not in duplicates
+            and by_id[target].get("source_id") in sources
+            and (ev.get("raw") or {}).get("_miami_water_contribution") == target}
+
+
 def linked_notices(events: list[dict], duplicates: dict) -> dict:
     """{kept event_id: [the e-mail notices linked to it as duplicates, oldest first]}: each with its own source, times
     and estimated volume, so a page can show the operator's figure next to the record it repeats, cited to the
@@ -2225,7 +2259,12 @@ class Resolver:
     def __init__(self, waters: dict, outfalls: list[dict], discharger_towns: dict | None = None,
                  discharger_waters: dict | None = None, placement_rules: dict | None = None):
         """placement_rules: data/rules.json "placement" (None: read it)."""
+        # Stable ties and name-index order across equivalent writer payloads. Town order is retained:
+        # the guard quotes the first towns in its note. Alias order carries no such meaning.
+        waters = {s: {**w, **{k: sorted(set(w.get(k) or [])) for k in ("aliases", "slug_aliases")}}
+                  for s, w in sorted(waters.items())}
         self.waters = waters
+        self.dependencies = None
         self.slug_alias = slug_aliases(waters)          # an older slug of a record -> the record (P2-1)
         self.slug_alias.update(remainder_parents(waters))   # Oregon: a river's remainder read as the river (P2-2)
         pr = (load_rules().get("placement") or {}) if placement_rules is None else placement_rules
@@ -2264,6 +2303,38 @@ class Resolver:
                         self.names[(w.get("state"), an)].append(slug)
                 elif slug not in self.exact[(w.get("state"), an)]:
                     self.exact[(w.get("state"), an)].append(slug)
+
+        # Preserve the name index's order, but never scan other states for each report.
+        self.names_by_state = defaultdict(list)
+        self.stems_by_state = defaultdict(list)
+        for st, n in self.names:
+            self.names_by_state[st].append(n)
+        for st, n in self.stems:
+            self.stems_by_state[st].append(n)
+        self.name_matches_old = {}
+        self.name_matches = {}
+        self.cache_name_matches = True
+
+    def matching_names(self, text: str, state, stems: bool = False) -> list[str]:
+        """Names contained in already-normalised, space-padded text. Only this pure text lookup is cached:
+        point, town, county, island, qualification and placement guards still run for each report.
+        Persisted entries are admitted only under placement_stamp; keep only keys used this build."""
+        if self.dependencies:
+            self.dependencies.observe(("matching", state, text, stems))
+        key = json.dumps([state, text, stems], ensure_ascii=False)
+        if self.cache_name_matches:
+            if key in self.name_matches:
+                return self.name_matches[key]
+            if key in self.name_matches_old:
+                self.name_matches[key] = self.name_matches_old[key]
+                return self.name_matches[key]
+        names = self.names_by_state.get(state, [])
+        if stems:
+            names = names + self.stems_by_state.get(state, [])
+        found = [n for n in names if f" {n} " in text]
+        if self.cache_name_matches:
+            self.name_matches[key] = found
+        return found
 
     def _index_folded(self, slug: str, w: dict) -> None:
         """__init__'s index for a record of an ACCENT_FOLD_STATES state: the name's forms (name_forms_in: accents
@@ -2319,6 +2390,8 @@ class Resolver:
             return None
         best = None
         for s in slugs:
+            if self.dependencies:
+                self.dependencies.observe(("waters", s))
             g = water_geometry(s, self.waters)
             if g is None:
                 continue
@@ -2438,9 +2511,7 @@ class Resolver:
         if folds(state):
             found = self.folded_phrases(text, state)
         else:
-            for (st, n), slugs in self.names.items():
-                if st == state and f" {n} " in t:
-                    found[n] = slugs
+            found = {n: self.names[(state, n)] for n in self.matching_names(t, state)}
         for key in (() if folds(state) else ((state, norm_name(text)), (state, nt))):
             if key in self.exact:                                     # a short alias, the whole text
                 found[key[1]] = list(dict.fromkeys(found.get(key[1], []) + self.exact[key]))
@@ -2532,7 +2603,7 @@ class Resolver:
         return out
 
     def distance_m(self, slug, lat, lon):
-        key = (slug, round(lat, 4), round(lon, 4))
+        key = (slug, lat, lon)
         if key not in self._dist:
             near = self.nearest([slug], lat, lon)
             self._dist[key] = near[0] if near else None
@@ -2567,7 +2638,7 @@ class Resolver:
         if labels and rest is None:
             return False
         t = f" {norm_name(rest if labels else text)} "
-        return any(st == state and f" {n} " in t for (st, n) in list(self.names) + list(self.stems))
+        return bool(self.matching_names(t, state, stems=True))
 
     def same_named(self, slug: str) -> list[str]:
         """The other records of the water's state that carry its name (an NHD remainder of a river, a
@@ -2627,13 +2698,28 @@ class Resolver:
         kept, aside, _ = self.guard_detail(slugs, ev)
         return kept, aside
 
+    def point_candidates(self, lat, lon, state):
+        # Rechecking saved spatial queries must not scan the national catalog once per old point.
+        # The tree only filters boxes; the original inclusive comparisons still decide membership.
+        from shapely.geometry import Point, box
+        from shapely.strtree import STRtree
+        if not hasattr(self, "_point_index"):
+            rows = [(s, w) for s, w in self.waters.items() if w.get("bbox")]
+            boxes = [box(w["bbox"][0] - .01, w["bbox"][1] - .01,
+                         w["bbox"][2] + .01, w["bbox"][3] + .01) for _, w in rows]
+            self._point_index = rows, STRtree(boxes)
+        rows, tree = self._point_index
+        candidates = [rows[i] for i in sorted(tree.query(Point(lon, lat)))]
+        return [s for s, w in candidates if (state is None or w.get("state") == state)
+                and w["bbox"][0] - .01 <= lon <= w["bbox"][2] + .01
+                and w["bbox"][1] - .01 <= lat <= w["bbox"][3] + .01]
+
     def by_point(self, lat, lon, state):
         if lat is None or lon is None:
             return None
-        pad = 0.01
-        cands = [s for s, w in self.waters.items()
-                 if (state is None or w.get("state") == state) and w.get("bbox")
-                 and w["bbox"][0] - pad <= lon <= w["bbox"][2] + pad and w["bbox"][1] - pad <= lat <= w["bbox"][3] + pad]
+        if self.dependencies:
+            self.dependencies.observe(("point", lat, lon, state))
+        cands = self.point_candidates(lat, lon, state)
         near = self.nearest(cands, lat, lon)
         if near and near[0] <= GEOMETRY_MATCH_M:
             return near
@@ -2652,18 +2738,28 @@ class Resolver:
         d = row.get("distance_m")
         return f"{step}, " + (f"{d} m from the point" if d is not None else "no point") + f"; {by}"
 
+    @staticmethod
+    def row_water_key(row):
+        """The memo identity, also used when replaying selective-cache dependencies."""
+        permit_ = str(row.get("npdes_permit") or "")
+        eff_state = (row.get("state") or (permit_[:2] if re.match(r"[A-Z]{2}\d", permit_) else "") or "").upper()
+        text_ = (row.get("receiving_water") or row.get("receiving_water_echo") or row.get("water_name") or "").strip()
+        # Include every row input read by row_water and registry_how, including note-only fields.
+        # Caller-supplied rows can share permit/outfall IDs but need different answers and observations.
+        # Effective state/text preserve the fallback semantics; retrieval metadata is immaterial.
+        # Distance is quoted in notes: numerically equal 1 and 1.0 produce different text.
+        distance = row.get("distance_m")
+        return (row.get("_file"), row.get("npdes_permit"), row.get("outfall"), row.get("lat"), row.get("lon"),
+                eff_state, text_, row.get("water_slug"), row.get("water_matched_by"), row.get("no_water_reason"),
+                row.get("city"), row.get("county"), row.get("match"), row.get("water_match"),
+                str(distance) if distance is not None else None)
+
     def row_water(self, row) -> tuple[str | None, str]:
         """(slug, how) for one registry outfall. A row the registry pass matched (water_matched_by; PLACE_STEPS
         registry_first): its water_slug, or no water when the pass found none (no_water_reason). Otherwise its
         water_slug, else its receiving water's name in its state (checked against the outfall's own point by the
         guard), else the water at its point."""
-        permit_ = str(row.get("npdes_permit") or "")
-        eff_state = (row.get("state") or (permit_[:2] if re.match(r"[A-Z]{2}\d", permit_) else "") or "").upper()
-        text_ = (row.get("receiving_water") or row.get("receiving_water_echo") or row.get("water_name") or "").strip()
-        # the effective state and the text are part of the key: a Puerto Rico row's answer never reaches the same row
-        # read as another state's (review 2026-11-15 P1), nor rows with no identifiers but another text
-        key = (row.get("_file"), row.get("npdes_permit"), row.get("outfall"), row.get("lat"), row.get("lon"),
-               eff_state, text_, row.get("water_slug"))
+        key = self.row_water_key(row)
         if key in self._row_water:
             return self._row_water[key]
         if PLACE_STEPS["registry_first"] and row.get("water_matched_by"):
@@ -3044,6 +3140,8 @@ class Resolver:
             return {"water_slugs": [], "water_match": "none", "note": None, "unknown_slugs": unknown,
                     "unplaced_reason": elsewhere}
         text0 = ev.get("waterbody_text")
+        if self.dependencies and isinstance(text0, str):
+            self.dependencies.observe(("person", text0))
         if isinstance(text0, str) and text0.strip() \
                 and (not re.sub(r"[\W_]+", "", text0.replace(REDACTED, "")) or person_shaped(text0)) \
                 and not self.mentions_water(text0, event_state(ev)):
@@ -3966,17 +4064,19 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
     red_days = float(u.get("ongoing_red_days") or 7)
     unres_days = float(u.get("unresolved_yellow_days") or 30)
     unknown_days = float(u.get("unknown_status_yellow_days") or 14)
+    latest_start = latest_start_for_windows(ev, start, state)
 
     def no_end(anchor, first_until, first_rule):
         """From the anchor (the start for ongoing, the source's report time for unknown status): the first colour,
         then unresolved to day 30, then the off-map note to day 90. Every colour ends by the absolute cap, 30 days
         (unresolved_yellow_days) after the report began, however late it was reported or first seen: after that the
         site assumes the discharge ended and the record says the end was never reported (owner, 2026-11-03)."""
-        cap = (pt(ev.get("started_at")) or start) + timedelta(days=unres_days)
+        cap = latest_start + timedelta(days=unres_days)
+        latest_anchor = max(anchor, latest_start)
         first_until = min(first_until, cap)
-        u_until = min(anchor + timedelta(days=unres_days), cap)
+        u_until = min(latest_anchor + timedelta(days=unres_days), cap)
         note_from = max(anchor, first_until, u_until)
-        note_until = max(note_from, anchor + timedelta(days=NOTE_DAYS))
+        note_until = max(note_from, latest_anchor + timedelta(days=NOTE_DAYS))
         unres_rule = {"rule": "unresolved.unresolved_yellow_days", "days": unres_days,
                       "rationale": u.get("unresolved_yellow_rationale"), "source": "data/rules.json"}
         out = []
@@ -3997,6 +4097,12 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
             note["rule_applied"] = {**unres_rule, "rationale": u.get("end_assumed_rationale")
                                     or u.get("unresolved_yellow_rationale")}
             out.append(note)
+        if latest_start != start:
+            for iv in out:
+                iv["rule_applied"]["start_bound"] = {
+                    "at": iso(latest_start),
+                    "basis": "DEC's stored start date can be one day early. We count the window from the end "
+                             "of the next day."}
         return out
 
     if st == "ongoing" and end is None:
@@ -4005,7 +4111,7 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         listed = listed_ongoing_intervals(ev, start, now, state, red, yellow, rules)
         if listed is not None:
             return listed
-        return no_end(start, start + timedelta(days=red_days), "ongoing")
+        return no_end(start, latest_start + timedelta(days=red_days), "ongoing")
     if end is not None:
         out = [_iv(ev, start, end, "discharge", red, yellow)]
         out[0]["rule_applied"] = {"rule": "discharge", "rationale": "between the reported start and end"}
@@ -4048,7 +4154,7 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         return out
     told = next((t for t in (pt(ev.get("reported_at")), pt(ev.get("published_at"))) if t), None)
     anchor = max(start, told) if told else start
-    return no_end(anchor, anchor + timedelta(days=unknown_days), "no_end")
+    return no_end(anchor, max(anchor, latest_start) + timedelta(days=unknown_days), "no_end")
 
 
 def resolve_revisions(events: list[dict], by_id: dict) -> tuple[dict, dict]:
@@ -4194,7 +4300,7 @@ PERMIT_OUTLET_NEAR_KM = 1.0     # candidates whose order is not established, all
 PERMIT_OUTLET_LEAD = {PERMIT_OUTLET_BASIS: "The report names no outlet.",
                       PERMIT_OUTLET_UNMATCHED: "The outlet the report names is not in our outlet records."}
 PERMIT_OUTLET_NOTE = ("{lead} The stretch is drawn from the operator's most upstream registered outlet on this river "
-                      "(outfall {outfall} of {n}); our choice, not the report's.")
+                      "({which}); our choice, not the report's.")
 PERMIT_OUTLET_NOTE_MANY = ("{lead} The stretches are drawn from the operator's most upstream registered outlet on each "
                            "river ({each}); our choice, not the report's.")
 PERMIT_OUTLET_INFERRED = "The report names no water; this river is the one the operator's permit names."
@@ -4402,6 +4508,31 @@ def permit_outlet_reaches(ev: dict, named: list[str], index: dict, waters: dict,
     return list(picks.values())
 
 
+def outlet_basis_summary(placements: dict) -> str:
+    """The status step's one line on the records drawn from an outlet the build chose (reach_basis): how many under
+    each basis, on how many reaches, and how many of them have a river taken from the permit. Counts only."""
+    by, reaches, inferred = Counter(), set(), 0
+    for pl in (placements or {}).values():
+        b = pl.get("reach_basis")
+        if not b:
+            continue
+        by[b] += 1
+        outs = pl.get("reach_basis_outfalls") or []
+        reaches.update(o.get("reach") for o in outs if o.get("reach"))
+        inferred += any(o.get("water_named") is False for o in outs)
+    n = sum(by.values())
+    if not n:
+        return "status: no record drawn from an outlet chosen for it (reach_basis)"
+    return (f"status: {n} records drawn from an outlet chosen for them (reach_basis) {dict(sorted(by.items()))} "
+            f"on {len(reaches)} reaches; {inferred} with a river taken from the permit")
+
+
+def outlet_among(outfall, n: int, where: str = "on this river") -> str:
+    """"outfall 004, one of its 2 outlets on this river"; "outfall 039, its only outlet on this river". Never
+    "outfall 004 of 2", which reads as the fourth of two."""
+    return f"outfall {outfall}, its only outlet {where}" if n == 1 else f"outfall {outfall}, one of its {n} outlets {where}"
+
+
 def permit_outlet_note(picks: list[dict], waters: dict, basis: str = PERMIT_OUTLET_BASIS,
                        named: set | None = None) -> str:
     """The note: PERMIT_OUTLET_LEAD for the basis, then PERMIT_OUTLET_NOTE for one river or PERMIT_OUTLET_NOTE_MANY
@@ -4410,10 +4541,10 @@ def permit_outlet_note(picks: list[dict], waters: dict, basis: str = PERMIT_OUTL
     lead = PERMIT_OUTLET_LEAD[basis]
     each = [(slug, p["outfall"], p["candidates"][slug]) for p in picks for slug in p["water_slugs"]]
     if len(each) == 1:
-        text = PERMIT_OUTLET_NOTE.format(lead=lead, outfall=each[0][1], n=each[0][2])
+        text = PERMIT_OUTLET_NOTE.format(lead=lead, which=outlet_among(each[0][1], each[0][2]))
     else:
         text = PERMIT_OUTLET_NOTE_MANY.format(lead=lead, each="; ".join(
-            f"{(waters.get(s) or {}).get('name') or s}: outfall {o} of {n}" for s, o, n in each))
+            f"{(waters.get(s) or {}).get('name') or s}: {outlet_among(o, n, 'there')}" for s, o, n in each))
     if named is not None:
         inferred = [s for s, _, _ in each if s not in named]
         if inferred and not named:
@@ -5098,58 +5229,95 @@ def source_health(sid: str, f: dict, reg: dict, now: datetime) -> dict:
 
 PLACEMENT_CACHE = BUILD_DIR / "placement-cache.json"
 PLACEMENT_CACHE_DAYS = 120      # records that began longer ago than this reuse their placement while nothing changed
-STAMP_IGNORED_WATER_KEYS = frozenset({"fetched_at", "targets"})    # bookkeeping of waters_from_nhd; placement reads neither
+# Resolver inputs, not the source documents' fetch/run metadata. Keep these beside the stamp so a new
+# placement input has an explicit cache dependency. Waters and aliases use canonical order; town lists
+# and within-permit registry rows retain the order quoted in placement notes.
+PLACEMENT_WATER_KEYS = ("name", "state", "kind", "towns", "bbox", "aliases", "slug_aliases", "covers_part_of")
+PLACEMENT_OUTFALL_KEYS = ("npdes_permit", "outfall", "outfall_name", "outfall_status", "state", "lat", "lon",
+                          "water_slug", "receiving_water", "receiving_water_echo", "water_name", "city", "county",
+                          "water_matched_by", "water_match", "match", "no_water_reason", "distance_m", "_file")
 
 
 def outline_files(waters) -> list:
-    """The outlines placement reads from openboatlaunch's folder (water_geometry: a record with no inline geometry),
-    as (slug, geometry_hash, present) for a record whose extract carries the hash, else (slug, size, modified) or
-    (slug, None) where there is none: a moved outline, or a machine without the folder
-    (the hosted runner has none), is a placement input like the records themselves (review 2026-11-04)."""
-    out = [str(OBL_WATER_DIR)]
+    """Hash the actual geometry and geometry_lines read by water_geometry, inline or external.
+
+    An archive restore, changed fetch metadata or another checkout path is not a changed outline. An
+    upstream geometry_hash is not sufficient either: it can be absent or stale and omit geometry_lines.
+    No stat-based memo survives a build: even a same-size edit with a preserved mtime must invalidate.
+    """
+    import hashlib
+    out = []
     for slug in sorted(waters):
-        if (waters[slug] or {}).get("geometry"):
-            continue
-        gh = (waters[slug] or {}).get("geometry_hash")
-        if gh:
-            # openboatlaunch's API records name their outline's hash (the extract carries it): a changed outline
-            # changes the hash, and a folder unpacked again (new file times) with the same outlines does not
-            out.append((slug, gh, (OBL_WATER_DIR / f"{slug}.json").is_file()))
-            continue
-        try:
-            st = (OBL_WATER_DIR / f"{slug}.json").stat()
-            out.append((slug, st.st_size, st.st_mtime_ns))
-        except OSError:
-            out.append((slug, None))
+        w = waters[slug] or {}
+        if not w.get("geometry"):
+            try:
+                w = read_json(OBL_WATER_DIR / f"{slug}.json") or {}
+            except (OSError, ValueError):
+                w = {}
+        g = {k: w[k] for k in ("geometry", "geometry_lines") if isinstance(w.get(k), dict) and w[k]}
+        out.append((slug, hashlib.sha256(json.dumps(g, sort_keys=True, separators=(",", ":")).encode()).hexdigest()))
     return out
 
 
-def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules, states) -> str:
-    """Everything a placement is made from besides the record: the water records, the outlines read from
-    openboatlaunch's folder (outline_files), the outfall registry, the operators' towns and receiving waters, the
-    rules, the live states, the placement steps switched on (PLACE_STEPS), the code (this module, build/redact.py,
-    common.py) and the name lists. A change to any of them places every record again."""
+def placement_stamp(waters, outfalls, discharger_towns, discharger_waters, rules, states, parts=None, water_hashes=None) -> str:
+    """Content dependencies of Resolver.resolve, independent of fetch/run times and filesystem metadata.
+
+    Colour/reach rules are evaluated afresh outside the cached resolver. person_shaped reads the reference
+    vocabulary, not the export's allow/block lists. County outlines and Hawaii's island code also affect
+    placement. Source code is deliberately conservative: any code edit invalidates, never a code mtime.
+    """
     import hashlib
     import sys as _sys
     from build import redact as _redact
-    # the water records less the keys no placement reads and that change every hour without their water changing:
-    # ingest/waters_from_nhd.py stamps fetched_at with the build time and counts the record's targets each run, even for
-    # a record rebuilt from its cached answers, so with them in the stamp no hourly run ever reused a placement (run
-    # 42417263287: "reused for 0 of 142323"; 2026-11-07 refresh-time brief)
-    waters = {s: ({k: v for k, v in w.items() if k not in STAMP_IGNORED_WATER_KEYS} if isinstance(w, dict) else w)
-              for s, w in waters.items()}
-    h = hashlib.sha256(json.dumps([waters, outline_files(waters), outfalls, discharger_towns, discharger_waters, rules,
-                                   sorted(states), PLACE_STEPS], sort_keys=True, default=str).encode())
-    for f in (Path(__file__), Path(_redact.__file__), Path(_sys.modules["common"].__file__),
-              DATA_DIR / "name-allowlist.json", BUILD_DIR / "name-blocklist.json"):
-        h.update(f.read_bytes() if f.exists() else b"-")
-    return h.hexdigest()
+    from build import placement_cache as _pc
+    from ingest import hi_doh_cwb_events as _hi
+    water_inputs = [(s, {k: sorted(set(w.get(k) or [])) if k in ("aliases", "slug_aliases") else w.get(k)
+                        for k in PLACEMENT_WATER_KEYS}) for s, w in sorted(waters.items())]
+    outlines = outline_files(waters)
+    if water_hashes is not None:
+        shapes = dict(outlines)
+        water_hashes.update({s: _pc.digest([w, shapes[s]]) for s, w in water_inputs})
+    # Resolver groups by permit; ordering between different permits is immaterial, but ordering within a
+    # permit determines its fallback and the order of outfalls in the placement note.
+    by_permit = defaultdict(list)
+    for o in outfalls:
+        if o.get("npdes_permit"):
+            by_permit[o["npdes_permit"]].append({k: o.get(k) for k in PLACEMENT_OUTFALL_KEYS})
+    towns = {k: sorted({norm_town(t) for t in v or []}) for k, v in discharger_towns.items()}
+    operator_waters = {k: {f: v.get(f) for f in ("state", "names", "slugs")} for k, v in discharger_waters.items()}
+    # Project the same memoized vocabulary person_shaped reads. Each hourly stage runs in a fresh process;
+    # callers changing reference files within one process clear the redactor's caches as well.
+    known, reference_towns = _redact._reference_norm(str(_redact.DATA_DIR))
+    # person_shaped only consults whole names after these lexical gates. Water/utility words,
+    # ordinary names without a common first name and non-first-name towns cannot change its answer.
+    excluded = _redact.KILL | _redact.WATER_WORDS | set(_redact.FUNCTION) | set(_redact.STATES) | set(_redact.HEADER_WORDS)
+    reference_names = [sorted(n for n in known if 2 <= len(n.split()) <= 4
+                              and n.split()[0] in _redact.FIRST_NAMES and not set(n.split()) & excluded),
+                       sorted(reference_towns & _redact.FIRST_NAMES)]
+    counties = {}
+    for state, filename in COUNTY_STATES.items():
+        doc = read_json(DATA_DIR / "reference" / filename) or {}
+        counties[state] = [{k: c.get(k) for k in ("geoid", "county", "geometry")} for c in doc.get("counties") or []]
+    inputs = {"waters": water_inputs, "outlines": outlines, "outfalls": by_permit,
+              "operator_towns": towns, "operator_waters": operator_waters,
+              "placement_rules": bool((rules.get("placement") or {}).get("no_outfall_all_waters")),
+              "states": sorted(states), "steps": PLACE_STEPS, "reference_names": reference_names, "counties": counties}
+    fingerprints = {k: hashlib.sha256(json.dumps(v, sort_keys=True, default=str).encode()).hexdigest()
+                    for k, v in inputs.items()}
+    code = hashlib.sha256()
+    for f in (Path(__file__), Path(_redact.__file__), Path(_sys.modules["common"].__file__), Path(_hi.__file__), Path(_pc.__file__)):
+        code.update(f.read_bytes() if f.exists() else b"-")
+    fingerprints["code"] = code.hexdigest()
+    if parts is not None:
+        parts.update(fingerprints)
+    return hashlib.sha256(json.dumps(fingerprints, sort_keys=True).encode()).hexdigest()
 
 
 def record_hash(ev: dict) -> str:
     import hashlib
-    # feed health is not the record (load_events), nor is the beach verdict build() sets (placement does not read it)
-    ev = {k: v for k, v in ev.items() if k not in ("_feed_health", "_beach_reason")}
+    # Fetch time affects freshness and some intervals, all recomputed outside Resolver. Keep source times
+    # and the remaining record conservatively: unlike fetched_at they may carry an agency's correction.
+    ev = {k: v for k, v in ev.items() if k not in ("_feed_health", "_beach_reason", "fetched_at")}
     return hashlib.blake2b(json.dumps(ev, sort_keys=True, default=str).encode(), digest_size=16).hexdigest()
 
 
@@ -5163,11 +5331,12 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     None and rules.rain_likely.enabled is true. Placement reads every outfall registry file
     (load_registry_outfalls) when outfalls is None, else the outfalls given.
     placement_cache: a record that began more than PLACEMENT_CACHE_DAYS ago keeps the placement the last run made
-    for it when the record and everything placement reads are unchanged (placement_stamp, record_hash): with the
+    for it when its record and observed placement inputs are unchanged (placement_stamp, record_hash): with the
     history of a state on file (Michigan from 2001, some 55,000 records) placing every record again took 30 s an
     hour. Everything else (intervals, colours, counts) is computed for every record as before. True: the file
     PLACEMENT_CACHE when this build writes the shared outputs (write and the default events directory); a path: that
-    file; None or False: no cache."""
+    file; None or False: no cache. The same file also holds the resolver's pure text matches, shared by
+    reports of any age; changing a report's point or other placement inputs still runs its guards afresh."""
     now = now or datetime.now(UTC)
     loaded = waters is None
     waters = load_waters() if loaded else waters
@@ -5230,15 +5399,29 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     resolver = Resolver(waters, placement_outfalls, discharger_towns, discharger_waters, rules.get("placement") or {})
     if placement_cache is True:
         placement_cache = PLACEMENT_CACHE if write and Path(events_dir) == Path(EVENTS_DIR) else None
+    resolver.cache_name_matches = bool(placement_cache)
     cache_old, cache_new, cache_stamp = {}, {}, None
+    cache_parts, water_hashes = {}, {}
+    dependencies = None
     if placement_cache:
-        cache_stamp = placement_stamp(waters, placement_outfalls, discharger_towns, discharger_waters, rules, _STATES)
+        cache_stamp = placement_stamp(waters, placement_outfalls, discharger_towns, discharger_waters, rules, _STATES,
+                                      parts=cache_parts, water_hashes=water_hashes)
         try:
             c = read_json(Path(placement_cache)) or {}
         except (OSError, ValueError):
             c = {}
-        if c.get("stamp") == cache_stamp:
+        unchanged = c.get("stamp") == cache_stamp
+        changed = [k for k, v in cache_parts.items() if (c.get("inputs") or {}).get(k) != v]
+        if not unchanged and c.get("inputs"):
+            print("status: placement cache inputs changed: " + ", ".join(changed))
+        # Query observations cover water content, outlines and reference-name predicates. All remaining
+        # dependencies still invalidate globally. A legacy cache has no observations and starts cold.
+        if not set(changed) - {"waters", "outlines", "reference_names"}:
             cache_old = c.get("placements") or {}
+        if unchanged:
+            resolver.name_matches_old = c.get("name_matches") or {}
+        from build.placement_cache import Dependencies
+        dependencies = Dependencies(resolver, water_hashes, c.get("dependencies"), unchanged)
     cache_before = (now - timedelta(days=PLACEMENT_CACHE_DAYS)) if placement_cache else None
     cache_hits = 0
 
@@ -5276,6 +5459,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         if ev.get("duplicate_of") and ev["duplicate_of"] != ev["event_id"]:
             duplicates[ev["event_id"]] = ev["duplicate_of"]
     duplicates = shown_over_links(events, duplicates)
+    water_contributions = retained_water_contributions(events, duplicates)
     linked = linked_notices(events, duplicates)
     beach_reason = annotate_beach_reasons(events, by_id, duplicates, rules)
     for sid, n in (beach_reason.get("unlisted_sources") or {}).items():
@@ -5295,12 +5479,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         if began is not None and began < cache_before and agency_extent(ev) is None:
             h = record_hash(ev)
             hit = cache_old.get(eid)
-            if hit and hit[0] == h:
+            if hit and hit[0] == h and len(hit) == 3 and dependencies.valid(hit[2]):
                 pl = copy.deepcopy(hit[1])
+                group = dependencies.import_group(hit[2])
                 cache_hits += 1
             else:
-                pl = resolver.resolve(ev)
-            cache_new[eid] = [h, copy.deepcopy(pl)]
+                pl, group = dependencies.resolve(ev)
+            cache_new[eid] = [h, copy.deepcopy(pl), group]
         else:
             pl = resolver.resolve(ev)
         placements[eid] = {k: v for k, v in pl.items() if k != "unknown_slugs"}
@@ -5339,7 +5524,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             unknown_slugs[s] += 1
         eff = effective.get(eid, ev)
         point_on, river_point, outline_less = [], [], []
-        live = eid not in superseded and eid not in duplicates
+        live = eid not in superseded and (eid not in duplicates or eid in water_contributions)
         if live and listed_without_reason(eff, rules):
             placements[eid]["no_stated_reason"] = BR.note(eff, beach_verdict(eff, rules), rules)
         is_discharge = ev.get("event_type") in DISCHARGE_TYPES or (
@@ -5502,7 +5687,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                                "why": (COUNTY_RECORD_POINT_WHY if event_state(ev) in COUNTY_RECORD_POINT_STATES
                                        else RECORD_POINT_WHY)})
         # beach, rain and HAB advisories that colour no water: a marker of their own
-        if ((ev.get("event_type") in POINT_ADVISORY_TYPES or point_on) and eid not in superseded and eid not in duplicates
+        if ((ev.get("event_type") in POINT_ADVISORY_TYPES or point_on) and live
                 and ev.get("lat") is not None and ev.get("lon") is not None
                 and (point_on or not pl["water_slugs"])):
             ivs = event_intervals(eff, event_state(ev), now, rules=rules)
@@ -5999,7 +6184,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         p = Path(placement_cache)
         p.parent.mkdir(parents=True, exist_ok=True)
         tmp = p.with_suffix(p.suffix + ".tmp")
-        tmp.write_text(json.dumps({"stamp": cache_stamp, "built": iso(now), "placements": cache_new},
+        tmp.write_text(json.dumps({"stamp": cache_stamp, "inputs": cache_parts, "built": iso(now), "placements": cache_new,
+                                  "name_matches": resolver.name_matches, "dependencies": dependencies.saved()},
                                   separators=(",", ":"), default=str))
         tmp.replace(p)
         print(f"status: placement reused for {cache_hits} of {len(cache_new)} records that began over "
@@ -6027,6 +6213,7 @@ def main() -> None:
     print(f"status: {len(status['waters'])} tracked waters {dict(by)}; {status['counts']['events']} events "
           f"({status['counts']['unplaced']} unplaced, {status['counts']['no_receiving_water']} name no receiving "
           f"water); fixtures {'in' if status['fixtures_included'] else 'out'}")
+    print(outlet_basis_summary(status.get("placements")))
     cov = status.get("outlines") or {}
     print("status: water records with an outline here, by state: "
           + ", ".join(f"{st} {c['with_outline']}/{c['records']}" for st, c in cov.items()))

@@ -392,6 +392,47 @@ def location_name(v) -> str | None:
     return cut_location_numbers(strip_house_numbers(scrub_text(s))) or None
 
 
+def private_only(appearance_points, categories=PRIVATE_ONLY) -> bool:
+    apps = {x.strip().lower() for x in clean(appearance_points).split(";") if x.strip()}
+    return bool(apps) and apps <= categories
+
+
+def rounded(v) -> str | None:
+    """A typed coordinate to three decimals (about 100 m), as text; None when it is not a number."""
+    f = fnum(v)
+    return None if f is None else str(round(f, 3))
+
+
+def round_raw_points(raw: dict, private_categories=PRIVATE_ONLY) -> None:
+    if private_only(raw.get("appearance_points"), private_categories):
+        raw["lat"], raw["lon"] = rounded(raw.get("lat")), rounded(raw.get("lon"))
+        if raw.get("_coords_rejected"):
+            raw["_coords_rejected"] = point(raw["lat"], raw["lon"])[2]
+    # Destination points can mark a home regardless of the spill's appearance point.
+    for i in range(1, 5):
+        for k in (f"dest_lat_{i}", f"dest_lon_{i}"):
+            if k in raw:
+                raw[k] = rounded(raw[k])
+    for pt in raw.get("destination_points") or []:
+        for k in ("lat", "lon"):
+            pt[k] = fnum(rounded(pt.get(k)))
+
+
+def scrub_history(records: list[dict], private_categories=PRIVATE_ONLY) -> list[dict]:
+    from copy import deepcopy
+
+    records = deepcopy(records)
+    for r in records:
+        raw = r.get("raw") or {}
+        round_raw_points(raw, private_categories)
+        if private_only(raw.get("appearance_points"), private_categories):
+            for k in ("lat", "lon"):
+                r[k] = fnum(rounded(r.get(k)))
+            if r.get("lat") is not None:
+                r["coord_precision_m"] = 150
+    return records
+
+
 def scrubbed_row(r: dict) -> dict:
     """The kept fields as the record keeps them (see the docstring)."""
     out = {k: r.get(k, "") for k in KEYS}
@@ -405,6 +446,7 @@ def scrubbed_row(r: dict) -> dict:
               "appearance_points", "public_access_impact", "caloes_control_number"):
         if isinstance(out.get(k), str):
             out[k] = scrub_text(out[k])
+    round_raw_points(out)
     return {k: (v if v not in ("",) else None) for k, v in out.items()}
 
 
@@ -571,8 +613,7 @@ def _record(a: dict, base: dict, raw: dict, fetched_at: str, wdids: dict[str, st
     elif pnote:
         raw["_coords_repaired"] = pnote
     precision_m = None
-    apps = {x.strip().lower() for x in clean(a.get("appearance_points")).split(";") if x.strip()}
-    if lat is not None and apps and apps <= PRIVATE_ONLY:
+    if lat is not None and private_only(a.get("appearance_points")):
         lat, lon, precision_m = round(lat, 3), round(lon, 3), 150
         raw["_coords_rounded"] = ("the spill appeared only on private property (a private lateral clean-out or inside "
                                   "a building): its point is rounded to about 100 m so it does not mark a home")
@@ -639,7 +680,7 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], wdids: di
     Returns (records, stats); earlier records of spills not in the file are kept and marked."""
     wdids = wdid_index() if wdids is None else wdids
     today = today or datetime.fromisoformat(fetched_at.replace("Z", "+00:00")).date()
-    prev = {r["event_id"]: r for r in prev_records}
+    prev = {r["event_id"]: r for r in scrub_history(prev_records)}
     current, earlier = latest(rows)
     records, seen, skipped = [], set(), 0
     for row in current:
@@ -707,7 +748,7 @@ def main(argv=None) -> int:
     fetched_at = now_iso()
     state = read_json(STATE_FILE, {}) or {}
     prev_doc = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
-    prev = prev_doc.get("records", [])
+    prev = scrub_history(prev_doc.get("records", []))
     sess = requests.Session()
     sess.headers.update(HEADERS)
     try:
@@ -721,7 +762,7 @@ def main(argv=None) -> int:
                     raise RuntimeError(f"the file has not been rebuilt since {modified} ({age.days} days)")
     except Exception as e:  # noqa: BLE001
         write_json(STATE_FILE, state)
-        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        write_events(SOURCE_ID, prev, ok=False, partial=True, error=f"{error_text(e)}")
         print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     if content is None and not args.backfill and prev:
@@ -738,7 +779,7 @@ def main(argv=None) -> int:
         if not rows:
             raise ValueError("the file holds no spill rows")
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        write_events(SOURCE_ID, prev, ok=False, partial=True, error=f"{error_text(e)}")
         print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     raw_path = state.get("raw_path")

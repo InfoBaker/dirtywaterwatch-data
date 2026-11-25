@@ -25,6 +25,7 @@ FIELDS (every value is the source's own, never converted; a field the source doe
   volume_method         how the volume was determined, in the source's words ("Best Professional Judgement",
                         "flow meter")
   volume_to_water_gal   gallons the source says reached a water (a number, as the source gives it)
+  water_reach           whether the source says the overflow reached a waterway, in its domain words
   overflow_point        where the sewage came out, in the source's words ("Manhole", "Gravity Mainline")
   town                  the city or town the source names for the report
   resolution            how the source says the incident was resolved, in its words (CT DEEP's "How incident was
@@ -39,6 +40,12 @@ house number never leaves; the record's raw keeps the whole text.
   description           the discharge as the source describes it ("Sanitary sewer overflowing into storm sewer")
   location_description  the place as the source describes it ("Manhole is in the street at the intersection of ...");
                         house numbers removed (common.strip_house_numbers)
+  toxin                 the agency's named toxin (not a concentration)
+  release_url           the agency's health-advisory link, apart from the record's source URL
+  result_source_url     the layer supplying the named toxin/link
+  result_observed_at    our observation time for that layer detail, not publication or sample time
+  sample_results        typed source observations: analyte, value/text, units, qualifier, sample date/text,
+                        source field/URL/record and observation time; missing counts/units stay null
   rate                  a rate the source states in place of a volume, as a value (export/estimates.py rate_of):
                         {text, unit, low, high, bound?, qualifier?}; the source's own figure, never a volume
 
@@ -62,6 +69,7 @@ import json
 import re
 import sys
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
 
 if __package__ in (None, ""):
@@ -72,9 +80,11 @@ from common import (HOUSE_NUMBER_REMOVED, NAME_KEYS, PERSONAL_KEYS, ROUTE_BEFORE
                     strip_house_numbers)
 from export import estimates as estimates_mod  # noqa: E402
 
+LIFT_FIELDS = ('confirmation_method', 'source_end_date', 'source_end_text', 'source_status', 'sample_analyte', 'sample_result_text', 'sample_unit', 'sample_qualifier', 'sample_date')
+
 FIELDS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
-          "volume_method", "volume_to_water_gal", "overflow_point", "town", "resolution", "notes", "description",
-          "location_description", "rate")
+          "volume_method", "volume_to_water_gal", "water_reach", "overflow_point", "town", "resolution", "notes",
+          "description", "location_description", "rate") + LIFT_FIELDS + ("toxin", "release_url", "result_source_url", "result_observed_at", "sample_results")
 NUMBER_FIELDS = {"volume_to_water_gal"}
 QUALIFIERS = ("estimated", "measured", "modeled", "verified by the operator")
 # a field whose value is a place description: its house numbers are removed as well as the usual scrub
@@ -83,7 +93,7 @@ ADDRESS_FIELDS = {"location_description", "description", "overflow_point"}
 OBJECT_FIELDS = {"rate"}
 # the fields the report tables carry (slim rows): the cell's cause, description and duration, the qualifier of its
 # volume, and a rate given in place of a volume
-CELL_FIELDS = ("cause", "description", "duration_text", "volume_qualifier", "rate")
+CELL_FIELDS = ("cause", "description", "duration_text", "volume_qualifier", "rate") + LIFT_FIELDS + ("toxin", "release_url", "result_source_url", "result_observed_at", "sample_results")
 DISCHARGE_TYPES = {"cso", "sso", "bypass", "blended", "plant_bypass", "unknown"}
 MAX_TEXT = 300          # a field longer than this is cut at a word with "…" (the record's raw keeps the whole text)
 MAX_LINKED = 12
@@ -173,13 +183,15 @@ def plain_inches(*paths: str):
     return read
 
 
-def with_unit(path: str, unit: str):
+def with_unit(path: str, unit: str, singular: str | None = None):
     """A bare number from a field whose unit is in its name ("duration_hours"): the number as written and the unit."""
     def read(raw: dict):
         v = text(path)(raw)
         if not v:
             return None
-        return f"{v} {unit}" if re.fullmatch(r"\d*\.?\d+", v) else v
+        if re.fullmatch(r"\d*\.?\d+", v):
+            return f"{v} {singular if singular and float(v) == 1 else unit}"
+        return v
     return read
 
 
@@ -354,9 +366,71 @@ NY_WEB = {
     "rate": _rate("ny-dec-sprtk-web"),
 }
 
+
+def _ny_history_qualifier(raw: dict):
+    """The older SPRTK workbook's estimate column in each layout's words ("Estimated", "(Estimated)", "Estimate", or the
+    flag 1); "Actual" is not taken for measured, as in the newer workbook."""
+    row = raw.get("row") if isinstance(raw.get("row"), dict) else {}
+    word = str(row.get("estimated indicator") or row.get("Estimate/Actual") or row.get("Estimate or Actual") or "")
+    if re.match(r"\W*estimat", word, re.I) or str(row.get("estimated_ind") or "").strip() == "1":
+        return "estimated"
+    return None
+
+
+# the older workbook, Sewage_Discharge_Reports.xlsx, as ny_sprtk_history reads it: raw.row in each tab's own columns
+# (four layouts; the narrative columns are never read), raw._notice_kind.word the headline's UPDATE or ENDED,
+# raw._duration_text the duration with its units
+NY_HISTORY = {
+    "report_kind": text("_notice_kind.word"),
+    "cause": text("row.reasons for discharge", "row.reason for discharge1", "row.reason for discharge",
+                  "row.Reason for Discharge", "row.Reason For Discharge", cut=re.compile(r"[;,\s]+$")),
+    "duration_text": text("_duration_text"), "volume_qualifier": _ny_history_qualifier,
+    "town": text("row.city", "row.Town/City"),
+}
+
 # source id -> {field: reader of the record's raw}. A source not listed gets no detail (its raw stays on the page as
 # the source data); add a source here with the source key named.
+def _id_toxin(raw):
+    from ingest.id_deq_cyanohab import TOXINS
+    return raw.get("dhw_toxin") if raw.get("dhw_toxin") in TOXINS else None
+
+
+def _id_release(raw):
+    from ingest.id_deq_cyanohab import release_url
+    return release_url(raw.get("dhw_release_url"))
+
+
+def _mt_density(raw, record):
+    from ingest.mt_deq_hab_map import density_results
+    return [dict(result, source_record_id=record.get("source_record_id"), observed_at=record.get("fetched_at"))
+            for result in density_results(raw)] or None
+
+
+_mt_density.with_record = True
+
+
 SOURCES: dict[str, dict] = {
+    "mo-dnr-hab-map": {
+        "confirmation_method": text("confirmation_method"),
+        "source_end_date": text("dissolved_on"),
+        "source_status": text("source_fields.BloomStat"),
+    },
+    "wi-dnr-beach-health": {
+        "source_end_date": text("source_end_observation.date"),
+        "source_end_text": text("source_end_observation.text"),
+        "source_status": lambda raw: (joined(text("action"), text("map_status"))(raw["source_end_observation"])
+                                      if raw.get("source_end_observation") else
+                                      joined(text("beach_action"), text("map_status"))(raw)),
+        "sample_analyte": text("sample_result.analyte"),
+        "sample_result_text": text("sample_result.text"),
+        "sample_unit": text("sample_result.unit"),
+        "sample_qualifier": text("sample_result.qualifier"),
+        "sample_date": text("sample_result.sampled_at"),
+    },
+    "id-deq-cyanohab-risk-table": {"toxin": _id_toxin, "release_url": _id_release,
+                                  "result_source_url": text("dhw_detail_source_url"),
+                                  "result_observed_at": text("dhw_detail_observed_at")},
+    "mt-deq-hab-map": {"sample_results": _mt_density},
     "ma-massdep": {
         "report_kind": _ma_kind, "rainfall_in": plain_inches("rainfallData"),
         "rainfall_label": lambda raw: "Rainfall" if plain_inches("rainfallData")(raw) else None,
@@ -372,16 +446,29 @@ SOURCES: dict[str, dict] = {
                               "cause": text("CauseDescription")},
     # Houston's monthly SSO table (ingest/tx_houston_sso_monthly.py): its columns as written; "Est. Volume (Gallons)"
     # is an estimate, and a "0" is no figure (the City's note, kept as raw.volume_note)
-    "tx-houston-sso-monthly": {"report_kind": const("Monthly SSO Report"),
+    "tx-houston-sso-monthly": {"report_kind": lambda raw: raw.get("report_kind") or "Monthly SSO Report",
                                "cause": text("cause", "structure_and_cause_as_written"),
                                "overflow_point": text("structure_type"), "town": text("city"),
                                "volume_qualifier": lambda raw: "estimated" if not raw.get("volume_note") else None,
-                               "volume_method": text("volume_note")},
+                               "volume_method": text("volume_note", "volume_method"),
+                               "duration_text": with_unit("duration_minutes", "minutes"),
+                               "notes": text("system_note", "system")},
     # the notice's own form fields as the ingester reads them from its text (fl_dep_pnp.template_fields: "Cause:")
     "fl-dep-pnp": {"cause": text("_template.cause"), "town": text("FACILITY_CITY")},
-    "ct-deep": CT, "ct-deep-annual": CT, "ct-deep-archive": CT,
-    "ny-dec-sprtk": NY, "ny-dec-sprtk-web": NY_WEB,
+    # County codes as published (no domain labels); recovered gallons remain separate from discharged gallons.
+    "fl-miami-dade-sso": {"cause": joined(text("DISCCAUSECAT"), text("DISCHARGECAUSE")),
+                           "volume_qualifier": const("estimated"),
+                           "notes": with_unit("ESTGALRECOVER", "gallons recovered (estimated)")},
+    "ct-deep": CT, "ct-deep-annual": CT,
+    "ct-deep-archive": {**CT, "duration_text": lambda raw: with_unit(
+        "CSO_DURATION" if "CSO_DURATION" in raw else "DURATION", "hours", singular="hour")(raw)},
+    "ny-dec-sprtk": NY, "ny-dec-sprtk-web": NY_WEB, "ny-dec-sprtk-2013-2021": NY_HISTORY,
     "md-mde-overflows": {"cause": text("row.overflow_cause"), "duration_text": _md_duration},
+    "md-baltimore-sso": {"cause": text("_cause_text"), "duration_text": text("_duration_text"),
+                         "water_reach": text("_water_reach"),
+                         "notes": lambda r: " ".join(filter(None, (r.get("_water_reach_conflict"),
+                                                                  r.get("_time_uncertainty")))) or None,
+                         "volume_qualifier": lambda r: "estimated" if r.get("EST_VOLUME") is not None else None},
     "nc-dwr-sso-2022-2025": {"cause": text("incident_cause"), "volume_to_water_gal": number("volume_reach_water"),
                              "town": text("city")},
     # the five-day report's fields first, then the 24-hour report's (nc_dwr_sso keeps either naming)
@@ -400,12 +487,13 @@ SOURCES: dict[str, dict] = {
                     "rainfall_label": lambda raw: "Precipitation" if plain_inches("sewage[].precipitation_in")(raw) else None,
                     "overflow_point": text("sewage[].component"), "town": text("report.city")},
     "ga-epd-spills": {"cause": text("row.cause"), "overflow_point": text("row.spill_source"), "town": text("row.city")},
-    "wa-ecology-sewage-spills": {"duration_text": with_unit("row.final_event_duration_hours", "hours")},
+    "wa-ecology-sewage-spills": {"duration_text": with_unit("row.final_event_duration_hours", "hours", singular="hour")},
     "oh-bowling-green-cso-events": {"rainfall_in": plain_inches("row.RAINFALL_BEFORE_EVENT"),
                                     "rainfall_label": lambda raw: "Rainfall before the event" if plain_inches("row.RAINFALL_BEFORE_EVENT")(raw) else None},
     "oh-clyde-cso-notification": {"cause": text("row.cause"), "rainfall_in": plain_inches("row.rain_total_in"),
                                   "rainfall_label": lambda raw: "Total rainfall" if plain_inches("row.rain_total_in")(raw) else None},
-    "oh-neorsd-cso-notification-map": {"volume_qualifier": _neorsd_qualifier},
+    "oh-neorsd-cso-notification-map": {"volume_qualifier": _neorsd_qualifier,
+                                      "duration_text": with_unit("duration_h", "hours", singular="hour")},
     "va-richmond-cso": {"rainfall_in": plain_inches("rain_in"),
                         "rainfall_label": lambda raw: "Rainfall" if plain_inches("rain_in")(raw) else None,
                         "duration_text": with_unit("overflow_duration_hours", "hours")},
@@ -511,12 +599,13 @@ def _same(a, b) -> bool:
     return bool(norm(a)) and norm(a) == norm(b)
 
 
-def detail_of(e: dict) -> dict:
+def detail_of(e: dict, *, clean=None) -> dict:
     """The named detail fields of one record (FIELDS, in that order), empty when its source is not mapped."""
     spec = SOURCES.get(e.get("source_id") or "")
     raw = e.get("raw") if isinstance(e.get("raw"), dict) else {}
     if not spec or not raw:
         return {}
+    clean = clean or _clean
     out = {}
     for f in FIELDS:
         fn = spec.get(f)
@@ -536,12 +625,16 @@ def detail_of(e: dict) -> dict:
         elif f == "volume_qualifier":
             if v not in QUALIFIERS:
                 continue
+        elif f == "sample_results":
+            # The source-specific reader constructs typed, scrubbed observations; never stringify the list.
+            if not isinstance(v, list) or not v:
+                continue
         elif f in OBJECT_FIELDS:
             v = _rate_checked(v)
             if not v:
                 continue
         else:
-            v = _clean(str(v), address=f in ADDRESS_FIELDS)
+            v = clean(str(v), address=f in ADDRESS_FIELDS)
         out[f] = v
     if "rainfall_in" not in out:
         out.pop("rainfall_label", None)
@@ -644,6 +737,26 @@ def states_total(e: dict) -> bool:
             and not (isinstance(e.get("raw"), dict) and estimates_mod.rate_of(e)))
 
 
+def _latest_in_families(by_id, family_of, times, eligible):
+    """Latest eligible member per family, retaining input order for equal publication times.
+
+    All recipients ask for the same maximum; rescanning a family per recipient makes a long
+    notice history quadratic. The lists returned by family_of are shared within this call.
+    """
+    latest = {}
+    for eid in by_id:
+        family = family_of(eid)
+        if family is None or id(family) in latest:
+            continue
+        best = None
+        for e in family:
+            t = times[e["event_id"]]
+            if t is not None and eligible(e) and (best is None or t > times[best["event_id"]]):
+                best = e
+        latest[id(family)] = best
+    return latest
+
+
 def later_totals(events: list[dict], duplicates: set[str] | frozenset = frozenset()) -> set[str]:
     """event ids of the records a later record of the same event (linked as links_of links them) gives a total for, as
     a figure or in words: our computed volume yields to it (a stated total wins; review 6). A record carrying
@@ -651,20 +764,17 @@ def later_totals(events: list[dict], duplicates: set[str] | frozenset = frozense
     by_id = {e["event_id"]: e for e in events if e.get("event_id")}
     dup = lambda x: bool(x.get("duplicate_of")) or x["event_id"] in duplicates   # noqa: E731
     _children, family_of = _families(by_id)
+    times = {eid: _t(e) for eid, e in by_id.items() if family_of(eid)}
+    latest = _latest_in_families(
+        by_id, family_of, times,
+        lambda x: not dup(x) and (x["_states_total"] if "_states_total" in x else states_total(x)))
     out = set()
     for eid, e in by_id.items():
         fam = family_of(eid)
-        mine = _t(e) if fam else None
-        if not fam or mine is None:
-            continue
-        for x in fam:
-            if x is e or dup(x):
-                continue
-            tx = _t(x)
-            total = x["_states_total"] if "_states_total" in x else states_total(x)
-            if tx is not None and tx > mine and total:
-                out.add(eid)
-                break
+        mine = times.get(eid)
+        x = latest.get(id(fam))
+        if x is not None and mine is not None and times[x["event_id"]] > mine:
+            out.add(eid)
     return out
 
 
@@ -677,6 +787,8 @@ def links_of(events: list[dict], duplicates: set[str] | frozenset = frozenset())
     times = {eid: _t(e) for eid, e in by_id.items()}
     # families: the records joined by parent links within one source (union-find)
     children, family_of = _families(by_id)
+    latest = _latest_in_families(
+        by_id, family_of, times, lambda x: isinstance(x.get("volume_gal"), (int, float)) and not dup(x))
     # another source's record of the same event, as the pipeline paired them (Georgia EPD and EPA's eRule report)
     other = defaultdict(set)
     for e in by_id.values():
@@ -710,10 +822,8 @@ def links_of(events: list[dict], duplicates: set[str] | frozenset = frozenset())
         fam = family_of(eid)
         if fam and e.get("event_type") in DISCHARGE_TYPES and not dup(e):
             mine = times[eid]
-            later = [x for x in fam if x is not e and isinstance(x.get("volume_gal"), (int, float)) and not dup(x)
-                     and mine is not None and times[x["event_id"]] is not None and times[x["event_id"]] > mine]
-            if later:
-                x = max(later, key=lambda x: times[x["event_id"]])
+            x = latest.get(id(fam))
+            if x is not None and mine is not None and times[x["event_id"]] > mine:
                 q = _qualifier(x)
                 if not (x["volume_gal"] == e.get("volume_gal") and q == _qualifier(e)):
                     add["later_volume"] = {k: v for k, v in {
@@ -748,8 +858,11 @@ def estimate_cell(v: dict | None) -> dict | None:
 def enrich(events: list[dict], duplicates: set[str] | frozenset = frozenset()) -> None:
     """Writes `detail` (only when the source gives a mapped field), `later_volume`, `linked_records`, and our own
     `volume_estimate` and `end_estimate` (export/estimates.py) onto each record in place. duplicates: as links_of."""
+    # Source labels and reasons recur across history files. The scrub is a pure text transform;
+    # bound its memo and discard it after this pass, without retaining records or changing raw.
+    clean = lru_cache(maxsize=4096)(_clean)
     for e in events:
-        d = detail_of(e)
+        d = detail_of(e, clean=clean)
         if d:
             e["detail"] = d
         else:

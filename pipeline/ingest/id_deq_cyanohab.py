@@ -66,6 +66,9 @@ Records (a list read as a snapshot; never an invented date)
     as End or No); a failed or partial read ends nothing. data/rules.json beach_reason reads those three fields: a
     closure whose entry gives no water-quality reason is listed without a colour (decision 40). Identity:
     dhw:<location slug>:<issue slug>:<first read's UTC date>.
+  - Toxin (DHW's coded name, not a concentration) and LongInfoURL (the map's health-advisory link) are retained
+    with the map objectid, layer URL and observation time. They are episode detail, separate from the frozen point;
+    a failed map read preserves the previous observation, and a closed episode never acquires a later toxin.
   Privacy: the table carries no personal data today; every row, DHW's names and the carried state go through
   ingest/ia_id_privacy.scrub before any save (raw, state, records, error text), and errors never quote the page.
 
@@ -80,6 +83,7 @@ import re
 import sys
 from datetime import date
 from pathlib import Path
+from urllib.parse import urlsplit
 
 import requests
 
@@ -94,7 +98,7 @@ URL = "https://www.deq.idaho.gov/water-quality/surface-water/cyanobacteria-harmf
 LAYER = ("https://services1.arcgis.com/CNPdEkvnGl65jCX8/arcgis/rest/services/"
          "Public_Health_Advisories_for_Recreational_Waters_in_Idaho_V2_view/FeatureServer/0")
 LAYER_QUERY = (LAYER + "/query?where=1%3D1&outFields=objectid,LocationDiscription,RiskTier,DisplayOnWebsite,Issue,"
-               "Issue_other,WebNote&returnGeometry=true&outSR=4326&f=json")
+               "Issue_other,WebNote,Toxin,LongInfoURL&returnGeometry=true&outSR=4326&f=json")
 LAYER_ITEM = "https://www.arcgis.com/home/item.html?id=8f6fe24f43d044fc8a9e88aa721f101d"
 STATE_PATH = BUILD_DIR / "id-deq-cyanohab-state.json"
 AUTHORITY = ("Idaho Department of Health and Welfare and Idaho Department of Environmental Quality "
@@ -211,8 +215,26 @@ def parse_layer(doc: dict) -> dict[str, dict]:
         except (TypeError, ValueError):
             lat = lon = None
         out[key(name)] = {"name": name, "tier": clean(a.get("RiskTier")) or None,
-                          "shown": clean(a.get("DisplayOnWebsite")) or None, "lat": lat, "lon": lon}
+                          "shown": clean(a.get("DisplayOnWebsite")) or None, "lat": lat, "lon": lon,
+                          "objectid": a.get("objectid"), "toxin": a.get("Toxin") if a.get("Toxin") in TOXINS else None,
+                          "release_url": release_url(a.get("LongInfoURL"))}
     return out
+
+
+TOXINS = {"Anatoxin a", "Cylindrospermopsin", "Microcystins", "Other"}  # DHW field domain, 2026-11-22
+
+
+def release_url(value) -> str | None:
+    """Keep a public HTTP(S) agency link, never credentials, contact text or tracking/query data."""
+    if not isinstance(value, str) or scrub(value) != value or re.search(r"[\s<>]", value):
+        return None
+    try:
+        u = urlsplit(value)
+        if u.scheme not in {"https", "http"} or not u.hostname or u.username or u.password or u.query or u.fragment:
+            return None
+    except ValueError:
+        return None
+    return value
 
 
 def is_bloom_issue(issue) -> bool:
@@ -245,6 +267,7 @@ def parse_issues(doc: dict) -> list[dict]:
         out.append({"objectid": a.get("objectid"), "name": name, "issue": scrub(clean(a.get("Issue"))),
                     "issue_other": scrub(clean(a.get("Issue_other"))) or None,
                     "web_note": scrub(clean(a.get("WebNote"))) or None,
+                    "release_url": release_url(a.get("LongInfoURL")),
                     "shown": clean(a.get("DisplayOnWebsite")) or None, "lat": lat, "lon": lon})
     return out
 
@@ -334,6 +357,10 @@ def _scrub_points(points: dict) -> dict:
     for v in points.values():
         if isinstance(v, dict):
             v = dict(v, name=scrub(clean(v.get("name"))))
+            if "toxin" in v:
+                v["toxin"] = v["toxin"] if v["toxin"] in TOXINS else None
+            if "release_url" in v:
+                v["release_url"] = release_url(v["release_url"])
             out[key(v["name"] or "")] = v
     return out
 
@@ -346,12 +373,17 @@ def scrub_state(state: dict) -> dict:
         if isinstance(ep.get("row"), dict):
             ep["row"] = scrub_row(ep["row"])
             if isinstance(ep.get("point"), dict):
-                ep["point"] = dict(ep["point"], name=scrub(clean(ep["point"].get("name"))))
+                ep["point"] = next(iter(_scrub_points({"point": ep["point"]}).values()))
             old = ep.get("water_key") or ""
             new = (("unread-" + slug(" ".join(str(x) for x in ep["row"].values()))[:60]) if old.startswith("unread-")
                    else f"{slug(ep['row']['water'])}:{slug(ep['row']['county'])}")
             if new != old and sid.startswith(old):
                 ep["water_key"], sid = new, new + sid[len(old):]
+        if isinstance(ep.get("dhw_detail"), dict):
+            d = ep["dhw_detail"]
+            ep["dhw_detail"] = {"objectid": d.get("objectid"),
+                                "toxin": d.get("toxin") if d.get("toxin") in TOXINS else None,
+                                "release_url": release_url(d.get("release_url")), "observed_at": d.get("observed_at")}
         eps[sid] = ep
     if "episodes" in state:
         state["episodes"] = eps
@@ -455,6 +487,11 @@ def update(state: dict, rows: list[dict], at: str, layer: dict | None, layer_par
         elif at > last["to"]:
             last["to"] = at
         ep.update(last_seen=at, row=r)
+        # Detail is versioned with this episode, separately from its immutable placement point.
+        current = (layer or {}).get(key(r["water"]))
+        if current is not None:
+            ep["dhw_detail"] = {"objectid": current.get("objectid"), "toxin": current.get("toxin"),
+                                "release_url": release_url(current.get("release_url")), "observed_at": at}
         # the episode keeps the point it was first placed at: a later move of DHW's marker never rewrites an earlier
         # record's place (lessons 3); an episode with no point yet takes the first one the layer gives
         if not ep.get("point"):
@@ -498,6 +535,12 @@ def records(state: dict) -> list[dict]:
                "level_rule": LEVEL_RULE, "advisory_noun": "Algal bloom health advisory",
                "date_note": ("the Collection Date is the date of the sample or image the row rests on (DEQ's "
                              "column), not an advisory's issue date")}
+        detail = ep.get("dhw_detail") or {}
+        if detail:
+            raw.update(dhw_objectid=detail.get("objectid"),
+                       dhw_toxin=detail.get("toxin") if detail.get("toxin") in TOXINS else None,
+                       dhw_release_url=release_url(detail.get("release_url")),
+                       dhw_detail_observed_at=detail.get("observed_at"), dhw_detail_source_url=LAYER)
         lat = lon = None
         if pt:
             lat, lon = pt["lat"], pt["lon"]
@@ -599,6 +642,8 @@ def dhw_records(state: dict) -> list[dict]:
         words = issue + (f": {it['issue_other']}" if it.get("issue_other") else "")
         raw = {"dhw_objectid": it.get("objectid"), "dhw_issue": issue, "dhw_issue_other": it.get("issue_other"),
                "dhw_web_note": it.get("web_note"),
+               "dhw_release_url": release_url(it.get("release_url")),
+               "dhw_detail_observed_at": ep.get("last_seen"), "dhw_detail_source_url": LAYER,
                "location_as_listed": it["name"], "part": part, "state": "ID", "first_seen_at": ep["first_seen"],
                "_last_seen_in_source": ep.get("last_seen"), "time_zone": zone, "start_basis": DHW_START_BASIS,
                "category_basis": ("DHW's Issue field: a Beach Closure is a beach closure, Swimmer's Itch and Other "

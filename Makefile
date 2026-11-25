@@ -3,8 +3,10 @@
 #   make ingest    run every feed module in pipeline/ingest/ (helpers marked "not a feed" and
 #                  INGEST_SKIP are left out), then the modules in INGEST_EXTRA (conditions); one
 #                  failing feed does not stop the others. New York: ny_beaches_habs, ny_sprtk,
-#                  ny_sprtk_web, nyc_dep_advisories (sorted order matters: ny_sprtk_web dedupes
-#                  against the ny_sprtk events file, so it must run after ny_sprtk). Pennsylvania:
+#                  ny_sprtk_history, ny_sprtk_web, nyc_dep_advisories (sorted order matters:
+#                  ny_sprtk_history and ny_sprtk_web dedupe against the ny_sprtk events file, so they
+#                  must run after ny_sprtk; ny_sprtk_history, the older workbook of 2013 to August 2021,
+#                  asks DEC at most weekly with If-Modified-Since). Pennsylvania:
 #                  pa_alcosan (SOAK log pages 1-3 + news posts; `--backfill` once to load 2025-),
 #                  pa_crw (stub: licence, fetches nothing), pa_erie (last 30 days; `--backfill` from
 #                  2025-01-01), pa_habs_beaches (PA DOH HAB layer + Erie County beach sheets),
@@ -36,7 +38,9 @@
 #                  INGEST_SNAPSHOTS (so a generic feed can dedupe against a module's events file); blocks with
 #                  live: false (ports being compared with their modules) are not run.
 #                  Florida: fl_dep_pnp (DEP Public Notice of Pollution, last 30 days; `--backfill` once
-#                  for every notice since 2017), fl_dep_habs (DEP algal bloom visits), fl_doh_beaches
+#                  for every notice since 2017), fl_miami_dade_sso (RER/DERM all-utility county history;
+#                  runs after fl_dep_pnp and links matching records to one DEP event, including on a failed read),
+#                  fl_dep_habs (DEP algal bloom visits), fl_doh_beaches
 #                  (Healthy Beaches result pages: a full pass starts at most every 20 hours and is spread over
 #                  hourly runs, at most 6 minutes of pages a run, resumed where it stopped)
 #                  Michigan: mi_egle_mienviro (EGLE MiEnviro CSO/SSO List: every open report and the completed

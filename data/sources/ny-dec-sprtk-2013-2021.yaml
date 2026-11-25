@@ -1,0 +1,32 @@
+id: "ny-dec-sprtk-2013-2021"
+name: "DEC Sewage Pollution Right to Know workbook 'Sewage_Discharge_Reports.xlsx' (discharge reports and NY-Alert notices, 2013 to August 2021)"
+url: "https://extapps.dec.ny.gov/fs/data/Sewage_Discharge_Reports.xlsx"
+homepage: "https://dec.ny.gov/environmental-protection/water/water-quality/sewage-pollution-right-to-know"
+kind: "csv"
+level: "state"
+# Feed row: the source id written by pipeline/ingest/ny_sprtk_history.py
+#   (data/build/events/ny-dec-sprtk-2013-2021.json). The newer workbook, SPRTK_Data.xlsx (January 2021 on), is the
+#   feed ny-dec-sprtk (pipeline/ingest/ny_sprtk.py); a notice in both workbooks is listed from that feed.
+# Built 2026-11-22: DEC's older SPRTK workbook, unchanged since 2023-07-11 (Last-Modified), 3,809,544 bytes.
+#   54 tabs and 31,657 data rows: the written discharge reports of 2013 to May 2015 (one tab), the NY-Alert notices of
+#   late 2015 to May 2016 (one tab), and one tab per month or batch of NY-Alert notices from May 2016 to August
+#   2021 (four column layouts; the last tab's header row stands after its first two notices). No notification
+#   ids, no posting times.
+# Clock (the module's docstring has the evidence): the NY-Alert tabs from June 13, 2018 store New York local time
+#   shifted back by the UTC offset, the same rule as the newer workbook's DD/MON tabs; the earlier tabs store local
+#   time. Read at most weekly with If-Modified-Since; a run between reads keeps the records.
+# Privacy (review 2026-11-22): the operator's narrative columns (descriptions, instructions, location notes,
+#   corrective actions, unnamed columns) are never read into a record or the saved raw page; raw._withheld names them.
+cadence: "frozen: DEC last changed the file on 2023-07-11; the feed asks for it at most weekly"
+license: "No licence stated. NY-Alert notifier terms (Wayback copy of sprtknotifierterms.pdf, 2025-11-14): 'All data provided remains under the ownership of DEC, which has the right to remove, add, delete, and view the data stored on the NY-ALERT databases.'"
+attribution: "NYS DEC"
+enabled: true
+role: "events"
+event_types: ["cso", "sso", "bypass", "plant_bypass", "blended"]
+states: ["NY"]
+registry_ids: ["ny-dec-sewage-discharge-reports-xlsx"]
+access: ["csv"]
+access_detail: "Excel workbook, no key. https://www.dec.ny.gov/fs/data/Sewage_Discharge_Reports.xlsx answers 301 to https://extapps.dec.ny.gov/fs/data/Sewage_Discharge_Reports.xlsx (200, 3,809,544 bytes, Last-Modified 2023-07-11, read 2026-11-22). The Internet Archive holds captures (2021-09-29 and later); the feed reads the latest one only when DEC does not answer."
+machine_readable: true
+legal_basis: "ECL 17-0826-a; 6 NYCRR 750-2.7"
+checked: "2026-11-22"

@@ -134,10 +134,9 @@ def test_new_fields_are_named_plainly_and_reach_the_csv_as_its_last_columns():
     # after every earlier column, so a reader of those by position is not moved (New York's columns follow them)
     i = csv_export.COLUMNS.index("listed_without_colour")
     assert csv_export.COLUMNS[i + 1:i + 3] == ["resolution", "notes"]
-    # every field has a column; New York's rate is written as its text (rate_text)
-    ny = {"description", "location_description", "rate"}
-    assert set(csv_export.DETAIL_COLUMNS) | set(csv_export.LATER_DETAIL_COLUMNS) | ny == set(D.FIELDS)
-    assert {"description", "location_description", "rate_text"} <= set(csv_export.COLUMNS)
+    # every field has a column, a few under a CSV name of their own
+    csv_name = {"rate": "rate_text", "sample_results": "sample_results_json", "town": "town_named"}
+    assert [f for f in D.FIELDS if csv_name.get(f, f) not in csv_export.COLUMNS] == []
 
 
 # ---------------------------------------------------------------- Astra review 2026-11-21 (detail-fields-astra.md)

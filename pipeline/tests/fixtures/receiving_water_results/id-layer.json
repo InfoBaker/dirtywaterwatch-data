@@ -1,0 +1,48 @@
+{
+  "features": [
+    {
+      "attributes": {
+        "objectid": 104,
+        "LocationDiscription": "Crane Creek Reservoir",
+        "RiskTier": "Health Advisory",
+        "DisplayOnWebsite": "Yes",
+        "Issue": "Cyanobacterial Bloom",
+        "Toxin": null,
+        "LongInfoURL": "https://www.deq.idaho.gov/water-quality/surface-water/cyanobacteria-harmful-algal-blooms/"
+      }
+    },
+    {
+      "attributes": {
+        "objectid": 115,
+        "LocationDiscription": "Hordemann Pond",
+        "RiskTier": "Health Alert",
+        "DisplayOnWebsite": "Yes",
+        "Issue": "Cyanobacterial Bloom",
+        "Toxin": "Microcystins",
+        "LongInfoURL": "https://www.deq.idaho.gov/water-quality/surface-water/cyanobacteria-harmful-algal-blooms/"
+      }
+    },
+    {
+      "attributes": {
+        "objectid": 122,
+        "LocationDiscription": "CJ Strike - Bruneau Arm",
+        "RiskTier": "Health Advisory",
+        "DisplayOnWebsite": "Yes",
+        "Issue": "Cyanobacterial Bloom",
+        "Toxin": "Microcystins",
+        "LongInfoURL": "https://www.deq.idaho.gov/water-quality/surface-water/cyanobacteria-harmful-algal-blooms/"
+      }
+    },
+    {
+      "attributes": {
+        "objectid": 136,
+        "LocationDiscription": "Mann Lake",
+        "RiskTier": "Health Advisory",
+        "DisplayOnWebsite": "Yes",
+        "Issue": "Cyanobacterial Bloom",
+        "Toxin": "Microcystins",
+        "LongInfoURL": "https://www.deq.idaho.gov/water-quality/surface-water/cyanobacteria-harmful-algal-blooms/"
+      }
+    }
+  ]
+}

@@ -1,11 +1,34 @@
 #!/usr/bin/env python3
 """What the workflows keep in R2 between runs (bucket dirtywaterwatch-data, prefix state/), and the tarballs of it.
 
-Three state objects:
-  state/build.tar.gz       data/build whole: the ingesters' history and snapshot files, the reach traces
+State objects:
+  state/frozen.tar.gz      Maryland's 2005-2023 Socrata table, California's 2006-order SSOs and New York's
+                           2013-2021 workbook: events plus their own state files (FROZEN_FEEDS). Restored into
+                           data/build beside the hot state every run, before counts, guard or ingestion. Saved
+                           on migration, changed membership, unknown markers or changed file bytes/source versions:
+                           MD meta.table_version, CA state's last_modified and sha256, NY state's sha256. Checked/read clocks
+                           are not source versions. Michigan, Baltimore, Houston and Miami-Dade remain hot:
+                           those histories still include changing/current reports.
+                           A manifest checks every member digest and requires every named events file before
+                           extraction. A fetch/unpack failure stops the run. Missing is allowed only before the
+                           first split; frozen-required.json in hot state makes subsequent absence fatal.
+                           Frozen records never move out of data/build/events. pack-build excludes identical copies while
+                           save-check and guard see the whole tree. A frozen source drop holds both restored
+                           objects, retains the frozen primary, saves recovered hot state, then fails the step.
+                           Damaged local files are also retained under data/build/history-recovery/.
+                           A tiny frozen-runtime.json in hot state carries metadata and state checkpoints so
+                           weekly read schedules and 304 checks survive hours with no frozen upload. It is
+                           applied only when its source versions match the restored frozen manifest, and never over
+                           a hot file; no records are copied there. Reuse requires identical file bytes, including
+                           operational clocks and relinking changes, even when the source version is unchanged.
+                           Seven daily copies state/daily/frozen-<weekday>.tar.gz and monthly copies
+                           state/monthly/frozen-YYYY-MM.tar.gz (+ .json markers) use the same
+                           bounded retry/confirmation protocol as build; frozen-generations.json stays hot.
+                           Copies use the restored archive even on a run that does not upload the primary object.
+  state/build.tar.gz       data/build except the frozen manifest and files (pack-build): the ingesters' history and snapshot files, the reach traces
                            (data/build/reaches/, build/reaches.py: its NLDI and NHDPlus answers are kept there, 30
                            days), the provisional-outfall and geocoder caches, the private name blocklist. Made with
-                           tar by the workflow; this script checks its size (check-size) and restores it
+                           pack-build; this script checks its size (check-size) and restores it
                            (unpack-build: data/build members only).
   state/raw-cache.tar.gz   the answers in data/raw that the code reads back (RAW_CACHE below, with the reasons),
                            packed and restored by this script. Everything else in data/raw is a bulk raw save that
@@ -26,7 +49,83 @@ Three state objects:
                            not used; the refresh saves the folder back here (pack-obl) whenever the API changed it,
                            so this object is the last good copy, the fallback when the API is down.
 
-Restore order: build.tar.gz, then raw-cache.tar.gz (the NY workbook entry is named by a data/build file). Save: both
+  state/attains.tar.gz     the state assessments joined to the water records (data/build/attains/attains-waters.json,
+                           pipeline/build/attains.py, docs/attains.md), written only by the weekly ATTAINS workflow
+                           (.github/workflows/attains.yml) and restored read only by the hourly refresh after the build
+                           state (unpack-attains), so the export reads this week's file; the copy that rides in
+                           build.tar.gz is the fallback when this object cannot be fetched.
+  state/attains-geom.tar.gz the ATTAINS assessment-unit geometry per state (data/raw/attains/geom/<ST>.json.gz and its
+                           manifest.json), public map-layer answers kept so the weekly job fetches a state again only
+                           when EPA reloaded it; written and read by the weekly job only (unpack-attains).
+
+History copies of state/build.tar.gz (2026-11-21). R2 keeps no versions and the bucket has no expiry rule, so each
+save of state/build.tar.gz replaces the only copy: a run that ends well with less history than it restored (a module
+that rewrites its file from a short window, a code change, a bad merge) would lose the rest for good. The refresh
+keeps three kinds of copy of the same archive, private like it, in the bucket dirtywaterwatch-data under state/held/,
+state/daily/ and state/monthly/ only (GENERATION_KEY; put() writes nothing else, never current/ or any public path).
+Every call is `wrangler r2 object get|put`, which the workflows route to R2's S3 endpoint (scripts/wrangler-guard.sh,
+scripts/r2-s3-keys.sh), as the state save does:
+  state/daily/build-<Mon..Sun>.tar.gz    the first save of each UTC day: a ring of seven keys, each overwritten a week
+                                         later, so nothing is listed or deleted
+  state/monthly/build-<YYYY-MM>.tar.gz   the first save of each calendar month (UTC); kept
+  state/held/build-<date>-<run>.tar.gz   the archive as restored (the history before the run), uploaded by the
+                                         history guard when a source lost records; kept. <run> is the Actions run id,
+                                         with -a<attempt> for a re-run attempt
+  state/daily/build-<Mon..Sun>.json and state/monthly/build-<YYYY-MM>.json
+                                         each copy's marker (its key, date and run; a few hundred bytes), uploaded
+                                         only after the copy
+The history guard. After BOTH restores the workflow keeps the restored archives (restored-build.tar.gz) and its
+records per source (counts: restored-counts.json; both in the runner's workspace, outside data/build). Before the
+save, guard counts data/build/events again. A source whose records fell by at least DROP_MIN_PERCENT percent and at
+least DROP_MIN_RECORDS records, or whose events file disappeared or can no longer be read, is a drop: one ::warning::
+per source with its counts, the restored archive held, and data/build/history-guard.json written (time, run, each
+drop's counts, the held key and whether it uploaded; earlier drop runs kept below it). Hot-source drops still save.
+Frozen-source drops retain frozen and save recovered hot history before failing. No drop: nothing held.
+No restored state (a first run): nothing compared. A missing data/build counts as every source gone. Another case that
+stops the save is save-check's: data/build/events missing or holding no events file while the restored state had some;
+the save step then fails and the stored state stands.
+Time. The held copy, the copies, their markers and the marker reads are optional: each has a total deadline, retries
+included (OPTIONAL_CAP_S: 10 minutes for an archive, 1 for a marker), its process group killed when it runs out, and
+none runs past SAVE_RESERVE_S (15 minutes) before the job's limit (refresh.yml timeout-minutes, read by job_limit_s), counted from the job's start the restore
+step writes to job-started; with less time left an operation is skipped with a warning.
+The generation record, data/build/state-generations.json, travels with the state. Before the archive is made,
+generations plan records the copies the previous run left pending whose markers name that run (one small read each),
+then writes the copies due (the day's daily when the record does not hold this UTC date for that weekday, the month's
+monthly when it does not hold this month) as this run's pending ones, claiming nothing for them. After the save,
+generations put uploads the saved archive to each, then its marker. A failed upload is a warning, never fails the run
+and leaves no marker that names the run, so the next run finds the copy still due and makes it again. The record
+never claims a copy that was not uploaded (it can miss one whose marker failed; that copy is simply made again).
+Cost at R2 list prices (Standard storage $0.015 per GB-month, Class A operations $4.50 per million, Class B $0.36 per
+million; no free allowance netted out), for a 123 MB archive: the daily ring holds 7 x 123 MB = 0.86 GB, $0.013 a
+month; each monthly copy adds 0.123 GB, $0.0018 a month, kept (12 copies, 1.48 GB, $0.022 a month after a year); the
+uploads are about 63 Class A operations a month (31 copies and 31 markers), $0.0003, and the marker reads about 31
+Class B operations, $0.00001. A held copy is one more Class A operation and 0.123 GB ($0.0018 a month) until someone
+deletes it. In all about $0.015 a month at first, $0.035 a month after a year and $0.30 over the first year; every
+figure grows in step with the archive.
+Migration and membership changes: before replacing frozen, save a COMPLETE hot checkpoint. Only after the
+frozen upload succeeds may pack-build --saved-frozen exclude its byte-identical members. A restored object kept
+by this run also authorizes exclusion of identical files. Without that argument it saves all history files.
+frozen-hot.json records hashes for diagnostics; both readers preserve EVERY hot file when overlaying frozen,
+including when the map is missing, empty, incomplete or malformed. Historical schemas stay accepted independently
+of FROZEN_FEEDS. Demoted feeds therefore reach saved hot state before their frozen copy is retired. A failed
+checkpoint leaves both stored objects intact; a later failure leaves a complete hot checkpoint and old/new frozen.
+Missing/invalid version markers always force a save. Baseline membership, digests and versions come from the restored
+frozen manifest, separately from the complete in-memory history used by the guard.
+
+Rollback, by hand (never automated): the owner's operator sets state/PAUSE and waits for any running refresh to
+finish. Preserve both current objects under private held keys first. To restore split-code history, choose a build
+copy and an appropriate frozen monthly/held copy, restore both in a scratch directory, and compare the combined
+per-source counts before putting either primary object; put frozen first, then build. Both held objects carry the
+same date/run suffix. Monthly copies are the first successful save of the month, not necessarily the same run.
+To roll back to code predating the split, reconstruct a WHOLE build: unpack the chosen build and frozen archives,
+remove frozen-required.json, frozen-manifest.json, frozen-runtime.json and frozen-generations.json from the scratch
+build, tar data/build whole, verify all per-source counts, then put it as state/build.tar.gz. Deploy the old reader
+before clearing the pause. Never restore only a reduced build with an old reader. Leave frozen and its generations
+in R2 for recovery; the operator may remove them later. Generation records go back with the chosen build: preserve
+any daily/monthly keys they may cause a subsequent run to overwrite before clearing state/PAUSE. No automated rollback.
+
+
+Restore order: build.tar.gz, frozen.tar.gz, then raw-cache.tar.gz (the NY workbook entry is named by a data/build file). Save: both
 only after a run that ended well (a cancelled or failed refresh never overwrites the saved state). A state object
 that is there but cannot be fetched (fetch exits 1) is never saved over: the refresh stops when build.tar.gz cannot be
 fetched or unpacked (a run without its history and blocklist would publish and then save a history that starts from
@@ -41,6 +140,16 @@ that cannot be read is replaced by the next good run's.
                                                             absolute or '..' paths, AppleDouble '._*' files and
                                                             anything else are skipped and counted (a tarball made
                                                             elsewhere, or by an older list, cannot widen the set)
+    python3 -I scripts/state_paths.py pack-build FILE [--saved-frozen FILE]
+                                                            full hot checkpoint, or exclude byte-identical frozen members
+    python3 -I scripts/state_paths.py pack-frozen FILE [--baseline restored-frozen.json]
+                                                            exit 0 packed after membership/version/file-byte change;
+                                                            3 unchanged (no primary upload); 1 invalid/incomplete
+    python3 -I scripts/state_paths.py unpack-frozen FILE    validate and restore frozen members into data/build
+    python3 -I scripts/state_paths.py frozen-baseline FILE snapshot saved manifest and combined membership before ingestion
+    python3 -I scripts/state_paths.py frozen-required      exit 0 split marker present, 3 legacy/first-run state
+    python3 -I scripts/state_paths.py generations plan|put [FILE] --archive frozen --record data/build/frozen-generations.json
+                                                            daily/monthly frozen copies, even when the primary is unchanged
     python3 -I scripts/state_paths.py unpack-build FILE     restore state/build.tar.gz: the whole archive is read and
                                                             checked first; only data/build and regular files and
                                                             folders under it; a link, special file, absolute or '..'
@@ -77,6 +186,13 @@ that cannot be read is replaced by the next good run's.
                                                             .dww-changed there); exit 0 packed, 3 nothing to save
     python3 -I scripts/state_paths.py obl-not-saved         that pack was not uploaded: data/build/obl-changes.json's
                                                             national pull and changes until go back to before the run
+    python3 -I scripts/state_paths.py unpack-attains FILE [--only cache|geom]
+                                                            restore state/attains.tar.gz (--only cache:
+                                                            data/build/attains/attains-waters.json) or
+                                                            state/attains-geom.tar.gz (--only geom:
+                                                            data/raw/attains/geom/<ST>.json.gz and manifest.json),
+                                                            regular files; the whole archive is read and checked first,
+                                                            and anything else refuses it whole (exit 1, nothing written)
     python3 -I scripts/state_paths.py check-size FILE [--max-mb N] [--hard-mb N]
                                                             exit 1 when a tarball is over the cap; with --hard-mb,
                                                             over the cap is a warning and only over N fails
@@ -85,6 +201,21 @@ that cannot be read is replaced by the next good run's.
                                                             3 when there is no such object (a first run), 1 when it
                                                             could not be fetched (the workflow then keeps the stored
                                                             object: a run that could not restore it never saves over it)
+    python3 -I scripts/state_paths.py counts SRC OUT        records per source (records, duplicate_of,
+                                                            missing_from_source) of SRC, the data/build folder or a
+                                                            state tarball (read, never unpacked), as JSON in OUT
+    python3 -I scripts/state_paths.py guard COUNTS [--restored FILE] [--out FILE] [--run-id ID]
+                                                            the history guard (above) against COUNTS, the counts taken
+                                                            at the restore; FILE (default restored-build.tar.gz) is
+                                                            held on a drop; exit 0 (the save goes on)
+    python3 -I scripts/state_paths.py save-check COUNTS [--restored FILE] [--build DIR] [--keep-frozen]
+                                                            exit 1 on unsafe loss; --keep-frozen recovers frozen-only
+                                                            drops and exits 3: retain frozen, save full hot, then fail
+    python3 -I scripts/state_paths.py generations plan|put [FILE] [--record FILE] [--run-id ID]
+                                                            plan: record the previous run's copies their markers name,
+                                                            print the copies due and write them as pending; put FILE:
+                                                            upload the saved archive to them, then their markers;
+                                                            exit 0 (a failed upload is a warning)
 
 The cap is 200 MB (STATE_MAX_MB in the environment, or --max-mb, overrides it). The build state's save warns over the
 cap and fails only over wrangler's upload limit (300 MiB, --hard-mb 314), where the upload would fail anyway: a build
@@ -99,14 +230,17 @@ from __future__ import annotations
 
 import argparse
 import gzip
+import hashlib
 import json
 import os
 import re
+import signal
 import subprocess
 import sys
 import tarfile
 import time
 import zlib
+from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
@@ -115,7 +249,13 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_MAX_MB = 200.0
 WRANGLER_MAX_MB = 314.0          # wrangler r2 object put refuses a file over 300 MiB (314.6 MB)
 BUCKET = "dirtywaterwatch-data"
-STATE_KEY = re.compile(r"state/[a-z0-9][a-z0-9._-]*\.tar\.gz|state/PAUSE")   # state/PAUSE: the shared pause switch
+# the history copies of state/build.tar.gz (put() writes these keys only; never current/ or any public path)
+WEEKDAYS = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+GENERATION_KEY = re.compile(r"state/daily/(?:build|frozen)-(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\.(?:tar\.gz|json)"
+                            r"|state/monthly/(?:build|frozen)-[0-9]{4}-(?:0[1-9]|1[0-2])\.(?:tar\.gz|json)"
+                            r"|state/held/(?:build|frozen)-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9a-z][0-9a-z-]{0,39}\.tar\.gz")
+# state/PAUSE: the shared pause switch; the history copies may be fetched too (to look at one before a rollback)
+STATE_KEY = re.compile(r"state/[a-z0-9][a-z0-9._-]*\.tar\.gz|state/PAUSE|" + GENERATION_KEY.pattern)
 # wrangler's answer for a key that is not there ("The specified key does not exist."): a first run, not a failure
 MISSING = re.compile(r"specified key does not exist|NoSuchKey", re.I)
 FETCHED, ABSENT, FAILED = 0, 3, 1
@@ -270,25 +410,69 @@ def check_size(path: Path, cap_mb: float, label: str | None = None, hard_mb: flo
     return True
 
 
-def fetch(key: str, out: Path, tries: int = 3, wrangler: str | None = None) -> int:
+def run_killable(cmd: list[str], timeout: float) -> tuple[int | None, str]:
+    """(exit code, output) of cmd, stdout and stderr together; (None, the reason) when it could not start or ran past
+    timeout, in which case its whole process group (wrangler's filter and the AWS CLI it starts) is killed."""
+    try:
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors="replace",
+                             start_new_session=True)
+    except OSError as ex:
+        return None, type(ex).__name__
+    try:
+        out, _ = p.communicate(timeout=max(timeout, 0.1))
+    except subprocess.TimeoutExpired:
+        try:
+            os.killpg(p.pid, signal.SIGKILL)
+        except OSError:
+            p.kill()
+        try:
+            p.communicate(timeout=10)
+        except subprocess.TimeoutExpired:
+            pass
+        return None, "TimeoutExpired"
+    return p.returncode, out or ""
+
+
+def _attempts(tries: int, budget_s: float | None, per_try_s: float):
+    """The timeouts of up to `tries` attempts: per_try_s each, or with a total budget (retries and pauses included)
+    what is left of it. Yields (attempt number, timeout); the caller sleeps between attempts with pause()."""
+    end = None if budget_s is None else time.monotonic() + budget_s
+    for n in range(tries):
+        left = per_try_s if end is None else min(per_try_s, end - time.monotonic())
+        if left < 1:
+            return
+        yield n, left
+
+
+def _pause(n: int, tries: int, budget_end: float | None, pause: float) -> bool:
+    """Sleep before attempt n + 1; False when there is none, or no time for it within the budget."""
+    if n >= tries - 1:
+        return False
+    wait = pause * (n + 1)
+    if budget_end is not None and time.monotonic() + wait + 1 >= budget_end:
+        return False
+    time.sleep(wait)
+    return True
+
+
+def fetch(key: str, out: Path, tries: int = 3, wrangler: str | None = None, budget_s: float | None = None) -> int:
     """Get a state object with wrangler: FETCHED (0), ABSENT (3: wrangler says there is no such key) or FAILED (1:
-    anything else, after `tries` attempts). Never leaves a partial file behind on ABSENT or FAILED."""
+    anything else, after `tries` attempts). Never leaves a partial file behind on ABSENT or FAILED. budget_s: a total
+    deadline, retries included, for an optional read (a generation marker); without it each attempt has 300 s."""
     if not STATE_KEY.fullmatch(key):
         raise ValueError(f"not a state object key: {key!r}")
     cmd = [wrangler or os.environ.get("WRANGLER") or "wrangler", "r2", "object", "get", f"{BUCKET}/{key}",
            "--file", str(out), "--remote"]
     pause = float(os.environ.get("STATE_FETCH_RETRY_S") or 15)
+    if budget_s is not None and budget_s < MIN_OPTIONAL_S:
+        say(f"{key}: not fetched, skipped ({max(budget_s, 0):.0f} s left for it, kept for the state save)")
+        return FAILED
+    end = None if budget_s is None else time.monotonic() + budget_s
     last = "no answer"
-    for n in range(tries):
+    for n, timeout in _attempts(tries, budget_s, 300):
         out.unlink(missing_ok=True)
-        try:
-            p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors="replace",
-                               timeout=300)
-        except (OSError, subprocess.TimeoutExpired) as ex:
-            p, text = None, f"{type(ex).__name__}"
-        else:
-            text = p.stdout or ""
-        if p is not None and p.returncode == 0 and out.is_file():
+        rc, text = run_killable(cmd, timeout)
+        if rc == 0 and out.is_file():
             say(f"{key}: fetched, {mb(out.stat().st_size)}")
             return FETCHED
         out.unlink(missing_ok=True)
@@ -296,10 +480,11 @@ def fetch(key: str, out: Path, tries: int = 3, wrangler: str | None = None) -> i
             say(f"{key}: not in the bucket")
             return ABSENT
         lines = [x.strip() for x in text.splitlines() if x.strip()]
-        last = lines[-1][:300] if lines else (f"exit {p.returncode}" if p is not None else text)
+        last = lines[-1][:300] if lines else (f"exit {rc}" if rc is not None else text)
         if n < tries - 1:
             say(f"{key}: not fetched ({last}); trying again")
-            time.sleep(pause * (n + 1))
+        if not _pause(n, tries, end, pause):
+            break
     print(f"::warning::{key} could not be fetched ({last})", flush=True)
     return FAILED
 
@@ -416,6 +601,85 @@ def unpack_build(src: Path, root: Path = ROOT) -> dict:
     say(f"restored {n} file(s) from {Path(src).name} into {BUILD_DIR}"
         + (f", {len(ms) - len(keep)} AppleDouble file(s) skipped" if len(ms) != len(keep) else ""))
     return {"files": n, "skipped": len(ms) - len(keep)}
+
+
+ATTAINS_CACHE = "data/build/attains/attains-waters.json"
+ATTAINS_GEOM = re.compile(r"data/raw/attains/geom/(?:[A-Z]{2}\.json\.gz|manifest\.json)")
+ATTAINS_DIRS = {"data", "data/build", "data/build/attains", "data/raw", "data/raw/attains", "data/raw/attains/geom"}
+
+
+def attains_member_problem(m: tarfile.TarInfo, only: str | None = None) -> str | None:
+    """Why a member of state/attains.tar.gz or state/attains-geom.tar.gz may not be restored, or None: only the
+    assessment cache, the per-state geometry files and their manifest (regular files) and the folders above them;
+    only="cache" or "geom" allows the one kind of file."""
+    name = m.name
+    if not name or name.startswith("/") or "\\" in name:
+        return "an absolute or odd path"
+    parts = [x for x in PurePosixPath(name).parts if x != "."]
+    if not parts or any(x in ("..", "") for x in parts):
+        return "an odd path"
+    path = "/".join(parts)
+    if not (m.isfile() or m.isdir()):
+        return "a link or special file"
+    if m.isdir():
+        return None if path in ATTAINS_DIRS else "a folder that is not the cache's"
+    ok = (path == ATTAINS_CACHE and only in (None, "cache")) or (bool(ATTAINS_GEOM.fullmatch(path))
+                                                                 and only in (None, "geom"))
+    return None if ok else "a file that is not the cache's"
+
+
+def safe_error(ex: BaseException) -> str:
+    """An exception as a public log may show it: the pipeline's common.error_text (a fixed category, never the
+    exception's own words, which can quote a member name or a path), loaded from pipeline/common.py (standard library
+    only); the exception's kind alone when that file cannot be loaded."""
+    try:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("dww_common", ROOT / "pipeline" / "common.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.error_text(ex)
+    except Exception:  # noqa: BLE001 - the kind alone rather than the words
+        name = type(ex).__name__
+        return name if re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]{0,60}", name) else "Error"
+
+
+def unpack_attains(src: Path, root: Path = ROOT, only: str | None = None) -> dict:
+    """Restore state/attains.tar.gz (the assessment cache) or state/attains-geom.tar.gz (the geometry cache) under
+    root. The whole archive is read and checked first (attains_member_problem); one member that may not be restored,
+    or a damaged gzip, raises Unreadable having written nothing. Refused when a folder on the way is a link. The
+    message counts the refused members by their fixed category (attains_member_problem's words) and never names one:
+    a member name is the archive's text, which can hold a path or an address, and the logs are public."""
+    root = Path(root)
+    for d in ATTAINS_DIRS:
+        if (root / d).is_symlink():
+            raise Unreadable(f"{d} is a link: not written through")
+    try:
+        with open(src, "rb") as fh:
+            if fh.read(2) != b"\x1f\x8b":
+                raise Unreadable("the archive is not a gzip file")
+        with gzip.open(src, "rb") as g:
+            while g.read(1 << 20):
+                pass
+        with tarfile.open(src, "r:gz") as tf:
+            ms = tf.getmembers()
+            # AppleDouble '._*' files from a tarball made on a Mac are skipped, as in unpack-build
+            ms = [m for m in ms if not any(x.startswith("._") for x in PurePosixPath(m.name).parts)]
+            bad = [why for m in ms if (why := attains_member_problem(m, only))]
+            if bad:
+                counts = sorted(Counter(bad).items())
+                shown = "; ".join(f"{why}: {n}" for why, n in counts)
+                raise Unreadable(f"the archive holds {len(bad)} member(s) that may not be restored ({shown}); "
+                                 "nothing was written")
+            if not any(m.isfile() for m in ms):
+                raise Unreadable("the archive holds no file; nothing was written")
+            tf.extractall(root, members=ms, filter="data")
+    except Unreadable:
+        raise
+    except (OSError, EOFError, tarfile.TarError, zlib.error) as ex:
+        raise Unreadable(f"the archive could not be read ({safe_error(ex)})") from None
+    n = sum(1 for m in ms if m.isfile())
+    say(f"restored {n} file(s) from {Path(src).name}")
+    return {"files": n}
 
 
 def obl_allowed(name: str) -> bool:
@@ -664,6 +928,552 @@ def pack_obl(out: Path, src: Path = OBL_OUT, always: bool = False) -> int:
     return FETCHED
 
 
+# ---------------------------------------------------------------- history copies of state/build.tar.gz (2026-11-21)
+
+EVENT_FILE = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*\.json")   # data/build/events/<source>.json; no AppleDouble '._'
+DROP_MIN_RECORDS = 5               # a drop: at least this many records fewer...
+DROP_MIN_PERCENT = 1               # ...and at least this share of the restored count
+GUARD_FILE = ROOT / BUILD_DIR / "history-guard.json"
+GUARD_KEEP = 50                    # earlier drop runs kept in it (their held keys among them)
+GENERATIONS_FILE = ROOT / BUILD_DIR / "state-generations.json"
+# Time for the optional R2 operations (Astra review 2026-11-21 P1-2): each has a total deadline, retries included, and
+# none runs past SAVE_RESERVE_S before the job's limit (refresh.yml timeout-minutes), counted from the start the
+# restore step writes to JOB_START_FILE
+JOB_START_FILE = ROOT / "job-started"
+REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "refresh.yml"
+DEFAULT_JOB_LIMIT_S = 100 * 60   # used only when refresh.yml cannot be read and JOB_LIMIT_MIN is not set
+SAVE_RESERVE_S = 15 * 60
+OPTIONAL_CAP_S = {"held": 600.0, "copy": 600.0, "marker": 60.0}
+MIN_OPTIONAL_S = 20.0
+
+
+def utc_now() -> datetime:
+    """The clock in UTC; STATE_NOW (an ISO time, for the tests) stands in for it."""
+    t = _iso_time(os.environ["STATE_NOW"]) if os.environ.get("STATE_NOW") else None
+    return t.astimezone(timezone.utc) if t is not None else datetime.now(timezone.utc)
+
+
+def stamp(t: datetime) -> str:
+    return t.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def run_token(arg: str | None = None) -> str:
+    """This run's id in keys and records: --run-id, else GITHUB_RUN_ID with '-a<attempt>' for a re-run attempt (a
+    re-run never overwrites the first attempt's held copy), else 'local'. ValueError for anything that could not be
+    part of a key."""
+    if arg:
+        tok = str(arg)
+    else:
+        rid, att = os.environ.get("GITHUB_RUN_ID") or "", os.environ.get("GITHUB_RUN_ATTEMPT") or "1"
+        tok = (rid + (f"-a{att}" if att != "1" else "")) if rid else "local"
+    tok = tok.lower()
+    if not re.fullmatch(r"[0-9a-z][0-9a-z-]{0,39}", tok):
+        raise ValueError(f"not a run id: {tok[:60]!r}")
+    return tok
+
+
+def read_json_dict(path: Path) -> dict:
+    try:
+        d = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    return d if isinstance(d, dict) else {}
+
+
+def write_json(path: Path, d) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(json.dumps(d, indent=1, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
+    tmp.replace(path)
+
+
+def _record_counts(d) -> dict:
+    """Counts of one events file: records, those marked duplicate_of (another source's copy) and those marked
+    missing from the source (raw._missing_from_source_since); {"unreadable": True} when it is not an events file."""
+    recs = d.get("records") if isinstance(d, dict) else None
+    if not isinstance(recs, list):
+        return {"unreadable": True}
+    dup = miss = 0
+    for r in recs:
+        if isinstance(r, dict):
+            dup += bool(r.get("duplicate_of"))
+            raw = r.get("raw")
+            miss += isinstance(raw, dict) and bool(raw.get("_missing_from_source_since"))
+    return {"records": len(recs), "duplicate_of": dup, "missing_from_source": miss}
+
+
+def event_counts(src: Path) -> dict:
+    """{source: counts} for every data/build/events/<source>.json in src: the data/build folder, or a state tarball
+    (state/build.tar.gz, a daily, monthly or held copy; read, never unpacked). Counts only, never a record."""
+    src = Path(src)
+    out: dict = {}
+    if src.is_dir():
+        d = src / "events"
+        for p in sorted(d.glob("*.json")) if d.is_dir() else []:
+            if not EVENT_FILE.fullmatch(p.name) or p.is_symlink() or not p.is_file():
+                continue
+            try:
+                out[p.name[:-5]] = _record_counts(json.loads(p.read_text(encoding="utf-8")))
+            except (OSError, ValueError):
+                out[p.name[:-5]] = {"unreadable": True}
+        return out
+    with tarfile.open(src, "r:gz") as tf:
+        for m in tf:
+            parts = [x for x in PurePosixPath(m.name).parts if x != "."]
+            if len(parts) != 4 or parts[:3] != ["data", "build", "events"] or not m.isfile() \
+                    or not EVENT_FILE.fullmatch(parts[3]):
+                continue
+            try:
+                out[parts[3][:-5]] = _record_counts(json.load(tf.extractfile(m)))
+            except (OSError, ValueError, EOFError, zlib.error):
+                out[parts[3][:-5]] = {"unreadable": True}
+    return dict(sorted(out.items()))
+
+
+def write_counts(src: Path, out: Path, now: datetime | None = None) -> dict:
+    sources = event_counts(src)
+    n = sum(c.get("records") or 0 for c in sources.values())
+    write_json(out, {"counted_at": stamp(now or utc_now()), "of": Path(src).name, "sources": sources})
+    say(f"{len(sources)} events file(s), {n} record(s) counted in {Path(src).name}")
+    return sources
+
+
+def history_drops(before: dict, after: dict) -> list[dict]:
+    """The sources whose events file disappeared (whether or not it could be read when restored: its bytes may still
+    have been recoverable), can no longer be read, or whose records fell by at least DROP_MIN_RECORDS and
+    DROP_MIN_PERCENT percent of the restored count. A source unreadable when restored that is still there has no
+    count to compare and is left out."""
+    out = []
+    for sid in sorted(before):
+        b = before[sid] if isinstance(before[sid], dict) else {}
+        n = b.get("records") if isinstance(b.get("records"), int) and not b.get("unreadable") else None
+        a = after.get(sid)
+        if a is None:
+            out.append({"source": sid, "why": "events file gone", "before": b, "after": None})
+        elif n is None:
+            continue
+        elif a.get("unreadable") or not isinstance(a.get("records"), int):
+            out.append({"source": sid, "why": "events file unreadable", "before": b, "after": None})
+        elif (fell := n - a["records"]) >= DROP_MIN_RECORDS and fell * 100 >= n * DROP_MIN_PERCENT:
+            out.append({"source": sid, "why": "records fell", "before": b, "after": a})
+    return out
+
+
+def _shown(sid: str) -> str:
+    return re.sub(r"[^A-Za-z0-9._-]", "?", str(sid))[:80]
+
+
+def job_start() -> float | None:
+    """The job's start (epoch seconds) the restore step wrote (JOB_START_FILE, or STATE_JOB_START_FILE); None when
+    there is none (outside the workflow)."""
+    path = Path(os.environ.get("STATE_JOB_START_FILE") or JOB_START_FILE)
+    try:
+        return float(path.read_text().split()[0])
+    except (OSError, ValueError, IndexError):
+        return None
+
+
+def job_limit_s(workflow: Path | None = None) -> float:
+    """The refresh job's time limit in seconds: JOB_LIMIT_MIN in the environment when set, else the first
+    timeout-minutes in refresh.yml (one place to change it: 100 until 2026-11-22, then 150), else DEFAULT_JOB_LIMIT_S."""
+    env = os.environ.get("JOB_LIMIT_MIN")
+    if env:
+        try:
+            return float(env) * 60
+        except ValueError:
+            pass
+    try:
+        m = re.search(r"^\s*timeout-minutes:\s*(\d+)", Path(workflow or REFRESH_WORKFLOW).read_text(), re.M)
+    except OSError:
+        m = None
+    return float(m.group(1)) * 60 if m else float(DEFAULT_JOB_LIMIT_S)
+
+
+def optional_budget(kind: str) -> float:
+    """Seconds an optional R2 operation (OPTIONAL_CAP_S: held, copy, marker) may take, retries included: its own cap,
+    and never past SAVE_RESERVE_S before the job's limit (job_limit_s, from the start on file), so the state save and
+    the steps after it keep their time. Below MIN_OPTIONAL_S the operation is skipped."""
+    cap = OPTIONAL_CAP_S[kind]
+    start = job_start()
+    if start is None:
+        return cap
+    return min(cap, start + job_limit_s() - SAVE_RESERVE_S - time.time())
+
+
+def put(key: str, src: Path, tries: int = 2, wrangler: str | None = None, budget_s: float | None = None) -> int:
+    """Upload src to a history-copy key (GENERATION_KEY only) with `wrangler r2 object put BUCKET/KEY --file F
+    --remote`, the form the workflow uses: FETCHED (0) uploaded, FAILED (1) not (the reason is said; the caller
+    warns). Every attempt counts against one total deadline (budget_s, default optional_budget for the key's kind),
+    and a stalled upload is killed when it runs out; with too little time left it is skipped."""
+    if not GENERATION_KEY.fullmatch(key):
+        raise ValueError(f"not a history copy key: {key!r}")
+    if budget_s is None:
+        budget_s = optional_budget("held" if key.startswith("state/held/") else
+                                   "marker" if key.endswith(".json") else "copy")
+    if budget_s < MIN_OPTIONAL_S:
+        say(f"{key}: not uploaded, skipped ({max(budget_s, 0):.0f} s left for it, kept for the state save)")
+        return FAILED
+    cmd = [wrangler or os.environ.get("WRANGLER") or "wrangler", "r2", "object", "put", f"{BUCKET}/{key}",
+           "--file", str(src), "--remote"]
+    pause = float(os.environ.get("STATE_FETCH_RETRY_S") or 15)
+    end = time.monotonic() + budget_s
+    last = "no answer"
+    for n, timeout in _attempts(tries, budget_s, budget_s):
+        rc, text = run_killable(cmd, timeout)
+        if rc == 0:
+            say(f"{key}: uploaded, {mb(Path(src).stat().st_size)}")
+            return FETCHED
+        lines = [x.strip() for x in text.splitlines() if x.strip()]
+        last = lines[-1][:300] if lines else (f"exit {rc}" if rc is not None else text)
+        if n < tries - 1:
+            say(f"{key}: not uploaded ({last}); trying again")
+        if not _pause(n, tries, end, pause):
+            break
+    say(f"{key}: not uploaded ({last})")
+    return FAILED
+
+
+def restored_baseline(restored_counts: Path, restored: Path | None, frozen: Path | None = None) -> dict | None:
+    """The restored records per source: the counts taken at the restore, else the kept archive counted; None when
+    there is no restored state (a first run) or it cannot be counted (said in a warning)."""
+    if Path(restored_counts).is_file():
+        s = read_json_dict(restored_counts).get("sources")
+        if isinstance(s, dict):
+            return s
+        say(f"{Path(restored_counts).name} cannot be read")
+    if restored is None or not Path(restored).is_file():
+        return None
+    try:
+        before = event_counts(Path(restored))
+        if frozen and Path(frozen).is_file():
+            frozen_counts = event_counts(Path(frozen))
+            # Match restore: every hot file wins, even without checkpoint metadata.
+            before.update({sid: counts for sid, counts in frozen_counts.items() if sid not in before})
+    except (OSError, EOFError, ValueError, TypeError, tarfile.TarError, zlib.error) as ex:
+        print(f"::warning::the restored state could not be counted ({type(ex).__name__})", flush=True)
+        return None
+    say(f"the restored records were counted from {Path(restored).name}")
+    return before
+
+
+def frozen_state_drops(before: dict, build: Path, restored: Path | None, frozen: Path | None) -> list[dict]:
+    """Companion state files are as irreplaceable as events. Inspect the restored archive's membership, not a
+    mutable current manifest, so deleting both a state file and the manifest cannot hide the loss."""
+    owners = {f"{BUILD_DIR}/{path}": sid for sid, states in accepted_frozen_feeds().items() for path in states}
+    expected = set()
+    for archive in (restored, frozen):
+        if archive is not None and Path(archive).is_file():
+            with tarfile.open(archive, "r:gz") as tf:
+                expected.update(m.name for m in tf if m.isfile() and m.name in owners)
+    drops = []
+    for name in sorted(expected):
+        path = Path(build) / name.removeprefix(BUILD_DIR + "/")
+        try:
+            linked = any(p.is_symlink() for p in (path, *path.parents) if p != Path(build).parent)
+            readable = not linked and isinstance(json.loads(path.read_text()), dict)
+        except (OSError, ValueError):
+            readable = False
+        if not readable:
+            sid = owners[name]
+            drops.append({"source": sid, "why": "frozen history state file gone or unreadable",
+                          "before": before.get(sid, {}), "after": None})
+    return drops
+
+
+def guard(restored_counts: Path, build: Path = ROOT / BUILD_DIR, out: Path = GUARD_FILE,
+          restored: Path | None = None, run: str = "local", now: datetime | None = None,
+          wrangler: str | None = None, frozen: Path | None = None) -> list[dict]:
+    """Before the save: compare data/build/events with the counts taken at the restore (restored_counts; the kept
+    archive `restored` is counted instead when they are missing). A missing build folder counts as every restored
+    source gone. On a drop: one ::warning:: per source (counts only), the restored archive uploaded to
+    state/held/build-<UTC date>-<run>.tar.gz (within optional_budget), and `out` written when its folder is there
+    (time, run, the drops, the held key and whether it uploaded; earlier drop runs kept below). Returns the drops;
+    never stops the save and never creates the build folder. No restored state (a first run): nothing compared."""
+    now = now or utc_now()
+    restored = Path(restored) if restored else None
+    before = restored_baseline(restored_counts, restored, frozen)
+    if before is None:
+        if restored is None or not restored.is_file():
+            say("history guard: no restored state (a first run); nothing to compare")
+        else:
+            print("::warning::history guard: the history was not compared this run", flush=True)
+        return []
+    drops = history_drops(before, event_counts(build) if Path(build).is_dir() else {})
+    drops += frozen_state_drops(before, build, restored, frozen)
+    if not drops:
+        say(f"history guard: {len(before)} source(s) compared with the restored state; no drop")
+        return []
+    key = f"state/held/build-{now.strftime('%Y-%m-%d')}-{run}.tar.gz"
+    held = restored is not None and restored.is_file() and put(key, restored, wrangler=wrangler) == FETCHED
+    frozen_held = None
+    if frozen and Path(frozen).is_file():
+        frozen_key = f"state/held/frozen-{now.strftime('%Y-%m-%d')}-{run}.tar.gz"
+        frozen_held = {"key": frozen_key, "uploaded": put(frozen_key, frozen, wrangler=wrangler) == FETCHED}
+    save_message = ("stored frozen history is retained; hot history is saved before the step fails"
+                    if any(d["source"] in accepted_frozen_feeds() for d in drops) else "the state is saved as usual")
+    for d in drops:
+        b, a = d["before"].get("records"), (d["after"] or {}).get("records")
+        b = b if isinstance(b, int) and not d["before"].get("unreadable") else "an unknown number of"
+        print(f"::warning::history guard: {_shown(d['source'])}: {d['why']}, {b} record(s) restored, "
+              f"{'none readable' if a is None else a} now; "
+              f"{save_message}", flush=True)
+    if held:
+        say(f"history guard: {len(drops)} source(s) lost records; the restored state is held at {key}")
+    else:
+        print(f"::warning::history guard: the restored state could not be held at {key}", flush=True)
+    if not Path(out).parent.is_dir():
+        say(f"history guard: {Path(out).parent} is gone; {Path(out).name} is not written")
+        return drops
+    if frozen_held and not frozen_held["uploaded"]:
+        print("::warning::history guard: the restored frozen state could not be held", flush=True)
+    prev = read_json_dict(out)
+    earlier = ([{k: prev[k] for k in ("time", "run", "drops", "held", "frozen_held") if k in prev}] if prev.get("time") else []) \
+        + [e for e in prev.get("earlier") or [] if isinstance(e, dict)]
+    write_json(out, {"time": stamp(now), "run": run, "drops": drops, "held": {"key": key, "uploaded": held},
+                     "earlier": earlier[:GUARD_KEEP], "frozen_held": frozen_held})
+    return drops
+
+
+def save_check(restored_counts: Path, build: Path = ROOT / BUILD_DIR, restored: Path | None = None,
+               frozen: Path | None = None) -> bool:
+    """Right before the state is archived: False, with an ::error::, when data/build/events is missing or holds no
+    events file while the restored state had some (or a restored state is there that cannot be counted). The save
+    step then fails and the stored state stands, rather than a run that ended well replacing the history with
+    nothing (Astra review 2026-11-21 P1-1). A first run, or a restored state with no events file, passes."""
+    before = restored_baseline(restored_counts, restored, frozen)
+    if before is None and frozen and Path(frozen).is_file():
+        print("::error::the split history baseline could not be read; neither archive is saved", flush=True)
+        return False
+    if before is not None:
+        drops = history_drops(before, event_counts(build) if Path(build).is_dir() else {})
+        drops += frozen_state_drops(before, build, restored, frozen)
+        if any(d["source"] in accepted_frozen_feeds() for d in drops):
+            print("::error::frozen history lost records or became unreadable; neither state archive is saved", flush=True)
+            return False
+    events = Path(build) / "events"
+    n = sum(1 for p in events.glob("*.json") if EVENT_FILE.fullmatch(p.name) and p.is_file()) \
+        if events.is_dir() else 0
+    if n:
+        return True
+    restored = Path(restored) if restored else None
+    before = restored_baseline(restored_counts, restored, frozen)
+    if before is None and (restored is None or not restored.is_file()) and not Path(restored_counts).is_file():
+        return True                                    # a first run: nothing restored
+    if before == {}:
+        return True
+    had = f"{len(before)} events file(s)" if before else "a history that could not be counted"
+    print(f"::error::data/build/events is {'empty' if events.is_dir() else 'missing'} while the restored state had "
+          f"{had}; state/build.tar.gz is not saved over, so the stored state stands", flush=True)
+    return False
+
+
+def save_status(restored_counts: Path, build: Path, restored: Path, frozen: Path) -> int:
+    """0 normal save, 3 keep frozen and save recovered hot history then fail, 1 unsafe whole-tree loss.
+
+    Preserve damaged local bytes as well as the restored good copy. This covers first migration and demotion,
+    where the stored frozen object alone might not contain the dropped source. No record content is logged.
+    """
+    before = restored_baseline(restored_counts, restored, frozen)
+    after = event_counts(build) if build.is_dir() else {}
+    if before is None or not after:
+        return 0 if save_check(restored_counts, build, restored, frozen) else 1
+    feeds = accepted_frozen_feeds()
+    drops = history_drops(before, after) + frozen_state_drops(before, build, restored, frozen)
+    affected = {d["source"] for d in drops if d["source"] in feeds}
+    if not affected:
+        return 0 if save_check(restored_counts, build, restored, frozen) else 1
+    paths = frozen_paths({sid: feeds[sid] for sid in affected})
+    # The combined baseline may prefer a newer hot checkpoint, so match that same restore order.
+    recovered = {}
+    for archive in (restored, frozen):
+        if not archive.is_file():
+            continue
+        with tarfile.open(archive, "r:gz") as tf:
+            for member in tf:
+                path = member.name.removeprefix(BUILD_DIR + "/")
+                if member.isfile() and path in paths and path not in recovered:
+                    recovered[path] = tf.extractfile(member).read()
+    for sid in affected:
+        if f"events/{sid}.json" not in recovered:
+            raise Unreadable("dropped frozen history cannot be recovered")
+    for path, content in recovered.items():
+        dest = build / path
+        if any(p.is_symlink() for p in (dest, *dest.parents)):
+            raise Unreadable("a recovery destination is a link")
+        if dest.is_file():
+            damaged = dest.read_bytes()
+            backup = build / "history-recovery" / hashlib.sha256(damaged).hexdigest() / path
+            backup.parent.mkdir(parents=True, exist_ok=True)
+            backup.write_bytes(damaged)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(content)
+    print("::warning::frozen history drop: stored frozen object retained; save hot history, then fail the step", flush=True)
+    return 3
+
+
+def generation_key(kind: str, slot: str, mark: bool = False, archive: str = "build") -> str:
+    """state/<kind>/build-<slot>.tar.gz, the copy, or with mark its .json marker (written only after the copy)."""
+    key = f"state/{kind}/{archive}-{slot}.{'json' if mark else 'tar.gz'}"
+    if archive not in ("build", "frozen") or kind not in ("daily", "monthly") or not GENERATION_KEY.fullmatch(key):
+        raise ValueError(f"not a generation: {kind} {slot!r}")
+    return key
+
+
+def generations_due(rec: dict, now: datetime, archive: str = "build") -> list[dict]:
+    """The copies a save at `now` is due for: the day's daily (state/daily/build-<weekday>.tar.gz) when the record
+    does not hold this UTC date for that weekday, the month's monthly when the record does not hold this month."""
+    day, slot, month = now.strftime("%Y-%m-%d"), WEEKDAYS[now.weekday()], now.strftime("%Y-%m")
+    daily = rec.get("daily") if isinstance(rec.get("daily"), dict) else {}
+    monthly = rec.get("monthly") if isinstance(rec.get("monthly"), dict) else {}
+    due = []
+    if (daily.get(slot) or {}).get("date") != day:
+        due.append({"kind": "daily", "slot": slot, "date": day, "key": generation_key("daily", slot, archive=archive)})
+    if month not in monthly:
+        due.append({"kind": "monthly", "slot": month, "date": day, "key": generation_key("monthly", month, archive=archive)})
+    return due
+
+
+DATE_RE = re.compile(r"[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])")
+MONTH_RE = re.compile(r"[0-9]{4}-(?:0[1-9]|1[0-2])")
+RUN_RE = re.compile(r"[0-9a-z][0-9a-z-]{0,39}")
+
+
+def normalize_generations(rec, archive: str = "build") -> tuple[dict, bool]:
+    """(the record with only well-formed entries, whether anything was dropped). daily: {weekday: {"date", "run"}}
+    with a weekday key and a date; monthly: {"YYYY-MM": {...}}; pending: {"run", "planned_at", "copies": [daily or
+    monthly copies with a valid slot and date]}. A malformed entry is dropped (its copy is then due again); a
+    malformed record starts again from nothing (Astra review 2026-11-21 P2-4)."""
+    if not isinstance(rec, dict):
+        return {}, rec not in ({}, None)
+    out: dict = {}
+    daily = rec.get("daily") if isinstance(rec.get("daily"), dict) else {}
+    out["daily"] = {k: {"date": v["date"], **({"run": str(v["run"])} if isinstance(v.get("run"), (str, int)) else {})}
+                    for k, v in daily.items()
+                    if k in WEEKDAYS and isinstance(v, dict) and isinstance(v.get("date"), str)
+                    and DATE_RE.fullmatch(v["date"])}
+    monthly = rec.get("monthly") if isinstance(rec.get("monthly"), dict) else {}
+    out["monthly"] = {k: v for k, v in monthly.items() if isinstance(k, str) and MONTH_RE.fullmatch(k)
+                      and isinstance(v, dict)}
+    pend = rec.get("pending")
+    if isinstance(pend, dict) and isinstance(pend.get("run"), str) and RUN_RE.fullmatch(pend["run"]) \
+            and isinstance(pend.get("copies"), list):
+        copies = []
+        for g in pend["copies"]:
+            if not (isinstance(g, dict) and g.get("kind") in ("daily", "monthly") and isinstance(g.get("slot"), str)
+                    and isinstance(g.get("date"), str) and DATE_RE.fullmatch(g["date"])):
+                continue
+            try:
+                key = generation_key(g["kind"], g["slot"], archive=archive)
+            except ValueError:
+                continue
+            copies.append({"kind": g["kind"], "slot": g["slot"], "date": g["date"], "key": key})
+        if copies:
+            out["pending"] = {"run": pend["run"], "planned_at": pend.get("planned_at"), "copies": copies}
+    return out, out != {"daily": {}, "monthly": {}, **rec}
+
+
+def _marker_says(kind: str, slot: str, date, run: str, wrangler: str | None = None, archive: str = "build") -> bool:
+    """True when the copy's marker in R2 names this copy, date and run: the copy uploaded. Absent, unreadable, not
+    read within its time (optional_budget) or naming another run (an earlier week's, or a copy whose upload failed
+    after an earlier one): False."""
+    import tempfile
+    fd, name = tempfile.mkstemp(prefix="dww-mark-", suffix=".json")
+    os.close(fd)
+    tmp = Path(name)
+    try:
+        if fetch(generation_key(kind, slot, mark=True, archive=archive), tmp, tries=2, wrangler=wrangler,
+                 budget_s=optional_budget("marker")) != FETCHED:
+            return False
+        m = read_json_dict(tmp)
+    finally:
+        tmp.unlink(missing_ok=True)
+    return m.get("key") == generation_key(kind, slot, archive=archive) and m.get("date") == date and m.get("run") == run
+
+
+def generations_plan(record: Path = GENERATIONS_FILE, run: str = "local", now: datetime | None = None,
+                     wrangler: str | None = None, archive: str = "build") -> list[str]:
+    """Before the archive is made. The record is checked first (a malformed one repaired: normalize_generations).
+    Then the copies an earlier run left pending are recorded when their markers say they uploaded (one small read
+    each, once a day); then the copies this save is due for are written as this run's pending ones (the record
+    travels in the archive and claims nothing for them) and their keys printed. When the build folder is missing,
+    nothing is written (the folder is never made here) and no generation is due."""
+    now = now or utc_now()
+    record = Path(record)
+    if not record.parent.is_dir():
+        print(f"::warning::state generations: {record.parent} is missing; no generation is made this run",
+              flush=True)
+        return []
+    try:
+        raw = json.loads(record.read_text(encoding="utf-8")) if record.exists() else {}
+    except (OSError, ValueError):
+        raw = None
+    rec, repaired = normalize_generations(raw, archive)
+    if repaired:
+        say(f"the generation record {record.name} was malformed; repaired (what could not be read is due again)")
+    pend = rec.get("pending") or {}
+    if pend.get("run") and pend["run"] != run:
+        for g in pend["copies"]:
+            if _marker_says(g["kind"], g["slot"], g["date"], pend["run"], wrangler, archive):
+                rec[g["kind"]][g["slot"]] = {"date": g["date"], "run": pend["run"]}
+                say(f"generation {g['key']} of run {pend['run']}: uploaded, recorded")
+            else:
+                say(f"generation {g['key']} of run {pend['run']}: no marker for it, so not recorded (made again when "
+                    "due)")
+    due = generations_due(rec, now, archive)
+    if due:
+        rec["pending"] = {"run": run, "planned_at": stamp(now), "copies": due}
+    else:
+        rec.pop("pending", None)
+    write_json(record, rec)
+    for g in due:
+        say(f"generation due: {g['key']}")
+    if not due:
+        say("no generation due (the day's daily and the month's monthly are made)")
+    return [g["key"] for g in due]
+
+
+def generations_put(src: Path, record: Path = GENERATIONS_FILE, run: str = "local", now: datetime | None = None,
+                    wrangler: str | None = None, archive: str = "build") -> list[str]:
+    """After the save: upload src (the archive just saved) to each copy this run planned, then each copy's marker
+    (state/<kind>/build-<slot>.json: key, date, run), which the next run's plan reads to record it. Returns the
+    copies uploaded with their markers. A failed upload is a warning and leaves no marker, so the next run makes the
+    copy again; it never stops the run."""
+    import tempfile
+    now = now or utc_now()
+    pend = normalize_generations(read_json_dict(record), archive)[0].get("pending") or {}
+    if pend.get("run") != run or not pend.get("copies"):
+        say("no generation planned by this run")
+        return []
+    made = []
+    for g in pend["copies"]:
+        try:
+            kind, slot = g["kind"], g["slot"]
+            key, mark = generation_key(kind, slot, archive=archive), generation_key(kind, slot, mark=True, archive=archive)
+        except (KeyError, TypeError, ValueError):
+            say("a pending generation that is not one was left out")
+            continue
+        if put(key, src, wrangler=wrangler) != FETCHED:
+            print(f"::warning::state generation {key} was not uploaded; the next run makes it again (the run goes "
+                  "on)", flush=True)
+            continue
+        fd, name = tempfile.mkstemp(prefix="dww-mark-", suffix=".json")
+        os.close(fd)
+        tmp = Path(name)
+        try:
+            write_json(tmp, {"key": key, "date": g.get("date"), "run": run, "made_at": stamp(now),
+                             "bytes": Path(src).stat().st_size})
+            ok = put(mark, tmp, wrangler=wrangler) == FETCHED
+        finally:
+            tmp.unlink(missing_ok=True)
+        if ok:
+            made.append(key)
+        else:
+            print(f"::warning::state generation {key} uploaded but its marker {mark} did not; it is not recorded and "
+                  "the next run makes it again", flush=True)
+    return made
+
+
 def obl_not_saved(state_file: Path = OBL_CHANGES, src: Path = OBL_OUT) -> int:
     """The folder the API changed this run could not be saved to R2: put the national pull and the changes' until
     back to where they were before this run (data/build/obl-changes.json "national_before", "until_before", and
@@ -690,6 +1500,250 @@ def obl_not_saved(state_file: Path = OBL_CHANGES, src: Path = OBL_OUT) -> int:
     return 0
 
 
+# Only feeds whose own ingestion protocol identifies a frozen/rarely revised source.
+# The other large histories (MI, Baltimore, Houston, Miami-Dade) include current reports.
+FROZEN_SCHEMAS = {1: {
+    "md-mde-sewer-overflows-2005-2023": ("generic/md-mde-sewer-overflows-2005-2023-fetch.json",),
+    "ca-swrcb-ciwqs-sso-2006-order": ("ca-swrcb-ciwqs-sso-2006-state.json",),
+    "ny-dec-sprtk-2013-2021": ("ny-sprtk-history-state.json",),
+}}
+# Never remove a historical schema when changing the current packing configuration.
+FROZEN_FEEDS = {sid: FROZEN_SCHEMAS[1][sid] for sid in (
+    "md-mde-sewer-overflows-2005-2023",
+    "ca-swrcb-ciwqs-sso-2006-order",
+    "ny-dec-sprtk-2013-2021",
+)}
+FROZEN_HOT = "frozen-hot.json"
+FROZEN_MANIFEST = "frozen-manifest.json"
+FROZEN_REQUIRED = "frozen-required.json"
+FROZEN_RUNTIME = "frozen-runtime.json"
+
+
+def accepted_frozen_feeds() -> dict:
+    return {**{sid: states for schema in FROZEN_SCHEMAS.values() for sid, states in schema.items()}, **FROZEN_FEEDS}
+
+
+def frozen_paths(feeds: dict | None = None) -> set[str]:
+    return {p for sid, states in (FROZEN_FEEDS if feeds is None else feeds).items()
+            for p in (f"events/{sid}.json", *states)}
+
+
+def check_frozen_inputs(root: Path, paths: set[str]) -> None:
+    """Check fixed paths and every parent before reading; never follow a link into another file tree."""
+    build = root / BUILD_DIR
+    for rel in paths:
+        path = build / rel
+        for part in (path, *path.parents):
+            if part == root:
+                break
+            if part.is_symlink():
+                raise Unreadable("a frozen input or parent is a link")
+        if path.exists() and not path.is_file():
+            raise Unreadable("a frozen input is not a regular file")
+
+
+def frozen_versions(root: Path = ROOT) -> dict:
+    build = root / BUILD_DIR
+    check_frozen_inputs(root, frozen_paths())
+    versions = {}
+    for sid, states in FROZEN_FEEDS.items():
+        event = build / f"events/{sid}.json"
+        if not event.exists():
+            continue
+        doc = json.loads(event.read_text())
+        if _record_counts(doc).get("unreadable"):
+            raise Unreadable("a frozen events file is unreadable")
+        meta = doc.get("meta") or {}
+        state_path = build / states[0]
+        state = json.loads(state_path.read_text()) if state_path.exists() else {}
+        if not isinstance(state, dict):
+            raise Unreadable("a frozen history state file is unreadable")
+        if sid.startswith("md-"):
+            version = {"table_version": meta.get("table_version")}
+        elif sid.startswith("ca-"):
+            version = {k: state.get(k) for k in ("last_modified", "sha256")}
+        else:
+            version = {"sha256": state.get("sha256")}
+        versions[sid] = version
+    return versions
+
+
+def reliable_versions(versions: dict) -> bool:
+    """Unknown markers are never evidence of unchanged content."""
+    for sid, version in versions.items():
+        if not isinstance(version, dict):
+            return False
+        if sid.startswith("md-"):
+            value = version.get("table_version")
+            if not isinstance(value, (str, int)) or isinstance(value, bool) or not re.fullmatch(r"[1-9][0-9]*", str(value)):
+                return False
+        else:
+            digest = version.get("sha256")
+            if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
+                return False
+            if sid.startswith("ca-"):
+                try:
+                    value = version.get("last_modified")
+                    if not isinstance(value, str) or datetime.fromisoformat(value.replace("Z", "+00:00")).tzinfo is None:
+                        return False
+                except ValueError:
+                    return False
+    return True
+
+
+def frozen_baseline(out: Path, root: Path = ROOT) -> None:
+    """Keep saved membership/versions separate from the combined history's membership."""
+    build = root / BUILD_DIR
+    manifest = read_json_dict(build / FROZEN_MANIFEST)
+    write_json(out, {"versions": manifest.get("versions", {}),
+                     "members": sorted(manifest.get("members", {})),
+                     "digests": manifest.get("members", {}),
+                     "history_members": sorted(p for p in frozen_paths() if (build / p).is_file()),
+                     "restored": bool(manifest)})
+
+
+def frozen_digests(root: Path, paths: set[str]) -> dict[str, str]:
+    """Hash the exact bytes that packing would carry, only after checking every input path."""
+    check_frozen_inputs(root, paths)
+    return {p: hashlib.sha256((root / BUILD_DIR / p).read_bytes()).hexdigest()
+            for p in sorted(paths) if (root / BUILD_DIR / p).is_file()}
+
+
+def pack_frozen(out: Path, root: Path = ROOT, baseline: Path | None = None) -> int:
+    """0 packed (membership, version or byte change), 3 identical. Never move shared-tree files."""
+    build = root / BUILD_DIR
+    before = read_json_dict(baseline) if baseline else {}
+    versions = frozen_versions(root)
+    digests = frozen_digests(root, frozen_paths())
+    paths = sorted(digests)
+    if set(before.get("history_members", [])) - set(paths):
+        raise Unreadable("a restored frozen member disappeared; neither archive may be saved")
+    # Keep runtime metadata for older split archives. Exact-byte comparison below still forces replacement
+    # when an operational clock or companion changes; this map never substitutes for saved history bytes.
+    runtime = {"versions": versions, "states": {}, "meta": {}}
+    for sid, states in FROZEN_FEEDS.items():
+        if sid in versions:
+            meta = read_json_dict(build / f"events/{sid}.json").get("meta") or {}
+            runtime["meta"][sid] = {k: meta[k] for k in (
+                "checked_at", "last_read_at", "last_read_via", "unchanged_runs",
+                "workbook_not_modified_since", "file_not_modified_since") if k in meta}
+            for path in states:
+                if (build / path).is_file():
+                    runtime["states"][path] = json.loads((build / path).read_text())
+    if versions:
+        write_json(build / FROZEN_RUNTIME, runtime)
+    if (before.get("restored") and before.get("versions") == versions
+            and set(before.get("members", [])) == set(paths) and before.get("digests") == digests
+            and reliable_versions(versions)):
+        say("frozen source versions and file bytes unchanged; state/frozen.tar.gz is not uploaded")
+        return ABSENT
+    if not paths and not before.get("restored"):
+        return ABSENT
+    manifest = {"schema": 1, "versions": versions, "members": digests}
+    write_json(build / FROZEN_MANIFEST, manifest)
+    with tarfile.open(out, "w:gz", compresslevel=6) as tf:
+        for path in [*paths, FROZEN_MANIFEST]:
+            if (build / path).is_symlink():
+                raise Unreadable("a frozen member is a link")
+            tf.add(build / path, arcname=f"{BUILD_DIR}/{path}", recursive=False)
+    write_json(build / FROZEN_REQUIRED, {"schema": 1})
+    return FETCHED
+
+
+def frozen_manifest(src: Path) -> dict:
+    """Validate the complete gzip, historical allowlist, manifest and every digest without extraction."""
+    try:
+        with gzip.open(src, "rb") as gz:
+            while gz.read(1 << 20):
+                pass
+        with tarfile.open(src, "r:gz") as tf:
+            members = tf.getmembers()
+            names = [m.name for m in members]
+            allowed_paths = {f"{BUILD_DIR}/{p}" for p in frozen_paths(accepted_frozen_feeds()) | {FROZEN_MANIFEST}}
+            if len(names) != len(set(names)) or any(not m.isfile() or m.name not in allowed_paths for m in members):
+                raise Unreadable("unexpected or duplicate frozen archive member")
+            manifest = json.load(tf.extractfile(f"{BUILD_DIR}/{FROZEN_MANIFEST}"))
+            if not isinstance(manifest, dict):
+                raise Unreadable("invalid frozen manifest")
+            hashes = manifest.get("members")
+            if manifest.get("schema") != 1 or not isinstance(hashes, dict):
+                raise Unreadable("missing frozen manifest")
+            if set(names) != {f"{BUILD_DIR}/{p}" for p in hashes} | {f"{BUILD_DIR}/{FROZEN_MANIFEST}"}:
+                raise Unreadable("frozen manifest members missing")
+            expected = manifest.get("versions")
+            if not isinstance(expected, dict) or set(expected) - accepted_frozen_feeds().keys():
+                raise Unreadable("invalid frozen source versions")
+            for sid in expected:
+                if f"events/{sid}.json" not in hashes:
+                    raise Unreadable("frozen events missing from manifest")
+            for path, digest in hashes.items():
+                content = tf.extractfile(f"{BUILD_DIR}/{path}").read()
+                if hashlib.sha256(content).hexdigest() != digest:
+                    raise Unreadable("frozen member digest mismatch")
+                if not isinstance(json.loads(content), dict):
+                    raise Unreadable("a frozen member is not a JSON object")
+                if path.startswith("events/") and _record_counts(json.loads(content)).get("unreadable"):
+                    raise Unreadable("frozen events unreadable")
+    except (OSError, EOFError, ValueError, KeyError, TypeError, tarfile.TarError, zlib.error):
+        raise Unreadable("frozen archive could not be validated") from None
+    return manifest
+
+
+def unpack_frozen(src: Path, root: Path = ROOT) -> dict:
+    """Lay frozen files only where hot has none; checkpoint maps never authorize overwrites."""
+    manifest = frozen_manifest(src)
+    build = root / BUILD_DIR
+    paths = frozen_paths(accepted_frozen_feeds())
+    check_frozen_inputs(root, paths | {FROZEN_MANIFEST, FROZEN_HOT, FROZEN_REQUIRED, FROZEN_REQUIRED + ".tmp"})
+    preserved = {path for path in paths if (build / path).is_file()}
+    # Validate the archive and destinations before writing anything. Do not even temporarily replace hot
+    # bytes: a crash during extraction must not erase them. The manifest describes the retained frozen object.
+    with tarfile.open(src, "r:gz") as tf:
+        members = [m for m in tf.getmembers() if m.name.removeprefix(BUILD_DIR + "/") not in preserved]
+        tf.extractall(root, members=members, filter="data")
+    result = {"files": len(members), "skipped": len(manifest["members"].keys() & preserved)}
+    write_json(build / FROZEN_REQUIRED, {"schema": 1})
+    runtime = read_json_dict(build / FROZEN_RUNTIME)
+    if runtime.get("versions") == manifest["versions"] and reliable_versions(manifest["versions"]):
+        for path, state in (runtime.get("states") or {}).items():
+            if path in frozen_paths() and path not in preserved and not path.startswith("events/"):
+                if read_json_dict(build / path) != state:
+                    write_json(build / path, state)
+        for sid, meta in (runtime.get("meta") or {}).items():
+            if sid in FROZEN_FEEDS and f"events/{sid}.json" not in preserved:
+                path = build / f"events/{sid}.json"
+                doc = read_json_dict(path)
+                if doc and any((doc.get("meta") or {}).get(k) != v for k, v in meta.items()):
+                    write_json(path, {**doc, "meta": {**(doc.get("meta") or {}), **meta}})
+    return result
+
+
+def pack_build(out: Path, root: Path = ROOT, saved_frozen: Path | None = None) -> None:
+    """Archive the hot state without moving/deleting any file the guard or exporter reads."""
+    build = root / BUILD_DIR
+    # Only the caller's successfully uploaded (or restored) object authorizes exclusion.
+    # No confirmation means a complete hot checkpoint, including every frozen member.
+    saved = frozen_manifest(saved_frozen) if saved_frozen else {}
+    digests = frozen_digests(root, frozen_paths(accepted_frozen_feeds()))
+    # Membership and source versions alone never prove that the saved object contains these bytes.
+    excluded = {p for p, digest in digests.items()
+                if p in frozen_paths() and saved.get("members", {}).get(p) == digest} | {FROZEN_MANIFEST}
+    check_frozen_inputs(root, {FROZEN_HOT, FROZEN_HOT + ".tmp", FROZEN_REQUIRED, FROZEN_REQUIRED + ".tmp"})
+    write_json(build / FROZEN_HOT, {"members": {p: digest for p, digest in digests.items() if p not in excluded}})
+    if saved_frozen:
+        write_json(build / FROZEN_REQUIRED, {"schema": 1})
+    else:
+        (build / FROZEN_REQUIRED).unlink(missing_ok=True)
+
+    def keep(info):
+        if build_member_problem(info):
+            raise Unreadable("invalid build archive member")
+        rel = info.name.removeprefix(BUILD_DIR + "/")
+        return None if rel in excluded or any(p.startswith("._") for p in PurePosixPath(info.name).parts) else info
+    with tarfile.open(out, "w:gz", compresslevel=6) as tf:
+        tf.add(build, arcname=BUILD_DIR, filter=keep)
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -702,8 +1756,19 @@ def main(argv=None) -> int:
             s.add_argument("--hard-mb", type=float, help="over the cap is a warning; only over this fails")
     s = sub.add_parser("unpack")
     s.add_argument("file")
+    for name in ("pack-build", "pack-frozen", "unpack-frozen", "frozen-baseline"):
+        s = sub.add_parser(name)
+        s.add_argument("file")
+        if name == "pack-build":
+            s.add_argument("--saved-frozen")
+        if name == "pack-frozen":
+            s.add_argument("--baseline", default="restored-frozen.json")
+    sub.add_parser("frozen-required")
     s = sub.add_parser("unpack-build")
     s.add_argument("file")
+    s = sub.add_parser("unpack-attains")
+    s.add_argument("file")
+    s.add_argument("--only", choices=("cache", "geom"), help="allow only the assessment cache, or only the geometry")
     s = sub.add_parser("unpack-obl")
     s.add_argument("file")
     s.add_argument("--to", default=str(OBL_OUT), help="openboatlaunch's out folder (default ../openboatlaunch/out)")
@@ -721,7 +1786,80 @@ def main(argv=None) -> int:
     s = sub.add_parser("fetch")
     s.add_argument("key")
     s.add_argument("file")
+    s = sub.add_parser("counts", help="records per source of the data/build folder or a state tarball")
+    s.add_argument("src")
+    s.add_argument("out")
+    s = sub.add_parser("guard", help="the history guard before the save")
+    s.add_argument("restored_counts")
+    s.add_argument("--restored", help="the restored archive, held in R2 on a drop (default restored-build.tar.gz)",
+                   default="restored-build.tar.gz")
+    s.add_argument("--build", default=str(ROOT / BUILD_DIR))
+    s.add_argument("--out", default=str(GUARD_FILE))
+    s.add_argument("--frozen", default="restored-frozen.tar.gz")
+    s.add_argument("--run-id")
+    s = sub.add_parser("save-check", help="refuse to save over the history with no events file")
+    s.add_argument("--keep-frozen", action="store_true")
+    s.add_argument("restored_counts")
+    s.add_argument("--restored", default="restored-build.tar.gz")
+    s.add_argument("--frozen", default="restored-frozen.tar.gz")
+    s.add_argument("--build", default=str(ROOT / BUILD_DIR))
+    s = sub.add_parser("generations", help="the daily and monthly copies: plan before the archive, put after the save")
+    s.add_argument("action", choices=("plan", "put"))
+    s.add_argument("file", nargs="?", help="put: the archive just saved")
+    s.add_argument("--record", default=str(GENERATIONS_FILE))
+    s.add_argument("--archive", choices=("build", "frozen"), default="build")
+    s.add_argument("--run-id")
     a = ap.parse_args(argv)
+    if a.cmd in ("guard", "generations"):
+        try:
+            run = run_token(a.run_id)
+        except ValueError as ex:
+            print(f"::error::{ex}", flush=True)
+            return 2
+    if a.cmd in ("pack-build", "pack-frozen", "unpack-frozen", "frozen-baseline", "frozen-required"):
+        try:
+            if a.cmd == "frozen-required":
+                return 0 if (ROOT / BUILD_DIR / FROZEN_REQUIRED).exists() else 3
+            if a.cmd == "pack-build":
+                pack_build(Path(a.file), saved_frozen=Path(a.saved_frozen) if a.saved_frozen else None)
+                return 0
+            if a.cmd == "pack-frozen":
+                return pack_frozen(Path(a.file), baseline=Path(a.baseline))
+            if a.cmd == "unpack-frozen":
+                unpack_frozen(Path(a.file))
+            else:
+                frozen_baseline(Path(a.file))
+            return 0
+        except Exception as ex:  # noqa: BLE001 - malformed state fails closed; log only common's safe error text
+            print(f"::error::frozen state operation failed ({safe_error(ex)})", flush=True)
+            return 1
+    if a.cmd == "counts":
+        try:
+            write_counts(Path(a.src), Path(a.out))
+        except (OSError, EOFError, tarfile.TarError, zlib.error) as ex:
+            print(f"::error::{Path(a.src).name} could not be counted ({type(ex).__name__})", flush=True)
+            return 1
+        return 0
+    if a.cmd == "save-check":
+        if a.keep_frozen:
+            try:
+                return save_status(Path(a.restored_counts), Path(a.build), Path(a.restored), Path(a.frozen))
+            except Exception as ex:  # noqa: BLE001 - no record contents in errors
+                print(f"::error::history recovery failed ({safe_error(ex)})", flush=True)
+                return 1
+        return 0 if save_check(Path(a.restored_counts), Path(a.build), Path(a.restored) if a.restored else None, Path(a.frozen)) else 1
+    if a.cmd == "guard":
+        guard(Path(a.restored_counts), Path(a.build), Path(a.out), Path(a.restored) if a.restored else None, run, frozen=Path(a.frozen))
+        return 0
+    if a.cmd == "generations":
+        if a.action == "plan":
+            generations_plan(Path(a.record), run, archive=a.archive)
+            return 0
+        if not a.file or not Path(a.file).is_file():
+            print("::error::generations put needs the archive just saved", flush=True)
+            return 2
+        generations_put(Path(a.file), Path(a.record), run, archive=a.archive)
+        return 0
     if a.cmd == "list":
         print("\n".join(raw_paths()))
         return 0
@@ -746,6 +1884,13 @@ def main(argv=None) -> int:
             unpack_build(Path(a.file))
         except Unreadable as ex:
             print(f"::error::the build state could not be restored ({ex})", flush=True)
+            return 1
+        return 0
+    if a.cmd == "unpack-attains":
+        try:
+            unpack_attains(Path(a.file), only=a.only)
+        except Exception as ex:  # noqa: BLE001 - every failure in fixed words (Unreadable's are this script's own)
+            say(f"the assessment object could not be read ({safe_error(ex)}); nothing was restored from it")
             return 1
         return 0
     if a.cmd == "unpack-obl":

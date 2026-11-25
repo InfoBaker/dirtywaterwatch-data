@@ -26,7 +26,7 @@ HEADER = ("event_id,water,water_slug,state,operator,operator_id,outlet_id,outlet
           "later_record_published_at,later_record_id,linked_record_ids,notice_volume_gal,notice_record_id,"
           "listed_without_colour,resolution,notes,"
           "description,location_description,rate_text,volume_estimate_gal,volume_estimate_low_gal,"
-          "volume_estimate_high_gal,volume_estimate_bound,volume_estimate_basis,end_estimate_at,end_estimate_basis").split(",")
+          "volume_estimate_high_gal,volume_estimate_bound,volume_estimate_basis,end_estimate_at,end_estimate_basis,water_reach,confirmation_method,source_end_date,source_end_text,source_status,sample_analyte,sample_result_text,sample_unit,sample_qualifier,sample_date,toxin,release_url,result_source_url,result_observed_at,sample_results_json").split(",")
 AS_OF = "2026-11-02T12:00:00Z"
 
 
@@ -331,6 +331,54 @@ def test_a_failed_run_keeps_the_previous_files(tmp_path, monkeypatch):
     assert (out / "all-reports-2026.csv").read_bytes() == before and not (tmp_path / "csv.tmp").exists()
 
 
+def test_split_csvs_only_write_final_files(tmp_path, monkeypatch):
+    monkeypatch.setattr(csv_export, "SPLIT_BYTES", 1)
+    real, paths = csv_export._write, []
+
+    def record(path, rows):
+        paths.append(path.relative_to(tmp_path / "csv.tmp"))
+        return real(path, rows)
+
+    monkeypatch.setattr(csv_export, "_write", record)
+    out, counts = write(tmp_path, [ev("old", "2025-05-01T00:00:00Z"), ev("new")])
+    assert set(paths) == {p.relative_to(out) for p in out.rglob("*.csv")}
+    assert len(paths) == counts["files"]
+
+
+@pytest.mark.parametrize('kind', ['water', 'operator'])
+def test_split_removes_whole_filename_colliding_with_earlier_year(tmp_path, monkeypatch, kind):
+    monkeypatch.setattr(csv_export, 'SPLIT_BYTES', 1)
+    waters = [{**WATERS[0], 'slug': slug} for slug in ('river', 'river-2026')]
+    operators = [{**DISCHARGERS[0], 'id': did} for did in ('river', 'river-2026')]
+    events = [ev(f'{slug}-{year}', f'{year}-05-01T00:00:00Z', water_slugs=[slug],
+                 discharger_id=slug) for slug in ('river', 'river-2026') for year in (2025, 2026)]
+    out, counts = write(tmp_path, events, waters=waters, dischargers=operators)
+    folder = out / kind
+    assert {p.name for p in folder.glob('*.csv')} == {
+        'river-2025.csv', 'river-2026-2025.csv', 'river-2026-2026.csv'}
+    for year in (2025, 2026):
+        assert [r['record_id'] for r in read(folder / f'river-2026-{year}.csv')] == [f'river-2026-{year}']
+    assert f'{kind}/river-2026.csv' in counts['split']
+
+
+@pytest.mark.parametrize("offset", [-1, 0, 1])
+def test_split_threshold_uses_exact_utf8_csv_bytes(tmp_path, monkeypatch, offset):
+    # Quoting, CRLF, multibyte text and formula protection all contribute to the size.
+    rows = [ev("old", "2025-05-01T00:00:00Z", outfall_name='Rivière, "é"\r\nworks'),
+            ev("new", outfall_name="=é")]
+    out, _ = write(tmp_path / "whole", rows)
+    original = (out / "state/ma.csv").read_bytes()
+    monkeypatch.setattr(csv_export, "SPLIT_BYTES", len(original) + offset)
+    other, counts = write(tmp_path / "threshold", rows)
+    if offset < 0:
+        assert "state/ma.csv" in counts["split"]
+        header, *body = original.split(b"\r\n", 1)
+        pieces = [(other / f"state/ma-{y}.csv").read_bytes() for y in (2026, 2025)]
+        assert pieces[0] + pieces[1][len(header) + 2:] == original
+    else:
+        assert (other / "state/ma.csv").read_bytes() == original
+
+
 def test_a_file_over_the_hosts_limit_is_reported(tmp_path, monkeypatch):
     monkeypatch.setattr(csv_export, "MAX_FILE_BYTES", len(",".join(HEADER)) + 10)       # a header-only file fits
     _, counts = write(tmp_path, [ev("1")])
@@ -378,6 +426,24 @@ def test_observed_sample_advisory_end_is_not_exported_as_agency_reported_end(tmp
     row = read(out / "all-reports-2026.csv")[0]
     assert row["ended_at"] == "2026-06-19T16:00:00Z" and row["end_reported"] == "false"
     assert row["time_precision"] == row["ended_at_precision"] == "poll"
+
+
+@pytest.mark.parametrize("source,raw", [
+    ("pa-erie-beaches", {"end_basis": "the next sample's collection date at this beach"}),
+    ("ny-parks-beaches", {"_ended_at_basis": "date of the next sample row, which reads Reopened / Clear after resample"}),
+    ("ny-parks-beaches", {"_ended_at_basis": "Date_sampled of the next status shown (Open / Clear after resample)"}),
+    ("ny-parks-beaches", {"_ended_at_basis": "first poll showing another status"}),
+])
+def test_sample_date_ends_without_sampled_at_are_not_reported(tmp_path, source, raw):
+    # These ingesters store observation dates in the legacy start/end fields at day precision.
+    sample = ev("sample-date", source_id=source, event_type="beach_advisory", status="advisory_lifted",
+                started="2026-07-01T00:00:00-04:00", ended_at="2026-07-02T00:00:00-04:00",
+                time_precision="day", raw=raw)
+    out, _ = write(tmp_path, [sample])
+    row = read(out / "all-reports-2026.csv")[0]
+    assert row["ended_at"] == sample["ended_at"] and row["end_reported"] == "false"
+    assert row["end_estimate_at"] == row["end_estimate_basis"] == ""
+    assert row["time_precision"] == row["ended_at_precision"] == "day"
 
 
 def test_an_operators_notice_volume_fills_its_own_columns(tmp_path):

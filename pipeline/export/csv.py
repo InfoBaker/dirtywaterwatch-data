@@ -35,6 +35,8 @@ module path).
 from __future__ import annotations
 
 import csv
+import io
+import json
 import math
 import re
 import shutil
@@ -47,6 +49,7 @@ from zoneinfo import ZoneInfo
 from build import status as status_mod
 
 SITE = "https://dirtywaterwatch.org"
+LIFT_DETAIL_COLUMNS = ('confirmation_method', 'source_end_date', 'source_end_text', 'source_status', 'sample_analyte', 'sample_result_text', 'sample_unit', 'sample_qualifier', 'sample_date')
 COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id", "outlet_id", "outlet_name",
            "event_type", "category", "status", "started_at", "ended_at", "end_reported", "volume_gal", "volume_text", "lat", "lon",
            "towns", "source_id", "source_name", "record_id", "published_at", "reported_at", "source_updated_at",
@@ -69,7 +72,10 @@ COLUMNS = ["event_id", "water", "water_slug", "state", "operator", "operator_id"
            # our own figures, apart from the source's (export/estimates.py): a volume computed from the record's rate
            # and duration, and an end estimated from its start and the duration it gives, each with its basis
            "volume_estimate_gal", "volume_estimate_low_gal", "volume_estimate_high_gal", "volume_estimate_bound",
-           "volume_estimate_basis", "end_estimate_at", "end_estimate_basis"]
+           "volume_estimate_basis", "end_estimate_at", "end_estimate_basis",
+           # whether the source says the overflow reached a waterway, in its words (export/detail.py)
+           "water_reach"] + list(LIFT_DETAIL_COLUMNS) + [
+           "toxin", "release_url", "result_source_url", "result_observed_at", "sample_results_json"]
 DETAIL_COLUMNS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "duration_text", "volume_qualifier",
                   "volume_method", "volume_to_water_gal", "overflow_point", "town")
 LATER_DETAIL_COLUMNS = ("resolution", "notes")
@@ -292,7 +298,10 @@ def _epoch_minutes(s) -> int | None:
 
 
 def _ny_day(minutes: int) -> str:
-    return datetime.fromtimestamp(minutes * 60, UTC).astimezone(NY).strftime("%Y-%m-%d")
+    day = datetime.fromtimestamp(minutes * 60, UTC).astimezone(NY)
+    # strftime consults locale for every row; ISO formatting is identical for
+    # four-digit years. Preserve platform-specific padding of earlier years.
+    return day.date().isoformat() if day.year >= 1000 else day.strftime("%Y-%m-%d")
 
 
 class SiteLinks:
@@ -419,9 +428,14 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
     towns = _join_towns(_own_towns(e) or d.get("towns") or [])
     eid = e["event_id"]
     ended_precision = status_mod.end_precision(e) if e.get("ended_at") else None
+    # These legacy beach feeds end episodes at the next sample/status observation, not an agency lift time.
+    # They store sample dates as day-precision start/end fields without sampled_at.
+    sample_date_end = e.get("source_id") in {"pa-erie-beaches", "ny-parks-beaches"}
     # an end the pipeline worked out (export/estimates.py ended_at_ours) is ours, not the source's report
     end_reported = (bool(e.get("ended_at")) and not (e.get("sampled_at") and ended_precision == "poll")
-                    and not isinstance(e.get("ended_at_ours"), dict))
+                    and not sample_date_end and not isinstance(e.get("ended_at_ours"), dict)
+                    and not (e.get("source_id") in {"mo-dnr-hab-map", "wi-dnr-beach-health"}
+                             and ended_precision == "poll"))
     notice = linked_notice(e)
     row = [
         _text(eid), _text(water), _text(LIST_SEP.join(slugs)), _text(state), _text(operator), _text(operator_id),
@@ -458,6 +472,11 @@ def event_row(e: dict, ctx: _Context) -> tuple[list[str], list[str]]:
         ee = {"at": e["ended_at"], "basis": e["ended_at_ours"].get("basis")}      # the record's own end, worked out by us
     row += [_number(ve.get("gallons")), _number(ve.get("low")), _number(ve.get("high")), _text(ve.get("bound")),
             _text(ve.get("basis")), _text(ee.get("at")), _text(ee.get("basis"))]
+    row += [_text(d.get("water_reach"))]
+    row += [_text(d.get(k)) for k in LIFT_DETAIL_COLUMNS]
+    row += [_text(d.get(k)) for k in ("toxin", "release_url", "result_source_url", "result_observed_at")]
+    results = d.get("sample_results")
+    row.append(json.dumps(results, ensure_ascii=False, separators=(",", ":")) if isinstance(results, list) and results else "")
     return row, ops
 
 
@@ -482,12 +501,25 @@ def start_precision_text(e: dict) -> str | None:
     return f"{p or 'not stated'}; on or before ({b['started_at_kind']})"
 
 
-def _write(path: Path, rows: list[list[str]]) -> None:
+class _CsvEncoder:
+    """Encode each public row once, then reuse its exact UTF-8 bytes in every download."""
+
+    def __init__(self):
+        self.buffer = io.StringIO(newline="")
+        self.writer = csv.writer(self.buffer)
+
+    def row(self, cells: list[str]) -> bytes:
+        self.buffer.seek(0)
+        self.buffer.truncate(0)
+        self.writer.writerow(cells)
+        return self.buffer.getvalue().encode("utf-8")
+
+
+def _write(path: Path, rows: list[bytes]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as f:
-        w = csv.writer(f)           # comma, quote only where needed, quote doubled, CRLF line ends (RFC 4180)
-        w.writerow(COLUMNS)
-        w.writerows(rows)
+    with path.open("wb") as f:
+        f.write(_CsvEncoder().row(COLUMNS))
+        f.writelines(rows)
 
 
 def year_of(row: list[str]) -> str | None:
@@ -499,10 +531,16 @@ def year_of(row: list[str]) -> str | None:
 def by_year(rows: list[list[str]], idx, latest: str) -> dict[str, list[int]]:
     """{year: row positions}, newest year first; rows with no start or sample date go in the latest year's file (the
     latest year among these rows, else `latest`). Positions keep the newest-first order of `rows`."""
+    idx = sorted(set(idx))
+    return _by_year({i: year_of(rows[i]) for i in idx}, idx, latest)
+
+
+def _by_year(years, idx, latest):
+    """Group positions using years already read while encoding the rows."""
     dated: dict[str, list[int]] = defaultdict(list)
     undated = []
     for i in sorted(set(idx)):
-        y = year_of(rows[i])
+        y = years[i]
         (dated[y] if y else undated).append(i)
     last = max(dated, default=latest)
     dated[last] = sorted(dated[last] + undated)
@@ -545,10 +583,13 @@ def write_csvs(events: list[dict], waters, dischargers: list[dict], out_dir, *, 
                    source_names if source_names is not None else source_labels(uniq),
                    SiteLinks(uniq, wrows, dischargers, pages, as_of, source_states), seen)
 
-    rows, by_id, by_state, by_operator = [], {}, defaultdict(list), defaultdict(list)
+    rows, row_years, by_id, by_state, by_operator = [], [], {}, defaultdict(list), defaultdict(list)
+    encoder = _CsvEncoder()
+    header_size = len(encoder.row(COLUMNS))
     for i, e in enumerate(uniq):
         row, ops = event_row(e, ctx)
-        rows.append(row)
+        rows.append(encoder.row(row))
+        row_years.append(year_of(row))
         by_id[e["event_id"]] = i
         if row[3]:
             by_state[row[3]].append(i)
@@ -560,7 +601,7 @@ def write_csvs(events: list[dict], waters, dischargers: list[dict], out_dir, *, 
     counts = {"files": 0, "water": 0, "operator": 0, "state": 0, "events": len(rows), "all_reports": [], "split": [],
               "oversize": []}
     # the year undated reports go to when nothing else says: the newest start year in the data, else this year
-    latest = max((y for y in map(year_of, rows) if y), default=None) or \
+    latest = max((y for y in row_years if y), default=None) or \
         str((status_mod.parse_time(as_of) or datetime.now(UTC)).year)
 
     def emit(rel: str, idx) -> None:
@@ -573,23 +614,24 @@ def write_csvs(events: list[dict], waters, dischargers: list[dict], out_dir, *, 
         """stem.csv, or stem-<year>.csv per year when the file would pass SPLIT_BYTES."""
         counts[kind] += 1
         path = tmp / f"{stem}.csv"
-        _write(path, [rows[i] for i in sorted(set(idx))])
-        size = path.stat().st_size
-        years = by_year(rows, idx, latest) if size > SPLIT_BYTES else {}
+        idx = sorted(set(idx))
+        size = header_size + sum(len(rows[i]) for i in idx)
+        years = _by_year(row_years, idx, latest) if size > SPLIT_BYTES else {}
         if len(years) > 1:
-            path.unlink()
+            path.unlink(missing_ok=True)
             counts["split"].append(f"{stem}.csv")
             print(f"export: csv {stem}.csv would be {size / 1048576:.1f} MiB (over 24 MiB); "
                   f"written as {stem}-<year>.csv for {', '.join(years)}")
             for y, ids in years.items():
                 emit(f"{stem}-{y}.csv", ids)
         else:
+            _write(path, [rows[i] for i in idx])
             counts["files"] += 1
             if size > MAX_FILE_BYTES:
                 counts["oversize"].append(f"{stem}.csv")
 
     try:
-        for y, ids in by_year(rows, range(len(rows)), latest).items():
+        for y, ids in _by_year(row_years, range(len(rows)), latest).items():
             emit(f"{ALL_REPORTS}-{y}.csv", ids)
             counts["all_reports"].append(f"{ALL_REPORTS}-{y}.csv")
         placed = defaultdict(list)

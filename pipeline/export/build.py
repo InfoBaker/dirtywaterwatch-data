@@ -93,12 +93,16 @@ Files:
                      flow, water level, temperature, turbidity, conductance, NWS flood stages and
                      the cold / turbid / high-flow flags), shown beside the status, never changing
                      it; also as `conditions` in waters/<slug>.json (null when the water has none)
+  assessments.json   the state's own Clean Water Act assessment beside the status, never changing it (EPA ATTAINS,
+                     export/assessments.py, docs/attains.md): {"built", "source", "waters": {slug: SUMMARY}}; the units
+                     are `assessment` in waters/<slug>.json (null when none matched or the cache is missing or stale)
   csv/               the reports as CSV downloads (export/csv.py, docs/data-downloads.md): water/<slug>.csv,
-                     operator/<id>.csv, state/<st>.csv and all-reports-<year>.csv; the site serves them at /csv/...
+                     operator/<id>.csv, state/<st>.csv and all-reports-<year>.csv; the site serves them at /csv/...;
+                     and assessments.csv, the matched assessment units per tracked water (export/assessments.py)
   coverage.json      what is reported, state by state (docs/plan.md §2.y); rain_caution_states: where the
                      "discharge likely" caution is computed and how (radar, or New Jersey's shared site);
                      states.<ST>.notification_pages: the public-notice page health (ingest/notification_pages.py)
-  meta.json          build times, fixture flag, counts by state and status, by event type, csv_files
+  meta.json          build times, fixture flag, counts by state and status, by event type, csv_files, assessments
 
 Placement texts and status lines that quote a record pass through the same redactor as the records' free text
 (public_placement, redact_status_texts), and the export ends with a self-check: a name of the owner's blocklist in
@@ -117,8 +121,14 @@ import json
 import os
 import re
 import shutil
-from collections import Counter, defaultdict
+from collections import Counter, defaultdict, deque
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import contextmanager
+from functools import lru_cache
 from pathlib import Path
+from time import perf_counter
+from unicodedata import normalize
+from uuid import uuid4
 
 from build import status as status_mod
 from build.redact import BlockScan, Redactor, blocklist, quote_swaps, redact_events, redactor_for
@@ -126,6 +136,7 @@ from common import scrub_residence_numbers
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, OUT_DIR, OUTFALL_REGISTRY_GLOB, OUTFALL_REGISTRY_SKIPPED,
                     PROVISIONAL_FIELDS, REPORTED_OUTFALLS, ROOT, STATE_CODE, discharger_alias_map, is_provisional, now_iso, read_json,
                     error_text, public_error, scrub_names, split_path_notes, strip_personal, write_json)
+from export import assessments as assess_mod
 from export import detail as detail_mod
 from export import outfalls as outfalls_mod
 
@@ -143,7 +154,7 @@ INDEX_FIELDS = ["event_id", "event_type", "status", "state", "started_at", "ende
                 "time_precision", "ended_at_precision"]
 WATER_EVENT_EXTRA = ["source_id", "waterbody_text", "outfall_name", "volume_text", "water_match", "superseded",
                      "duplicate_of", "file", "estimate_flag", "detail", "later_volume", "linked_notices",
-                     "volume_estimate", "end_estimate"]
+                     "volume_estimate", "end_estimate", "ended_at_ours"]
 # the report tables' part of an operator's e-mail notice linked to a record (build.status.linked_notices); the event's
 # own file carries the notice whole (its advice and how the volume was estimated)
 LINKED_NOTICE_CELL = ("event_id", "source_id", "published_at", "ended_at", "volume_gal", "volume_text", "estimate_flag")
@@ -218,6 +229,12 @@ def index_obj(rec: dict) -> dict:
         if o[k] is not None:
             o[k] = round(float(o[k]), 5)
     return o
+
+
+def index_row(rec: dict) -> list:
+    """The columnar index row, normalizing bounds, state and coordinates once per event."""
+    o = index_obj(rec)
+    return [o[k] for k in INDEX_FIELDS]
 
 
 def time_key(rec: dict) -> float:
@@ -939,55 +956,257 @@ def scan_stamp(names: list[str]) -> str:
     from build import redact as _redact
     h = hashlib.sha256(json.dumps(sorted(names)).encode())
     h.update(Path(_redact.__file__).read_bytes())
+    h.update(b"blocklist-cache-digit-equivalence-v1")
     return h.hexdigest()
 
 
-def blocklist_hits(out_dir: Path, names: list[str], cache: Path | None = None) -> list[str]:
-    """The files of out_dir that carry a name of the owner's blocklist (data/build/name-blocklist.json),
-    relative to out_dir: events.json, waters/*.json and the full records events/*.json (which the site serves as
-    /event/<id>/ and /data/records/<month>.json). The names are never printed, only where they are.
-    cache: a file of the content digests of texts found clean under the same names and scanning code (scan_stamp);
-    such a text is not searched again (2026-11-07 refresh-time profile: searching all 155,000 files took 290 of the
-    export's 730 s an hour, and nearly all are the same text as the hour before). A text with a hit is always searched;
-    the cache keeps only this run's clean digests, and holds digests only, never a name or a text."""
-    scan = BlockScan(names)
-    if not scan.phrases:
-        return []
+def _blocklist_cache(cache: Path | None, stamp: str | None) -> tuple[set[str], str]:
+    if cache is None:
+        return set(), "disabled"
+    try:
+        c = json.loads(Path(cache).read_text())
+        if not isinstance(c, dict) or c.get("stamp") != stamp:
+            return set(), "stamp_changed"
+        return {d for d in c.get("clean", [])
+                if isinstance(d, str) and re.fullmatch(r"[0-9a-f]{32}", d)}, "loaded"
+    except FileNotFoundError:
+        return set(), "missing"
+    except (OSError, ValueError, TypeError):
+        return set(), "unreadable"
+
+
+def _blocklist_text(scan: BlockScan, text: str, clean: set[str], cache: bool) -> tuple[str, bool, bool]:
     import hashlib
-    out_dir = Path(out_dir)
-    stamp = scan_stamp(names) if cache else None
-    clean_before: set[str] = set()
-    if cache:
-        try:
-            c = json.loads(Path(cache).read_text())
-            if isinstance(c, dict) and c.get("stamp") == stamp:
-                clean_before = set(c.get("clean") or [])
-        except (OSError, ValueError):
-            pass
-    clean_now: list[str] = []
-    # the map and list payloads too: the monthly marks, overlays, advisory points, reaches, active rows, rain and
-    # coverage files carry labels and names copied from records (review 2026-11-03 SOL P1-1)
-    paths = [out_dir / n for n in ("events.json",) + PUBLIC_PAYLOADS] + sorted((out_dir / "waters").glob("*.json")) \
-        + sorted((out_dir / "events").glob("*.json")) + sorted((out_dir / REACH_STATE_DIR).glob("*.geojson"))
-    hits = []
+    digest = hashlib.blake2b(scan.cache_text(text).encode("utf-8"), digest_size=16).hexdigest() if cache else ""
+    reused = bool(cache and digest in clean)
+    return digest, False if reused else bool(scan.found(text)), reused
+
+
+def _blocklist_file_version(path: Path) -> tuple[int, ...]:
+    s = path.stat()
+    return s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns
+
+
+class BlocklistWrites:
+    """Check serialized JSON while the writer holds it; retain only results and file versions.
+
+    The writer calls observe *after* its atomic replacement. Final enumeration is
+    unchanged, and any changed/replaced file or different blocklist is read again.
+    No texts or names are persisted. This object belongs to one export, never a global.
+    """
+
+    def __init__(self, out_dir: Path, names: list[str], cache: Path | None = None, *, workers: int = 1):
+        self.out_dir = Path(out_dir)
+        self.scan = BlockScan(names)
+        self.stamp = scan_stamp(names)
+        self.cache = cache
+        self.clean, _ = _blocklist_cache(cache, self.stamp)
+        self.results = {}
+        self._pool = None
+        self._batch = []
+        self._batch_chars = 0
+        self._pending = deque()
+        self._limit = max(1, workers) * 2
+        from threading import Lock
+        self._lock = Lock()
+        if workers > 1 and self.scan.phrases:
+            from concurrent.futures import ProcessPoolExecutor
+            from multiprocessing import get_context
+            self._pool = ProcessPoolExecutor(max_workers=workers, mp_context=get_context("spawn"),
+                                             initializer=_blocklist_worker_init,
+                                             initargs=(names, self.clean, cache is not None))
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        self.finish()
+
+    def _collect(self):
+        for path, version, result in self._pending.popleft().result():
+            self.results[path] = version, result
+
+    def finish(self):
+        """Join before final enumeration; also release workers after writer errors."""
+        with self._lock:
+            if self._pool is None:
+                return
+            try:
+                if self._batch:
+                    self._pending.append(self._pool.submit(_blocklist_text_batch, self._batch))
+                    self._batch = []
+                    self._batch_chars = 0
+                while self._pending:
+                    self._collect()
+            finally:
+                self._pool.shutdown(wait=True, cancel_futures=True)
+                self._pool = None
+
+    def observe(self, path: Path, text: str) -> None:
+        if not self.scan.phrases:
+            return
+        path = Path(path)
+        version = _blocklist_file_version(path)
+        with self._lock:
+            if self._pool is None:
+                result = _blocklist_text(self.scan, text, self.clean, self.cache is not None)
+                self.results[path] = version, result
+            else:
+                self._batch.append((path, version, text))
+                self._batch_chars += len(text)
+                # Bound count and characters; a large aggregate is sent alone.
+                if len(self._batch) >= 256 or self._batch_chars >= 1_048_576:
+                    self._pending.append(self._pool.submit(_blocklist_text_batch, self._batch))
+                    self._batch = []
+                    self._batch_chars = 0
+                    if len(self._pending) >= self._limit:
+                        self._collect()
+
+
+def _blocklist_worker_init(names, clean, cache):
+    global _blocklist_worker
+    _blocklist_worker = BlockScan(names), clean, cache
+
+
+def _blocklist_text_batch(rows):
+    scan, clean, cache = _blocklist_worker
+    return [(p, version, _blocklist_text(scan, text, clean, cache)) for p, version, text in rows]
+
+
+def _blocklist_read_batch(paths):
+    scan, clean, cache = _blocklist_worker
+    results = []
     for p in paths:
         try:
             text = p.read_text(encoding="utf-8")
         except OSError:
             continue
-        if cache:
-            d = hashlib.blake2b(text.encode("utf-8"), digest_size=16).hexdigest()
-            if d in clean_before:
-                clean_now.append(d)
+        results.append((p, _blocklist_text(scan, text, clean, cache)))
+    return results
+
+
+def _blocklist_parallel(paths, names, clean, cache, workers):
+    from concurrent.futures import ProcessPoolExecutor
+    from multiprocessing import get_context
+    # Spawn is safe even if a caller has threads. Bound IPC and pending paths on
+    # Python 3.12 too (Executor.map's buffersize only exists in newer versions).
+    with ProcessPoolExecutor(max_workers=workers, mp_context=get_context("spawn"),
+                             initializer=_blocklist_worker_init, initargs=(names, clean, cache)) as pool:
+        pending = deque()
+        for start in range(0, len(paths), 256):
+            pending.append(pool.submit(_blocklist_read_batch, paths[start:start + 256]))
+            if len(pending) >= workers * 2:
+                yield from pending.popleft().result()
+        while pending:
+            yield from pending.popleft().result()
+
+
+def publication_paths(out_dir: Path) -> list[Path]:
+    """The publication manifest is the entire out/ tree.
+
+    refresh.yml archives all of out/ for the site; the dataset release excludes
+    csv/ but the site serves those downloads too. upload-current.sh publishes a
+    subset of this same tree. Enumerate files, not an extension/name allowlist,
+    so new outputs are checked automatically. Keep the legacy hit order first,
+    then append newly covered files in path order. One walk avoids a second
+    traversal of the hundreds of thousands of event files.
+    """
+    import os
+
+    out_dir = Path(out_dir)
+    fixed = ("events.json",) + PUBLIC_PAYLOADS
+    waters, events, reaches, additional = [], [], [], []
+    for directory, _dirs, files in os.walk(out_dir):
+        parent = Path(directory)
+        relative = parent.relative_to(out_dir).as_posix()
+        for name in files:
+            if relative == "." and name in fixed:
                 continue
-        if scan.found(text):
+            if relative == "waters" and name.endswith(".json"):
+                group = waters
+            elif relative == "events" and name.endswith(".json"):
+                group = events
+            elif relative == REACH_STATE_DIR and name.endswith(".geojson"):
+                group = reaches
+            else:
+                group = additional
+            group.append(parent / name)
+    return ([out_dir / name for name in fixed] + sorted(waters) + sorted(events)
+            + sorted(reaches) + sorted(additional))
+
+
+def blocklist_hits(out_dir: Path, names: list[str], cache: Path | None = None,
+                   *, stats: dict | None = None, observed: BlocklistWrites | None = None,
+                   workers: int | None = None) -> list[str]:
+    """Every published file, with legacy hit order and exact BlockScan matches.
+
+    Clean digests are keyed by names, scanner source and cache semantics. ASCII
+    digits may be made equivalent only when no name contains one (BlockScan's
+    proof); no fields are omitted and serialized JSON is never decoded. A bounded
+    cache may evict clean entries, which are then searched again. File versions
+    allow reuse of checks performed on the writer's exact serialized text.
+    """
+    metrics = {"files": 0, "cache_hits": 0, "scanned": 0, "cache_state": "disabled", "in_memory": 0}
+    if stats is not None:
+        stats.update(metrics)
+        metrics = stats
+    if observed is not None:
+        observed.finish()
+    scan = BlockScan(names)
+    if not scan.phrases:
+        return []
+    out_dir = Path(out_dir)
+    stamp = scan_stamp(names) if cache or observed else None
+    clean_before, metrics["cache_state"] = _blocklist_cache(cache, stamp)
+    if observed is not None and (observed.stamp != stamp or observed.out_dir != out_dir or observed.cache != cache):
+        observed = None
+    clean_now: set[str] = set()
+    paths = publication_paths(out_dir)
+    def serial():
+        for p in paths:
+            result = None
+            if observed is not None and p in observed.results:
+                try:
+                    version, prior = observed.results[p]
+                    if version == _blocklist_file_version(p):
+                        result = prior
+                        metrics["in_memory"] += 1
+                except OSError:
+                    pass
+            if result is None:
+                try:
+                    text = p.read_text(encoding="utf-8")
+                except OSError:
+                    continue
+                result = _blocklist_text(scan, text, clean_before, cache is not None)
+            yield p, result
+
+    if workers is None:
+        import os
+        workers = min(4, os.cpu_count() or 1) if len(paths) >= 10_000 and observed is None else 1
+    results = (_blocklist_parallel(paths, names, clean_before, cache is not None, workers)
+               if workers > 1 and observed is None else serial())
+    hits = []
+    for p, result in results:
+        digest, hit, reused = result
+        metrics["files"] += 1
+        metrics["cache_hits"] += int(reused)
+        metrics["scanned"] += int(not reused)
+        if hit:
             hits.append(str(p.relative_to(out_dir)))
         elif cache:
-            clean_now.append(d)
+            clean_now.add(digest)
     if cache:
+        # Full 128-bit digests, bounded state; eviction only costs a rescan.
+        import gzip
+        clean = sorted(clean_now)[:200_000]
+        payload = json.dumps({"stamp": stamp, "clean": clean}, separators=(",", ":"))
+        while len(gzip.compress(payload.encode(), compresslevel=1, mtime=0)) >= 5_000_000:
+            clean = clean[:len(clean) // 2]
+            payload = json.dumps({"stamp": stamp, "clean": clean}, separators=(",", ":"))
         Path(cache).parent.mkdir(parents=True, exist_ok=True)
         tmp = Path(cache).with_suffix(".tmp")
-        tmp.write_text(json.dumps({"stamp": stamp, "clean": sorted(set(clean_now))}, separators=(",", ":")))
+        tmp.write_text(payload)
         tmp.replace(cache)
     return hits
 
@@ -1021,22 +1240,28 @@ def shown_path(p: Path) -> str:
         return str(p)
 
 
+# Legacy ordering only; publication_paths derives coverage from the published tree.
 PUBLIC_PAYLOADS = ("waters.json", "active.json", "monthly-outfalls.json", "overlays.geojson", "advisory-points.geojson",
                    "reaches.geojson", "reach-paths.geojson", "rain.json", "coverage.json", "dischargers.json",
-                   "outfalls.json", "rain-levels.json")
+                   "outfalls.json", "rain-levels.json", "assessments.json")
 BLOCKED_MARK = BUILD_DIR / "export-blocked.json"     # the old hard stop; removed whenever the export runs
 HITS_MARK = BUILD_DIR / "blocklist-hits.json"        # the files (never the name) a hit is in, for the next run's fix
 SCAN_CACHE = BUILD_DIR / "blocklist-scan-cache.json"  # digests of out/ texts found clean (blocklist_hits), saved state
 
 
-def enforce_blocklist(out_dir: Path = OUT_DIR, names: list[str] | None = None) -> int:
+def enforce_blocklist(out_dir: Path = OUT_DIR, names: list[str] | None = None,
+                      *, observed: BlocklistWrites | None = None) -> int:
     """The export's last step. A blocklisted name in out/ (blocklist_hits) is a warning, not a stop (owner,
     2026-11-05: operations are not disrupted for public-record text that can be corrected): the files are named in
     HITS_MARK and on the console, never the name, the run goes on and uploads, and the record is fixed with a rule
     on the next run. The old hard-stop mark is removed so the scripts never hold a publish. Returns the files checked."""
     names = blocklist(DATA_DIR) if names is None else names
     # the clean-text cache only for the real out/ (a test's folder never writes into data/build)
-    hits = blocklist_hits(out_dir, names, cache=SCAN_CACHE if Path(out_dir) == OUT_DIR else None)
+    stats = {}
+    hits = blocklist_hits(out_dir, names, cache=SCAN_CACHE if Path(out_dir) == OUT_DIR else None,
+                          stats=stats, observed=observed)
+    print(f"export: blocklist cache {stats['cache_state']}; files {stats['files']}; "
+          f"cache hits {stats['cache_hits']}; scanned {stats['scanned']}; in memory {stats['in_memory']}", flush=True)
     BLOCKED_MARK.unlink(missing_ok=True)
     if hits:
         write_json(HITS_MARK, {"at": now_iso(), "files": hits,
@@ -1046,7 +1271,7 @@ def enforce_blocklist(out_dir: Path = OUT_DIR, names: list[str] | None = None) -
               f"{' ...' if len(hits) > 5 else ''}); uploaded anyway; see {shown_path(HITS_MARK)}")
     else:
         HITS_MARK.unlink(missing_ok=True)
-    return 1 + len(list((Path(out_dir) / "waters").glob("*.json"))) + len(list((Path(out_dir) / "events").glob("*.json")))
+    return stats["files"]
 
 
 def public_rules(o):
@@ -1410,11 +1635,62 @@ def monthly_props(w: dict) -> dict:
             "label": r.get("monthly_label") or r.get("short"), "monthly_reports": len(ms)}
 
 
-def write_compact(path: Path, obj) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(obj, ensure_ascii=False, separators=(",", ":"), default=str))
-    tmp.replace(path)
+def write_compact(path: Path, obj, *, blocklist_check: BlocklistWrites | None = None) -> None:
+    # Event and water directories already exist: avoid a failed mkdir (and its
+    # follow-up stat) for each of the hundreds of thousands of records.
+    parent = path.parent
+    if not parent.is_dir():
+        parent.mkdir(parents=True, exist_ok=True)
+    tmp = parent / f".export-{uuid4().hex}.tmp"
+    file = tmp.open("x", encoding="utf-8")
+    try:
+        with file:
+            text = json.dumps(obj, ensure_ascii=False, separators=(",", ":"), default=str)
+            file.write(text)
+        tmp.replace(path)
+        if blocklist_check is not None:
+            blocklist_check.observe(path, text)
+    except BaseException:
+        tmp.unlink(missing_ok=True)
+        raise
+
+
+@contextmanager
+def compact_writes(*, workers: int = 4, max_pending: int = 32,
+                   blocklist_check: BlocklistWrites | None = None):
+    """Bound independent atomic writes in flight and join them before publishing dependent files.
+
+    Aliased destinations finish in input order, including on case-insensitive filesystems.
+    Each object must remain unchanged until this context exits.
+    Worker failures propagate; executor shutdown joins all workers even on an error.
+    """
+    pending = deque()
+    destinations = {}
+
+    @lru_cache(maxsize=max_pending)
+    def resolved_parent(parent):
+        return parent.resolve()
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        def emit(path, obj):
+            # Compare directory entries, resolving parent aliases and canonical Unicode.
+            # Cache only a bounded number of parents to avoid resolving the event directory per row.
+            key = normalize("NFC", str(resolved_parent(path.parent) / path.name)).casefold()
+            if key in destinations:
+                destinations[key].result()
+            kwargs = {"blocklist_check": blocklist_check} if blocklist_check is not None else {}
+            future = pool.submit(write_compact, path, obj, **kwargs)
+            destinations[key] = future
+            pending.append((key, future))
+            if len(pending) >= max_pending:
+                old_key, old_future = pending.popleft()
+                old_future.result()
+                if destinations[old_key] is old_future:
+                    del destinations[old_key]
+
+        yield emit
+        for _, future in pending:
+            future.result()
 
 
 def round_coords(c):
@@ -1460,6 +1736,28 @@ def public_conditions(cond: dict | None, tracked) -> dict:
               for slug, rec in sorted((cond.get("waters") or {}).items()) if slug in tracked and rec.get("gauge_id")}
     return {"built": cond.get("built"), "thresholds": cond.get("thresholds"), "source": CONDITIONS_SOURCE,
             "note": CONDITIONS_NOTE, "count": len(waters), "waters": waters}
+
+
+def public_assessments(st: dict, redactor: Redactor | None = None, out_dir: Path | None = None,
+                       path: Path | None = None, now: str | None = None) -> dict:
+    """The state's own Clean Water Act assessments for the tracked waters (export/assessments.py, docs/attains.md):
+    the cache kept to st's waters, checked whole and its free text through common.scrub_text and the records'
+    redactor (Redactor.note), out/assessments.json written, and why nothing is shown printed. Beside the status,
+    never changing it: st is only read. Never raises over the cache (missing, unreadable, malformed or stale: every
+    water's `assessment` is null and meta.json's assessments.unavailable says why)."""
+    a = assess_mod.load(set(st["waters"]), canon=lambda s: status_mod.SLUG_ALIASES.get(s, s), path=path, now=now,
+                        scrub=redactor.note if redactor is not None else None)
+    if a["unavailable"]:
+        print(f"export: no state assessments on the water pages ({a['unavailable']})")
+    assess_mod.write_index(out_dir or OUT_DIR, a)
+    return a
+
+
+def assessment_download(out_dir: Path, a: dict, tracked: list[dict]) -> int:
+    """out/csv/assessments.csv beside the report downloads (after write_csvs, which swaps the csv folder in whole):
+    the rows written, 0 (and no file) when no tracked water has a unit."""
+    return assess_mod.write_csv(Path(out_dir) / "csv" / "assessments.csv", a,
+                                names={w["slug"]: w["name"] for w in tracked})
 
 
 # ---------------------------------------------------------------- inputs
@@ -1721,10 +2019,19 @@ def advisory_point_features(st: dict, by_event: dict) -> list[dict]:
 
 
 def export(include_fixtures: bool = False, include_restricted: bool = False) -> dict:
+    phase_started = perf_counter()
+
+    def phase_done(name):
+        nonlocal phase_started
+        finished = perf_counter()
+        print(f"timing: export.{name} {int(finished - phase_started)} s", flush=True)
+        phase_started = finished
+
     if include_fixtures and os.environ.get("DWW_ALLOW_FIXTURES") != "1":
         raise SystemExit("export: refusing to write out/ with research fixture events; "
                          "set DWW_ALLOW_FIXTURES=1 for a development export")
     st, hist = ensure_status(include_fixtures, include_restricted)
+    phase_done("status")
     waters = status_mod.live_waters(status_mod.load_waters())   # the live states' records only (rules.json live_states)
     # the outfall registry (every data/outfalls-*.json, national), kept to the live states for every public output
     outfalls = status_mod.live_outfalls(status_mod.load_registry_outfalls(provisional=True))
@@ -1751,6 +2058,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     if n_alias_events or n_alias_status:
         print(f"export: {n_alias_events} events and {n_alias_status} status records carried a registry alias as "
               f"discharger_id; written with the registry id")
+    phase_done("inputs")
     # names of private individuals in quoted source text -> "[name removed]" before any record is written
     # (build/redact.py; owner's lists data/name-allowlist.json, data/name-blocklist.json; review: build/name_review.py).
     # The same redactor then runs over the placement texts and status lines that quote a record (public_record,
@@ -1760,12 +2068,14 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     swaps_of = {r["event_id"]: s for e, r in zip(events, redacted)
                 if (s := quote_swaps(as_read.get(r["event_id"], e), r))}
     events = redacted
+    phase_done("redaction")
     # what each source says beyond the common fields, as named fields, and the later records of the same event
     # (export/detail.py): read from the redacted records, so a removed name stays removed
     detail_mod.enrich(events, duplicates={i for i, pl in placements.items() if (pl or {}).get("duplicate_of")})
     n_status = redact_status_texts(st, redactor, swaps_of)
     if n_status:
         print(f"export: {n_status} status lines quoted a removed name or contact; written redacted")
+    phase_done("enrichment")
 
     # intervals each event set (from the history), by event
     effects = defaultdict(list)
@@ -1795,26 +2105,31 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         shutil.rmtree(ev_dir)
     ev_dir.mkdir(parents=True)
     wording = Counter()                     # placement texts still carrying internal wording (self-check)
-    for e in events:
-        if e["event_id"] in seen:
-            continue
-        seen.add(e["event_id"])
-        pl = placements.get(e["event_id"]) or {}
-        rec = public_record(e, pl, redactor, swaps_of.get(e["event_id"], ()))
-        wording.update(note_wording(rec))
-        full = dict(rec)
-        full["status_effects"] = effects.get(e["event_id"], [])
-        full["active_now"] = active_now.get(e["event_id"], [])
-        full["reach"] = pl.get("reach")
-        full.update(band_fields(bands_of.get(e["event_id"]) or [], pl))
-        write_compact(OUT_DIR / rec["file"], publicize(full))
-        csv_events.append(rec)
-        out_events.append(slim_event(rec))
+    with (
+        BlocklistWrites(OUT_DIR, blocklist(DATA_DIR), SCAN_CACHE, workers=min(4, os.cpu_count() or 1)) as blocklist_check,
+        compact_writes(blocklist_check=blocklist_check) as write_event,
+    ):
+        for e in events:
+            if e["event_id"] in seen:
+                continue
+            seen.add(e["event_id"])
+            pl = placements.get(e["event_id"]) or {}
+            rec = public_record(e, pl, redactor, swaps_of.get(e["event_id"], ()))
+            wording.update(note_wording(rec))
+            full = dict(rec)
+            full["status_effects"] = effects.get(e["event_id"], [])
+            full["active_now"] = active_now.get(e["event_id"], [])
+            full["reach"] = pl.get("reach")
+            full.update(band_fields(bands_of.get(e["event_id"]) or [], pl))
+            write_event(OUT_DIR / rec["file"], publicize(full))
+            csv_events.append(rec)
+            out_events.append(slim_event(rec))
+    phase_done("per_event_files")
     out_events.sort(key=time_key, reverse=True)
     by_event = {e["event_id"]: e for e in out_events}
     write_compact(OUT_DIR / "events-index.json", {
         "built": now_iso(), "fixtures_included": include_fixtures, "fields": INDEX_FIELDS, "count": len(out_events),
-        "rows": [[index_obj(e)[k] for k in INDEX_FIELDS] for e in out_events]})
+        "rows": [index_row(e) for e in out_events]})
     rain_block = st.get("rain_likely") or {}
     active = active_entries(active_now, by_event, rain_block)
     write_compact(OUT_DIR / "active.json", {"built": now_iso(), "fixtures_included": include_fixtures,
@@ -1836,6 +2151,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         (OUT_DIR / "rain-levels-sso.json").unlink(missing_ok=True)
     write_compact(OUT_DIR / "events.json", {"built": now_iso(), "fixtures_included": include_fixtures,
                                             "count": len(out_events), "events": out_events})
+    phase_done("events")
 
     # outfalls by water, by permit and by operator: every registry outfall in a live state (outfall_lists)
     outfalls_by_water, outfalls_by_permit, outfalls_by_operator = outfall_lists(outfalls, aliases)
@@ -1843,6 +2159,10 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     # conditions at the nearest gauge (ingest/gauges.py), beside the status, never changing it
     conditions = public_conditions(read_json(BUILD_DIR / "conditions.json"), set(st["waters"]))
     write_compact(OUT_DIR / "conditions.json", conditions)
+    # the state's own Clean Water Act assessment (export/assessments.py), beside the status, never changing it; its
+    # free text through the same redactor as the records'
+    assessments = public_assessments(st, redactor)
+    phase_done("assessments")
 
     # waters.json and overlays
     health = st.get("sources") or {}
@@ -1901,6 +2221,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
             **{k: v for k, v in row.items() if k != "events"},
             "launches": launch_objs,
             "conditions": conditions["waters"].get(slug),
+            "assessment": assess_mod.water_block(assessments, slug),
             "history": {"start": hist.get("start"), "step_hours": hist.get("step_hours", 1),
                         "strip": (hist.get("waters") or {}).get(slug), "intervals": (hist.get("intervals") or {}).get(slug, [])},
             "events": [{k: v for k, v in {**index_obj(e), **{k: e.get(k) for k in WATER_EVENT_EXTRA}}.items()
@@ -1948,6 +2269,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         {"type": "Feature", "id": lo["slug"], "geometry": {"type": "Point", "coordinates": [lo["lon"], lo["lat"]]},
          "properties": {k: v for k, v in lo.items() if k not in ("lat", "lon")}}
         for lo in launch_feats.values() if lo["lat"] is not None and lo["lon"] is not None]})
+    phase_done("waters")
 
     # advisory markers: beach, rain and HAB advisories that colour no water
     pts = advisory_point_features(st, by_event)
@@ -1956,6 +2278,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     # them into out/outfalls.json (`status: "monthly"`, days, month, received_at, label) for the map's points
     write_compact(OUT_DIR / "monthly-outfalls.json", {"built": now_iso(), "status_now": st.get("now"),
                                                       "outfalls": publicize(st.get("monthly_outfalls") or [])})
+    phase_done("advisory_points")
 
     # modeled reaches: active events x segments, the stop markers, and every traced path for replay
     from build import reaches as reaches_mod
@@ -1969,12 +2292,14 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     if no_state:
         print(f"export: {len(no_state)} reach(es) touch no live state and are only in the national files: "
               f"{', '.join(no_state[:5])}{' ...' if len(no_state) > 5 else ''}")
+    phase_done("reaches")
 
     # history: only tracked waters (all are, by construction)
     hist_out = dict(hist)
     hist_out["waters"] = {s: v for s, v in hist["waters"].items() if s in st["waters"]}
     hist_out["intervals"] = {s: v for s, v in (hist.get("intervals") or {}).items() if s in st["waters"]}
     write_compact(OUT_DIR / "history.json", hist_out)
+    phase_done("history")
 
     # dischargers (loaded above; event counts by the canonical discharger_id, else by permit)
     ev_by_permit = defaultdict(list)
@@ -2001,6 +2326,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     unknown_permits = sorted(p for p in ev_by_permit if p not in dis_permits)
     write_compact(OUT_DIR / "dischargers.json", {"built": now_iso(), "from": dis_from, "count": len(dis),
                                                  "permits_with_events_not_listed": unknown_permits, "dischargers": dis})
+    phase_done("dischargers")
     # the map's outfall points and the live layer's lookups (export/outfalls.py): the same registry rows, the operator
     # by permit, the rain caution and the monthly marks; official combined sewer outfalls with no point and no water apart ("unplaced":
     # counted and listed on the state page, never drawn)
@@ -2012,6 +2338,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     outfalls_mod.write(outfall_points, OUT_DIR, now_iso(), outfall_unplaced)
     print(f"export: {outfalls_mod.summary(outfall_points)}; {len(outfall_unplaced)} official combined sewer outfalls "
           "with no point and no water (unplaced)")
+    phase_done("outfalls")
 
     # sources
     feed_of = {}
@@ -2038,6 +2365,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                       "waters_covered": sum(1 for w in st["waters"].values() if sid in w["covered_by"])})
     feeds = live_feeds(feeds, kept_rids)
     write_compact(OUT_DIR / "sources.json", {"built": now_iso(), "feeds": feeds, "registry": reg_rows})
+    phase_done("feeds")
 
     # what is reported, state by state and water by water (docs/plan.md §2.y; export/coverage.py), with where the
     # "discharge likely" caution is computed (rain_caution_states: build/rain_likely.caution_coverage)
@@ -2054,6 +2382,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     if rain_sso.enabled(status_mod.load_rules()):
         # each state's grade for the separate sewer caution's timeliness rule (build/rain_sso.py), pipeline state only
         rain_sso.write_grades(cov)
+    phase_done("coverage")
 
     # CSV downloads of the reports per water, operator and state, and all of them (export/csv.py,
     # docs/data-downloads.md). The same public records as above; a failure is logged and the export goes on.
@@ -2075,6 +2404,9 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
             states=set(status_mod.states()),
             as_of=st.get("now"), active_ids=active_ids, source_states=source_states)
         csv_files = csv_counts["files"]
+        # the assessment download beside them (after write_csvs, which swaps the csv folder in whole)
+        if assessment_download(OUT_DIR, assessments, tracked):
+            csv_files += 1
         if csv_counts["oversize"]:          # the host takes no file over 25 MiB; scripts/mirror-csv.sh leaves them out
             note = f"csv files over 25 MiB are not published on the site: {', '.join(csv_counts['oversize'])}"
             print(f"export: {note}")
@@ -2082,6 +2414,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     except Exception as exc:
         print(f"export: CSV files not written ({error_text(exc)})")
         problems.append(f"csv export failed: {error_text(exc)}")
+    phase_done("csv")
 
     # meta
     by_state_status = defaultdict(lambda: Counter())
@@ -2143,6 +2476,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
                        "with_flow": sum(1 for r in conditions["waters"].values() if r.get("flow_cfs") is not None),
                        "with_temperature": sum(1 for r in conditions["waters"].values() if r.get("temp_c") is not None),
                        "with_turbidity": sum(1 for r in conditions["waters"].values() if r.get("turbidity_ntu") is not None)},
+        "assessments": assess_mod.meta(assessments),
         "waters_without_geometry": missing_geom,
         # as they may be published: a problem that quotes an exception keeps its kind and category (common.public_error)
         "problems": [public_error(p) for p in (st.get("problems") or []) + problems],
@@ -2152,7 +2486,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     if rules_src.exists():                  # the methods page prints it; internal "_" keys stay home
         write_json(OUT_DIR / "rules.json", live_rules(public_rules(json.loads(rules_src.read_text())), status_mod.states()))
     for name in ("meta.json", "sources.json", "waters.json", "conditions.json", "active.json", "dischargers.json",
-                 "coverage.json", "monthly-outfalls.json", "outfalls.json"):
+                 "coverage.json", "monthly-outfalls.json", "outfalls.json", "assessments.json"):
         hits = internal_wording(read_json(OUT_DIR / name))
         if hits:
             print(f"export: internal wording left in {name}: {', '.join(sorted(set(hits))[:5])}")
@@ -2164,10 +2498,12 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         print(f"export: {note}")
         meta["problems"].append(note)
         write_compact(OUT_DIR / "meta.json", meta)
+    phase_done("metadata")
     # the owner's blocklist, checked in what was written: a name in events.json, waters/*.json or the full
     # records fails the export (review 2026-11-03 P1-1; scripts/refresh.sh then uploads and deploys nothing)
-    checked = enforce_blocklist(OUT_DIR)
+    checked = enforce_blocklist(OUT_DIR, observed=blocklist_check)
     print(f"export: blocklist self-check passed ({checked} files)")
+    phase_done("blocklist_self_check")
     return meta
 
 

@@ -458,5 +458,84 @@
     "verified": "search_only",
     "checked": "2026-11-03",
     "notes": ""
+  },
+  {
+    "id": "fl-miami-dade-sso",
+    "name": "Miami-Dade County RER/DERM sanitary sewer overflows",
+    "jurisdiction": "FL",
+    "operator": "Miami-Dade County Regulatory and Economic Resources, DERM",
+    "operator_type": "municipal",
+    "role": "events",
+    "event_types": [
+      "sso"
+    ],
+    "waters_covered": "All utilities within Miami-Dade County; receiving water only when named in the county record.",
+    "water_slugs": [],
+    "url": "https://opendata.miamidade.gov/datasets/MDC::sewer-overflow/about",
+    "access": [
+      "arcgis"
+    ],
+    "access_detail": "Item 868a052504a449a4b0fa965b9e49e7c3; https://services.arcgis.com/8Pc9XBTAsYuxx9Ny/arcgis/rest/services/SewerOverflow_gdb/FeatureServer/0/query. Anonymous named-field query, six complete cursor pages on 2026-11-22; 5,252 unique INCIDENTID values.",
+    "machine_readable": true,
+    "sample_record": {
+      "INCIDENTID": "20261106100459783383",
+      "TRACKNUM": "597571",
+      "QUANDSCHRG": 72917,
+      "ESTGALRECOVER": 59840,
+      "DISCCAUSECAT": "FM",
+      "DISCHARGECAUSE": "CONTRACTOR",
+      "SURFWATNAME": "CANAL",
+      "DISCSURFWAT": "Y"
+    },
+    "fields": [
+      "INCIDENTID",
+      "INCDNTDATE",
+      "STARTDATE",
+      "STOPDATE",
+      "QUANDSCHRG",
+      "ESTGALRECOVER",
+      "TRACKNUM",
+      "UTILITYNAME",
+      "DISCCAUSECAT",
+      "DISCHARGECAUSE",
+      "DISCSURFWAT",
+      "WATBODYTYPE",
+      "SURFWATNAME",
+      "CREATEDDATE",
+      "MODIFIEDDATE",
+      "LAT",
+      "LON",
+      "WATDISCTYPE"
+    ],
+    "fills_event_fields": [
+      "source_record_id",
+      "started_at",
+      "ended_at",
+      "time_precision",
+      "volume_gal",
+      "waterbody_text",
+      "coordinates",
+      "source_updated_at",
+      "authority",
+      "material"
+    ],
+    "cannot_fill": [
+      "reported_at",
+      "published_at",
+      "advice_text",
+      "valid_until",
+      "decoded cause labels (no domains)"
+    ],
+    "has_coordinates": true,
+    "has_outfall_ids": false,
+    "cadence": "Weekly per agency item description; newest start 2026-11-03, row modification 2026-11-06, layer data edit 2026-11-10 at the 2026-11-22 read.",
+    "history": "5,252 records, 1990-2026. 116 starts from 2025-11-22 through 2026-11-22, including 94 positive spills under 1,000 gallons; 14 report surface-water discharge.",
+    "license": "County as-is terms; no warranty of accuracy or completeness. Official Open Data Hub offers public download and API use.",
+    "legal_basis": null,
+    "status": "used",
+    "status_reason": "Read by fl-miami-dade-sso. Preserves all county utilities and small spills, source cause codes, separately stated discharged and recovered gallons, and source end precision. Confirmed DEP overlaps link to one counted DEP event with both records cited; ambiguous matches remain separate.",
+    "verified": "fetched",
+    "checked": "2026-11-22",
+    "notes": "Agency ownership: MDPublisher in Miami-Dade County organization 8Pc9XBTAsYuxx9Ny; official GIS Online Services links the county Open Data Hub. Eastern wall-clock values encoded as UTC confirmed against DEP notice 202611184 / WASD 597571. Contact, address and narrative fields never requested. Only allowlisted attributes are saved; points rounded to three decimals. Dates, publication and fetch times remain distinct. Explicit SECONDARY EFFLUENT rows (seven at the live check) stay in sanitized raw snapshots and are excluded from sewage events, consistent with the DEP reader."
   }
 ]

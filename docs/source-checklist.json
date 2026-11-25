@@ -50884,6 +50884,86 @@
   "area": "fl"
  },
  {
+  "id": "fl-miami-dade-sso",
+  "name": "Miami-Dade County RER/DERM sanitary sewer overflows",
+  "jurisdiction": "FL",
+  "operator": "Miami-Dade County Regulatory and Economic Resources, DERM",
+  "operator_type": "municipal",
+  "role": "events",
+  "event_types": [
+   "sso"
+  ],
+  "waters_covered": "All utilities within Miami-Dade County; receiving water only when named in the county record.",
+  "water_slugs": [],
+  "url": "https://opendata.miamidade.gov/datasets/MDC::sewer-overflow/about",
+  "access": [
+   "arcgis"
+  ],
+  "access_detail": "Item 868a052504a449a4b0fa965b9e49e7c3; https://services.arcgis.com/8Pc9XBTAsYuxx9Ny/arcgis/rest/services/SewerOverflow_gdb/FeatureServer/0/query. Anonymous named-field query, six complete cursor pages on 2026-11-22; 5,252 unique INCIDENTID values.",
+  "machine_readable": true,
+  "sample_record": {
+   "INCIDENTID": "20261106100459783383",
+   "TRACKNUM": "597571",
+   "QUANDSCHRG": 72917,
+   "ESTGALRECOVER": 59840,
+   "DISCCAUSECAT": "FM",
+   "DISCHARGECAUSE": "CONTRACTOR",
+   "SURFWATNAME": "CANAL",
+   "DISCSURFWAT": "Y"
+  },
+  "fields": [
+   "INCIDENTID",
+   "INCDNTDATE",
+   "STARTDATE",
+   "STOPDATE",
+   "QUANDSCHRG",
+   "ESTGALRECOVER",
+   "TRACKNUM",
+   "UTILITYNAME",
+   "DISCCAUSECAT",
+   "DISCHARGECAUSE",
+   "DISCSURFWAT",
+   "WATBODYTYPE",
+   "SURFWATNAME",
+   "CREATEDDATE",
+   "MODIFIEDDATE",
+   "LAT",
+   "LON",
+   "WATDISCTYPE"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "started_at",
+   "ended_at",
+   "time_precision",
+   "volume_gal",
+   "waterbody_text",
+   "coordinates",
+   "source_updated_at",
+   "authority",
+   "material"
+  ],
+  "cannot_fill": [
+   "reported_at",
+   "published_at",
+   "advice_text",
+   "valid_until",
+   "decoded cause labels (no domains)"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": false,
+  "cadence": "Weekly per agency item description; newest start 2026-11-03, row modification 2026-11-06, layer data edit 2026-11-10 at the 2026-11-22 read.",
+  "history": "5,252 records, 1990-2026. 116 starts from 2025-11-22 through 2026-11-22, including 94 positive spills under 1,000 gallons; 14 report surface-water discharge.",
+  "license": "County as-is terms; no warranty of accuracy or completeness. Official Open Data Hub offers public download and API use.",
+  "legal_basis": null,
+  "status": "used",
+  "status_reason": "Read by fl-miami-dade-sso. Preserves all county utilities and small spills, source cause codes, separately stated discharged and recovered gallons, and source end precision. Confirmed DEP overlaps link to one counted DEP event with both records cited; ambiguous matches remain separate.",
+  "verified": "fetched",
+  "checked": "2026-11-22",
+  "notes": "Agency ownership: MDPublisher in Miami-Dade County organization 8Pc9XBTAsYuxx9Ny; official GIS Online Services links the county Open Data Hub. Eastern wall-clock values encoded as UTC confirmed against DEP notice 202611184 / WASD 597571. Contact, address and narrative fields never requested. Only allowlisted attributes are saved; points rounded to three decimals. Dates, publication and fetch times remain distinct. Explicit SECONDARY EFFLUENT rows (seven at the live check) stay in sanitized raw snapshots and are excluded from sewage events, consistent with the DEP reader.",
+  "area": "fl"
+ },
+ {
   "id": "mi-egle-mienviro-cso-sso-list",
   "name": "EGLE MiEnviro CSO/SSO List (sewage discharge reports: CSO, SSO, RTB and other discharges)",
   "jurisdiction": "MI",
@@ -57808,12 +57888,12 @@
   "status_reason": "Read through the generic ArcGIS reader (data/sources/tx-glo-beach-watch.yaml): 174 stations on 2026-11-07 (Low 162, Medium 12, High 0); High is the program's advisory, Medium its label.",
   "verified": "fetched",
   "checked": "2026-11-07",
-  "notes": "Watch for the service name changing (BW2026_...).",
+  "notes": "Watch for the service name changing (BW2026_...). 2026-11-21: www.texasbeachwatch.com answered 302 to GLO's home page and the layer timed out (this Mac and GitHub's runner) during GLO's announced weekend maintenance of texasbeachwatch.com and some map applications from 2026-11-20 17:00 Central; the citation stays.",
   "area": "tx"
  },
  {
   "id": "tx-houston-sso-monthly",
-  "name": "City of Houston Public Works monthly SSO reports (consent decree Paragraph 61)",
+  "name": "City of Houston Public Works monthly SSO reports and history",
   "jurisdiction": "TX",
   "operator": "City of Houston, Houston Public Works",
   "operator_type": "municipal",
@@ -57825,10 +57905,11 @@
   "water_slugs": [],
   "url": "https://www.houstonpublicworks.org/wastewater-cd",
   "access": [
-   "pdf"
+   "pdf",
+   "api"
   ],
-  "access_detail": "HTML page https://www.houstonpublicworks.org/wastewater-cd linking one PDF per month (\"Monthly SSO Report - <Month YYYY>\", April 2021 to September 2026 on 2026-11-17; irregular file names, the month read from the link title), filed under the 2021 wastewater consent decree (U.S. and Texas v. City of Houston, 4:18-cv-03368, S.D. Tex.; the cover letter cites Paragraph 61). Table: SSO ID, TPDES permit, address, flow location, reached waters of the US (Yes/No), estimated gallons, structure type, cause, start and end date and time, average flow (GPM), corrective action; the month's total, notifications to the public and the City's notes under it; a map page of points.",
-  "machine_readable": false,
+  "access_detail": "HTML page https://www.houstonpublicworks.org/wastewater-cd linking one PDF per month (\"Monthly SSO Report - <Month YYYY>\", April 2021 to September 2026 on 2026-11-17; irregular file names, the month read from the link title), filed under the 2021 wastewater consent decree (U.S. and Texas v. City of Houston, 4:18-cv-03368, S.D. Tex.; the cover letter cites Paragraph 61). Table: SSO ID, TPDES permit, address, flow location, reached waters of the US (Yes/No), estimated gallons, structure type, cause, start and end date and time, average flow (GPM), corrective action; the month's total, notifications to the public and the City's notes under it; a map page of points. History enrichment: https://services.arcgis.com/NummVBqZSIJKUeVR/ArcGIS/rest/services/RSSO_Package/FeatureServer/0, City of Houston GIS item f10546c4604a4d38bbc397549925f0f4. Selected fields and WGS84 geometry; complete ordered resultOffset pages of 2,000, checked against the count. Same source, EXCURSIONID equals monthly SSO ID.",
+  "machine_readable": true,
   "sample_record": "SSO 68784, September 2026: WQ0010495003, Graustark St (house number removed), Storm Sewer (not contained), reached waters of the US: Yes, 567 gallons, Manhole, Grease Blockage, 9/10/2026 9:33 AM to 12:15 PM, 4 GPM, Cleaned and Disinfected; Cleared Main Line",
   "fields": [
    "SSO ID",
@@ -57840,7 +57921,12 @@
    "cause",
    "start",
    "end",
-   "corrective action"
+   "corrective action",
+   "EXCURSIONID",
+   "TOTALVOLLOST",
+   "DURATION (minutes)",
+   "SYSTEM (public/private)",
+   "WGS84 geometry"
   ],
   "fills_event_fields": [
    "started_at (minute)",
@@ -57849,23 +57935,26 @@
    "volume",
    "outfall_name (street, no house number)",
    "reached water (Yes/No)",
-   "cause, structure type, flow location, corrective action"
+   "cause, structure type, flow location, corrective action",
+   "source point rounded to about 100 meters",
+   "source duration in minutes",
+   "public/private system"
   ],
   "cannot_fill": [
-   "the receiving water (taken from TCEQ's record of the same overflow where it names one)",
-   "coordinates (the map is a PDF; no geocoding of the street)"
+   "the receiving water (taken from linked TCEQ records; sewer basin and treatment plant are not receiving waters)",
+   "the owner or permit of a history-only overflow"
   ],
-  "has_coordinates": false,
+  "has_coordinates": true,
   "has_outfall_ids": false,
   "cadence": "monthly, two to seven weeks after the month ends (September 2026 posted October 16, 2026)",
-  "history": "April 2021 to date on the page; read from January 2024",
-  "license": "none stated",
+  "history": "Layer: 2018 through October 2026 on November 22, 2026; monthly PDFs listed from April 2021, read from January 2024",
+  "license": "City GIS history: public domain, copying permitted and citation appreciated (https://mycity.houstontx.gov/about.html); monthly PDFs: none stated",
   "legal_basis": "Consent decree",
   "status": "used",
-  "status_reason": "Read hourly by pipeline/ingest/tx_houston_sso_monthly.py from 2026-11-17 (--backfill for the months from January 2024): one record per row, start and end to the minute, the City's reached-water flag kept. 33 reports read on 2026-11-17, 4,407 rows (1,409 marked as reaching waters of the US), each month's count equal to its stated total. TCEQ's record of the same overflow (3,017 rows met one on TCEQ's Harris County rows from 2023) is linked as the same event, the City's row shown.",
+  "status_reason": "We enrich the existing monthly source by exact SSO ID from the City GIS history layer. Live check November 22, 2026: all 4,494 monthly records match; 29,313 records after excluding the monthly report's voided SSO, a gain of 24,819. We preserve monthly values and TCEQ links, add source points and keep private-system rows marked. No end or volume is computed.",
   "verified": "fetched",
-  "checked": "2026-11-17",
-  "notes": "",
+  "checked": "2026-11-22",
+  "notes": "Dates and separate clocks are UTC epochs decoded independently in America/Chicago before combining; clocks use an 1899 base date. Zero volume is unknown. TOTALVOLLOST is the City's published figure, even when it differs from GPM times duration. Source layer edit time, PDF publication time and our fetch times stay separate. Source points are rounded to three decimals; no house numbers or personal narrative fields are saved.",
   "area": "tx"
  },
  {

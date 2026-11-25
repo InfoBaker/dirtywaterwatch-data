@@ -167,3 +167,9 @@ def test_p1_9_12_link_after_the_generic_reader_and_write_order(tmp_path, monkeyp
     t = json.loads(tq.read_text())
     assert H.link_only("2026-11-17T17:00:00Z", tmp_path / "none.json", tq) == 0
     assert json.loads(tq.read_text())["records"][0]["duplicate_of"] is None
+
+
+@pytest.fixture(autouse=True)
+def monthly_transport_only(monkeypatch):
+    """These existing cases isolate the PDF/link transport; history paging has its own integration tests."""
+    monkeypatch.setattr(H, "read_history", lambda held, at, get: held)

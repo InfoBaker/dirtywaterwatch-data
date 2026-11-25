@@ -246,3 +246,80 @@ def test_alabama_is_wired_in():
     assert re.search(r'"al": "Alabama"', (root / "scripts" / "gen_source_checklist.py").read_text())
     for sid in ("al-adem-sso-history", "al-adem-sso-map-live", "al-adem-beach-monitoring"):
         assert (root / "data" / "sources" / f"{sid}.yaml").exists()
+
+
+def test_live_detail_survives_absence_without_reusing_old_status():
+    from export.detail import detail_of
+
+    hist = next(r for r in _rows("history.json") if r["sso_report_id"] == "SSO-00215084")
+    live = next(r for r in _rows("live.json") if r["sso_report_id"] == hist["sso_report_id"])
+    live = {**live, "sso_ongoing_ind": "Yes"}
+    first, _ = S.build([hist], [live], AT, [], True, ops=OPS)
+    later = "2026-11-22T14:00:00Z"
+    changed = {**hist, "sso_ongoing_ind": None, "date_sso_stopped": None}
+    again, _ = S.build([changed], [], later, first, True, ops=OPS)
+    r = again[0]
+    assert r["raw"]["live"] == first[0]["raw"]["live"]
+    assert r["raw"]["_live_last_seen_at"] == AT
+    assert r["raw"]["_live_missing_since"] == later
+    assert r["raw"]["live"]["sso_report_version"] == live["sso_report_version"]
+    assert r["status"] == "unknown" and r["ended_at"] is None
+    assert detail_of(r)["cause"] == "vent saddle rusted"
+    third, _ = S.build([changed], [], "2026-11-23T14:00:00Z", again, True, ops=OPS)
+    assert third[0]["raw"]["_live_last_seen_at"] == AT
+    assert third[0]["raw"]["_live_missing_since"] == later
+
+
+def test_live_correction_replaces_even_blank_cause_and_keeps_superseded_evidence():
+    hist = next(r for r in _rows("history.json") if r["sso_report_id"] == "SSO-00215084")
+    live = next(r for r in _rows("live.json") if r["sso_report_id"] == hist["sso_report_id"])
+    first, _ = S.build([hist], [live], AT, [], True, ops=OPS)
+    gone, _ = S.build([hist], [], "2026-11-21T14:00:00Z", first, True, ops=OPS)
+    later = "2026-11-22T14:00:00Z"
+    corrected = {**live, "cause_of_discharge": None, "sso_report_version": 3}
+    again, _ = S.build([hist], [corrected], later, gone, True, ops=OPS)
+    raw = again[0]["raw"]
+    assert raw["live"]["cause_of_discharge"] is None
+    assert raw["_live_last_seen_at"] == later and "_live_missing_since" not in raw
+    revision = raw["_live_revisions"][0]
+    assert revision["live"]["cause_of_discharge"] == "vent saddle rusted"
+    assert revision["last_seen_at"] == AT and revision["superseded_at"] == later
+    same, _ = S.build([hist], [corrected], later, again, True, ops=OPS)
+    assert len(same[0]["raw"]["_live_revisions"]) == 1
+
+
+def test_live_absence_marks_retained_history_and_uses_legacy_fetch_time():
+    first, _ = _build()
+    old = copy.deepcopy(first["SSO-00215084"])
+    old["raw"].pop("_live_last_seen_at", None)
+    later = "2026-11-22T14:00:00Z"
+    again, _ = S.build([], [], later, [old], False, ops=OPS)
+    assert again[0]["raw"]["_live_last_seen_at"] == AT
+    assert again[0]["raw"]["_live_missing_since"] == later
+
+
+def test_absent_live_only_report_keeps_observed_status_but_only_caution_intervals():
+    from datetime import datetime
+    from build import status
+
+    observed = "2026-11-21T20:00:00Z"
+    missing = "2026-11-22T20:00:00Z"
+    live = {"sso_report_id": "SSO-00990001", "sso_ongoing_ind": "Yes",
+            "date_sso_began": "Nov 21 2026 1:03PM"}
+    first, _ = S.build([], [live], observed, [], True, ops=OPS)
+    assert first[0]["status"] == "ongoing" and first[0]["started_at"]
+    gone, _ = S.build([], [], missing, first, True, ops=OPS)
+    r = gone[0]
+    assert r["status"] == "unknown" and r["ended_at"] is None
+    assert r["raw"]["live"]["sso_ongoing_ind"] == "Yes"
+    assert r["raw"]["_live_last_seen_at"] == observed
+    assert r["raw"]["_live_missing_since"] == missing
+    assert r["fetched_at"] == observed
+    ivs = status.event_intervals(r, "AL", datetime.fromisoformat(missing.replace("Z", "+00:00")))
+    assert ivs and any(i["color"] == "yellow" for i in ivs)
+    assert all(i["color"] != "red" and i["rule"] != "ongoing" for i in ivs)
+    again, _ = S.build([], [], "2026-11-23T20:00:00Z", gone, True, ops=OPS)
+    assert again[0]["status"] == "unknown" and again[0]["ended_at"] is None
+    assert again[0]["raw"]["_live_last_seen_at"] == observed
+    back, _ = S.build([], [live], "2026-11-24T20:00:00Z", again, True, ops=OPS)
+    assert back[0]["status"] == "ongoing" and "_live_missing_since" not in back[0]["raw"]

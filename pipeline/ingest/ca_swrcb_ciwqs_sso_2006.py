@@ -215,8 +215,7 @@ def private_only(appearance_points) -> bool:
 
 def rounded(v) -> str | None:
     """A typed coordinate to three decimals (about 100 m), as text; None when it is not a number."""
-    f = L.fnum(v)
-    return None if f is None else str(round(f, 3))
+    return L.rounded(v)
 
 
 def scrubbed_row(r: dict) -> dict:
@@ -571,7 +570,7 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], live_reco
     names = discharger_names() if names is None else names
     live_records = live_records or []
     live_names = operator_names(live_records)
-    prev = {r["event_id"]: r for r in prev_records}
+    prev = {r["event_id"]: r for r in L.scrub_history(prev_records, PRIVATE_ONLY)}
     current, folded, no_id = spills(rows, prev_records)
     cats = Counter(L.category(r.get("spill_type")) for _, r, _, _ in current)
     flags = Counter()
@@ -648,7 +647,7 @@ def keep(prev_doc: dict, prev: list[dict], fetched_at: str, state: dict, why: di
     """A run that reads nothing: the records are kept (the overlap with the 2022 order's file checked again)."""
     from build import redact
     live = (read_json(LIVE_EVENTS, {}) or {}).get("records", [])
-    records = list(prev)
+    records = L.scrub_history(prev, PRIVATE_ONLY)
     overlap = link_copies(records, live)
     meta = {**(prev_doc.get("meta") or {}), **why, "checked_at": fetched_at, "overlap_with_2022_order": overlap,
             "records": len(records), "shown_category_1": sum(1 for r in records if not r.get("duplicate_of"))}
@@ -670,7 +669,7 @@ def main(argv=None) -> int:
     now = datetime.fromisoformat(fetched_at.replace("Z", "+00:00"))
     state = read_json(STATE_FILE, {}) or {}
     prev_doc = read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}
-    prev = prev_doc.get("records", [])
+    prev = L.scrub_history(prev_doc.get("records", []), PRIVATE_ONLY)
     if not args.file and not args.backfill and prev and not due(state, now):
         return keep(prev_doc, prev, fetched_at, state, {"last_read_at": state.get("read_at")},
                     f"read {state.get('read_at')}, next read {REREAD_DAYS} days after it")
@@ -685,7 +684,7 @@ def main(argv=None) -> int:
             content, modified = L.fetch(sess, state, FILE_URL)
     except Exception as e:  # noqa: BLE001
         write_json(STATE_FILE, state)
-        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        write_events(SOURCE_ID, prev, ok=False, partial=True, error=f"{error_text(e)}")
         print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     if content is None:
@@ -699,7 +698,7 @@ def main(argv=None) -> int:
         records, stats = build(rows, fetched_at, prev, live, file_modified=modified)
     except Exception as e:  # noqa: BLE001 - a read that fails keeps the previous records
         write_json(STATE_FILE, state)
-        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        write_events(SOURCE_ID, prev, ok=False, partial=True, error=f"{error_text(e)}")
         print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     raw_path = state.get("raw_path")

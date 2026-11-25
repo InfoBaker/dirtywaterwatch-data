@@ -894,6 +894,58 @@ class Towns:
 
 # ---------------------------------------------------------------- targets
 
+TARGET_PLACEMENTS = BUILD_DIR / "nhd-target-placements.json"
+
+
+class TargetPlacements:
+    """The target scan needs only whether a report was placed and its no-water reason.
+
+    Keep these answers under the resolver's content stamp in the restored build state. Target counts,
+    points, towns, references and the unplaced records are still collected afresh, in their original order.
+    This is separate from status's cache: NHD deliberately resolves without its own water records.
+    """
+    def __init__(self, resolver):
+        self.resolver = resolver
+        self.path = TARGET_PLACEMENTS
+        self.parts, water_hashes = {}, {}
+        self.stamp = S.placement_stamp(resolver.waters,
+                                       [r for rows in resolver.by_permit.values() for r in rows],
+                                       resolver.discharger_towns, resolver.discharger_waters,
+                                       {"placement": {"no_outfall_all_waters": resolver.no_outfall_all_waters}},
+                                       S.states(), parts=self.parts, water_hashes=water_hashes)
+        try:
+            saved = read_json(self.path) or {}
+        except (OSError, ValueError):
+            saved = {}
+        changed = {k for k, v in self.parts.items() if (saved.get("inputs") or {}).get(k) != v}
+        self.old = saved.get("placements", {}) if not changed - {"waters", "outlines", "reference_names"} else {}
+        from build.placement_cache import Dependencies
+        self.dependencies = Dependencies(resolver, water_hashes, saved.get("dependencies"),
+                                         saved.get("stamp") == self.stamp)
+        self.new = {}
+
+    def resolve(self, ev):
+        if S.agency_extent(ev) is not None:
+            return self.resolver.resolve(ev)
+        key, digest = ev["event_id"], S.record_hash(ev)
+        held = self.old.get(key)
+        if held and held[0] == digest and len(held) == 3 and self.dependencies.valid(held[2]):
+            result = held[1]
+            group = self.dependencies.import_group(held[2])
+        else:
+            pl, group = self.dependencies.resolve(ev)
+            result = {"water_slugs": bool(pl["water_slugs"]), "no_receiving_water": pl.get("no_receiving_water")}
+        self.new[key] = [digest, result, group]
+        return result
+
+    def save(self):
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        tmp = self.path.with_suffix(".json.tmp")
+        tmp.write_text(json.dumps({"stamp": self.stamp, "inputs": self.parts, "placements": self.new,
+                                   "dependencies": self.dependencies.saved()}, separators=(",", ":")))
+        tmp.replace(self.path)
+
+
 def existing_waters() -> dict:
     """The water records the site has without this file (openboatlaunch, waters-extra)."""
     return S.load_waters(include_nhd=False)
@@ -946,6 +998,7 @@ def collect_targets(existing: dict, events=None, verbose=True, unplaced: list | 
     S._STATES = S.derive_states(existing, S.load_rules())
     S._GEOM_CACHE.clear()
     resolver = S.make_resolver(existing)
+    placements = TargetPlacements(resolver)
     targets: dict[tuple, Target] = {}
     skipped = Counter()
     skipped_reason = {}
@@ -1008,7 +1061,7 @@ def collect_targets(existing: dict, events=None, verbose=True, unplaced: list | 
         text = (ev.get("waterbody_text") or "").strip()
         if not text:
             continue
-        pl = resolver.resolve(ev)
+        pl = placements.resolve(ev)
         if pl["water_slugs"]:
             continue
         if pl.get("no_receiving_water"):        # "N/A", "storm drain", "did not reach a waterbody"
@@ -1052,6 +1105,7 @@ def collect_targets(existing: dict, events=None, verbose=True, unplaced: list | 
             t["name"], t["words"] = None, []
         out.append(t)
     out.sort(key=lambda t: (-(t["events"] + t["outfalls"]), t["key"]))
+    placements.save()
     return out, skipped, skipped_reason, stats, resolver
 
 

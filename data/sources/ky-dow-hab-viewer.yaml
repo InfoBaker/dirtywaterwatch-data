@@ -31,7 +31,8 @@ checked: "2026-11-07"
 # Generic ingester (docs/generic-ingesters.md). One record per point under an advisory status (Warning, and the
 #   stronger Danger the program also uses); a point sampled with toxins below the advisory level (Below) or none
 #   detected (NoDetect) is not a record: grey, "no report", never clean. Every fetch that still finds the record
-#   confirms it (history.confirm_while_listed), and the first that no longer finds it ends it (raw._unlisted_since).
+#   confirms it (history.confirm_while_listed). Inactive rows close the exact point/start episode only with
+#   HABEND or an explicit dated advisory lift in HABSTATDES; an undated inactive status keeps the caution.
 #   HABEND, when the Division sets it, is the advisory's end in the Division's words (advisory_lifted, day precision).
 #   The layer spans both of Kentucky's time zones and a block names one: the dates are dates (midnight: date), and the
 #   hook writes raw.time_zone from the point (zones.zone_for, the forty-one Central-time counties), so each day ends
@@ -51,8 +52,7 @@ fetch:
   bounds: [-89.6, 36.45, -81.9, 39.2]      # Kentucky; a point outside is not used (raw._coords_rejected)
   safe_fields: [OBJECTID, HABSTART, HABEND, HABSTATUS, HABNAME, HABSTATDES, HABYEARS, _x, _y]
   free_text: [HABSTATDES]
-  # sampled with no advisory (Below: toxins under the advisory level; NoDetect): not an advisory record
-  filter: [{field: HABSTATUS, regex: "^\\s*(below|nodetect|no ?detect|none|not detected|monitored|)\\s*$", exclude: true}]
+  # Read inactive rows for explicit lifts; the episode hook excludes sample-only records.
   record:
     source_record_id: {template: "{OBJECTID}-{@started_at|compact|default:nodate}"}
     started_at: {field: HABSTART, parse: epoch_ms, midnight: date}
@@ -67,11 +67,13 @@ fetch:
     authority: {const: "Kentucky Division of Water (HAB Viewer)"}
     source_url: {const: "https://watermaps.ky.gov/HABs"}
   transform: "ingest.ky_transforms.ky_hab_record"
+  post: "ingest.ky_transforms.ky_hab_episodes"
   raw_notes:
     _hab_level: {field: HABSTATUS, upper: true}
     _hab_season: HABYEARS
   dedupe: {repeats: suffix}
   history:
+    revisions: true
     keep_missing: true
     confirm_while_listed: true
     track:

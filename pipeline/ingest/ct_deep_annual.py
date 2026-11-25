@@ -226,11 +226,16 @@ def sheet_rows(rows: list[list]) -> list[dict]:
     """Rows under the header line (the first row naming Request ID or a date column)."""
     out, header = [], None
     for i, r in enumerate(rows):
-        cells = [clean(x) for x in r]
+        cells = [re.sub(r"\s+", " ", clean(x)).strip() if clean(x) else None for x in r]
+        names = {c for c in cells if c}
+        # Replacement headers can add or reorder columns. Recognize their labels
+        # without mapping them through the previous positions; any independent
+        # value (including an ID or date) keeps an incident from becoming a header.
+        known_labels = HEADER_KEYS | set(header or [])
+        if len(names & HEADER_KEYS) >= 2 and (header is None or names <= known_labels):
+            header = cells
+            continue
         if header is None:
-            names = {re.sub(r"\s+", " ", c).strip() for c in cells if c}
-            if len(names & HEADER_KEYS) >= 2:
-                header = [re.sub(r"\s+", " ", c).strip() if c else None for c in r]
             continue
         if not any(cells):
             continue
@@ -257,7 +262,33 @@ def to_dashboard_row(kind: str, rec: dict) -> dict:
     return row
 
 
+def is_header_or_section(row: dict) -> bool:
+    """Recognize workbook labels, without dropping an incident just because its date will not parse."""
+    cells = {" ".join(k.split()): " ".join(str(v).split()) for k, v in row.items()
+             if not k.startswith("_") and v is not None and str(v).strip()}
+    rid = cells.get("Request ID")
+    if rid and rid != "Request ID":
+        return False
+    # Every populated cell must be a label. Even one independent value is evidence
+    # of an incident, including a utility alongside an accidentally copied date header.
+    old_dates = {"Regulator activated": "Date Activated", "Regulator Stopped": "Date Ceased",
+                 "Bypass Began or Discovered": "Date Bypass Began or was Discovered",
+                 "Bypass Ended": "Date Bypass Ended"}
+    def label(k, v):
+        return (v == k or OLD_CSO.get(v) == k or OLD_SSO.get(v) == k or old_dates.get(v) == k or
+                bool(re.fullmatch(r"NO REPORTED BYPASSES(?: AT [\w-]+)?", v, re.I))) or (
+            k == "Report Type" and v == "CSO - Utility")  # translated old header
+    return bool(cells) and all(label(k, v) for k, v in cells.items())
+
+
+def load_history() -> list[dict]:
+    saved = (read_json(EVENTS_DIR / f"{SOURCE_ID}.json", {}) or {}).get("records", [])
+    return [r for r in saved if not is_header_or_section(r.get("raw") or {})]
+
+
 def is_event_row(kind: str, row: dict) -> bool:
+    if is_header_or_section(row):
+        return False
     date_col = "Date Activated" if kind == "cso" else "Date Bypass Began or was Discovered"
     return bool(clean(row.get("Request ID")) or clean(row.get(date_col)))
 
@@ -308,6 +339,7 @@ def main(argv=None) -> int:
     s.headers.update(HEADERS)
     dash = {r["event_id"] for r in (read_json(EVENTS_DIR / "ct-deep.json", {}) or {}).get("records", [])}
 
+    previous = load_history()
     records, files_meta, totals = [], {}, {}
     seen_ids: Counter = Counter()
     try:
@@ -332,7 +364,7 @@ def main(argv=None) -> int:
                                                    dash, seen_ids))
     except Exception as e:
         print(f"ct_deep_annual: failed: {error_text(e)}", file=sys.stderr)
-        write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
+        write_events(SOURCE_ID, previous, ok=False, partial=True, error=f"{error_text(e)}")
         return 1
 
     records.sort(key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
