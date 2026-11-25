@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1755 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1756 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -54,7 +54,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wi | 8 | 0 | 10 | 2 | 1 | 21 |
 | de | 3 | 0 | 5 | 1 | 0 | 9 |
 | sc | 7 | 0 | 2 | 1 | 1 | 11 |
-| in | 9 | 0 | 15 | 0 | 2 | 26 |
+| in | 10 | 0 | 15 | 0 | 2 | 27 |
 | wv | 8 | 0 | 12 | 1 | 1 | 22 |
 | la | 4 | 2 | 7 | 3 | 0 | 16 |
 | nv | 4 | 1 | 8 | 3 | 0 | 16 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **653** | **240** | **547** | **236** | **79** | **1755** |
+| **all** | **654** | **240** | **547** | **236** | **79** | **1756** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1882,7 +1882,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `sc-epa-sobe` | EPA SOBE extract, SC rows | rejected | fetched | events | No South Carolina row in EPA's current or all-versions sewer overflow extract, fetched 2026-11-14 (registered as a watched channel). |
 | `sc-charleston-water-notices` | Charleston Water System overflow notices and West Ashley alert system (2026 settlement) | unreachable | fetched | events | www.charlestonwater.com did not answer this site's client on 2026-11-14 (TCP connection timed out, three attempts); its news page is a watched channel. The 2026-11-09 research read article 270 rewritten for a second break: an article address is not one overflow. |
 
-## in: Indiana (26)
+## in: Indiana (27)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
@@ -1890,6 +1890,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `in-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Indiana | used | inferred | events | Read by the national eRule module with IN in its states (2026-11-14): one Indiana report on the 2026-11-12 extract (Shelbyville's plant bypass, 2026-08-12); IDEM's own reports are not sent here until its move to NeT-SewerOverflow. |
 | `in-epa-cso-inventory` | EPA National CSO Inventory (Indiana extract) | used | fetched | outfalls | Baseline; IDEM layer is better. |
 | `in-epa-gl-cso-indiana` | EPA: Combined Sewer Overflows in the Great Lakes Basin, Indiana | used | fetched | outfalls | Seeds the channel column for Great Lakes basin operators. |
+| `in-evansville-releases` | Evansville Water and Sewer Utility sanitary release history (SSO/CSSR) | used | fetched | events | Read by in_evansville_releases: stable source IDs, source gallons and cause, minute start/end and affected area. Invalid source ends stay unknown. Placement uses only named waters; ground and storm-sewer areas are counted as naming no receiving water. Current CSO outfall status is a separate later source. |
 | `in-fort-wayne-cso-notifications` | Fort Wayne City Utilities CSO notifications | used | fetched | events | Read hourly by pipeline/ingest/in_fort_wayne_cso.py from 2026-11-16, with --backfill for the earlier weeks: one dated record per overflow (start, end, estimated volume), a quiet week none. The 35 weekly PDFs read on 2026-11-16 (weeks of 2026-02-25 to 2026-11-11, two weeks not at their usual addresses) held 139 overflows, the newest on 2026-09-20; the week of 2026-11-05 to 11-11 reported no overflows. |
 | `in-idem-cso-outfall-layer` | IDEM Indiana CSO Outfall Map (ArcGIS) | used | fetched | outfalls | Registry rows (scripts/build_in_outfalls.py, 2026-11-14): 981 points on 110 permits (578 Active, 318 Inactive, 85 Active but discharge prohibited; 136 with no point); 985 rows, 966 paired with EPA's inventory, which they outrank; IDEM's status kept even where it gives no point. |
 | `in-idem-cyanobacteria` | IDEM Blue-Green Algae dashboard (cyanobacteria and toxin results at state park beaches) | used | fetched | advisories | Read through the generic ArcGIS block (2026-11-14): 1,717 samples at 29 beaches, 2010 to 2026-09-14, each with IDEM's advisory level; 909 at an advisory level kept as IDEM's statements with their sample dates, never as advisory dates. |
@@ -1898,7 +1899,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `in-bills` | Indiana bills on CSO regulation (SB 449, 2023) | watch | search_only | law | 2023 bill to help CSO cities avoid violations; no 2025-2026 notification bill found (search only). |
 | `in-citizens-cso-warnings` | Citizens Energy Group CSO warnings (email), Indianapolis | watch | fetched | events | 2018 post: 'CSO warnings are issued via email by Citizens Energy Group when' as little as a quarter-inch of rain is forecast; mandated by the consent decree; avoid contact downstream for four days (search). Sign-up page not found; the 2026 CSO page URL returned 404. |
 | `in-dnr-advisories-closings` | Indiana DNR state parks lake advisories and closings | watch | search_only | advisories | Read 2026-11-14: park alerts by property; the blue-green algae lines are a standing general note ('Found in lakes year round. Don't drink the water. Shower after you swim.'), not a report of a bloom, so they are not records. Watched in the register. |
-| `in-evansville-ewsu-clear-path` | Evansville Water and Sewer Utility (Clear Path CSO program) | watch | fetched | events | Homepage links a Combined Sewer Overflow page; notification channel not traced. |
+| `in-evansville-ewsu-clear-path` | Evansville Water and Sewer Utility (Clear Path CSO program) | watch | fetched | events | Current CSO status is traced but its snapshot adapter is deferred. Sanitary release history is read separately by in-evansville-releases. |
 | `in-goshen-cso-notice` | Goshen CSO Notice posts | watch | fetched | events | The notice page (https://goshen.in.gov/cso-notice/) holds one dated notice (2018-02-20) and the city's notification policy. Watched in the register. |
 | `in-hammond-cso-notification` | Hammond Sanitary District CSO notification program | watch | fetched | events | E-mail notification when CSOs discharge, by request sent to the district's postal address. |
 | `in-highland-sso-reports` | Highland bypass/overflow report PDFs | watch | search_only | events | Town posts its State Form 48373 SSO reports as PDFs (2025-2026). |

@@ -182,6 +182,8 @@
 #                  Central time by the event's county, data/reference/in-central-time-counties.json) and the generic
 #                  ArcGIS block in-idem-cyanobacteria (IDEM's beach samples with IDEM's advisory level; ingest/
 #                  in_transforms.py); IDEM's outfall layer is data/outfalls-in.json (scripts/build_in_outfalls.py)
+#                  in_evansville_releases (EWSU SSO/CSSR history: source IDs, gallons, cause, minute start/end,
+#                  affected water; Central time, full history checked against yearly windows; CSO status separate).
 #                  West Virginia: wv_echo_cso_monthly (EPA's monthly DMRs at combined sewer outlets: two permits report flow
 #                  at an outlet; month precision; a weekly cache in data/build) and wv_dep_hab_advisories (DEP's algal bloom
 #                  advisory map, three layers, poll-dated); outlets from DEP's layer (data/outfalls-wv.json, built by hand with
