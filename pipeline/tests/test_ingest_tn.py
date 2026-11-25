@@ -146,13 +146,13 @@ def test_the_key_is_stable_and_repeats_are_suffixed():
     assert st["npdes_permit"] is None and st["raw"]["state_permit"] == "SOP-99001"
 
 
-def test_no_personal_field_or_string_reaches_the_records():
+def test_public_record_fields_and_text_are_kept():
     recs, _ = tdec()
     text = json.dumps(recs)
     for s in ['1234 Example', '4321', '555-0142', 'Fixturename', 'Jane']:
         assert s in text
     for r in recs:
-        assert "contact_email" not in r["raw"]["row"]
+        assert "contact_email" in r["raw"]["row"]
     p = by_type(recs, "SSO, Dry Weather")[0]          # a small system filed under its owner's name
     assert p["discharger_name"] == 'Jane Fixturename' and p["raw"]["row"]["permittee_name"] == 'Jane Fixturename'
     assert p["raw"]["row"]["project_name"] == 'Jane Fixturename' and p["npdes_permit"] == "TN0099903"
@@ -160,11 +160,11 @@ def test_no_personal_field_or_string_reaches_the_records():
     assert "[phone removed]" not in w["outfall_name"] and "[house number removed]" not in w["outfall_name"]
 
 
-def test_raw_storage_keeps_only_safe_scrubbed_rows():
+def test_raw_storage_keeps_complete_source_rows():
     _, block = R.load_source("tn-tdec-events-report")
     rows = csv_json.parse(block, (FIX / "tn_tdec_events.csv").read_bytes())
     doc = json.loads(R.safe_payload(rows, block, None))
-    assert len(doc["rows"]) == 8 and all(set(r) <= set(block["safe_fields"]) for r in doc["rows"])
+    assert len(doc["rows"]) == 8 and doc["rows"] == rows
     blob = json.dumps(doc)
     for s in ['1234 Example', '4321', '555-0142', 'Fixturename', 'Jane']:
         assert s in blob

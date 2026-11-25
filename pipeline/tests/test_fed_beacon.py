@@ -496,7 +496,7 @@ def test_a_policy_flag_keeps_its_value_and_its_note():
     assert out["flag_notes"] == {"Storm": "Action may be by policy"}
 
 
-def test_a_comment_is_scrubbed_before_it_is_saved():
+def test_a_comment_is_kept_as_published():
     main = (FIX / "beach-actions_2026.csv").read_text()
     detail = (FIX / "beach-actions-detail_2026.csv").read_text().replace(
         "736651,Contamination Advisory,10-15-2026,10-22-2026,7,100,24,24,ELEV_BACT,,",
@@ -505,7 +505,7 @@ def test_a_comment_is_scrubbed_before_it_is_saved():
     assert "555-867-5309" in detail
     rows, _ = B.normalize(main, detail)
     com = rows["736651-advisory"]["reason_comments"][0]
-    assert "555-867-5309" not in com and "example.org" not in com
+    assert com == "Call 555-867-5309 or mail ranger@example.org"
 
 
 # ---------------------------------------------------------------- review fixes (Astra, 2026-11-21)
@@ -527,12 +527,12 @@ def test_a_day_precision_end_is_lifted_only_after_that_day(tmp_path, registry):
     assert recs["710924-advisory"]["status"] == "advisory_lifted"
 
 
-def test_the_registry_scrubs_the_states_free_text():
+def test_the_registry_keeps_the_states_free_text():
     R = registry_module()
     row = {"Indicator Name": "ENTEROCOCCUS", "MeasureType": "SSM", "MeasureValue": "104", "MeasureUnit": "cfu/100mL",
            "Criteria Comments": "Questions: call 555-867-5309 or ranger@example.org"}
     c = R.criterion(row)
-    assert "555-867-5309" not in c["comment"] and "example.org" not in c["comment"]
+    assert c["comment"] == row["Criteria Comments"]
 
 
 def test_a_closure_never_links_to_an_advisory(tmp_path, registry):

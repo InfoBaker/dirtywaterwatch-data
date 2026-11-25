@@ -355,7 +355,7 @@ def row_key(r: dict) -> str | None:
 
 
 def safe_row(r: dict) -> dict:
-    """Only the requested fields (a service that ignored responseFields keeps no others)."""
+    """Retain every returned source field, including fields beyond the request projection."""
     return dict(r)
 
 
@@ -598,7 +598,7 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], permits: 
         if eid in seen:
             continue
         raw = r.get("raw") or {}
-        row = {k: raw.get(k) for k in FIELDS if k in raw}
+        row = {k: v for k, v in raw.items() if not k.startswith("_")}
         key = row_key(row)
         if (carry_completed and key and key not in missing and isinstance(r.get("raw"), dict)
                 and clean(raw.get("reportStatusId")).upper() == "COMPLETE"):
@@ -653,7 +653,7 @@ def query(sess: requests.Session, flt: dict, top: int = TOP, read_timeout: float
     if strict and not all(isinstance(x, dict) for x in d["queryResults"]):
         # South Carolina's feed (strict): a row that is not a record makes the answer not the list's
         raise RuntimeError("unexpected answer: a row that is not a record")
-    return [{k: x.get(k) for k in fields if k in x} for x in d["queryResults"] if isinstance(x, dict)]
+    return [dict(x) for x in d["queryResults"] if isinstance(x, dict)]
 
 
 class BudgetSpent(Exception):

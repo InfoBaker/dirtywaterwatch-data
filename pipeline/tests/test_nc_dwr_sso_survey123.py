@@ -208,8 +208,9 @@ def test_only_safe_fields_are_requested_kept_and_linked():
         assert "outFields=*" not in r["source_url"] and "submitter" not in r["source_url"]
 
 
-def test_the_layer_is_read_by_its_description_and_named_fields_only(monkeypatch, tmp_path):
+def test_the_layer_is_read_by_its_description_and_all_published_fields(monkeypatch, tmp_path):
     feats = json.loads((FIX / "nc_dwr_sso_survey123.json").read_text())["pages"][0]["features"]
+    feats[0]["attributes"].update(submitter_name="Sample Reporter", reporter="555-0100")
     layer_fields = S.SURVEY_FIELDS + ["owner", "submitter_name", "reporter", "latest_comments", "Creator"]
     asked = []
 
@@ -238,7 +239,7 @@ def test_the_layer_is_read_by_its_description_and_named_fields_only(monkeypatch,
                              "editingInfo": {"dataLastEditDate": 1794519922649}})
             if url == f"{S.SURVEY_LAYER}/query":
                 want = params["outFields"].split(",")
-                return Resp({"features": [{"attributes": {k: v for k, v in f["attributes"].items() if k in want}}
+                return Resp({"features": [{"attributes": {k: v for k, v in f["attributes"].items() if "*" in want or k in want}}
                                           for f in feats]})
             return Resp({"error": {"code": 400, "message": "Invalid URL"}})
 
@@ -254,9 +255,14 @@ def test_the_layer_is_read_by_its_description_and_named_fields_only(monkeypatch,
     assert out["ok"] and out["count"] == 18 and out["meta"]["layers"][S.SURVEY_LAYER]["schema"] == "survey123"
     assert out["meta"]["newest_start"] == "2026-11-12T12:15:00-05:00"
     queries = [p for u, p in asked if u.endswith("/query")]
-    assert queries and all(p["outFields"] == ",".join(S.SURVEY_FIELDS) for p in queries)
+    assert queries and all(p["outFields"] == "*" for p in queries)
     saved = "\n".join(p.read_text() for p in (tmp_path / "raw").rglob("*") if p.is_file())
-    assert saved and "submitter" not in saved and "owner" not in saved
+    assert saved
+    saved_rows = [a for p in (tmp_path / "raw").rglob("*.json")
+                  for layer in json.loads(p.read_text()) for page in layer["pages"]
+                  for f in page["features"] for a in [f["attributes"]]]
+    assert saved_rows == [f["attributes"] for f in feats]
+    assert any(r["raw"].get("submitter_name") == "Sample Reporter" for r in out["records"])
 
 
 def test_a_missing_field_names_the_layer_the_missing_fields_and_the_lookalikes():

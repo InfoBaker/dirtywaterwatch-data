@@ -1,4 +1,4 @@
-raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
+raw_fields: {reporter_contact: [contact_email], customer_identifier: [], description: []}
 id: "tn-tdec-events-report"
 name: "TDEC Division of Water Resources Events Report (sewer overflows, releases, bypasses, upsets, washouts)"
 url: "https://dataviewers.tdec.tn.gov/dataviewers/f?p=2005:34140"

@@ -74,13 +74,13 @@ def test_water_as_named_and_existing_generic_name_guard():
     assert next(r for r in records() if r['raw']['UTILITYNAME'] == 'HIALEAH')['waterbody_text'] == 'GRATIGNY CANAL'
 
 
-def test_privacy_before_raw_save():
+def test_public_source_fields_survive_raw_save():
     a = rows()[0]
     a.update(RPTNAME='[private reporter]', RPTPHONE='[private phone]', HNUM='[house number]',
              ADDRESS='[private address]', CREATEDBY='[private staff]', SURFWATNAME='12345 NW 199th ST',
              UTILITYNAME='[private person]')
     r = M.to_record(a, AT)
-    assert not {'RPTNAME','RPTPHONE','HNUM','ADDRESS','CREATEDBY'} & r['raw'].keys()
+    assert all(r['raw'][k] == a[k] for k in ('RPTNAME','RPTPHONE','HNUM','ADDRESS','CREATEDBY'))
     assert '12345' in json.dumps(r) and '[private person]' in json.dumps(r)
     assert r['lat'] == a['LAT']
 
@@ -100,13 +100,13 @@ def page(items, more=False):
     return {'features':[{'attributes':a} for a in items], 'exceededTransferLimit':more}
 
 
-def test_paging_safe_fields_and_saved_response():
+def test_paging_all_published_fields_and_saved_response():
     a,b = rows()[:2]; a['OBJECTID'],b['OBJECTID'] = 1,2; a['RPTNAME'] = '[private reporter]'
     s = Session([meta(),{'count':2},page([a],True),page([b]),{'count':2},meta()])
     got,raw,_ = M.query_layer(s)
-    assert len(got)==2 and 'RPTNAME' not in raw.decode()
+    assert len(got)==2 and json.loads(raw)['features'][0]['attributes']['RPTNAME'] == a['RPTNAME']
     qs = [p for _,p in s.calls if 'outFields' in p]
-    assert all('*' not in p['outFields'] for p in qs) and 'OBJECTID > 1' in qs[1]['where']
+    assert all(p['outFields'] == '*' for p in qs) and 'OBJECTID > 1' in qs[1]['where']
 
 
 @pytest.mark.parametrize('failure',['short','duplicate','changed_count','changed_edit','missing_field'])

@@ -105,18 +105,18 @@ def test_volume_units_and_materials():
     assert recs["900008"]["event_type"] == "unknown" and recs["900008"]["raw"]["_source_type"] == "Rock"
 
 
-def test_no_personal_field_or_string_reaches_the_records():
+def test_public_record_fields_and_text_are_kept():
     recs, _ = tceq()
     text = json.dumps(list(recs.values()))
     for s in ['1234 Sample', '1967', '4321', '4321 Fixture', '512-555', '555-0142', 'Apt #2', 'Fixturename', 'Jane', 'Lot 108', 'example.com', 'jfixture']:
         assert s in text
     r = recs["900006"]["raw"]["row"]
-    assert not {"customer_number", "incident_comment", "incident_action"} & set(r)
+    assert {"customer_number", "incident_comment", "incident_action"} <= set(r)
     assert "[house number removed]" not in r["incident_description"] and "[phone removed]" not in r["incident_description"]
     assert "[email removed]" not in r["incident_description"] and "[name removed]" not in r["incident_description"]
     assert "[house number removed] FIXTURE DRIVE" not in recs["900006"]["waterbody_text"]
     assert "4321 Fixture Drive" in recs["900006"]["outfall_name"]
-    # an entity filed under a person's name: gone from discharger_name and from raw.row
+    # An entity filed under a person's name remains the source's named operator.
     p = recs["900009"]
     assert p["discharger_name"] == "JANE FIXTURENAME" and p["raw"]["row"]["regulated_entity_name"] == "JANE FIXTURENAME"
 

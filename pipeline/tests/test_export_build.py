@@ -38,7 +38,8 @@ def test_normal_export_keeps_calculated_end_basis_in_water_json(tmp_path, monkey
     monkeypatch.setattr(S, "water_geometry", lambda *args: None)
     monkeypatch.setattr(X, "load_dischargers", lambda: ([], ""))
     monkeypatch.setattr(X, "launches_for", lambda *args: [])
-    monkeypatch.setattr(rain_history, "load_levels", lambda: None)
+    levels = {"method_version": "test", "permits": {}}
+    monkeypatch.setattr(rain_history, "load_levels", lambda: levels)
     monkeypatch.setattr(reaches, "load_reaches", lambda: {})
     monkeypatch.setattr(outfalls, "ma_layer_rows", lambda: [])
     monkeypatch.setattr(coverage, "load_notification_pages", lambda: None)
@@ -55,6 +56,7 @@ def test_normal_export_keeps_calculated_end_basis_in_water_json(tmp_path, monkey
         'status', 'inputs', 'enrichment', 'per_event_files', 'events', 'assessments',
         'waters', 'advisory_points', 'reaches', 'history', 'dischargers', 'outfalls', 'feeds',
         'coverage', 'csv', 'metadata', 'requested_removals')]
+    assert json.loads((X.OUT_DIR / "rain-levels.json").read_text()) == levels
     assert meta["counts"]["events"] == 1
     full = json.loads((X.OUT_DIR / "events" / X.event_file_name(e["event_id"])).read_text())
     slim = json.loads((X.OUT_DIR / "events.json").read_text())["events"][0]

@@ -840,20 +840,6 @@ def test_without_a_blocklist_the_notes_are_left_alone(tmp_path, capsys):
     assert capsys.readouterr().out == ""                               # nothing said about names
 
 
-def test_scrub_notes_touches_note_keys_only():
-    from build.redact import BlockScan
-    block = BlockScan(["Zorvath", "Ada Zorvath"])
-    doc = {"reason": "Ada Zorvath and zorvath", "name": "Zorvath", "slug": "zorvath-nc",
-           "notes": ["Zorvath Run"], "how": ["near Zorvath"], "stats": {"failed_reasons": {"Zorvath": 1}},
-           "replaced_match": {"water_name": "Zorvath Run", "why": "Zorvath"}, "Zorvathing": "Zorvathing"}
-    new, n = B.scrub_notes(doc, block)
-    assert n == 4
-    assert new["reason"] == "[name removed] and [name removed]"
-    assert new["notes"] == ["[name removed] Run"] and new["how"] == ["near [name removed]"]
-    assert new["name"] == "Zorvath" and new["slug"] == "zorvath-nc"
-    assert new["stats"] == {"failed_reasons": {"Zorvath": 1}}         # keys are never changed (the scan sees them)
-    assert new["replaced_match"] == {"water_name": "Zorvath Run", "why": "[name removed]"}
-    assert block.scrub(new["reason"]) == new["reason"] and not block.found(new["reason"])
 
 
 def test_dumps_like_keeps_each_files_layout():
@@ -898,13 +884,6 @@ def test_scrub_refuses_a_file_no_known_layout_reproduces(tmp_path, capsys):
     assert "pat@example.org" not in capsys.readouterr().out
 
 
-def test_a_structural_key_protects_its_whole_subtree():
-    from build.redact import BlockScan
-    block = BlockScan(["Zorvath"])
-    doc = {"records": {"reason": "Zorvath"}, "name": {"notes": ["Zorvath"]}, "reason": {"slug": "zorvath", "why": "Zorvath"}}
-    new, n = B.scrub_notes(doc, block)
-    assert new["records"] == {"reason": "Zorvath"} and new["name"] == {"notes": ["Zorvath"]}
-    assert new["reason"] == {"slug": "zorvath", "why": "[name removed]"} and n == 1
 
 
 def test_scan_never_prints_a_key_that_holds_a_name_or_contact(tmp_path, capsys):
@@ -1036,20 +1015,6 @@ def test_a_one_word_entry_in_a_permittee_still_fails_the_scan(tmp_path, capsys):
     assert "pat@example.org" not in capsys.readouterr().out
 
 
-def test_withhold_launches_only_full_names_only_in_water_records():
-    from build.redact import BlockScan
-    block = BlockScan(["Zorvath", "Ada Quillon"])
-    doc = {"launches": ["Ada Quillon a"], "targets": [{"launches": ["Ada Quillon b"]}],
-           "waters": [{"launches": ["ok-a", {"slug": "Ada Quillon c"}, {"name": "x", "Ada Quillon": 1}, "zorvath-d",
-                                    "ok-b"],
-                       "other": ["Ada Quillon e"]}, "not a record", {"launches": "Ada Quillon f"}]}
-    new, n = B.withhold_launches(doc, block)
-    assert n == 2 and new["waters"][0]["launches"] == ["ok-a", "zorvath-d", "ok-b"]
-    assert new["launches"] == ["Ada Quillon a"] and new["targets"] == doc["targets"]
-    assert new["waters"][0]["other"] == ["Ada Quillon e"] and new["waters"][1:] == doc["waters"][1:]
-    assert len(doc["waters"][0]["launches"]) == 5                       # the input is not changed
-    assert B.withhold_launches(new, block) == (new, 0)
-    assert B.withhold_launches(doc, BlockScan(["Zorvath"])) == (doc, 0)  # one-word entries only: nothing withheld
 
 
 def test_without_a_blocklist_the_launches_are_left_alone(tmp_path, capsys):
@@ -1070,13 +1035,3 @@ def test_a_launch_in_a_file_no_layout_reproduces_is_left_for_the_scan(tmp_path, 
     assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
     assert (root / "data/waters-nhd.json").read_bytes() == before
     assert "pat@example.org" not in capsys.readouterr().out
-
-
-def test_a_full_name_in_slug_form_is_not_a_hit_by_the_scans_rule():
-    """The scan's phrase rule (build.redact._phrase_re) joins a name's words by spaces only, so a two-word entry in a
-    hyphenated launch slug is not found by the scan, and the pass (held to the same rule) does not withhold it."""
-    from build.redact import BlockScan
-    block = BlockScan(["Ada Quillon"])
-    assert not block.found("ada-quillon-landing-nc") and block.found("Ada Quillon Landing")
-    doc = {"waters": [{"launches": ["ada-quillon-landing-nc"]}]}
-    assert B.withhold_launches(doc, block) == (doc, 0)

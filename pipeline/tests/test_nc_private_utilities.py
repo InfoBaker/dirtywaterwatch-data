@@ -71,7 +71,7 @@ def test_a_report_with_no_permit_gets_a_stated_reason_and_never_an_operator():
     for r in cur + hist:
         assert r["discharger_id"] is None and r["npdes_permit"] is None
         assert r["raw"]["_discharger_basis"] == S.NO_PERMIT and "never inferred" in S.NO_PERMIT
-    assert PERSON not in json.dumps(hist)
+    assert {r["raw"]["facility_owner"] for r in hist} == {"Aqua North Carolina Inc", PERSON}
 
 
 def test_a_permit_with_no_row_says_so():
