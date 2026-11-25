@@ -51,8 +51,8 @@
    "NH": {
     "hours": 72,
     "clock": "end_of_discharge",
-    "basis": "New Hampshire's law applies special water-use criteria during combined sewer discharges and for up to three days after they stop. We use 72 hours after the reported end.",
-    "source": "N.H. RSA 485-A:8, III"
+    "basis": "New Hampshire's law applies special water-use criteria during combined sewer discharges and for up to three days after they stop. We use 72 hours after the reported end. We publish beach advisories and algal bloom reports from the New Hampshire Department of Environmental Services (NHDES), whose Healthy Swimming Mapper licence states: “These data are to be used for screening purposes only. Distribution is discouraged.”",
+    "source": "N.H. RSA 485-A:8, III; NHDES Healthy Swimming Mapper, licence read Nov. 25, 2026 (UTC): https://nhdes.maps.arcgis.com/apps/dashboards/8d84a6b03acb4efaab571b222c78447b"
    },
    "ME": {
     "hours": null,
@@ -93,8 +93,8 @@
    "DC": {
     "hours": 24,
     "clock": "end_of_discharge",
-    "basis": "DC Water's permit requires a warning light on the Anacostia and on the Potomac: one colour while a combined sewer overflow is occurring and a second colour for 24 hours after it has stopped (NPDES permit DC0021199, Part III.B.1.h.i); DC Water's own page adds that after rain over one inch the effects can last up to three days. We use 24 hours from the end of the overflow, the permit's light period. No District law requires public notice of overflows, and swimming in the Potomac, the Anacostia and Rock Creek is prohibited by regulation (21 DCMR 1108.1)",
-    "source": "NPDES permit DC0021199 (EPA Region 3), Part III.B.1.h; DC Water combined sewer system page; 21 DCMR 1108.1"
+    "basis": "DC Water's permit requires a warning light on the Anacostia and on the Potomac: one colour while a combined sewer overflow is occurring and a second colour for 24 hours after it has stopped (NPDES permit DC0021199, Part III.B.1.h.i); DC Water's own page adds that after rain over one inch the effects can last up to three days. We use 24 hours from the end of the overflow, the permit's light period. No District law requires public notice of overflows, and swimming in the Potomac, the Anacostia and Rock Creek is prohibited by regulation (21 DCMR 1108.1). We publish sanitary sewer overflow reports from DC Water, whose Sanitary Sewer Dashboard states that the data are “not for any commercial, legal or other use.”",
+    "source": "NPDES permit DC0021199 (EPA Region 3), Part III.B.1.h; DC Water combined sewer system page; 21 DCMR 1108.1; DC Water Sanitary Sewer Dashboard, use condition read Nov. 25, 2026 (UTC): https://www.dcwater.com/resources/open-data-portal/sanitary-sewer-dashboard"
    },
    "NC": {
     "hours": null,
@@ -1039,8 +1039,25 @@
     "basis": "Nebraska's Beach Watch label is set from the week's E. coli sample, which each record gives."
    },
    "nh-des-swimming": {
-    "kind": "program",
-    "basis": "NHDES issues fecal-bacteria advisories under Env-Wq 1108.14 from its beach samples."
+    "kind": "fields",
+    "inherit_parent_reason": false,
+    "fields": [
+     "Status"
+    ],
+    "read": "NHDES Healthy Swimming Mapper's beach status and dated advisory history",
+    "program_values": {
+     "Status": [
+      "Advisory",
+      "No advisory"
+     ],
+     "season_from": [
+      "SampleDate year"
+     ]
+    },
+    "program_basis": "NHDES issues fecal-bacteria advisories under Env-Wq 1108.14 from its beach samples. Its Advisory and No advisory labels record those advisories and their lifting; dated advisory history records earlier advisories.",
+    "labels": {
+     "beach_advisory": "Beach status listed; the source gives no water-quality reason"
+    }
    },
    "nj-beaches": {
     "kind": "program",
