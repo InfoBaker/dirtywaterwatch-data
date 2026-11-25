@@ -1039,8 +1039,24 @@
     "basis": "Nebraska's Beach Watch label is set from the week's E. coli sample, which each record gives."
    },
    "nh-des-swimming": {
-    "kind": "program",
-    "basis": "NHDES issues fecal-bacteria advisories under Env-Wq 1108.14 from its beach samples."
+    "kind": "fields",
+    "fields": [
+     "Status"
+    ],
+    "read": "NHDES Healthy Swimming Mapper's beach status and dated advisory history",
+    "program_values": {
+     "Status": [
+      "Advisory",
+      "No advisory"
+     ],
+     "season_from": [
+      "SampleDate year"
+     ]
+    },
+    "program_basis": "NHDES issues fecal-bacteria advisories under Env-Wq 1108.14 from its beach samples. Its Advisory and No advisory labels record those advisories and their lifting; dated advisory history records earlier advisories.",
+    "labels": {
+     "beach_advisory": "Beach status listed; the source gives no water-quality reason"
+    }
    },
    "nj-beaches": {
     "kind": "program",
