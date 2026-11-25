@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "mo-dnr-concern-reports"
 name: "Missouri DNR Water Pollution Control concern reports (monthly PDFs)"
 url: "https://dnr.mo.gov/commissions-boards-councils/clean-water-commission"

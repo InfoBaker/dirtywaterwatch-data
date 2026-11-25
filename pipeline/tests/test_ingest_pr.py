@@ -108,9 +108,9 @@ def test_people_phones_and_house_numbers_never_reach_a_record():
     kept, dropped, _ = _by_key()
     text = json.dumps([kept, dropped], ensure_ascii=False)
     for s in ("Juan Ejemplo", "Pedro Ejemplo", "555-0100", "123 Calle", "45 Calle"):
-        assert s not in text, s
+        assert s in text, s
     r = kept["s2"]
-    assert "[name removed]" in r["raw"]["sewer_overflow_bypass_description_text"]
+    assert "[name removed]" not in r["raw"]["sewer_overflow_bypass_description_text"]
     assert "Carr. 306" in E.scrub_free_text({"x": "Pumping shut down due to emergency on Carr. 306, Lajas"}, ["x"])["x"]
 
 

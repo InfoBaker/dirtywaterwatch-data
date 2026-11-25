@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "sd-danr-hab-2026-samples"
 name: "SD DANR 2026 Shoreline Microcystin Samples (ArcGIS)"
 url: "https://services1.arcgis.com/PwrabBhZHUggYYSp/arcgis/rest/services/2026_Shoreline_Microcystin_Samples_View/FeatureServer/0"

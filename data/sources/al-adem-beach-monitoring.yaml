@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "al-adem-beach-monitoring"
 name: "ADEM / ADPH Coastal Alabama Beach Monitoring (BeachMonitoring_New MapServer layer 15)"
 url: "https://gis.adem.alabama.gov/arcgis/rest/services/BeachMonitoring_New/MapServer/15"

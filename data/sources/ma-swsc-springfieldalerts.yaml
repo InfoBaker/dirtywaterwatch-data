@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ma-swsc-springfieldalerts"
 name: "Springfield Alerts (SWSC CSO/SSO/blending advisory site)"
 url: "https://springfieldalerts.com/Suez/"

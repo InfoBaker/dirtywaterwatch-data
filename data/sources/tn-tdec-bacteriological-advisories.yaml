@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "tn-tdec-bacteriological-advisories"
 name: "TDEC Bacteriological and Fishing Advisories"
 url: "https://www.tn.gov/content/tn/environment/program-areas/wr-water-resources/watershed-stewardship/bacteriological-and-fishing-advisories.html"

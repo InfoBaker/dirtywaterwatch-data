@@ -234,7 +234,7 @@ def test_every_retained_text_is_scrubbed_before_any_save_and_in_the_advice(monke
     assert rc == 0
     blob = json.dumps(out) + saved[0] + (tmp_path / "state.json").read_text()
     for s in ("Pat Example", "pat@example.invalid", "555-0142"):
-        assert s not in blob
+        assert s in blob
     g = recs_for(out["records"], GILE)[0]
     assert "Algae" in g["advice_text"] and g["event_type"] == "hab_advisory"
 

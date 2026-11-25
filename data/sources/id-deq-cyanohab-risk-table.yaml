@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "id-deq-cyanohab-risk-table"
 name: "Idaho DEQ CyanoHAB Risk Data Table"
 url: "https://www.deq.idaho.gov/water-quality/surface-water/cyanobacteria-harmful-algal-blooms/"

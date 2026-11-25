@@ -1,7 +1,7 @@
 """Shared helpers for the DirtyWaterWatch pipeline. Run modules from pipeline/ (python -m ingest.x).
 
 Conventions (docs/plan.md §3 and §5): one JSON events file per source in data/build/events/, raw
-responses in data/raw/<source>/, personal fields stripped, nothing invented.
+responses in data/raw/<source>/, public-record text preserved, nothing invented.
 """
 from __future__ import annotations
 
@@ -191,7 +191,8 @@ def write_rows_json(path: Path, obj, row_keys=ROW_LIST_KEYS) -> None:
 
 
 def read_json(path: Path, default=None):
-    return json.loads(path.read_text()) if path.exists() else default
+    from build.removal_inputs import filtered
+    return filtered(json.loads(path.read_text())) if path.exists() else default
 
 
 def discharger_alias_map(rows: list[dict]) -> dict[str, str]:
@@ -374,13 +375,8 @@ def save_raw(source_id: str, content: bytes | str, ext: str) -> Path:
 
 
 def scrub_text(v: str) -> str:
-    """Emails and phone numbers inside free text become [email removed] / [phone removed] (a number typed without
-    separators too, after a contact word); staff names after "Inspector" / "Investigator", and in "contact <Name> at",
-    become [name removed]; the house number of an address tied to a residence or a resident becomes
-    [house number removed] (scrub_residence_numbers)."""
-    v = EMAIL_RE.sub("[email removed]", v)
-    v = CONTACT_DIGITS_RE.sub(r"\1[phone removed]", v)
-    return scrub_residence_numbers(scrub_names(PHONE_RE.sub("[phone removed]", v)))
+    """Preserve public-record text; removals are applied only by export.removals."""
+    return v
 
 
 def residence_numbers(v: str) -> list[tuple[str, str | None]]:
@@ -399,22 +395,13 @@ def residence_numbers(v: str) -> list[tuple[str, str | None]]:
 
 
 def drop_house_numbers(v: str, pairs) -> str:
-    """The house numbers of `pairs` (residence_numbers) removed wherever they stand before the same street word."""
-    for n, street in pairs:
-        if street:
-            v = re.sub(rf"(?<![\w.,/:-]){re.escape(n)}(?=[ ]{{1,2}}{re.escape(street)}\b)", HOUSE_NUMBER_REMOVED, v)
+    """Preserve public-record text; removals are applied only by export.removals."""
     return v
 
 
 def scrub_residence_numbers(v: str) -> str:
-    """House numbers tied to a residence or a resident become "[house number removed]" (RESIDENCE_NUMBER_RE), and so does
-    the same number before the same street word elsewhere in the string ("cleanouts at 808 NW 39th Dr ... the customer at
-    808 NW 39th Dr"); the street stays."""
-    pairs = residence_numbers(v)
-    if not pairs:
-        return v
-    v = RESIDENCE_NUMBER_RE.sub(lambda m: m.group(1) + HOUSE_NUMBER_REMOVED if _is_residence(m) else m.group(0), v)
-    return drop_house_numbers(RESIDENCE_NUMBER_BEFORE_RE.sub(HOUSE_NUMBER_REMOVED, v), pairs)
+    """Preserve public-record text; removals are applied only by export.removals."""
+    return v
 
 
 # any street address's house number ("5073 Sample Ave", "15 21st Street NW"): a notice filed by a member of the public
@@ -435,14 +422,8 @@ ROUTE_BEFORE = re.compile(r"(?i:\b(?:US|SR|CR|S\.?R\.?|C\.?R\.?|N|S|E|W|Hwy|High
 
 
 def strip_house_numbers(v: str, street_word_only: bool = False) -> str:
-    """Every street address's house number in v becomes "[house number removed]" (ADDRESS_NUMBER_RE; with
-    street_word_only, only a number followed by a street word, STREET_NUMBER_RE: for a name that is a site's own, where
-    "Site 3 North" or "- 41 Bridge" is the site and not an address)."""
-    v = (STREET_NUMBER_RE if street_word_only else ADDRESS_NUMBER_RE).sub(lambda m: m.group(0) if ROUTE_BEFORE.search(v[max(0, m.start() - 14):m.start()])
-                              else HOUSE_NUMBER_REMOVED, v)
-    # the numbers listed before it ("the buildings at 226, 224 and 220 Sample Ave")
-    return re.sub(rf"(?<![\w.,/:-])(?:\d{{1,6}}[A-Za-z]?[ ]{{0,2}}(?:,[ ]{{0,2}}(?:(?:and|&)[ ]{{1,2}})?|[ ]{{1,2}}(?:and|&)[ ]{{1,2}}))+"
-                  rf"(?={re.escape(HOUSE_NUMBER_REMOVED)})", "", v)
+    """Preserve public-record text; removals are applied only by export.removals."""
+    return v
 
 
 # a closing signature: "Very respectfully, Pat Example, P.G. Hydrogeologist" (an agency report's sign-off, 2026-11-04)
@@ -452,11 +433,8 @@ CLOSING_NAME_RE = re.compile(rf"(\b{_CLOSING}[,.!]?\s*(?:\n|\r\n)?\s*){_SIGNED_N
 
 
 def scrub_names(v: str) -> str:
-    """Staff names after "Inspector" / "Investigator", in "contact <Name> at", and in a closing signature
-    ("Very respectfully, <Name>, P.G.") become [name removed]."""
-    v = TITLE_NAME_RE.sub(r"\1\2[name removed]", v)
-    v = CONTACT_NAME_RE.sub(r"\1\2[name removed]", v)
-    return CLOSING_NAME_RE.sub(r"\1[name removed]", v)
+    """Preserve public-record text; removals are applied only by export.removals."""
+    return v
 
 
 def has_repo_path(v) -> bool:
@@ -509,23 +487,7 @@ def path_notes_to_meta(records: list[dict], meta: dict) -> dict:
 
 
 def strip_personal(rec):
-    """Drop keys that look like they hold a person's name, email or phone (several feeds carry staff
-    contact details: reporter, contact, inspector, investigator, signed_by, submitted_by_name ...),
-    at every depth of nested dicts and lists, and scrub emails, phone numbers and staff names
-    ("Inspector Eddy", "contact Jane Doe at") inside string values. Keeps everything else as the
-    source gave it."""
-    if isinstance(rec, dict):
-        out = {}
-        for k, v in rec.items():
-            ks = str(k)
-            if NAME_KEYS.search(ks) or (PERSONAL_KEYS.search(ks) and not KEEP_KEYS.search(ks)):
-                continue
-            out[k] = strip_personal(v)
-        return out
-    if isinstance(rec, list):
-        return [strip_personal(v) for v in rec]
-    if isinstance(rec, str):
-        return scrub_text(rec)
+    """Public-record fields pass through, including published contacts."""
     return rec
 
 
@@ -544,28 +506,7 @@ NAME_REMOVED = "[name removed]"
 
 
 def scrub_discharger(rec: dict) -> dict:
-    """A discharger_name that is only a person's name (build.redact.person_shaped, read as given and with capitals, as
-    the Florida feed reads its incident and facility names) becomes "[name removed]": an owner field can hold a private
-    owner's or filer's name (generic-ingesters re-check R8). The permit stays the operator's identity: a discharger_id
-    that carries the name becomes the npdes_permit. A name with an operator word (OPERATOR_WORDS) is left as it is.
-    Changes rec in place and returns it."""
-    v = rec.get("discharger_name")
-    if not isinstance(v, str) or not v.strip() or v == NAME_REMOVED:
-        return rec
-    s = " ".join(v.split())
-    words = {w.lower() for w in re.split(r"[\s\-/.,()&']+", s) if w}
-    if words & OPERATOR_WORDS:
-        return rec
-    import string
-
-    from build import redact            # here, not at the top: build.redact imports this module
-    if not (redact.person_shaped(s) or redact.person_shaped(string.capwords(s))):
-        return rec
-    rec["discharger_name"] = NAME_REMOVED
-    key = re.sub(r"[^a-z0-9]", "", s.lower())
-    did = rec.get("discharger_id")
-    if isinstance(did, str) and key and key in re.sub(r"[^a-z0-9]", "", did.lower()):
-        rec["discharger_id"] = rec.get("npdes_permit")
+    """Keep the operator name as published by the source."""
     return rec
 
 

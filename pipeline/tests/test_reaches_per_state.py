@@ -105,10 +105,12 @@ def test_state_files_and_index_are_written_and_a_stale_state_file_removed(feats,
         X.write_reach_state_files({"../x": []}, out)
 
 
-def test_the_blocklist_check_reads_the_state_files(tmp_path):
+def test_requested_removal_check_reads_the_state_files(tmp_path):
     out = tmp_path / "out"
     X.write_compact(out / "reaches" / "pa.geojson", {"features": [{"properties": {"label": "at the home of Pat Doe"}}]})
-    assert X.blocklist_hits(out, ["Pat Doe"]) == ["reaches/pa.geojson"]
+    p = X.RemovalList([{ "id": "request", "added": "2026-11-24", "kind": "text", "match": "Pat Doe"}])
+    assert p.enforce(out) == 1
+    assert "Pat Doe" not in (out / "reaches/pa.geojson").read_text()
 
 
 def test_the_export_writes_the_state_files_beside_the_unchanged_national_ones():
@@ -117,7 +119,7 @@ def test_the_export_writes_the_state_files_beside_the_unchanged_national_ones():
     assert 'write_compact(OUT_DIR / "reaches.geojson", {"type": "FeatureCollection", "features": reach_feats})' in src
     assert 'write_compact(OUT_DIR / "reach-paths.geojson", {"type": "FeatureCollection", "features": path_feats})' in src
     assert src.index('OUT_DIR / "reach-paths.geojson"') < src.index("write_reach_state_files(") \
-        < src.index("enforce_blocklist(OUT_DIR")
+        < src.index("removals.enforce(OUT_DIR")
 
 
 # ---------------------------------------------------------------- scripts/upload-current.sh
@@ -133,6 +135,7 @@ def _project(tmp_path, index, states=("pa", "ny"), fail=(), flaky=(), missing=()
     root = tmp_path / "proj"
     (root / "scripts").mkdir(parents=True)
     shutil.copy(ROOT / "scripts" / "upload-current.sh", root / "scripts" / "upload-current.sh")
+    shutil.copy(ROOT / "scripts/publication_deletions.py", root / "scripts/publication_deletions.py")
     (root / "scripts" / "export-outfalls.py").write_text("")
     (root / "out" / "reaches").mkdir(parents=True)
     for f in NATIONAL:
@@ -170,13 +173,11 @@ def test_upload_preserves_checked_outfalls_even_after_registry_changes(tmp_path,
     out = root / "out"
     checked = json.dumps({"receiving_water": "Zorbel Quillfeather"})
     (out / "outfalls.json").write_text(checked)
-    monkeypatch.setattr(X, "BLOCKED_MARK", tmp_path / "blocked.json")
-    monkeypatch.setattr(X, "HITS_MARK", tmp_path / "hits.json")
-    X.BLOCKED_MARK.write_text("{}")
-    X.enforce_blocklist(out, ["Zorbel Quillfeather"])
-    warning = capsys.readouterr().out
-    assert "::warning::" in warning and "outfalls.json" in warning
-    assert "Zorbel Quillfeather" not in warning and not X.BLOCKED_MARK.exists()
+    p = X.RemovalList([{"id": "request", "added": "2026-11-24", "kind": "text", "match": "Zorbel Quillfeather"}])
+    p.publish(out)
+    p.enforce(out)
+    checked = (out / "outfalls.json").read_text()
+    assert "Zorbel Quillfeather" not in checked
     # A changed registry would produce different bytes after the final check.
     (root / "scripts" / "export-outfalls.py").write_text(
         "from pathlib import Path\n"

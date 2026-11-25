@@ -144,7 +144,8 @@ def clean(s) -> str:
 def key(s: str) -> str:
     """'CJ Strike – Snake River Arm' and 'CJ Strike - Snake River Arm' -> 'cj strike snake river arm';
     "Henry's Lake" and 'Henrys Lake' -> 'henrys lake'."""
-    s = clean(s).lower().replace("’", "").replace("'", "")
+    from ingest.identity_compat import ia_text
+    s = ia_text(clean(s)).lower().replace("’", "").replace("'", "")
     return re.sub(r"[^a-z0-9]+", " ", s).strip()
 
 
@@ -211,7 +212,7 @@ def parse_layer(doc: dict) -> dict[str, dict]:
         lat = lon = None
         try:
             if g.get("x") is not None and g.get("y") is not None:
-                lat, lon = round(float(g["y"]), 3), round(float(g["x"]), 3)
+                lat, lon = float(g["y"]), float(g["x"])
         except (TypeError, ValueError):
             lat = lon = None
         out[key(name)] = {"name": name, "tier": clean(a.get("RiskTier")) or None,
@@ -246,7 +247,7 @@ def is_bloom_issue(issue) -> bool:
 def _point(g: dict) -> tuple[float | None, float | None]:
     try:
         if g.get("x") is not None and g.get("y") is not None:
-            return round(float(g["y"]), 3), round(float(g["x"]), 3)
+            return float(g["y"]), float(g["x"])
     except (TypeError, ValueError):
         pass
     return None, None
@@ -568,7 +569,7 @@ def records(state: dict) -> list[dict]:
         info = r["info"]
         common_f = dict(source_id=SOURCE_ID, source_record_id=sid, waterbody_text=base, water_slugs=[],
                         water_match="none", lat=lat, lon=lon, coord_source="source" if pt else None,
-                        coord_precision_m=150 if pt else None, reported_at=None, published_at=None,
+                        coord_precision_m=None, reported_at=None, published_at=None,
                         source_updated_at=None, authority=AUTHORITY, source_url=URL)
         if level == "closure":
             # the row's own closure ("Waterbody closed to recreational use."): the authority's closure, red while the
@@ -661,7 +662,7 @@ def dhw_records(state: dict) -> list[dict]:
         out.append(event(source_id=SOURCE_ID, source_record_id=sid, event_type=et,
                          status="advisory_lifted" if ended else "advisory_active", waterbody_text=base,
                          water_slugs=[], water_match="none", lat=(pt or {}).get("lat"), lon=(pt or {}).get("lon"),
-                         coord_source="source" if pt else None, coord_precision_m=150 if pt else None,
+                         coord_source="source" if pt else None, coord_precision_m=None,
                          started_at=ep["first_seen"], ended_at=ended, time_precision="poll", reported_at=None,
                          published_at=None, source_updated_at=None, authority=DHW_AUTHORITY,
                          advice_text=(f"{words} (Idaho Department of Health and Welfare's map)"

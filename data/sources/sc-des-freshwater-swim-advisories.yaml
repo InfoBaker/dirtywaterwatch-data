@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": ["Phone", "Contact", "Creator", "Editor"], "customer_identifier": [], "description": []}
 id: "sc-des-freshwater-swim-advisories"
 name: "South Carolina DES: the map layer titled \"Swimming Advisory\" (SCDES Water Advisories, river and lake sites)"
 url: "https://gis.des.sc.gov/gisserver/rest/services/water/Water_Advisories/MapServer/0"

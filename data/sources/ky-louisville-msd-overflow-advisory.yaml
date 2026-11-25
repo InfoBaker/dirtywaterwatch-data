@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ky-louisville-msd-overflow-advisory"
 name: "Louisville MSD Overflow Advisory Level banner and notice nodes"
 url: "https://louisvillemsd.org/overflowalert"

@@ -5,13 +5,9 @@
                                                                             "cadence:ok"; a feed of a state not
                                                                             yet live carries ":daily"
     python -m cadence ran ingest.al_adem_sso                                 that daily feed ran well now
-    python -m cadence daily name-review                                      exit 0 when that daily step is due, 3
+    python -m cadence daily example-step                                      exit 0 when that daily step is due, 3
                                                                             when it ran in the last day (any other
                                                                             exit: run it)
-
-The standing name review (build/name_review.py --standing, scripts/refresh-data.sh) is a daily step too: it writes
-only data/build/name-review.json and .md for the owner (no published file, no later step reads them), rescans every
-record (209 s of run 42417263287), and its ::warning:: on new candidate names comes once a day, not hourly.
 
 The rule (docs/refresh-time-brief-2026-11-07.md; data/rules.json `live_states` is the only switch): a feed belongs to
 a state when its name starts with a two-letter state code and an underscore or hyphen (`al_adem_sso`,

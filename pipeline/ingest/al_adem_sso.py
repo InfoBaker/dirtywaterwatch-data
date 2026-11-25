@@ -231,15 +231,8 @@ STREET_AFTER = re.compile(r"(?i)^(?:[ ]{1,2}[A-Za-z][\w'.-]*){0,4}?[ ]{1,2}(?:Ro
 
 
 def strip_al_house_numbers(v: str) -> str:
-    """strip_house_numbers' leftovers (AL_HOUSE_RE): a leading house number or a list of them before a word."""
-    def repl(m):
-        before = v[max(0, m.start() - 16):m.start()]
-        if ROUTE_WORD.search(before):
-            return m.group(0)
-        if ID_WORD.search(before) and not STREET_AFTER.match(v[m.end():]):
-            return m.group(0)
-        return HOUSE_NUMBER_REMOVED
-    return AL_HOUSE_RE.sub(repl, v)
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 def clean_text(v) -> str | None:

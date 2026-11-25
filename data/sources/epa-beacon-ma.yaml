@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "epa-beacon-ma"
 name: "EPA BEACON 2.0 (MA beach notification data reported by DPH)"
 url: "https://beacon.epa.gov/ords/beacon2/f?p=BEACON2:12"

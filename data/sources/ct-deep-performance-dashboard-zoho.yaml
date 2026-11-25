@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-deep-performance-dashboard-zoho"
 name: "CT DEEP Performance Dashboard - CSO and SSO/bypass reports (QScend QAlert data in Zoho Analytics open views)"
 url: "https://deepct.qscend.mygovcenter.com/cms/cms?id=1"

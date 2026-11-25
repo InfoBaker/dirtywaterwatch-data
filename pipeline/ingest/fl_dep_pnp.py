@@ -12,50 +12,12 @@ Source
   a release reportable to the State Watch Office; DEP posts it within 24 hours of receipt and mails
   it to county subscribers.
 
-Privacy (the service is public but carries personal data)
-  The layer has REPORTER_NAME, REPORTER_TITLE, REPORTER_EMAIL, REPORTER_PHONE, CONTACT_NAME,
-  CONTACT_EMAIL and CONTACT_PHONE. They are never requested. The request names only these fields:
-    INCIDENT_NUMBER, INCIDENT_NAME, INCIDENT_REPORT, DATE_TIME_OF_REPORT, RELEASE_START_DATE_TIME,
-    RELEASE_ONGOING, RELEASE_END_DATE_TIME, FACILITY_NAME, FACILITY_ADDRESS_LINE_1,
-    FACILITY_ADDRESS_LINE_2, FACILITY_CITY, FACILITY_STATE, FACILITY_ZIP5, AFFECTED_COUNTIES,
-    MIGRATED_OFFSITE, MIGRATED_COUNTIES, LATITUDE, LONGITUDE, DATUM, MAP_SOURCE_SCALE, OBJECTID
-  plus REPORTER_REALTIONSHIP (sic), the filer's relationship to the facility. That one is reduced at
-  once to a code (operator, owner, citizen, other) and deleted from the attributes before anything is
-  saved or built: its free-text "OTHER-..." values are never stored. FACILITY_DIRECTIONS (free text)
-  is not requested.
-  INCIDENT_REPORT is free text that often quotes forms with names, phones and e-mails (the
-  "Agencies Notified" list names agency staff; county forms carry "Reported by", "Caller Name",
-  "Employee ID", "Future Contact Person", "Form Completed by", "NAME / SIGNATURE" fields). scrub()
-  removes every such labelled field up to the next non-personal label (or to the end), names after a
-  job title ("Director: ...", "Chief of Staff ...") or before one, names before "with FDEP / DOH ...",
-  "Mr./Ms. X", "I <name>", e-mail headers, and any common given name followed by a capitalised word
-  that is not a place (drop_given_pairs: "Andrew Hooks received call" loses the name, "Dale Mabry
-  Hwy" keeps it; a rare given name can still slip through, so build.redact runs after), then
-  common.scrub_text (e-mails, phones, "Inspector X", "contact X at"); build.redact (private names
-  in context, the blocklist) runs over the records last. Saved raw pages hold the scrubbed text
-  only. INCIDENT_NAME and FACILITY_NAME go through scrub_name_field(): filers often type their own name
-  (or a resident's) there, so a value that is only a person's name becomes "[name removed]" and names
-  inside it go as in the text; a notice filed by a member of the public keeps no street address
-  ("[address removed]": its facility is often the filer's or a neighbour's home). tests/test_fl_dep_pnp.py proves that a contact field and a name in those labels never reach
-  a record or the saved raw page.
-  The name review of 2026-11-04 (build/name_review.py over all 12,499 records) added the shapes it found: camel-case
-  and particle surnames ("Mc...", "De..."), "Reporting Party:", "Contacted by:", "PERSON CONTACTED:", "Assigned To:"
-  labels (a blank "____" field is empty), an initial and a surname next to a contact verb, any name before what only a
-  person does ("received call", "called me", "were dispatched", "is aware", "began to"), "myself, <name>", a greeting,
-  "is named <name>", "<name> (DEP)", "<agency> (<name>)", "<title> for the Village, <name>", a name before an e-mail or
-  phone, a capitalised "PER <NAME> W.", "Ranger <surname>", and the State Watch Office's "DEM-<surname>"; a company,
-  agency, role, place, water, storm or facility in those places is kept (_company_or_place). common.scrub_text removes a
-  phone number typed without separators after a contact word and the house number of an address the text ties to a
-  residence or a resident (the street stays); safe_attributes cuts that number from the incident name, facility name and
-  address line too. A notice filed by a member of the public keeps no house number anywhere and its point is rounded
-  to three decimals (about 100 m, raw._coords_note). Records kept from an earlier run are rebuilt from their raw
-  attributes under the current rules (rebuilt()). A rare given name standing alone as the incident name, or a name that
-  is also a company's, can still pass: the owner's blocklist (data/build/name-blocklist.json) covers those.
-  The value of "Reporting Party:", "Person Contacted:", "Contacted by:" and "Assigned To:" ends at the next contact,
-  date or time label when no safe label follows (NAME_VALUE_LABELS), so the account after it stays; a forwarded
-  e-mail's addressees ("To: <surname>, <given> <address>") are removed; a Florida town of two words or more
-  (data/waters-fl.json) before an action verb is the utility, not a person; a rounded complaint point carries its
-  precision (raw._coord_precision_m: about 100 m, or the source's own when coarser).
+Public source fields
+  Request and retain all published layer attributes, including reporter/contact fields, directions and narrative.
+  The source YAML declares reporter/contact keys for omission from the report page's Record details; downloads
+  retain them. Names, addresses and source coordinates stay intact, subject only to requested removals.
+  Reporter relationship still supplies the provenance classification. Historical normalization is used only for
+  identity and duplicate ordering, so a reread does not change an existing record identifier.
 
 Which notices become records (the feed mixes every kind of pollution)
   - Notices filed on DEP's wastewater template carry "Wastewater Type: <type> Cause: <cause> Spill
@@ -191,7 +153,7 @@ TIME_BASIS = ("DATE_TIME_OF_REPORT holds Florida wall-clock time stored as if it
               "and the wall-clock time labelled America/New_York. Release start and end are dates (00:00) and are read as "
               "local dates.")
 
-# ---------------------------------------------------------------- privacy: the free text
+# --------------------------------------- legacy identity classifiers and source text helpers
 
 # labels whose value is a person, a person's id or a contact detail
 PERSON_LABEL = re.compile(
@@ -400,30 +362,7 @@ STATION_BEFORE = re.compile(r"(?i:\b(?:lift|pump(?:ing)?)\s+station|\bL\.?S\.?|\
 
 
 def drop_given_pairs(s: str) -> str:
-    first = _given_names()
-    cuts, last_end = [], -1
-    for m in GIVEN_PAIR.finditer(s):           # overlapping: "PM Andrew Sample" tries "PM Andrew" and "Andrew Sample"
-        g, n = m.group(1), m.group(2)
-        if m.start(1) < last_end:
-            continue
-        nxt = (m.group(3) or "").strip().lower().strip(".,")
-        if g.lower() not in first or f"{g} {n}".lower() in PLACE_PAIRS or g.lower() in FL_PLACE_GIVEN:
-            continue
-        if re.search(r"\b(?:of|in|at|near)\s+$", s[max(0, m.start() - 6):m.start()], re.I) and nxt in ("", "and", "on", "in"):
-            continue
-        if NAMED_AFTER.search(s[max(0, m.start() - 16):m.start()]):
-            continue                          # "Hurricane Ian ...", "TS Debby ...", "Lake Mary Jane": a storm or a place
-        if n.lower() in PLACE_AFTER or n.lower() in NOT_PERSON_WORDS or nxt in PLACE_AFTER:
-            continue
-        if STATION_BEFORE.search(s[max(0, m.start() - 24):m.start()]):
-            continue                          # "Lift Station #814 <name>": the station's name
-        if FACILITY_AFTER.match(s, m.end(2)):
-            continue                          # "<name> Water Reclamation Facility", "<name> Regional WWTF": a facility
-        end = m.end(2)
-        cuts.append((m.start(1), end))
-        last_end = end
-    for a, b in reversed(cuts):
-        s = s[:a] + "[name removed]" + s[b:]
+    """Preserve the source public record (decision 57)."""
     return s
 
 
@@ -513,83 +452,8 @@ def _drop_title_name(m: re.Match) -> str:
 
 
 def scrub(text) -> str | None:
-    """The notice text with personal fields removed (see the module docstring). Every labelled personal field
-    loses its value up to the next safe label, or to the end of the text when none follows."""
-    if text is None:
-        return None
-    s = str(text).replace("\u00bf", "'").replace("&#8209;", "-")
-    out, pos = [], 0
-    while True:
-        m = PERSON_LABEL.search(s, pos)
-        if not m:
-            out.append(s[pos:])
-            break
-        if m.start() and s[m.start() - 1] == "[":
-            out.append(s[pos:m.end()])     # "[email removed]", "[e-mail header removed]": a marker, not a label
-            pos = m.end()
-            continue
-        blank = BLANK_VALUE.match(s, m.end())
-        if blank:
-            out.append(s[pos:blank.end()])     # "PERSON CONTACTED: ________": an empty form field
-            pos = blank.end()
-            continue
-        # a bare "Name"/"NAME" only counts as a label when a colon (or a form's table header) follows
-        after = s[m.end():m.end() + 4]
-        bare = m.group(0).lower() == "name"
-        before = s[max(0, m.start() - 20):m.start()].split()
-        if bare and before and before[-1].strip(".,").lower() in NAME_OF_THING:
-            out.append(s[pos:m.end()])     # "Utility Name:", "Facility Name:": a thing, not a person
-            pos = m.end()
-            continue
-        if bare and not LABEL_END.match(after) and not re.search(r"\b(?:Name|NAME)\s+(?:Represents|Title|Phone)", s[m.start():m.start() + 40]):
-            out.append(s[pos:m.end()])
-            pos = m.end()
-            continue
-        if not bare and re.sub(r"\s+", " ", m.group(0).lower()) in LABEL_ONLY_WITH_COLON and not LABEL_END.match(after):
-            out.append(s[pos:m.end()])   # an ordinary word ("crews were notified"), not a form label
-            pos = m.end()
-            continue
-        out.append(s[pos:m.end()])
-        nxt = SAFE_LABEL.search(s, m.end())
-        if re.sub(r"\s+", " ", m.group(0).lower()) in NAME_VALUE_LABELS:
-            stop = VALUE_STOP.search(s, m.end(), m.end() + VALUE_REACH)
-            if stop and (nxt is None or stop.start() < nxt.start()):
-                out.append(": [removed] ")
-                pos = stop.end()
-                continue
-        # the value must not swallow a safe label that starts right after (empty value)
-        if nxt:
-            out.append(": [removed] " if not s[m.end():nxt.start()].strip(" :#?-") else ": [removed] ")
-            pos = nxt.start()
-        else:
-            out.append(": [removed]")
-            break
-    s = "".join(out)
-    s = re.sub(r"(:\s*)+: \[removed\]", ": [removed]", s)
-    s = TITLE_THEN_NAME.sub(_drop_title_name, s)
-    s = NAME_WITH_AGENCY.sub(_drop_name_with_agency, s)
-    s = NAME_THEN_TITLE.sub(lambda m: m.group(0) if _not_person(m.group(1)) else "[name removed]", s)
-    s = FIRST_PERSON_NAME.sub(lambda m: m.group(0) if _not_person(m.group(2)) else m.group(1) + "[name removed]", s)
-    s = TITLE_ORG_NAME.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
-    s = NAME_BEFORE_CONTACT.sub(lambda m: m.group(0) if _company_or_place(m.group(1)) else "[name removed]", s)
-    s = NAME_THEN_AGENCY.sub(lambda m: m.group(0) if _company_or_place(m.group(1)) else "[name removed]", s)
-    s = AGENCY_THEN_NAME.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
-    s = NAMED_CUE.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
-    s = GREETING_NAME.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
-    s = CUE_NAME_CAPS.sub(_drop_caps_cue, s)
-    s = HONORIFIC_NAME.sub("[name removed]", s)
-    s = EMAIL_HEADER.sub("[e-mail header removed]", s)
-    s = EMAIL_ADDRESSEE.sub("[name removed] ", s)
-    s = drop_given_pairs(s)
-    s = CUE_NAME.sub(_drop_cue_name, s)
-    s = CUE_INITIAL.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) or _place_after(m) else m.group(1) + "[name removed]", s)
-    s = NAME_BEFORE_ACTION.sub(_drop_named_before_action, s)
-    s = INITIAL_BEFORE_ACTION.sub(_drop_named_before_action, s)
-    s = RANK_SURNAME.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
-    s = AGENCY_DASH_SURNAME.sub(r"\1[name removed]", s)
-    s = scrub_text(s)
-    s = SPACE.sub(" ", s).strip()
-    return s or None
+    """Preserve the source public record (decision 57)."""
+    return text
 
 
 def relationship_code(v) -> str | None:
@@ -608,26 +472,8 @@ def relationship_code(v) -> str | None:
 
 
 def scrub_name_field(v):
-    """INCIDENT_NAME or FACILITY_NAME with personal data removed. Filers often type their own name, or a resident's,
-    as the incident or facility name (a staff member's name as the incident name; a homeowner's name as the facility
-    of a complaint): a value that is only a person's name (build.redact.person_shaped, read in any case) becomes
-    "[name removed]"; names inside a longer value go as in the notice text (common given name + surname, Mr./Ms.),
-    and e-mails and phone numbers as everywhere."""
-    if not isinstance(v, str):
-        return v
-    s = SPACE.sub(" ", scrub_text(v)).strip()
-    if not s:
-        return s
-    words = {w.lower() for w in re.split(r"[\s\-/.,()]+", s) if w}
-    if not words & (NOT_PERSON_WORDS | PLACE_AFTER) and \
-            (redact.person_shaped(s) or redact.person_shaped(string.capwords(s))):
-        return "[name removed]"
-    if s.islower() or s.isupper():          # "jordan sample", "JORDAN SAMPLE": read with capitals
-        c = drop_given_pairs(HONORIFIC_NAME.sub("[name removed]", string.capwords(s)))
-        if "[name removed]" in c:
-            return c
-    s = HONORIFIC_NAME.sub("[name removed]", s)
-    return drop_given_pairs(s)
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 CITIZEN_COORD_DIGITS = 3      # about 100 m: a complaint's point is often the filer's home
@@ -635,41 +481,8 @@ CITIZEN_PRECISION_M = 100
 
 
 def safe_attributes(a: dict) -> dict:
-    """The attributes this module keeps: the safe fields only, the relationship as a code, the text scrubbed, the
-    incident and facility names cleared of people's names, the house number of an address the text ties to a residence
-    or a resident (common.residence_numbers) cut from the names and the address line too, and, for a notice filed by a
-    member of the public, no street address, no house number anywhere and the point rounded to about 100 m: the facility
-    of a complaint is often the filer's or a neighbour's home."""
-    out = {k: a.get(k) for k in SAFE_FIELDS if k in a}
-    # a saved page already holds the code (the relationship itself is never saved)
-    out["_filer"] = relationship_code(a.get(RELATIONSHIP_FIELD)) if RELATIONSHIP_FIELD in a else a.get("_filer")
-    homes = residence_numbers(out["INCIDENT_REPORT"]) if isinstance(out.get("INCIDENT_REPORT"), str) else []
-    for k in ("INCIDENT_REPORT", "INCIDENT_NAME", "FACILITY_NAME"):
-        if isinstance(out.get(k), str):
-            out[k] = scrub(out[k]) if k == "INCIDENT_REPORT" else scrub_name_field(out[k])
-            if out[k] and homes:
-                out[k] = drop_house_numbers(out[k], homes)
-    for k in ("FACILITY_ADDRESS_LINE_1", "FACILITY_ADDRESS_LINE_2"):
-        if isinstance(out.get(k), str) and homes:
-            out[k] = drop_house_numbers(out[k], homes)
-    if out["_filer"] == "citizen":
-        for k in ("FACILITY_ADDRESS_LINE_1", "FACILITY_ADDRESS_LINE_2"):
-            if out.get(k):
-                out[k] = "[address removed]"
-        for k in ("INCIDENT_REPORT", "INCIDENT_NAME", "FACILITY_NAME"):
-            if isinstance(out.get(k), str):
-                out[k] = strip_house_numbers(out[k])
-        lat0 = fnum(out.get("LATITUDE"))
-        if lat0 is not None:
-            # the precision of the rounded point: about 100 m, or the source's own when coarser; carried, because a
-            # rounded value that ends in zero ("27.45") would read as 1 km (a rebuild reads the carried value)
-            given = a.get("_coord_precision_m")
-            out["_coord_precision_m"] = given if isinstance(given, int) else max(CITIZEN_PRECISION_M, precision_m(lat0))
-        for k in ("LATITUDE", "LONGITUDE"):
-            v = fnum(out.get(k))
-            if v is not None:
-                out[k] = round(v, CITIZEN_COORD_DIGITS)
-    return out
+    """Preserve the source public record (decision 57)."""
+    return {**a, "_filer": relationship_code(a.get(RELATIONSHIP_FIELD)) if RELATIONSHIP_FIELD in a else a.get("_filer")}
 
 
 # ---------------------------------------------------------------- classification
@@ -1143,7 +956,7 @@ def build_record(a: dict, key: str, fetched_at: str, prev: dict | None, permits:
 
 
 def pnp_url(a: dict) -> str:
-    """The layer query that returns this notice (safe fields only)."""
+    """The layer query that returns this notice and its published source fields."""
     n = incident_number(a.get("INCIDENT_NUMBER"))
     ms = fnum(a.get("DATE_TIME_OF_REPORT"))
     if n:
@@ -1274,8 +1087,12 @@ def keyed(features: list[dict]) -> list[tuple[str, dict]]:
         groups[record_key(a)].append(a)
     out = []
     for k, rows in groups.items():
-        rows.sort(key=lambda a: (fnum(a.get("LATITUDE")) or 0, fnum(a.get("LONGITUDE")) or 0,
-                                 hashlib.sha1(str(a.get("INCIDENT_REPORT") or "").encode()).hexdigest()))
+        from ingest.identity_compat import fl_row
+        def historical_order(row):
+            a = fl_row(row)
+            return (fnum(a.get("LATITUDE")) or 0, fnum(a.get("LONGITUDE")) or 0,
+                    hashlib.sha1(str(a.get("INCIDENT_REPORT") or "").encode()).hexdigest())
+        rows.sort(key=historical_order)
         for i, a in enumerate(rows):
             out.append((k if i == 0 else f"{k}-{chr(ord('a') + i)}", a))
     return out
@@ -1311,13 +1128,13 @@ def link_revisions(records: list[dict]) -> dict:
 
 
 def rebuilt(r: dict, permits: dict) -> dict:
-    """A record kept from an earlier run, rebuilt from its own raw attributes under the current rules, so that a privacy
-    rule added since reaches the notices the 30-day layer no longer lists (their text was scrubbed when first read). The
-    record stays as it was when its raw holds no notice or the rebuild no longer reads it as the same sewage record."""
+    """Rebuild a carried record from its saved source attributes under current interpretation rules.
+    Text withheld by an earlier version cannot be recovered without rereading the source. Keep the record when its
+    raw holds no notice or rebuilding no longer identifies the same sewage record."""
     raw = r.get("raw") or {}
     if not isinstance(raw.get("INCIDENT_REPORT"), str) and not isinstance(raw.get("INCIDENT_NAME"), str):
         return r
-    a = {k: raw[k] for k in SAFE_FIELDS if k in raw and k != "OBJECTID"}
+    a = dict(raw)
     a["OBJECTID"], a["_filer"] = raw.get("_layer_objectid"), raw.get("_filer")
     if raw.get("_coord_precision_m") is not None:
         a["_coord_precision_m"] = raw["_coord_precision_m"]
@@ -1410,9 +1227,9 @@ def left_out_meta(left_out: dict, records: list[dict], backfilled_at: str | None
 # ---------------------------------------------------------------- fetch
 
 def query_layer(sess: requests.Session, layer: str) -> list[dict]:
-    """Every feature of the layer, the safe fields and the relationship only, paged by OBJECTID."""
+    """Every feature and published field of the layer, paged by OBJECTID."""
     feats, offset = [], 0
-    fields = ",".join(SAFE_FIELDS + (RELATIONSHIP_FIELD,))
+    fields = "*"
     while True:
         params = {"where": "1=1", "outFields": fields, "returnGeometry": "false", "orderByFields": "OBJECTID",
                   "resultOffset": offset, "resultRecordCount": 5000, "f": "json"}
@@ -1451,7 +1268,7 @@ def main(argv=None) -> int:
         write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
         print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
-    # the saved page holds the safe fields and the scrubbed text only (the relationship is a code)
+    # Save the complete downloaded source attributes and derived relationship classification.
     safe = [safe_attributes(a) for a in features]
     state = read_json(STATE_FILE, {}) or {}
     raw_path = state.get("raw_path")

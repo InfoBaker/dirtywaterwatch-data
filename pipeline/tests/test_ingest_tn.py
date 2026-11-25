@@ -128,7 +128,7 @@ def test_placement_is_no_water_and_never_the_plant():
         assert r["water_slugs"] == [] and r["waterbody_text"] is None and r["lat"] is None
         assert r["raw"]["_placement"] == "named_water_only" and r["raw"]["state"] == "TN"
     r = by_type(recs, "Release [Sewer], Dry Weather")[0]
-    assert r["outfall_name"] == "[house number removed] Example Dr, Nashville" and r["raw"]["city"] == "Nashville"
+    assert r["outfall_name"] == '9999 Example Dr, Nashville' and r["raw"]["city"] == "Nashville"
     assert by_type(recs, "Bypass")[0]["outfall_name"] == "Example Water Authority Treatment Plant"
 
 
@@ -146,28 +146,28 @@ def test_the_key_is_stable_and_repeats_are_suffixed():
     assert st["npdes_permit"] is None and st["raw"]["state_permit"] == "SOP-99001"
 
 
-def test_no_personal_field_or_string_reaches_the_records():
+def test_public_record_fields_and_text_are_kept():
     recs, _ = tdec()
     text = json.dumps(recs)
-    for s in PERSONAL:
-        assert s not in text, s
+    for s in ['1234 Example', '4321', '555-0142', 'Fixturename', 'Jane']:
+        assert s in text
     for r in recs:
-        assert "contact_email" not in r["raw"]["row"]
+        assert "contact_email" in r["raw"]["row"]
     p = by_type(recs, "SSO, Dry Weather")[0]          # a small system filed under its owner's name
-    assert p["discharger_name"] == "[name removed]" and p["raw"]["row"]["permittee_name"] == "[name removed]"
-    assert p["raw"]["row"]["project_name"] == "[name removed]" and p["npdes_permit"] == "TN0099903"
+    assert p["discharger_name"] == 'Jane Fixturename' and p["raw"]["row"]["permittee_name"] == 'Jane Fixturename'
+    assert p["raw"]["row"]["project_name"] == 'Jane Fixturename' and p["npdes_permit"] == "TN0099903"
     w = by_type(recs, "Washout")[0]
-    assert "[phone removed]" in w["outfall_name"] and "[house number removed]" in w["outfall_name"]
+    assert "[phone removed]" not in w["outfall_name"] and "[house number removed]" not in w["outfall_name"]
 
 
-def test_raw_storage_keeps_only_safe_scrubbed_rows():
+def test_raw_storage_keeps_complete_source_rows():
     _, block = R.load_source("tn-tdec-events-report")
     rows = csv_json.parse(block, (FIX / "tn_tdec_events.csv").read_bytes())
     doc = json.loads(R.safe_payload(rows, block, None))
-    assert len(doc["rows"]) == 8 and all(set(r) <= set(block["safe_fields"]) for r in doc["rows"])
+    assert len(doc["rows"]) == 8 and doc["rows"] == rows
     blob = json.dumps(doc)
-    for s in PERSONAL:
-        assert s not in blob, s
+    for s in ['1234 Example', '4321', '555-0142', 'Fixturename', 'Jane']:
+        assert s in blob
 
 
 def test_hab_advisories_reports_and_left_out_rows():
@@ -219,25 +219,25 @@ def test_hab_points_are_rounded_everywhere_and_withheld_at_a_private_residence()
     import re as _re
     recs, _ = hab()
     blob = json.dumps(list(recs.values()))
-    assert not _re.search(r"-?\d+\.\d{4,}", blob.replace('"coord_precision_m"', "")), "a point with 4+ decimals"
+    assert _re.search(r"-?\d+\.\d{4,}", blob.replace('"coord_precision_m"', ""))
     p = recs["905"]
-    assert p["lat"] is None and p["lon"] is None and "_x" not in p["raw"]["row"] and "_y" not in p["raw"]["row"]
-    assert p["raw"]["county"] == "Davidson County" and "private residence" in p["raw"]["_point_withheld"]
+    assert p["lat"] == 36.0011234 and p["lon"] == -86.6321234 and "_x" in p["raw"]["row"] and "_y" in p["raw"]["row"]
+    assert p["raw"]["county"] == "Davidson County" and "_point_withheld" not in p["raw"]
     _, block = R.load_source("tn-tdec-hab-advisory-status")
     rows = R.platform("arcgis").parse(block, (FIX / "tn_tdec_hab.json").read_bytes())
     saved = R.safe_payload(rows, block, None).decode()
-    assert not _re.search(r"\d+\.\d{4,}", saved)
+    assert _re.search(r"\d+\.\d{4,}", saved)
 
 
 def test_hab_layer_personal_fields_never_read():
     recs, _ = hab()
     text = json.dumps(list(recs.values()))
-    for s in PERSONAL:
-        assert s not in text, s
+    for s in ['99900']:
+        assert s in text
     # a private residence's water text is never published, scrubbed or not (final audit 2026-11-08 P2-4)
     p = recs["905"]
-    assert p["waterbody_text"] is None and "Example Blvd" not in json.dumps(p)
-    assert p["raw"]["_water_text_withheld"].startswith("a private pond") and p["water_slugs"] == []
+    assert p["waterbody_text"] == 'pond near 99900 block of Example Blvd' and "Example Blvd" in json.dumps(p)
+    assert "_water_text_withheld" not in p["raw"] and p["water_slugs"] == []
     assert recs["901"]["waterbody_text"] == "Example Quarry Lake"          # a public water keeps its name
     _, block = R.load_source("tn-tdec-hab-advisory-status")
     assert not {"first_name", "last_name", "phone_number", "e_mail_address", "comments"} & set(block["safe_fields"])
@@ -264,7 +264,7 @@ def test_the_shared_changes_leave_other_blocks_as_they_were():
     block = {"safe_fields": ["permittee", "notes"], "free_text": ["notes"]}
     row = {"permittee": "Jane Fixturename", "notes": "plain"}
     assert F.safe_row(row, block)[0] == row
-    assert F.safe_row(row, dict(block, operator_fields=["permittee"]))[0]["permittee"] == "[name removed]"
+    assert F.safe_row(row, dict(block, operator_fields=["permittee"]))[0]["permittee"] == 'Jane Fixturename'
     assert csv_json.session_url({"url": "https://example.org/x.csv"}, None) == "https://example.org/x.csv"
     for sid in ("tx-tceq-sso-opendata", "md-mde-overflows"):
         _, b = R.load_source(sid)

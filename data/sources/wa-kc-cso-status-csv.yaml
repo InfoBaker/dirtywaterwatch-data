@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": ["Contact"], "customer_identifier": [], "description": []}
 id: "wa-kc-cso-status-csv"
 name: "King County / Seattle CSO overflow status CSV (behind the King County CSO status map)"
 url: "https://your.kingcounty.gov/dnrp/library/wastewater/cso/img/CSO_metadata.CSV"
@@ -38,6 +39,7 @@ fetch:
   url: "https://your.kingcounty.gov/dnrp/library/wastewater/cso/img/CSO_metadata.CSV"
   csv: {headers: "as_is"}
   time_zone: "America/Los_Angeles"
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [CSO_TagName, X_COORD, Y_COORD, Name, DSN, DateTime, Status]
   reviewed_fields:
     Name: "the outfall's label ('King County CSO: Ballard', 'Seattle CSO'), the operator's, never a person"

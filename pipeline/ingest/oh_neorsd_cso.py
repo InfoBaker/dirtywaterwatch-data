@@ -110,14 +110,8 @@ _UNIT_AFTER = re.compile(r"\s+(?:yds?|yards?|ft|feet|foot|miles?|meters?)\b", re
 
 
 def scrub_location(v: str | None) -> str | None:
-    if not v:
-        return v
-
-    def cut(m: re.Match) -> str:
-        if _STREET_BEFORE.search(v[:m.start()]) or _UNIT_AFTER.match(v[m.end():]):
-            return m.group(0)
-        return HOUSE_NUMBER_REMOVED
-    return " ".join(_HOUSE.sub(cut, v).split())
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 def water_name(v: str | None) -> str | None:

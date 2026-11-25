@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "pr-prasa-cso-data"
 name: "PRASA combined sewer overflow outfalls (ArcGIS feature service CSO_Data)"
 url: "https://gis.acueductospr.com/arcgis_local/rest/services/Hosted/CSO_Data/FeatureServer/0"

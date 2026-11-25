@@ -80,7 +80,7 @@ def lakes(doc: dict) -> dict[str, dict]:
             if SEVERITY[level] > SEVERITY[row["level"]]:
                 row["level"] = level
         if row["lat"] is None and g.get("y") is not None:
-            row["lat"], row["lon"] = round(float(g["y"]), 3), round(float(g["x"]), 3)
+            row["lat"], row["lon"] = float(g["y"]), float(g["x"])
     return out
 
 
@@ -123,7 +123,7 @@ def rounded(doc: dict) -> dict:
     """The answer with every point kept to 0.001 degree, as saved in data/raw."""
     out = {k: v for k, v in doc.items() if k != "features"}
     out["features"] = [{"attributes": f.get("attributes"),
-                        "geometry": {k: round(float(v), 3) for k, v in (f.get("geometry") or {}).items()
+                        "geometry": {k: float(v) for k, v in (f.get("geometry") or {}).items()
                                      if k in ("x", "y") and v is not None}} for f in doc.get("features") or []]
     return out
 
@@ -140,7 +140,7 @@ def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
             tz = zones.kansas_zone(lat=x["lat"], lon=x["lon"])
             r = event(source_id=SOURCE_ID, source_record_id=f"{wid}-{re.sub(r'[^0-9]', '', at)[:14]}", event_type="hab_advisory",
                       status="advisory_active", waterbody_text=x["name"], lat=x["lat"], lon=x["lon"],
-                      coord_source="source", coord_precision_m=100, started_at=at, time_precision="poll",
+                      coord_source="source", coord_precision_m=None, started_at=at, time_precision="poll",
                       authority=AUTHORITY, advice_text=ADVICE[x["level"]], source_url=PAGE,
                       raw={"state": "KS", "time_zone": tz, "waterbody_id": wid, "kdhe_level": x["level"],
                            "levels": [{"level": x["level"], "first_seen": at}], "status_date": x["status_date"],

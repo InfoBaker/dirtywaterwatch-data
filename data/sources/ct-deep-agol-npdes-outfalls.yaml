@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-deep-agol-npdes-outfalls"
 name: "CT DEEP NPDES_Outfalls / NPDES_PermiteeSite (ICIS data pull 2026-01-14)"
 url: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/NPDES_Outfalls/FeatureServer/0"

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ga-epa-sobe"
 name: "EPA SOBE (eRule Phase 2) extract, GA rows"
 url: "https://echo.epa.gov/tools/data-downloads"

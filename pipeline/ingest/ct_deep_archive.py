@@ -14,10 +14,9 @@ and carry no licence text.
 
 Request mechanics: plain ArcGIS REST queries, no login: where=1=1, outSR=4326,
 returnGeometry=true, orderByFields=OBJECTID, resultOffset/resultRecordCount pages of 1,000 (the
-layers' maxRecordCount). outFields lists every field except the personal ones (USER_NAME,
-EMAIL, PHONE_NUMBER, Creator, Editor), so reporter names, emails and phones are never
-downloaded; free text (COMMENTS, NOTES, BYPASS_DISCOVERY) is also scrubbed of phone numbers and
-email addresses. Every response page is saved with save_raw().
+layers' maxRecordCount). outFields lists every field, including reporter contacts. Every response page is saved
+with save_raw(), and raw event attributes retain the source text. The source YAML declares reporter contact keys
+for the site to omit from Record details while retaining them in downloads.
 
 Normalisation (docs/plan.md section 3)
 - event_type by layer: the CSO layer -> cso; the bypass layer -> sso, or plant_bypass when the
@@ -62,7 +61,7 @@ LAYERS = {
     "bypass": f"{BASE}/Bypass_Reporting_Archive_deepgis/FeatureServer/0",
     "cso": f"{BASE}/CSO_Reporting_Archive_deepgis/FeatureServer/0",
 }
-PERSONAL = {"USER_NAME", "EMAIL", "PHONE_NUMBER", "Creator", "Editor"}
+# Reporter contact declarations live in the source YAML; no publication field exclusion.
 DEFAULT_POINT = (41.12598, -73.39137)   # the reporting form's default pin (5 dp)
 PAGE = 1000
 
@@ -101,7 +100,7 @@ def fetch_layer(session: requests.Session, name: str) -> list[dict]:
     url = LAYERS[name]
     meta = get(session, url, {"f": "json"})
     save_raw(SOURCE_ID, meta.pop("_content"), f"{name}-layer.json")
-    fields = [f["name"] for f in meta["fields"] if f["name"] not in PERSONAL]
+    fields = [f["name"] for f in meta["fields"]]
     feats, offset = [], 0
     while True:
         d = get(session, f"{url}/query", {"where": "1=1", "outFields": ",".join(fields), "returnGeometry": "true",
@@ -154,7 +153,7 @@ def normalise(layer: str, feat: dict, fetched: str, code_labels: dict | None = N
     a = dict(feat.get("attributes") or {})
     g = feat.get("geometry") or {}
     notes, errors = [], []
-    raw = scrub({k: v for k, v in a.items() if k not in PERSONAL})
+    raw = scrub(a)
     raw["_layer"] = LAYERS[layer]
     oid = a.get("OBJECTID")
     if oid is None:
@@ -278,7 +277,7 @@ def main(argv=None) -> int:
                 a = (f.get("attributes") or {})
                 records.append(event(source_id=SOURCE_ID, source_record_id=f"{layer}-{a.get('OBJECTID')}", fetched_at=fetched,
                                      source_url=LAYERS[layer], authority="CT DEEP reporting archive 2016-2021",
-                                     raw=scrub({k: v for k, v in a.items() if k not in PERSONAL}),
+                                     raw=scrub(dict(a)),
                                      parse_error=f"{error_text(e)}"))
     records.sort(key=lambda r: (r.get("started_at") or "", r["event_id"]), reverse=True)
     meta = {"layers": LAYERS, "features": {k: len(v) for k, v in feats.items()}, "cso_utility_codes": code_labels,

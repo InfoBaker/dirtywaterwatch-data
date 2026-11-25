@@ -1,5 +1,9 @@
 """Avon Lake Regional Water CSO notices, Form B (PDF) -> data/build/events/oh-avon-lake-cso-notices.json.
 
+Public-record policy: downloaded source text is retained, including published names, contacts and addresses.
+Structured event classification still uses the documented source fields. Requested removals apply at export.
+
+
 Source (registry oh-avon-lake-cso-notices; 40 CFR 122.38, the Great Lakes CSO public notice rule)
   Avon Lake Regional Water's water reclamation facility page,
   https://avonlakewater.org/about-us/about-the-avon-lake-water-reclamation-facility/ (200 to this machine and GitHub's
@@ -151,7 +155,7 @@ def parse(text: str) -> dict:
         if v and re.fullmatch(r"(?i)yes|no", v) and not (k == "Miller Roa" and "Miller Road Park" in areas):
             areas[k] = v
     sent = value(ls, r"Initial Notification sent")
-    return {"kind": "supplemental" if re.search(r"\bSupplemental\b", joined) else "notice",
+    return {"source_text": text, "kind": "supplemental" if re.search(r"\bSupplemental\b", joined) else "notice",
             "start": st.isoformat() if st else None, "start_as_written": start_raw, "start_problem": st_problem,
             "end": end.isoformat() if end else None, "end_as_written": end_raw or None,
             "end_problem": end_problem if end_raw else None,
@@ -215,7 +219,7 @@ def to_record(key: str, notices: list[dict], points: dict[str, dict]) -> dict:
     st = datetime.fromisoformat(latest["start"])
     end = datetime.fromisoformat(latest["end"]) if latest.get("end") else None
     raw = {"time_zone": TZ_NAME, "state": "OH",
-           "notices": [{"kind": n["kind"], "pdf": n["url"], "form_date": n.get("form_date"),
+           "notices": [{"source_text": n.get("source_text"), "kind": n["kind"], "pdf": n["url"], "form_date": n.get("form_date"),
                         "initial_notice_sent": n.get("initial_notice_sent"), "start_as_written": n["start_as_written"],
                         "end_as_written": n.get("end_as_written"), "volume_as_written": n.get("volume_as_written"),
                         "_first_seen_at": n["first_seen_at"], "_last_seen_in_source": n["last_seen_at"]}

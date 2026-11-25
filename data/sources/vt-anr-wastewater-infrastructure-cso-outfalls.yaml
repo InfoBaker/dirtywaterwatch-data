@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "vt-anr-wastewater-infrastructure-cso-outfalls"
 name: "VT ANR Wastewater Infrastructure (Point features), Type 23 'Combined sewer outfall'"
 url: "https://anrmaps.vermont.gov/arcgis/rest/services/Open_Data/OPENDATA_ANR_UTILITY_SP_NOCACHE_v1/MapServer/166"

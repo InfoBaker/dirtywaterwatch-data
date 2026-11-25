@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "pa-epa-cso-outfall-map"
 name: "EPA 'Where Combined Sewer Overflow Outfalls Are Located' national map"
 url: "https://www.epa.gov/npdes/where-combined-sewer-overflow-outfalls-are-located"

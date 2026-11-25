@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nj-drbc-bacteria-sampling"
 name: "Delaware River Basin Commission bacteria sampling results (e.g. 'June 22, 2026, Bacterial Sampling Data')"
 url: "https://www.nj.gov/drbc/library/documents/bacti062226.pdf"

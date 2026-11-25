@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "fed-wqp-organizations-ne-bacteria"
 name: "Water Quality Portal organizations submitting E. coli/enterococci in New England since 2024 (legacy Organization service)"
 url: "https://www.waterqualitydata.us/data/Organization/search?statecode=US%3A25&statecode=US%3A09&statecode=US%3A44&statecode=US%3A33&statecode=US%3A50&statecode=US%3A23&characteristicName=Escherichia%20coli&characteristicName=Enterococcus&characteristicName=Enterococci&startDateLo=01-01-2024&mimeType=csv"

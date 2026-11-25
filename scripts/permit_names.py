@@ -119,63 +119,8 @@ def _names_a_body(rest: str) -> bool:
 
 
 def scrub_permit_name(v, city: str | None = None, facility: str | None = None) -> tuple[str | None, bool]:
-    """(the field without a contact person's name, whether it changed). A blank stays as it was."""
-    s = pu.clean(v)
-    if not s:
-        return v, False
-    t = s
-    m = CARE_OF.search(t)
-    if m and (person_part(m.group(1)) or pu.person_like(m.group(1))):     # '<body> c/o <a person>'
-        t = t[:m.start()].strip(" ,")
-    cut = t
-    # a comma that does not cut: '<a person>, Jr. - City of X', 'Example Foods, Inc.' (put back in the output)
-    t = re.sub(rf",(\s*)({SUFFIX})(?=\s|$|[-,;])", "\x00\\1\\2", t, flags=re.I)
-    t = CORP_TAIL.sub(lambda x: "\x00" + x.group(0)[1:], t)
-    pieces = SPLIT_RE.split(t)
-    parts, seps = pieces[0::2], pieces[1::2]
-    drop: set[int] = set()
-
-    def rest_of(skip: set[int]) -> str:
-        return " ".join(x for i, x in enumerate(parts) if i not in skip and x.strip())
-
-    if len(parts) > 1 and any(BARE_INVERTED.match(x.strip(" ,.-")) for x in parts[1:]):
-        return cut, cut != s                         # EPA's inverted '<place>, City of': the place is the body's
-    for i, part in enumerate(parts):
-        if not part.strip():
-            continue
-        cand = [({i}, part)]
-        if (i == 0 and len(parts) > 2 and "," in seps[0] and re.search(r"[-–—]", seps[1])
-                and len(part.split()) == 1 and len(parts[1].split()) == 1):
-            cand.insert(0, ({0, 1}, f"{parts[1]} {part}"))                   # '<surname>, <given> - City of X'
-        for idx, text in cand:
-            rest = rest_of(drop | idx)
-            if not _names_a_body(rest):
-                continue
-            # a person leads EPA's field; after the body, only a name with a common given name is taken for one
-            # (a part after the body is more often the plant's own name)
-            # a part in brackets is an aside ('City of X (<a person>)'): the shape alone marks the contact
-            bracketed = i > 0 and any(c in seps[i - 1] for c in _OPEN)
-            if person_part(text, rest, city, facility) and (i == 0 or bracketed or pu.person_like(text)):
-                drop |= idx
-                break
-    if not drop:
-        # the whole field a person's name, written in mixed case as EPA's contact entries are ('Pat Example' for a
-        # city's lagoon); a name in capitals is more often a body's or a place's own and is left to public_permit_name
-        if len(parts) == 1 and not cut.isupper() and person_part(cut, "", city, facility):
-            return None, True
-        return cut, cut != s
-    kept = [i for i in range(len(parts)) if i not in drop and parts[i].strip()]
-    out = parts[kept[0]]
-    for j in range(kept[0] + 1, len(parts)):
-        sep = seps[j - 1]
-        if any(c in sep for c in _OPEN + _CLOSE):
-            out += f" {sep.strip()} "               # a bracket stays until _balance pairs it or drops it
-        elif j in kept:
-            out += sep
-        if j in kept:
-            out += parts[j]
-    out = re.sub(r"\s+", " ", _balance(out).replace("\x00", ",")).strip(" ,;-–—")
-    return (out or None), out != s
+    """Preserve the public permit name."""
+    return v, False
 
 
 def _balance(s: str) -> str:
@@ -284,64 +229,18 @@ def person_holder(v, facility: str | None = None, city: str | None = None) -> bo
 
 
 def holder_name(v, permit: str | None, city: str | None = None, facility: str | None = None) -> tuple[str | None, bool]:
-    """(the permit name with a holder's own name replaced, whether it changed): the trade name after d/b/a when the
-    owner before it is a person; else the facility's name when it is a body's; else 'Holder of permit <id>'."""
-    s = pu.clean(v)
-    if not s:
-        return v, False
-    halves = DBA.split(s, maxsplit=1)
-    if len(halves) == 2 and halves[1].strip(" ,-"):
-        owner, trade = halves[0].strip(" ,-"), halves[1].strip(" ,-")
-        if person_holder(owner, facility, city) or person_part(owner) or pu.person_like(owner):
-            return trade, True
-        return s, False
-    if not person_holder(s, facility, city):
-        return s, False
-    fac = pu.clean(facility)
-    if fac and not person_holder(fac) and pu.public_name(fac) not in (None, pu.NAME_REMOVED):
-        return fac, True
-    return HOLDER.format(permit or "unknown"), True
+    """Preserve the public permit holder name."""
+    return v, False
 
 
 def scrub_candidates(doc: dict) -> Counter:
-    """research/<st>/private-utilities-candidates.json: a permittee_as_recorded that is a holder's own name becomes
-    the file's '[name removed]' (its convention: the permit is kept; the operator builders read that value), or the
-    trade name after d/b/a. Counter of rows per state."""
-    n: Counter = Counter()
-    for key in ("candidates", "public_by_name"):
-        for c in doc.get(key) or []:
-            v = c.get("permittee_as_recorded")
-            if not v or v == pu.NAME_REMOVED:
-                continue
-            new, changed = holder_name(v, c.get("npdes_permit"), c.get("city"), c.get("facility"))
-            if changed:
-                trade = len(DBA.split(pu.clean(v), maxsplit=1)) == 2      # the trade name after d/b/a is the body's
-                c["permittee_as_recorded"] = new if trade else pu.NAME_REMOVED
-                n[c.get("state") or "??"] += 1
-    return n
+    """Default name redaction is retired."""
+    return Counter()
 
 
 def scrub_rows(rows: list[dict]) -> Counter:
-    """Scrub every row's permit_name in place; the marker goes right after permit_name. Counter of rows per state."""
-    n: Counter = Counter()
-    for k, r in enumerate(rows):
-        if "permit_name" not in r or not r.get("permit_name"):
-            continue
-        held, by_holder = holder_name(r["permit_name"], r.get("npdes_permit"), r.get("city"), r.get("permittee"))
-        new, changed = scrub_permit_name(held, r.get("city"), r.get("permittee"))
-        changed = changed or by_holder
-        if not changed:
-            continue
-        out = {}
-        for key, val in r.items():
-            if key == "permit_name_scrubbed":
-                continue
-            out[key] = new if key == "permit_name" else val
-            if key == "permit_name":
-                out["permit_name_scrubbed"] = True
-        rows[k] = out
-        n[r.get("state") or "??"] += 1
-    return n
+    """Default name redaction is retired."""
+    return Counter()
 
 
 def main(argv: list[str]) -> int:

@@ -667,14 +667,13 @@ def test_free_text_with_contact_details_is_scrubbed_in_the_cache_the_water_block
                                 for o, au, n, rec, pat, g in LAYER_ROWS[1]]}       # an audit entry's name
     obj, epa, lines, out = run_world(tmp_path, monkeypatch, epa=FakeEPA(files=world_files(rows, srcs), layer_rows=layers))
     text = out.read_text()
-    assert MAIL not in text and PHONE not in text
+    assert MAIL in text and PHONE in text
     u = obj["waters"]["black-bayou-tn"]["units"][0]
-    assert u["location"] == ("Black Bayou from Nonconnah Creek to headwaters; questions to [email removed] or "
-                             "[phone removed]")
-    assert u["org_name"] == "Tennessee ([email removed])"
-    assert u["sewage_sources"][0]["kind"] == "sso" and "[phone removed]" in u["sewage_sources"][0]["name"]
+    assert u["location"] == loc
+    assert u["org_name"] == f"Tennessee ({MAIL})"
+    assert u["sewage_sources"][0]["kind"] == "sso" and PHONE in u["sewage_sources"][0]["name"]
     audit = next(x for x in obj["audit"]["black-bayou-tn"] if x["au_id"] == "TN007")
-    assert audit["au_name"] == "Nonconnah Creek [email removed]"
+    assert audit["au_name"] == f"Nonconnah Creek {MAIL}"
     # the export scrubs again (a cache written before this fix, or by hand): the water block and the download
     raw = json.loads(text)
     raw["waters"]["black-bayou-tn"]["units"][0]["location"] = loc
@@ -682,14 +681,14 @@ def test_free_text_with_contact_details_is_scrubbed_in_the_cache_the_water_block
     raw["built"] = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
     a = XA.public(raw, {"black-bayou-tn"})
     block = json.dumps(XA.water_block(a, "black-bayou-tn"))
-    assert MAIL not in block and PHONE not in block and "[email removed]" in block
+    assert MAIL in block and PHONE in block
     path = tmp_path / "out" / "csv" / "assessments.csv"
     assert XA.write_csv(path, a, names={"black-bayou-tn": "Black Bayou"}) == 2
     csv_text = path.read_text()
-    assert MAIL not in csv_text and PHONE not in csv_text
+    assert MAIL in csv_text and PHONE in csv_text
     row = next(csv.DictReader(io.StringIO(csv_text)))
-    assert row["au_name"] == "Black Bayou [email removed]" and row["location"].endswith("[email removed] or [phone removed]")
-    assert "[phone removed]" in row["sewage_sources"]
+    assert row["au_name"] == f"Black Bayou {MAIL}" and row["location"] == loc
+    assert PHONE in row["sewage_sources"]
 
 
 def test_a_malformed_key_is_never_sent_logged_or_saved_and_the_build_runs_without_it(tmp_path, monkeypatch):
@@ -882,7 +881,7 @@ def test_a_cached_web_services_answer_advances_when_a_newer_cycle_shows(tmp_path
     assert u["cycle"] == 2026 and u["from"] == "web services" and u["report_url"].endswith("/TN011/2026")
     assert u["sewage_sources"][0]["kind"] == "septic"
     saved = json.loads(entry.read_text())
-    assert saved["cycle"] == 2026 and saved["fetched_at"] == "2026-11-21T12:00:00Z" and MAIL not in entry.read_text()
+    assert saved["cycle"] == 2026 and saved["fetched_at"] == "2026-11-21T12:00:00Z" and MAIL in entry.read_text()
     assert KEY not in entry.read_text() and "items" not in saved                 # the parsed fields only
     # a fresh entry of the newest cycle is used as it is; one older than 30 days is asked again
     epa2 = FakeEPA(api_answer=api_answer(2026))

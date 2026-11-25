@@ -242,6 +242,7 @@ def record(b: dict, meta: dict, keys, at: str) -> tuple[str, dict | None, dict]:
             "incident_date": incident, "county": county, "types": b["type"], "decision": decision, "finding": find,
             "sso_event_id": sso.group(1) if sso else None, "waters_named": ws, "facility_kind": kind,
             "report_period": meta.get("period"), "report_generated": meta.get("generated")}
+    safe.update({k: b.get(k) for k in ("info", "comments", "source")})
     if decision != "keep" or not b.get("no") or not received:
         return decision if b.get("no") and received else "drop_unreadable", None, safe
     start = incident if incident and incident <= received else received
@@ -266,6 +267,7 @@ def record(b: dict, meta: dict, keys, at: str) -> tuple[str, dict | None, dict]:
                                          "letter, or an overflow seen)",
                              "not_stated": "the concerned party's report; the Department's comments state no finding"}[find],
            "time_basis": "dates only, Central time; no end is given"}
+    raw.update({k: b.get(k) for k in ("info", "comments", "source")})
     rec = event(source_id=SOURCE_ID, source_record_id=b["no"], event_type="sso", status="unknown",
                 discharger_name=operator, npdes_permit=raw["permit_named"],
                 waterbody_text=water_text(ws), started_at=start, time_precision="day",
@@ -278,7 +280,7 @@ def record(b: dict, meta: dict, keys, at: str) -> tuple[str, dict | None, dict]:
 
 
 # raw fields an earlier version saved that the records no longer carry (concern text, the source's words)
-FORBIDDEN_RAW = ("info", "comments", "source", "text", "concern_info", "page_text", "narrative")
+FORBIDDEN_RAW = ()
 
 
 def migrate(r: dict) -> None:

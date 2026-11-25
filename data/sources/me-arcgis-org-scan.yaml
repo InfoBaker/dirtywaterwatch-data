@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "me-arcgis-org-scan"
 name: "Maine ArcGIS Online org RbMX0mRVOFNTdLzd service list scan (1,107 services)"
 url: "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services?f=json"

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-deq-prep"
 name: "Virginia DEQ Pollution Response Program (PReP) pollution reports, sewage-related"
 url: "https://portal.deq.virginia.gov/prep/api/prepReports"

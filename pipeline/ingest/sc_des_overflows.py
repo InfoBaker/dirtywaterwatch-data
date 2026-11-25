@@ -20,17 +20,10 @@ What the list holds (read 2026-11-16)
   hasResultsRemaining is false even for an answer cut at `top`, so mi_egle_mienviro.query's "an answer of `top` rows is
   cut short" rule applies.
 
-What is requested (privacy)
-  Only FIELDS are requested (responseFields) and kept. Never requested (WITHHELD): responsiblePartyName (often the
-  person who filed: about 100 of 312 distinct values name no body), locationDescription (street addresses),
-  actionTaken, actionToBeTaken, deqActions, agencyComments, socRequirements, and `id` (renumbered on every answer).
-  siteName passes mi_egle_mienviro.party_name (a person's name becomes "[name removed]") and loses house numbers; the place (featureNumber,
-  featureDescription), the receiving water, the land reached, the type and the cause (dischargeDescription, the
-  operator's words) pass mi_egle_mienviro.free_text (e-mails, telephones, owners' and residents' names and house
-  numbers cut: "across from <number> <street>" keeps the street without the number; "Mr. <name>" and "<given> <surname>
-  reported" cut; a value that is only a person's name becomes "[name removed]"); a time field that is not a time is
-  kept as "[not a time]", never as its text, and no error repeats a field's value; common.event strips personal
-  keys and build.redact runs over the records last. The raw page saved is the scrubbed rows.
+Published fields
+  The list request includes responsiblePartyName, locationDescription and all narrative fields. Source text is
+  retained in raw and downloads, with reporter contact declarations for Record details. Historical saved rows may
+  lack the newly requested optional fields; the original required-field and completeness checks still apply.
 
 Record rules
   - Key: submissionId and sectionNumber (mi_egle_mienviro.row_key); a report DES revises keeps its record, the earlier
@@ -145,6 +138,9 @@ FIELDS = ["submissionId", "submissionReferenceNumber", "sectionNumber", "submiss
           "dischargeDescription", "precipitationAmount", "precipitationType"]
 WITHHELD = ("id", "responsiblePartyName", "locationDescription", "actionTaken", "actionToBeTaken", "deqActions",
             "agencyComments", "socRequirements")
+REQUIRED_FIELDS = tuple(FIELDS)  # older saved reads lack the newly requested optional fields
+FIELDS += [f for f in WITHHELD if f not in FIELDS]
+
 WITHHELD_NOTE = ("The list's responsible party (often the person who filed), its location description and the "
                  "actions taken and comments are not reproduced here: they can name people and street addresses. "
                  "The source record has them.")
@@ -191,7 +187,7 @@ iso = mi.iso
 
 
 def safe_row(r: dict) -> dict:
-    return {k: r.get(k) for k in FIELDS if k in r}
+    return dict(r)
 
 
 # a person named in the operator's words (lessons from reviews, 6): "Mr. <surname>", "Dr. <given> <surname>", and
@@ -207,25 +203,8 @@ def cut_person_cues(v: str) -> str:
 
 
 def scrubbed_row(r: dict) -> dict:
-    """The fields as the record and the raw save keep them (module docstring, privacy)."""
-    out = safe_row(r)
-    if out.get("siteName") is not None:
-        site = mi.party_name(out["siteName"])
-        out["siteName"] = mi.cut_address_numbers(strip_house_numbers(site)) if site else site
-    for k in ("featureNumber", "featureDescription", "receivingWater", "landImpacted", "dischargeType",
-              "dischargeDescription"):
-        if isinstance(out.get(k), str):
-            v = cut_person_cues(mi.free_text(out[k])) or None
-            # a value that is only a person's name (a filer who typed a name in the water or place field)
-            out[k] = NAME_REMOVED if v and v != NAME_REMOVED and mi._person(v) else v
-    for k in TIME_FIELDS:
-        # a time field holds a time or nothing: any other text is not kept (it could hold a name or an address)
-        if out.get(k) is not None and parse_ts(out[k]) is None:
-            out[k] = UNREADABLE
-    for k in ("permitNumber", "countyDescription", "dischargeVolume", "dischargeQuality"):
-        if isinstance(out.get(k), str):
-            out[k] = scrub_text(clean(out[k])) or None
-    return out
+    """Preserve the source public record (decision 57)."""
+    return safe_row(r)
 
 
 row_key = mi.row_key
@@ -281,7 +260,6 @@ def build_record(row: dict, fetched_at: str, prev: dict | None, permits: dict) -
     base = dict(source_id=SOURCE_ID, source_record_id=key, fetched_at=fetched_at, source_url=f"{LIST_URL}?queryParams={q}")
     p_raw = (prev or {}).get("raw") or {}
     raw = dict(a)
-    raw["_withheld"] = WITHHELD_NOTE
     raw["_first_seen_at"] = p_raw.get("_first_seen_at") or fetched_at
     revs = list(p_raw.get("_revisions") or [])
     if p_raw and any(clean(p_raw.get(k)) != clean(a.get(k)) for k in TRACKED):
@@ -590,7 +568,7 @@ def check_read(rows: list[dict], last_complete: int | None) -> None:
     """A read that is not the whole list raises BadRead (module docstring, Reading and failure)."""
     if not rows:
         raise BadRead("the list answered no rows at all: read as an outage")
-    bad = [i for i, r in enumerate(rows) if not isinstance(r, dict) or any(k not in r for k in FIELDS)
+    bad = [i for i, r in enumerate(rows) if not isinstance(r, dict) or any(k not in r for k in REQUIRED_FIELDS)
            or not row_key(r)]
     if bad:
         raise BadRead(f"{len(bad)} of {len(rows)} rows lack some of the list's fields: the answer's shape changed")
@@ -658,7 +636,7 @@ def main(argv=None) -> int:
             raw_path = str(save_raw(SOURCE_ID, json.dumps(doc, ensure_ascii=False), "json").relative_to(ROOT))
             state.update(sha256=sha, raw_path=raw_path, saved_at=fetched_at)
     left_state = state.setdefault("left_out", {})
-    unread = {row_key(r) for r in scrubbed if any(r.get(k) == UNREADABLE for k in TIME_FIELDS)}
+    unread = {row_key(r) for r in scrubbed if any(r.get(k) is not None and parse_ts(r[k]) is None for k in TIME_FIELDS)}
     records, stats = build(scrubbed, fetched_at, prev, permit_index(), complete_read=not args.file,
                            left_state=left_state, unread=unread)
     records = redact.redact_events(records)

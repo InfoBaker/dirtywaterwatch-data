@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "oh-epa-spills-opendata"
 name: "Ohio EPA Spills (current year and previous years), Office of Emergency Response"
 url: "https://geo.epa.ohio.gov/arcgis/rest/services/EmergResponse/Spills2_OpenData/MapServer"

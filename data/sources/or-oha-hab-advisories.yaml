@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "or-oha-hab-advisories"
 name: "Oregon Health Authority cyanobacteria (harmful algae bloom) recreational use advisories (ArcGIS FeatureServer)"
 url: "https://services.arcgis.com/uUvqNMGPm7axC2dD/arcgis/rest/services/HABs_Advisories_(Points)/FeatureServer/0"
@@ -32,6 +33,7 @@ fetch:
   geometry: true
   time_zone: "America/Los_Angeles"
   bounds: [-124.8, 41.9, -116.4, 46.35]       # Oregon; a point outside is not used (raw._coords_rejected)
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [OBJECTID, WaterbodyName, AdvisoryStatus, Toxin, ToxinLevel_ppb, ToxinLevel, Details, AdvisoryLink,
                 Issue_Date, County_1, County_2, StatusSort, Above_PetRUV, EditDate, _x, _y]
   free_text: [Details]

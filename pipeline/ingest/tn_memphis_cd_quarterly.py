@@ -180,15 +180,8 @@ def signed_date(pages: list[str]) -> str | None:
 
 
 def water_cell(text: str) -> tuple[str | None, str | None]:
-    """(the receiving stream as written, or None; why it was withheld). The Baton Rouge reader's check (an address, a
-    phone, an e-mail, a person's name, or a cell that is not a water's name is withheld) and a cell ending in a street
-    word ('Wolf River Road'): the row is kept and placed on no water (review 2026-11-17 P1-1, P1-2)."""
-    t = _clean(text)
-    if not t:
-        return None, None
-    if STREET_END.search(t):
-        return None, "the receiving-water cell ends in a street word and is withheld"
-    return receiving_water(t)
+    """Preserve the source public record (decision 57)."""
+    return (text or None, None)
 
 
 def table_lines(pages: list[str]) -> tuple[list[str], dict[str, str]]:

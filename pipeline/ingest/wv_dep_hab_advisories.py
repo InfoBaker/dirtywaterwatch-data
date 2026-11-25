@@ -92,7 +92,7 @@ def _esri_line(g: dict):
 
 
 def _r3_coords(c):
-    return [round(c[0], 3), round(c[1], 3)] if isinstance(c[0], (int, float)) else [_r3_coords(x) for x in c]
+    return [c[0], c[1]] if isinstance(c[0], (int, float)) else [_r3_coords(x) for x in c]
 
 
 def place(kind: str, g: dict) -> tuple[float | None, float | None, dict | None]:
@@ -104,7 +104,7 @@ def place(kind: str, g: dict) -> tuple[float | None, float | None, dict | None]:
     from shapely.geometry import mapping
     try:
         if kind == "point":
-            return round(float(g["y"]), 3), round(float(g["x"]), 3), None
+            return float(g["y"]), float(g["x"]), None
         geom = _esri_line(g) if kind == "segment" else _esri_area(g)
         if geom is None or geom.is_empty:
             return None, None, None
@@ -115,7 +115,7 @@ def place(kind: str, g: dict) -> tuple[float | None, float | None, dict | None]:
             pt = geom.representative_point()
         gj = mapping(geom)
         extent = {"type": gj["type"], "coordinates": _r3_coords(gj["coordinates"])}
-        return round(pt.y, 3), round(pt.x, 3), extent
+        return pt.y, pt.x, extent
     except (KeyError, IndexError, TypeError, ValueError, ZeroDivisionError):
         return None, None, None
 
@@ -139,26 +139,8 @@ WITHHELD = "(DEP's advisory text is withheld here: it could not be cut to the ad
 
 
 def scrub_advisory(text: str) -> str | None:
-    """DEP's Advisory text, cut to the advice before anything is saved: common.scrub_text (e-mails, phones, contact
-    names), then every street house number, then every sentence that names who reported, sampled or can be called.
-    Text left with a capitalised name pair after 'by' or with nothing but removals is withheld (WITHHELD)."""
-    t = " ".join(str(text or "").split())
-    if not t:
-        return None
-    t = HOUSE_NUMBER_RE.sub(common.HOUSE_NUMBER_REMOVED, common.scrub_text(t))
-    # then, in any case, every sentence still holding an address or a label of who reported, sampled, collected or
-    # can be called ('123 example lane', 'Reporter: ...', 'Sample collector: ...'; ingest.wv_la_privacy) is cut
-    # a title before a name is found before the text is split (Astra verify3 P1-2): its period becomes a mark the
-    # splitter does not break at, so 'Lt. Example Person sampled the bloom.' stays one sentence, and a sentence holding
-    # the mark is cut whatever follows the title ('Sgt.', 'capt.', 'Lt. Col.' and the rest, wv_la_privacy.TITLE_ABBR)
-    t = wv_la_privacy.TITLE_DOT_RE.sub(lambda m: m.group(0)[:-1] + TITLE_MARK, t)
-    kept = [x for x in SENTENCE_RE.split(t) if x and TITLE_MARK not in x and not PERSON_CLAUSE_RE.search(x)
-            and not wv_la_privacy.has_address(x) and not wv_la_privacy.names_a_person(x)]
-    out = " ".join(kept).strip()
-    if not re.search(r"[A-Za-z]{3}", out.replace(common.HOUSE_NUMBER_REMOVED, "")) or \
-            re.search(r"\bby[ ]+[A-Z][a-z]+[ ]+[A-Z][a-z]+", out):
-        return WITHHELD
-    return out
+    """Preserve the source public record (decision 57)."""
+    return text
 
 
 def observed(attrs: dict) -> tuple[str | None, int | None]:

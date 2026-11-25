@@ -3,22 +3,18 @@
 The utility's map uses GET /Location/SearchCSSR/MM.DD.YYYY/MM.DD.YYYY/*,
 returning {Success: true, Result: "[...JSON rows...]"}. No REST layer or paging
 token exists. Read the full range and each calendar year, reconciling the ID
-and safe-value sets before saving anything. Windows can return the same ID
+and source-value sets before saving anything. Windows can return the same ID
 (including rows with conflicting start/end years). Conflicting copies or a
 short read fail closed; missing historical records remain in our history.
 
-One record per Id, updated in place, with prior safe values in _revisions.
+One record per Id, updated in place, with prior source values in _revisions.
 Times are unzoned local clocks, interpreted in America/Chicago (Evansville);
 Has* flags determine precision. Ambiguous/nonexistent DST hours and ends
 before starts stay unknown. entered is a database entry stamp, not evidence
 of publication, receipt or last update; those three fields remain null.
 
-The endpoint cannot select fields. Discard location, action, manholes, sewer
-segments and other unnecessary fields before saving. Only previously audited
-cause and affected-area strings are kept verbatim; new free text is withheld
-for review rather than risking a private name. The adjacent safe-text JSON
-contains all such strings inspected on 2026-11-22. Coordinates are rounded
-to three decimals. Ground and storm-sewer wording stays in waterbody_text so
+The endpoint cannot select fields. Keep every published field and the source's
+coordinate precision. Ground and storm-sewer wording stays in waterbody_text so
 the resolver can classify records that name no receiving water. Generic private
 waters and other unresolved areas remain in raw only; no water reach is inferred.
 
@@ -38,7 +34,6 @@ import copy
 import hashlib
 import json
 import math
-import re
 import sys
 import time
 from collections import Counter
@@ -58,25 +53,20 @@ AUTHORITY = "Evansville Water and Sewer Utility"
 STATE_FILE = BUILD_DIR / f"{SOURCE_ID}-state.json"
 TZ = ZoneInfo("America/Chicago")
 TIME_BASIS = "We read the utility's unzoned local times in Central time (America/Chicago), including daylight saving time."
-AUDITED_TEXT = json.loads(Path(__file__).with_name("in_evansville_safe_text.json").read_text())
-REASONS = {"Construction Related", "Debris", "Power Failure", "Equipment Failure", "Grease",
-           "Hydraulically Maximized", "Private", "Roots", "Rags", "Towels", "Unknown", "Other", "Maintenance"}
-DATE_FIELDS = ("StartDate", "StartDateTime", "EndDate", "EndDateTime", "entered")
-TIME_FIELDS = ("StartTime", "EndTime")
-BOOL_FIELDS = ("HasStartDate", "HasStartTime", "HasEndDate", "HasEndTime", "EWSUSystem", "PrivateProperty")
-NUMBER_FIELDS = ("VolumeReleased", "DurationHrs", "Latitude", "Longitude", "EventReasonID")
-SAFE_FIELDS = ("Id", *DATE_FIELDS, *TIME_FIELDS, *BOOL_FIELDS, *NUMBER_FIELDS,
-               "CauseDescription", "AffectedArea", "EventReason")
 REQUIRED_FIELDS = {"Id", "StartDate", "StartDateTime", "StartTime", "EndDate", "EndDateTime", "EndTime",
                    "HasStartDate", "HasStartTime", "HasEndDate", "HasEndTime", "VolumeReleased",
                    "CauseDescription", "AffectedArea", "EventReasonID"}
-# Keep the other audited area texts, including ground/street/storm-sewer terms:
+# Keep the other source area texts, including ground/street/storm-sewer terms:
 # status.no_receiving_water reads those words without asserting water was not reached.
 # These generic areas still give no water name the resolver can use.
 UNRESOLVED_AREAS = {"Garage Floor", "Detention Basin", "Storm Retention Pond",
                     "Garage Floor Drain / Private Lake", "Ground/Private Lake"}
-STAMP_RE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?")
-CLOCK_RE = re.compile(r"\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?")
+# Reader annotations are not source columns when replaying saved event history.
+ROW_ANNOTATIONS = {"ended_at_precision", "time_zone", "_time_basis", "_placement",
+                   "source_entered_at", "entry_time_basis", "_water_note",
+                   "coordinate_precision_basis", "_coordinate_note", "_first_seen_at",
+                   "_last_seen_in_source", "_revisions", "operator_basis",
+                   "_missing_from_source_since", "_withheld_fields"}
 
 
 def number(value):
@@ -86,34 +76,10 @@ def number(value):
 
 
 def safe_row(row: dict) -> dict:
-    """An idempotent, typed allowlist applied before raw, fixtures or events are saved."""
+    """Validate the stable source identity; retain all published values."""
     if type(row.get("Id")) is not int or row["Id"] <= 0:
         raise ValueError("release has no valid numeric identity")
-    out = {"Id": row["Id"]}
-    withheld = set(k for k in row.get("_withheld_fields", []) if k in SAFE_FIELDS)
-    for key in SAFE_FIELDS[1:]:
-        value = row.get(key)
-        valid = value is None
-        if key in DATE_FIELDS:
-            valid |= isinstance(value, str) and STAMP_RE.fullmatch(value) is not None
-        elif key in TIME_FIELDS:
-            valid |= isinstance(value, str) and CLOCK_RE.fullmatch(value) is not None
-        elif key in BOOL_FIELDS:
-            valid |= isinstance(value, bool)
-        elif key in NUMBER_FIELDS:
-            valid |= number(value) is not None
-        else:
-            allowed = REASONS if key == "EventReason" else AUDITED_TEXT[key]
-            valid |= isinstance(value, str) and value in allowed
-        if not valid:
-            withheld.add(key)
-            value = None
-        if key in ("Latitude", "Longitude") and value is not None:
-            value = round(value, 3)
-        out[key] = value
-    if withheld:
-        out["_withheld_fields"] = sorted(withheld)
-    return out
+    return copy.deepcopy({k: v for k, v in row.items() if k not in ROW_ANNOTATIONS})
 
 
 def query_url(start: date, end: date) -> str:
@@ -198,7 +164,7 @@ def source_time(row, prefix, problems):
             raise ValueError("date and time components disagree")
         precision = "minute" if stamp.endswith(":00") else "second"
         return local_time(stamp), precision
-    except (ValueError, TypeError):
+    except (ValueError, TypeError, AttributeError):
         problems.append(f"{prefix} time is missing, inconsistent or ambiguous")
         return None, None
 
@@ -206,8 +172,6 @@ def source_time(row, prefix, problems):
 def to_record(source_row: dict, fetched_at: str, prev: dict | None = None) -> dict:
     raw = safe_row(source_row)
     problems = []
-    if raw.get("_withheld_fields"):
-        problems.append("Unreviewed or invalid fields withheld: " + ", ".join(raw["_withheld_fields"]))
     start, precision = source_time(raw, "Start", problems)
     end, end_precision = source_time(raw, "End", problems)
     if start and end and (end.date() < start.date() if end_precision == "day" else end < start):
@@ -221,19 +185,22 @@ def to_record(source_row: dict, fetched_at: str, prev: dict | None = None) -> di
     if raw.get("entered"):
         try:
             raw["source_entered_at"] = local_time(raw["entered"]).isoformat()
-        except (ValueError, TypeError):
+        except (ValueError, TypeError, AttributeError):
             problems.append("Source entry time could not be read")
     raw["entry_time_basis"] = "The utility's database entry time; publication and receipt times are not given."
     area = raw.get("AffectedArea")
+    area = area if isinstance(area, str) else None
     water = area if area and area not in UNRESOLVED_AREAS else None
     if not water:
         raw["_water_note"] = "The affected area names no receiving water."
-    vol = raw.get("VolumeReleased")
+    vol = number(raw.get("VolumeReleased"))
+    if vol is None and raw.get("VolumeReleased") is not None:
+        problems.append("Source volume is not a finite number; gallons left unknown")
     if vol is not None and vol < 0:
         problems.append("Source volume is negative; gallons left unknown")
         vol = None
-    lat, lon = raw.get("Latitude"), raw.get("Longitude")
-    raw["coordinate_precision_basis"] = "We round the source's coordinates to three decimals, about 100 meters."
+    lat, lon = number(raw.get("Latitude")), number(raw.get("Longitude"))
+    raw["coordinate_precision_basis"] = "We retain the source's coordinate precision."
     if lat is None or lon is None or not (37.7 <= lat <= 38.3 and -87.9 <= lon <= -87.2):
         lat = lon = None
         raw["_coordinate_note"] = "No usable source point in the Evansville area."
@@ -284,7 +251,7 @@ def build(rows, fetched_at, previous):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--file", help="read a saved query envelope or sanitized row array")
+    ap.add_argument("--file", help="read a saved query envelope or source row array")
     args = ap.parse_args(argv)
     fetched_at = now_iso()
     try:

@@ -72,15 +72,8 @@ _ROUTE_BEFORE = re.compile(r"(?:\b(?:Highway|Hwy|Route|Rte|SR|US|U\.S\.|State Ro
 
 
 def scrub_name(v: str | None) -> str | None:
-    """IDEM's location text with a house number cut ("1234 S Example St" -> "[house number removed] S State St")."""
-    if not v:
-        return v
-
-    def cut(m: re.Match) -> str:
-        if _ROUTE_BEFORE.search(v[:m.start()]):
-            return m.group(0)
-        return HOUSE_NUMBER_REMOVED
-    return " ".join(_HOUSE.sub(cut, v).split()) or None
+    """Keep the location the source publishes."""
+    return v
 
 
 CARRY_TIE_M = 500
@@ -110,24 +103,8 @@ def names_agree(row: dict, e: dict) -> bool:
 
 
 def sanitize(doc: dict) -> dict:
-    """The layer's answer as it may be saved: the safe fields only, the house numbers in IDEM's location text cut and
-    every point rounded to three decimals (review 2026-11-14 P1-5: nothing else reaches data/raw)."""
-    feats = []
-    for f in doc.get("features") or []:
-        a = {k: v for k, v in (f.get("attributes") or {}).items() if k in SAFE_FIELDS}
-        head, sep, rest = str(a.get("CSO_Number") or "").partition("--")
-        if sep:
-            a["CSO_Number"] = f"{head.strip()} -- {scrub_name(' '.join(rest.split())) or ''}".strip()
-        elif a.get("CSO_Number") is not None:
-            # no '--': the whole text is scrubbed, whether or not the row will become a record (re-review P1-2)
-            a["CSO_Number"] = scrub_name(" ".join(str(a["CSO_Number"]).split()))
-        for k in ("X_Coordinate", "Y_Coordinate"):
-            if isinstance(a.get(k), (int, float)):
-                a[k] = round(float(a[k]), 3)
-        g = f.get("geometry") or {}
-        g = {k: round(float(g[k]), 3) for k in ("x", "y") if g.get(k) is not None} or None
-        feats.append({"attributes": a, "geometry": g})
-    return {"features": feats}
+    """Keep the public layer answer, including source coordinates and attribution."""
+    return {"features": [dict(f) for f in doc.get("features") or []]}
 
 
 def outfall_number(cso_number: str | None) -> str | None:

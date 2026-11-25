@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "md-mde-sewer-overflows-2005-2023"
 name: "MDE Reported Sewer Overflows (2005 to January 2023, frozen), Maryland Open Data Portal"
 url: "https://opendata.maryland.gov/Energy-and-Environment/Reported-Sewer-Overflows/3rgd-zjxx/data"
@@ -47,6 +48,7 @@ fetch:
   if_changed: true         # frozen since 2023-02-23: each run asks the metadata and keeps the records
   min_rows: 27000          # 27,479 rows on 2026-11-21: a cut-off download is never accepted as the table
   time_zone: "America/New_York"
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [overflow_type, municipality_facility, npdes, date_discovered, time_discovered, duration_days,
                 duration_hours, duration_minutes, location, zip_code, collection_system, quantity_in_gallons_estimated,
                 net_in_gallons_estimated, cause, watershed, receiving_waters, county, penalty_collected, latitude,

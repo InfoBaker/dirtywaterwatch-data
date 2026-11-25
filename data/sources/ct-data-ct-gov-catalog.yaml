@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-data-ct-gov-catalog"
 name: "data.ct.gov (Socrata) catalog search"
 url: "https://data.ct.gov/"

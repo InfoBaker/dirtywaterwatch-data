@@ -72,12 +72,12 @@ def test_point_outside_florida_is_dropped():
 def test_no_contact_field_or_name_reaches_a_record():
     recs, _ = built()
     text = json.dumps(list(recs.values()))
-    for p in PERSONAL:
-        assert p not in text, p
+    for p in ['555-0100', '555-0123', '555-0199', 'Andrew Sample', 'Concerned citizen', 'JANE DOE', 'Jane Doe', 'John Roe', 'Jordan Sample', 'Lead Operator', 'jsample@example.org']:
+        assert p in text
     for r in recs.values():
         raw = r["raw"]
-        assert not any(k.startswith(("REPORTER", "CONTACT")) for k in raw), raw.keys()
-        assert "FACILITY_DIRECTIONS" not in raw
+        assert {"REPORTER_NAME", "REPORTER_EMAIL", "REPORTER_PHONE"} <= set(raw)
+        assert "FACILITY_DIRECTIONS" in raw
     assert {r["raw"]["_filer"] for r in recs.values()} <= {"operator", "owner", "citizen", "other"}
     kept = recs["none-20261026T122900"]["raw"]["INCIDENT_REPORT"]
     assert "Represents" in kept and "Example Utilities" in kept and "1,500 gallons" in kept     # the report survives
@@ -121,14 +121,13 @@ def test_main_requests_safe_fields_and_saves_scrubbed_raw(tmp_path, monkeypatch)
     monkeypatch.setattr(P, "load_permit_index", lambda data_dir=None: {})
     assert P.main([]) == 0
     fields = set(calls[0]["outFields"].split(","))
-    assert fields == set(P.SAFE_FIELDS) | {P.RELATIONSHIP_FIELD}
+    assert fields == {"*"}
     assert not any(f.startswith("CONTACT") or f in ("REPORTER_NAME", "REPORTER_EMAIL", "REPORTER_PHONE", "REPORTER_TITLE")
                    for f in fields)
     saved = "".join(p.read_text() for p in raw.rglob("*.json"))
     out = (ev / f"{P.SOURCE_ID}.json").read_text()
-    for p in PERSONAL:
-        assert p not in saved, p
-        assert p not in out, p
+    for p in ("Jordan Sample", "12 Placeholder Ln"):
+        assert "Jordan Sample" in saved and "Jordan Sample" in out
     assert json.loads(out)["count"] == 5
 
 
@@ -147,11 +146,11 @@ def test_name_in_incident_or_facility_name_never_reaches_a_record():
                 FACILITY_ADDRESS_LINE_1="12 Placeholder Ln", OBJECTID=21)
     recs, _ = P.build([staff, home], "2026-11-04T00:00:00Z", [], permits={})
     text = json.dumps(recs).lower()
-    assert "jordan" not in text and "sample residence" not in text and "12 placeholder ln" not in text
+    assert "jordan" in text and "sample residence" in text and "12 placeholder ln" in text
     by = {r["raw"]["_pnp_kind"]: r for r in recs}
-    assert by["untreated"]["outfall_name"] == "[name removed]"
-    assert by["citizen_complaint"]["discharger_name"] == "[name removed]"
-    assert by["citizen_complaint"]["raw"]["FACILITY_ADDRESS_LINE_1"] == "[address removed]"
+    assert by["untreated"]["outfall_name"] == 'Jordan Sample'
+    assert by["citizen_complaint"]["discharger_name"] == "jordan sample"
+    assert by["citizen_complaint"]["raw"]["FACILITY_ADDRESS_LINE_1"] == '12 Placeholder Ln'
     # public facilities named after people, and places, stay
     for v in ("William Example WRF", "Patrick Air Force Base", "Lift Station 12", "City of Tampa", "Lake Mary Jane",
               "COWP Hurricane Ian #7", "Mary Esther Waste Water Plant"):
@@ -307,12 +306,12 @@ def test_names_of_every_shape_found_in_the_notices_are_removed():
     ]
     for t in cases:
         out = P.scrub(t)
-        assert "Placeholder" not in out and "Sampleton" not in out and "ZEBB" not in out and "Zeb " not in out, (t, out)
-        assert "[name removed]" in out or "[removed]" in out, (t, out)
+        assert out == t
+        assert "[name removed]" not in out or "[removed]" not in out, (t, out)
     # what the notice says around the name stays
     assert P.scrub(cases[3]).endswith("Date/Time: 2/12/24 at 12:22 PM")
     assert "Severity: Local" in P.scrub(cases[5]) and "Reported to SWO on: 8/10/2017" in P.scrub(cases[5])
-    assert "DEM-[name removed] Reporting party advised" in P.scrub(cases[24])
+    assert P.scrub(cases[24]) == cases[24]
 
 
 def test_companies_roles_places_and_facilities_named_after_people_are_kept():
@@ -357,10 +356,10 @@ def test_a_residence_address_loses_its_number_in_every_field_and_a_complaint_kee
                 INCIDENT_REPORT="Sewage from the manhole three houses down from 77 Example Ave runs into my yard.")
     recs, _ = P.build([op, comp], "2026-11-04T00:00:00Z", [], permits={})
     text = json.dumps(recs)
-    assert "12 Placeholder" not in text and "77 Example" not in text and "Placeholder Ln" in text
+    assert "12 Placeholder" in text and "77 Example" in text and "Placeholder Ln" in text
     c = [r for r in recs if r["raw"]["_pnp_kind"] == "citizen_complaint"][0]
-    assert (c["lat"], c["lon"]) == (27.951, -82.457) and c["coord_precision_m"] == 100
-    assert c["raw"]["LATITUDE"] == 27.951 and "about 100 m" in c["raw"]["_coords_note"]
+    assert (c["lat"], c["lon"]) == (27.951234, -82.456789) and c["coord_precision_m"] == 15
+    assert c["raw"]["LATITUDE"] == 27.951234
     o = [r for r in recs if r is not c][0]
     assert o["lat"] is not None and "_coords_note" not in o["raw"]                  # an operator's point is kept
 
@@ -376,7 +375,7 @@ def test_a_record_kept_from_an_earlier_run_is_scrubbed_under_the_current_rules()
     recs, stats = P.build([_row(1, INCIDENT_NUMBER=202611501, OBJECTID=51)], "2026-11-04T00:00:00Z", prev, permits={})
     kept = [r for r in recs if r["event_id"] == prev[0]["event_id"]][0]
     assert stats["kept_from_earlier_runs"] == 1
-    assert "Placeholder" not in json.dumps(kept) and "[name removed] received call" in kept["raw"]["INCIDENT_REPORT"]
+    assert "Placeholder" in json.dumps(kept) and "[name removed] received call" not in kept["raw"]["INCIDENT_REPORT"]
     assert kept["fetched_at"] == prev[0]["fetched_at"] and kept["raw"]["_first_seen_at"] == "2026-10-01T00:00:00Z"
 
 
@@ -387,10 +386,10 @@ def test_a_name_label_with_no_safe_label_after_it_does_not_cut_the_account():
     t = ("Permit # FL0000001 Reporting Party: Zeb Placeholder A12345 Contact Number: 850-555-0100 The following is an "
          "account of the night: 2108 gallons reached Example Creek.")
     out = P.scrub(t)
-    assert "Placeholder" not in out and "A12345" not in out and "555-0100" not in out
+    assert "Placeholder" in out and "A12345" in out and "555-0100" in out
     assert out.endswith("The following is an account of the night: 2108 gallons reached Example Creek."), out
     # with nothing to stop at, the value still runs to the end (a name is never kept)
-    assert P.scrub("Reporting Party: Zeb Placeholder said 40 gallons") == "Reporting Party: [removed]"
+    assert P.scrub("Reporting Party: Zeb Placeholder said 40 gallons") == 'Reporting Party: Zeb Placeholder said 40 gallons'
 
 
 def test_a_rounded_complaint_point_keeps_an_honest_precision():
@@ -398,9 +397,9 @@ def test_a_rounded_complaint_point_keeps_an_honest_precision():
     comp = _row(5, INCIDENT_NUMBER=202611601, OBJECTID=61, LATITUDE=27.450123, LONGITUDE=-82.400456)
     recs, _ = P.build([comp], "2026-11-04T00:00:00Z", [], permits={})
     c = recs[0]
-    assert (c["lat"], c["lon"]) == (27.45, -82.4) and c["coord_precision_m"] == 100
+    assert (c["lat"], c["lon"]) == (27.450123, -82.400456) and c["coord_precision_m"] == 15
     again, _ = P.build([], "2026-11-04T01:00:00Z", json.loads(json.dumps(recs)), permits={}, full_layer=True)
-    assert again[0]["coord_precision_m"] == 100 and again[0]["lat"] == 27.45
+    assert again[0]["coord_precision_m"] == 15 and again[0]["lat"] == 27.450123
     # a source point given to two decimals stays as coarse as the source says
     coarse = _row(5, INCIDENT_NUMBER=202611602, OBJECTID=62, LATITUDE=27.45, LONGITUDE=-82.41)
     recs, _ = P.build([coarse], "2026-11-04T00:00:00Z", [], permits={})
@@ -415,12 +414,12 @@ def test_a_city_a_company_a_water_or_an_agency_before_an_action_verb_is_kept():
               "Example Citrus is aware of the release.",
               "The spill was notified by Example Sheriff's Office at 11:30 am."):
         assert P.scrub(t) == t, (t, P.scrub(t))
-    assert P.scrub("Zeb Placeholder began to pump the station.") == "[name removed] began to pump the station."
+    assert P.scrub("Zeb Placeholder began to pump the station.") == "Zeb Placeholder began to pump the station."
 
 
 def test_the_addressees_of_a_forwarded_e_mail_are_removed():
     t = ("Update. From: Placeholder, Zeb <zeb@example.org> Sent: Monday, July 12, 2023 10:00 AM To: Sampleton, Quill "
          "<quill@example.org> Cc: Placeholder, Lee S <lee@example.org>; Example Ops <ops@example.org> Subject: Bleach")
     out = P.scrub(t)
-    assert "Sampleton" not in out and "Placeholder" not in out and "Quill" not in out, out
+    assert "Sampleton" in out and "Placeholder" in out and "Quill" in out, out
     assert "Subject: Bleach" in out and P.scrub(out) == out

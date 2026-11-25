@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [RPTNAME, RPTPHONE], customer_identifier: [], description: []}
 id: "fl-miami-dade-sso"
 name: "Miami-Dade County RER/DERM sanitary sewer overflows, all county utilities"
 url: "https://opendata.miamidade.gov/datasets/MDC::sewer-overflow/about"

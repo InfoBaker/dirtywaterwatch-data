@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "md-mde-overflows"
 name: "MDE Reported Sewer Overflows (New for 2023), Maryland Open Data Portal (Socrata stgj-u72u)"
 url: "https://opendata.maryland.gov/dataset/Reported-Sewer-Overflows-New-for-2023-/stgj-u72u"
@@ -32,6 +33,7 @@ fetch:
   format: "csv"            # the SODA endpoint here sits behind a firewall that blocked a compound query
   metadata: true           # rowsUpdatedAt -> source_updated_at (MDE publishes no per-row times)
   time_zone: "America/New_York"
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [overflow_type, facility_collection_system, npdes_no, start_date, start_time, duration_day,
                 duration_hour, duration_minute, overflow_address, zip, owner_name, discharge_volume, overflow_cause,
                 receiving_water, county, penalty_id, overflow_latitude, overflow_longitude, id]

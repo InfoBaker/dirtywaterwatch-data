@@ -23,22 +23,9 @@ Source
   intentional or accidental discharge of untreated or undertreated wastewater that does not meet permit
   requirements", combined sewers included. Permitted facilities only: no private backups or illegal dumping.
 
-What is requested (privacy)
-  Only these fields (outFields) are requested and kept: objectid, globalid, ecology_region, start_date_and_time,
-  permitee, location, county, initial_estimated_amount, level_of_treatment, potentially_impacted_area,
-  end_event_timedate, final_event_duration_hours, final_total_event_volume, link_to_5_day_report, event_type,
-  event_type_other, erts_number, was_the_spill_continuous. Never requested: steps_taken_to_contain_or_clean (the
-  operator's narrative, which can name staff, residents and the homes they cleaned; raw._withheld says so and the
-  record links Ecology's report) and the layer's editor fields (creator and editor user names; the layer does not
-  list them as fields, and they are never asked for). The geometry is not requested: every point on the layer is
-  0,0 (checked 2026-11-04).
-  permitee is a coded value of Ecology's facility names (data/reference/wa-ecology-facility-permits.json lists them;
-  none is a person). location and potentially_impacted_area are typed by the operator: common.scrub_text runs on
-  both (e-mails, phones, staff names after a title, a house number tied to a residence), and when the report (its area or
-  its location) says the sewage went into a home (a private residence, a basement, a private property) every street
-  address's house number in the location is removed (common.strip_house_numbers): Ecology mostly writes a hundred block, but not
-  always. Every string then passes common.strip_personal (in event()) and build.redact runs over the records last.
-  tests/test_ingest_wa.py proves the withheld narrative and the placeholder details never reach a record.
+Published fields
+  All attributes are requested and retained, including the cleanup narrative and editor fields. The source YAML
+  declares contact keys for Record details. Geometry remains unrequested because the layer points are all 0,0.
 
 Record rules
   - Key: globalid (lower case, braces dropped); source_url is the layer query for that globalid with the safe fields.
@@ -155,7 +142,7 @@ GALLONS_RE = re.compile(r"^\s*(?:~|approx\.?|approximately|about|estimated|est\.
 # ------------------------------------------------------------------------------------------------ reading the layer
 
 def query_url(where: str) -> str:
-    q = {"where": where, "outFields": ",".join(SAFE_FIELDS), "returnGeometry": "false", "orderByFields": "objectid",
+    q = {"where": where, "outFields": "*", "returnGeometry": "false", "orderByFields": "objectid",
          "f": "json"}
     return f"{LAYER}/query?{urllib.parse.urlencode(q)}"
 
@@ -190,8 +177,8 @@ def fetch(sess=None) -> tuple[list[dict], dict]:
 
 
 def safe_row(a: dict) -> dict:
-    """Only the safe fields, the free text scrubbed (the saved raw page holds this, never the answer as fetched)."""
-    out = {k: a.get(k) for k in SAFE_FIELDS}
+    """Keep all source attributes, including the operator narrative and editor fields."""
+    out = dict(a)
     for k in FREE_TEXT:
         if isinstance(out.get(k), str):
             out[k] = scrub_text(out[k])
@@ -320,7 +307,7 @@ def permit_operators(rows=None) -> dict[str, str]:
 
 def to_record(a: dict, fetched_at: str, facilities: dict, operators: dict, prev: dict | None) -> dict:
     gid = clean(a.get("globalid")).strip("{}").lower()
-    notes: dict = {"_withheld": WITHHELD}
+    notes: dict = {}
     problems = []
     fetch_dt = datetime.fromisoformat(fetched_at.replace("Z", "+00:00"))
     start, end = when(a.get("start_date_and_time")), when(a.get("end_event_timedate"))

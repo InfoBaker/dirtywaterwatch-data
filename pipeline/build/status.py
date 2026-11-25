@@ -37,6 +37,7 @@ duplicates, advisory_points, dropped_fixtures, problems}; history.json {start, s
 waters: {slug: one char per hour, r/y/g}, intervals: {slug: [[from, until, colour, rule, event]]}}.
 """
 from __future__ import annotations
+from build.removal_inputs import publication_inputs, filtered, ACTIVE
 
 import argparse
 import copy
@@ -723,7 +724,9 @@ def load_registry(sources_dir: Path = SOURCES_DIR) -> dict[str, dict]:
             reg[p.stem] = {"id": p.stem, "_error": f"unreadable yaml: {error_detail(e)}"}
             continue
         if isinstance(d, dict):
-            reg[d.get("id") or p.stem] = d
+            d = filtered(d)
+            if d:
+                reg[d.get("id") or p.stem] = d
     return reg
 
 
@@ -785,7 +788,7 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
     live_up = {str(x).upper() for x in live} if live is not None else None
     for p in sorted(events_dir.glob("*.json")):
         try:
-            d = json.loads(p.read_text())
+            d = read_json(p)
         except Exception as e:
             problems.append(f"{p.name}: unreadable ({error_detail(e)})")
             continue
@@ -1061,7 +1064,7 @@ def water_geometry(slug: str, waters: dict | None = None):
         else:
             p = OBL_WATER_DIR / f"{slug}.json"
             if p.exists():
-                g = outline_of(json.loads(p.read_text()))
+                g = outline_of(read_json(p))
     except Exception:
         g = None
     _GEOM_CACHE[slug] = g
@@ -5326,6 +5329,7 @@ def record_hash(ev: dict) -> str:
     return hashlib.blake2b(json.dumps(ev, sort_keys=True, default=str).encode(), digest_size=16).hexdigest()
 
 
+@publication_inputs
 def build(include_fixtures: bool = False, now: datetime | None = None, events_dir: Path = EVENTS_DIR,
           write: bool = True, waters: dict | None = None, outfalls: list | None = None,
           registry: dict | None = None, include_restricted: bool = False, rules: dict | None = None,
@@ -5351,6 +5355,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     registry = load_registry() if registry is None else registry
     files, events, problems = load_events(events_dir, include_fixtures, include_restricted,
                                           live=rules_live_states(rules if rules is not None else load_rules()) if live_only else None)
+    policy = ACTIVE.get()
+    inputs = [files, events, waters, placement_outfalls, outfalls, registry,
+              discharger_towns, discharger_waters, discharger_aliases_map, reaches, rain]
+    for value in inputs:
+        policy.register(value)
+    (files, events, waters, placement_outfalls, outfalls, registry,
+     discharger_towns, discharger_waters, discharger_aliases_map, reaches, rain) = [filtered(v) for v in inputs]
     if live_only and NOT_LIVE:
         by_state = defaultdict(int)
         for _, st in NOT_LIVE:
@@ -6132,7 +6143,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                        for iv in ivs if iv.get("rule") == "outage_unconfirmed" and iv["start"] <= now
                        and (iv["end"] is None or iv["end"] > now))
     status = {
-        "built": now_iso(), "now": iso(now), "fixtures_included": include_fixtures,
+        "built": now_iso(), "requested_removals_applied": bool(policy.entries), "now": iso(now), "fixtures_included": include_fixtures,
         "restricted_included": include_restricted, "withheld_sources": withheld,
         "rules": {k: {"status": v[0], "label": v[1],
                       # the caution's label by which amount applied (build/rain_likely.py label_by_basis)

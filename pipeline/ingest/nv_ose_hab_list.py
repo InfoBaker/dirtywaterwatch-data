@@ -118,15 +118,8 @@ def us_date(s: str) -> date:
 
 
 def clean_text(s: str) -> tuple[str, int]:
-    """The parks' sentence cleaner (P.clean_text), with "contact with the water" read as advice, not a contact."""
-    kept, withheld = [], 0
-    for sent in re.split(r"(?<=[.!?])(?<!\bDr\.)(?<!\bMr\.)(?<!\bMs\.)(?<!\bMrs\.)(?<!\bSt\.)\s+", s or ""):
-        probe = BENIGN.sub(" ", sent)
-        if P.PERSONAL_SENTENCE.search(probe) or P.HOUSE_NUMBER.search(probe):
-            withheld += 1
-            continue
-        kept.append(P.COORD_IN_TEXT.sub(lambda m: f"{round(float(m.group(1)), 3):.3f}", sent))
-    return scrub_text(" ".join(x for x in kept if x).strip()), withheld
+    """Preserve the source public record (decision 57)."""
+    return (s, 0)
 
 
 def recleaned(p: dict) -> dict:
@@ -264,7 +257,8 @@ def saved_form(parsed: dict) -> str:
 
 
 def key_of(it: dict) -> str:
-    return P.slug(it["water"]) + (f"--{P.slug(it['part'])}" if it.get("part") else "")
+    from ingest.identity_compat import nv_field
+    return P.slug(nv_field(it["water"])) + (f"--{P.slug(nv_field(it['part'], 'place'))}" if it.get("part") else "")
 
 
 def rank(level: str | None) -> int:
@@ -316,7 +310,7 @@ def build(page: str, fetched: str, previous: list[dict], parks: list[dict] | Non
         county = KNOWN.get(it["water"])
         if county and it.get("place") and county.split()[0].casefold() not in it["place"].casefold():
             county = None       # a place the Office gives that does not name the record's county (Astra P1-4)
-        raw = {"water_key": k, "block_key": P.slug(it["water"]), "water": it["water"], "part": part,
+        raw = {"water_key": k, "block_key": key_of({"water": it["water"]}), "water": it["water"], "part": part,
                "place": it.get("place"), "level": it["level"], "level_date": it["level_date"],
                "level_history": P.deep_clean(history), "advisory_extent": "part_of_water" if part else "named_water",
                "time_zone": nevada_zone(), "start_basis": START_BASIS,

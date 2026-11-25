@@ -60,6 +60,7 @@ Public wording: "Provisional location from overflow reports", never a permitted 
 written to a row; common.strip_personal runs over every row.
 """
 from __future__ import annotations
+from build.removal_inputs import publication_inputs, filtered, ACTIVE
 
 import argparse
 import hashlib
@@ -476,11 +477,13 @@ def named_water_only(ev: dict) -> bool:
     return (ev.get("raw") or {}).get("_placement") == "named_water_only"
 
 
+@publication_inputs
 def build_places(events: list[dict], outlines: dict | None = None, key: dict | None = None,
                  by_id: dict | None = None) -> tuple[list[dict], Counter, list[dict]]:
     """(places, drops, unlocated): one place per operator and 50 m, from the reports with a usable point; drops
     counts the reports left out by reason; unlocated are the reports kept (operator, privacy) that have no usable
     point (the geolocation step's input)."""
+    events = filtered(events)
     outlines = state_outlines() if outlines is None else outlines
     if key is None or by_id is None:
         key, by_id = operator_index()
@@ -1473,6 +1476,7 @@ def summarize(places: list[dict], drops: Counter, unlocated: list[dict], key: di
     }
 
 
+@publication_inputs
 def run(args) -> dict:
     t0 = time.monotonic()
     now = now_iso()

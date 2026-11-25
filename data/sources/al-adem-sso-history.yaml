@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "al-adem-sso-history"
 name: "ADEM SSO reports, all dates (SSOs_ALL_OB_ID MapServer layer 0)"
 url: "https://gis.adem.alabama.gov/arcgis/rest/services/SSOs_ALL_OB_ID/MapServer/0"

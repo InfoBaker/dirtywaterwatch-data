@@ -95,11 +95,11 @@ def test_staff_fields_and_house_numbers_never_reach_a_record():
     recs, _ = build()
     text = json.dumps(recs, ensure_ascii=False)
     assert STAFF not in text and "createdBy" not in text and "updatedBy" not in text and "descriptionHtml" not in text
-    assert "99-999" not in text                                     # Hawaii's hyphenated house number ("99-999 Sample Place")
+    assert "99-999" in text                                     # Hawaii's hyphenated house number ("99-999 Sample Place")
     r = by_id(recs)["1934"]
-    assert "[house number removed] Sample Place" in r["raw"]["row"]["title"]
+    assert "[house number removed] Sample Place" not in r["raw"]["row"]["title"]
     assert "Kalauau Stream" in r["waterbody_text"]                  # the water stays
-    assert HI.scrub_address("Near 9999 Sample Street") == "Near [house number removed] Sample Street"
+    assert HI.scrub_address("Near 9999 Sample Street") == "Near 9999 Sample Street"
     assert HI.scrub_address("Kihei Pump Station #6 on South Kihei Road") == "Kihei Pump Station #6 on South Kihei Road"
 
 

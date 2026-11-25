@@ -3,11 +3,11 @@ records of the same event (owner, 2026-11-17: "we would want to share as much de
 from the source"; site docs/decisions.md item 31).
 
     detail_of(e)         -> dict   the record's `detail`: only the fields in FIELDS, each read from a source key
-                                    named in SOURCES (a key nobody named stays out), personal data scrubbed
+                                    named in SOURCES (a key nobody named stays out), public source text preserved
     links_of(events)     -> {event_id: {"later_volume": {...}, "linked_records": [...]}}
     cell_detail(detail)  -> dict   the subset the report tables carry (events.json, waters/<slug>.json)
-    enrich(events)       -> None   both, written onto each record in place (the export calls it on the public,
-                                    redacted records; `python -m export.detail <out>` applies it to an existing
+    enrich(events)       -> None   both, written onto each record in place (the export calls it on the public
+                                    records; `python -m export.detail <out>` applies it to an existing
                                     out/ directory, for a check against a real export)
 
 FIELDS (every value is the source's own, never converted; a field the source does not give is left out):
@@ -33,13 +33,12 @@ FIELDS (every value is the source's own, never converted; a field the source doe
   notes                 the source's free-text remarks on the report, in its words (MassDEP's "Additional
                         information", a form's "Comments"); program boilerplate a source puts in every row is left out
 
-Every text field goes through the repository's scrubs (_clean: e-mails, phones, staff names, a residence's house
-number, and the house number of any street address), so a source's words are kept, never paraphrased, and a
-house number never leaves; the record's raw keeps the whole text.
+Public source text is preserved. Explicit requested removals apply to every payload at the end of export;
+see docs/requested-removals.md. The raw record retains the source text until that publication step.
 
   description           the discharge as the source describes it ("Sanitary sewer overflowing into storm sewer")
   location_description  the place as the source describes it ("Manhole is in the street at the intersection of ...");
-                        house numbers removed (common.strip_house_numbers)
+                        house numbers preserved
   toxin                 the agency's named toxin (not a concentration)
   release_url           the agency's health-advisory link, apart from the record's source URL
   result_source_url     the layer supplying the named toxin/link
@@ -87,7 +86,7 @@ FIELDS = ("report_kind", "cause", "weather", "rainfall_in", "rainfall_label", "d
           "description", "location_description", "rate") + LIFT_FIELDS + ("toxin", "release_url", "result_source_url", "result_observed_at", "sample_results")
 NUMBER_FIELDS = {"volume_to_water_gal"}
 QUALIFIERS = ("estimated", "measured", "modeled", "verified by the operator")
-# a field whose value is a place description: its house numbers are removed as well as the usual scrub
+# fields whose values describe places (their source text is preserved)
 ADDRESS_FIELDS = {"location_description", "description", "overflow_point"}
 # fields whose value is an object the reader builds and checks itself (not a source string)
 OBJECT_FIELDS = {"rate"}
@@ -555,17 +554,8 @@ _LISTED_BEFORE = re.compile(rf"(?<![\w.,/:-])(?:\d{{1,6}}[A-Za-z]?[ ]{{0,2}}(?:,
 
 
 def scrub_street_numbers(v: str) -> str:
-    """The house number of any street address in a source's words becomes "[house number removed]" and the street
-    stays; a route or mile marker ("Route 9", "Exit 3"), a count or a measure ("2 hours on Main Street", "12 manholes
-    along Ocean Ave") and a station's number stay (review 2026-11-21: the repository's strip_house_numbers takes "2
-    pumps run" for an address and misses "12-14 Main Street", "12 1/2 Main Street" and "at 180 Broadway")."""
-    def keep(m: re.Match, g: int) -> bool:
-        s, start, end = m.string, m.start(g), m.end(g)
-        return bool(ROUTE_BEFORE.search(s[max(0, start - 14):start]) or _QUANTITY.match(s, end))
-
-    v = _STREET_NUMBER.sub(lambda m: m.group(0) if keep(m, 1) else HOUSE_NUMBER_REMOVED, v)
-    v = _AT_NUMBER.sub(lambda m: m.group(0) if keep(m, 2) else m.group(1) + HOUSE_NUMBER_REMOVED, v)
-    return _LISTED_BEFORE.sub("", v)
+    """Keep source address numbers (decision 57)."""
+    return v
 
 
 # a hyphenated house number or a range of them before a street word ("123-45 Example Avenue", "12-14 Sample Road"),
@@ -574,17 +564,7 @@ HYPHEN_NUMBER_RE = re.compile(rf"(?<![\w.,/:-])\d{{1,6}}[A-Za-z]?[ ]?-[ ]?\d{{1,
 
 
 def _clean(v, address: bool = False):
-    """A source string through the same scrub as raw (emails, phones, staff names, a residence's house number) and
-    the house number of any street address (scrub_street_numbers); a place description also goes through
-    common.strip_house_numbers. Cut at MAX_TEXT."""
-    if not isinstance(v, str):
-        return v
-    v = scrub_street_numbers(scrub_residence_numbers(scrub_names(scrub_text(v))))
-    if address:
-        v = strip_house_numbers(HYPHEN_NUMBER_RE.sub(HOUSE_NUMBER_REMOVED, v))
-    if len(v) > MAX_TEXT:
-        cut = v[:MAX_TEXT].rsplit(" ", 1)[0].rstrip(",;:")
-        v = f"{cut}…"
+    """Keep source text verbatim; requested removals run across all export payloads."""
     return v
 
 

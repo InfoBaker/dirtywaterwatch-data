@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [submitter_name, submitter, submitter_id, reporter, reporter_id], customer_identifier: [], description: [deq_comments, dwr_em_43_comments, dwr_resolution_5d, latest_comments, resolution]}
 id: "nc-dwr-sso-2026"
 name: "NC DEQ DWR Sanitary Sewer Overflow Tracking Map (ArcGIS layer)"
 url: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/survey123_1766d0b5d5294b05a27751560c1f1f97_results/FeatureServer/0"

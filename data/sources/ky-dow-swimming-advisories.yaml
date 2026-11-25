@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ky-dow-swimming-advisories"
 name: "Kentucky swimming advisories (DOW and Department for Public Health)"
 url: "https://eec.ky.gov/Environmental-Protection/Water/Monitor/Pages/Swimming-Advisories.aspx"

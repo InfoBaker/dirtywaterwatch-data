@@ -152,7 +152,9 @@ def poll(state: dict, rows: list[dict], now: str, ctx: F.Ctx) -> dict:
     stats = Counter()
     seen = set()
     for a in rows:
-        name = F.clean(F.get(a, s["unit"]))
+        from ingest.identity_compat import generic_row
+        identity = generic_row(a, ctx.block)[0]
+        name = F.clean(F.get(identity, s["unit"])) or F.clean(F.get(a, s["unit"]))
         if not name:
             stats["unnamed"] += 1
             continue

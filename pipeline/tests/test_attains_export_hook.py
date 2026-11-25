@@ -54,7 +54,7 @@ def status() -> dict:
 
 
 def redactor(tmp_path) -> R.Redactor:
-    return R.Redactor(R.build_lexicon([], tmp_path, allow=[], block=[NAME]), set())
+    return R.PublicRecords()
 
 
 def unit(au="MA001", listed=True, sewage=False, **kw) -> dict:
@@ -98,16 +98,15 @@ def test_with_a_valid_cache_the_water_page_index_download_and_meta_carry_the_red
     st, a, out, rows = run_hook(tmp_path, p)
     block = X.assess_mod.water_block(a, "test-river-ma")
     assert [u["au_id"] for u in block["units"]] == ["MA001", "MA002"] and block["source"]["name"] == "EPA ATTAINS"
-    assert block["units"][0]["location"] == ("Test River from the dam to the mouth; questions to [email removed], "
-                                             "attention [name removed]")
+    assert block["units"][0]["location"] == unit()["location"]
     assert X.assess_mod.water_block(a, "other-pond-ma") is None and "untracked-ma" not in a["waters"]   # no units
     index = json.loads((out / "assessments.json").read_text())
     assert set(index["waters"]) == {"test-river-ma"} and index["waters"]["test-river-ma"]["pathogen_listed"] == 1
     assert rows == 2
     text = (out / "csv" / "assessments.csv").read_text()
     published = json.dumps(block) + (out / "assessments.json").read_text() + text
-    assert MAIL not in published and NAME not in published and "audit" not in published
-    assert next(csv.DictReader(io.StringIO(text)))["location"].endswith("[email removed], attention [name removed]")
+    assert MAIL in published and NAME in published and "audit" not in published
+    assert next(csv.DictReader(io.StringIO(text)))["location"].endswith(f"{MAIL}, attention {NAME}")
     assert XA.meta(a) == {"built": AT, "waters_with_units": 1, "waters_pathogen_listed": 1, "waters_sewage_named": 1,
                           "waters_capped": 0, "unavailable": None}
 
@@ -180,6 +179,6 @@ def test_the_hook_changes_no_status_colour_or_reach(tmp_path):
 
 
 def test_the_export_lists_the_assessment_files_and_scans_them():
-    assert "assessments.json" in X.PUBLIC_PAYLOADS
+    assert not hasattr(X, "PUBLIC_PAYLOADS")  # removal check traverses every file
     assert "assessments.json" in X.__doc__ and "`assessment` in waters/<slug>.json" in X.__doc__
     assert "assessments.csv" in X.__doc__

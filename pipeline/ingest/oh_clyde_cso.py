@@ -1,5 +1,9 @@
 """City of Clyde yearly CSO reports -> data/build/events/oh-clyde-cso-notification.json.
 
+Public-record policy: downloaded source text is retained, including published names, contacts and addresses.
+Structured event classification still uses the documented source fields. Requested removals apply at export.
+
+
 Source (registry oh-clyde-cso-notification; review 2026-11-08 P2-7)
   Clyde's CSO notification site (https://cso.clydeohio.org/) publishes a yearly report page per year,
   https://cso.clydeohio.org/templates/cso-report.php?year=<yyyy> (2017 on): a table of each overflow of the city's one
@@ -69,7 +73,7 @@ def parse(page: str) -> list[dict]:
     for m in ROW.finditer(cells(page)):
         sd, stt, ed, et, cause, r1, r2, vol, tss, cbod = m.groups()
         out.append({"start_date": sd, "start_time": stt, "end_date": ed, "end_time": et, "cause": cause.strip(),
-                    "rain_before_in": r1, "rain_total_in": r2, "volume_mg": vol, "tss_mg_l": tss, "cbod5_mg_l": cbod})
+                    "source_text": cells(page), "rain_before_in": r1, "rain_total_in": r2, "volume_mg": vol, "tss_mg_l": tss, "cbod5_mg_l": cbod})
     return out
 
 

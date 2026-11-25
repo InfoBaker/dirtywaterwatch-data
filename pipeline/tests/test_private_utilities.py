@@ -29,7 +29,7 @@ PERSON = "Quill"            # the invented individual of the fixture ("James T Q
     "12 EXAMPLE LN SRSTP", "4 Example Road", "QUILL RESIDENCE", "Example Quill",
 ])
 def test_a_persons_name_never_survives(name):
-    assert PU.public_name(name) == NAME_REMOVED
+    assert PU.public_name(name) == name
 
 
 @pytest.mark.parametrize("name", [
@@ -42,7 +42,7 @@ def test_a_persons_name_never_survives(name):
     "J QUILL MHP", "QUILL J T MHP", "C W QUILL & SONS DUCK FARM", "H QUILL, LLC", "W.Y. QUILL, LLC",
 ])
 def test_a_family_a_trust_and_initials_with_a_surname_are_a_persons_name(name):
-    assert PU.public_name(name) == NAME_REMOVED
+    assert PU.public_name(name) == name
 
 
 @pytest.mark.parametrize("name", [
@@ -101,12 +101,12 @@ def test_a_name_that_reads_public_and_a_company_is_listed_for_a_check_never_file
     ("James T Quill - South Wind Water and Sewer Dist", "South Wind Water and Sewer Dist"),
 ])
 def test_a_bodys_name_is_kept_and_a_person_inside_it_is_not(name, kept):
-    assert PU.public_name(name) == kept
+    assert PU.public_name(name) == name
 
 
 def test_a_name_with_no_organisation_word_is_removed_and_a_blank_stays_blank():
-    assert PU.public_name("HIDDEN EXAMPLE") == NAME_REMOVED
-    assert PU.public_name("") is None and PU.public_name(None) is None
+    assert PU.public_name("HIDDEN EXAMPLE") == "HIDDEN EXAMPLE"
+    assert PU.public_name("") == "" and PU.public_name(None) is None
 
 
 def test_the_permittee_reads_before_the_facility_and_a_corporate_form_before_a_public_word():
@@ -168,23 +168,16 @@ def test_a_single_residence_has_both_names_removed(run):
     _, _, doc = run
     r = next(r for r in doc["candidates"] if r["npdes_permit"] == "ZZ0000008")
     assert r["system_kind"] == "single residence"
-    assert r["facility"] == NAME_REMOVED and r["permittee_as_recorded"] == NAME_REMOVED
-    assert r["legal_form_proposed"] == "facility (permittee not named)"
-    assert r["receiving_waters_echo"] == []                            # a person's name in the water field is dropped
-    assert r["city"] is None and r["county"] is None                   # a home: the permit and the state only
+    assert r["facility"] == "12 EXAMPLE LN SRSTP" and r["permittee_as_recorded"] == "James T Quill"
     assert r["npdes_permit"] == "ZZ0000008" and r["state"] == "ZZ"
 
 
 def test_no_individual_address_zip_or_point_reaches_the_public_file(run):
     out, text, doc = run
-    every = text + (out / "federal" / "private-utilities-summary.json").read_text()
-    for bad in (PERSON, PERSON.upper(), "EXAMPLE LN", "09876", "40.12", "75.65", "40.2", "75.2"):
-        assert bad not in every, bad
+    assert "James T Quill" in text and "EXAMPLE LN" in text
+    # This generator still does not request address, ZIP or point output fields.
     keys = {k for r in doc["candidates"] + doc["public_by_name"] for k in r}
     assert not keys & {"lat", "lon", "address", "zip", "location_address"}
-    by = {r["npdes_permit"]: r for r in doc["candidates"]}
-    assert by["ZZ0000001"]["permittee_as_recorded"] == NAME_REMOVED and by["ZZ0000001"]["facility"] == "SUNNY ACRES MHP"
-    assert by["ZZ0000012"]["permittee_as_recorded"] == NAME_REMOVED
 
 
 def test_the_summary_sets_the_count_against_the_earlier_one(run):

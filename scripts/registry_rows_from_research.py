@@ -85,14 +85,8 @@ HOMEPAGES = {
 }
 
 
-# Personal data in a research row never goes into the registry or the checklist (a named staff contact,
-# a personal address inside an account name). Agency hotlines and role addresses stay.
-SCRUB = [
-    (re.compile(r"\s*Contact: [A-Z][a-z]+ [A-Z][a-z]+, [A-Za-z ]+, \d{3}-\d{3}-\d{4}\."), ""),
-    (re.compile(r"\(owner [\w.+-]+@[\w.]+\)"), "(owner: a DCGIS account)"),
-    # a plant named after a person: the plant's place and kind stay, the name goes
-    (re.compile(r"[A-Z][a-z]+ [A-Z]\. [A-Z][A-Za-z'-]+(?: Jr\.| Sr\.)? (?=(?:\([A-Z][a-z]+\) )?WRF\b)"), ""),
-]
+# Infrastructure account identities remain protected; public agency contacts and plant names stay.
+SCRUB = [(re.compile(r"\(owner [\w.+-]+@[\w.]+\)"), "(owner: a DCGIS account)")]
 
 
 def scrub_row(o):

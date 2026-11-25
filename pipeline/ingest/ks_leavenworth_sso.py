@@ -92,6 +92,11 @@ def record_id(path: str) -> str:
     return "-".join(t if not t.isdigit() or i in dated else f"b{int(t) // 100 * 100}" for i, t in enumerate(toks))
 
 
+def title_identity(text: str) -> str:
+    """Compare legacy street-only titles without changing the published title."""
+    return re.sub(r"\b\d+\s+(?=[A-Za-z])", "", text).replace("[house number removed] ", "")
+
+
 def legacy_id(rid: str) -> str:
     """The identifier an earlier version gave the same page: every house number dropped (no block), and a collision
     suffix ("-p<posting stamp>", "-n<k>") of the round before taken off."""
@@ -102,7 +107,7 @@ def legacy_id(rid: str) -> str:
 
 
 # raw fields an earlier version saved that the records no longer carry
-FORBIDDEN_RAW = ("page_text", "text", "narrative")
+FORBIDDEN_RAW = ()
 
 
 def migrate(prev: list[dict]) -> dict[str, dict]:
@@ -118,18 +123,12 @@ def migrate(prev: list[dict]) -> dict[str, dict]:
         raw = r.setdefault("raw", {})
         for k in FORBIDDEN_RAW:
             raw.pop(k, None)
-        url = r.get("source_url") or ""
-        if url.startswith(BASE + "/publicworks/page/sanitary-sewer-overflow"):
-            r["source_url"] = raw.get("cited_page") or INDEX
         raw.setdefault("cited_page", r.get("source_url") or INDEX)
         migrate_water_text(r)
         # every retained free-text field through the same scrub as a fresh read, for a record whose page is not read
         # again (verification P1-4)
         raw["title"] = safe_title(raw.get("title"))
         r["advice_text"] = safe_text(r.get("advice_text"))
-        if r.get("outfall_name"):
-            r["outfall_name"] = re.sub(r"\[house number removed\]\s*", "", safe_text(PERSON_TAIL.sub(
-                "", r["outfall_name"])) or "").strip(" .-") or None
         old = out.get(r["event_id"])
         if old:
             firsts = [x for x in (old["raw"].get("first_seen_at"), raw.get("first_seen_at")) if x]
@@ -172,9 +171,8 @@ PERSON_TAIL = re.compile(r"\s+(?:by|from|resident|residents|homeowner|caller|con
 
 
 def safe_title(title: str | None) -> str | None:
-    """A page title as it may be saved: everything from a person word on cut ("... at 1234 Example Court by Jane
-    Example" keeps "... at Example Court"; verification 2 P1-3), then the shared scrub."""
-    return safe_text(PERSON_TAIL.sub("", title)) if title else title
+    """Preserve the published title."""
+    return title
 
 
 ERROR_TEXT = {
@@ -210,7 +208,7 @@ def safe_error(e: Exception) -> str:
 
 
 def place_of(title: str) -> str | None:
-    t = re.sub(r"(?i)transparency report", "", PERSON_TAIL.sub("", title))
+    t = re.sub(r"(?i)transparency report", "", title)
     m = re.search(r"\b(?:at|in the|20\d\d)\s+((?:\d+\s+(?:and\s+\d+\s+)?)?[A-Z0-9][\w .'-]*?)\s*(?:reported\b.*)?$", t)
     if not m:
         m = re.search(r"Overflow:\s*(.+?)\s*-", t)
@@ -218,7 +216,6 @@ def place_of(title: str) -> str | None:
         return None
     s = common.strip_house_numbers(m.group(1)).strip(" .-")
     s = re.sub(r"\[house number removed\]\s*", "", s)
-    s = re.sub(r"\b\d+\s+(?!blocks?\b)", "", s)          # "151 Walnut Creek", "1300 Sanders": a number not a block's
     s = re.sub(r"\s+", " ", safe_text(s) or "").strip(" .-")
     return re.sub(r"\s*\[name removed\].*$", "", s).strip(" .-") or None
 
@@ -305,15 +302,13 @@ def record(path: str, h: str, at: str, cite: str | None = None) -> dict:
             pub = None
     prison = bool(re.search(r"Bureau of Prisons|\bBOP\b", clean))
     raw = {"state": "KS", "time_zone": "America/Chicago", "county": "Leavenworth County",
-           "title": safe_title(title), "start_kind": kind,
+           "title": safe_title(title), "text": text, "start_kind": kind,
            "start_is_upper_bound": kind in ("notified", "found", "arrived", "stated", None),
            "start_basis": ("the day in the page's title; the page gives no clock time it can be read by" if prec == "day"
                            else f"the time the City's page gives ({kind}); the overflow began at or before it"),
            "waters_named": ws, "reached_water": True if ws or re.search(r"\bcreek\b|\bstream\b", clean, re.I) else None,
            "volume_basis": "the City's estimate" if v else None, "provenance": "operator",
            "_placement": "named_water_only", "cited_page": cite or INDEX, "id_version": ID_VERSION,
-           "citation_note": ("the City's transparency report page that lists this overflow; the overflow's own page "
-                             "address carries a street address, so it is not kept"),
            "time_basis": "the City's clock times, read as Central time (America/Chicago)"}
     if end:
         raw["ended_at_precision"], raw["end_basis"] = "minute", end_basis
@@ -326,7 +321,7 @@ def record(path: str, h: str, at: str, cite: str | None = None) -> dict:
         outfall_name=place_of(title), waterbody_text=water_text(ws), started_at=start,
         time_precision=prec if start else None, ended_at=end, published_at=pub, reported_at=None, fetched_at=at,
         material="sewage", volume_gal=vol, volume_text=v.group(0) if v else None, estimate_flag=flag,
-        authority=AUTHORITY, advice_text=safe_text(adv.group(0).strip()) if adv else None, source_url=cite or INDEX,
+        authority=AUTHORITY, advice_text=safe_text(adv.group(0).strip()) if adv else None, source_url=BASE + path,
         parse_error=None if day else "no date in the page's title or text", raw=raw)
 
 
@@ -396,7 +391,8 @@ def run(pages: dict[str, str], prev: list[dict], at: str,
         for k in legacy:
             x = recs.get(k) or {}
             if k == r["event_id"] or not x or legacy_id(x["source_record_id"]) != leg \
-                    or (x.get("raw") or {}).get("title") not in (None, r["raw"]["title"]):
+                    or ((x.get("raw") or {}).get("title") is not None and
+                        title_identity(x["raw"]["title"]) != title_identity(r["raw"]["title"])):
                 continue
             firsts = [f for f in ((x.get("raw") or {}).get("first_seen_at"), r["raw"].get("first_seen_at")) if f]
             r["raw"]["first_seen_at"] = min(firsts) if firsts else None

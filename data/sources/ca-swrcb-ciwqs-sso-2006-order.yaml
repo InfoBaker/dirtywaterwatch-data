@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ca-swrcb-ciwqs-sso-2006-order"
 name: "State Water Board CIWQS Sanitary Sewer System spill data under Order 2006-0003-DWQ, 2007 to June 5, 2023: SSO.txt (flat file)"
 url: "https://www.waterboards.ca.gov/water_issues/programs/sso/docs/data_files/SSO.txt"

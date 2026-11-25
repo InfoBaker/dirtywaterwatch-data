@@ -204,9 +204,9 @@ def test_strip_personal_recurses_and_scrubs_text():
                     "steps": [{"note": "Call 555-555-1212 or (413) 555-1212; mail ann.lee@town.gov"}]},
         "comments": "Call 555-555-1212", "reporterClass": "Permittee", "permit": "MA0101613",
         "volume": "1,200,000", "id": "2031521141906769", "date": "2026-10-01"})
-    assert "contactEmail" not in out["details"] and "FirstName" not in out["details"] and "last_name" not in out["details"]
-    assert out["details"]["steps"][0]["note"] == "Call [phone removed] or [phone removed]; mail [email removed]"
-    assert out["comments"] == "Call [phone removed]" and out["reporterClass"] == "Permittee"
+    assert "contactEmail" in out["details"] and "FirstName" in out["details"] and "last_name" in out["details"]
+    assert out["details"]["steps"][0]["note"] == "Call 555-555-1212 or (413) 555-1212; mail ann.lee@town.gov"
+    assert out["comments"] == "Call 555-555-1212" and out["reporterClass"] == "Permittee"
     assert out["permit"] == "MA0101613" and out["volume"] == "1,200,000" and out["id"] == "2031521141906769"
     assert out["date"] == "2026-10-01"
 

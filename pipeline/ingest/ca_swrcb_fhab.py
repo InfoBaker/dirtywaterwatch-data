@@ -9,13 +9,10 @@ Source
   Advisory levels are the California Cyanobacteria and Harmful Algal Bloom Network's trigger levels (Caution, Warning,
   Danger) and the algal mat alert sign, recommended by the FHAB program or the water body's manager.
 
-What is read (privacy)
-  Only FIELDS are asked for (datastore `fields`): the report's id, type and dates, the water body, landmark, county,
-  point, texture, the advisory's id, level, dates and detail, and the case's status and end. Never asked for: the
-  reporter's management-organization text, the response author (Response_Update_By) and the case lead (Case_Lead),
-  which name people. The landmark (typed by the reporter) passes common.scrub_text and loses street house numbers;
-  common.strip_personal runs on every raw (in event()). tests/test_ca_swrcb_fhab.py proves a personal field never
-  reaches a record.
+What is read
+  Read all published datastore columns, including the case lead, response author and reported management
+  organizations. Keep source narrative and location text. Source YAML declares contact fields for the report-page
+  detail policy; downloads retain them. FIELDS documents the fields used to interpret status and dates.
 
 Records (event_type hab_advisory: blooms, the plum category, never a sewage colour)
   - Key: Bloom_Report_ID and Advisory_ID (a report linked to several advisories is one row per advisory).
@@ -69,7 +66,7 @@ ADVISORY_LEVELS = {"caution": "Caution", "warning": "Warning", "danger": "Danger
                    "algal mat alert sign": "Algal mat alert sign"}
 NEW_REPORT_DAYS = 14
 BOUNDS = (-124.6, 32.4, -114.0, 42.1)
-RULES_VERSION = 1          # a run whose table is unchanged still rebuilds the records when this changes
+RULES_VERSION = 2          # a run whose table is unchanged still rebuilds the records when this changes
 
 
 def clean(v) -> str:
@@ -98,7 +95,7 @@ def level(row: dict) -> str | None:
 
 
 def build_record(row: dict, fetched_at: str) -> dict | tuple[str, str]:
-    a = {k: row.get(k) for k in FIELDS}
+    a = dict(row)
     if a.get("Landmark"):
         a["Landmark"] = strip_house_numbers(scrub_text(clean(a["Landmark"])), street_word_only=True)
     rid, aid = clean(a.get("Bloom_Report_ID")), clean(a.get("Advisory_ID"))
@@ -179,7 +176,7 @@ def main(argv=None) -> int:
         if args.file:
             d = json.loads(Path(args.file).read_text())
             rows = d if isinstance(d, list) else (d.get("result") or {}).get("records") or d.get("records") or []
-            rows = [{k: x.get(k) for k in FIELDS} for x in rows]
+            rows = [dict(x) for x in rows]
             modified = None
         else:
             modified = ca_datagov.resource_modified(sess, PACKAGE, RESOURCE)

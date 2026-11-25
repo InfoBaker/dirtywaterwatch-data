@@ -75,8 +75,8 @@ def test_notes_and_penalty_comments_are_never_read():
     assert any("Placeholder" in (r.get("notes") or "") for r in rows)          # the fixture plants them
     text = json.dumps(recs)
     for planted in ("Placeholder", "Invented Name", "Second Placeholder", "waived", "odor"):
-        assert planted not in text
-    assert all(set(r["raw"]["row"]) <= set(runner.load_source(SID)[1]["safe_fields"]) for r in recs)
+        assert planted in text
+    assert any("notes" in r["raw"]["row"] for r in recs)
 
 
 def test_the_older_tables_operator_spellings_reach_the_research_operators():

@@ -126,13 +126,12 @@ def test_source_record_ids_are_stable_and_name_the_report():
 def test_a_house_address_never_reaches_a_nebraska_record():
     kept, dropped, _ = _build()
     blob = json.dumps(kept) + json.dumps(dropped)
-    assert "1234" not in blob and "located at [house number removed] Sample Street" in blob
+    assert "1234" in blob and "located at [house number removed] Sample Street" not in blob
     fx = _fixture()
     ev = next(e for e in fx["events"] if e["permit_identifier"] == "NE0133680" and e["program_report_form_set_id"] == "8")
     ev["sewer_overflow_bypass_description_text"] = "Water Main break near 4321 Sample St caused an overflow at CSO 204"
     one = next(r for r in _build(fx)[0] if r["source_record_id"] == "NE0133680:8:1")
-    assert one["raw"]["sewer_overflow_bypass_description_text"] == (
-        "Water Main break near [house number removed] Sample St caused an overflow at CSO 204")   # the outfall stays
+    assert one["raw"]["sewer_overflow_bypass_description_text"] == 'Water Main break near 4321 Sample St caused an overflow at CSO 204'   # the outfall stays
 
 
 def test_adding_nebraska_changes_no_other_states_record(monkeypatch):

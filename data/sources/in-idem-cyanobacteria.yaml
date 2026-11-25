@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "in-idem-cyanobacteria"
 name: "IDEM Blue-Green Algae: cyanobacteria and cyanotoxin samples at Indiana beaches (ArcGIS)"
 url: "https://utility.arcgis.com/usrsvcs/servers/7f70273baaae4bee8e5ee285d1d2406b/rest/services/Hosted/cyanobacteria/FeatureServer/0"
@@ -45,6 +46,7 @@ fetch:
   # never the service's error object or answer text
   bounded_errors: true
   # the layer keeps every season: a short answer is a failure, not the season
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [objectid, advisory_level, beach_name, waterbody, date_, year_, location_id, sample_id, project,
                 microcystin, anatoxin_a, cylindrospermopsin, saxitoxin, total_count, dominant_taxa, _x, _y]
   reviewed_fields:

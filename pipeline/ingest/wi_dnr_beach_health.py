@@ -133,7 +133,7 @@ def _pt(geom) -> tuple[float | None, float | None]:
         return None, None
     if math.isnan(x) or math.isnan(y):
         return None, None
-    lat, lon = round(y, 3), round(x, 3)
+    lat, lon = y, x
     if BOUNDS[1] <= lat <= BOUNDS[3] and BOUNDS[0] <= lon <= BOUNDS[2]:
         return lat, lon
     return None, None
@@ -608,7 +608,7 @@ def _record(key: str, v: dict, now: str) -> dict:
         raw.update(beach_seq_no=v["iid"], last_sample_at=v.get("sample_at"),
                    extent_basis=("the Department gives one point for the beach: shown at that point; the lake or river "
                                  "is not coloured whole"),
-                   point_basis=("the beach's point on the Department's beach map layer, rounded to three decimals"
+                   point_basis=("the beach's point as published on the Department's beach map layer"
                                 if has_pt else "the Department's layer gives no usable point for this beach: listed, "
                                                "not mapped"))
     if v.get('sample_result'):

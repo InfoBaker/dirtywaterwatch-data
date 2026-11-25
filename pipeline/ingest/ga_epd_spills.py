@@ -14,8 +14,8 @@ Source
   October 2026; the 2025-12-01 file gives its Posting Date as text, "12/1/2025"); a day with no posting answers 404
   with an HTML page. Some older files add columns: LATITUDE / LONGITUDE (ten files, 2025-11-14 to 2026-07-14),
   SPILL_END_DATE (the 2026-10-13 file), FORM_TYPE (2026-04-02), BYPASS_ID and FORM_VERSION_NUM (2026-10-26). Only the
-  13 columns above and the point and end date are read (safe fields); any other column is named in meta
-  (unread_columns), its values never read. Points: the public ArcGIS layer behind EPD's "Spills in Georgia" StoryMap,
+  13 columns above and the point and end date drive classification; additional downloaded columns are retained
+  in raw and their headers remain listed in meta.unread_columns for layout diagnostics. Points: the public ArcGIS layer behind EPD's "Spills in Georgia" StoryMap,
   https://services1.arcgis.com/p0dLjwtOaJHU8zq2/arcgis/rest/services/Spill_Summary_Continuous_Update/
   FeatureServer/0 (registry ga-epd-spills-map-layer): the same rows with LATITUDE / LONGITUDE, but BEGIN_DATE is
   null on every row, so the layer only lends its point to a workbook row of the same permit and address.
@@ -244,8 +244,8 @@ def sheet_rows(content: bytes) -> list[list[str]]:
 
 
 def read_posting(content: bytes, unread: list | None = None) -> tuple[str | None, list[dict]]:
-    """(posting date, rows as {field: text}) of one workbook. ValueError when it is not the spills list. Only the
-    13 known columns (FIELDS) are read; any other column's header (never its values) is added to unread."""
+    """(posting date, rows as {field: text}) of one workbook. ValueError when it is not the spills list. Every downloaded column is retained. Additional
+    headers are also added to unread for layout diagnostics."""
     rows = sheet_rows(content)
     posting = None
     hdr_i = None
@@ -266,8 +266,7 @@ def read_posting(content: bytes, unread: list | None = None) -> tuple[str | None
     for r in rows[hdr_i + 1:]:
         if not any(c.strip() for c in r):
             continue
-        out.append({h: " ".join((r[j] if j < len(r) else "").split()) for j, h in enumerate(hdr)
-                    if h in FIELDS or h in OPTIONAL})
+        out.append({h: " ".join((r[j] if j < len(r) else "").split()) for j, h in enumerate(hdr) if h})
     return posting, out
 
 

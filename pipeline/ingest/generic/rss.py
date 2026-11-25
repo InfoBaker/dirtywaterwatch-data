@@ -43,6 +43,7 @@ def items(xml: bytes | str) -> list[dict]:
         for it in root.iter("item"):
             link = _t(it, "link")
             out.append({"id": _t(it, "guid") or link, "title": text_of(_t(it, "title")), "link": link,
+                        "author": _t(it, "author") or _t(it, f"{DC}creator"),
                         "published": _t(it, "pubDate") or _t(it, f"{DC}date"), "updated": None,
                         "summary": text_of(_t(it, "description") or _t(it, f"{CONTENT}encoded")),
                         "categories": "; ".join(c.text.strip() for c in it.findall("category") if c.text) or None})
@@ -54,6 +55,8 @@ def items(xml: bytes | str) -> list[dict]:
                     link = ln.get("href")
                     break
             out.append({"id": _t(it, f"{ATOM}id") or link, "title": text_of(_t(it, f"{ATOM}title")), "link": link,
+                        "author": _t(it, f"{ATOM}author/{ATOM}name"),
+                        "author_email": _t(it, f"{ATOM}author/{ATOM}email"),
                         "published": _t(it, f"{ATOM}published"), "updated": _t(it, f"{ATOM}updated"),
                         "summary": text_of(_t(it, f"{ATOM}summary") or _t(it, f"{ATOM}content")),
                         "categories": "; ".join(c.get("term") for c in it.findall(f"{ATOM}category") if c.get("term"))

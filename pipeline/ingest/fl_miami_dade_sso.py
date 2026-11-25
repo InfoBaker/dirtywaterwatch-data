@@ -6,11 +6,11 @@ Dates encode Eastern wall-clock time despite UTC metadata (confirmed against WAS
 incident 597571 in DEP notice 202611184). Midnight is conservatively day precision;
 INCDNTDATE is a date-only fallback. CREATEDDATE is entry, not publication or receipt.
 QUANDSCHRG is estimated discharged gallons; ESTGALRECOVER stays separate in raw.
-Secondary effluent stays in the sanitized snapshot but is excluded from sewage events.
+Secondary effluent stays in the source snapshot but is excluded from sewage events.
 Causes are source codes, unchanged: this layer supplies no coded-value domains.
 
-Only selected fields are requested. Contacts, addresses and narrative comments are
-excluded; water names are scrubbed and points rounded before any data is saved.
+All published fields are requested and retained, including contacts and addresses.
+Source points keep their precision; numeric and identifier validation still applies.
 Placement uses existing named-water guards. Generic CANAL never supplies a water tie.
 
 Run after fl_dep_pnp (the Makefile's alphabetical module order). Confirmed duplicates
@@ -20,7 +20,7 @@ against retained evidence, because DEP may have rewritten its records this run.
 No coordinates/dates-only match: an explicit tracking reference or a unique agreement
 on date, municipal utility, positive volume and rounded source point is required.
 
-Run from pipeline/: python -m ingest.fl_miami_dade_sso [--file safe-snapshot.json]
+Run from pipeline/: python -m ingest.fl_miami_dade_sso [--file snapshot.json]
 """
 from __future__ import annotations
 
@@ -71,15 +71,13 @@ def number(v):
 
 
 def safe_attributes(a):
-    out = {k:a[k] for k in SAFE_FIELDS if k in a}
+    out = dict(a)
     for k in ('LAT','LON'):
         n = number(out.get(k))
-        out[k] = round(n,3) if n is not None else None
+        out[k] = n
     for k in ('DISCCAUSECAT','DISCHARGECAUSE','WATBODYTYPE','SURFWATNAME','WATDISCTYPE'):
         if isinstance(out.get(k),str):
             out[k] = strip_house_numbers(scrub_name_field(scrub(out[k])) or '') or None
-    if out.get('UTILITYNAME') not in UTILITIES:
-        out['UTILITYNAME'] = None
     for k, pattern in (('INCIDENTID', r'\d{20}'), ('TRACKNUM',r'[A-Za-z0-9.\-/]{1,30}')):
         if out.get(k) is not None and not re.fullmatch(pattern,str(out[k])):
             out[k] = None
@@ -120,7 +118,7 @@ def query_layer(sess):
     if after.get('editingInfo') != meta.get('editingInfo'):
         raise RuntimeError('ArcGIS layer changed during read')
     safe_meta = {k:meta.get(k) for k in ('dateFieldsTimeReference','editingInfo')}
-    body = json.dumps({'layer':LAYER,'fields_requested':list(SAFE_FIELDS),'metadata':safe_meta,
+    body = json.dumps({'layer':LAYER,'fields_requested':['*'],'metadata':safe_meta,
                        'features':[{'attributes':a} for a in rows]},ensure_ascii=False).encode()
     return rows, body, safe_meta
 
@@ -426,7 +424,7 @@ def main(argv=None):
         records,stats=build(rows,at,prev)
         path=save_raw(SOURCE_ID,body,'json')
         write_events(SOURCE_ID,records,meta={**stats,'raw_path':str(path.relative_to(ROOT)),
-                     'layer_metadata':metadata,'requested_fields':list(SAFE_FIELDS),'registry_ids':[SOURCE_ID],
+                     'layer_metadata':metadata,'requested_fields':['*'],'registry_ids':[SOURCE_ID],
                      'credit':AUTHORITY,'time_basis':TIME_BASIS})
     except Exception as exc:
         write_events(SOURCE_ID,[],ok=False,error=error_text(exc)); link_only()

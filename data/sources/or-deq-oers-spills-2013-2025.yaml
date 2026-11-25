@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "or-deq-oers-spills-2013-2025"
 name: "Oregon DEQ: all spills reported to OERS and verified by DEQ, 2013 to March 27, 2025 (ArcGIS FeatureServer), sewage rows"
 url: "https://services.arcgis.com/uUvqNMGPm7axC2dD/arcgis/rest/services/all_spills_Aug1_2013_Mar27_2025_pts/FeatureServer/1"

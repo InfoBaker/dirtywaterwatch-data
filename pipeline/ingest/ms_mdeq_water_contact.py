@@ -261,9 +261,8 @@ def poll_times(r: dict) -> None:
 
 
 def safe_feed(body: bytes) -> bytes:
-    """What is kept of a fetched feed in data/raw: the fields this module reads (title, link, date) as JSON, never the
-    response itself (its dc:creator is an MDEQ staff name; SOL wave 2 P1-5)."""
-    return json.dumps({"url": FEED, "items": items(body)}, ensure_ascii=False, indent=1).encode()
+    """Preserve the fetched public feed alongside its parsed notice fields."""
+    return json.dumps({"url": FEED, "source_text": body.decode("utf-8-sig"), "items": items(body)}, ensure_ascii=False, indent=1).encode()
 
 
 def run(feed: bytes, pages: dict[str, str | None], prev: list[dict], at: str) -> tuple[list[dict], dict]:

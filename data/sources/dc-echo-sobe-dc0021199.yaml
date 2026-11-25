@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-echo-sobe-dc0021199"
 name: "EPA ECHO Sewer Overflow/Bypass Event data, DC Water permit DC0021199"
 url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"

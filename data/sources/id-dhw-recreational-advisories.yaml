@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "id-dhw-recreational-advisories"
 name: "Idaho DHW Public Health Advisories for Recreational Waters (map layer)"
 url: "https://services1.arcgis.com/CNPdEkvnGl65jCX8/arcgis/rest/services/Public_Health_Advisories_for_Recreational_Waters_in_Idaho_V2_view/FeatureServer/0"

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "crc-isitclean-reports-mainstem2023"
 name: "Is It Clean? interactive report, mainstem 2023 (reports.isitclean.us)"
 url: "https://reports.isitclean.us/posts/mainstem2023.html"

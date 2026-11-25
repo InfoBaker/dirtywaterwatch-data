@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ri-rigis-nbc-sewer-overflows"
 name: "RIGIS UTILITY_NBC_Sewer_Overflows_spf (NBC CSO and discharge points)"
 url: "https://services2.arcgis.com/S8zZg9pg23JUEexQ/arcgis/rest/services/UTILITY_NBC_Sewer_Overflows_spf/FeatureServer/0"

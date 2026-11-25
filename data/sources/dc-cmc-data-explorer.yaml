@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-cmc-data-explorer"
 name: "Chesapeake Monitoring Cooperative (CMC) Data Explorer API (Anacostia Riverkeeper, Potomac Riverkeeper E. coli)"
 url: "https://cmc.vims.edu/"

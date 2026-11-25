@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-lynchburg-cso-layers"
 name: "Lynchburg 'CSO Locations' map layers (CSO - Discharge Locations; CSO - Overflow Manhole)"
 url: "https://cityoflynchburg.maps.arcgis.com/apps/webappviewer/index.html?id=0fb6dc4e5aef434cb92305f4bb3aa15e"

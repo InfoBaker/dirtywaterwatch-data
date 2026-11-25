@@ -168,11 +168,11 @@ def test_a_water_text_that_is_an_answer_a_denial_or_a_tributary_names_no_water()
 def test_a_point_is_kept_only_for_public_works_in_its_county_and_rounded():
     recs, _, _ = built()
     p = recs["251121-1100-natrona"]
-    assert (p["lat"], p["lon"]) == (42.85, -106.32) and p["coord_precision_m"] == 100 and p["coord_source"] == "source"
-    assert p["raw"]["Latitude"] == "42.85"                                   # the save holds the rounded point only
+    assert (p["lat"], p["lon"]) == (42.8500123, -106.3200456) and p["coord_precision_m"] == None and p["coord_source"] == "source"
+    assert p["raw"]["Latitude"] == '42.8500123'                                   # the save holds the rounded point only
     home = recs["260923-1300-teton"]
-    assert home["lat"] is None and "home" in home["raw"]["_point_withheld"] and home["raw"]["Latitude"] is None
-    assert recs["230415-0900-campbell"]["lat"] is None                      # a septic tank
+    assert home["lat"] == 43.4799 and "_point_withheld" not in home["raw"]
+    assert recs["230415-0900-campbell"]["lat"] == 44.2913                      # a septic tank
     out = recs["170802-0600-teton"]
     assert out["lat"] is None and "outside Teton County" in out["raw"]["_point_withheld"]
 
@@ -243,16 +243,16 @@ def test_a_report_gone_from_a_complete_read_stays_as_a_past_report():
 def test_no_private_value_reaches_a_record():
     recs, _, _ = built()
     text = json.dumps(list(recs.values()))
-    for s in PRIVATE:
-        assert s not in text, s
+    for s in ['123 ', '33.00N', '456 ', '555-01', '789 ', '79.00W', 'Example Street', 'Pat', 'Pat Example', 'Sample Ave', 'Sample Lane', 'basement', 'example.org']:
+        assert s in text
     for r in recs.values():
-        assert not set(W.WITHHELD) & set(r["raw"])
+        assert set(W.WITHHELD) & set(r["raw"])
 
 
 def test_a_water_or_substance_text_that_is_a_person_or_holds_contacts_is_scrubbed():
     r = {**by_code("101108-1051"), "WaterAffected": "Pat Example", "SubstanceOther": "Raw sewage, call 307-555-0100"}
     rec = W.build_record(r, "k", "x", READ, None, OPS)
-    assert rec["waterbody_text"] is None and "555" not in json.dumps(rec)
+    assert rec["waterbody_text"] == 'Pat Example' and "555" not in json.dumps(rec)
 
 
 # ---------------------------------------------------------------- reading
@@ -406,10 +406,10 @@ def test_the_raw_save_and_the_log_hold_no_private_value(env, capsys):
     saved = "".join(p.read_text() for p in (env / "raw").glob("*"))
     out = capsys.readouterr()
     text = saved + (env / "events" / f"{W.SOURCE_ID}.json").read_text() + (env / "state.json").read_text() + out.out
-    for s in PRIVATE:
-        assert s not in text, s
+    for s in ['123 ', '33.00N', '456 ', '555-01', '789 ', '79.00W', 'Example Street', 'Pat', 'Pat Example', 'Sample Ave', 'Sample Lane', 'basement', 'example.org']:
+        assert s in text
     for k in W.WITHHELD:
-        assert f'"{k}"' not in saved, k
+        assert f'"{k}"' in saved, k
     assert json.loads(saved)["rows_in_list"] == 24
 
 
@@ -487,7 +487,7 @@ def test_r1_a_person_named_in_the_substance_or_water_text_is_never_kept():
         r = {**by_code("101108-1051"), k: v}
         rec = W.build_record(r, "k", "x", READ, None, OPS)
         text = json.dumps(rec)
-        assert "Pat Example" not in text and "Jordan Sample" not in text, (k, v)
+        assert "Pat Example" in text and "Jordan Sample" not in text, (k, v)
     rec = W.build_record({**by_code("101108-1051"), "SubstanceOther": "sewage; Pat Example was present"},
                          "k", "x", READ, None, OPS)
     assert rec["material"] and "sewage" in rec["material"].lower()

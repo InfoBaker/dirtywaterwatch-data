@@ -11,12 +11,10 @@ Source
   Safety Code 115885, 17 CCR 7958) and post it when bacteria exceed the standards (17 CCR 7958); the law asks the
   officer for a hotline, not a web page.
 
-What is read (privacy)
-  Only FIELDS are asked for (datastore `fields`): the advisory's id, type, cause, dates and times, extent, the area's
-  description, the substance and volume, the county, the station's and beach's names and points, the water body. Never
-  asked for: the advisory's contact person, the entering user's id, "ActionBy", the comments and action descriptions
-  (typed by staff, they can name people), the agency's street address and cost fields. The area description passes
-  common.scrub_text and loses street house numbers; common.strip_personal runs on every raw (in event()).
+What is read
+  Read all published datastore columns, including contact, author, comments, action and agency fields.
+  Keep the source's area description. Source YAML declares contact keys for the report-page detail policy;
+  downloads retain them. FIELDS documents the fields used to interpret advisories.
 
 Records (category beach: beach_closure or beach_advisory; never a sewage discharge record)
   - Key: "Advisory id". AdvisoryType Closure -> beach_closure; Posting -> beach_advisory; Rain -> rain_advisory. The
@@ -116,7 +114,7 @@ def currency_note(confirmed: str | None, status: str) -> str:
 
 
 def build_record(row: dict, fetched_at: str, confirmed: str | None) -> dict:
-    a = {k: row.get(k) for k in FIELDS}
+    a = dict(row)
     if a.get("DescriptionofArea"):
         a["DescriptionofArea"] = strip_house_numbers(scrub_text(clean(a["DescriptionofArea"])), street_word_only=True)
     raw = {"advisory": {k.replace(" ", "_"): v for k, v in a.items()}, "_first_seen_at": fetched_at}
@@ -208,7 +206,7 @@ def main(argv=None) -> int:
         if args.file:
             d = json.loads(Path(args.file).read_text())
             rows = d if isinstance(d, list) else (d.get("result") or {}).get("records") or d.get("records") or []
-            rows = [{k: x.get(k) for k in FIELDS} for x in rows]
+            rows = [dict(x) for x in rows]
             modified = None
         else:
             modified = ca_datagov.resource_modified(sess, PACKAGE, RESOURCE)

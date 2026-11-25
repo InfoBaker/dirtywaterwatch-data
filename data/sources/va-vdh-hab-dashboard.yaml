@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-vdh-hab-dashboard"
 name: "VDH Harmful Algal Bloom dashboard and '2026 HAB Sample Results' layers"
 url: "https://virginiahealth.maps.arcgis.com/apps/dashboards/5336b3174db64819ad172199347cfd73"

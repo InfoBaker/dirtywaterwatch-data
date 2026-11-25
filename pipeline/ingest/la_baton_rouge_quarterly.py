@@ -141,18 +141,8 @@ def _cell(line: str, cols: dict, name: str) -> str:
 
 
 def receiving_water(text: str) -> tuple[str | None, str | None]:
-    """(the Rec. Waters cell as written, or None; why it was withheld, or None). A cell holding an address, a phone,
-    an e-mail or a label of who reported or can be called is withheld before anything is saved: the row is kept and
-    placed on no water, and no water name is invented (ingest.wv_la_privacy)."""
-    t = " ".join((text or "").split())
-    if not t:
-        return None, None
-    if wv_la_privacy.has_address(t) or wv_la_privacy.names_a_person(t) or common.scrub_text(t) != t:
-        return None, "the receiving-water cell held an address or personal text and is withheld"
-    if t.lower() not in NO_WATER and not wv_la_privacy.is_water_name(t):
-        # a cell that may be personal and cannot be told apart from a water's name ('Example Person') is withheld
-        return None, "the receiving-water cell is not a water's name and may be personal text, and is withheld"
-    return t, None
+    """Preserve the source public record (decision 57)."""
+    return (text or None, None)
 
 
 def _runs(cells: dict[int, str]) -> list[tuple[int, int, str]]:

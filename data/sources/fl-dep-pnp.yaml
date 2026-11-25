@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": ["REPORTER_NAME", "REPORTER_TITLE", "REPORTER_EMAIL", "REPORTER_PHONE", "CONTACT_NAME", "CONTACT_EMAIL", "CONTACT_PHONE"], "customer_identifier": [], "description": ["FACILITY_DIRECTIONS", "INCIDENT_REPORT"]}
 id: "fl-dep-pnp"
 name: "Florida DEP Public Notice of Pollution, sewage and wastewater notices (PNP feature service)"
 url: "https://ags.dep.state.fl.us/arcgis/rest/services/External_Services/PNP/FeatureServer"

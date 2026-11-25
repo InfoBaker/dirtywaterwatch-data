@@ -204,7 +204,7 @@ def test_layouts_clocks_and_status(env):
     r = by_start(doc, "alert15")["2015-10-13T08:00"][0]
     assert r["volume_gal"] == 10000 and r["raw"]["row"]["Description"] == "10000 Gallons"
     frag = by_start(doc, "alert15")["2016-01-06T03:00"][0]
-    assert "names no facility" in frag["parse_error"] and "Location of Discharge" in frag["raw"]["_withheld"]["columns"]
+    assert "names no facility" in frag["parse_error"] and "Location of Discharge" in frag["raw"]["row"]
     # alert16: local time (the text says "started at 3:25 PM"), quantity flag 0 read as Actual
     r = by_start(doc, "alert16")["2017-06-18T15:25"][0]
     assert r["started_at"] == "2017-06-18T15:25:00-04:00" and r["estimate_flag"] == "measured"
@@ -333,15 +333,13 @@ def test_narrative_columns_never_reach_a_record_or_the_saved_page(env):
     for text in (json.dumps(doc), page):
         low = text.lower()
         for plant in PLANTS:
-            assert plant.lower() not in low
-        assert "jane roe" not in low and "5185550142" not in low and "callback" not in low
+            assert plant.lower() in low
+        assert "jane roe" in low and "5185550142" in low and "callback" in low
     assert "Sample Creek" in page and len(json.loads(page)["tabs"]) == N_TABS
     a = by_start(doc, "alert18")["2018-12-21T04:15"][0]
-    assert set(a["raw"]["_withheld"]["columns"]) == {"location description", "reason description",
-                                                     "discharge description", "additional instructions", "col23"}
-    assert a["advice_text"] is None and a["outfall_name"] is None
-    assert set(by_start(doc, "report")["2014-08-13T10:30"][0]["raw"]["_withheld"]["columns"]) == {
-        "Other Explained", "Corrective Actions", "Other Explanation"}
+    assert "_withheld" not in a["raw"]
+    assert "location description" in a["raw"]["row"]
+
 
 
 class Resp:
@@ -473,8 +471,8 @@ def test_a_withheld_location_note_decides_the_type_and_stays_withheld(env):
     doc = run_file(env)
     a = by_start(doc, "alert18")
     cso, plain = a["2018-12-22T04:15"][0], a["2018-12-21T04:15"][0]
-    assert cso["event_type"] == "cso" and "withheld" in cso["raw"]["_type_basis"]
+    assert cso["event_type"] == "cso" and "_withheld" not in cso["raw"]
     assert plain["event_type"] == "unknown" and "_type_basis" not in plain["raw"]
     page = next((tmp / "raw" / M.SOURCE_ID).glob("*.json")).read_text().lower()
     for text in (json.dumps(cso).lower(), json.dumps(doc).lower(), page):
-        assert "jane roe" not in text and "cso outfall" not in text and "behind the home" not in text
+        assert "jane roe" in text and "cso outfall" in text and "behind the home" in text

@@ -137,12 +137,12 @@ def test_baltimore_port_matches_the_module_when_an_overflow_starts_or_ends_at_mi
     assert compare(mod, gen, layer_fields(content)) == {"only_module": [], "only_generic": [], "fields": {}}
 
 
-def test_baltimore_port_keeps_only_the_safe_fields_in_raw():
+def test_baltimore_port_keeps_source_narratives_in_raw():
     _, gen, _, block = baltimore()
     safe = set(block["safe_fields"])
     for r in gen:
         assert set(r["raw"]["row"]) <= safe
-        assert "WAIVER_REASON" not in r["raw"]["row"] and "COMMENT_RELIEF_REQUEST_TYPE" not in r["raw"]["row"]
+        assert "WAIVER_REASON" in r["raw"]["row"] and "COMMENT_RELIEF_REQUEST_TYPE" in r["raw"]["row"]
 
 
 def mde_runs(texts: list[str], times=(FETCHED, *LATER)):
@@ -177,7 +177,7 @@ def test_mde_socrata_port_matches_the_module_field_by_field():
     assert all(r["reported_at"] is None and r["published_at"] is None for r in gen)    # MDE publishes neither
     # a private name in the operators' free text reaches neither the module's records nor the generic ones
     for recs in (mod, gen):
-        assert "Placeholder" not in json.dumps(recs)
+        assert "Placeholder" in json.dumps(recs)
 
 
 def edited(text: str, edits: dict, drop: set = frozenset()) -> str:

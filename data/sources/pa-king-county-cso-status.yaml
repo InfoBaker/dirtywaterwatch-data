@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "pa-king-county-cso-status"
 name: "King County / Seattle Public Utilities real-time CSO status map and CSV feed"
 url: "https://kingcounty.gov/en/dept/dnrp/waste-services/wastewater-treatment/sewer-system-services/cso-status"

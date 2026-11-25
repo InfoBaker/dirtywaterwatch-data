@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "vt-doh-after-flood-guidance"
 name: "Vermont Department of Health after-flood recreational water guidance"
 url: "https://HealthVermont.Gov/sites/default/files/document/env-after-flood-recreational-water-guidance-english.pdf"

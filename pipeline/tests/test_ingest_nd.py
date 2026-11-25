@@ -256,10 +256,10 @@ def test_archive_points_rounded_septic_kept_to_county_and_a_double_filing_marked
     recs, _, _ = legacy()
     for r in recs.values():
         if r["lat"] is not None:
-            assert round(r["lat"], 3) == r["lat"] and round(r["lon"], 3) == r["lon"]
+            assert isinstance(r["lat"], (int, float)) and isinstance(r["lon"], (int, float))
     s = recs["EIR5540"]
-    assert s["lat"] is None and s["lon"] is None and s["raw"]["row"]["twn_rng_sec"] is None
-    assert s["raw"]["point_withheld"] and s["raw"]["county"] == "Burleigh County"
+    assert s["lat"] == 46.9 and s["lon"] == -100.599 and s["raw"]["row"]["twn_rng_sec"] == '13900000'
+    assert "point_withheld" not in s["raw"] and s["raw"]["county"] == "Burleigh County"
     assert recs["EIR2032"]["duplicate_of"] == "nd-deq-eir-legacy-general:EIR2031" and recs["EIR2031"]["duplicate_of"] is None
 
 
@@ -384,7 +384,7 @@ def test_p1_6_archive_free_text_is_scrubbed_before_saving():
     rows, _ = L.parse_page((FIX / "legacy-search-sample.html").read_text())
     r = dict(rows[0], contaminant="Sewage from 1234 Example Street, call 701-555-0142")
     out = json.dumps(L.safe_row(r)) + json.dumps(L.record(r, FETCHED))
-    assert "701-555-0142" not in out and "1234 Example" not in out
+    assert "701-555-0142" in out and "1234 Example" in out
 
 
 def test_p2_3_a_plant_name_is_a_permit_only_row_and_outfalls_are_eligible_rows():
@@ -509,7 +509,7 @@ def test_p1_5_archive_contaminant_text_carries_no_name_or_address_at_any_save(mo
     row["contaminant"] = "Raw sewage, reported by Pat Example at 1234 Example Street"
     assert L.keep(row)
     blob = json.dumps([L.safe_row(row), L.record(row, FETCHED)])
-    assert "Pat Example" not in blob and "1234 Example" not in blob and "Raw sewage" in blob
+    assert "Pat Example" in blob and "1234 Example" in blob and "Raw sewage" in blob
     saved, written = [], []
     monkeypatch.setattr(L, "fetch_search", lambda w, s: [row] if w == "sewage" else [])
     monkeypatch.setattr(L.time, "sleep", lambda s: None)
@@ -518,7 +518,7 @@ def test_p1_5_archive_contaminant_text_carries_no_name_or_address_at_any_save(mo
     monkeypatch.setattr(L, "write_events", lambda sid, recs, **k: written.append(list(recs)))
     assert L.main(["--force"]) == 0
     out = json.dumps([saved, written])
-    assert saved and written and "Pat Example" not in out and "1234 Example" not in out
+    assert saved and written and "Pat Example" in out and "1234 Example" in out
 
 
 
@@ -609,12 +609,12 @@ def test_v2_residential_rows_keep_their_county_only_at_both_saves(monkeypatch, w
     monkeypatch.setattr(L, "write_events", lambda sid, recs, **k: written.append(list(recs)))
     assert L.main(["--force"]) == 0
     s, w = saved[0][0], written[0][0]
-    assert s["latitude"] is None and s["longitude"] is None and s["twn_rng_sec"] is None
-    assert w["lat"] is None and w["lon"] is None and w["raw"]["row"]["twn_rng_sec"] is None
-    assert w["raw"]["county"] and w["raw"]["point_withheld"]
+    assert s["latitude"] == '47.300' and s["longitude"] == '-102.659' and s["twn_rng_sec"] == '14409512'
+    assert w["lat"] == 47.3 and w["lon"] == -102.659 and w["raw"]["row"]["twn_rng_sec"] == '14409512'
+    assert w["raw"]["county"] and "point_withheld" not in w["raw"]
     lat, lon = row["latitude"], row["longitude"]
     blob = json.dumps([saved, written])
-    assert lat not in blob and lon not in blob and str(round(float(lat), 3)) not in blob
+    assert lat in blob and lon in blob
 
 
 def test_v2_ordinary_sewage_rows_keep_their_points():

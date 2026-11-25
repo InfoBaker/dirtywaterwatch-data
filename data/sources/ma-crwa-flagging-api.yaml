@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ma-crwa-flagging-api"
 name: "Charles River Watershed Association Flagging Program and Public Flagging API"
 url: "https://crwa-flagging.herokuapp.com/api/v1/model"

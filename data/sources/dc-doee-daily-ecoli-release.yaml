@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-doee-daily-ecoli-release"
 name: "DOEE release 'DC To Begin Daily E. coli Testing on the Potomac and Anacostia' (2026-02-27)"
 url: "https://doee.dc.gov/release/dc-begin-daily-e-coli-testing-potomac-and-anacostia"

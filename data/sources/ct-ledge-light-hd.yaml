@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-ledge-light-hd"
 name: "Ledge Light Health District beach and shellfish postings (East Lyme, Groton, Ledyard, New London, Old Lyme, Stonington, Waterford)"
 url: "https://llhd.org/"

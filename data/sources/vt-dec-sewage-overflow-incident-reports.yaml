@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "vt-dec-sewage-overflow-incident-reports"
 name: "VT DEC sewer overflow and release Incident Reports (New/pending, Reviewed, and Wet Weather CSO tables) on the Sewage Overflows report page"
 url: "https://anrweb.vt.gov/DEC/WWInventory/SewageOverflows.aspx"

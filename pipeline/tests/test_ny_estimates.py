@@ -215,7 +215,7 @@ def test_descriptions_and_the_component_are_the_sources_words(recs):
     assert d["description"] == "Sanitary sewer overflow into storm sewer"
     assert d["overflow_point"] == "Manhole"
     assert "location_description" not in d                         # the outlet name already says it (said once)
-    assert D.ny_place_text("row.addressDescription")(k["raw"]) == "Manhole is on the front lawn of [house number removed] Sample sso #12"
+    assert D.ny_place_text("row.addressDescription")(k["raw"]) == k["raw"]["row"]["addressDescription"]
     assert d["rate"] == {"text": "10 Gallons per Minute Estimated", "unit": "gallons per minute", "low": 10, "high": 10,
                          "qualifier": "estimated"}
     assert "volume_qualifier" not in d                              # a rate carries its own; there is no volume
@@ -229,15 +229,15 @@ def test_descriptions_and_the_component_are_the_sources_words(recs):
     assert D.detail_of(s)["location_description"] == "CSO outfall is farthest upstream."
     web = copy.deepcopy(recs["ny-dec-sprtk-web:NYS900021-20261106T162658Z"])
     assert D.detail_of(web)["description"] == "Sanitary sewer overflowing into storm sewer"
-    assert D.ny_place_text("parsed.location_details")(web["raw"]) == "Manhole is in the Melrose lawn at [house number removed] Example, SSO #004"
+    assert D.ny_place_text("parsed.location_details")(web["raw"]) == web["raw"]["parsed"]["location_details"]
 
 
 def test_a_description_loses_any_street_addresss_house_number_and_contacts():
     raw = {"row": {"dischargeDescription": "Overflow at 12 Sample Rd; call 555-123-4567 or pat@example.org",
                    "addressDescription": "Manhole in front of 45 Oak Street", "quantity": "60 Gallons per Minute Estimated"}}
     d = D.detail_of({"source_id": "ny-dec-sprtk", "raw": raw, "outfall_name": "Manhole"})
-    assert "12 Sample" not in d["description"] and "555" not in d["description"] and "@" not in d["description"]
-    assert d["location_description"] == "Manhole in front of [house number removed] Oak Street"
+    assert d["description"] == raw["row"]["dischargeDescription"]
+    assert d["location_description"] == "Manhole in front of 45 Oak Street"
     assert not any(PERSONAL_KEYS.search(f) or NAME_KEYS.search(f) for f in D.FIELDS)
 
 
@@ -323,10 +323,10 @@ def test_review_1_a_hyphenated_house_number_leaves_a_description():
                    "dischargeDescription": "Overflow between 12-14 Sample Road and the creek",
                    "streetNumber": "123-45", "streetName": "Example Avenue"}}
     d = D.detail_of({"source_id": "ny-dec-sprtk", "raw": raw, "outfall_name": "Manhole"})
-    assert d["location_description"] == "Manhole outside [house number removed] Example Avenue"
-    assert d["description"] == "Overflow between [house number removed] Sample Road and the creek"
+    assert d["location_description"] == "Manhole outside 123-45 Example Avenue"
+    assert d["description"] == "Overflow between 12-14 Sample Road and the creek"
     raw = {"row": {"addressDescription": "Manhole on the lawn of 123-45 Example", "streetNumber": "123-45", "streetName": "Example St"}}
-    assert "123" not in D.ny_place_text("row.addressDescription")(raw)          # the notice's own number, no street word
+    assert "123" in D.ny_place_text("row.addressDescription")(raw)          # the notice's own number, no street word
 
 
 def test_review_2_a_bound_or_a_small_figure_is_never_rounded_into_a_stronger_claim(recs):

@@ -161,7 +161,7 @@ def test_ohio_records_are_month_precision_monthly_marks_never_counted(env):
     assert (r["started_at"], r["ended_at"], r["time_precision"], r["status"]) == ("2026-05-01", "2026-05-31", "month",
                                                                                  "ended")
     assert r["reported_at"] == "2026-06-19" and r["volume_gal"] is None
-    assert r["water_slugs"] == ["scioto-river-oh"] and (r["lat"], r["lon"]) == (39.951, -83.01)
+    assert r["water_slugs"] == ["scioto-river-oh"] and (r["lat"], r["lon"]) == (39.9512, -83.0101)
     assert r["raw"]["dmr"]["volume"]["StatisticalBases"] == "DAILY MX 2.373; MO AVG .4005"
     assert "authority" in r and "Ohio EPA" in r["authority"]
     assert r["source_id"] in status.EPA_MONTHLY_SOURCES

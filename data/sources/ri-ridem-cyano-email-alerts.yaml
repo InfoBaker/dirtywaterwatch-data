@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ri-ridem-cyano-email-alerts"
 name: "RIDEM cyanobacteria email alerts (Constant Contact)"
 url: "https://lp.constantcontactpages.com/sl/2Y3SFbb"

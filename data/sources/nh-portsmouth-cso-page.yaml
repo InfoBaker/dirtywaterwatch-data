@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nh-portsmouth-cso-page"
 name: "Portsmouth Combined Sewer Overflows page (dashboard and monthly table)"
 url: "https://www.portsmouthnh.gov/publicworks/wastewater/combined-sewer-overflows-cso"

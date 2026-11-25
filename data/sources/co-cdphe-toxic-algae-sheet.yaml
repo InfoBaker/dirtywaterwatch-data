@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "co-cdphe-toxic-algae-sheet"
 name: "CDPHE \"Recent blooms for select water bodies\" Google Sheet (toxic algae status)"
 url: "https://docs.google.com/spreadsheets/d/1rnsdGU5IrrCt3jfYQGa3obDd7SN27R1mitLhilBvYSQ/export?format=csv"

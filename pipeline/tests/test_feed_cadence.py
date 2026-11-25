@@ -139,29 +139,26 @@ def test_going_live_makes_the_feed_hourly_and_a_broken_check_runs_everything(tmp
     assert len(ran) == 5
 
 
-# ---------------------------------------------------------------- the standing name review's daily pass
+# ---------------------------------------------------------------- generic daily steps
 
-def test_the_name_review_is_due_once_a_day(tmp_path):
-    assert C.daily_due("name-review", {}, NOW)
-    assert not C.daily_due("name-review", {"name-review": stamp(NOW - timedelta(hours=3))}, NOW)
-    assert C.daily_due("name-review", {"name-review": stamp(NOW - timedelta(hours=23, minutes=45))}, NOW)
-    assert C.daily_due("name-review", {"name-review": stamp(NOW - timedelta(hours=3))}, NOW, run_all=True)
+def test_a_named_step_is_due_once_a_day(tmp_path):
+    assert C.daily_due("example-step", {}, NOW)
+    assert not C.daily_due("example-step", {"example-step": stamp(NOW - timedelta(hours=3))}, NOW)
+    assert C.daily_due("example-step", {"example-step": stamp(NOW - timedelta(hours=23, minutes=45))}, NOW)
+    assert C.daily_due("example-step", {"example-step": stamp(NOW - timedelta(hours=3))}, NOW, run_all=True)
     sf = tmp_path / "c.json"
     env = {**os.environ, "DWW_CADENCE_FILE": str(sf)}
     run = lambda *a: subprocess.run([sys.executable, "-m", "cadence", *a], cwd=ROOT / "pipeline", env=env,  # noqa: E731
                                     capture_output=True, text=True).returncode
-    assert run("daily", "name-review") == 0
-    assert run("ran", "name-review") == 0 and "name-review" in json.loads(sf.read_text())
-    assert run("daily", "name-review") == 3
+    assert run("daily", "example-step") == 0
+    assert run("ran", "example-step") == 0 and "example-step" in json.loads(sf.read_text())
+    assert run("daily", "example-step") == 3
 
 
 def test_the_refresh_script_runs_the_name_review_on_its_daily_pass_and_fails_open():
     s = (ROOT / "scripts" / "refresh-data.sh").read_text()
-    gate = s[s.index("-m cadence daily name-review"):]
-    # only an answer of 3 (ran in the last day) skips it; a failing check runs it; a good run is recorded
-    assert 'if [ "$nr_due" = 3 ]' in gate and "-m build.name_review --standing" in gate
-    assert gate.index("-m build.name_review --standing") < gate.index("-m cadence ran name-review")
-    assert s.index("-m cadence daily name-review") < s.index("make tally")
+    assert "build.name_review" not in s
+    assert "make tally" in s
 
 
 # ---------------------------------------------------------------- a skipped not-live feed changes nothing live

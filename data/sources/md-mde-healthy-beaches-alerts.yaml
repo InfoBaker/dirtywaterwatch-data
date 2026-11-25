@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "md-mde-healthy-beaches-alerts"
 name: "MDE Maryland Healthy Beaches alerts layer (statewide beach status map)"
 url: "https://mde.maryland.gov/programs/water/MHB/Pages/Current-Conditions.aspx"

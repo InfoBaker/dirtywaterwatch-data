@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ri-ridem-cyano-advisories"
 name: "RIDEM/RIDOH cyanobacteria advisories layer (dashboard)"
 url: "https://services1.arcgis.com/HAt3zp2GOzn12Lxk/arcgis/rest/services/Cyanobacteria_Advisories_WFL1/FeatureServer/0"

@@ -216,19 +216,8 @@ def _public_names():
 
 
 def public_permit_name(v):
-    """ICIS PERMIT_NAME as the public file carries it: None when it names a person in place of a body (EPA often fills
-    the field with a contact person): no body's word, and a person's name, whole or in a part joined by '&', 'and' or
-    a comma, by scripts/private_utilities.person_like (the check the private-utility list uses). A person named beside
-    a body ("<a person> - City of X") is cut after the rows are built (scripts/permit_names.scrub_rows, which reads the
-    row's city and facility name and marks the row permit_name_scrubbed)."""
-    s = (v or '').strip()
-    if not s:
-        return None
-    pu = _public_names()
-    if pu.has_org_word(s):
-        return s
-    parts = [x.strip(' .,') for x in re.split(r'\s*[;,()/&]\s*|\s+-\s*|\s*-\s+|\s+and\s+', pu.clean(s), flags=re.I)]
-    return None if any(x and pu.person_like(x) for x in [pu.clean(s).strip(' .,')] + parts) else s
+    """Keep the public ICIS permit name, including an individual holder."""
+    return v or None
 
 
 def group_permits(ol_rows):

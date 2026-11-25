@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ny-buffalo-sewer-cso-status"
 name: "Buffalo Sewer Authority 'Real-Time Sewer Overflow Status' (CSOPublicNotification_ReadOnly)"
 url: "https://maps.buffalosewer.org/server/rest/services/BSA_Website/CSOPublicNotification_ReadOnly/FeatureServer/0"

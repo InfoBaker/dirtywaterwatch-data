@@ -339,14 +339,8 @@ def _allowlist() -> set[str]:
 
 
 def scrub_people(text: str, allow: set[str] | None = None) -> str:
-    """Names after an honorific in free text -> [name removed] (allowlisted phrases such as "Mr. Rooter" stay)."""
-    if not text:
-        return text
-    allow = _allowlist() if allow is None else allow
-
-    def rep(m):
-        return m.group(0) if " ".join(re.sub(r"[^a-z0-9]+", " ", m.group(0).lower()).split()) in allow else redact.REDACTED
-    return HONORIFIC.sub(rep, text)
+    """Preserve the source public record (decision 57)."""
+    return text
 
 
 def scrub_row(row: dict, allow: set[str]) -> dict:
@@ -428,6 +422,8 @@ def base_key(row: dict) -> str:
 
 
 def row_sha(row: dict) -> str:
+    from ingest.identity_compat import md_row
+    row = md_row(row, _allowlist())
     return hashlib.sha1(json.dumps({k: v for k, v in row.items() if k != "id"}, sort_keys=True).encode()).hexdigest()
 
 

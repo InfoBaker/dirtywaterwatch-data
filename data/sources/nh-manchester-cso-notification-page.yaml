@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nh-manchester-cso-notification-page"
 name: "Manchester CSO Discharge Notification page"
 url: "https://www.manchesternh.gov/Departments/Sewer-and-Stormwater/CSO/CSO-Discharge-Notification"

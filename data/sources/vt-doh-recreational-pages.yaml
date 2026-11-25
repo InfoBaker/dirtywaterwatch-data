@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "vt-doh-recreational-pages"
 name: "Vermont DOH recreational water, swimming and cyanobacteria pages"
 url: "https://www.healthvermont.gov/environment/recreational-water"

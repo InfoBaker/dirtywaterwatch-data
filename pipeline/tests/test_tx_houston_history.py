@@ -24,7 +24,7 @@ def test_exact_identity_enriches_without_replacing_monthly_fields_or_tceq_link()
     out = H.enrich_history([r], history(), {'67077': {}})
     r = next(r for r in out if r['source_record_id'] == '68784')
     assert r['event_id'] == old['event_id']
-    assert (r['lat'], r['lon'], r['coord_precision_m']) == (29.737, -95.395, 100)
+    assert (r['lat'], r['lon'], r['coord_precision_m']) == (29.737, -95.395, None)
     for k in ['started_at','ended_at','volume_gal','published_at','source_url']:
         assert r[k] == old[k]
     assert r['raw']['history']['attributes']['EXCURSIONID'] == 68784
@@ -97,7 +97,7 @@ def test_complete_paging_safe_geometry_and_cache():
     h=H.read_history({},AT,get)
     assert len(h['features'])==3
     assert 'ACTION' not in h['features'][0]['attributes']
-    assert h['features'][0]['geometry']=={'x':-95.395,'y':29.737}
+    assert h['features'][0]['geometry'] == {'x': -95.394789, 'y': 29.736999}
     assert [q['resultOffset'][0] for q in calls if 'resultOffset' in q]==['0','2']
     assert all(q['outSR']==['4326'] and '*' not in q['outFields'][0] for q in calls if 'outFields' in q)
     calls.clear()
@@ -346,7 +346,7 @@ def test_explicit_reference_survives_safe_snapshot_reprocessing():
     row = {'incident_number': '451100', 'incident_description': 'Houston SSO ID# 65766 at Westhollow Dr',
            'start_date': '2025-12-23', 'county': 'HARRIS', 'material_type': 'Sewage'}
     safe, _ = F.safe_row(row, block)
-    assert '65766' not in safe['incident_description']
+    assert '65766' in safe['incident_description']
     assert safe['_houston_sso_ids'] == ['65766']
     replayed, _ = F.safe_row(json.loads(json.dumps(safe)), block)
     assert replayed == safe

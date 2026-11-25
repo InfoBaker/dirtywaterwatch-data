@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ny-dec-sprtk-2013-2021"
 name: "DEC Sewage Pollution Right to Know workbook 'Sewage_Discharge_Reports.xlsx' (discharge reports and NY-Alert notices, 2013 to August 2021)"
 url: "https://extapps.dec.ny.gov/fs/data/Sewage_Discharge_Reports.xlsx"

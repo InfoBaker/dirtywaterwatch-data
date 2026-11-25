@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-vdh-advisories"
 name: "Virginia Department of Health recreational water and swimming advisories (newsroom search RSS)"
 url: "https://www.vdh.virginia.gov/news/?s=recreational+water+advisory&feed=rss2"

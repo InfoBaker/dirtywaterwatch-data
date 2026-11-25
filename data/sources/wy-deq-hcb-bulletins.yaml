@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "wy-deq-hcb-bulletins"
 name: "Wyoming DEQ harmful cyanobacteria bloom bulletins: bloom and toxin advisories with the date each was issued"
 url: "https://public.govdelivery.com/topics/WYDEQ_42/feed.rss"

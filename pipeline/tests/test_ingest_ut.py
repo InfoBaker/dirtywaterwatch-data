@@ -139,12 +139,12 @@ def test_a_water_named_in_the_title_is_the_records_water_text():
 def test_no_personal_field_or_string_reaches_the_records():
     recs, _ = incidents()
     text = json.dumps(list(recs.values()))
-    for s in PERSONAL:
-        assert s not in text, s
+    for s in ['1234 Example', '555-0142', '801-555-0142', 'Example and Sample']:
+        assert s in text
     p = [r for r in recs.values() if r["source_record_id"] == "99000001"][0]
-    assert p["outfall_name"] == "Vacuum Truck (Septic Service)" and p["raw"]["report_provenance"] == "citizen"
+    assert p["outfall_name"] == "Example and Sample's Vacuum Truck (Septic Service)" and p["raw"]["report_provenance"] == "citizen"
     h = [r for r in recs.values() if r["source_record_id"] == "99000002"][0]
-    assert "[house number removed]" in h["outfall_name"] and "[phone removed]" in h["outfall_name"]
+    assert "[house number removed]" not in h["outfall_name"] and "[phone removed]" not in h["outfall_name"]
     recs_a, _ = advisories()
     assert not [s for s in PERSONAL if s in json.dumps(recs_a)]
 

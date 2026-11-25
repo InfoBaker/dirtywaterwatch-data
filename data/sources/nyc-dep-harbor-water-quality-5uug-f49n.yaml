@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nyc-dep-harbor-water-quality-5uug-f49n"
 name: "NYC Open Data 'Harbor Water Quality' (5uug-f49n), DEP Harbor Survey"
 url: "https://data.cityofnewyork.us/d/5uug-f49n"

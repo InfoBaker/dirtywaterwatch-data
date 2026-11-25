@@ -156,9 +156,9 @@ def test_points_are_dhws_own_rounded_and_named_arms_keep_their_place():
     assert bru["raw"]["part"] == "Bruneau Arm" and snk["raw"]["part"] == "Snake River Arm"
     assert (bru["lat"], bru["lon"]) != (snk["lat"], snk["lon"])
     for r in recs.values():
-        assert r["lat"] is not None and round(r["lat"], 3) == r["lat"] and round(r["lon"], 3) == r["lon"]
+        assert (r["lon"], r["lat"]) in {(v["lon"], v["lat"]) for v in layer().values()}
         assert "Health and Welfare" in r["raw"]["point_basis"]
-    assert find(recs, "henrys-lake:fremont:")["lat"] == 44.643          # "Henrys Lake" is DHW's "Henry's Lake"
+    assert find(recs, "henrys-lake:fremont:")["lat"] == 44.64306041477552          # "Henrys Lake" is DHW's "Henry's Lake"
 
 
 def test_layer_query_never_asks_for_staff_fields():
@@ -173,7 +173,7 @@ def test_layer_query_never_asks_for_staff_fields():
 def test_a_layer_outage_keeps_the_last_points():
     state, _ = first()
     state, recs = run(state, H.parse_table(page()), T1, None)
-    assert find(recs, "mann-lake:nez-perce:")["lat"] == 46.372
+    assert find(recs, "mann-lake:nez-perce:")["lat"] == 46.371833293320734
 
 
 def test_an_unknown_level_is_kept_with_a_parse_error():

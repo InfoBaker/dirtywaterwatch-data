@@ -85,6 +85,7 @@ mean annual flow (qe_ma) and slope; the flow on each flowline is the gauge's rel
 Q/Qa times the flowline's qe_ma. With no gauge reading, Q = qe_ma (NHDPlus mean annual), said so.
 """
 from __future__ import annotations
+from build.removal_inputs import publication_inputs, filtered, ACTIVE
 
 import argparse
 import json
@@ -689,7 +690,7 @@ def reported_outfalls(days: int = REPORTED_DAYS) -> set:
     out: set = set()
     for p in sorted(EVENTS_DIR.glob("*.json")):
         try:
-            d = json.loads(p.read_text())
+            d = read_json(p)
         except Exception:
             continue
         for e in (d.get("records") or d.get("events") or []) if isinstance(d, dict) else []:
@@ -710,6 +711,7 @@ def reported_outfalls(days: int = REPORTED_DAYS) -> set:
     return out
 
 
+@publication_inputs
 def candidate_outfalls(waters: dict | None = None, registry: list[dict] | None = None, live: set | None = None,
                        skipped: dict | None = None, reported: set | None = None,
                        plants: bool | None = None, shore: dict | None = None) -> list[dict]:
@@ -725,7 +727,8 @@ def candidate_outfalls(waters: dict | None = None, registry: list[dict] | None =
     from build.status import Resolver, load_waters, oid_key, with_outline_areas
     shore = shore_rule() if shore is None else shore
     waters = waters if waters is not None else with_outline_areas(load_waters(), shore)
-    registry = registry if registry is not None else registry_outfalls()
+    registry = filtered(registry if registry is not None else registry_outfalls())
+    waters = filtered(waters)
     live = {str(s).upper() for s in (live if live is not None else live_states())}
     reported = reported if reported is not None else reported_outfalls()
     plants = TRACE_PLANTS if plants is None else plants
@@ -1134,6 +1137,7 @@ def trace(o: dict, cap: float, prev: dict | None = None) -> dict:
     return rec
 
 
+@publication_inputs
 def event_points() -> list[dict]:
     """Recent river discharges with a point but no outfall reach (status.json needs_reach: sewer
     breaks, pump stations): traced from the event's own coordinates."""
@@ -1210,6 +1214,7 @@ def stretch_candidate(ev: dict) -> dict | None:
             "rule": STRETCH_RULE}
 
 
+@publication_inputs
 def stretch_points(events_dir=None, now: datetime | None = None) -> list[dict]:
     """Every advisory record with a stretch (stretch_candidate) that is in effect, or was lifted within
     STRETCH_HISTORY_DAYS (its red stays in the 90-day history), from the events files. One trace each, cached like
@@ -1223,7 +1228,7 @@ def stretch_points(events_dir=None, now: datetime | None = None) -> list[dict]:
             text = p.read_text()
             if '"stretch"' not in text:
                 continue
-            doc = json.loads(text)
+            doc = filtered(json.loads(text))
         except Exception:
             continue
         for e in (doc.get("records") or doc.get("events") or []) if isinstance(doc, dict) else []:
@@ -1505,8 +1510,10 @@ def load_reaches() -> dict[str, dict]:
     on = tidal_river_on()
     for p in sorted(REACH_DIR.glob("*.json")):
         try:
-            d = json.loads(p.read_text())
+            d = read_json(p)
         except Exception:
+            continue
+        if not d:
             continue
         out[d.get("key") or p.stem] = d if on else without_tidal_river(d)
     return out
@@ -2251,6 +2258,7 @@ def run_traces(cands: list[dict], cap: float, budget: Budget, force: bool = Fals
     return run, cached
 
 
+@publication_inputs
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--flows", action="store_true", help="only refresh gauge readings")

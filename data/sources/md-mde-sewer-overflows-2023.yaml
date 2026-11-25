@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "md-mde-sewer-overflows-2023"
 name: "MDE Reported Sewer Overflows (New for 2023), Maryland Open Data Portal"
 url: "https://opendata.maryland.gov/dataset/Reported-Sewer-Overflows-New-for-2023-/stgj-u72u/data"

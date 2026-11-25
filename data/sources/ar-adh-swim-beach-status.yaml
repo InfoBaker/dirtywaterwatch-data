@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ar-adh-swim-beach-status"
 name: "Arkansas Department of Health, Arkansas Swim Beach Program: closed swim beaches"
 url: "https://healthy.arkansas.gov/programs-services/public-health-safety/marine-sanitation/arkansas-swim-beach-program/"

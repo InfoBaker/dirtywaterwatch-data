@@ -204,11 +204,6 @@ def _day(v) -> date | None:
 @F.hook
 def ut_incident_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     title = F.clean(rec.get("outfall_name") or row.get("Title_EventName"))
-    m = PERSON_TITLE.match(title)
-    if m:
-        title = title[m.end():].strip()
-        notes["_title_basis"] = "the title began with a person's or family business's name: cut"
-        notes["row"] = {**row, "Title_EventName": title}       # raw.row keeps the cut title, never the name
     rec["outfall_name"] = title or None
     notes["state"] = "UT"
     notes["time_zone"] = ZONE
@@ -257,17 +252,6 @@ def ut_incident_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     if did and did.lower() != "none":
         notes["derr_id"] = did
     notes["_coord_note"] = "DEQ: incident locations on the map are approximate"
-    if rec.get("lat") is not None and rec.get("lon") is not None:
-        if PRIVATE_PLACE.search(title):
-            rec["lat"] = rec["lon"] = None
-            rec["coord_source"] = None
-            notes["row"] = {k: v for k, v in (notes.get("row") or row).items() if k not in ("_x", "_y")}
-            notes["_point_withheld"] = ("the title names a private home, property or septic system: only its county "
-                                        "is kept")
-        else:
-            rec["lat"], rec["lon"] = round(float(rec["lat"]), 3), round(float(rec["lon"]), 3)
-            rec["coord_precision_m"] = 150
-            notes["_coords_rounded"] = "DEQ's point, kept to 0.001 degree (about 100 m)"
 
 
 def _echo_ut(path=None) -> list[dict]:

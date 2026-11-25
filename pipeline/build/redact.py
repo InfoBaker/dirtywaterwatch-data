@@ -1,55 +1,9 @@
-"""Private individuals' names in quoted source text become "[name removed]" (an export step).
+"""Public-record preservation and legacy text classification utilities.
 
-Several feeds quote an operator's free text ("How incident was resolved", COMMENTS,
-additionalInformation), and some of it names a resident: "Building owner contacted to repair pump
-station.  Robert Sacks was his name." common.strip_personal already drops personal keys and scrubs
-emails, phones and staff names ("Inspector X", "contact X at"); this pass covers the rest of the names
-(docs/plan.md: raw keeps the source record with personal fields removed, staff names included). It is
-deliberately conservative: agency, company, street and water names stay.
-
-  candidate  two or three capitalised words (one after an honorific) that are not place, water,
-             organisation, street or header words. The lexicon: data/waters-new-england.csv (names and towns),
-             data/waters-extra.json, data/waters-nhd.json, data/dischargers.json, data/outfalls-*.json, the records' own
-             name fields (utility, permittee, water body, beach) and keys, US states, months,
-             weekdays, and the words the records use in lower case. A run ending in a street, water or
-             organisation word ("Boston Post Rd", "Fort Point Channel", "Fred Mold Park", "Francis
-             Xavier plaza apartments") is a place, not a name.
-  removed    a candidate the text marks as a person (Hit.contexts):
-               honorific    Mr / Mrs / Ms / Mx / Dr before it ("Dr" after a word is Drive)
-               role         resident, homeowner, property / building / home owner, tenant, neighbor,
-                            landlord, occupant, customer, complainant, caller, a relative (niece, son,
-                            wife ...) next to it; "owner of"
-                            after it; "call from" / "complaint by" before it
-               name_cue     the text says it is a name ("Robert Sacks was his name", "named Jane Doe")
-               phone_email  a phone number or email (or its "[phone removed]") right after it
-               address      a street address next to it            } only when the name starts with
-               contact      spoke with / per / reported by / from  } a common given name (Nancy,
-                            ...; operator, director ...; "X of the  } Doug ...), so that a company
-                            Town of Orange", "X arrived ...";       } or street is never taken
-                            "Person Reporting:", "Contact at Scene:", "referred to")
-               title        a job title joined to the name by a comma, bracket or dash ("X, Operator at
-                            the ...", "X (Director of ...)"), a person's title before it ("Mayor X",
-                            "Dispatcher X"), or the name opening a dated notice ("On June 5, 2026, X
-                            with the Town of ...") -- for names that do not start with a common given
-                            name (a town's name, or a rare one)
-             A single given name is removed only next to a role, a name cue or a phone ("Cathy,
-             homeowner of ..."); a surname only after an honorific. A two- or three-word name marked
-             once is removed wherever it appears in the export. After a name is removed from a
-             string, later mentions in that string of its given name or surname ("Dan Gregory ... Dan
-             arrived") go too, unless they are part of a place name ("Prince William", "Taylor St").
-  water field  a discharge report's receiving-water field (waterbody_text, raw "Receiving Waterbody",
-             RECEIVING_WATER_BODY ...) holding only a name (person_shaped: two to four capitalised words led by a
-             common given name, no water, place or organisation word, no known name; or name_like: no word of it
-             known to the lexicon) is removed whole, and the name everywhere else (several CT DEEP reports put the
-             reporter's name there). Such a value never enters the lexicon as a place name (waterish). Beach,
-             HAB, shellfish and rain advisories are exempt: their field names a site.
-  blocklist  data/build/name-blocklist.json (gitignored with data/build: it quotes the names; the
-             lexicon also reads data/name-blocklist.json when there is one): names the owner wants
-             removed everywhere, in any context.
-  allowlist  data/name-allowlist.json: phrases never removed (false positives such as "Mr. Rooter",
-             a drain company); they never come up as candidates again.
-
-build/name_review.py lists every candidate, removed or not, for the owner (data/build/name-review.json).
+Default publication uses PublicRecords, redactor_for and redact_events as identity
+adapters. The retired blocklist is never read. Explicit requested removals live
+in export.removals. Legacy lexicon/detector APIs remain for map-name validation
+and offline analysis; they are not a default publication filter.
 """
 from __future__ import annotations
 
@@ -69,7 +23,7 @@ ALLOWLIST = DATA_DIR / "name-allowlist.json"
 BLOCKLIST = BUILD_DIR / "name-blocklist.json"       # data/build is gitignored: the file quotes the names
 # top-level fields that can quote a source's text (raw is walked in full)
 FREE_TEXT_FIELDS = ("waterbody_text", "outfall_name", "volume_text", "advice_text", "parse_error", "material")
-# the contexts that remove a name (drop one here to stop removing on it; name_review still lists it)
+# Historical identity normalization contexts; never a publication filter.
 AUTO_CONTEXTS = ("honorific", "role", "name_cue", "phone_email", "address", "contact", "title", "action")
 SINGLE_CONTEXTS = ("role", "name_cue", "phone_email", "action")      # enough for a lone given name
 # a phone number with area code: top-level free text is not scrubbed by common.strip_personal (only raw is), and the
@@ -327,12 +281,8 @@ def load_list(path: Path) -> list[str]:
 
 
 def blocklist(data_dir: Path) -> list[str]:
-    """The owner's blocklist: data/build/name-blocklist.json (gitignored: it quotes the names), plus
-    data/name-blocklist.json when there is one."""
-    out: list[str] = []
-    for p in (data_dir / BLOCKLIST.relative_to(DATA_DIR), data_dir / BLOCKLIST.name):
-        out += [n for n in load_list(p) if n not in out]
-    return out
+    """Retired default list: never open it, even for legacy callers."""
+    return []
 
 
 # raw keys whose short values name a utility, permittee, water or beach (never a private person)
@@ -857,102 +807,6 @@ def quote_swaps(orig: dict, red: dict) -> list[tuple[str, str]]:
     return sorted(out.items(), key=lambda kv: -len(kv[0]))
 
 
-# ---------------------------------------------------------------- the export's self-check
-
-_SCAN_WORDS = re.compile(r"[^\W\d_]+")
-
-
-class BlockScan:
-    """Exact legacy matches, with one prefix-factored compiled pattern rejecting clean text.
-
-    The word prefilter remains authoritative: its lower()/Unicode behavior is subtly
-    different from re.I. Only a possible phrase hit needs tokenization and the original
-    per-name checks (which preserve overlapping names, duplicates and input order).
-    """
-
-    def __init__(self, names):
-        self.phrases = [(n, frozenset(_SCAN_WORDS.findall(n.lower())), _phrase_re([n])) for n in names if n.strip()]
-        self.words = frozenset().union(*(ws for _, ws, _ in self.phrases)) if self.phrases else frozenset()
-        # Search in the direction with fewer initial characters. Surnames often
-        # share suffixes; factoring them avoids a wide branch at every position.
-        phrases = [" ".join(n.split()) for n, _, _ in self.phrases]
-        self._reverse = len({n[-1].lower() for n in phrases}) < len({n[0].lower() for n in phrases})
-        trie = {}
-        for phrase in phrases:
-            node = trie
-            # These are exactly _phrase_re's literal characters and space runs.
-            for c in phrase[::-1] if self._reverse else phrase:
-                node = node.setdefault(c, {})
-            node[None] = {}
-
-        # Wide alternations can cost more than the cheap word filter on text
-        # containing no name words. Keep that rejection first in this case.
-        self._word_first = len(trie) > 4
-        # Bottom-up construction avoids recursion for unusually long entries.
-        stack, bodies = [(trie, False)], {}
-        while stack:
-            node, ready = stack.pop()
-            if not ready:
-                stack.append((node, True))
-                stack.extend((child, False) for c, child in node.items() if c is not None)
-                continue
-            branches = [(r"[ ]{1,3}" if c == " " else re.escape(c)) + bodies.pop(id(child))
-                        for c, child in node.items() if c is not None]
-            body = branches[0] if len(branches) == 1 else "(?:" + "|".join(branches) + ")"
-            bodies[id(node)] = ("(?:" + body + ")?" if None in node else body) if branches else ""
-        try:
-            # No assertions here: this is a conservative rejection filter. The
-            # original regexes below enforce boundaries, including apostrophes.
-            self._any = re.compile(bodies[id(trie)], re.I) if self.phrases else None
-        except (RecursionError, re.error):
-            # A pathological deeply branching trie can exceed the regex parser's
-            # nesting limit. The flat union is still an exact rejection filter.
-            self._reverse = False
-            self._any = _phrase_re(n for n, _, _ in self.phrases)
-        # A digit cannot be part of any literal phrase in this mode; replacing it
-        # with another digit preserves both boundary assertions and _SCAN_WORDS.
-        self._digits = (re.compile(r"[1-9]")
-                        if not any(re.search(r"[0-9]", n) for n, _, _ in self.phrases) else None)
-
-    def cache_text(self, text: str) -> str:
-        """Match-equivalent cache input, without dropping any field or decoding JSON.
-
-        If a name contains a digit, use exact text. Otherwise all ASCII digits are
-        interchangeable: none can match a literal name character, all are word characters,
-        and all separate _SCAN_WORDS tokens. Length and punctuation stay intact.
-        """
-        return self._digits.sub("0", text) if self._digits is not None else text
-
-    def found(self, text: str) -> list[str]:
-        """The blocklisted names in the text (as listed), [] when none."""
-        if not text or self._any is None:
-            return []
-        have = self.words.intersection(_SCAN_WORDS.findall(text.lower())) if self._word_first else None
-        if have is not None and (not have or not any(ws <= have for _, ws, _ in self.phrases)):
-            return []
-        if not self._any.search(text[::-1] if self._reverse else text):
-            return []
-        if have is None:
-            have = self.words.intersection(_SCAN_WORDS.findall(text.lower()))
-        if not have:
-            return []
-        return [n for n, ws, rx in self.phrases if ws <= have and rx.search(text)]
-
-    def scrub(self, text: str) -> str:
-        """The text with every blocklisted name that found() finds replaced by REDACTED, by the same phrase rule
-        (_phrase_re, longest name first), so found() finds nothing in the result and a second scrub changes nothing.
-        Unchanged when nothing is found, and unchanged when a blocklisted name matches inside the marker itself (a
-        scrub would nest markers on every rerun): the scan then refuses, as it should."""
-        if self.found(REDACTED):
-            return text
-        for _ in range(len(self.phrases) + 1):
-            hits = self.found(text)
-            if not hits:
-                break
-            text = _phrase_re(hits).sub(REDACTED, text)
-        return text
-
-
 def _map_raw(o, r: "Redactor", key: str = ""):
     """raw with every string through the free-text pass, and receiving-water fields through Redactor.water."""
     if isinstance(o, dict):
@@ -983,15 +837,22 @@ def _merge(spans):
 
 
 def redactor_for(events: list[dict], data_dir: Path = DATA_DIR) -> Redactor:
-    lex = build_lexicon(events, data_dir)
-    return Redactor(lex, marked_names(events, lex))
+    """Compatibility adapter without lexicon construction or private-list reads."""
+    return PublicRecords()
 
 
 def redact_events(events: list[dict], data_dir: Path = DATA_DIR, redactor: Redactor | None = None) -> list[dict]:
-    """The export's pass: names of private individuals in quoted source text -> "[name removed]".
-    Builds the lexicon from these events, finds the names marked as a person anywhere and removes
-    them everywhere, with the blocklist and never the allowlist. Returns new records; the input is
-    not changed. redactor: one already built from these events (redactor_for), so the caller can run
-    the same one over its own text that quotes the records (Redactor.note)."""
-    r = redactor or redactor_for(events, data_dir)
-    return [r.event(e) for e in events]
+    """Public records are preserved; requested removals happen at export only."""
+    return events
+
+
+class PublicRecords:
+    """Compatibility with source readers and placement formatters; no default scrub."""
+    def text(self, value):
+        return value
+
+    water = text
+    event = text
+
+    def note(self, value, swaps=()):
+        return value
