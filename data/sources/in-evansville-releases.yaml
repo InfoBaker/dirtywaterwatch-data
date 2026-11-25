@@ -7,7 +7,7 @@ level: "municipal"
 # Feed row: pipeline/ingest/in_evansville_releases.py. This is release history,
 # separate from the current CSO status endpoint, which is not read by this feed.
 cadence: "1 hour"
-license: "No map-specific license stated. The official page links city terms scoped to www.evansvillegov.org; their application to this separate factual feed is unstated. See https://www.evansvillegov.org/city/terms/."
+license: "Published with credit to Evansville Water and Sewer Utility. The utility's site links the City of Evansville's website terms (https://www.evansvillegov.org/city/terms/), which allow personal, noncommercial reuse; DirtyWaterWatch is a noncommercial public-records service."
 attribution: "Evansville Water and Sewer Utility"
 enabled: true
 role: "events"

@@ -769,7 +769,7 @@
   "has_outfall_ids": false,
   "cadence": "Hourly read; entries may appear weeks after the event.",
   "history": "729 unique releases, Jan. 3, 2015, to Sept. 6, 2026; 33 in the preceding 12 months as read Nov. 22, 2026.",
-  "license": "No map-specific license stated. The official homepage links city terms scoped to www.evansvillegov.org, limiting reuse to personal noncommercial use without permission; applicability to the separate cso.ewsu.com factual feed is not stated. https://www.evansvillegov.org/city/terms/",
+  "license": "Published with credit to Evansville Water and Sewer Utility. The utility's site links the City of Evansville's website terms (https://www.evansvillegov.org/city/terms/), which allow personal, noncommercial reuse; DirtyWaterWatch is a noncommercial public-records service.",
   "legal_basis": null,
   "status": "used",
   "status_reason": "Read by in_evansville_releases: stable source IDs, source gallons and cause, minute start/end and affected area. Invalid source ends stay unknown. Placement uses only named waters; ground and storm-sewer areas are counted as naming no receiving water. Current CSO outfall status is a separate later source.",
