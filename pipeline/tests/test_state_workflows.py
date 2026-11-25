@@ -170,6 +170,7 @@ def checkout(tmp: Path) -> Path:
     (tmp / "scripts").mkdir(parents=True)
     shutil.copy(ROOT / "scripts" / "state_paths.py", tmp / "scripts" / "state_paths.py")
     shutil.copy(ROOT / "scripts/removal_list.py", tmp / "scripts/removal_list.py")
+    shutil.copy(ROOT / "scripts/publication_deletions.py", tmp / "scripts/publication_deletions.py")
     (tmp / "pipeline/export").mkdir(parents=True)
     shutil.copy(ROOT / "pipeline/export/removals.py", tmp / "pipeline/export/removals.py")
     shutil.copy(ROOT / "pipeline/common.py", tmp / "pipeline/common.py")

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nh-berlin-wastewater-event-alert"
 name: "Berlin Notify Me 'Wastewater Event Alert'"
 url: "https://www.berlinnh.gov/list.aspx"

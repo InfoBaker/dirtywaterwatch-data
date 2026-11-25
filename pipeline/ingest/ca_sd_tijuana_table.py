@@ -332,8 +332,8 @@ def record_ids(rows: list[dict]) -> list[str]:
         d = parse_date(r.get("start"))
         # Preserve the historical street-based identity independently of the published
         # location. Source text below remains complete, including house numbers.
-        from common import ADDRESS_NUMBER_RE, HOUSE_NUMBER_REMOVED
-        loc = ADDRESS_NUMBER_RE.sub(HOUSE_NUMBER_REMOVED, clean(r.get("location"))).lower()
+        from ingest import identity_text
+        loc = identity_text.strip_house_numbers(identity_text.scrub_text(clean(r.get("location")))).lower()
         base = (f"{d.isoformat() if d else 'no-start'}-{slugify(water_name(loc) or 'site')}-"
                 f"{hashlib.sha256(loc.encode()).hexdigest()[:10]}")
         seen[base] += 1

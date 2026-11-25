@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-lynchburg-cso-alerts"
 name: "Lynchburg CSO Alert System (Lynchburg Alerts, Everbridge) and CSO page"
 url: "https://www.lynchburgva.gov/513/Combined-Sewer-Overflow-System-CSO"

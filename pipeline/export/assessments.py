@@ -28,7 +28,7 @@ import math
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
-from common import BUILD_DIR, scrub_text
+from common import BUILD_DIR, scrub_text, read_json
 
 CACHE = BUILD_DIR / "attains" / "attains-waters.json"
 STALE_DAYS = 30
@@ -235,7 +235,7 @@ def read_cache(path: Path | None = None) -> tuple[dict | None, str | None]:
     try:
         if not path.is_file():
             return None, "no assessment file for this export"
-        return json.loads(path.read_text(encoding="utf-8")), None
+        return read_json(path), None
     except (OSError, ValueError, UnicodeDecodeError, RecursionError):
         return {}, "the assessment file is not readable"
 

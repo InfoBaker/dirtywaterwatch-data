@@ -165,8 +165,8 @@ def test_idem_outfall_numbers_and_names():
     assert B.outfall_number("004Z -- SSO") == "004Z"
     assert B.outfall_number("A38 -- CSO - Example St and Sample St") == "A38"
     assert B.outfall_number("CSO at the bridge") is None
-    assert B.scrub_name("CSO - 1234 S Example St") == "CSO - [house number removed] S Example St"
-    assert B.scrub_name("CSO - 800' North of 4321 Sample Ave.") == "CSO - 800' North of [house number removed] Sample Ave."
+    assert B.scrub_name("CSO - 1234 S Example St") == "CSO - 1234 S Example St"
+    assert B.scrub_name("CSO - 800' North of 4321 Sample Ave.") == "CSO - 800' North of 4321 Sample Ave."
     for keep in ("CSO - Highway 67 East of Highway 1", "CSO - 001 Pond", "CSO - CS 002 Pump Station",
                  "CSO - Alley 31-32 North Side Blvd", "CSO - Example Rd 120\" S of Bridge"):
         assert B.scrub_name(keep) == keep
@@ -190,7 +190,7 @@ def test_idem_rows_supersede_epas_and_inactive_is_closed():
     assert (by["002"]["lat"], by["002"]["lon"]) == (39.9, -86.1) and by["002"]["coords_from"] == "state outfall layer"
     assert by["003"]["lat"] == 40.0 and isinstance(by["003"]["lat"], float)
     assert by["002"]["downstream_waters"] == ["Example River", "Wabash River"]
-    assert by["003"]["outfall_status"].startswith("CLS") and "house number removed" in by["003"]["outfall_name"]
+    assert by["003"]["outfall_status"].startswith("CLS") and "1234 Sample St" in by["003"]["outfall_name"]
     assert not by["004"]["outfall_status"].startswith("CLS")
     assert by["005Z"]["outfall_kind"] == "other" and by["002"]["outfall_kind"] == "cso"
     assert out["epa_not_in_state_layer"][0]["outfall"] == "009"
@@ -653,8 +653,8 @@ def test_the_saved_layer_answer_is_sanitized_before_it_is_written():
     doc = {"features": [_idem(1, "IN0000008", "002C -- CSO - 1234 S Example St", "Active", 40.123456, -86.654321)]}
     out = B.sanitize(doc)
     a, g = out["features"][0]["attributes"], out["features"][0]["geometry"]
-    assert "1234" not in json.dumps(out) and "Jane Example" not in json.dumps(out) and "Photo_Credit" not in a
-    assert g == {"x": -86.654, "y": 40.123} and a["X_Coordinate"] == -86.654
+    assert "1234 S Example St" in json.dumps(out) and "Jane Example" in json.dumps(out) and "Photo_Credit" in a
+    assert g == {"x": -86.654321, "y": 40.123456} and a["X_Coordinate"] == -86.654321
     assert B.outfall_number(a["CSO_Number"]) == "002"
 
 
@@ -794,7 +794,7 @@ def test_a_cso_number_without_the_delimiter_is_scrubbed_and_an_error_answer_is_a
     doc = {"features": [_idem(1, "IN0000008", "CSO at 1234 S Example St", "Active", 40.1, -86.6),
                         _idem(2, "IN0000008", "003C", "Active", 40.1, -86.6)]}
     out = json.dumps(B.sanitize(doc))
-    assert "1234" not in out and "[house number removed] S Example St" in out and '"003C"' in out
+    assert "1234 S Example St" in out and '"003C"' in out
 
 
 def test_a_reopened_algae_advisory_renders_both_intervals_and_other_sources_are_unchanged():

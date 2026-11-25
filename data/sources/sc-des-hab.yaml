@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": ["Creator", "Editor"], "customer_identifier": [], "description": []}
 id: "sc-des-hab"
 name: "South Carolina DES Harmful Algal Bloom Monitoring: bloom delineations and the watches and advisories table"
 url: "https://services5.arcgis.com/OMDIQXm11z4wcK26/arcgis/rest/services/algal_hydro_2_view/FeatureServer/0"

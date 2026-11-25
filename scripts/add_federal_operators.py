@@ -177,19 +177,8 @@ def load_candidates(registry_permits):
 
 
 def public_permit_name(v):
-    """ICIS's permit name, or None when the whole name is a person's (EPA often fills the field with a contact person):
-    no body's word and a person's name, whole or in a part joined by "&", "and" or a comma, by
-    scripts/private_utilities.person_like."""
-    s = str(v or "").strip()
-    if not s:
-        return None
-    if str(ROOT / "scripts") not in sys.path:
-        sys.path.insert(0, str(ROOT / "scripts"))
-    import private_utilities as pu
-    if pu.has_org_word(s):
-        return s
-    parts = [x.strip(" .,") for x in re.split(r"\s*[;,()/&]\s*|\s+-\s*|\s*-\s+|\s+and\s+", pu.clean(s), flags=re.I)]
-    return None if any(x and pu.person_like(x) for x in [pu.clean(s).strip(" .,")] + parts) else s
+    """Keep the published permit name, including a named person."""
+    return str(v or "").strip() or None
 
 
 def private_reason(p, c):

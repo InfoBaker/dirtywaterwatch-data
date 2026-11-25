@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "vt-doh-swimming-water-safety-page"
 name: "VT Dept of Health Swimming & Water Safety page"
 url: "https://www.healthvermont.gov/environment/swimming-water-safety"

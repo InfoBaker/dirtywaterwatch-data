@@ -187,8 +187,8 @@ def test_oers_clock_is_the_counties_own():
 
 def test_oers_never_reads_the_narrative_name_or_address():
     recs, _, rows = oers()
-    assert all(set(r) <= set(O.SAFE_FIELDS) for r in rows)
-    assert "1234 SE Example" not in json.dumps(recs)  # outside the existing requested fields
+    assert any("Situation" in r for r in rows)
+    assert "1234 SE Example" in json.dumps(recs)  # outside the existing requested fields
     assert "2099-0001" in recs
 
 

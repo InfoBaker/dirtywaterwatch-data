@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "oh-echo-dmr-cso"
 name: "EPA ECHO discharge monitoring reports: Ohio combined sewer outfalls' monthly figures (EPA's state DMR file)"
 url: "https://echo.epa.gov/files/echodownloads/NPDES_by_state_year/OH_FY2026_NPDES_DMRS_LIMITS.zip"

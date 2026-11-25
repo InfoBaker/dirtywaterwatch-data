@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ky-echo-dmr-cso"
 name: "EPA ECHO discharge monitoring reports: Kentucky combined sewer outfalls' monthly figures (EPA's state DMR file)"
 url: "https://echo.epa.gov/files/echodownloads/NPDES_by_state_year/KY_FY2026_NPDES_DMRS_LIMITS.zip"

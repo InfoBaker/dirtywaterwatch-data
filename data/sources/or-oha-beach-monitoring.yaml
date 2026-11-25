@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "or-oha-beach-monitoring"
 name: "Oregon Health Authority, Oregon Beach Monitoring Program: current beach conditions"
 url: "https://www.oregon.gov/oha/PH/HEALTHYENVIRONMENTS/RECREATION/BEACHWATERQUALITY/Pages/status.aspx"

@@ -11,16 +11,9 @@ Source
   public list of newer reports was found: Oregon's newer sewage reports are in DEQ's files (OERS takes them by telephone,
   1-800-452-0311; OAR 340-142-0040; permit Schedule F).
 
-What is read (privacy)
-  SAFE_FIELDS only, requested by name (outFields). Never requested: Situation (the call narrative: it names callers,
-  residents and contractors), Name (the incident's title, often a street address or a business or person's name),
-  Address (the street address, often a private home: the point and the city carry the place), Latitude and Longitude
-  (text copies of Lat_DD and Lon_DD). data/raw keeps only the requested fields of the rows read (safe_row), never
-  another field, with every point rounded to three decimals (about 100 m) before anything is saved: DEQ's points are
-  to about a metre and many are homes (Oregon go-live audit 2026-11-08 P2-1). A report whose Source is a private
-  residence or a septic tank (PRIVATE_SOURCES: 77 and 24 rows) keeps its county only: no point, no city
-  (raw._point_withheld), placed only on a water it names (raw._placement named_water_only), as Tennessee's rule does
-  for its bloom reporters. common.event runs common.strip_personal on raw.
+Published fields
+  All attributes are requested and retained, including Situation, Name and Address. Source coordinates are kept
+  with the existing geographic validity checks. Source YAML declares descriptions and dedicated contact fields.
 
 Record rules (rules only; no model, no geocoding)
   - Rows: Material "Sewage" (2,371). The category's other materials (Wastewater (Non-Sewage) 266, Biological Material
@@ -115,7 +108,7 @@ POINT_DECIMALS = 3
 
 def safe_row(attrs: dict) -> dict:
     """Preserve the source public record (decision 57)."""
-    return {k: attrs.get(k) for k in SAFE_FIELDS}
+    return dict(attrs)
 
 
 def clean(v) -> str:
@@ -201,7 +194,7 @@ def record(a: dict, key: str, fetched_at: str) -> dict:
     private = False  # published source locations are kept
     lat, lon = (None, None) if private else (a.get("Lat_DD"), a.get("Lon_DD"))
     bad = BAD_POINTS.get(clean(a.get("OERS_No")))
-    raw = {"state": "OR", "time_zone": zone,
+    raw = {**a, "state": "OR", "time_zone": zone,
            "timezone_note": ("Mountain time: Malheur County north of township 35 South (49 CFR 71.9)"
                              if zone == zones.MOUNTAIN else "Pacific time"),
            "oers_no": clean(a.get("OERS_No")), "city": None if private else (clean(a.get("City")) or None),
@@ -214,8 +207,7 @@ def record(a: dict, key: str, fetched_at: str) -> dict:
                            "began at or before it" if prec == "minute" else
                            "the date of the report to OERS, with no time (DEQ's layer gives no separate start)"),
            "end_basis": "DEQ's layer gives no end for any spill",
-           "_withheld": "the call narrative, the incident title and the street address are not read (they name people "
-                        "and private homes)"}
+           }
     if src.lower() not in TYPES:
         raw["_source_type"] = src or None
         raw["_type_basis"] = (f"DEQ's material is Sewage; the source is not a public sewer or plant ({src or 'not '
@@ -285,7 +277,7 @@ def query(sess: requests.Session) -> list[dict]:
     rows, off = [], 0
     while True:
         r = sess.get(f"{LAYER}/query", headers=HEADERS, timeout=TIMEOUT, params={
-            "where": WHERE, "outFields": ",".join(SAFE_FIELDS), "orderByFields": "OBJECTID", "returnGeometry": "false",
+            "where": WHERE, "outFields": "*", "orderByFields": "OBJECTID", "returnGeometry": "false",
             "resultOffset": off, "resultRecordCount": PAGE, "f": "json"})
         r.raise_for_status()
         d = r.json()

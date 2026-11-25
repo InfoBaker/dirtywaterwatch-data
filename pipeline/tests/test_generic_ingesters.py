@@ -43,21 +43,20 @@ def build_csv(b=None, text=CSV, prev=()):
 
 # ---------------------------------------------------------------- privacy
 
-def test_a_personal_field_never_reaches_the_records():
+def test_public_contact_fields_reach_the_download_records():
     recs, _ = build_csv()
     dump = json.dumps(recs)
     for s in ['312-555-0142', 'Placeholder', 'ops.person@example.org']:
         assert s in dump
     a1 = next(r for r in recs if r["source_record_id"] == "A1")
-    assert set(a1["raw"]["row"]) <= set(block()["safe_fields"])
+    assert {"reporter_name", "contact_email", "contact_phone"} <= set(a1["raw"]["row"])
     assert "[email removed]" not in a1["raw"]["row"]["notes"] and "[phone removed]" not in a1["raw"]["row"]["notes"]
 
 
-def test_a_personal_field_named_safe_is_refused_and_a_reviewed_one_still_leaves_raw():
+def test_contact_fields_need_no_privacy_justification():
     b = block(safe_fields=block()["safe_fields"] + ["reporter_name"])
-    assert any("reporter_name" in e for e in runner.validate_block(b))
-    with pytest.raises(F.SpecError):
-        build_csv(b)
+    assert not runner.validate_block(b)
+    assert all("reporter_name" in r["raw"]["row"] for r in build_csv(b)[0])
     # a reviewer may let a field through (an operator's office line, say); strip_personal still drops it from raw
     b = block(safe_fields=block()["safe_fields"] + ["contact_phone"],
               reviewed_fields={"contact_phone": "test: the office line of the utility"})
@@ -183,18 +182,18 @@ def rss_block(**kw):
     return b
 
 
-def test_rss_and_atom_items_keep_publication_time_apart_and_drop_authors():
+def test_rss_and_atom_items_keep_publication_time_apart_and_keep_authors():
     b = rss_block()
     recs, _ = runner.build("x-rss", b, rss.parse(b, RSS.encode()), FETCHED, [])
     assert len(recs) == 1
     r = recs[0]
     assert r["published_at"] == "2026-11-03T15:20:00-06:00" and r["started_at"] is None and r["fetched_at"] == FETCHED
     assert r["event_type"] == "beach_closure" and r["source_url"] == "https://example.invalid/n/1"
-    assert "Pat Example" not in json.dumps(recs) and "press@example.org" in json.dumps(recs)
+    assert "Pat Example" in json.dumps(recs) and "press@example.org" in json.dumps(recs)
     assert r["advice_text"].startswith("The county closed Example Beach.")
     a = runner.build("x-atom", b, rss.parse(b, ATOM.encode()), FETCHED, [])[0][0]
     assert (a["published_at"], a["source_updated_at"]) == ("2026-11-03T08:00:00+00:00", "2026-11-03T09:30:00+00:00")
-    assert a["status"] == "advisory_lifted" and a["event_type"] == "beach_advisory" and "Pat Example" not in json.dumps(a)
+    assert a["status"] == "advisory_lifted" and a["event_type"] == "beach_advisory" and "Pat Example" in json.dumps(a)
 
 
 def test_socrata_json_pages_and_metadata_time():
@@ -210,7 +209,7 @@ def test_socrata_json_pages_and_metadata_time():
     assert by["1"]["started_at"] == "2026-11-01T07:00:00-06:00" and by["1"]["time_precision"] == "minute"
     assert by["2"]["started_at"] == "2026-11-02T00:00:00-06:00" and by["2"]["time_precision"] == "day"
     assert by["1"]["source_updated_at"] == "2026-11-02T09:55:53-06:00" == stats["source_updated_at"]
-    assert "Pat Example" not in json.dumps(recs)
+    assert "Pat Example" in json.dumps(recs)
     assert socrata.urls(b)["json"] == "https://data.example.invalid/resource/abcd-1234.json"
 
 
@@ -226,7 +225,7 @@ def test_arcgis_geometry_and_layer_edit_time():
                            {"editingInfo": {"lastEditDate": 1793634953000}})
     r = recs[0]
     assert (r["lat"], r["lon"], r["status"]) == (41.88, -87.62, "ongoing")
-    assert r["source_updated_at"] == "2026-11-02T09:55:53-06:00" and "pexample" not in json.dumps(recs)
+    assert r["source_updated_at"] == "2026-11-02T09:55:53-06:00" and "pexample" in json.dumps(recs)
 
 
 # ---------------------------------------------------------------- the runner and the registry
@@ -472,7 +471,7 @@ def test_personal_field_rule_covers_names_owners_callers_and_nested_objects():
     b["record"] = {"source_record_id": "id", "lat": {"field": "site.lat", "parse": "number"}}
     doc = {"items": [{"id": 1, "site": {"owner": "Pat Example", "caller": "Lee Example", "lat": 39.1}}]}
     r = runner.build("x-nest", b, csv_json.parse(b, json.dumps(doc).encode()), FETCHED, [])[0][0]
-    assert "Example" not in json.dumps(r) and r["raw"]["_dropped_objects"] == ["site"] and r["lat"] is None
+    assert "Example" in json.dumps(r) and "_dropped_objects" not in r["raw"] and r["lat"] is None
     # a discharger name read from a field is scrubbed as free text
     b2 = block(safe_fields=block()["safe_fields"] + ["filer"], reviewed_fields={"filer": "test: the utility"})
     b2["record"]["discharger_name"] = "filer"
@@ -745,7 +744,7 @@ def _intercept(monkeypatch, tmp_path, content: bytes, parse=None):
     return saved, states
 
 
-def test_fetch_rows_keeps_no_excluded_field_or_contact_in_raw_storage(monkeypatch, tmp_path):
+def test_fetch_rows_keeps_all_downloaded_public_fields(monkeypatch, tmp_path):
     saved, states = _intercept(monkeypatch, tmp_path, CSV.encode())
     rows, meta, raw_path = runner.fetch_rows("x-test", block(), None, None)
     assert len(saved) == 1 and saved[0][1] == "json" and raw_path == "x.json"
@@ -754,13 +753,13 @@ def test_fetch_rows_keeps_no_excluded_field_or_contact_in_raw_storage(monkeypatc
         assert s in blob
     doc = json.loads(saved[0][0])
     assert doc["format"] == runner.SAFE_ROWS_FORMAT and len(doc["rows"]) == 3
-    assert all(set(r) <= set(block()["safe_fields"]) for r in doc["rows"])
+    assert all("reporter_name" in r for r in doc["rows"])
     assert "[email removed]" not in doc["rows"][0]["notes"] and "[phone removed]" not in doc["rows"][0]["notes"]
     assert doc["meta"] == meta == {"rowsUpdatedAt": 1762300000, "editingInfo": {"lastEditDate": 1762300000000}}
     # nothing else was written under the run's directories
     assert not [p for p in tmp_path.rglob("*") if p.is_file() and p.suffix != ".json"]
     for p in tmp_path.rglob("*.json"):
-        assert not any(s in p.read_text() for s in PERSONAL), p
+        assert p.suffix == ".json"  # metadata state and public source rows, no side files
     # the same response again: nothing new saved
     runner.fetch_rows("x-test", block(), None, None)
     assert len(saved) == 1

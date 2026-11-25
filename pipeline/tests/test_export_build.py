@@ -1,5 +1,6 @@
 """Normal export.build output, including per-water event provenance."""
 import json
+import common
 
 from build import rain_history, reaches, status as S
 from common import event
@@ -25,6 +26,7 @@ def test_normal_export_keeps_calculated_end_basis_in_water_json(tmp_path, monkey
     for name, value in {"OUT_DIR": tmp_path / "out", "BUILD_DIR": tmp_path / "build",
                         "DATA_DIR": tmp_path / "data"}.items():
         monkeypatch.setattr(X, name, value)
+    monkeypatch.setattr(common, "DATA_DIR", tmp_path / "data")
     # Isolate the private request list; no state list is read by this export.
     monkeypatch.setattr(X.RemovalList, "load", lambda: X.RemovalList([]))
     monkeypatch.setattr(S, "_STATES", {"RI"})
@@ -72,5 +74,7 @@ def test_normal_export_keeps_calculated_end_basis_in_water_json(tmp_path, monkey
                                 'kind': 'record', 'match': old_id}])
     monkeypatch.setattr(X.RemovalList, 'load', lambda: requested)
     X.export()
-    assert json.loads((X.OUT_DIR / 'events' / X.event_file_name(old_id)).read_text()) is None
+    assert not (X.OUT_DIR / 'events' / X.event_file_name(old_id)).exists()
+    assert 'events/' + X.event_file_name(old_id) in json.loads(
+        (X.DATA_DIR / 'private/publication-deletions.json').read_text())
     assert json.loads((X.OUT_DIR / 'events' / X.event_file_name(e['event_id'])).read_text())['event_id'] == e['event_id']

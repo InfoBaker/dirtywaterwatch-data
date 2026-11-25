@@ -185,8 +185,8 @@ def validate_block(block: dict, source_id: str = "") -> list[str]:
         errs.append(f"missing settings {sorted(missing)} for {inner}")
     if inner == "arcgis" and block.get("out_fields") is not None:
         of = block["out_fields"]
-        if not isinstance(of, list) or set(of) - set(block.get("safe_fields") or []):
-            errs.append("arcgis out_fields is a list of safe fields (never *)")
+        if not isinstance(of, list) or not all(isinstance(f, str) and f for f in of):
+            errs.append("arcgis out_fields is a list of field names")
     rc = block.get("round_coords")
     if rc is not None and (isinstance(rc, bool) or not isinstance(rc, int) or not 0 <= rc <= 6):
         errs.append("round_coords is a whole number of decimals, 0 to 6")
@@ -264,16 +264,20 @@ def to_record(row: dict, ctx: F.Ctx, dropped: list | None = None) -> dict:
     A transform or matcher that fails leaves the mapped fields and the record key as the field map made them, adds
     its error, and counts in raw._hook_errors (the run fails when too many rows have one)."""
     block = ctx.block
+    from ingest.identity_compat import generic_row
+    identity = generic_row(row, block)[0]
     raw = {"row": dict(row)}
     if dropped:
         raw["_dropped_objects"] = sorted(dropped)
     try:
         rec, notes = F.build_fields(row, ctx)
+        original_id = rec.get("source_record_id")
+        identity_id = F.build_fields(identity, ctx)[0].get("source_record_id")
     except F.SpecError:
         raise
     except Exception as e:  # noqa: BLE001 - never drop a record
         raw["_hook_errors"] = [f"field map: {error_text(e)}"]
-        return event(source_id=ctx.source_id, source_record_id="row-" + F.row_sha(row)[:12],
+        return event(source_id=ctx.source_id, source_record_id="row-" + F.row_sha(identity)[:12],
                      fetched_at=ctx.fetched_at, source_updated_at=ctx.source_updated_at, raw=raw,
                      parse_error=f"the field map could not read this row ({error_text(e)})")
     errors = []
@@ -300,8 +304,10 @@ def to_record(row: dict, ctx: F.Ctx, dropped: list | None = None) -> dict:
         notes["_hook_errors"] = hook_errors
     raw.update(notes)
     sid = rec.pop("source_record_id", None)
+    if sid == original_id:
+        sid = identity_id
     if sid is None:
-        sid = "row-" + F.row_sha(row)[:12]
+        sid = "row-" + F.row_sha(identity)[:12]
         problems.append("no source record id: the id is a hash of the row")
     rec = {k: v for k, v in rec.items() if k not in RECORD_INTERNAL}
     if rec.get("source_updated_at") is None:          # the record's own edit time, else the dataset's
@@ -339,7 +345,8 @@ def dedupe(records: list[dict], rows: list[dict], block: dict) -> tuple[list[dic
             out.append(grp[0][0])
             n["dropped_repeats"] += len(grp) - 1
             continue
-        grp.sort(key=lambda p: _order_key(p[0], p[1], order, ignore))
+        from ingest.identity_compat import generic_row
+        grp.sort(key=lambda p: _order_key(p[0], generic_row(p[1], block)[0], order, ignore))
         first = grp[0][0]
         out.append(first)
         for i, (rec, _) in enumerate(grp[1:], start=2):

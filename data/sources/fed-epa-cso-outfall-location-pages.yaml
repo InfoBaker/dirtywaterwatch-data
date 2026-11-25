@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "fed-epa-cso-outfall-location-pages"
 name: "EPA 'Where CSO outfalls are located' and CSO program pages"
 url: "https://www.epa.gov/npdes/where-combined-sewer-overflow-outfalls-are-located"

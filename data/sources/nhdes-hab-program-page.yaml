@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nhdes-hab-program-page"
 name: "NHDES Cyanobacteria Harmful Algal Blooms page"
 url: "https://www.des.nh.gov/water/healthy-swimming/harmful-algal-blooms"

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-deep-agol-ct-cso-20160209"
 name: "CT DEEP CT_CSO_20160209 (2016 CSO locations; feeds the DEEP CSO Right-to-Know instant app)"
 url: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CT_CSO_20160209/FeatureServer/1"

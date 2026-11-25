@@ -12,10 +12,9 @@ Source (registry mi-egle-beachguard; docs/analysis/2026-11-21-swimguide.md in th
   - 2082 "Closures and Contamination Advisories": every advisory since 1994 (3,655 on 2026-11-21, 246 begun in 2026
     at 152 beaches): StartDate, EndDate (dates: "6/12/2026 12:00:00 AM"), AdvisoryType (Closed, Contamination
     Advisory), Reason, PollutionSource, DaysUnderAdvisory, IssuingOrganization, AdvisoryComments, Name, Identifier
-    (the beach's id). One request each run (about 63 KB gzip), asking for ADV_KEPT only (responseFields), so
-    AdvisoryComments is not sent; an answer with every field is still read and the comments dropped.
+    (the beach's id). One request each run (about 63 KB gzip), requesting every advisory column, including AdvisoryComments.
   - 2081 "Beach Details": the 2,914 sites with their point, county, waterbody, EPA beach id and access. Read at most
-    once a day (SITES_MAX_AGE_H) and whenever an advisory names a beach the saved list lacks; only SITE_FIELDS are
+    once a day (SITES_MAX_AGE_H) and whenever an advisory names a beach the saved list lacks; all returned fields are
     kept (data/build/mi-egle-beaches-sites.json). A new answer is added to the saved list (a beach it lacks keeps its
     saved point) and one under MIN_SITES or MIN_SHARE of the saved list is not used.
   - 2078 "Sampling Results" (452,680 rows) is not read.
@@ -23,12 +22,9 @@ Source (registry mi-egle-beachguard; docs/analysis/2026-11-21-swimguide.md in th
   monitoring". Law: the BEACH Act (CWA 406) and Part 31 of Michigan's NREPA (Rule 62: E. coli 300 per 100 mL as a
   daily geometric mean, 130 as a 30-day mean); EGLE says local health departments post advisories "within 24 hours".
 
-Privacy (what is kept)
-  AdvisoryComments (free text by health department staff) is not requested (responseFields) and, if sent anyway, never
-  kept: not in a record, not in raw, not in the saved raw read. Report 2081 refuses a field list by its display
-  names, so its private columns arrive and are dropped while parsing, before anything is saved. From report 2081 only SITE_FIELDS are kept: never "Site Information - Private Comments", "Site
-  Information - Additional Comments", "Beach Description" or "Site Information - Facilities". Points are rounded to
-  three decimals (POINT_DECIMALS): private beaches are among the sites. common.event runs strip_personal.
+Published fields
+  Advisory comments and all returned site attributes are retained. The identity signature uses the historical
+  columns separately, so adding comments does not split an existing advisory or change its collision suffix.
 
 Records (category beach: beach_closure or beach_advisory; never a sewage discharge record)
   - One per advisory row. Key (source_record_id): "<Identifier>-<start YYYYMMDD>-<closure|advisory>". Rows that are
@@ -97,7 +93,8 @@ REPORT_SITES = 2081
 BOX = {"latitudeMin": 41.5, "latitudeMax": 48.5, "longitudeMin": -90.6, "longitudeMax": -82.0}
 ADV_COLUMNS = ["StartDate", "EndDate", "AdvisoryType", "Reason", "PollutionSource", "DaysUnderAdvisory",
                "IssuingOrganization", "AdvisoryComments", "Name", "Identifier"]
-ADV_KEPT = [c for c in ADV_COLUMNS if c != "AdvisoryComments"]
+IDENTITY_COLUMNS = [k for k in ADV_COLUMNS if k != "AdvisoryComments"]
+ADV_KEPT = list(ADV_COLUMNS)
 SITE_FIELDS = {"Beach ID": "beach_id", "Beach Name": "name", "Latitude": "lat", "Longitude": "lon", "County": "county",
                "Waterbody": "waterbody", "EPA Beach ID": "epa_beach_id",
                "Site Information - Accessibility": "access", "Site Information - Great Lake": "great_lake",
@@ -148,7 +145,7 @@ def decode(body: bytes) -> str:
 
 def fetch_report(sess, report_id: int, fields: list[str] | None = None) -> str:
     """One export report as CSV text. fields: responseFields, the columns to ask for (report 2082 honours it, so its
-    AdvisoryComments never leaves EGLE's server; report 2081 refuses its display names, 400 "is not a field")."""
+    field selection; report 2081 refuses its display names, 400 "is not a field")."""
     params = {"responseContentType": "text/csv", "includeMetadataInResponse": "false", "loadChildren": "true",
               "queryParams": query_params(report_id), "filterString": ""}
     if fields:
@@ -171,11 +168,10 @@ def _valid(r: dict, columns: list[str]) -> bool:
 
 
 def read_advisories(text: str) -> tuple[list[dict], int]:
-    """(the valid advisory rows with ADV_KEPT only, the number of malformed rows left out). AdvisoryComments is
-    dropped here, before anything is saved; a malformed row is dropped whole."""
+    """Valid source rows and the number of malformed rows left out; accept the old header for saved reads."""
     rd = csv.DictReader(io.StringIO(text), restkey="__extra__", restval=None)
     columns = [c.strip() for c in (rd.fieldnames or [])]
-    if columns not in (ADV_KEPT, ADV_COLUMNS):        # the requested fields, or every field when they are not honoured
+    if columns not in (IDENTITY_COLUMNS, ADV_COLUMNS):        # the requested fields, or every field when they are not honoured
         raise ReadError(f"report {REPORT_ADVISORIES}: header changed: {rd.fieldnames}")
     rows, rejected = [], 0
     for r in rd:
@@ -200,14 +196,14 @@ def parse_advisories(text: str) -> list[dict]:
 
 
 def parse_sites(text: str) -> dict[str, dict]:
-    """Report 2081 by Beach ID, SITE_FIELDS only, points rounded."""
+    """Report 2081 by Beach ID, preserving source fields alongside normalized placement fields."""
     rd = csv.DictReader(io.StringIO(text))
     missing = [c for c in SITE_FIELDS if c not in (rd.fieldnames or [])]
     if missing:
         raise ReadError(f"report {REPORT_SITES}: columns missing: {missing}")
     out = {}
     for r in rd:
-        s = {v: _clean(r.get(k)) or None for k, v in SITE_FIELDS.items()}
+        s = {**r, **{v: _clean(r.get(k)) or None for k, v in SITE_FIELDS.items()}}
         try:                                      # a point is both coordinates or none (Astra review P2-3)
             s["lat"], s["lon"] = float(s["lat"]), float(s["lon"])
         except (TypeError, ValueError):
@@ -237,7 +233,7 @@ def zone_of(site: dict | None) -> str:
 
 
 def _sig(r: dict) -> list:
-    return [r.get(k) for k in ADV_KEPT]
+    return [r.get(k) for k in IDENTITY_COLUMNS]
 
 
 def _order(r: dict):
@@ -294,7 +290,7 @@ def to_record(key: str, r: dict, site: dict | None, fetched_at: str, first_seen:
     et, _code = TYPES.get(r["AdvisoryType"].lower(), ("beach_advisory", "advisory"))
     tz_name = zone_of(site)
     start, end = parse_date(r["StartDate"]), parse_date(r["EndDate"])
-    raw = {"identifier": r["Identifier"] or None, "beach": r["Name"] or None, "advisory_type": r["AdvisoryType"] or None,
+    raw = {**r, "identifier": r["Identifier"] or None, "beach": r["Name"] or None, "advisory_type": r["AdvisoryType"] or None,
            "reason": r["Reason"] or None, "pollution_source": r["PollutionSource"] or None,
            "days_under_advisory": _days(r["DaysUnderAdvisory"]), "issuer": r["IssuingOrganization"] or None,
            "time_zone": tz_name, "state": "MI", "_first_seen_at": first_seen,
@@ -302,6 +298,7 @@ def to_record(key: str, r: dict, site: dict | None, fetched_at: str, first_seen:
     if r["AdvisoryType"].lower() not in TYPES:
         raw["type_unmapped"] = f"advisory type {r['AdvisoryType']!r} read as a beach advisory"
     if site:
+        raw.update({k: v for k, v in site.items() if k not in SITE_FIELDS.values()})
         raw.update(county=site.get("county"), access=site.get("access"), great_lake=site.get("great_lake"),
                    epa_beach_id=site.get("epa_beach_id"), park=site.get("park"))
     if end and start and end < start:

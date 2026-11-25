@@ -95,15 +95,9 @@ Duplicates within this year's layers: a complete incident number and permit on o
 only when intervals and placement evidence agree. Multiple records in the same layer, including retained rows
 with older global ids, remain ambiguous. Links are recomputed every run; uncertain reports keep colouring.
 
-Privacy
-  Only named fields are requested. The history layer's facility_owner holds the owner's name, and for a few
-  private systems that is an individual's name: it never reaches a record. A public body's name (a city,
-  town, county, authority, district, commission, university) is kept as raw._owner_public; any other owner
-  becomes raw._owner_kind "private or not stated". The narrative fields (deq_comments, dwr_em_43_comments,
-  dwr_resolution_5d; the history layer's resolution and volume_determined) are never requested: they name the staff,
-  officials and residents the writer dealt with in forms neither filter catches ("Reported to <name> at EM"), so
-  raw._withheld says they were left out. The remaining text (addresses, cause, weather) passes common.strip_personal
-  (in event()) and build.redact. A fixture test checks all three.
+Published fields
+  All returned source attributes are retained, including facility_owner, comments and resolution notes. Ownership
+  classification remains separate from publication; source YAML declares the dedicated reporter contact keys.
 
 Cadence: hourly with the refresh (DWR enters reports within about a day of the start; the layer has lagged a
 few days at times).
@@ -426,7 +420,7 @@ def query_layer(sess: requests.Session, url: str, fields: list[str], oid: str) -
     """Every row (attributes only; the points are fields) and the raw pages."""
     feats, pages, offset = [], [], 0
     while True:
-        params = {"where": "1=1", "outFields": ",".join(fields), "returnGeometry": "false", "orderByFields": oid,
+        params = {"where": "1=1", "outFields": "*", "returnGeometry": "false", "orderByFields": oid,
                   "resultOffset": offset, "resultRecordCount": 2000, "f": "json"}
         r = sess.get(f"{url}/query", params=params, timeout=(15, 120))
         r.raise_for_status()
@@ -492,8 +486,7 @@ def layer_schema(fields: list[str] | set[str]) -> tuple[str | None, str | None]:
 
 def safe(a: dict, fields: list[str]) -> dict:
     """Only the fields this module asks for (a layer that answered every field keeps no others)."""
-    want = {f.lower() for f in fields}
-    return {k: v for k, v in a.items() if k.lower() in want}
+    return dict(a)
 
 
 # ---------------------------------------------------------------- this year's layers
@@ -538,7 +531,6 @@ def build_record(a: dict, layer: str, fetched_at: str, prev: dict | None, permit
                 source_url=f"{layer}/query?where=globalid%3D%27{gid}%27&outFields={out}&f=json")
     raw = safe(a, SURVEY_FIELDS if survey else FIELDS)
     raw["_layer"] = layer
-    raw["_withheld"] = WITHHELD_NOTE
     try:
         if survey:
             a, raw["_reached_water_basis"] = survey_canonical(a)
@@ -849,8 +841,7 @@ def hist_record(a: dict, fetched_at: str, rid: str, permits: dict[str, str], dup
     oid = a.get("OBJECTID")
     base = dict(source_id=HIST_ID, source_record_id=rid, fetched_at=fetched_at,
                 source_url=f"{HIST_LAYER}/query?where=OBJECTID%3D{oid}&outFields=*&f=json")
-    raw = {k: v for k, v in safe(a, HIST_FIELDS).items() if k != "facility_owner"}
-    raw["_withheld"] = WITHHELD_NOTE
+    raw = safe(a, HIST_FIELDS)
     kind, public = owner_kind(a.get("facility_owner"))
     raw["_owner_kind"] = kind
     if public:

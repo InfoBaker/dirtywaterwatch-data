@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": ["Case_Lead", "Response_Update_By", "Reported_Management_Organizations"], "customer_identifier": [], "description": []}
 id: "ca-swrcb-fhab"
 name: "Surface Water - Freshwater Harmful Algal Blooms (FHAB bloom reports, cases, advisories)"
 url: "https://data.ca.gov/dataset/surface-water-freshwater-harmful-algal-blooms"

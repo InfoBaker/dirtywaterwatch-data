@@ -144,7 +144,8 @@ def clean(s) -> str:
 def key(s: str) -> str:
     """'CJ Strike – Snake River Arm' and 'CJ Strike - Snake River Arm' -> 'cj strike snake river arm';
     "Henry's Lake" and 'Henrys Lake' -> 'henrys lake'."""
-    s = clean(s).lower().replace("’", "").replace("'", "")
+    from ingest.identity_compat import ia_text
+    s = ia_text(clean(s)).lower().replace("’", "").replace("'", "")
     return re.sub(r"[^a-z0-9]+", " ", s).strip()
 
 

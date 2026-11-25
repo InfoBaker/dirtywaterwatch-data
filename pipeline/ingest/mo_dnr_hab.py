@@ -29,10 +29,10 @@ Record rules (the accuracy-first clock, as Kansas's HAB layer, ingest/ks_kdhe_ha
     A failed read changes nothing: an error,
     a truncated answer, a row without its id, a code DNR does not use or a shown row without a point inside Missouri
     fails the read (check), never lifts every advisory.
-  - The point, kept to 0.001 degree before any save; raw.time_zone America/Chicago.
+  - The point retains source precision; raw.time_zone America/Chicago.
 
-Privacy: only the fields above are requested and saved (never the public information text, the description, the
-reporter or the owner fields); points rounded before the raw save.
+Public source fields: request and save all published attributes, including public information, description,
+reporter and owner fields. Source names and coordinates remain intact, subject to requested removals.
 Run from pipeline/:  python -m ingest.mo_dnr_hab [--file layer.json]
 """
 from __future__ import annotations
@@ -86,9 +86,9 @@ def check(doc) -> None:
 
 
 def rounded(doc: dict) -> dict:
-    """Only the requested fields, every point kept to 0.001 degree, as saved in data/raw."""
+    """All downloaded attributes and source point precision, as saved in data/raw."""
     keep = FIELDS.split(",")
-    return {"features": [{"attributes": {k: (f.get("attributes") or {}).get(k) for k in keep},
+    return {"features": [{"attributes": dict(f.get("attributes") or {}),
                           "geometry": {k: float(v) for k, v in (f.get("geometry") or {}).items()
                                        if k in ("x", "y") and v is not None}} for f in doc.get("features") or []]}
 
@@ -118,7 +118,7 @@ def shown(doc: dict) -> tuple[dict[str, dict], dict]:
 
 def _source_evidence(r: dict, a: dict, at: str) -> None:
     raw = r['raw']
-    fields = {k: a.get(k) for k in ('BloomStat', 'DissDat', 'IConfMet')}
+    fields = dict(a)
     if raw.get('source_fields') and raw['source_fields'] != fields:
         raw.setdefault('source_field_history', []).append({'fields': raw['source_fields'],
                                                           'seen_at': raw.get('source_fields_seen_at')})
@@ -242,7 +242,7 @@ def main(argv=None) -> int:
             doc = json.loads(Path(argv[argv.index("--file") + 1]).read_text())
         else:
             r = requests.get(f"{LAYER}/query", headers=HEADERS, timeout=(20, 120), params={
-                "where": "1=1", "outFields": FIELDS, "outSR": 4326, "f": "json", "returnGeometry": "true"})
+                "where": "1=1", "outFields": "*", "outSR": 4326, "f": "json", "returnGeometry": "true"})
             r.raise_for_status()
             doc = r.json()
             check(doc)

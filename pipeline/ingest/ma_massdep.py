@@ -398,10 +398,15 @@ def resolve_water(texts: list[tuple[str, str]], town: str | None, echo_rec: dict
 
 # ---------------------------------------------------------------- normalise
 
+def identity_row(row):
+    from ingest.identity_compat import ma_row
+    return ma_row(row)
+
+
 def normalise(entry: dict, ctx: dict) -> dict:
     row = entry["row"]
     rid = row.get("incidentId") or row.get("incidentNumber") or hashlib.sha1(
-        json.dumps(row, sort_keys=True).encode()).hexdigest()[:16]
+        json.dumps(identity_row(row), sort_keys=True).encode()).hexdigest()[:16]
     base = dict(source_id=SOURCE_ID, source_record_id=rid, fetched_at=entry.get("fetched_at") or now_iso(),
                 source_url=DETAILS_URL.format(row["incidentId"]) if row.get("incidentId") else PORTAL)
     try:
@@ -693,7 +698,7 @@ def main(argv=None) -> int:
     seen = set()
     for row in fetched:
         key = row.get("incidentId") or row.get("incidentNumber") or hashlib.sha1(
-            json.dumps(row, sort_keys=True).encode()).hexdigest()[:16]
+            json.dumps(identity_row(row), sort_keys=True).encode()).hexdigest()[:16]
         seen.add(key)
         prev = rows.get(key, {})
         rows[key] = {**prev, "row": row, "fetched_at": stamp_now,

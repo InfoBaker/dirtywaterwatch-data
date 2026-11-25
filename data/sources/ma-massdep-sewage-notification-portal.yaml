@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ma-massdep-sewage-notification-portal"
 name: "MassDEP Sewage Notification public portal (EEA Data Portal 'CSO Data Portal')"
 url: "https://eeaonline.eea.state.ma.us/portal/dep/cso-data-portal/"

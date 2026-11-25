@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-deep-cso-right-to-know-page"
 name: "CT DEEP 'Combined Sewer Overflows: Right to Know' page (CSO map, fact sheets, LTCPs, emergency contacts)"
 url: "https://portal.ct.gov/deep/municipal-wastewater/combined-sewer-overflows-right-to-know"

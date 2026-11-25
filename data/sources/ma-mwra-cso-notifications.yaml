@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ma-mwra-cso-notifications"
 name: "MWRA CSO discharge notifications (web, email, text via Everbridge)"
 url: "https://www.mwra.com/node/5699"

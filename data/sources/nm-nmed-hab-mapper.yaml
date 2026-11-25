@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nm-nmed-hab-mapper"
 name: "NMED Surface Water Quality Bureau HABs Mapper (current HAB advisories) feature service"
 url: "https://services8.arcgis.com/sqciGhV7WvGQn4ky/arcgis/rest/services/Upload_Data_May2026/FeatureServer/0"
@@ -50,6 +51,7 @@ fetch:
   metadata: true
   time_zone: "America/Denver"
   bounds: [-109.1, 31.3, -103.0, 37.05]      # New Mexico; a point outside is not used (raw._coords_rejected)
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [OBJECTID, ASSESSMENT_UNIT_NAME, STATION_NAME, Station_ID, MLOC_LATITUDE, MLOC_LONGITUDE,
                 Location_Details, Last_Monitored, CHARACTERISTIC_NAME, HAB_Status, Category_Override,
                 Advisory_Details, Map_Upload_Date, ReportedValue_ug_L]

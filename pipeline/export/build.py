@@ -108,6 +108,7 @@ Public-record text is preserved. Explicit requests from the private removal list
 applied to the complete output tree, followed by a check of those requests only.
 """
 from __future__ import annotations
+from build.removal_inputs import publication_inputs, filtered, ACTIVE
 
 import argparse
 import json
@@ -138,7 +139,7 @@ SIMPLIFY_DEG = 20 / 111_320          # ~20 m
 COORD_DIGITS = 5                     # ~1 m
 STATUS_ORDER = {"red": 0, "yellow": 1, "unresolved": 2, "monthly": 3, "grey": 4}
 ACTIVE_STATES = ("red", "yellow", "unresolved")
-REGISTRY_KEYS = ["id", "name", "url", "homepage", "kind", "level", "cadence", "license", "attribution",
+REGISTRY_KEYS = ["raw_fields", "id", "name", "url", "homepage", "kind", "level", "cadence", "license", "attribution",
                  "enabled", "role", "event_types", "states", "access"]
 SAFE = re.compile(r"[A-Za-z0-9._-]")
 SLIM_DROP = {"raw", "advice_text", "advice_window_basis", "fetched_at", "coord_source", "coord_precision_m",
@@ -1022,6 +1023,13 @@ def live_registry_rows(rows: list[dict], live: set[str]) -> list[dict]:
     return out
 
 
+def feed_raw_fields(sid, health, registry):
+    """Exact raw keys, including feeds backed by multiple source registry rows."""
+    rows = [registry.get(rid, {}) for rid in {sid, *(health.get("registry_ids") or [])}]
+    return {kind: sorted({key for row in rows for key in (row.get("raw_fields") or {}).get(kind, [])})
+            for kind in ("reporter_contact", "customer_identifier", "description")}
+
+
 def live_feeds(feeds: list[dict], kept_registry_ids: set[str]) -> list[dict]:
     """The feeds whose registry rows survive live_registry_rows (a feed with no registry row is kept: its state is
     not known here, and its events are already limited to the live waters)."""
@@ -1200,7 +1208,7 @@ def extra_launches(water_slug: str) -> list[dict]:
     if _LAUNCHES_EXTRA is None:
         idx: dict[str, list] = defaultdict(list)
         try:
-            rows = json.loads(LAUNCHES_EXTRA.read_text()) if LAUNCHES_EXTRA.exists() else []
+            rows = read_json(LAUNCHES_EXTRA) if LAUNCHES_EXTRA.exists() else []
         except (OSError, ValueError):
             rows = []
         for r in rows if isinstance(rows, list) else []:
@@ -1218,7 +1226,7 @@ def obl_build_launches(state: str | None) -> dict[str, list]:
         idx: dict[str, list] = defaultdict(list)
         p = OBL_BUILD_DIR / state / "launches.json"
         try:
-            rows = json.loads(p.read_text()) if p.exists() else []
+            rows = read_json(p) if p.exists() else []
         except (OSError, ValueError):
             rows = []
         for r in rows if isinstance(rows, list) else []:
@@ -1244,7 +1252,7 @@ def launches_for(water_slug: str, state: str | None = None) -> list[dict]:
     as url only when the launch is published there."""
     p = status_mod.OBL_WATER_DIR / f"{water_slug}.json"
     try:
-        rows = (json.loads(p.read_text()) or {}).get("launches") or [] if p.exists() else []
+        rows = (read_json(p) or {}).get("launches") or [] if p.exists() else []
     except (OSError, ValueError):
         rows = []
     build = {r["slug"]: r for r in obl_build_launches(state).get(water_slug, [])}
@@ -1519,7 +1527,9 @@ def stale_reason(st: dict | None, hist: dict | None, include_fixtures: bool, inc
 def ensure_status(include_fixtures: bool, include_restricted: bool = False):
     st = read_json(BUILD_DIR / "status.json")
     hist = read_json(BUILD_DIR / "history.json")
-    why = stale_reason(st, hist, include_fixtures, include_restricted, status_inputs())
+    policy = ACTIVE.get()
+    why = ("requested removals require rebuilt summaries" if (policy and policy.entries) or (st or {}).get("requested_removals_applied") else
+           stale_reason(st, hist, include_fixtures, include_restricted, status_inputs()))
     if why:
         print(f"export: rebuilding status ({why})")
         st, hist = status_mod.build(include_fixtures=include_fixtures, include_restricted=include_restricted)
@@ -1538,7 +1548,7 @@ def load_dischargers() -> tuple[list[dict], str]:
     for p in sorted((ROOT / "research").glob("*/dischargers.json")):
         area = p.parent.name
         try:
-            rows = json.loads(p.read_text())
+            rows = read_json(p)
         except Exception:
             continue
         for r in rows if isinstance(rows, list) else []:
@@ -1634,7 +1644,7 @@ def outfall_lists(outfalls: list[dict], aliases: dict[str, str] | None = None) -
         slug = status_mod.SLUG_ALIASES.get(o["water_slug"], o["water_slug"]) if o.get("water_slug") else None
         prov = is_provisional(o)
         row = {"npdes_permit": o.get("npdes_permit"), "outfall": o.get("outfall"),
-               "outfall_name": None if prov else o.get("outfall_name"),
+               "outfall_name": o.get("outfall_name"),
                "outfall_kind": o.get("outfall_kind") or "cso", "state": status_mod.outfall_state(o),
                "permittee": o.get("permittee"), "receiving_water": outfalls_mod.receiving_water(o),
                "lat": o.get("lat"), "lon": o.get("lon"), "water_slug": slug, "match": o.get("match"),
@@ -1707,6 +1717,7 @@ def advisory_point_features(st: dict, by_event: dict) -> list[dict]:
     return pts
 
 
+@publication_inputs
 def export(include_fixtures: bool = False, include_restricted: bool = False) -> dict:
     phase_started = perf_counter()
 
@@ -1719,6 +1730,8 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     if include_fixtures and os.environ.get("DWW_ALLOW_FIXTURES") != "1":
         raise SystemExit("export: refusing to write out/ with research fixture events; "
                          "set DWW_ALLOW_FIXTURES=1 for a development export")
+    removals = ACTIVE.get()
+    (BUILD_DIR / "export-blocked.json").unlink(missing_ok=True)
     st, hist = ensure_status(include_fixtures, include_restricted)
     phase_done("status")
     waters = status_mod.live_waters(status_mod.load_waters())   # the live states' records only (rules.json live_states)
@@ -1747,11 +1760,12 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         print(f"export: {n_alias_events} events and {n_alias_status} status records carried a registry alias as "
               f"discharger_id; written with the registry id")
     phase_done("inputs")
-    # No default redaction. Register source identity and requested fields before derived outputs.
-    removals = RemovalList.load()
-    removals.register(events)
-    removals.register(st)
-    removals.register(hist)
+    # Include injected registries and enrichment inputs before deriving counts or details.
+    inputs = [files, events, st, hist, waters, outfalls, registry, dis]
+    for value in inputs:
+        removals.register(value)
+    files, events, st, hist, waters, outfalls, registry, dis = [filtered(v) for v in inputs]
+    placements = st.get("placements") or {}
     redactor = PublicRecords()
     swaps_of = {}
     detail_mod.enrich(events, duplicates={i for i, pl in placements.items() if (pl or {}).get("duplicate_of")})
@@ -2039,6 +2053,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         f = files.get(sid) or {}
         meta_pub = {k: v for k, v in (f.get("meta") or {}).items() if k in PUBLIC_FEED_META}
         feeds.append({**h, "file": f.get("file"), "meta": meta_pub,
+                      "raw_fields": feed_raw_fields(sid, h, registry),
                       "waters_covered": sum(1 for w in st["waters"].values() if sid in w["covered_by"])})
     feeds = live_feeds(feeds, kept_rids)
     write_compact(OUT_DIR / "sources.json", {"built": now_iso(), "feeds": feeds, "registry": reg_rows})
@@ -2161,7 +2176,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     write_compact(OUT_DIR / "meta.json", meta)
     rules_src = DATA_DIR / "rules.json"
     if rules_src.exists():                  # the methods page prints it; internal "_" keys stay home
-        write_json(OUT_DIR / "rules.json", live_rules(public_rules(json.loads(rules_src.read_text())), status_mod.states()))
+        write_json(OUT_DIR / "rules.json", live_rules(public_rules(read_json(rules_src)), status_mod.states()))
     for name in ("meta.json", "sources.json", "waters.json", "conditions.json", "active.json", "dischargers.json",
                  "coverage.json", "monthly-outfalls.json", "outfalls.json", "assessments.json"):
         hits = internal_wording(read_json(OUT_DIR / name))
@@ -2178,10 +2193,8 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     phase_done("metadata")
     removals.publish(OUT_DIR)
     removals.enforce(OUT_DIR)
-    # Current event files are rebuilt from scratch. Also overwrite old remote keys
-    # for requested IDs that now exist only in history (or no longer in local state).
-    for event_id in removals.removed_ids:
-        removals.empty_file(ev_dir / event_file_name(event_id))
+    # Old keys are deleted remotely; private requested text never becomes an archive filename.
+    removals.save_deletions(DATA_DIR / "private" / "publication-deletions.json")
     phase_done("requested_removals")
     return meta
 

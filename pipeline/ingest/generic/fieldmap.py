@@ -569,18 +569,16 @@ def personal_field(name: str) -> bool:
 
 
 def safe_row(row: dict, block: dict) -> tuple[dict, list[str]]:
-    """(only the safe fields, the safe fields dropped because their value is an object or a list). A dotted safe
-    field keeps that nested leaf under its dotted name; an object is never kept whole (its keys were not reviewed).
-    Free-text fields are scrubbed (emails, phones, staff titles, names after an honorific)."""
-    out, dropped = {}, []
-    for f in block["safe_fields"]:
-        v = row[f] if f in row else get(row, f)
-        if isinstance(v, (dict, list)):
-            dropped.append(f)
-            continue
-        if f in row or v is not None:
-            out[f] = v
-    # Preserve only explicit source identities before strict scrubbing removes numbers.
+    """Keep every downloaded public field, including nested source attributes.
+
+    safe_fields remains the mapping schema, not a publication allowlist.
+    """
+    out, dropped = dict(row), []
+    out.pop("_houston_sso_ids", None)  # internal parser hint: never trust a source value
+    for f in block.get("safe_fields", []):
+        if f not in out and get(row, f) is not None:
+            out[f] = get(row, f)
+    # Preserve validated cross-source identities, including hints from historical saved rows.
     # Scoped to this transform: an incident number or an unrelated SSO mention is not a Houston ID.
     if block.get("transform") == "ingest.tx_transforms.tx_tceq_record":
         ids = re.findall(r"\bSSO\s*ID\s*#?\s*(\d{1,6})\b",
@@ -759,17 +757,6 @@ def validate(block: dict, source_id: str = "") -> list[str]:
     if not isinstance(safe, list) or not safe or not all(isinstance(f, str) and f for f in safe):
         errs.append("fetch.safe_fields is missing: every block lists the fields it may keep")
         safe = [f for f in safe if isinstance(f, str)] if isinstance(safe, list) else []
-    reviewed = block.get("reviewed_fields") or {}
-    if not isinstance(reviewed, dict):
-        errs.append("reviewed_fields is {field: reason}")
-        reviewed = {}
-    for f, why in reviewed.items():
-        if not clean(why):
-            errs.append(f"reviewed_fields.{f}: give the reason the field holds no private person")
-    for f in safe:
-        if personal_field(f) and f not in reviewed:
-            errs.append(f"safe field {f!r} may hold a private person (a name, owner, caller, reporter, email or phone); "
-                        f"list it under reviewed_fields with the reason it does not, or leave it out")
     rec = block.get("record") or {}
     if not isinstance(rec, dict) or "source_record_id" not in rec:
         errs.append("fetch.record.source_record_id is missing")

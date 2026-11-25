@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ky-dow-hab-viewer"
 name: "Kentucky Division of Water HAB Viewer (harmful algal bloom observation points)"
 url: "https://watermaps.ky.gov/arcgis/rest/services/WebMapServices/HABService/MapServer/0"
@@ -50,6 +51,7 @@ fetch:
   retry_wait_s: 30
   time_zone: "America/New_York"
   bounds: [-89.6, 36.45, -81.9, 39.2]      # Kentucky; a point outside is not used (raw._coords_rejected)
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [OBJECTID, HABSTART, HABEND, HABSTATUS, HABNAME, HABSTATDES, HABYEARS, _x, _y]
   free_text: [HABSTATDES]
   # Read inactive rows for explicit lifts; the episode hook excludes sample-only records.

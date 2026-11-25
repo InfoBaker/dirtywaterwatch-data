@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "chicopee-cso-notices"
 name: "City of Chicopee CSO public notification page and notices"
 url: "https://chicopeema.gov/936/Combined-Sewer-Overflow-Public-Notificat"

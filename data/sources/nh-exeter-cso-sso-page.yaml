@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nh-exeter-cso-sso-page"
 name: "Exeter Combined Sewer & Sanitary Sewer Overflows page"
 url: "https://www.exeternh.gov/publicworks/combined-sewer-sanitary-sewer-overflows"

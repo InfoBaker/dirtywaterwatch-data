@@ -191,7 +191,8 @@ def write_rows_json(path: Path, obj, row_keys=ROW_LIST_KEYS) -> None:
 
 
 def read_json(path: Path, default=None):
-    return json.loads(path.read_text()) if path.exists() else default
+    from build.removal_inputs import filtered
+    return filtered(json.loads(path.read_text())) if path.exists() else default
 
 
 def discharger_alias_map(rows: list[dict]) -> dict[str, str]:

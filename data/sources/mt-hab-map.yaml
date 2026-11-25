@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "mt-hab-map"
 name: "Montana HAB reports and advisories map (HAB.mt.gov, DPHHS and DEQ)"
 url: "https://gis.mtdeq.us/hosting/rest/services/Hosted/Harmful_Algal_Bloom_Survey_(Public_Web_Map)/FeatureServer/0"

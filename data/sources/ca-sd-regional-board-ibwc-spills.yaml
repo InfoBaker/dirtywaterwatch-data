@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ca-sd-regional-board-ibwc-spills"
 name: "San Diego Water Board: USIBWC Spill Events and Transboundary Flow Events from Mexico"
 url: "https://www.waterboards.ca.gov/sandiego/water_issues/programs/tijuana_river_valley_strategy/sewage_issue.html"

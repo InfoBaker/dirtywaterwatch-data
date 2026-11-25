@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "md-baltimore-health-sso"
 name: "Baltimore City Health Department Sanitary Sewer Overflows page"
 url: "https://www.baltimorecity.gov/health/our-work/environmental-health/sanitary-sewer-overflows-sso"

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "hi-doh-cwb-events-api"
 name: "Hawaii Department of Health, Clean Water Branch: water quality advisories and events (eha-cloud portal API)"
 url: "https://eha-cloud.doh.hawaii.gov/cwb/api/events"

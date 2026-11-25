@@ -257,7 +257,8 @@ def saved_form(parsed: dict) -> str:
 
 
 def key_of(it: dict) -> str:
-    return P.slug(it["water"]) + (f"--{P.slug(it['part'])}" if it.get("part") else "")
+    from ingest.identity_compat import nv_field
+    return P.slug(nv_field(it["water"])) + (f"--{P.slug(nv_field(it['part'], 'place'))}" if it.get("part") else "")
 
 
 def rank(level: str | None) -> int:
@@ -309,7 +310,7 @@ def build(page: str, fetched: str, previous: list[dict], parks: list[dict] | Non
         county = KNOWN.get(it["water"])
         if county and it.get("place") and county.split()[0].casefold() not in it["place"].casefold():
             county = None       # a place the Office gives that does not name the record's county (Astra P1-4)
-        raw = {"water_key": k, "block_key": P.slug(it["water"]), "water": it["water"], "part": part,
+        raw = {"water_key": k, "block_key": key_of({"water": it["water"]}), "water": it["water"], "part": part,
                "place": it.get("place"), "level": it["level"], "level_date": it["level_date"],
                "level_history": P.deep_clean(history), "advisory_extent": "part_of_water" if part else "named_water",
                "time_zone": nevada_zone(), "start_basis": START_BASIS,

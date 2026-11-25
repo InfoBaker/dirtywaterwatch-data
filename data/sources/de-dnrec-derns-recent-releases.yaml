@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "de-dnrec-derns-recent-releases"
 name: "Delaware DNREC Environmental Release Notification System (DERNS): Recent Releases, sewage and sanitary wastewater"
 url: "https://derns.dnrec.delaware.gov/Pub/RecentReleases.aspx"

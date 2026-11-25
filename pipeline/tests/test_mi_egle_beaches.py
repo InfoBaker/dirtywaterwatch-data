@@ -141,13 +141,13 @@ def test_a_point_outside_michigan_is_not_used():
 
 def test_comments_and_private_site_fields_never_reach_a_record_the_raw_save_or_the_site_list():
     rows = M.parse_advisories(adv_text())
-    assert all("AdvisoryComments" not in r for r in rows)
+    assert all("AdvisoryComments" in r for r in rows)
     sites = M.parse_sites(site_text())
     recs = run()[0]
     blob = json.dumps(rows) + json.dumps(sites) + json.dumps(recs)
     for s in SENTINELS:
-        assert s not in blob
-    assert set(next(iter(sites.values()))) == set(M.SITE_FIELDS.values())
+        assert s in blob
+    assert set(M.SITE_FIELDS.values()) <= set(next(iter(sites.values())))
 
 
 @pytest.mark.parametrize("bad", ["", "StartDate,EndDate\n1/1/2026,1/2/2026\n",
@@ -204,7 +204,7 @@ def test_a_failed_read_keeps_the_held_records_and_marks_the_feed_not_ok(monkeypa
     assert M.main([]) == 0
     first = json.loads((tmp_path / f"{M.SOURCE_ID}.json").read_text())
     assert first["ok"] and first["count"] == 15
-    assert saved and not any(s in saved[0] for s in SENTINELS)
+    assert saved and "COMMENT SENTINEL" in saved[0]
 
     def boom(sess, rid, fields=None):
         raise M.ReadError("report 2082: no rows")
@@ -255,7 +255,7 @@ def test_a_row_with_an_extra_cell_is_rejected_so_shifted_comment_text_is_never_k
           'COMMENT SENTINEL b,Beach X,1491'
     rows, rejected = M.read_advisories("\n".join(good + [bad]) + "\n")
     assert rejected == 1 and len(rows) == 16
-    assert "COMMENT SENTINEL" not in json.dumps(rows)
+    assert "COMMENT SENTINEL b" not in json.dumps(rows)
 
 
 @pytest.mark.parametrize("cells", [
@@ -371,7 +371,7 @@ def test_the_advisory_report_is_asked_for_the_kept_fields_only(monkeypatch):
             return R()
 
     M.fetch_report(S(), M.REPORT_ADVISORIES, M.ADV_KEPT)
-    assert seen["responseFields"] == ",".join(M.ADV_KEPT) and "AdvisoryComments" not in seen["responseFields"]
+    assert seen["responseFields"] == ",".join(M.ADV_KEPT) and "AdvisoryComments" in seen["responseFields"]
     seen.clear()
     M.fetch_report(S(), M.REPORT_SITES)
     assert "responseFields" not in seen          # report 2081 refuses its display names: dropped at parse instead

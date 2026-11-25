@@ -14,8 +14,7 @@ No publication time is invented. Source ends remain source ends; DURATION has
 mixed notation and no declared unit, so no end is derived. Cause flags quote the
 City's field aliases and Yes/No domain labels without expanding opaque acronyms.
 
-Only allowlisted fields are saved; locations lose house numbers and personal
-text and coordinates are rounded to three decimals before persistence. MDE runs
+Source locations, coordinates and waiver/relief narratives are retained. MDE runs
 after this module, marks its matching records duplicate_of these events, and adds
 an other-source link consumed symmetrically by the existing detail exporter.
 Run from pipeline/: python -m ingest.md_baltimore_sso [--file layer.json]
@@ -87,7 +86,8 @@ CAUSE_FIELDS = ("CAUSE_RAGS", "CAUSE_ROOTS", "CAUSE_RAIN", "CAUSE_GREASE", "CAUS
 # All cause aliases equal their field names. The domain supplies only Yes/No,
 # not expansions of SGR, INFLIT or PLOSS (metadata checked 2026-11-22).
 BOOLEAN_DOMAIN = {0: "No", 1: "Yes"}
-SAFE_FIELDS = LEGACY_SAFE_FIELDS + ("SSOID", "DURATION", "OVFL_REACH_WW") + CAUSE_FIELDS
+SAFE_FIELDS = LEGACY_SAFE_FIELDS + ("SSOID", "DURATION", "OVFL_REACH_WW",
+                                    "WAIVER_REASON", "COMMENT_RELIEF_REQUEST_TYPE") + CAUSE_FIELDS
 # the fields the record's identity, times and status rest on: a layer without one of them is a failed read
 REQUIRED_FIELDS = ("OBJECTID", "SSOID", "SSO_DATE", "START_DATETIME", "END_DATETIME", "STATUS")
 SITE_RE = re.compile(r"\bSSO\s+Site\s*#\s*(\d+)", re.I)

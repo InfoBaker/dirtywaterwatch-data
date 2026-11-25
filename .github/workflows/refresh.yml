@@ -163,6 +163,7 @@ jobs:
           fi
           python3 -I scripts/state_paths.py frozen-baseline restored-frozen.json
           find data/build -name '._*' -delete 2>/dev/null || true   # AppleDouble files from a tarball made on a Mac
+          rm -f data/build/export-blocked.json  # retired default-redaction marker
       - name: Restore the state assessments from R2 (state/attains.tar.gz, the weekly ATTAINS job's output; read only)
         if: steps.pause.outputs.paused != '1'
         env:
@@ -274,7 +275,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          [ -f data/build/export-blocked.json ] && { echo "export blocked; out/ not published"; exit 0; }
+          python3 -I scripts/publication_deletions.py
           [ -d out ] || { echo "::error::no out/ folder: nothing to publish, and no state is saved"; exit 1; }
           # each its own command, so a failed archive or upload fails the step (SOL wave1 P2-12)
           tar -czf out.tar.gz out
@@ -397,7 +398,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ''       # no storage keys here (scripts/r2-s3-keys.sh put them in the job's environment)
           AWS_SECRET_ACCESS_KEY: ''
         run: |
-          [ -f data/build/export-blocked.json ] && { echo "export blocked; no release"; exit 0; }
           (cd out && zip -qr ../dataset.zip . -x 'csv/*')
           gh release view latest >/dev/null 2>&1 || gh release create latest --title "Latest dataset" --notes "Rolling dataset; replaced daily. See DATA-LICENSE.md."
           n=0; until gh release upload latest dataset.zip --clobber; do n=$((n + 1)); [ "$n" -ge 3 ] && { echo "::warning::dataset release upload failed three times; the export and state are saved"; exit 1; }; sleep $((15 * n)); done

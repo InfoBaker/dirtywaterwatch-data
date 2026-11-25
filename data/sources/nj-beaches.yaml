@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nj-beaches"
 name: "NJ beach monitoring public API behind njbeaches.org (CCMP ocean/bay, ECM, Freshwater Beach Monitoring Program) - beachapi.njdep.rutgers.edu"
 url: "https://njbeaches.org/"

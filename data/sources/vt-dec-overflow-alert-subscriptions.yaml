@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "vt-dec-overflow-alert-subscriptions"
 name: "WSMD Notification Subscription System (email/text alerts for public alerts, incident reports, unpermitted discharges)"
 url: "https://anrweb.vt.gov/DEC/WWInventory/Subscriptions.aspx"

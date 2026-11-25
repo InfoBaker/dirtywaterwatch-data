@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ri-ridoh-beach-advisory-feed"
 name: "RIDOH Beach Advisories feed page (ridoh-feed-beaches)"
 url: "https://health.ri.gov/ridoh-feed-beaches"

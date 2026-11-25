@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ks-kdhe-hab-status"
 name: "KDHE Harmful Algal Bloom status map layer (Lake Points Statewide)"
 url: "https://maps.kdhe.ks.gov/kdhe_doe/rest/services/HAB/HAB_County/MapServer/0"

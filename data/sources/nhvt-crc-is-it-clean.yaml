@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nhvt-crc-is-it-clean"
 name: "Connecticut River Conservancy 'Is It Clean?' E. coli map (connecticutriver.us)"
 url: "https://connecticutriver.us/"

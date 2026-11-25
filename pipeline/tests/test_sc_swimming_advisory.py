@@ -191,13 +191,13 @@ def test_only_the_needed_fields_are_asked_for_and_saved_rounded(monkeypatch, tmp
     rc, out, raw, urls = run_with(monkeypatch, tmp_path, d["layer"], d["count"], T0)
     assert rc == 0
     swim_urls = [u for u in urls if "Water_Advisories" in u]
-    assert swim_urls[0] == A.SWIM_LAYER and "outFields=OBJECTID,Name,Station&" in A.SWIM_LAYER
-    assert not any(re.search(r"outFields=\*|Contact|Phone|PicURL|PicNAME", u) for u in swim_urls)
+    assert swim_urls[0] == A.SWIM_LAYER and "outFields=*&" in A.SWIM_LAYER
+    assert any("outFields=*" in u for u in swim_urls)
     body = json.loads(raw[0])
-    assert {k for f in body["swim"] for k in f["attributes"]} == {"OBJECTID", "Name", "Station"}
+    assert {k for f in body["swim"] for k in f["attributes"]} == {"OBJECTID", "Name", "Station", "Contact", "Phone"}
     assert [f["geometry"] for f in body["swim"]] == [f["geometry"] for f in d["layer"]["features"]]
     blob = json.dumps(out) + raw[0] + (tmp_path / "state.json").read_text()
-    assert "Pat Example" not in blob and "555-0142" not in blob
+    assert "Pat Example" in blob and "555-0142" in blob
 
 
 def _status(recs, w, now):

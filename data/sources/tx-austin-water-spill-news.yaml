@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "tx-austin-water-spill-news"
 name: "Austin Water news releases on sanitary sewer overflows and wastewater spills"
 url: "https://www.austintexas.gov/water/news"

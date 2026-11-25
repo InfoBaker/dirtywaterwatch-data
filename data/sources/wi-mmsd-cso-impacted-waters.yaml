@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "wi-mmsd-cso-impacted-waters"
 name: "MMSD CSO impacted waters map (potentially impacted waterways and public access locations)"
 url: "https://www.mmsd.com/about-us/milwaukee-rain-facility-information/cso-impacted-waters"

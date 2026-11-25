@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [responsiblePartyName], customer_identifier: [], description: [locationDescription, actionTaken, actionToBeTaken, deqActions, agencyComments, socRequirements]}
 id: "sc-des-overflow-list"
 name: "SC DES ePermitting wastewater overflow list (sanitary sewer overflow reports)"
 url: "https://epermitting.des.sc.gov/ext/ncore/external/overflow/list"

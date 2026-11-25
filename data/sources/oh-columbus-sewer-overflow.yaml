@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "oh-columbus-sewer-overflow"
 name: "Columbus Sewer Overflow Discharge Information (SSO/CSO) and overflow map"
 url: "https://www.columbus.gov/Services/Columbus-Water-Power/About-Columbus-Water-Power/The-Division-of-Water-Reclamation/WW-Treatment/Sewer-Overflow-Discharge-Information-SSOCSO/Sewer-Overflow-FAQs"

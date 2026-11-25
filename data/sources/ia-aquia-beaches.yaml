@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ia-aquia-beaches"
 name: "Iowa DNR AQuIA beach monitoring (state and county beaches)"
 url: "https://programs.iowadnr.gov/aquia/api/v1/beaches/weekly_results/state?week=all"

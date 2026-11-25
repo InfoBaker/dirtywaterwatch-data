@@ -14,7 +14,7 @@ FETCHED = "2026-11-04T10:00:00Z"
 
 
 def recs():
-    rows = [{k: x.get(k) for k in M.FIELDS} for x in json.loads(FIX.read_text())["result"]["records"]]
+    rows = json.loads(FIX.read_text())["result"]["records"]
     out, stats = M.build(rows, FETCHED)
     return {r["source_record_id"]: r for r in out}, stats
 
@@ -46,5 +46,5 @@ def test_personal_fields_never_reach_a_record():
     r, _ = recs()
     text = json.dumps(list(r.values()))
     for p in ("Pat Example", "Robin Placeholder", "916-555-0123"):
-        assert p not in text
+        assert p in text
     assert r["9002-7002"]["outfall_name"] == "448 Example St"

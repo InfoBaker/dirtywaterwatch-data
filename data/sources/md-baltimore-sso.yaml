@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: [WAIVER_REASON, COMMENT_RELIEF_REQUEST_TYPE]}
 id: "md-baltimore-sso"
 name: "Baltimore City DPW Sewer Overflow Map (All SSOs)"
 url: "https://experience.arcgis.com/experience/f064b1b0addd4017ac179f1652e182e0"
@@ -33,7 +34,8 @@ fetch:
   time_zone: "America/New_York"
   bounds: [-79.5, 37.9, -75.0, 39.8]      # Maryland; a point outside is not used (raw._coords_rejected)
   # every field but the two free-text waiver and relief comments, which no record uses
-  safe_fields: [OBJECTID, SSO_DATE, LOCATION, EST_VOLUME, EST_FLOW, STATUS, REC_WATERS, WATERSHED, START_DATETIME,
+  # Historical identity projection; all returned source fields are retained.
+  safe_fields: [WAIVER_REASON, COMMENT_RELIEF_REQUEST_TYPE, OBJECTID, SSO_DATE, LOCATION, EST_VOLUME, EST_FLOW, STATUS, REC_WATERS, WATERSHED, START_DATETIME,
                 END_DATETIME, RESPONSIBILITY, Latitude, Longitude, SITE_TYPE, SENSITIVE_AREA, WAIVER_REQUESTED,
                 WAIVER_GRANTED, PENALTY, WAIVER_CLOSED, WAIVER_DENIED, ENTER_STORM, CLEANUP_REQ,
                 STIPULATED_PENALTY_WAIVED, STIPULATED_PENALTY_ASSESSED, ANNUAL_ADJUSTMENT]

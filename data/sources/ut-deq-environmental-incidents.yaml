@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ut-deq-environmental-incidents"
 name: "Utah DEQ Environmental Incidents (DERR spill hotline reports) ArcGIS feature service"
 url: "https://services2.arcgis.com/NnxP4LZ3zX8wWmP9/arcgis/rest/services/EnvironmentalIncidents/FeatureServer/0"
@@ -46,6 +47,7 @@ fetch:
   metadata: false        # the layer's last edit is the source's health, never a record's time (go-live audit 2026-11-08 P1-2)
   time_zone: "America/Denver"
   bounds: [-114.1, 36.95, -109.0, 42.05]      # Utah; a point outside is not used (raw._coords_rejected)
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [OBJECTID, Id, DERRID, Title_EventName, Nearest_City, County, Date_Discovered,
                 Date_Discovered_For_Filter, SITEDESC, ReportLink, _x, _y]
   # every point kept to 0.001 degree (about 100 m) before anything is saved; the layer's UTM Northing and Easting (to

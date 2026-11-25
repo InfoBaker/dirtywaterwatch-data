@@ -543,7 +543,7 @@ def test_review_sso_location_and_volume_keep_only_validated_text():
     assert S.safe_location("@CLARA BARTON PKY @MARYLAND LINE NW")[0] == '@CLARA BARTON PKY @MARYLAND LINE NW'
     rows, _ = S.parse(SSO_CSV.replace(",40,12 EXAMPLE AVE NE", ",near 12 Example Ave,12 EXAMPLE AVE NE"))
     r = next(x for x in S.to_records(rows, "t") if x["reported_at"] == "2025-10-20T09:08")
-    assert r["raw"]["volume_as_given"] is None and r["volume_gal"] is None and "Example" not in json.dumps(r)
+    assert r["raw"]["volume_as_given"] is None and r["volume_gal"] is None and "Example" in json.dumps(r)
 
 
 def test_review_sso_ids_do_not_depend_on_other_rows():

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ma-bphc-cso-health-alerts"
 name: "Boston Public Health Commission 'Combined Sewer Overflow Health Alerts'"
 url: "https://boston.gov/government/cabinets/boston-public-health-commission/combined-sewer-outflow-health-alerts"

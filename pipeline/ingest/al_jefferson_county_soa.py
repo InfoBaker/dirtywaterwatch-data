@@ -151,9 +151,8 @@ SUFFIXES = {"ROAD": "RD", "STREET": "ST", "AVENUE": "AVE", "AV": "AVE", "DRIVE":
 def street_key(v: str | None) -> str:
     """A comparison key for a scrubbed street: letters and digits, street words in one form ("PINE GROVE ROAD" and
     "Pine Grove Rd." give "PINEGROVERD"; review 2026-11-17 P2-6)."""
-    s = (v or "").replace(HOUSE_NUMBER_REMOVED, " ").upper()
-    # Keep historical street-based identities while publishing the complete address.
-    s = re.sub(r"(?<![A-Z0-9])\d{1,6}[A-Z]?\s+(?=[A-Z])", "", s)
+    from ingest.identity_compat import al_street
+    s = (al_street(v) or "").replace(HOUSE_NUMBER_REMOVED, " ").upper()
     words = [SUFFIXES.get(w, w) for w in re.findall(r"[A-Z0-9]+", s)]
     return "".join(words)[:40] or "NOLOCATION"
 
@@ -284,6 +283,9 @@ def base_id(r: dict) -> str:
 
 def ident(r: dict) -> str:
     """What tells two rows of one date, time and street apart (the water, reason, point, city and ZIP)."""
+    from ingest.identity_compat import al_point
+    lat, lon, _ = al_point(r.get("maplink") or "")
+    r = {**r, "maplink": f"{lat}, {lon}" if lat is not None else ""}
     return hashlib.sha256("\x1f".join(str(r.get(k) or "") for k in ("waterway", "reason", "maplink", "city", "zip"))
                           .encode()).hexdigest()[:6]
 

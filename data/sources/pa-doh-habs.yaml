@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "pa-doh-habs"
 name: "PA Department of Health Harmful Algal Blooms dashboard and layer (HABS2018_2021_FIXED)"
 url: "https://www.pa.gov/agencies/health/programs/environmental-health/habs-dashboard"

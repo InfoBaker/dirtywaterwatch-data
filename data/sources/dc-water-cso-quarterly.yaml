@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-water-cso-quarterly"
 name: "DC Water: combined sewer overflow facilities quarterly reports, dated overflows at the inflatable dam structures (Table 2-7)"
 url: "https://www.dcwater.com/resources/publications?term_node_tid_depth=50"

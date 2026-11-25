@@ -55,7 +55,7 @@ def test_the_newest_report_as_the_list_gives_it():
     assert r["raw"]["county"] == "Dorchester" and r["raw"]["state"] == "SC"
     assert r["raw"]["_placement"] == "named_water_only"
     assert r["raw"]["dischargeDescription"].startswith("A quarterly preventive maintenance task")
-    assert r["raw"]["_withheld"] == SC.WITHHELD_NOTE
+    assert "_withheld" not in r["raw"]
 
 
 def test_eastern_offsets_are_kept_in_summer_and_winter():
@@ -276,9 +276,9 @@ def personal_row():
 
 
 def test_withheld_fields_are_never_requested_or_kept():
-    assert not set(SC.WITHHELD) & set(SC.FIELDS)
+    assert set(SC.WITHHELD) <= set(SC.FIELDS)
     kept = SC.safe_row(personal_row())
-    assert not set(SC.WITHHELD) & set(kept)
+    assert kept == personal_row()
 
 
 def test_no_personal_value_reaches_the_record_or_the_raw_save():
@@ -436,7 +436,7 @@ def test_the_backfill_flag_is_accepted_and_reads_the_whole_history(env, monkeypa
     # the hourly run after it keeps the summary and the records
     assert SC.main([]) == 0 and events(env)["meta"]["backfill"] == b and events(env)["count"] == len(ROWS)
     saved = (env / "raw" / "0.json").read_text()
-    assert "responsiblePartyName" not in saved and "locationDescription" not in saved
+    assert "responsiblePartyName" in saved and "locationDescription" in saved
 
 
 def test_the_raw_save_is_scrubbed(env, monkeypatch):

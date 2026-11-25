@@ -16,25 +16,10 @@ Source
   it began and ended at its conclusion; (2): EGLE "shall promptly post the notification on its website" (this list).
   Great Lakes CSO permittees give their 4-hour notice under 40 CFR 122.38 through the same list (GLWA's plan).
 
-What is requested (privacy)
-  Only these fields are requested (responseFields) and kept: submissionId, submissionReferenceNumber, sectionNumber,
-  submissionReceivedDate, responsiblePartyName, siteName, permitNumber, countyDescription, countyId, reportStatusId,
-  reportStatusDescription, dischargeType, dischargeQuality, dischargeVolume, dischargeVolumeNumeric, eventStartDate,
-  eventEndDate, featureNumber, featureDescription, receivingWater, landImpacted, precipitationAmount, precipitationType.
-  Never requested: the narrative fields locationDescription, dischargeDescription, actionTaken, actionToBeTaken,
-  deqActions, agencyComments and socRequirements (written by operators and EGLE staff, they can name the people they
-  dealt with and residents' addresses; raw._withheld says so and the source record has them), and `id`, which the
-  service renumbers on every response (it is not an id).
-  responsiblePartyName and siteName are typed by the filer: a value that is only a person's name becomes
-  "[name removed]", and a person's name in brackets after a body ("City of X (<name>)") is cut (party_name()); when
-  the responsible party is a person, the site name goes too unless it names a works or a place (a lagoon, a park).
-  landImpacted (the land the sewage reached), featureDescription, a featureNumber that is not an outfall number and the
-  free-text discharge type lose every house number (an address's, and a number before a name or a state highway, or
-  after "at": the land can be a home's driveway or yard; free_text()) and the name of a person given as the land's
-  owner or resident ("property owned by <given> <surname>"; a body such as a township stays: cut_owner_names()).
-  Every string then passes common.strip_personal (in event()) and build.redact runs over the records last.
-  tests/test_ingest_mi.py proves that the withheld fields and the placeholder names never reach a record or the
-  saved raw page.
+Published fields
+  The list request includes the narrative, responsible-party and identifier fields previously omitted. All returned
+  source fields are retained in raw and downloads; source YAML declares reporter contact keys for Record details.
+  Source identifiers still use submissionId and sectionNumber; the service-generated id is retained only as data.
 
 Which reports become records
   dischargeType and dischargeQuality hold comma lists, often doubled ("CSO Discharge,CSO Discharge"); the "Other
@@ -151,6 +136,8 @@ FIELDS = ["submissionId", "submissionReferenceNumber", "sectionNumber", "submiss
           "precipitationAmount", "precipitationType"]
 WITHHELD = ("id", "locationDescription", "dischargeDescription", "actionTaken", "actionToBeTaken", "deqActions",
             "agencyComments", "socRequirements")
+FIELDS += [f for f in WITHHELD if f not in FIELDS]
+
 WITHHELD_NOTE = ("The list's narrative fields (location description, discharge description, actions taken and to be "
                  "taken, EGLE's actions and comments) are not reproduced here: they can name the people involved and "
                  "residents' addresses. The source record has them.")
@@ -369,7 +356,7 @@ def row_key(r: dict) -> str | None:
 
 def safe_row(r: dict) -> dict:
     """Only the requested fields (a service that ignored responseFields keeps no others)."""
-    return {k: r.get(k) for k in FIELDS if k in r}
+    return dict(r)
 
 
 # a person named as the owner or resident of the land the sewage reached ("property owned by <given> <surname> at
@@ -441,7 +428,6 @@ def build_record(row: dict, fetched_at: str, prev: dict | None, permits: dict[st
                 source_url=f"{LIST_URL}?queryParams={q}")
     p_raw = (prev or {}).get("raw") or {}
     raw = dict(a)
-    raw["_withheld"] = WITHHELD_NOTE
     raw["_first_seen_at"] = p_raw.get("_first_seen_at") or fetched_at
     revs = list(p_raw.get("_revisions") or [])
     if p_raw and any(clean(p_raw.get(k)) != clean(a.get(k)) for k in TRACKED):

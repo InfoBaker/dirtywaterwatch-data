@@ -12,6 +12,7 @@ import html
 import io
 import json
 import re
+import hashlib
 from pathlib import Path
 
 from common import DATA_DIR
@@ -62,6 +63,9 @@ class RemovalList:
         self.removed_by = {eid: {e['id'] for e in self.entries if e['kind'] == 'record' and e['match'] == eid}
                            for eid in self.removed_ids}
         self.field_texts = {e['id']: set() for e in self.entries if e['kind'] == 'field'}
+        self.record_texts = {e['id']: set() for e in self.entries if e['kind'] == 'record'}
+        self.aliases = {}
+        self.retired_files = set()
 
     def remove_id(self, eid, entry_ids):
         self.removed_ids.add(eid)
@@ -90,7 +94,8 @@ class RemovalList:
                     ctx['source_id'] = sid
             elif obj.get('source_id'):
                 ctx = {'source_id': str(obj['source_id'])}
-        return ctx
+        reverse = {v: k for k, v in self.aliases.items()}
+        return {k: reverse.get(v, v) for k, v in ctx.items()}
 
     def scoped(self, e, ctx):
         return all(key not in ctx or ctx[key] == value for key, value in e.get('scope', {}).items())
@@ -123,6 +128,10 @@ class RemovalList:
                     if e['kind'] == 'record' and self.scoped(e, ctx) and self.matches(e, value):
                         if value.get('event_id'):
                             self.remove_id(str(value['event_id']), [e['id']])
+                            # Cached summaries have no event id beside a copied narrative.
+                            # Rebuild them at input time; also recognize residual copies.
+                            for key in ('advice_text', 'description', 'reason_short', 'notice', 'narrative'):
+                                self.record_texts[e['id']].update(strings(value.get(key)))
                 for k, v in value.items():
                     p = f'{path}.{k}' if path else str(k)
                     for e in self.entries:
@@ -133,6 +142,43 @@ class RemovalList:
                 for v in value:
                     visit(v, ctx, path)
         visit(obj, {})
+        self.register_identifiers(obj)
+
+    def register_identifiers(self, obj, ctx=None):
+        ctx = self.context(obj, ctx or {})
+        if isinstance(obj, dict):
+            eid = obj.get('event_id')
+            if eid and self.text(str(eid), ctx) != eid:
+                sid = str(obj.get('source_id') or str(eid).split(':', 1)[0])
+                if self.text(sid, ctx) != sid:
+                    self.aliases.setdefault(sid, self.safe_id(sid))
+                rid = self.safe_id(str(eid))
+                self.aliases.setdefault(str(eid), self.aliases.get(sid, sid) + ':' + rid)
+            for key, value in obj.items():
+                if key in ('id', 'slug', 'key', 'source_id', 'discharger_id', 'water_slug', 'outfall_id') and isinstance(value, str):
+                    if self.text(value, ctx) != value:
+                        self.aliases.setdefault(value, self.safe_id(value))
+                self.register_identifiers(value, ctx)
+        elif isinstance(obj, list):
+            for value in obj:
+                self.register_identifiers(value, ctx)
+
+    def safe_id(self, value):
+        # No source text appears in an opaque replacement, including the filename.
+        for salt in range(1000):
+            candidate = 'r' + hashlib.sha256(f'{salt}:{value}'.encode()).hexdigest()[:32]
+            if not self.text(candidate, {}, check=True):
+                return candidate
+        raise ValueError('no replacement identifier satisfies requested removals')
+
+    def reference(self, value):
+        if value in self.aliases:
+            return self.aliases[value]
+        from export.build import event_file_name
+        for old, new in self.aliases.items():
+            if ':' in old:
+                value = value.replace(event_file_name(old), event_file_name(new))
+        return value
 
     def matches(self, e, obj):
         rx = self.patterns[e['id']]
@@ -140,13 +186,24 @@ class RemovalList:
         match = rx.fullmatch if e['kind'] == 'record' and re.fullmatch(r'[^\s:]+:[^\s]+', e['match']) else rx.search
         return any(match(s) for s in strings(obj))
 
+    def record_copy(self, entry, values, ctx):
+        # Independent source records can legitimately repeat an agency sentence.
+        if ctx.get('event_id') and ctx['event_id'] not in self.removed_ids:
+            return False
+        flags = 0 if entry.get('case_sensitive') else re.I
+        return any(re.search(re.escape(quote), text, flags)
+                   for quote in self.record_texts.get(entry['id'], ()) if quote
+                   for text in strings(values))
+
     def text(self, value, ctx, check=False):
         for e in self.entries:
             if not self.scoped(e, ctx):
                 continue
+            if e['kind'] == 'record' and ctx.get('event_id') and ctx['event_id'] not in self.removed_ids:
+                continue
             patterns = ([self.patterns[e['id']]] if e['kind'] == 'text' else
                         [re.compile(re.escape(s), 0 if e.get('case_sensitive') else re.I)
-                         for s in sorted(self.field_texts.get(e['id'], ()), key=len, reverse=True)])
+                         for s in sorted(self.field_texts.get(e['id'], ()) or self.record_texts.get(e['id'], ()), key=len, reverse=True) if s])
             for rx in patterns:
                 if rx.search(value):
                     if check:
@@ -167,6 +224,15 @@ class RemovalList:
             if feature:
                 ctx = self.context(obj['properties'], ctx)
             eid = str((obj['properties'] if feature else obj).get('event_id', ''))
+            # Cached event-derived registries/traces are indivisible inputs. Rebuilding
+            # them from surviving events is preferable to retaining a copied name/count.
+            provenance = obj.get('_all_event_ids') or obj.get('event_ids') or obj.get('source_event_ids') or []
+            withdrawn = set(provenance) & self.removed_ids if isinstance(provenance, list) else set()
+            if withdrawn:
+                if check:
+                    for old in withdrawn:
+                        hits.update(self.removed_by.get(old, ()))
+                return DROP
             if eid in self.removed_ids:
                 if check:
                     hits.update(self.removed_by.get(eid, ()))
@@ -175,7 +241,7 @@ class RemovalList:
                 if e['kind'] == 'record' and self.scoped(e, ctx):
                     # Match at the record boundary, not an entire envelope of unrelated records.
                     own = {k: v for k, v in obj.items() if not isinstance(v, (dict, list))}
-                    if self.matches(e, obj if eid or feature else own):
+                    if self.matches(e, obj if eid or feature else own) or self.record_copy(e, own, ctx):
                         if check:
                             hits.add(e['id'])
                         if eid:
@@ -183,6 +249,8 @@ class RemovalList:
                         return DROP
             out = {}
             for k, v in obj.items():
+                if k == 'source_record_id' and eid in self.aliases:
+                    v = self.aliases[eid].split(':', 1)[-1]
                 if str(k) in self.removed_ids:
                     if check:
                         hits.update(self.removed_by.get(str(k), ()))
@@ -205,7 +273,7 @@ class RemovalList:
                         return DROP
                     if request:
                         continue
-                new_key = self.text(str(k), ctx)
+                new_key = self.text(self.reference(str(k)), ctx)
                 child_hits = set() if check else None
                 value = self._walk(v, ctx, p, check, child_hits)
                 if check:
@@ -226,6 +294,11 @@ class RemovalList:
                 if (isinstance(obj.get(key), (list, dict)) and key in out and 'count' in out
                         and obj.get('count') == len(obj[key])):
                     out['count'] = len(out[key])
+                    if key == 'records' and len(out[key]) != len(obj[key]) and isinstance(out.get('meta'), dict):
+                        # Ingest-time counts summarize the unfiltered input. Preserve source
+                        # provenance and runtime flags, but never publish stale aggregates.
+                        for aggregate in ('left_out', 'listed_without_status', 'left_out_note'):
+                            out['meta'].pop(aggregate, None)
                     break
             return out
         if isinstance(obj, list):
@@ -263,7 +336,7 @@ class RemovalList:
                     hits.add(hit)
                     return DROP
                 return original
-            out = self.text(obj, ctx)
+            out = self.text(self.reference(obj), ctx)
             return original if out == obj else out
         return obj
 
@@ -331,12 +404,64 @@ class RemovalList:
     def publish(self, root):
         if not self.entries and not self.removed_ids:
             return
+        # Learn ALL field values before mutating any payload (including new enrichment).
+        for path in self._files(root):
+            if path.suffix.lower() in ('.json', '.geojson'):
+                self.register(json.loads(path.read_text()))
+            elif path.suffix.lower() == '.csv':
+                self.register(list(csv.DictReader(io.StringIO(path.read_text()))))
+        self.rename_files(root)
         for path in self._files(root):
             result, _ = self._file(path)
             if result is None:
                 self.empty_file(path)
             else:
                 path.write_bytes(result)
+
+    def rename_files(self, root):
+        from export.build import event_id_from_file
+        root = Path(root)
+        for path in self._files(root):
+            relative = path.relative_to(root).as_posix()
+            try:
+                eid = event_id_from_file(path.name) if path.suffix == '.json' else None
+            except (ValueError, UnicodeError):
+                eid = None
+            if eid in self.removed_ids:
+                self.retired_files.add(relative)
+                path.unlink()
+                continue
+            if eid and self.text(eid, {}, check=True):
+                self.register_identifiers({'event_id': eid, 'source_id': eid.split(':', 1)[0]})
+            target = self.reference(relative)
+            if self.text(target, {}, check=True):
+                # Non-event paths can also contain requested text. Preserve extension,
+                # use a safe opaque basename, and rewrite all links in the same pass.
+                target = str(Path(target).with_name(self.safe_id(relative) + path.suffix))
+                if self.text(target, {}, check=True):
+                    target = self.safe_id(relative)
+                self.aliases[relative] = target
+            if target != relative:
+                self.retired_files.add(relative)
+                dest = root / target
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                if dest.exists():
+                    raise ValueError('requested removal filename collision')
+                path.rename(dest)
+
+    def save_deletions(self, path):
+        from export.build import event_file_name
+        self.retired_files.update('events/' + event_file_name(eid) for eid in self.removed_ids)
+        self.retired_files.update('events/' + event_file_name(eid) for eid in self.aliases if ':' in eid)
+        path = Path(path)
+        path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        # Retain retry work across exports. This manifest is never in out/ or a release.
+        previous = json.loads(path.read_text()) if path.exists() else []
+        import os
+        fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+        with os.fdopen(fd, 'w') as f:
+            os.fchmod(f.fileno(), 0o600)
+            json.dump(sorted(set(previous) | self.retired_files), f)
 
     @staticmethod
     def empty_file(path):
@@ -353,6 +478,10 @@ class RemovalList:
         if not self.entries:
             return 0
         count = 0
+        # Filenames are publication too, including URL-encoded event identifiers.
+        before = len(self.retired_files)
+        self.rename_files(root)
+        count += len(self.retired_files) - before
         for path in self._files(root):
             result, hits = self._file(path, check=True)
             if hits:
@@ -370,4 +499,9 @@ class RemovalList:
                     path.write_bytes(result)
         if count:
             self.publish(root)
+        # A replacement may itself match a request. Never publish such residuals.
+        for path in self._files(root):
+            _, hits = self._file(path, check=True)
+            if hits or self.text(path.relative_to(root).as_posix(), {}, check=True):
+                raise ValueError('requested removal remains after publication check')
         return count

@@ -463,7 +463,7 @@ def test_dnr_hab_map_bad_answers_fail_and_the_raw_save_is_cut_and_rounded(tmp_pa
     extra = {"features": [{**doc["features"][0], "attributes": {**doc["features"][0]["attributes"],
                                                                 "PubInfo": "Call Jane Example at 573-555-0100"}}]}
     saved = HAB.rounded(extra)
-    assert "PubInfo" not in json.dumps(saved) and saved["features"][0]["geometry"] == {'x': -92.3271234, 'y': 38.9512345}
+    assert "PubInfo" in json.dumps(saved) and saved["features"][0]["geometry"] == {'x': -92.3271234, 'y': 38.9512345}
 
 
 def test_dnr_hab_map_is_registered_as_a_read_feed():

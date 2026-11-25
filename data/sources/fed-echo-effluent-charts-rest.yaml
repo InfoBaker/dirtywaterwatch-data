@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "fed-echo-effluent-charts-rest"
 name: "ECHO Effluent Charts REST services (per-permit DMR data incl. monthly CSO event counts, duration, volume per outfall)"
 url: "https://echodata.epa.gov/echo/eff_rest_services.get_effluent_chart?output=JSON&p_id=MA0101630&parameter_code=51484&start_date=01/01/2025&end_date=10/31/2026"

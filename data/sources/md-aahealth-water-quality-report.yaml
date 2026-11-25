@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "md-aahealth-water-quality-report"
 name: "Anne Arundel County Department of Health Recreational Water Quality Report (beach enterococci results)"
 url: "https://www.aahealth.org/environmental-health/recreational-water-quality/water-quality-report"

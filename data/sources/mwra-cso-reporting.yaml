@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "mwra-cso-reporting"
 name: "MWRA CSO discharge reporting page"
 url: "https://www.mwra.com/cso/cso_reporting.html"

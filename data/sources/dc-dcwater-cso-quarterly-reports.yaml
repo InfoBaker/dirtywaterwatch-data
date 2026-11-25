@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-dcwater-cso-quarterly-reports"
 name: "DC Water CSO Facilities Quarterly Reports (monthly CSS operations + modeled/metered CSO results per outfall)"
 url: "https://www.dcwater.com/resources/publications?term_node_tid_depth=50"

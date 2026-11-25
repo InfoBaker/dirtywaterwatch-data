@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "me-dep-cso-status-report"
 name: "Maine DEP Maine Combined Sewer Overflow Status Report (annual; latest = 2025 report, June 2026)"
 url: "https://www.maine.gov/dep/publications/documents/legislative%20reports/Maine%20CSO%202025%20Status%20Report.pdf"

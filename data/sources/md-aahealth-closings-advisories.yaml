@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "md-aahealth-closings-advisories"
 name: "Anne Arundel County Department of Health Recreational Water Closings and Advisories"
 url: "https://www.aahealth.org/environmental-health/recreational-water-quality/closings-and-advisories"

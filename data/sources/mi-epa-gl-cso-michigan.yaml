@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "mi-epa-gl-cso-michigan"
 name: "EPA: Combined Sewer Overflows in the Great Lakes Basin, Michigan (operator list with websites)"
 url: "https://www.epa.gov/npdes/combined-sewer-overflows-great-lakes-basin-michigan"

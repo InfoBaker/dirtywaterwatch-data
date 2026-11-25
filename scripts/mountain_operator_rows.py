@@ -174,13 +174,13 @@ def name_for(p: str, pl: list[dict], cand: dict, overrides: dict) -> tuple[str, 
         return overrides[p], "the permittee's own name (EPA's spelling in the notes)"
     removed = cand.get("permittee_as_recorded") == REMOVED or cand.get("facility") == REMOVED
     pn = (pl[0].get("permit_name") or "") if pl else ""
-    if pn and BODY.search(pn) and not personish(tidy(pn)):
+    if pn and pn != REMOVED:
         return pn, "EPA ICIS-NPDES permit name"
     rec = cand.get("permittee_as_recorded")
-    if rec and rec != REMOVED and BODY.search(rec) and not personish(tidy(rec)):
+    if rec and rec != REMOVED:
         return rec, "EPA's permittee as recorded (private-utility candidates file)"
     fac = (pl[0].get("permittee") if pl else None) or cand.get("facility")
-    if fac and fac != REMOVED and (BODY.search(fac) or not removed) and not personish(tidy(fac)):
+    if fac and fac != REMOVED:
         return fac, "EPA ICIS-NPDES facility name (the owning body is not in the file)"
     return f"Sewage plant, permit {p}", "EPA gives no name that can be shown"
 

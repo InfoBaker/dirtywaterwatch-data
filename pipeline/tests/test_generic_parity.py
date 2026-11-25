@@ -137,12 +137,12 @@ def test_baltimore_port_matches_the_module_when_an_overflow_starts_or_ends_at_mi
     assert compare(mod, gen, layer_fields(content)) == {"only_module": [], "only_generic": [], "fields": {}}
 
 
-def test_baltimore_port_keeps_only_the_safe_fields_in_raw():
+def test_baltimore_port_keeps_source_narratives_in_raw():
     _, gen, _, block = baltimore()
     safe = set(block["safe_fields"])
     for r in gen:
         assert set(r["raw"]["row"]) <= safe
-        assert "WAIVER_REASON" not in r["raw"]["row"] and "COMMENT_RELIEF_REQUEST_TYPE" not in r["raw"]["row"]
+        assert "WAIVER_REASON" in r["raw"]["row"] and "COMMENT_RELIEF_REQUEST_TYPE" in r["raw"]["row"]
 
 
 def mde_runs(texts: list[str], times=(FETCHED, *LATER)):

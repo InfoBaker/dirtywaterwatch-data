@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nh-nashua-cso-history-pdf"
 name: "Nashua History of CSO Occurrences (PDF)"
 url: "https://www.nashuanh.gov/DocumentCenter/View/11049"

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nhdes-healthy-swimming-mapper-beaches"
 name: "NHDES Healthy Swimming Mapper - Beach Mapper Points (layer 0 of '2026 NHDES Healthy Swimming Mapper' feature service)"
 url: "https://services1.arcgis.com/MAcUimSes4gPY4sM/arcgis/rest/services/2024_Healthy_Swimming_Mapper_V2_WFL1/FeatureServer/0"

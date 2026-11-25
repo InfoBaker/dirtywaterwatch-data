@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-data-virginia-gov"
 name: "data.virginia.gov (Virginia Open Data Portal) DEQ listings"
 url: "https://data.virginia.gov/dataset/prep-report-export-all"

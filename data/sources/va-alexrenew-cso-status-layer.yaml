@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-alexrenew-cso-status-layer"
 name: "AlexRenew 'Outfall Overflow Status' ArcGIS layer (Public Notification System for Alexandria CSOs)"
 url: "https://services8.arcgis.com/gPxDs3sbKpglnSk7/arcgis/rest/services/Outfall_Overflow_Status_view/FeatureServer/0"

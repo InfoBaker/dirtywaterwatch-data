@@ -422,6 +422,8 @@ def base_key(row: dict) -> str:
 
 
 def row_sha(row: dict) -> str:
+    from ingest.identity_compat import md_row
+    row = md_row(row, _allowlist())
     return hashlib.sha1(json.dumps({k: v for k, v in row.items() if k != "id"}, sort_keys=True).encode()).hexdigest()
 
 

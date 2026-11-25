@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ny-dec-sprtk-web"
 name: "DEC Sewage Pollution Right to Know page, 'Recent NY-Alert Notifications' view"
 url: "https://dec.ny.gov/environmental-protection/water/water-quality/sewage-pollution-right-to-know"

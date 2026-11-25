@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-jra-james-river-watch"
 name: "James River Association - James River Watch bacteria data (ArcGIS)"
 url: "https://thejamesriver.org/james-river-watch/"

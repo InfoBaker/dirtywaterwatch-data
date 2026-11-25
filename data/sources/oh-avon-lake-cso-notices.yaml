@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "oh-avon-lake-cso-notices"
 name: "Avon Lake Regional Water CSO notices, Form B (PDF)"
 url: "https://avonlakewater.org/about-us/about-the-avon-lake-water-reclamation-facility/"

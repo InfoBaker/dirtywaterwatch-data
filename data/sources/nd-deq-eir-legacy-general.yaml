@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nd-deq-eir-legacy-general"
 name: "ND DEQ General Environmental Incidents - Historical (1975-2020), the sewage rows"
 url: "https://deq.nd.gov/FOIA/Spills/defaultarc.aspx/"

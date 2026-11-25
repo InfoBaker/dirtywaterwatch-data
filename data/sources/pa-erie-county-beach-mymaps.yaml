@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "pa-erie-county-beach-mymaps"
 name: "Erie County Department of Health beach and HAB advisory map (Google My Maps KML)"
 url: "https://eriecountypa.gov/departments/health/services-and-programs/health-and-wellness/beach-water-testing-results/"

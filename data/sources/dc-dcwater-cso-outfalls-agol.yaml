@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-dcwater-cso-outfalls-agol"
 name: "DC Water CSOSheds interactive map: Combined Sewer Outfalls layer"
 url: "https://services2.arcgis.com/kZWfT06uhil5hMQO/arcgis/rest/services/CSOSheds_InteractiveMap_CSOOutfalls/FeatureServer/0"

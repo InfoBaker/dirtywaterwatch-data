@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "tn-tdec-hab-advisory-status"
 name: "TDEC HAB Advisory Status (Survey123 layer behind the Tennessee HAB Dashboard)"
 url: "https://services5.arcgis.com/bPacKTm9cauMXVfn/arcgis/rest/services/survey123_ecdde0d22aef4bc897dd90831ea05618/FeatureServer/0"
@@ -39,6 +40,7 @@ fetch:
   metadata: true
   time_zone: "America/Chicago"   # dates only; each record names its point's zone (tn_hab_record)
   bounds: [-90.32, 34.98, -81.64, 36.68]      # Tennessee; a point outside is not used (raw._coords_rejected)
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [objectid, name_of_the_waterbody, HAB, HAB_Status_date, HAB_end_date, hab_confirmed, advisory_issued,
                 please_enter_the_date_the_algal, private_property, _x, _y]
   round_coords: 3      # the reporter's point, about 100 m, in raw.row and data/raw too

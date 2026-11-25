@@ -285,7 +285,8 @@ def build(page: str, fetched: str, previous: list[dict]) -> tuple[list[dict], di
     # one entry per water: a water listed twice (two levels at once) keeps the higher level, the other in raw
     by_water: dict[str, dict] = {}
     for it in items:
-        k = slug(it["water"])
+        from ingest.identity_compat import nv_field
+        k = slug(nv_field(it["water"]))
         if k in by_water:
             keep, other = sorted([by_water[k], it], key=lambda x: LEVELS.index(x["level"]), reverse=True)
             keep.setdefault("also_listed", []).append({"level": other["level"], "updated": other["updated"],

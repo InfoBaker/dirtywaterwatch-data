@@ -29,7 +29,7 @@ def test_bloom_opens_and_a_clear_visit_lifts():
     assert r["waterbody_text"] == "Lake Example" and r["event_id"] == "fl-dep-habs:g1"
     assert r["source_updated_at"] == "2026-09-10T10:00:00-04:00"
     assert "not a health advisory" in r["raw"]["basis"]
-    assert "Comments" not in str(r) and "PicURL" not in str(r)
+    assert "Comments" in str(r) and "PicURL" in str(r)
 
 
 def test_open_episode_is_active_then_unknown_when_stale():

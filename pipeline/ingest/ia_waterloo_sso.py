@@ -52,6 +52,8 @@ from common import EVENTS_DIR, HEADERS, end_after, event, now_iso, read_json, sa
     strip_house_numbers, write_events
 from common import error_detail
 from ingest.ia_id_privacy import home_place
+from ingest import ia_id_privacy as identity_rules
+from ingest import identity_text
 from ingest.ia_id_privacy import scrub as strict_scrub
 
 SOURCE_ID = "ia-waterloo-sso-notices"
@@ -175,12 +177,18 @@ def read(para: str) -> dict:
             "bypass_pumping": bool(re.search(r"bypass pumping", rest, re.I)), "text": text}
 
 
+def identity_scrub(text):
+    """The pre-change Iowa normalization, used only for stable identifiers."""
+    from ingest.identity_compat import ia_text
+    return ia_text(text)
+
+
 def id_location(f: dict) -> str:
-    """The location as it is saved (a private home's dropped, text that may name a person withheld): the id never
-    carries what the record does not (lessons 6 and 7)."""
-    if home_place(f.get("text"), f.get("location")):
+    """Historical location normalization for identity only; published location text is preserved."""
+    if any(t and (identity_rules.HOME_RE.search(t) or identity_rules.HOME_OF_RE.search(t))
+           for t in (f.get("text"), f.get("location"))):
         return ""
-    loc = strict_scrub(f.get("location"))
+    loc = identity_scrub(f.get("location"))
     return "" if not loc or loc.startswith("[withheld") else slug(loc)
 
 
@@ -236,7 +244,7 @@ def build(paras: list[str], at: str, previous: list[dict]) -> tuple[list[dict], 
         except ValueError as e:
             bad += 1
             text = strict_scrub(strip_house_numbers(scrub_text(p)))
-            sid = "unread-" + hashlib.sha1(text.encode()).hexdigest()[:12]
+            sid = "unread-" + hashlib.sha1(identity_scrub(p).encode()).hexdigest()[:12]
             out[sid] = event(source_id=SOURCE_ID, source_record_id=sid, event_type="sso", status="unknown",
                              discharger_name=OPERATOR, discharger_id=OPERATOR_ID, npdes_permit=PERMIT, fetched_at=at,
                              authority=AUTHORITY,

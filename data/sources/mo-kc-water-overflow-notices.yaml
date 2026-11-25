@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "mo-kc-water-overflow-notices"
 name: "KC Water wastewater overflow notices (news posts, read through the site search's RSS feed)"
 url: "https://www.kcwater.us/search/overflow/feed/rss2/"

@@ -333,7 +333,11 @@ def range_text(t) -> bool:
 
 # ---------------------------------------------------------------- loading
 
+from build.removal_inputs import publication_inputs, filtered
+
+
 class Data:
+    @publication_inputs
     def __init__(self, now: datetime):
         self.now = now
         self.waters = live_waters(load_waters())     # the live states' records only (rules.json live_states)
@@ -342,6 +346,8 @@ class Data:
         # state not yet live has no event page, so it is neither counted on a live water (157 Alabama reports were,
         # on Georgia and Mississippi waters) nor given a discharger chart (1,276 files for TX, AL, HI); 2026-11-08
         files, events, problems = load_events(include_fixtures=False, live=rules_live_states(self.rules))
+        files, events = filtered(files), filtered(events)
+        self.waters = filtered(self.waters)
         # an event's discharger_id that the registry lists as an alias is the row's id here too (as in the
         # export), so a discharger's chart is one series under the id its page uses
         aliases = discharger_alias_map([d for d in read_json(DATA_DIR / "dischargers.json", []) or [] if isinstance(d, dict)])
@@ -1486,6 +1492,7 @@ def safe_name(s: str) -> str:
     return re.sub(r"[^A-Za-z0-9._-]", "_", s)
 
 
+@publication_inputs
 def build(now: datetime | None = None, only: set | None = None, write: bool = True):
     now = (now or datetime.now(UTC)).astimezone(UTC)
     data = Data(now)

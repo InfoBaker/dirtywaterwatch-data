@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "mt-deq-hab-map"
 name: "Montana DEQ harmful algal bloom map layer: algal-bloom advisories with DEQ's issue and lift dates"
 url: "https://gis.mtdeq.us/hosting/rest/services/Hosted/Harmful_Algal_Bloom_Survey_(Public_Web_Map)/FeatureServer/0"

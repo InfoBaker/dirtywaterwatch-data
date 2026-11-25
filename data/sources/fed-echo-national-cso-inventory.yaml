@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "fed-echo-national-cso-inventory"
 name: "EPA National Combined Sewer Overflow Inventory (ECHO download ALL_CSO_downloads.zip)"
 url: "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"

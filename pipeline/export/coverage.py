@@ -380,10 +380,10 @@ def load_register(path=None) -> dict | None:
 def load_notification_pages(path=None) -> dict | None:
     """The page-health table of the public-notice channel monitor (ingest/notification_pages.py), or None."""
     import json
-    from common import BUILD_DIR
+    from common import BUILD_DIR, read_json
     p = path or BUILD_DIR / "notice-pages" / "health.json"
     try:
-        return json.loads(p.read_text())
+        return read_json(p)
     except (OSError, ValueError):
         return None
 

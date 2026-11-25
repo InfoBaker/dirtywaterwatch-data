@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-dcgis-pi-ecoli-samples"
 name: "Potomac Interceptor E. coli Sample Results (DCGIS ArcGIS feature service, all agencies)"
 url: "https://services.arcgis.com/neT9SoYxizqTHZPH/arcgis/rest/services/PI_Spill_Sampling_Sites_with_all_samples/FeatureServer/0"

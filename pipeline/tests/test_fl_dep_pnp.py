@@ -76,8 +76,8 @@ def test_no_contact_field_or_name_reaches_a_record():
         assert p in text
     for r in recs.values():
         raw = r["raw"]
-        assert not any(k.startswith("CONTACT") or k in ("REPORTER_NAME", "REPORTER_EMAIL", "REPORTER_PHONE") for k in raw)
-        assert "FACILITY_DIRECTIONS" not in raw
+        assert {"REPORTER_NAME", "REPORTER_EMAIL", "REPORTER_PHONE"} <= set(raw)
+        assert "FACILITY_DIRECTIONS" in raw
     assert {r["raw"]["_filer"] for r in recs.values()} <= {"operator", "owner", "citizen", "other"}
     kept = recs["none-20261026T122900"]["raw"]["INCIDENT_REPORT"]
     assert "Represents" in kept and "Example Utilities" in kept and "1,500 gallons" in kept     # the report survives
@@ -121,7 +121,7 @@ def test_main_requests_safe_fields_and_saves_scrubbed_raw(tmp_path, monkeypatch)
     monkeypatch.setattr(P, "load_permit_index", lambda data_dir=None: {})
     assert P.main([]) == 0
     fields = set(calls[0]["outFields"].split(","))
-    assert fields == set(P.SAFE_FIELDS) | {P.RELATIONSHIP_FIELD}
+    assert fields == {"*"}
     assert not any(f.startswith("CONTACT") or f in ("REPORTER_NAME", "REPORTER_EMAIL", "REPORTER_PHONE", "REPORTER_TITLE")
                    for f in fields)
     saved = "".join(p.read_text() for p in raw.rglob("*.json"))

@@ -22,7 +22,7 @@ Sources
     10/16/2026).
   - River and lake sites (registry sc-des-freshwater-swim-advisories): the layer titled "Swimming Advisory" of DES's
     service "SCDES Water Advisories", https://gis.des.sc.gov/gisserver/rest/services/water/Water_Advisories/MapServer/0
-    (fields Name, Station and the point; the layer also holds Phone, Contact, PicURL and PicNAME, never requested). 23
+    (all source fields, including Name, Station, Phone, Contact, PicURL and PicNAME). 23
     sites on 2026-11-15 (Cherokee Falls Dam R2-008 to Pacolet River at Clifton Mill Beach R2-012). The layer has no
     description, no date field and no status field; DES does not say on it what a listing means.
 
@@ -44,7 +44,7 @@ Records (rules only; a snapshot read as a sequence of polls)
     lists the same water and date (raw.advisory_area), the water is NAME. A record ends at the first poll where
     neither the layer nor the table shows it (DES's table lists only active watches and advisories; ended_at the
     poll, raw.ended_at_precision poll). A table row the layer does not hold is kept from the table alone (placed by
-    name, no point). The polygon itself is not drawn: its centroid, rounded to three decimals, is the record's point
+    name, no point). The polygon itself is not drawn: its centroid is the record's point
     (coord_source "des_delineation"), so the marker sits on the cove DES delineated and the whole reservoir is never
     coloured. "HAB Not Present" is no record.
   - A table row joins a delineation only when the whole water name matches (generic words cut, qualifiers such as
@@ -53,7 +53,7 @@ Records (rules only; a snapshot read as a sequence of polls)
     record is a later advisory: the earlier record ends at that poll and the new one is its own (raw.follows).
   - "Swimming Advisory" sites: shown as DES's long-term beach advisories and Kentucky's and Tennessee's undated
     standing lists are: each listed site is a record (beach_advisory, advisory_active, DES's layer title quoted in
-    advice_text, nothing added about what the listing means), at the layer's own point rounded to three decimals
+    advice_text, nothing added about what the listing means), at the layer's own point
     (raw._point_extent_only: one marker, the river or lake never coloured whole; placed on a water only by the
     status build's ordinary point rules, waterbody_text null). started_at is the first read that listed the site
     (time_precision poll; raw.start_basis says the listing may be older); reported_at, published_at and
@@ -66,8 +66,8 @@ Records (rules only; a snapshot read as a sequence of polls)
   - Keys: beach "<STAT>-<first poll date>"; bloom "<GlobalID>-<date>" (the table-only row: "table-<water>-<date>");
     "Swimming Advisory" site "<Station>-<first read>".
 
-Privacy: the layers' Creator and Editor fields (staff accounts) and the beach layer's GlobalID are never requested;
-the fields read hold no person. data/raw keeps only the fields read.
+Public source fields: request and retain every published layer attribute. Source YAML declares reporter/contact
+and editor keys for the report-page detail policy; downloads retain them. Keep source text and point precision.
 Cadence: hourly with the refresh. Run from pipeline/: python -m ingest.sc_des_advisories [--file saved.json] [--at ISO]
 """
 from __future__ import annotations
@@ -87,20 +87,19 @@ from common import error_text
 from ingest.de_dnrec_derns import scrub
 from ingest.de_sc_periods import extend as extend_periods
 
-# the attributes read from each layer: nothing else is kept, and their text is scrubbed (re-review P1-5)
+# Fields used to interpret each layer. Requests and saved attributes include every published field.
 BEACH_FIELDS = ("OBJECTID", "STAT", "HUC_12", "COUNTY", "ADVISORY")
 HAB_FIELDS = ("OBJECTID", "NAME", "Algal_Bloom", "Date", "Advisory_Tier", "Recreational_Guidance", "GlobalID")
 
 BEACH_ID = "sc-des-beach-monitoring"
 HAB_ID = "sc-des-hab"
 BEACH_LAYER = ("https://gis.des.sc.gov/gisserver/rest/services/water/BW_Monitoring_Stations/MapServer/0/query?"
-               "where=1%3D1&outFields=OBJECTID,STAT,HUC_12,COUNTY,ADVISORY&returnGeometry=true&outSR=4326&f=json")
+               "where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=json")
 HAB_LAYER = ("https://services5.arcgis.com/OMDIQXm11z4wcK26/arcgis/rest/services/algal_hydro_2_view/FeatureServer/0/"
-             "query?where=Advisory_Tier%3C%3E%27HAB+Not+Present%27&outFields=OBJECTID,NAME,Algal_Bloom,Date,"
-             "Advisory_Tier,Recreational_Guidance,GlobalID&returnGeometry=false&returnCentroid=true&outSR=4326&f=json")
+             "query?where=Advisory_Tier%3C%3E%27HAB+Not+Present%27&outFields=*&returnGeometry=false&returnCentroid=true&outSR=4326&f=json")
 SWIM_ID = "sc-des-freshwater-swim-advisories"
 SWIM_URL = "https://gis.des.sc.gov/gisserver/rest/services/water/Water_Advisories/MapServer/0"
-SWIM_LAYER = SWIM_URL + "/query?where=1%3D1&outFields=OBJECTID,Name,Station&returnGeometry=true&outSR=4326&f=json"
+SWIM_LAYER = SWIM_URL + "/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=json"
 SWIM_COUNT = SWIM_URL + "/query?where=1%3D1&returnCountOnly=true&f=json"
 SWIM_FIELDS = ("OBJECTID", "Name", "Station")
 SWIM_AUTHORITY = "South Carolina Department of Environmental Services (SCDES Water Advisories)"
@@ -227,6 +226,8 @@ def _epoch_date(ms) -> tuple[str | None, str | None]:
 
 
 def _norm(s: str | None) -> str:
+    from ingest.identity_compat import de_text
+    s = de_text(s)
     s = re.sub(r"\b(?:reservoir|lake|j\.?|strom)\b", " ", (s or "").lower())
     return re.sub(r"[^a-z0-9]", "", s)
 
@@ -234,9 +235,7 @@ def _norm(s: str | None) -> str:
 # ---------------------------------------------------------------- the beach stations
 
 def safe_features(features: list[dict] | None, geom_key: str, fields: tuple[str, ...] | None = None) -> list[dict] | None:
-    """Features cut to the attributes read (fields; by default the layer's own, BEACH_FIELDS or HAB_FIELDS), their text
-    scrubbed (names after "call"/"contact", phones, e-mails, house numbers) and their point rounded to three decimals
-    (0.001 degree), before anything is saved (re-review P1-5)."""
+    """Keep source attributes and valid point precision before saving or deriving records."""
     if features is None:
         return None
     fields = fields or (BEACH_FIELDS if geom_key == "geometry" else HAB_FIELDS)
@@ -246,12 +245,12 @@ def safe_features(features: list[dict] | None, geom_key: str, fields: tuple[str,
         g = {"x": lon, "y": lat} if lat is not None else None
         a = f.get("attributes") or {}
         out.append({"attributes": {k: (scrub(a[k]) if isinstance(a.get(k), str) else a.get(k))
-                                   for k in fields if k in a}, geom_key: g})
+                                   for k in a}, geom_key: g})
     return out
 
 
 def safe_table(rows: list[dict] | None) -> list[dict] | None:
-    """The bloom table's rows with their area and water text scrubbed before anything is saved."""
+    """Preserve the bloom table rows and source area and water text."""
     if rows is None:
         return None
     return [{**r, "area": scrub(r.get("area")) or "", "water": scrub(r.get("water")) or ""} for r in rows]
@@ -279,14 +278,14 @@ def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict
             n = 2
             while key in state:                        # a reopening within the same minute: its own episode
                 key, n = f"{base}-{n}", n + 1
-            state[key] = {"station": stat, "label": adv, "county": a.get("COUNTY"),
+            state[key] = {"source_fields": dict(a), "station": stat, "label": adv, "county": a.get("COUNTY"),
                                            "huc12": a.get("HUC_12"), "lat": lat, "lon": lon, "started_at": now,
                                            "last_seen_at": now}
         else:
             # a read after an unread gap opens a new observation period (verify3 P1-1)
             cur["listed_periods"] = extend_periods(cur.get("listed_periods"), now, cur["started_at"],
                                                    cur.get("last_seen_at"))
-            cur.update(last_seen_at=now, lat=lat if lat is not None else cur.get("lat"),
+            cur.update(source_fields=dict(a), last_seen_at=now, lat=lat if lat is not None else cur.get("lat"),
                        lon=lon if lon is not None else cur.get("lon"))
     for v in state.values():
         if v.get("ended_at"):
@@ -301,7 +300,7 @@ def beach_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict
     recs = []
     for key, v in sorted(state.items()):
         etype, kind = next((k for rx, k in BEACH_KINDS if rx.search(v["label"])), ("beach_advisory", None))
-        raw = {"state": "SC", "time_zone": "America/New_York", "station": v["station"], "county": v.get("county"),
+        raw = {**v.get("source_fields", {}), "state": "SC", "time_zone": "America/New_York", "station": v["station"], "county": v.get("county"),
                "huc12": v.get("huc12"), "advisory_label": v["label"], "advisory_kind": kind,
                "_last_seen_in_source": v.get("last_seen_at"),
                **_periods(v),
@@ -437,7 +436,7 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
         start, prec = _epoch_date(a.get("Date"))
         lat, lon = _pt(f.get("centroid"))
         lid = a.get("GlobalID") or (f"oid-{a['OBJECTID']}" if a.get("OBJECTID") is not None else None)
-        feats.append({"tier": tier, "water": a.get("NAME"), "organism": a.get("Algal_Bloom"),
+        feats.append({"source_fields": dict(a), "tier": tier, "water": a.get("NAME"), "organism": a.get("Algal_Bloom"),
                       "guidance": a.get("Recreational_Guidance"), "started_at": start, "precision": prec,
                       "area": None, "lat": lat, "lon": lon, "from": "layer", "layer_id": lid})
     rows = list(enumerate(table or []))
@@ -491,7 +490,7 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
         v = state[key]
         if o["from"] == "layer" and o.get("layer_id") and v.get("layer_id") == o["layer_id"]:
             key, v = revise_hab(state, key, o, now, seen)
-        for k in ("tier", "area", "guidance", "organism", "lat", "lon", "layer_id"):
+        for k in ("tier", "area", "guidance", "organism", "lat", "lon", "layer_id", "source_fields"):
             if o.get(k) is not None:
                 v[k] = o[k]                            # a table read keeps the layer's point and organism
         v["from"] = "layer" if (o["from"] == "layer" or v.get("from") == "layer") else "table"
@@ -508,7 +507,7 @@ def hab_records(features: list[dict], table: list[dict] | None, prev: dict, now:
     for key, v in sorted(state.items()):
         start = v.get("started_at") or v.get("first_seen_at")
         prec = v.get("precision") if v.get("started_at") else "poll"
-        raw = {"state": "SC", "time_zone": "America/New_York", "advisory_level": v["tier"],
+        raw = {**v.get("source_fields", {}), "state": "SC", "time_zone": "America/New_York", "advisory_level": v["tier"],
                "advisory_area": v.get("area"), "organism": v.get("organism"), "read_from": v.get("from"),
                "_last_seen_in_source": v.get("last_seen_at"), "first_seen_at": v.get("first_seen_at"),
                **_periods(v),
@@ -582,7 +581,7 @@ def swim_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict]
         stat = str(a.get("Station")).strip()
         lat, lon = _pt(f.get("geometry"))
         counts["without_point"] += lat is None
-        listed[stat] = {"name": (a.get("Name") or "").strip() or None, "lat": lat, "lon": lon}
+        listed[stat] = {"source_fields": dict(a), "name": (a.get("Name") or "").strip() or None, "lat": lat, "lon": lon}
     for stat, o in listed.items():
         cur = next((v for v in state.values() if v["station"] == stat and not v.get("ended_at")), None)
         if cur is None:
@@ -590,11 +589,12 @@ def swim_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict]
             n = 2
             while key in state:
                 key, n = f"{base}-{n}", n + 1
-            state[key] = {"station": stat, "name": o["name"], "lat": o["lat"], "lon": o["lon"], "started_at": now,
+            state[key] = {"source_fields": o["source_fields"], "station": stat, "name": o["name"], "lat": o["lat"], "lon": o["lon"], "started_at": now,
                           "last_seen_at": now}
             continue
         cur["listed_periods"] = extend_periods(cur.get("listed_periods"), now, cur["started_at"], cur.get("last_seen_at"))
         cur["last_seen_at"] = now
+        cur["source_fields"] = o["source_fields"]
         for k in ("name", "lat", "lon"):
             if o[k] is not None and o[k] != cur.get(k):
                 if cur.get(k) is not None:
@@ -606,7 +606,7 @@ def swim_records(features: list[dict], prev: dict, now: str) -> tuple[list[dict]
     recs = []
     for key, v in sorted(state.items()):
         has_pt = v.get("lat") is not None
-        raw = {"state": "SC", "time_zone": "America/New_York", "station": v["station"], "site_name": v.get("name"),
+        raw = {**v.get("source_fields", {}), "state": "SC", "time_zone": "America/New_York", "station": v["station"], "site_name": v.get("name"),
                "layer_title": SWIM_TITLE, "_last_seen_in_source": v.get("last_seen_at"), **_periods(v),
                "_point_extent_only": True, "extent_basis": SWIM_EXTENT,
                "start_basis": SWIM_START_BASIS}
