@@ -1040,6 +1040,7 @@
    },
    "nh-des-swimming": {
     "kind": "fields",
+    "inherit_parent_reason": false,
     "fields": [
      "Status"
     ],
