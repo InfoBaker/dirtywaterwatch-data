@@ -591,12 +591,12 @@ def test_nebraska_earlier_observation_periods_each_age_out_and_do_not_affect_oth
 
 def test_distribution_discouraged_files_are_withheld_unless_asked():
     d = tmp_events([])
-    (d / "nh-des-swimming.json").write_text(json.dumps({
-        "source_id": "nh-des-swimming", "ok": True, "last_ok_at": iso(NOW), "meta": {"distribution_discouraged": True},
-        "records": [ev("b", source_id="nh-des-swimming", event_type="beach_advisory", status="advisory_active",
+    (d / "restricted-test-feed.json").write_text(json.dumps({
+        "source_id": "restricted-test-feed", "ok": True, "last_ok_at": iso(NOW), "meta": {"distribution_discouraged": True},
+        "records": [ev("b", source_id="restricted-test-feed", event_type="beach_advisory", status="advisory_active",
                        started_at=iso(NOW - H), water_slugs=["other-pond-ma"])]}))
     st, _ = S.build(now=NOW, write=False, **world(d))
-    assert "other-pond-ma" not in st["waters"] and st["withheld_sources"] == ["nh-des-swimming"]
+    assert "other-pond-ma" not in st["waters"] and st["withheld_sources"] == ["restricted-test-feed"]
     st, _ = S.build(now=NOW, write=False, include_restricted=True, **world(d))
     assert st["waters"]["other-pond-ma"]["status"] == "red" and st["restricted_included"] is True
 
