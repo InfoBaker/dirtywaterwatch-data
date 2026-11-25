@@ -1,0 +1,28 @@
+id: "in-evansville-releases"
+name: "Evansville Water and Sewer Utility sanitary release history (SSO/CSSR)"
+url: "https://cso.ewsu.com/"
+homepage: "https://ewsu.com/water-sewer/sewer-wastewater/combined-sewer-overflow/"
+kind: "api"
+level: "municipal"
+# Feed row: pipeline/ingest/in_evansville_releases.py. This is release history,
+# separate from the current CSO status endpoint, which is not read by this feed.
+cadence: "1 hour"
+license: "Published with credit to Evansville Water and Sewer Utility. The utility's site links the City of Evansville's website terms (https://www.evansvillegov.org/city/terms/), which allow personal, noncommercial reuse; DirtyWaterWatch is a noncommercial public-records service."
+attribution: "Evansville Water and Sewer Utility"
+enabled: true
+role: "events"
+event_types: ["sso"]
+states: ["IN"]
+registry_ids: ["in-evansville-releases"]
+access: ["json"]
+access_detail: "GET /Location/SearchCSSR/MM.DD.YYYY/MM.DD.YYYY/* on cso.ewsu.com; Success boolean and Result containing a JSON-encoded array. Complete history is reconciled with overlapping calendar-year queries. No authentication or REST layer."
+machine_readable: true
+legal_basis: null
+checked: "2026-11-22"
+# Unzoned clocks interpreted in America/Chicago; Has* flags determine precision.
+# entered stays a separate database entry time, not publication, receipt or edit.
+# Id is stable across complete reads. Revisions replace that event and keep prior
+# safe values; missing rows and failed requests retain earlier history.
+# Only typed fields and audited cause/affected-area wording are saved. Unknown
+# text is withheld for review. Location, action, manhole and sewer-segment fields
+# are discarded before raw storage; points are rounded to three decimals.
