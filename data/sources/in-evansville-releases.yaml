@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: [CauseDescription, AffectedArea, LocationDescription, Action]}
 id: "in-evansville-releases"
 name: "Evansville Water and Sewer Utility sanitary release history (SSO/CSSR)"
 url: "https://cso.ewsu.com/"
@@ -22,7 +23,5 @@ checked: "2026-11-22"
 # Unzoned clocks interpreted in America/Chicago; Has* flags determine precision.
 # entered stays a separate database entry time, not publication, receipt or edit.
 # Id is stable across complete reads. Revisions replace that event and keep prior
-# safe values; missing rows and failed requests retain earlier history.
-# Only typed fields and audited cause/affected-area wording are saved. Unknown
-# text is withheld for review. Location, action, manhole and sewer-segment fields
-# are discarded before raw storage; points are rounded to three decimals.
+# source values; missing rows and failed requests retain earlier history.
+# All published fields and coordinate precision are retained.

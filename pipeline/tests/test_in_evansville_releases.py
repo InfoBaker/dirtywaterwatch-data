@@ -137,17 +137,15 @@ def test_affected_area_names_no_water_in_status_and_public_record(oid, tmp_path)
     assert S.no_water_flag(r) is None and S.reached_no_water(r) is None
 
 
-def test_privacy_before_raw_storage_and_unknown_text_is_withheld():
+def test_public_text_and_extra_fields_are_retained():
     a = row()
-    secret = "UNREVIEWED_PERSONAL_TEXT"
-    a.update(LocationDescription=secret, Action=secret, UpStreamManhole=secret,
-             reporter=secret, CauseDescription=secret, AffectedArea=secret, EventReason=secret)
-    safe = E.safe_row(a)
-    assert secret not in json.dumps(safe)
-    assert "LocationDescription" not in safe and "UpStreamManhole" not in safe
-    assert safe["Latitude"] == round(row()["Latitude"], 3)
+    text = "NEW_PUBLISHED_TEXT"
+    a.update(LocationDescription=text, Action=text, UpStreamManhole=text,
+             reporter=text, CauseDescription=text, AffectedArea=text, EventReason=text)
+    assert E.safe_row(a) == a
     r = E.to_record(a, FETCHED)
-    assert secret not in json.dumps(r) and r["parse_error"]
+    assert all(r["raw"][k] == v for k, v in a.items())
+    assert r["parse_error"] is None
 
 
 class Response:
@@ -268,7 +266,7 @@ def test_empty_history_fails_instead_of_clearing_records():
         E.fetch_rows(Session([[]]), date(2026, 11, 22), first_year=2026, pause=0)
 
 
-def test_saved_raw_is_scrubbed_and_repeated_read_reuses_it(tmp_path, monkeypatch):
+def test_saved_raw_retains_source_and_repeated_read_reuses_it(tmp_path, monkeypatch):
     import common
     monkeypatch.setattr(common, "EVENTS_DIR", tmp_path / "events")
     monkeypatch.setattr(E, "EVENTS_DIR", tmp_path / "events")
@@ -288,8 +286,32 @@ def test_saved_raw_is_scrubbed_and_repeated_read_reuses_it(tmp_path, monkeypatch
     assert E.main(["--file", str(source)]) == 0
     assert E.main(["--file", str(source)]) == 0
     assert len(saved) == 1
-    assert b"PRIVATE_" not in saved[0] and b"UNREVIEWED_TEXT" not in saved[0]
-    assert json.loads(saved[0])[0]["_withheld_fields"] == ["CauseDescription"]
+    assert json.loads(saved[0]) == [a]
     output = json.loads((tmp_path / "events" / f"{E.SOURCE_ID}.json").read_text())
     assert output["ok"] and len(output["records"]) == 1
     assert "_revisions" not in output["records"][0]["raw"]
+
+
+def test_public_row_retention_keeps_numeric_identity_on_history_reread():
+    from export.removals import RemovalList
+    a = row()
+    previous = E.to_record(a, FETCHED)
+    a.update(CauseDescription='New published cause', AffectedArea='Sample Creek',
+             LocationDescription='123 Sample Road', Action='Published action',
+             Latitude=37.9912345, Longitude=-87.5512345)
+    assert E.safe_row(a) == a
+    reread, _ = E.build([a], '2026-11-25T12:00:00Z', [previous])
+    assert len(reread) == 1 and reread[0]['event_id'] == previous['event_id']
+    assert reread[0]['lat'] == a['Latitude'] and reread[0]['lon'] == a['Longitude']
+    for key, value in a.items():
+        assert reread[0]['raw'][key] == value
+    p = RemovalList([{'id': 'test', 'added': FETCHED, 'kind': 'record', 'match': previous['event_id']}])
+    assert p.apply(reread) == []
+
+
+def test_evansville_declares_public_raw_fields():
+    import yaml
+    source = Path(__file__).resolve().parents[2] / 'data/sources/in-evansville-releases.yaml'
+    fields = yaml.safe_load(source.read_text())['raw_fields']
+    assert fields['reporter_contact'] == fields['customer_identifier'] == []
+    assert {'CauseDescription', 'AffectedArea', 'LocationDescription', 'Action'} <= set(fields['description'])

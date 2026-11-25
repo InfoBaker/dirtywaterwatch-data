@@ -199,10 +199,10 @@ def test_csv_requested_field_is_removed_from_header_too(tmp_path):
     assert p.enforce(tmp_path) == 0
 
 
-def test_record_request_removes_unstructured_payload(tmp_path):
-    p = policy(entry('record', 'Sample'))
+def test_record_request_removes_identified_unstructured_payload(tmp_path):
+    p = policy(entry('record', 'a:1'))
     path = tmp_path / 'feed.xml'
-    path.write_text('<feed><entry>Sample</entry></feed>')
+    path.write_text('<feed><entry><id>a:1</id>Sample</entry></feed>')
     p.publish(tmp_path)
     assert path.read_text().strip() in ('', 'null')
 
@@ -272,7 +272,8 @@ def test_numeric_and_scalar_record_copies_are_checked(tmp_path):
     p = policy(entry('record', 'Sample'))
     path.write_text('{"labels":["Sample","Other"]}')
     p.publish(tmp_path)
-    assert json.loads(path.read_text()) == {'labels': ['Other']}
+    assert json.loads(path.read_text()) == {'labels': ['Sample', 'Other']}
+    assert p.enforce(tmp_path) == 0
 
 
 def test_compact_global_field_removal_drops_column(tmp_path):
@@ -354,10 +355,10 @@ def test_record_identifier_matches_whole_id_not_an_id_prefix():
     assert p.apply({'event_id': 'A:1'}) is None
 
 
-def test_record_match_in_a_dictionary_key_is_not_published(tmp_path):
-    p = policy(entry('record', 'Sample'))
+def test_record_identifier_key_is_not_published(tmp_path):
+    p = policy(entry('record', 'a:1'))
     path = tmp_path / 'records.json'
-    path.write_text('{"Sample":{"note":"public"},"Other":{"note":"public"}}')
+    path.write_text('{"a:1":{"note":"public"},"Other":{"note":"public"}}')
     p.publish(tmp_path)
     assert json.loads(path.read_text()) == {'Other': {'note': 'public'}}
 
@@ -375,3 +376,13 @@ def test_postcheck_does_not_log_requested_text_in_filename(tmp_path, capsys):
     log = capsys.readouterr().out
     assert 'Sample' not in log
     assert 'request-001' in log and '.json' in log
+
+
+def test_record_backstop_preserves_other_identifier_in_feed(tmp_path):
+    p = policy(entry('record', 'a:1'))
+    path = tmp_path / 'feed.xml'
+    body = '<feed><entry><id>a:10</id>Sewer overflow ongoing</entry></feed>'
+    path.write_text(body)
+    p.publish(tmp_path)
+    assert p.enforce(tmp_path) == 0
+    assert path.read_text() == body

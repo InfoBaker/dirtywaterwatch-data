@@ -81,13 +81,9 @@ def test_default_export_includes_both_feeds_and_their_terms(published, tmp_path,
     assert st["withheld_sources"] == []
     monkeypatch.setattr(X, "ensure_status", lambda *args: (st, hist))
     for name, value in {"OUT_DIR": tmp_path / "out", "BUILD_DIR": tmp_path / "build",
-                        "DATA_DIR": tmp_path / "data", "EVENTS_DIR": published,
-                        "BLOCKED_MARK": tmp_path / "blocked.json", "HITS_MARK": tmp_path / "hits.json",
-                        "SCAN_CACHE": tmp_path / "scan.json"}.items():
+                        "DATA_DIR": tmp_path / "data", "EVENTS_DIR": published}.items():
         monkeypatch.setattr(X, name, value)
     X.DATA_DIR.mkdir()
-    redactor_for = X.redactor_for
-    monkeypatch.setattr(X, "redactor_for", lambda events: redactor_for(events, X.DATA_DIR))
     monkeypatch.setattr(S, "load_waters", lambda: {})
     monkeypatch.setattr(S, "load_registry_outfalls", lambda **kw: [])
     monkeypatch.setattr(S, "load_registry", lambda: {})
@@ -117,3 +113,28 @@ def test_coverage_credits_and_quotes_agencies_once():
     for state, words, agency in (("DC", DC_CONDITION, "DC Water"), ("NH", NH_CONDITION, "NHDES")):
         text = rules[state]["basis"]
         assert text.count(words) == 1 and agency in text
+
+
+def test_merged_readers_retain_public_text_and_declarations(monkeypatch):
+    from pathlib import Path
+    import yaml
+    monkeypatch.setattr(NH, 'match_waters', lambda *args: ([], []))
+    text = 'Published contact at 123 Sample Road, 212-555-0123'
+    features = [beach()]
+    features[0]['attributes']['Notes'] = text
+    records = NH.beach_records(features, AT, None)
+    assert records[0]['raw']['Notes'] == text
+    bloom = {'WB_ID': 'TEST', 'WB_NAME': 'Example Lake', 'Bloom_status': 'Warning',
+             'LatestAdvisory': 'Warning', 'Notes': text}
+    assert NH.hab_records([{'attributes': bloom}], AT, None)[0]['raw']['Notes'] == text
+    rows, _ = DC.parse('PremiseNo,Date Reported,SpillVolInGal,Location,Description\n'
+                       'CUSTOMER-7,2026-11-24 00:00:00,40,123 Sample Road,Published description\n')
+    raw = DC.to_records(rows, AT)[0]['raw']
+    assert raw['PremiseNo'] == 'CUSTOMER-7' and raw['Description'] == 'Published description'
+    assert '123 Sample Road' in json.dumps(raw)
+    root = Path(__file__).resolve().parents[2] / 'data/sources'
+    dc = yaml.safe_load((root / 'dc-water-sso.yaml').read_text())['raw_fields']
+    assert dc['customer_identifier'] == ['PremiseNo']
+    for name in ('nhdes-healthy-swimming-mapper-beaches', 'nhdes-healthy-swimming-mapper-cyanobacteria'):
+        fields = yaml.safe_load((root / (name + '.yaml')).read_text())['raw_fields']
+        assert fields['reporter_contact'] == fields['customer_identifier'] == []

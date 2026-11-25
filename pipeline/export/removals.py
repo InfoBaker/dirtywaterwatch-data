@@ -2,7 +2,7 @@
 
 Text matches are literal substrings (case insensitive unless case_sensitive is true).
 Field matches are dotted paths or bare keys. Record matches are literal source text
-or identifiers. Scopes use source_id and/or event_id; unknown provenance is treated
+or identifiers on inputs; derived outputs use removed identities only. Scopes use source_id and/or event_id; unknown provenance is treated
 conservatively so a derived quote cannot escape a request. Known other records stay.
 """
 from __future__ import annotations
@@ -63,8 +63,9 @@ class RemovalList:
         self.removed_by = {eid: {e['id'] for e in self.entries if e['kind'] == 'record' and e['match'] == eid}
                            for eid in self.removed_ids}
         self.field_texts = {e['id']: set() for e in self.entries if e['kind'] == 'field'}
-        self.record_texts = {e['id']: set() for e in self.entries if e['kind'] == 'record'}
         self.aliases = {}
+        self.alias_scopes = {}
+        self.path_aliases = {}
         self.retired_files = set()
 
     def remove_id(self, eid, entry_ids):
@@ -106,7 +107,7 @@ class RemovalList:
         suffix = path[-len(target)-1:]
         return equal(target, key) or equal(target, path) or equal('.' + target, suffix)
 
-    def register(self, obj):
+    def register(self, obj, *, records=True):
         """Learn identities and removed field values before any derived payload is written."""
         if not self.entries:
             return
@@ -125,13 +126,13 @@ class RemovalList:
             ctx = self.context(value, ctx)
             if isinstance(value, dict):
                 for e in self.entries:
-                    if e['kind'] == 'record' and self.scoped(e, ctx) and self.matches(e, value):
-                        if value.get('event_id'):
+                    if records and e['kind'] == 'record' and self.scoped(e, ctx) and value.get('event_id'):
+                        # Only source records carry source_record_id. Status reasons
+                        # carry event_id too, but their generated text is not input.
+                        target = value if 'source_record_id' in value else str(value['event_id'])
+                        if (self.matches(e, target) if isinstance(target, dict)
+                                else self.patterns[e['id']].fullmatch(target)):
                             self.remove_id(str(value['event_id']), [e['id']])
-                            # Cached summaries have no event id beside a copied narrative.
-                            # Rebuild them at input time; also recognize residual copies.
-                            for key in ('advice_text', 'description', 'reason_short', 'notice', 'narrative'):
-                                self.record_texts[e['id']].update(strings(value.get(key)))
                 for k, v in value.items():
                     p = f'{path}.{k}' if path else str(k)
                     for e in self.entries:
@@ -148,16 +149,18 @@ class RemovalList:
         ctx = self.context(obj, ctx or {})
         if isinstance(obj, dict):
             eid = obj.get('event_id')
+            if eid:
+                self.sources.setdefault(str(eid), str(obj.get('source_id') or str(eid).split(':', 1)[0]))
             if eid and self.text(str(eid), ctx) != eid:
                 sid = str(obj.get('source_id') or str(eid).split(':', 1)[0])
                 if self.text(sid, ctx) != sid:
-                    self.aliases.setdefault(sid, self.safe_id(sid))
+                    self.add_alias(sid, self.safe_id(sid), ctx)
                 rid = self.safe_id(str(eid))
-                self.aliases.setdefault(str(eid), self.aliases.get(sid, sid) + ':' + rid)
+                self.add_alias(str(eid), self.reference(sid, ctx) + ':' + rid, ctx)
             for key, value in obj.items():
                 if key in ('id', 'slug', 'key', 'source_id', 'discharger_id', 'water_slug', 'outfall_id') and isinstance(value, str):
                     if self.text(value, ctx) != value:
-                        self.aliases.setdefault(value, self.safe_id(value))
+                        self.add_alias(value, self.safe_id(value), ctx)
                 self.register_identifiers(value, ctx)
         elif isinstance(obj, list):
             for value in obj:
@@ -171,12 +174,30 @@ class RemovalList:
                 return candidate
         raise ValueError('no replacement identifier satisfies requested removals')
 
-    def reference(self, value):
+    def add_alias(self, old, new, ctx):
+        # A shared source/operator identifier can have different request scopes.
+        scopes = {tuple(sorted(e.get('scope', {}).items())) for e in self.entries
+                  if all(ctx.get(k) == v for k, v in e.get('scope', {}).items())
+                  and self.text(old, ctx, entries=[e]) != old}
+        if scopes:
+            self.aliases.setdefault(old, new)
+            self.alias_scopes.setdefault(old, set()).update(scopes)
+
+    def alias_applies(self, old, ctx):
+        return any(all(ctx.get(k) == v for k, v in scope)
+                   for scope in self.alias_scopes.get(old, ()))
+
+    def reference(self, value, ctx=None):
+        ctx = ctx or {}
+        if value in self.path_aliases:
+            return self.path_aliases[value]
         if value in self.aliases:
-            return self.aliases[value]
+            identity_ctx = self.context({'event_id': value}, ctx) if value in self.sources else ctx
+            if self.alias_applies(value, identity_ctx):
+                return self.aliases[value]
         from export.build import event_file_name
         for old, new in self.aliases.items():
-            if ':' in old:
+            if old in self.sources and self.alias_applies(old, self.context({'event_id': old}, {})):
                 value = value.replace(event_file_name(old), event_file_name(new))
         return value
 
@@ -186,24 +207,15 @@ class RemovalList:
         match = rx.fullmatch if e['kind'] == 'record' and re.fullmatch(r'[^\s:]+:[^\s]+', e['match']) else rx.search
         return any(match(s) for s in strings(obj))
 
-    def record_copy(self, entry, values, ctx):
-        # Independent source records can legitimately repeat an agency sentence.
-        if ctx.get('event_id') and ctx['event_id'] not in self.removed_ids:
-            return False
-        flags = 0 if entry.get('case_sensitive') else re.I
-        return any(re.search(re.escape(quote), text, flags)
-                   for quote in self.record_texts.get(entry['id'], ()) if quote
-                   for text in strings(values))
-
-    def text(self, value, ctx, check=False):
-        for e in self.entries:
+    def text(self, value, ctx, check=False, entries=None):
+        for e in self.entries if entries is None else entries:
             if not self.scoped(e, ctx):
                 continue
-            if e['kind'] == 'record' and ctx.get('event_id') and ctx['event_id'] not in self.removed_ids:
+            if e['kind'] == 'record':
                 continue
             patterns = ([self.patterns[e['id']]] if e['kind'] == 'text' else
                         [re.compile(re.escape(s), 0 if e.get('case_sensitive') else re.I)
-                         for s in sorted(self.field_texts.get(e['id'], ()) or self.record_texts.get(e['id'], ()), key=len, reverse=True) if s])
+                         for s in sorted(self.field_texts.get(e['id'], ()), key=len, reverse=True) if s])
             for rx in patterns:
                 if rx.search(value):
                     if check:
@@ -217,7 +229,7 @@ class RemovalList:
         result = self._walk(obj, {})
         return None if result is DROP else result
 
-    def _walk(self, obj, ctx, path='', check=False, hits=None):
+    def _walk(self, obj, ctx, path='', check=False, hits=None, records=True):
         ctx = self.context(obj, ctx)
         if isinstance(obj, dict):
             feature = obj.get('type') == 'Feature' and isinstance(obj.get('properties'), dict)
@@ -226,8 +238,10 @@ class RemovalList:
             eid = str((obj['properties'] if feature else obj).get('event_id', ''))
             # Cached event-derived registries/traces are indivisible inputs. Rebuilding
             # them from surviving events is preferable to retaining a copied name/count.
-            provenance = obj.get('_all_event_ids') or obj.get('event_ids') or obj.get('source_event_ids') or []
-            withdrawn = set(provenance) & self.removed_ids if isinstance(provenance, list) else set()
+            provenance = (obj.get('_all_event_ids') or obj.get('event_ids') or obj.get('source_event_ids')
+                          or (obj.get('events') if 'status' in obj or 'reason_short' in obj else []) or [])
+            withdrawn = ({v for v in provenance if isinstance(v, str)} & self.removed_ids
+                         if isinstance(provenance, list) else set())
             if withdrawn:
                 if check:
                     for old in withdrawn:
@@ -238,10 +252,11 @@ class RemovalList:
                     hits.update(self.removed_by.get(eid, ()))
                 return DROP
             for e in self.entries:
-                if e['kind'] == 'record' and self.scoped(e, ctx):
-                    # Match at the record boundary, not an entire envelope of unrelated records.
-                    own = {k: v for k, v in obj.items() if not isinstance(v, (dict, list))}
-                    if self.matches(e, obj if eid or feature else own) or self.record_copy(e, own, ctx):
+                if e['kind'] == 'record' and self.scoped(e, ctx) and eid:
+                    # Published derivations are withdrawn by identity only. Source
+                    # text selects records during the input registration pass.
+                    if (self.patterns[e['id']].fullmatch(eid) or
+                            (records and not check and eid not in self.sources and self.matches(e, obj))):
                         if check:
                             hits.add(e['id'])
                         if eid:
@@ -249,17 +264,11 @@ class RemovalList:
                         return DROP
             out = {}
             for k, v in obj.items():
-                if k == 'source_record_id' and eid in self.aliases:
-                    v = self.aliases[eid].split(':', 1)[-1]
+                if k == 'source_record_id' and self.reference(eid, ctx) != eid:
+                    v = self.reference(eid, ctx).split(':', 1)[-1]
                 if str(k) in self.removed_ids:
                     if check:
                         hits.update(self.removed_by.get(str(k), ()))
-                    continue
-                request = next((e for e in self.entries if e['kind'] == 'record' and self.scoped(e, ctx)
-                                and self.matches(e, str(k))), None)
-                if request:
-                    if check:
-                        hits.add(request['id'])
                     continue
                 p = f'{path}.{k}' if path else str(k)
                 request = next((e for e in self.entries if e['kind'] == 'field' and self.scoped(e, ctx)
@@ -273,9 +282,9 @@ class RemovalList:
                         return DROP
                     if request:
                         continue
-                new_key = self.text(self.reference(str(k)), ctx)
+                new_key = self.text(self.reference(str(k), ctx), ctx)
                 child_hits = set() if check else None
-                value = self._walk(v, ctx, p, check, child_hits)
+                value = self._walk(v, ctx, p, check, child_hits, records)
                 if check:
                     hits.update(child_hits)
                 if check and child_hits and (eid or feature):
@@ -312,7 +321,7 @@ class RemovalList:
                 ctx = self.context({'event_id': obj[4]}, ctx)
             out = []
             for v in obj:
-                value = self._walk(v, ctx, path, check, hits)
+                value = self._walk(v, ctx, path, check, hits, records)
                 if value is DROP and interval:
                     return DROP
                 if value is not DROP:
@@ -325,23 +334,25 @@ class RemovalList:
                 if check:
                     hits.update(self.removed_by.get(obj, ()))
                 return DROP
-            for e in self.entries:
-                if e['kind'] == 'record' and self.scoped(e, ctx) and self.matches(e, obj):
-                    if check:
-                        hits.add(e['id'])
-                    return DROP
             if check:
                 hit = self.text(obj, ctx, check=True)
                 if hit:
                     hits.add(hit)
                     return DROP
                 return original
-            out = self.text(self.reference(obj), ctx)
+            out = self.text(self.reference(obj, ctx), ctx)
             return original if out == obj else out
         return obj
 
     def _files(self, root):
         return sorted(p for p in Path(root).rglob('*') if p.is_file())
+
+    def identifier_hits(self, text):
+        # Identifiers are tokens: withdrawing a:1 must not withdraw a:10.
+        token = r"[\w.:/~%+-]"
+        return {entry for eid in self.removed_ids
+                if re.search(rf"(?<!{token}){re.escape(eid)}(?!{token})", text)
+                for entry in self.removed_by.get(eid, ())}
 
     def _file(self, path, check=False):
         """Decode JSON/GeoJSON and CSV; other payloads are conservatively a single record."""
@@ -351,7 +362,11 @@ class RemovalList:
             text = data.decode('utf-8-sig')
         except UnicodeError:
             # Unknown binary payloads containing a requested literal cannot be published.
-            hits = {e['id'] for e in self.entries if e['match'].encode().lower() in data.lower()}
+            hits = {e['id'] for e in self.entries if e['kind'] == 'text'
+                    and self.patterns[e['id']].search(data.decode('latin-1'))}
+            hits.update(self.identifier_hits(data.decode('latin-1')))
+            hits.update(e['id'] for e in self.entries if e['kind'] == 'field'
+                        and any(value.encode() in data for value in self.field_texts[e['id']]))
             return (None if hits else data), hits
         try:
             if path.suffix.lower() in ('.json', '.geojson'):
@@ -360,7 +375,7 @@ class RemovalList:
                 compact = isinstance(obj, dict) and isinstance(obj.get('fields'), list) and isinstance(obj.get('rows'), list)
                 if compact:
                     obj['rows'] = [dict(zip(obj['fields'], r)) for r in obj['rows']]
-                out = self._walk(obj, {}, check=check, hits=hits)
+                out = self._walk(obj, {}, check=check, hits=hits, records=False)
                 if out is DROP:
                     return None, hits
                 if compact:
@@ -374,7 +389,7 @@ class RemovalList:
                 reader = csv.DictReader(io.StringIO(text))
                 rows = []
                 for row in reader:
-                    out = self._walk(row, {}, check=check, hits=hits)
+                    out = self._walk(row, {}, check=check, hits=hits, records=False)
                     if out is not DROP:
                         rows.append(out)
                 buf = io.StringIO(newline='')
@@ -388,14 +403,14 @@ class RemovalList:
                 result = buf.getvalue().encode()
             else:
                 decoded = html.unescape(text)
-                hits.update(e['id'] for e in self.entries if e['kind'] == 'record' and self.matches(e, decoded))
+                hits.update(self.identifier_hits(decoded))
                 if check:
                     hit = self.text(decoded, {}, check=True)
                     if hit:
                         hits.add(hit)
                 if hits:
                     return None, hits
-                out = self._walk(text, {}, check=check, hits=hits)
+                out = self._walk(text, {}, check=check, hits=hits, records=False)
                 result = None if out is DROP else out.encode()
         except (ValueError, TypeError):
             raise ValueError('unreadable export payload during removal check') from None
@@ -407,9 +422,9 @@ class RemovalList:
         # Learn ALL field values before mutating any payload (including new enrichment).
         for path in self._files(root):
             if path.suffix.lower() in ('.json', '.geojson'):
-                self.register(json.loads(path.read_text()))
+                self.register(json.loads(path.read_text()), records=False)
             elif path.suffix.lower() == '.csv':
-                self.register(list(csv.DictReader(io.StringIO(path.read_text()))))
+                self.register(list(csv.DictReader(io.StringIO(path.read_text()))), records=False)
         self.rename_files(root)
         for path in self._files(root):
             result, _ = self._file(path)
@@ -431,16 +446,17 @@ class RemovalList:
                 self.retired_files.add(relative)
                 path.unlink()
                 continue
-            if eid and self.text(eid, {}, check=True):
+            ctx = self.context({'event_id': eid}, {}) if eid else {}
+            if eid and self.text(eid, ctx, check=True):
                 self.register_identifiers({'event_id': eid, 'source_id': eid.split(':', 1)[0]})
-            target = self.reference(relative)
-            if self.text(target, {}, check=True):
+            target = self.reference(relative, ctx)
+            if self.text(target, ctx, check=True):
                 # Non-event paths can also contain requested text. Preserve extension,
                 # use a safe opaque basename, and rewrite all links in the same pass.
                 target = str(Path(target).with_name(self.safe_id(relative) + path.suffix))
-                if self.text(target, {}, check=True):
+                if self.text(target, ctx, check=True):
                     target = self.safe_id(relative)
-                self.aliases[relative] = target
+                self.path_aliases[relative] = target
             if target != relative:
                 self.retired_files.add(relative)
                 dest = root / target
@@ -502,6 +518,12 @@ class RemovalList:
         # A replacement may itself match a request. Never publish such residuals.
         for path in self._files(root):
             _, hits = self._file(path, check=True)
-            if hits or self.text(path.relative_to(root).as_posix(), {}, check=True):
+            from export.build import event_id_from_file
+            try:
+                eid = event_id_from_file(path.name) if path.suffix == '.json' else None
+            except (ValueError, UnicodeError):
+                eid = None
+            ctx = self.context({'event_id': eid}, {}) if eid else {}
+            if hits or self.text(path.relative_to(root).as_posix(), ctx, check=True):
                 raise ValueError('requested removal remains after publication check')
         return count

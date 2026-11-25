@@ -123,7 +123,7 @@ def test_field_copies_registered_before_removal(tmp_path):
 def test_record_derived_summary_backstop(tmp_path):
     p = RemovalList([request('record', 'a:1')])
     p.register([{'event_id': 'a:1', 'source_id': 'a', 'advice_text': 'Withdrawn narrative'}])
-    (tmp_path / 'water.json').write_text(json.dumps({'reason_short': 'Withdrawn narrative', 'event_count': 1}))
+    (tmp_path / 'water.json').write_text(json.dumps({'reason_short': 'Withdrawn narrative', 'event_count': 1, 'events': ['a:1']}))
     assert p.enforce(tmp_path) > 0
     assert 'Withdrawn narrative' not in (tmp_path / 'water.json').read_text()
 
@@ -144,8 +144,9 @@ def test_text_identifier_filename_references(tmp_path):
     index = json.loads((tmp_path / 'index.json').read_text())
     assert (tmp_path / index['file']).exists()
 
-@pytest.mark.parametrize('kind', ['record', 'field', 'text'])
-def test_real_pipeline_and_dataset_archive(kind, tmp_path, monkeypatch):
+@pytest.mark.parametrize('kind,shared_status', [('record', None), ('record', 'red'),
+    ('record', 'yellow'), ('field', None), ('text', None)])
+def test_real_pipeline_and_dataset_archive(kind, shared_status, tmp_path, monkeypatch):
     from build import status as S, reaches, rain_history, charts as C
     from export import build as X, outfalls, coverage
     at = '2026-11-24T12:00:00+00:00'
@@ -160,6 +161,12 @@ def test_real_pipeline_and_dataset_archive(kind, tmp_path, monkeypatch):
                           advice_text='Withdrawn narrative', raw={'note': 'Event field', 'state': 'RI'})
     other = common.event(source_id='ri-test', source_record_id='retained', event_type='sso',
                          status='ongoing', started_at=at, fetched_at=at, water_slugs=[slug], raw={'state': 'RI'})
+    if shared_status:
+        target['advice_text'] = 'Sewer overflow'
+        target['water_slugs'] = ['withdrawn-bay-ri']
+        if shared_status == 'yellow':
+            other.update(status='ended', started_at='2026-11-21T12:00:00+00:00',
+                         ended_at='2026-11-22T00:00:00+00:00')
     common.write_json(inputs / 'ri-test.json', {'source_id': 'ri-test', 'fetched_at': at, 'ok': True,
                                                'count': 2, 'records': [target, other]})
     registry = {'id': 'operator', 'state': 'RI', 'name': 'Unique field value',
@@ -180,7 +187,7 @@ def test_real_pipeline_and_dataset_archive(kind, tmp_path, monkeypatch):
     monkeypatch.setattr(S, 'load_waters', lambda: {slug: water})
     monkeypatch.setattr(S, 'load_registry_outfalls', lambda **kw: [])
     monkeypatch.setattr(S, 'load_registry', lambda: {'ri-test': {'id': 'ri-test', 'states': ['RI']}})
-    monkeypatch.setattr(S, 'load_rules', lambda: {'version': 'test', 'live_states': ['RI']})
+    monkeypatch.setattr(S, 'load_rules', lambda: {'version': 'test', 'live_states': ['RI'], 'yellow': {'default_hours': 72}})
     monkeypatch.setattr(S, 'water_geometry', lambda *args: None)
     monkeypatch.setattr(X, 'launches_for', lambda *args: [])
     monkeypatch.setattr(rain_history, 'load_levels', lambda: None)
@@ -207,7 +214,7 @@ def test_real_pipeline_and_dataset_archive(kind, tmp_path, monkeypatch):
         return st, hist
     monkeypatch.setattr(X, 'ensure_status', actual_status)
     X.export()
-    forbidden = {'record': b'Withdrawn narrative', 'field': b'Unique field value', 'text': b'Sample'}[kind]
+    forbidden = {'record': target['event_id'].encode() if shared_status else b'Withdrawn narrative', 'field': b'Unique field value', 'text': b'Sample'}[kind]
     for f in X.OUT_DIR.rglob('*'):
         if f.is_file():
             assert forbidden.lower() not in f.read_bytes().lower(), f.relative_to(X.OUT_DIR)
@@ -215,6 +222,14 @@ def test_real_pipeline_and_dataset_archive(kind, tmp_path, monkeypatch):
     if kind == 'record':
         assert captured[0]['waters'][slug]['events'] == [other['event_id']]
         assert 'Withdrawn narrative' not in json.dumps(captured)
+        if shared_status:
+            summary = captured[0]['waters'][slug]
+            assert summary['status'] == shared_status
+            assert summary['reason_short'].startswith('Sewer overflow')
+            assert p.apply(summary) == summary
+            exported = json.loads((X.OUT_DIR / 'waters' / (slug + '.json')).read_text())
+            assert exported['status'] == shared_status
+            assert exported['reason_short'] == summary['reason_short']
         index = json.loads((X.OUT_DIR / 'events.json').read_text())
         assert len(index['events']) == 1
         assert not (X.OUT_DIR / 'events' / X.event_file_name(target['event_id'])).exists()
@@ -496,7 +511,7 @@ def test_newly_widened_readers_keep_source_coordinates():
 def test_publish_withdraws_cached_record_summary_and_its_count(tmp_path):
     p = RemovalList([request('record', 'a:1')])
     p.register([{'event_id': 'a:1', 'source_id': 'a', 'advice_text': 'Withdrawn narrative'}])
-    (tmp_path / 'water.json').write_text(json.dumps({'reason_short': 'Withdrawn narrative', 'event_count': 1}))
+    (tmp_path / 'water.json').write_text(json.dumps({'reason_short': 'Withdrawn narrative', 'event_count': 1, 'events': ['a:1']}))
     p.publish(tmp_path)
     p.enforce(tmp_path)
     assert json.loads((tmp_path / 'water.json').read_text()) is None
@@ -594,3 +609,65 @@ def test_expanded_source_declarations(source, kind, keys):
     import yaml
     doc = yaml.safe_load((ROOT / 'data/sources' / (source + '.yaml')).read_text())
     assert doc['raw_fields'][kind] == keys
+
+@pytest.mark.parametrize('color,rule', [('red', 'ongoing'), ('yellow', 'caution')])
+@pytest.mark.parametrize('match', ['a:1', 'Sewer overflow'])
+def test_record_removal_preserves_other_waters_derived_status(tmp_path, color, rule, match):
+    from build.status import short_reason
+    removed = {'event_id': 'a:1', 'source_id': 'a', 'source_record_id': '1', 'advice_text': 'Sewer overflow'}
+    surviving = {'event_id': 'a:2', 'source_id': 'a', 'event_type': 'sso'}
+    reason = short_reason({'state': color, 'rule': rule, 'event_type': 'sso', 'yellow_rule': {'hours': 72}}, surviving)
+    summary = {'status': color, 'reason_short': reason, 'events': ['a:2'], 'event_count': 1}
+    p = RemovalList([request('record', match)])
+    p.register([removed, surviving])
+    assert p.removed_ids == {'a:1'}
+    assert p.apply({'waters': {'other': summary}}) == {'waters': {'other': summary}}
+    path = tmp_path / 'waters.json'
+    path.write_text(json.dumps({'waters': {'other': summary}}))
+    p.publish(tmp_path)
+    assert p.enforce(tmp_path) == 0
+    assert json.loads(path.read_text()) == {'waters': {'other': summary}}
+
+@pytest.mark.parametrize('scope', [{'event_id': 'Sample:a'}, {'source_id': 'Sample'}])
+def test_scoped_aliases_keep_shared_source_and_operator_identities(tmp_path, scope):
+    from export.build import event_file_name
+    a = {'event_id': 'Sample:a', 'source_id': 'Sample', 'source_record_id': 'a', 'discharger_id': 'Sample-operator'}
+    b = {'event_id': 'Sample:b', 'source_id': 'Sample', 'source_record_id': 'b', 'discharger_id': 'Sample-operator'}
+    c = {'event_id': 'other:c', 'source_id': 'other', 'source_record_id': 'c', 'discharger_id': 'Sample-operator'}
+    p = RemovalList([request('text', 'Sample', scope=scope)])
+    p.register([a, b, c])
+    clean = p.apply([a, b, c])
+    assert clean[2] == c
+    if 'event_id' in scope:
+        assert clean[1] == b
+    for row in clean:
+        assert row['event_id'] == row['source_id'] + ':' + row['source_record_id']
+    index = []
+    for row in (a, b, c):
+        name = event_file_name(row['event_id'])
+        (tmp_path / name).write_text(json.dumps(row))
+        index.append({**row, 'file': name})
+    (tmp_path / 'index.json').write_text(json.dumps(index))
+    p.publish(tmp_path)
+    p.enforce(tmp_path)
+    published = json.loads((tmp_path / 'index.json').read_text())
+    for row in published:
+        assert (tmp_path / row['file']).exists()
+        assert row['event_id'] == row['source_id'] + ':' + row['source_record_id']
+    assert published[2] == {**c, 'file': event_file_name(c['event_id'])}
+    if 'event_id' in scope:
+        assert published[1] == {**b, 'file': event_file_name(b['event_id'])}
+
+
+def test_registering_rebuilt_status_does_not_select_records_by_generated_words():
+    from build.status import short_reason
+    p = RemovalList([request('record', 'Sewer overflow')])
+    removed = common.event(source_id='a', source_record_id='1', advice_text='Sewer overflow')
+    surviving = common.event(source_id='a', source_record_id='2', event_type='sso')
+    p.register([removed, surviving])
+    assert p.removed_ids == {'a:1'}
+    reason = {'event_id': 'a:2', 'source_id': 'a', 'status': 'red', 'rule': 'ongoing',
+              'short': short_reason({'rule': 'ongoing', 'event_type': 'sso'}, surviving)}
+    summary = {'status': 'red', 'reason_short': reason['short'], 'events': ['a:2'], 'reasons': [reason]}
+    p.register({'waters': {'other': summary}})
+    assert p.apply(summary) == summary
