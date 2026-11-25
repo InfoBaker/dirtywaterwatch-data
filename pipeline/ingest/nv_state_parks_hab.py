@@ -141,14 +141,8 @@ def personal_field(s: str) -> bool:
 
 
 def clean_field(s: str, what: str = "water") -> str:
-    """A name field cleaned before any save (verification pass P1-3): one that can carry a person is withheld whole,
-    named by a digest of its text so the record's id never depends on order; the rest scrubbed."""
-    if not isinstance(s, str) or not s:
-        return s
-    if personal_field(s):
-        import hashlib
-        return f"{what} withheld {hashlib.sha256(s.encode()).hexdigest()[:10]}"
-    return scrub_text(s)
+    """Preserve the source public record (decision 57)."""
+    return s
 
 
 def deep_clean(v, key: str = ""):
@@ -169,41 +163,14 @@ def deep_clean(v, key: str = ""):
 
 
 def clean_text(s: str) -> tuple[str, int]:
-    """(the text with every sentence that can carry a person withheld, the rest scrubbed and any coordinate in it rounded
-    to three decimals, the number of sentences withheld)."""
-    kept, withheld = [], 0
-    for sent in re.split(r"(?<=[.!?])(?<!\bDr\.)(?<!\bMr\.)(?<!\bMs\.)(?<!\bMrs\.)(?<!\bSt\.)\s+", s or ""):
-        named = re.match(r"\s*(.+?),\s+located in\b", sent)
-        if PERSONAL_SENTENCE.search(sent) or HOUSE_NUMBER.search(sent) or (named and personal_field(named.group(1))):
-            withheld += 1
-            continue
-        kept.append(COORD_IN_TEXT.sub(lambda m: f"{round(float(m.group(1)), 3):.3f}", sent))
-    return scrub_text(" ".join(x for x in kept if x).strip()), withheld
+    """Preserve the source public record (decision 57)."""
+    return (s, 0)
 
 
 def recleaned(p: dict) -> dict:
-    """A record carried from an earlier read, cleaned again before it is saved (lesson 6: every save path, the refused
-    read's included: verification pass P1-4): every text field and the whole of raw (deep_clean), the name fields
-    withheld when they can carry a person, the point rounded to three decimals, or removed when the record's text ties
-    it to a home. A clean record comes back unchanged."""
-    import json
-    home = bool(HOME_WORDS.search(json.dumps({k: p.get(k) for k in ("advice_text", "raw", *NAME_FIELDS)},
-                                             ensure_ascii=False, default=str)))
-    p = dict(p)
-    p["raw"] = deep_clean(p.get("raw") or {})
-    for k in ("advice_text", "parse_error"):
-        if isinstance(p.get(k), str):
-            p[k] = clean_text(p[k])[0]
-    for k in NAME_FIELDS:
-        if isinstance(p.get(k), str):
-            p[k] = clean_field(p[k], "place" if k == "outfall_name" else "water")
-    if p.get("lat") is not None and p.get("lon") is not None:
-        if home:
-            p.update(lat=None, lon=None, coord_source=None, coord_precision_m=None)
-            p["raw"]["point_removed"] = "the record's text tied its point to a home: the point is not kept"
-        else:
-            p["lat"], p["lon"] = round(float(p["lat"]), 3), round(float(p["lon"]), 3)
-    return p
+    """Copy carried records before updating their status, preserving source text."""
+    import copy
+    return copy.deepcopy(p)
 
 
 def write_refused(source_id: str, error: str, events_dir: Path) -> None:

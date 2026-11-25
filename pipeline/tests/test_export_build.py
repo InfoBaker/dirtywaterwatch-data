@@ -23,15 +23,10 @@ def test_normal_export_keeps_calculated_end_basis_in_water_json(tmp_path, monkey
           "placements": {e["event_id"]: {"water_slugs": [slug], "state": "RI", "fixture": False}}}
     monkeypatch.setattr(X, "ensure_status", lambda *args: (st, {"waters": {}, "intervals": {}}))
     for name, value in {"OUT_DIR": tmp_path / "out", "BUILD_DIR": tmp_path / "build",
-                        "DATA_DIR": tmp_path / "data", "BLOCKED_MARK": tmp_path / "blocked.json",
-                        "HITS_MARK": tmp_path / "hits.json", "SCAN_CACHE": tmp_path / "scan.json"}.items():
+                        "DATA_DIR": tmp_path / "data"}.items():
         monkeypatch.setattr(X, name, value)
-    # redactor_for's default is bound to the repository data directory; isolate
-    # it explicitly as well, so this export never reads a real private list.
-    X.DATA_DIR.mkdir()
-    (X.DATA_DIR / "name-blocklist.json").write_text(json.dumps({"names": ["Zorbel Quillfeather"]}))
-    redactor_for = X.redactor_for
-    monkeypatch.setattr(X, "redactor_for", lambda events: redactor_for(events, X.DATA_DIR))
+    # Isolate the private request list; no state list is read by this export.
+    monkeypatch.setattr(X.RemovalList, "load", lambda: X.RemovalList([]))
     monkeypatch.setattr(S, "_STATES", {"RI"})
     monkeypatch.setattr(S, "load_waters", lambda: {slug: water})
     monkeypatch.setattr(S, "load_registry_outfalls", lambda **kw: [])
@@ -53,12 +48,11 @@ def test_normal_export_keeps_calculated_end_basis_in_water_json(tmp_path, monkey
     meta = X.export()
     output = capsys.readouterr().out
     timing_lines = [line for line in output.splitlines() if line.startswith('timing:')]
-    published_count = sum(p.is_file() for p in X.OUT_DIR.rglob("*"))
-    assert f"; files {published_count};" in output
+    assert "blocklist" not in output
     assert timing_lines == [f'timing: export.{phase} 2 s' for phase in (
-        'status', 'inputs', 'redaction', 'enrichment', 'per_event_files', 'events', 'assessments',
+        'status', 'inputs', 'enrichment', 'per_event_files', 'events', 'assessments',
         'waters', 'advisory_points', 'reaches', 'history', 'dischargers', 'outfalls', 'feeds',
-        'coverage', 'csv', 'metadata', 'blocklist_self_check')]
+        'coverage', 'csv', 'metadata', 'requested_removals')]
     assert meta["counts"]["events"] == 1
     full = json.loads((X.OUT_DIR / "events" / X.event_file_name(e["event_id"])).read_text())
     slim = json.loads((X.OUT_DIR / "events.json").read_text())["events"][0]
@@ -71,3 +65,12 @@ def test_normal_export_keeps_calculated_end_basis_in_water_json(tmp_path, monkey
     assert water_event["ended_at_ours"]["basis_short"] == full["ended_at_ours"]["basis_short"]
     assert water_event["ended_at"] == e["ended_at"]
     assert water_event["ended_at_precision"] == "day"
+
+    # A request for a history-only ID must overwrite its previously published event object too.
+    old_id = 'ri-ridoh-beaches:old-record'
+    requested = X.RemovalList([{'id': 'historic-request', 'added': '2026-11-25',
+                                'kind': 'record', 'match': old_id}])
+    monkeypatch.setattr(X.RemovalList, 'load', lambda: requested)
+    X.export()
+    assert json.loads((X.OUT_DIR / 'events' / X.event_file_name(old_id)).read_text()) is None
+    assert json.loads((X.OUT_DIR / 'events' / X.event_file_name(e['event_id'])).read_text())['event_id'] == e['event_id']

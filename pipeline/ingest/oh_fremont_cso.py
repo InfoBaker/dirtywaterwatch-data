@@ -1,5 +1,9 @@
 """City of Fremont CSO notifications (PDF) -> data/build/events/oh-fremont-cso-notices.json.
 
+Public-record policy: downloaded source text is retained, including published names, contacts and addresses.
+Structured event classification still uses the documented source fields. Requested removals apply at export.
+
+
 Source (registry oh-fremont-cso-notices; 40 CFR 122.38, the Great Lakes CSO public notice rule)
   The Water Reclamation Center page, https://www.fremontohio.org/departments/water-reclamation-center/ (200 to this
   machine and GitHub's runner, 2026-11-16), links one PDF per notice under wp-content/uploads ("8-9-26-CSO-
@@ -134,7 +138,7 @@ def parse(text: str) -> dict:
     end = local(g[3], g[4], g[5]) if g[3] else None
     if g[3] and end is None:
         raise PN.NoticeError(f"end '{cells[1][:30]}' not read")
-    return {"kind": kind, "start": st.isoformat(), "start_as_written": f"{g[0]} {g[1]}{g[2]}M",
+    return {"source_text": text, "kind": kind, "start": st.isoformat(), "start_as_written": f"{g[0]} {g[1]}{g[2]}M",
             "end": end.isoformat() if end else None,
             "end_as_written": f"{g[3]} {g[4]}{g[5]}M" if g[3] else None,
             "volume_mg": g[6], "water": field(ls, r"Receiving water body"),
@@ -156,7 +160,7 @@ def to_record(key: str, notices: list[dict]) -> dict:
     st = datetime.fromisoformat(latest["start"])
     end = datetime.fromisoformat(latest["end"]) if latest.get("end") else None
     raw = {"time_zone": TZ_NAME, "state": "OH", "location": latest.get("location"),
-           "notices": [{"kind": n["kind"], "pdf": n["url"], "start_as_written": n["start_as_written"],
+           "notices": [{"source_text": n.get("source_text"), "kind": n["kind"], "pdf": n["url"], "start_as_written": n["start_as_written"],
                         "end_as_written": n.get("end_as_written"), "volume_mg_as_written": n.get("volume_mg"),
                         "_first_seen_at": n["first_seen_at"], "_last_seen_in_source": n["last_seen_at"]}
                        for n in notices],

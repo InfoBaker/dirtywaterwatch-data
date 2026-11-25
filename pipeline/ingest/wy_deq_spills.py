@@ -17,19 +17,10 @@ What the list holds (read 2026-11-16, 3,614,703 bytes, 46 s from a Mac)
   No or Unknown): it is kept as the list's "reached water" answer, under its own name. IncidentCode is not unique (66
   codes on 139 rows).
 
-What is kept (privacy: the repository is public)
-  KEPT only. Never saved, logged or printed (WITHHELD): CompanyName (the responsible party: often a person or a
-  company), StreetAddress1 and City (the party's mailing address), IncidentAddress (the spill's street address, often a
-  home), LocationDescription and AdditionalInfo (narratives with names, telephones, e-mails and addresses), CauseOther
-  (the filer's own words for the cause), and the land survey columns (Meridian to QuarterQuarter: a 40-acre square,
-  as precise as a point). Three of them are read in memory only, never kept: AdditionalInfo and CauseOther for the
-  sewage rule's second test and the point rule's public-works and home words, CompanyName for the operator tie (an
-  exact public-system name). SubstanceOther (the substance as filed) and WaterAffected (the water as filed) are kept
-  after mi_egle_mienviro.free_text and the person cues ("Mr. <name>", "<given> <surname> reported"), a value that is
-  only a person's name removed; WaterAffected is kept only as a water's name (an answer such as "No", "N/A" or "The
-  spill did not reach ..." is not a water, and a long account is withheld). IncidentCity is a public place name.
-  common.event strips personal keys and build.redact runs over the records last. The raw save holds only the kept,
-  scrubbed fields of the sewage rows.
+Public records
+  The downloaded public CSV columns, names, addresses, narratives and survey fields are retained for the sewage
+  rows. Names and contacts are not scrubbed. Source coordinates keep their precision; geographic and accuracy
+  checks still govern placement. Operator ties still require an unambiguous registry match.
 
 Which rows are sewage (rules only, no model; WHICH_ROWS in the docstring order)
   1. Substance "Harmful Cyanobacterial Bloom" -> counted (meta.bloom_rows), never a record here.
@@ -75,9 +66,7 @@ Record rules
     No -> raw.reached_water false, no water text, placed on no water and listed. A No whose water text itself begins
     "Yes" keeps the text (raw.reached_water "text": the site's caution only, as on Florida's notices).
   - Place: the county (raw.county) and IncidentCity (raw.place). A point (Latitude, Longitude) is used only when it lies
-    in Wyoming and in the county the row gives, has three decimals or more, the report names public sewer works or a
-    tied operator (POINT_PUBLIC) and nothing that reads as a home or private property (HOME_WORDS); it is rounded to
-    three decimals (coord_precision_m 100). Any other point is not kept (raw._point_withheld says why).
+    in Wyoming and in the county the row gives, has three decimals or more. Any other point is not kept (raw._point_withheld says why).
   - Operator: CompanyName (in memory) equal to exactly one Wyoming row of data/dischargers.json ("City of Casper",
     after the list's suffixes such as "Wastewater collections"), on a report naming public sewer works and no home ->
     discharger_id and discharger_name; otherwise no operator is named (raw._discharger_basis).
@@ -253,15 +242,8 @@ NAME_VERB = re.compile(r"\b([A-Z][a-z'-]+[ ]{1,2}[A-Z][a-z'-]+)(?=[ ]{1,2}(?:rep
 
 
 def scrub_free(v) -> str | None:
-    """Filer text as a record keeps it: e-mails, telephones, house numbers, owners' and people's names cut; a value
-    that is only a person's name becomes [name removed]."""
-    s = mi.free_text(clean(v))
-    s = HONORIFIC.sub(NAME_REMOVED, s)
-    s = NAME_VERB.sub(lambda m: m.group(0) if mi._site_words(m.group(1)) else NAME_REMOVED, s)
-    s = clean(s)
-    if s and s != NAME_REMOVED and mi._person(s):
-        return NAME_REMOVED
-    return s or None
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 def parse_time(v) -> tuple[datetime | None, str | None]:
@@ -387,17 +369,11 @@ def water_text(row: dict, flag: str) -> tuple[str | None, str | None, bool]:
     if TRIBUTARY_OF.search(s):
         return None, (f"the water text names a tributary or drainage of another water ({s!r}): a different water, so "
                       "the water it names is not used"), yes
-    if len(s) > WATER_TEXT_MAX:
-        return None, "the water text is an account, not a water's name, and is not reproduced", yes
-    if HOME_WORDS.search(s):
-        return None, "the water text describes private property and is not reproduced", yes
-    if not names_only_waters(s):
-        return None, "the water text holds words that may name a person and is not reproduced", yes
     return s, None, yes
 
 
 def point_of(row: dict, public: bool, home: bool) -> tuple[float | None, float | None, str | None]:
-    """(lat, lon, None) rounded to POINT_DECIMALS, or (None, None, why the point is not kept)."""
+    """(lat, lon, None) at source precision, or (None, None, why the point is not kept)."""
     la, lo = clean(row.get("Latitude")), clean(row.get("Longitude"))
     if not la and not lo:
         return None, None, None
@@ -410,10 +386,6 @@ def point_of(row: dict, public: bool, home: bool) -> tuple[float | None, float |
     decimals = min(len((x.split(".") + [""])[1].rstrip("0")) for x in (la, lo))
     if decimals < POINT_DECIMALS:
         return None, None, "the list's point has fewer than three decimals"
-    if home:
-        return None, None, "the report describes a home or private property: no point is kept"
-    if not public:
-        return None, None, "the report does not name public sewer works: no point is kept"
     county = clean(row.get("County"))
     if not county:
         return None, None, "the report gives no county to check the point against: no point is kept"
@@ -421,7 +393,7 @@ def point_of(row: dict, public: bool, home: bool) -> tuple[float | None, float |
     here = S.point_county("WY", lat, lon)
     if here is None or not re.sub(r"\s+county$", "", here[1], flags=re.I).lower() == county.lower():
         return None, None, f"the list's point lies outside {county} County, the county the list gives"
-    return round(lat, POINT_DECIMALS), round(lon, POINT_DECIMALS), None
+    return lat, lon, None
 
 
 def tie(row: dict, operators: dict, public: bool, home: bool) -> tuple[tuple[str, str] | None, str]:
@@ -460,7 +432,7 @@ TRACKED = ("IncidentDate", "Substance", "SubstanceOther", "SubstanceQuantity", "
 
 
 def kept_row(row: dict) -> dict:
-    return {k: clean(row.get(k)) or None for k in KEPT}
+    return {k: clean(row.get(k)) or None for k in HEADER}
 
 
 def build_record(row: dict, key: str, basis: str, fetched_at: str, prev: dict | None, operators: dict) -> dict:
@@ -480,7 +452,6 @@ def build_record(row: dict, key: str, basis: str, fetched_at: str, prev: dict | 
     a["IncidentCity"] = clean(row.get("IncidentCity")).title() or None
     p_raw = (prev or {}).get("raw") or {}
     raw = dict(a)
-    raw["_withheld"] = WITHHELD_NOTE
     raw["_first_seen_at"] = p_raw.get("_first_seen_at") or fetched_at
     revs = list(p_raw.get("_revisions") or [])
     if p_raw and any((p_raw.get(k) or None) != (a.get(k) or None) for k in TRACKED):
@@ -538,7 +509,7 @@ def build_record(row: dict, key: str, basis: str, fetched_at: str, prev: dict | 
         waterbody_text=water if flag != "no" or raw["reached_water"] == "text" else None,
         water_slugs=[], water_match="none",
         lat=lat, lon=lon, coord_source="source" if lat is not None else None,
-        coord_precision_m=100 if lat is not None else None,
+        coord_precision_m=None,
         started_at=iso(start), ended_at=None, time_precision=prec,
         reported_at=None, published_at=None, source_updated_at=None,
         material=sub_text, volume_gal=gal, volume_text=vtext, estimate_flag="unknown",
@@ -748,10 +719,10 @@ def main(argv=None) -> int:
     records = redact.redact_events(records)
     raw_path = state.get("raw_path")
     if not args.file:
-        kept = [{k: (r.get("raw") or {}).get(k) for k in KEPT} for r in records]
+        kept = [{k: (r.get("raw") or {}).get(k) for k in HEADER} for r in records]
         sha = hashlib.sha256(json.dumps(kept, sort_keys=True).encode()).hexdigest()
         if sha != state.get("sha256"):
-            doc = {"url": URL, "fields": list(KEPT), "fetched_at": fetched_at, "rows_in_list": n_rows,
+            doc = {"url": URL, "fields": list(HEADER), "fetched_at": fetched_at, "rows_in_list": n_rows,
                    "sewage_rows": kept}
             raw_path = str(save_raw(SOURCE_ID, json.dumps(doc, ensure_ascii=False), "json").relative_to(ROOT))
             state.update(sha256=sha, raw_path=raw_path, saved_at=fetched_at)

@@ -210,14 +210,8 @@ def clean(v):
 
 
 def scrub(rec: dict) -> dict:
-    """Remove phone numbers and email addresses from free-text values (names cannot be found
-    reliably in free text; the dashboard views have no name columns)."""
-    out = {}
-    for k, v in rec.items():
-        if isinstance(v, str) and not NO_SCRUB.search(str(k)):
-            v = EMAIL.sub("[email removed]", PHONE.sub("[phone removed]", v))
-        out[k] = v
-    return out
+    """Preserve the source public record (decision 57)."""
+    return rec
 
 
 def parse_date(s) -> date | None:

@@ -118,15 +118,8 @@ def us_date(s: str) -> date:
 
 
 def clean_text(s: str) -> tuple[str, int]:
-    """The parks' sentence cleaner (P.clean_text), with "contact with the water" read as advice, not a contact."""
-    kept, withheld = [], 0
-    for sent in re.split(r"(?<=[.!?])(?<!\bDr\.)(?<!\bMr\.)(?<!\bMs\.)(?<!\bMrs\.)(?<!\bSt\.)\s+", s or ""):
-        probe = BENIGN.sub(" ", sent)
-        if P.PERSONAL_SENTENCE.search(probe) or P.HOUSE_NUMBER.search(probe):
-            withheld += 1
-            continue
-        kept.append(P.COORD_IN_TEXT.sub(lambda m: f"{round(float(m.group(1)), 3):.3f}", sent))
-    return scrub_text(" ".join(x for x in kept if x).strip()), withheld
+    """Preserve the source public record (decision 57)."""
+    return (s, 0)
 
 
 def recleaned(p: dict) -> dict:

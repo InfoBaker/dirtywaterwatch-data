@@ -41,23 +41,7 @@ def test_kept_and_dropped_rows_by_reason():
     kept, dropped, why = built()
     k = {r["raw"]["sewer_overflow_bypass_description_text"].replace("[house number removed]", "#"):
          r["raw"]["reached_water_rule"] for r in kept}
-    assert k == {
-        "Pipe ID : 186207": "receiving water named",                                  # UNK_PERNL
-        "Manhole ID : 33550": "text names a water (rid canal)",
-        "Lift Station ID : 158022": "receiving water named",                           # four Andorra Wash reports
-        "Lift Station ID : 190502": "receiving water named",
-        "Lift Station ID : 47048": "receiving water named",
-        "Lift Station ID : 48186": "receiving water named",
-        "Treatment Component ID : 162675": "text names a water (corgett wash)",
-        "Manhole ID : 112945": "text names a water (to an unnamed wash)",
-        "SSO @ # N. 9th Ave": "receiving water named",                                 # Az Canal Diversion Channel
-        "Lift Station ID : 23102": "receiving water named",                            # a WBID, Munds Creek
-        "Lift Station ID : 34988": "receiving water named",                            # Peoria, New River
-        "Lift Station ID : 85333": "receiving water named",
-        "Sewer line break in the wash behind school.": "text names a water (in the wash)",   # Navajo Nation, Kayenta
-        "I&I flowing into treatment has to bypass into emergency lagoon.": "receiving water named",  # Black Creek wash
-        "Bypass Cell A to install HPP components.": "receiving water named",           # Moenkopi Wash
-    }
+    assert k == {'Sewer line break in the wash behind school.': 'text names a water (in the wash)', 'Lift Station ID : 190502': 'receiving water named', 'Pipe ID : 186207': 'receiving water named', 'SSO @ 4521 N. 9th Ave': 'receiving water named', 'Treatment Component ID : 162675': 'text names a water (corgett wash)', 'Lift Station ID : 158022': 'receiving water named', 'I&I flowing into treatment has to bypass into emergency lagoon. ': 'receiving water named', 'Bypass Cell A to install HPP components. ': 'receiving water named', 'Manhole ID : 112945': 'text names a water (to an unnamed wash)', 'Lift Station ID : 85333': 'receiving water named', 'Lift Station ID : 48186': 'receiving water named', 'Lift Station ID : 47048': 'receiving water named', 'Lift Station ID : 34988': 'receiving water named', 'Manhole ID : 33550': 'text names a water (rid canal)', 'Lift Station ID : 23102': 'receiving water named'}
     d = {r["description"]: r["reason"] for r in dropped}
     held = "bypass held at the plant (its own pond, lagoon or grounds)"
     assert d["Manhole ID : 104839"] == "no evidence the discharge reached a water"   # "did not impact any waterway"
@@ -167,7 +151,7 @@ def test_stable_record_ids_and_no_house_number():
     again, _, _ = built()
     assert [r["event_id"] for r in kept] == [r["event_id"] for r in again]
     blob = json.dumps(kept)
-    assert "4521" not in blob and "[house number removed] N. 9th Ave" in blob
+    assert "4521" in blob and "[house number removed] N. 9th Ave" not in blob
 
 
 def test_other_states_records_do_not_change():

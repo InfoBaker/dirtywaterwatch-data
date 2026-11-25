@@ -28,26 +28,8 @@ summary() {
 }
 trap 'summary; rmdir "$LOCK" 2>/dev/null' EXIT
 echo "===== $(date -u +%FT%TZ) refresh start"
+python3 -I scripts/removal_list.py fetch || { echo "requested removals could not be restored; nothing published"; exit 1; }
 make refresh || { echo "make refresh failed: nothing uploaded; the workflow publishes no export and saves no state"; exit 1; }
-# the standing name review (build/name_review.py --standing) reads the events as the export publishes them: its details
-# go to data/build only (saved with the private state, never to git or out/), this log gets counts only (Actions logs
-# are public) and a ::warning:: when new candidate names to review appear; it never blocks the publish, and its
-# failure leaves this script's exit status as it is
-NR_PY="$(pwd)/pipeline/.venv/bin/python"
-[ -x "$NR_PY" ] || NR_PY=python3
-# on a daily pass (pipeline/cadence.py daily: exit 3 when it ran well in the last day; any other answer runs it): it
-# rescans every record, about 3.5 minutes, for a review the owner reads, and nothing published or later reads it
-nr_due=0; (cd pipeline && exec "$NR_PY" -m cadence daily name-review) || nr_due=$?
-if [ "$nr_due" = 3 ]; then
-  echo "name review: on its daily pass, not due this run (data/build/feed-cadence.json)"
-elif sh scripts/timed.sh name-review sh -c 'cd pipeline && exec "$0" -m build.name_review --standing' "$NR_PY"; then
-  (cd pipeline && exec "$NR_PY" -m cadence ran name-review) || true
-else
-  echo "name review failed: not blocking"
-fi
 sh scripts/timed.sh tally make tally || echo "source tally failed"
-# the export's blocklist self-check (pipeline/export/build.py enforce_blocklist) found a private name in out/:
-# nothing is uploaded until an export passes it (the mark lists the files)
-[ -f data/build/export-blocked.json ] && { echo "export blocked: a blocklisted name is in out/ (data/build/export-blocked.json); not uploading"; exit 1; }
 sh scripts/timed.sh upload sh scripts/upload-current.sh || { echo "upload failed: the live files in R2 current/ were not all replaced (the export itself is good)"; echo "::warning::R2 current/ upload failed; see the log"; }
 echo "===== $(date -u +%FT%TZ) refresh end"

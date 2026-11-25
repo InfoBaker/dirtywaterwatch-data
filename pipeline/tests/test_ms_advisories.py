@@ -235,7 +235,7 @@ _CREATOR_FEED = b"""<?xml version="1.0" encoding="UTF-8"?>
 </channel></rss>"""
 
 
-def test_the_feed_kept_in_raw_storage_carries_no_author(monkeypatch):
+def test_the_feed_kept_in_raw_storage_preserves_source_author(monkeypatch):
     """P1-5: fetch() saved the whole RSS response (dc:creator, an MDEQ staff name) before items() dropped it."""
     saved, link = [], "https://www.mdeq.ms.gov/water-contact-advisory-issued-for-section-of-example-creek/"
 
@@ -255,7 +255,7 @@ def test_the_feed_kept_in_raw_storage_carries_no_author(monkeypatch):
     feed, pages = W.fetch()
     assert len(saved) == 1 and saved[0][2] == "json"
     blob = saved[0][1]
-    assert b"Quill" not in blob and b"Placeholder" not in blob and b"creator" not in blob and b"author" not in blob
+    assert b"Quill" in blob and b"Placeholder" in blob and b"creator" in blob and b"author" in blob
     kept = json.loads(blob)
     assert kept["items"] == [{"title": "Water Contact Advisory Issued for Section of Example Creek", "link": link,
                               "date": "Mon, 02 Nov 2026 13:41:58 +0000"}]

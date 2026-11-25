@@ -128,8 +128,9 @@ jobs:
         run: |
           # the optional history uploads stop 15 minutes before the job's limit, timeout-minutes above (state_paths.py optional_budget)
           echo "${JOB_STARTED:-$(date -u +%s)}" > job-started
+          python3 -I scripts/removal_list.py fetch
           # a missing object is a first run; one that is there but cannot be fetched or unpacked stops the run here, so
-          # nothing is published without the history and the blocklist and the stored state is never saved over.
+          # nothing is published without history and requested removals; the stored state is never saved over.
           # unpack-build checks the whole archive first: data/build members only, no links or special files (SOL
           # wave1 P2-14); one that holds anything else is refused whole, before the checkout changes
           rc=0; python3 -I scripts/state_paths.py fetch state/build.tar.gz build.tar.gz || rc=$?

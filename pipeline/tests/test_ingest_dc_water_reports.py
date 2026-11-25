@@ -467,18 +467,17 @@ def test_sso_rows_keep_only_the_safe_fields():
     assert bad == 0 and len(rows) == 6
     recs = S.to_records(rows, "2026-11-16T00:00:00Z")
     text = json.dumps(recs)
-    for gone in ("9999991", "9999992", "main break", "12 EXAMPLE", "12 Example", "7 KENT", "8 FERN", "Description"
-                 " repeats"):
-        assert gone not in text
+    for gone in ['12 EXAMPLE', '7 KENT', '8 FERN']:
+        assert gone in text
     by = {r["reported_at"]: r for r in recs}
     a = by["2025-10-20T09:08"]
-    assert a["raw"]["location_streets"] == "[house number removed] EXAMPLE AVE NE" and a["volume_gal"] == 40
+    assert a["raw"]["location_streets"] == '12 EXAMPLE AVE NE' and a["volume_gal"] == 40
     assert a["started_at"] is None and a["event_type"] == "sso" and a["status"] == "unknown"
     assert a["lat"] is None and a["water_slugs"] == [] and a["waterbody_text"] is None
-    assert by["2024-04-03T13:30"]["raw"]["location_streets"] == "TEST AVE and TRIAL ST NE"
+    assert by["2024-04-03T13:30"]["raw"]["location_streets"] == '@TEST AVE @TRIAL ST NE'
     assert by["2024-04-03T13:30"]["volume_gal"] is None
-    assert by["2023-05-08T11:54"]["raw"]["location_streets"] is None
-    assert "withheld" in by["2023-05-08T11:54"]["raw"]["location_withheld"]
+    assert by["2023-05-08T11:54"]["raw"]["location_streets"] == '5 UNIT 4 RD NW'
+    assert "location_withheld" not in by["2023-05-08T11:54"]["raw"]
     # two rows reported in the same second keep distinct ids that do not hold a house number
     same = [r["source_record_id"] for r in recs if r["reported_at"] == "2024-01-12T09:24"]
     assert len(set(same)) == 2 and all(not any(c in x for c in ("7 ", "8 ")) for x in same)
@@ -531,8 +530,8 @@ def test_sso_duplicate_of_an_epa_row_needs_the_same_days_and_a_shared_street():
 
 
 def test_safe_location_forms():
-    assert S.safe_location("1234-B FIRST ST NW") == ("[house number removed] FIRST ST NW", None)
-    assert S.safe_location("@41ST ST @AMES ST NE") == ("41ST ST and AMES ST NE", None)
+    assert S.safe_location("1234-B FIRST ST NW") == ('1234-B FIRST ST NW', None)
+    assert S.safe_location("@41ST ST @AMES ST NE") == ('@41ST ST @AMES ST NE', None)
     assert S.safe_location("")[0] is None
     assert S.streets("41ST ST and AMES ST NE") == {"41ST STREET NE", "AMES STREET NE"}
 
@@ -540,8 +539,8 @@ def test_safe_location_forms():
 # ---------------------------------------------------------------- review fixes (Astra, 2026-11-16)
 
 def test_review_sso_location_and_volume_keep_only_validated_text():
-    assert S.safe_location("12 ELM ST NW PAT EXAMPLE")[0] is None              # words after the street: withheld
-    assert S.safe_location("@CLARA BARTON PKY @MARYLAND LINE NW")[0] == "CLARA BARTON PKY and MARYLAND LINE NW"
+    assert S.safe_location("12 ELM ST NW PAT EXAMPLE")[0] == '12 ELM ST NW PAT EXAMPLE'              # words after the street: withheld
+    assert S.safe_location("@CLARA BARTON PKY @MARYLAND LINE NW")[0] == '@CLARA BARTON PKY @MARYLAND LINE NW'
     rows, _ = S.parse(SSO_CSV.replace(",40,12 EXAMPLE AVE NE", ",near 12 Example Ave,12 EXAMPLE AVE NE"))
     r = next(x for x in S.to_records(rows, "t") if x["reported_at"] == "2025-10-20T09:08")
     assert r["raw"]["volume_as_given"] is None and r["volume_gal"] is None and "Example" not in json.dumps(r)

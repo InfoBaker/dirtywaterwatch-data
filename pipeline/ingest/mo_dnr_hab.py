@@ -89,7 +89,7 @@ def rounded(doc: dict) -> dict:
     """Only the requested fields, every point kept to 0.001 degree, as saved in data/raw."""
     keep = FIELDS.split(",")
     return {"features": [{"attributes": {k: (f.get("attributes") or {}).get(k) for k in keep},
-                          "geometry": {k: round(float(v), 3) for k, v in (f.get("geometry") or {}).items()
+                          "geometry": {k: float(v) for k, v in (f.get("geometry") or {}).items()
                                        if k in ("x", "y") and v is not None}} for f in doc.get("features") or []]}
 
 
@@ -112,7 +112,7 @@ def shown(doc: dict) -> tuple[dict[str, dict], dict]:
             out[str(a["globalid"]).strip("{} ").lower()] = {
                 "code": code, "name": name_of(a.get("WBName")), "observed_on": day(a.get("HABODat")),
                 "case_status": a.get("CaseStatus"), "county": (str(a.get("HABCo") or "").strip() or None),
-                "lat": round(float(g["y"]), 3), "lon": round(float(g["x"]), 3)}
+                "lat": float(g["y"]), "lon": float(g["x"])}
     return out, counts
 
 
@@ -153,7 +153,7 @@ def run(doc: dict, prev: list[dict], at: str) -> tuple[list[dict], dict]:
         if r is None:
             r = event(source_id=SOURCE_ID, source_record_id=f"{rid}-{re.sub(r'[^0-9]', '', at)[:14]}",
                       event_type="hab_advisory", status="advisory_active", waterbody_text=x["name"], lat=x["lat"],
-                      lon=x["lon"], coord_source="source", coord_precision_m=100, started_at=at, time_precision="poll",
+                      lon=x["lon"], coord_source="source", coord_precision_m=None, started_at=at, time_precision="poll",
                       authority=AUTHORITY, advice_text=f"DNR's map: {SHOWN[x['code']]}.", source_url=PAGE,
                       raw={"state": "MO", "time_zone": "America/Chicago", "report_id": rid, "dnr_code": x["code"],
                            "dnr_label": SHOWN[x["code"]], "observed_on": x["observed_on"],

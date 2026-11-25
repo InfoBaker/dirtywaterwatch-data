@@ -19,23 +19,11 @@ Source
   reaches none of these (or is fully recovered from the storm drain); Category 3 is every other spill. The file labels
   its spills with these three categories through its whole span, 2007 included.
 
-What is read (privacy)
-  Only the columns in COLUMNS are read, under short keys; every other column is never parsed into a record or saved:
-  the certifier (CERT PERSON NAME, CERT PERSON TITLE, CERT LOCATION, CERT ID), the operator's contact (SSO OPERATOR
-  NAME, SSO OPERATOR PHONE) and every narrative or "explain" field (SPILL LOC DESC, APPEAR PT EXPLAIN, FINAL SPILL
-  DEST EXPL, SPILL CAUSE EXPLAIN, WHERE FAIL OCCUR EXP, RESPONSE ACTIVITIES EXPL, SSO CRCTIVE ACTION TAKEN EXPL,
-  REASON INVESTIGATE, VISUAL INSPCT RESULT, BEACH IMPACT, SURFACE WATER IMPACT, SMPLS_ANALYZE_FOR_EXPL, SMPLS REPORT
-  TO EXPL, SSO VOLUME METHOD), which can name staff, residents and private addresses (raw._withheld says so). The
-  spill location name (typed by the operator, often a home's street address) loses every house number
-  (ca_swrcb_ciwqs_spills.location_name: common.scrub_text, common.strip_house_numbers, then the numbers that cut
-  leaves); a value that is only a person's name becomes "[name removed]". When the spill appeared only on private
-  property (a private lateral clean-out, a private upper or lower lateral, a backflow prevention device, or a
-  building or structure) its point is rounded to three decimals (about 100 m), coord_precision_m 150, so it does not
-  mark a home; the typed point is rounded in scrubbed_row, so raw.lat, raw.lon and the saved page hold only the
-  rounded digits. common.strip_personal runs on every raw (in common.event) and build.redact over the records last. The
-  saved raw page (data/raw/<source>/) holds only the scrubbed short-key rows of the Category 1 spills, never the
-  file. tests/test_ca_swrcb_ciwqs_sso_2006.py proves that the certifier, the operator's name and phone and a
-  narrative never reach a record or the saved page.
+Public records
+  All columns already downloaded in the flat file are retained, including contacts and narratives. Mapped columns
+  keep their short keys; additional columns keep their source headers. Source names and addresses are preserved.
+  Origin and destination points retain source precision, including private-property locations. Geographic validity
+  checks still govern placement. Requested removals apply at export; collection requests are unchanged.
 
 Which reports are shown
   Only Category 1 spills become records (event_type sso, raw.spill_category "1", raw.reached_water true): the site
@@ -219,16 +207,12 @@ def rounded(v) -> str | None:
 
 
 def scrubbed_row(r: dict) -> dict:
-    """The kept fields as the record keeps them (see the docstring): the location loses its house numbers, the
-    pick-list texts pass common.scrub_text, and the point of a spill on private property is rounded here, so no
-    record or saved page holds its typed digits (review 2026-11-21 P1-1)."""
-    out = {k: r.get(k, "") for k in KEYS}
+    """Keep every downloaded public-record field; normalize empty cells to null."""
+    out = dict(r)
     out["location_name"] = L.location_name(out.get("location_name"))
     for k in ("appearance_points", "destinations", "causes", "failure_location", "county", "caloes_control_number"):
         if isinstance(out.get(k), str) and out[k]:
             out[k] = scrub_text(out[k])
-    if private_only(out.get("appearance_points")):
-        out["lat"], out["lon"] = rounded(out.get("lat")), rounded(out.get("lon"))
     return {k: (v if v != "" else None) for k, v in out.items()}
 
 
@@ -328,7 +312,6 @@ def build_record(key: str, row: dict, fetched_at: str, prev: dict | None, wdids:
     base = dict(source_id=SOURCE_ID, source_record_id=key, fetched_at=fetched_at, source_url=FILE_URL)
     p_raw = (prev or {}).get("raw") or {}
     raw = dict(a)
-    raw["_withheld"] = WITHHELD_NOTE
     raw["_first_seen_at"] = p_raw.get("_first_seen_at") or fetched_at
     raw["_first_seen_in_file"] = p_raw.get("_first_seen_in_file") or file_modified
     revs = list(p_raw.get("_revisions") or [])
@@ -431,10 +414,6 @@ def _record(a: dict, base: dict, raw: dict, fetched_at: str, wdids: dict[str, st
     elif pnote:
         raw["_coords_repaired"] = pnote
     precision_m = None
-    if lat is not None and private_only(a.get("appearance_points")):
-        lat, lon, precision_m = round(lat, 3), round(lon, 3), 150
-        raw["_coords_rounded"] = ("the spill appeared only on private property (a private lateral, a building or "
-                                  "structure): its point is rounded to about 100 m so it does not mark a home")
 
     wdid = L.clean(a.get("wdid")).upper() or None
     did = wdids.get(wdid) if wdid else None

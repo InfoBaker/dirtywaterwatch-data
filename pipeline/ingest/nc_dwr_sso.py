@@ -683,8 +683,6 @@ def build(rows: list[tuple[str, dict]], fetched_at: str, prev_records: list[dict
         if eid in seen:
             continue
         r.setdefault("raw", {})
-        for k in WITHHELD & set(r["raw"]):               # a record kept from a run before these were withheld
-            r["raw"].pop(k)
         r["raw"]["_missing_from_layer_since"] = r["raw"].get("_missing_from_layer_since") or fetched_at
         records.append(r)
         kept += 1

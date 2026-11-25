@@ -400,30 +400,7 @@ STATION_BEFORE = re.compile(r"(?i:\b(?:lift|pump(?:ing)?)\s+station|\bL\.?S\.?|\
 
 
 def drop_given_pairs(s: str) -> str:
-    first = _given_names()
-    cuts, last_end = [], -1
-    for m in GIVEN_PAIR.finditer(s):           # overlapping: "PM Andrew Sample" tries "PM Andrew" and "Andrew Sample"
-        g, n = m.group(1), m.group(2)
-        if m.start(1) < last_end:
-            continue
-        nxt = (m.group(3) or "").strip().lower().strip(".,")
-        if g.lower() not in first or f"{g} {n}".lower() in PLACE_PAIRS or g.lower() in FL_PLACE_GIVEN:
-            continue
-        if re.search(r"\b(?:of|in|at|near)\s+$", s[max(0, m.start() - 6):m.start()], re.I) and nxt in ("", "and", "on", "in"):
-            continue
-        if NAMED_AFTER.search(s[max(0, m.start() - 16):m.start()]):
-            continue                          # "Hurricane Ian ...", "TS Debby ...", "Lake Mary Jane": a storm or a place
-        if n.lower() in PLACE_AFTER or n.lower() in NOT_PERSON_WORDS or nxt in PLACE_AFTER:
-            continue
-        if STATION_BEFORE.search(s[max(0, m.start() - 24):m.start()]):
-            continue                          # "Lift Station #814 <name>": the station's name
-        if FACILITY_AFTER.match(s, m.end(2)):
-            continue                          # "<name> Water Reclamation Facility", "<name> Regional WWTF": a facility
-        end = m.end(2)
-        cuts.append((m.start(1), end))
-        last_end = end
-    for a, b in reversed(cuts):
-        s = s[:a] + "[name removed]" + s[b:]
+    """Preserve the source public record (decision 57)."""
     return s
 
 
@@ -513,83 +490,8 @@ def _drop_title_name(m: re.Match) -> str:
 
 
 def scrub(text) -> str | None:
-    """The notice text with personal fields removed (see the module docstring). Every labelled personal field
-    loses its value up to the next safe label, or to the end of the text when none follows."""
-    if text is None:
-        return None
-    s = str(text).replace("\u00bf", "'").replace("&#8209;", "-")
-    out, pos = [], 0
-    while True:
-        m = PERSON_LABEL.search(s, pos)
-        if not m:
-            out.append(s[pos:])
-            break
-        if m.start() and s[m.start() - 1] == "[":
-            out.append(s[pos:m.end()])     # "[email removed]", "[e-mail header removed]": a marker, not a label
-            pos = m.end()
-            continue
-        blank = BLANK_VALUE.match(s, m.end())
-        if blank:
-            out.append(s[pos:blank.end()])     # "PERSON CONTACTED: ________": an empty form field
-            pos = blank.end()
-            continue
-        # a bare "Name"/"NAME" only counts as a label when a colon (or a form's table header) follows
-        after = s[m.end():m.end() + 4]
-        bare = m.group(0).lower() == "name"
-        before = s[max(0, m.start() - 20):m.start()].split()
-        if bare and before and before[-1].strip(".,").lower() in NAME_OF_THING:
-            out.append(s[pos:m.end()])     # "Utility Name:", "Facility Name:": a thing, not a person
-            pos = m.end()
-            continue
-        if bare and not LABEL_END.match(after) and not re.search(r"\b(?:Name|NAME)\s+(?:Represents|Title|Phone)", s[m.start():m.start() + 40]):
-            out.append(s[pos:m.end()])
-            pos = m.end()
-            continue
-        if not bare and re.sub(r"\s+", " ", m.group(0).lower()) in LABEL_ONLY_WITH_COLON and not LABEL_END.match(after):
-            out.append(s[pos:m.end()])   # an ordinary word ("crews were notified"), not a form label
-            pos = m.end()
-            continue
-        out.append(s[pos:m.end()])
-        nxt = SAFE_LABEL.search(s, m.end())
-        if re.sub(r"\s+", " ", m.group(0).lower()) in NAME_VALUE_LABELS:
-            stop = VALUE_STOP.search(s, m.end(), m.end() + VALUE_REACH)
-            if stop and (nxt is None or stop.start() < nxt.start()):
-                out.append(": [removed] ")
-                pos = stop.end()
-                continue
-        # the value must not swallow a safe label that starts right after (empty value)
-        if nxt:
-            out.append(": [removed] " if not s[m.end():nxt.start()].strip(" :#?-") else ": [removed] ")
-            pos = nxt.start()
-        else:
-            out.append(": [removed]")
-            break
-    s = "".join(out)
-    s = re.sub(r"(:\s*)+: \[removed\]", ": [removed]", s)
-    s = TITLE_THEN_NAME.sub(_drop_title_name, s)
-    s = NAME_WITH_AGENCY.sub(_drop_name_with_agency, s)
-    s = NAME_THEN_TITLE.sub(lambda m: m.group(0) if _not_person(m.group(1)) else "[name removed]", s)
-    s = FIRST_PERSON_NAME.sub(lambda m: m.group(0) if _not_person(m.group(2)) else m.group(1) + "[name removed]", s)
-    s = TITLE_ORG_NAME.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
-    s = NAME_BEFORE_CONTACT.sub(lambda m: m.group(0) if _company_or_place(m.group(1)) else "[name removed]", s)
-    s = NAME_THEN_AGENCY.sub(lambda m: m.group(0) if _company_or_place(m.group(1)) else "[name removed]", s)
-    s = AGENCY_THEN_NAME.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
-    s = NAMED_CUE.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
-    s = GREETING_NAME.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
-    s = CUE_NAME_CAPS.sub(_drop_caps_cue, s)
-    s = HONORIFIC_NAME.sub("[name removed]", s)
-    s = EMAIL_HEADER.sub("[e-mail header removed]", s)
-    s = EMAIL_ADDRESSEE.sub("[name removed] ", s)
-    s = drop_given_pairs(s)
-    s = CUE_NAME.sub(_drop_cue_name, s)
-    s = CUE_INITIAL.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) or _place_after(m) else m.group(1) + "[name removed]", s)
-    s = NAME_BEFORE_ACTION.sub(_drop_named_before_action, s)
-    s = INITIAL_BEFORE_ACTION.sub(_drop_named_before_action, s)
-    s = RANK_SURNAME.sub(lambda m: m.group(0) if _company_or_place(m.group(2)) else m.group(1) + "[name removed]", s)
-    s = AGENCY_DASH_SURNAME.sub(r"\1[name removed]", s)
-    s = scrub_text(s)
-    s = SPACE.sub(" ", s).strip()
-    return s or None
+    """Preserve the source public record (decision 57)."""
+    return text
 
 
 def relationship_code(v) -> str | None:
@@ -608,26 +510,8 @@ def relationship_code(v) -> str | None:
 
 
 def scrub_name_field(v):
-    """INCIDENT_NAME or FACILITY_NAME with personal data removed. Filers often type their own name, or a resident's,
-    as the incident or facility name (a staff member's name as the incident name; a homeowner's name as the facility
-    of a complaint): a value that is only a person's name (build.redact.person_shaped, read in any case) becomes
-    "[name removed]"; names inside a longer value go as in the notice text (common given name + surname, Mr./Ms.),
-    and e-mails and phone numbers as everywhere."""
-    if not isinstance(v, str):
-        return v
-    s = SPACE.sub(" ", scrub_text(v)).strip()
-    if not s:
-        return s
-    words = {w.lower() for w in re.split(r"[\s\-/.,()]+", s) if w}
-    if not words & (NOT_PERSON_WORDS | PLACE_AFTER) and \
-            (redact.person_shaped(s) or redact.person_shaped(string.capwords(s))):
-        return "[name removed]"
-    if s.islower() or s.isupper():          # "jordan sample", "JORDAN SAMPLE": read with capitals
-        c = drop_given_pairs(HONORIFIC_NAME.sub("[name removed]", string.capwords(s)))
-        if "[name removed]" in c:
-            return c
-    s = HONORIFIC_NAME.sub("[name removed]", s)
-    return drop_given_pairs(s)
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 CITIZEN_COORD_DIGITS = 3      # about 100 m: a complaint's point is often the filer's home
@@ -635,41 +519,8 @@ CITIZEN_PRECISION_M = 100
 
 
 def safe_attributes(a: dict) -> dict:
-    """The attributes this module keeps: the safe fields only, the relationship as a code, the text scrubbed, the
-    incident and facility names cleared of people's names, the house number of an address the text ties to a residence
-    or a resident (common.residence_numbers) cut from the names and the address line too, and, for a notice filed by a
-    member of the public, no street address, no house number anywhere and the point rounded to about 100 m: the facility
-    of a complaint is often the filer's or a neighbour's home."""
-    out = {k: a.get(k) for k in SAFE_FIELDS if k in a}
-    # a saved page already holds the code (the relationship itself is never saved)
-    out["_filer"] = relationship_code(a.get(RELATIONSHIP_FIELD)) if RELATIONSHIP_FIELD in a else a.get("_filer")
-    homes = residence_numbers(out["INCIDENT_REPORT"]) if isinstance(out.get("INCIDENT_REPORT"), str) else []
-    for k in ("INCIDENT_REPORT", "INCIDENT_NAME", "FACILITY_NAME"):
-        if isinstance(out.get(k), str):
-            out[k] = scrub(out[k]) if k == "INCIDENT_REPORT" else scrub_name_field(out[k])
-            if out[k] and homes:
-                out[k] = drop_house_numbers(out[k], homes)
-    for k in ("FACILITY_ADDRESS_LINE_1", "FACILITY_ADDRESS_LINE_2"):
-        if isinstance(out.get(k), str) and homes:
-            out[k] = drop_house_numbers(out[k], homes)
-    if out["_filer"] == "citizen":
-        for k in ("FACILITY_ADDRESS_LINE_1", "FACILITY_ADDRESS_LINE_2"):
-            if out.get(k):
-                out[k] = "[address removed]"
-        for k in ("INCIDENT_REPORT", "INCIDENT_NAME", "FACILITY_NAME"):
-            if isinstance(out.get(k), str):
-                out[k] = strip_house_numbers(out[k])
-        lat0 = fnum(out.get("LATITUDE"))
-        if lat0 is not None:
-            # the precision of the rounded point: about 100 m, or the source's own when coarser; carried, because a
-            # rounded value that ends in zero ("27.45") would read as 1 km (a rebuild reads the carried value)
-            given = a.get("_coord_precision_m")
-            out["_coord_precision_m"] = given if isinstance(given, int) else max(CITIZEN_PRECISION_M, precision_m(lat0))
-        for k in ("LATITUDE", "LONGITUDE"):
-            v = fnum(out.get(k))
-            if v is not None:
-                out[k] = round(v, CITIZEN_COORD_DIGITS)
-    return out
+    """Preserve the source public record (decision 57)."""
+    return {**{k: a.get(k) for k in (*SAFE_FIELDS, RELATIONSHIP_FIELD) if k in a}, "_filer": relationship_code(a.get(RELATIONSHIP_FIELD)) if RELATIONSHIP_FIELD in a else a.get("_filer")}
 
 
 # ---------------------------------------------------------------- classification
@@ -1317,7 +1168,7 @@ def rebuilt(r: dict, permits: dict) -> dict:
     raw = r.get("raw") or {}
     if not isinstance(raw.get("INCIDENT_REPORT"), str) and not isinstance(raw.get("INCIDENT_NAME"), str):
         return r
-    a = {k: raw[k] for k in SAFE_FIELDS if k in raw and k != "OBJECTID"}
+    a = {k: raw[k] for k in (*SAFE_FIELDS, RELATIONSHIP_FIELD) if k in raw and k != "OBJECTID"}
     a["OBJECTID"], a["_filer"] = raw.get("_layer_objectid"), raw.get("_filer")
     if raw.get("_coord_precision_m") is not None:
         a["_coord_precision_m"] = raw["_coord_precision_m"]

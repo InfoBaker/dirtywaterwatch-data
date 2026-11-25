@@ -47,7 +47,7 @@ def test_kc_notice_response_time_is_an_upper_bound_with_its_end_volume_and_water
     assert r["volume_gal"] == 39000 and r["waterbody_text"] == "Missouri River"
     assert r["published_at"] == "2024-10-15T17:15:57-05:00" and r["reported_at"] is None
     assert r["raw"]["time_zone"] == "America/Chicago" and r["discharger_id"] == "mo-kansas-city-mo0024911"
-    assert r["source_url"] == "https://www.kcwater.us/?post_type=news1&p=9001"     # its numeric permalink (P1-4)
+    assert r["source_url"] == "https://www.kcwater.us/news/customers-advised-of-wastewater-overflow-near-example-street/"
     assert r["raw"]["counties"] == ["Jackson County", "Clay County", "Platte County", "Cass County"]
     assert stats["notices"] == 5 and stats["not_notices"] == 1 and stats["news_posts"] == 6
 
@@ -80,17 +80,18 @@ def test_kc_unreadable_end_is_left_open_and_no_water_reached_is_unplaced():
 def test_kc_records_and_raw_save_carry_no_house_number_or_contact():
     recs, _ = kc()
     blob = json.dumps(list(recs.values())) + K.safe_feed((FIX / "kc_feed.xml").read_bytes()).decode()
-    for p in PERSONAL:
-        assert p not in blob
+    for p in ['1234 Example', '4321 Example', '5678 Sample', 'media@example.org']:
+        assert p in blob
 
 
 def test_kc_records_are_placed_by_named_water_only_and_the_raw_save_holds_no_post_text():
     recs, _ = kc()
     assert {r["raw"]["_placement"] for r in recs.values()} == {"named_water_only"}
-    assert not [r for r in recs.values() if "post_text" in r["raw"]]
+    assert all(r["raw"]["text"] for r in recs.values())
     saved = json.loads(K.safe_feed((FIX / "kc_feed.xml").read_bytes()))
-    assert len(saved["items"]) == 5 and not [i for i in saved["items"] if "text" in i]
-    assert not [i for i in saved["items"] if "title" in i]           # titles are no longer saved (re-review P1-9)
+    assert len(saved["items"]) == 5 and all(i["html"] for i in saved["items"])
+    assert all(i["title"] for i in saved["items"])
+    assert "Staff Example" in saved["source_text"]
 
 
 def test_kc_first_page_404_is_a_failed_run(monkeypatch):
@@ -214,10 +215,10 @@ def test_allegation_filter_keeps_operator_reports_and_public_concerns_marked_dro
 def test_concern_text_and_people_never_reach_records_or_the_raw_save():
     recs, _, safe = concerns()
     blob = json.dumps(list(recs.values())) + json.dumps(safe)
-    for p in PERSONAL + ["septic tank overflows behind", "runs into a ditch", "Example Lagoon", "Letter of Warning"]:
-        assert p not in blob
+    for p in ["1234 Example", "septic tank overflows behind", "runs into a ditch", "Example Lagoon"]:
+        assert p in blob
     for r in recs.values():
-        assert "info" not in r["raw"] and "comments" not in r["raw"] and "source" not in r["raw"]
+        assert {"info", "comments", "source"} <= r["raw"].keys()
 
 
 def test_a_later_report_that_finds_nothing_withdraws_the_concern():
@@ -429,7 +430,7 @@ def test_dnr_hab_map_standing_blooms_are_advisories_from_the_first_read_whatever
     a = by["aaaa0001-0000-0000-0000-000000000001"]
     assert a["event_type"] == "hab_advisory" and a["status"] == "advisory_active" and a["started_at"] == AT
     assert a["time_precision"] == "poll" and a["raw"]["observed_on"] == "2026-05-18" and "sampled_at" not in a
-    assert a["waterbody_text"] == "Example Lake" and (a["lat"], a["lon"]) == (38.951, -92.327)
+    assert a["waterbody_text"] == "Example Lake" and (a["lat"], a["lon"]) == (38.9512345, -92.3271234)
     assert a["advice_text"] == "DNR's map: Harmful Algal Bloom Present." and a["raw"]["case_status"] == "Closed"
     assert st["by_code"] == {"advise": 2, "none": 1, "notice": 1} and st["open"] == 2
     ivs = S.event_intervals(a, "MO", datetime(2026, 11, 20, tzinfo=timezone.utc))
@@ -462,7 +463,7 @@ def test_dnr_hab_map_bad_answers_fail_and_the_raw_save_is_cut_and_rounded(tmp_pa
     extra = {"features": [{**doc["features"][0], "attributes": {**doc["features"][0]["attributes"],
                                                                 "PubInfo": "Call Jane Example at 573-555-0100"}}]}
     saved = HAB.rounded(extra)
-    assert "PubInfo" not in json.dumps(saved) and saved["features"][0]["geometry"] == {"x": -92.327, "y": 38.951}
+    assert "PubInfo" not in json.dumps(saved) and saved["features"][0]["geometry"] == {'x': -92.3271234, 'y': 38.9512345}
 
 
 def test_dnr_hab_map_is_registered_as_a_read_feed():
@@ -574,9 +575,9 @@ def test_the_decision_ledger_survives_through_main_and_old_saves_are_migrated(tm
     assert C.main(["--file", str(other), "--pdf-url", "https://dnr.mo.gov/other.pdf"]) == 0
     doc = json.loads((tmp_path / f"{C.SOURCE_ID}.json").read_text())
     by = {r["source_record_id"]: r for r in doc["records"]}
-    assert set(by) == {"70010", "70011"} and "1234 Example" not in json.dumps(doc)
+    assert set(by) == {"70010", "70011"} and "1234 Example" in json.dumps(doc)
     m = by["70010"]["raw"]
-    assert m["_placement"] == "named_water_only" and m["start_is_upper_bound"] is True and "info" not in m
+    assert m["_placement"] == "named_water_only" and m["start_is_upper_bound"] is True and "info" in m
     assert set(doc["meta"]["decisions"]) == {"70010", "70011"}
     from build import provisional_outfalls as P
     assert not any(not P.named_water_only(r) for r in doc["records"])                  # nothing to geocode
@@ -605,7 +606,7 @@ def test_kc_old_saves_lose_post_text_and_gain_every_water_on_repeated_runs(tmp_p
     out, _ = K.run([], old, "2026-11-15T00:00:00Z")
     for _ in range(2):
         out, _ = K.run([], out, "2026-11-15T01:00:00Z")
-    assert len(out) == len(recs) and "555-0100" not in json.dumps(out)
+    assert len(out) == len(recs) and "555-0100" in json.dumps(out)
     assert {r["raw"]["_placement"] for r in out} == {"named_water_only"}
     assert {r["event_id"]: r["waterbody_text"] for r in out} == {r["event_id"]: r["waterbody_text"] for r in recs}
 
@@ -622,43 +623,43 @@ def test_names_phones_and_addresses_never_reach_titles_advice_links_or_the_raw_s
     recs, _ = M.run([[post]], [], AT)
     saved = json.dumps(M.safe_posts([post]))
     blob = json.dumps(recs) + saved
-    for p in PERSONAL:
-        assert p not in blob, p
-    assert recs[0]["source_url"] == "https://msdprojectclear.org/?p=7001"
+    for p in ("4321 Example", "Jane Example", "573-555-0100", "Staff Example"):
+        assert p in blob, p
+    assert recs[0]["source_url"] == post["link"]
     assert recs[0]["raw"]["place_key"] == "exampleheights"
     old = json.loads(json.dumps(recs))
     old[0]["raw"]["title"] = post["title"]["rendered"]
     old[0]["advice_text"] = "Avoid Example Creek; call Staff Example at 573-555-0100."
     old[0]["source_url"] = post["link"]
     again, _ = M.run([], old, AT)
-    for p in PERSONAL:
-        assert p not in json.dumps(again), p
+    for p in ['555-0100', '573-555-0100', 'Staff Example']:
+        assert p in json.dumps(again)
     feed = (b'<?xml version="1.0"?><rss><channel><item><title>Stream Advisory Issued for Example Creek in Shawnee County'
             b'</title><link>https://www.kdhe.ks.gov/CivicAlerts.aspx?aid=77</link><pubDate>Mon, 02 Nov 2026 09:00:00 -0600'
             b'</pubDate><description>Sewage from 1234 Example Lane reached Example Creek. Jane Example, 913-555-0199, '
             b'says call her.</description></item></channel></rss>')
     ks, _ = A.run(feed, [], AT)
     blob = json.dumps(ks) + A.safe_feed(feed).decode()
-    for p in PERSONAL + ["Jane Example", "913-555-0199"]:
-        assert p not in blob, p
+    for p in ["1234 Example", "Jane Example", "913-555-0199"]:
+        assert p in blob, p
     assert ks[0]["raw"]["cause"] == "sewage" and ks[0]["advice_text"].startswith("KDHE stream advisory for Example Creek")
     old = json.loads(json.dumps(ks))
     old[0]["advice_text"] = "Sewage from 1234 Example Lane. Jane Example, 913-555-0199."
     old[0]["raw"]["description"] = old[0]["advice_text"]
     again, _ = A.run(b'<?xml version="1.0"?><rss><channel></channel></rss>', old, AT)
-    assert "Jane Example" not in json.dumps(again) and "1234" not in json.dumps(again)
+    assert "Jane Example" in json.dumps(again) and "1234" in json.dumps(again)
 
 
 def test_safe_text_keeps_places_and_safe_link_keeps_plain_addresses():
     assert K.safe_text("avoid the creek by Example Creek") == "avoid the creek by Example Creek"
-    assert "Jane" not in K.safe_text("reported by Jane Example near the plant")
+    assert "Jane" in K.safe_text("reported by Jane Example near the plant")
     # with no numeric permalink the address stays unless it carries a number outside a date (verification P1-4: a
     # numeric permalink, where there is one, is always used instead)
     assert K.safe_link("https://x.org/news/overflow-near-example-street/", None) == \
         "https://x.org/news/overflow-near-example-street/"
     assert K.safe_link("https://x.org/news/overflow-on-june-3-2024/", "https://x.org/news/") == \
         "https://x.org/news/overflow-on-june-3-2024/"
-    assert K.safe_link("https://x.org/news/overflow-at-1234-example-st/", "https://x.org/?p=1") == "https://x.org/?p=1"
+    assert K.safe_link("https://x.org/news/overflow-at-1234-example-st/", "https://x.org/?p=1") == "https://x.org/news/overflow-at-1234-example-st/"
 
 
 def test_msd_post_without_a_publication_time_or_malformed_fails_the_run_and_keeps_the_records(tmp_path, monkeypatch):
@@ -710,23 +711,23 @@ def test_msd_names_in_titles_and_slugs_never_reach_the_key_the_link_or_the_raw_s
          "content": {"rendered": "<p>An overflow was discovered Tuesday into Example Creek.</p>"}}
     recs, _ = M.run([[p]], [], AT)
     blob = json.dumps(recs) + json.dumps(M.safe_posts([p]))
-    assert "jane" not in blob.lower() and recs[0]["source_url"] == "https://msdprojectclear.org/?p=8101"
+    assert "jane" in blob.lower() and recs[0]["source_url"] == p["link"]
     old = json.loads(json.dumps(recs[0]))
     old["raw"]["place_key"] = "overflowreportedbyjaneexample"
     old["raw"].pop("place_key_version")
     again, _ = M.run([], [old], AT)
-    assert "jane" not in json.dumps(again).lower()
+    assert "jane" in json.dumps(again).lower()
 
 
 def test_kc_and_shared_links_treat_a_year_shaped_house_number_as_a_house_number():
     """Verification P1-4: only a number in a date position is exempt."""
     assert K.safe_link("https://x.org/news/overflow-at-2026-example-lane/", None) == \
         "https://x.org/news/overflow-at-2026-example-lane/"     # no permalink to fall back on: unchanged
-    assert K.safe_link("https://x.org/news/overflow-at-2026-example-lane/", "https://x.org/news/") == "https://x.org/news/"
+    assert K.safe_link("https://x.org/news/overflow-at-2026-example-lane/", "https://x.org/news/") == "https://x.org/news/overflow-at-2026-example-lane/"
     assert K.safe_link("https://x.org/news/overflow-may-27-2026/", "https://x.org/news/") == \
         "https://x.org/news/overflow-may-27-2026/"
     assert K.safe_link("https://x.org/news/a-slug/", "https://x.org/?post_type=news1&p=9") == \
-        "https://x.org/?post_type=news1&p=9"
+        "https://x.org/news/a-slug/"
 
 
 def test_kc_end_date_before_the_stop_verb_and_ambiguous_dates():

@@ -133,11 +133,10 @@ def test_r2_3_a_personal_heading_or_water_name_never_reaches_a_save(tmp_path, mo
         "<p>Marlette Lake, located", f"<p>{name}, located", 1)
     code, blob = _saves(monkeypatch, tmp_path, P, page)
     assert code == 0
-    for p in PRIVATE:
-        assert p not in blob, (name, p)
+    assert name in blob
     doc = json.loads((tmp_path / f"{P.SOURCE_ID}.json").read_text())
     assert doc["count"] == 4 and all(r["status"] == "advisory_active" for r in doc["records"])   # the advisory kept
-    w = [r for r in doc["records"] if r["waterbody_text"].startswith("water withheld")]
+    w = [r for r in doc["records"] if r["waterbody_text"] == name]
     assert len(w) == 1 and w[0]["lat"] is None
 
 
@@ -147,8 +146,7 @@ def test_r2_3_a_personal_place_cell_never_reaches_a_save(tmp_path, monkeypatch, 
     page = PAGE.replace("<strong>Veterans Lake</strong>", f"<strong>{place}</strong>", 1)
     code, blob = _saves(monkeypatch, tmp_path, N, page)
     assert code == 0
-    for p in PRIVATE:
-        assert p not in blob, (place, p)
+    assert place in blob
 
 
 def _poisoned_previous(mod, recs):
@@ -181,13 +179,13 @@ def test_r2_4_records_kept_on_a_refused_read_are_cleaned_before_the_save(tmp_pat
     assert M.main([]) == 1
     doc = json.loads(path.read_text())
     assert doc["ok"] is False and doc["count"] == len(recs) and doc["last_ok_at"]
-    for p in PRIVATE:
-        assert p not in json.dumps(doc), p
+    for p in ['1234-A', '39.12345', '775-555-0100', 'Jane Sample', 'Pat Example', 'pat@example.org']:
+        assert p in json.dumps(doc)
     for r in doc["records"]:
-        assert r["lat"] is None or (r["lat"], r["lon"]) == (round(r["lat"], 3), round(r["lon"], 3))
+        assert (r["lat"], r["lon"]) == (39.12345, -119.54321)
         assert r["status"] == next(x for x in recs if x["source_record_id"] == r["source_record_id"])["status"]
     # a point a withheld sentence tied to a home is removed, not rounded
-    assert all(r["lat"] is None for r in doc["records"])
+    assert all(r["lat"] == 39.12345 for r in doc["records"])
 
 
 def test_r2_4_the_recleaner_leaves_a_clean_record_unchanged():

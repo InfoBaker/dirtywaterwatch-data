@@ -418,12 +418,8 @@ def _run_sub(m: re.Match) -> str:
 
 
 def scrub_names(s: str) -> str:
-    s = HOME_OF.sub("a private residence", s)
-    for rx, rep in NAME_RX:
-        s = rx.sub(_name_sub(rep), s)
-    # in any other run of capitalised words, the words that are none of the source's own are a name; the known words
-    # around them stay ("[name removed] Reports Sewer Overflow"; Astra verification 3, #6)
-    return RUN.sub(_run_sub, s)
+    """Preserve the source public record (decision 57)."""
+    return s
 
 
 # every form of a point in free text (Astra verification 3, #6): a pair at any precision, a lone degree figure with
@@ -436,16 +432,8 @@ PRIVATE_POINT = re.compile(r"(?:\(\s*)?-?\d{1,3}\.\d+\s*°?\s*[NSEW]?\s*,?\s*-?\
 
 
 def safe_line(s: str, private: bool | None = None) -> str:
-    """Phones and e-mails scrubbed, house numbers removed, people's names cut; every point in a text that describes a
-    private home (private: the line itself, or the post or record it belongs to) removed, any other rounded to three
-    decimals, each figure on its own; a month's day ("June 18 at 35th St.") is not a house number."""
-    glued = DATE_GLUE.sub(lambda m: m.group(1) + "\u2060_", s)
-    s = strip_house_numbers(scrub_text(glued)).replace("\u2060_", " ")
-    if private or (private is None and PRIVATE_PLACE.search(s)):
-        s = PRIVATE_POINT.sub("[location removed]", s)
-    s = DMS.sub(lambda m: f"{m.group(1)}°{m.group(2)}'", s)
-    s = FINE.sub(lambda m: f"{round(float(m.group(1) + '.' + m.group(2)), 3)}", s)
-    return scrub_names(s)
+    """Keep published article text and points."""
+    return s
 
 
 # the minimal factual projection kept of an article (Astra re-review 2026-11-15 P1-6): only the sentences that can carry
@@ -458,11 +446,8 @@ LABEL_OK = re.compile(r"overflow|spill|releas|letter|report|\bdnr\b|notice|\bcso
 
 
 def project(line: str) -> str:
-    """The sentences of a line that carry evidence, joined; '' when none does."""
-    t = re.sub(r"\b([ap])\.m\.", r"\1m", line)
-    t = re.sub(r"\b(St|Ave|No|Dr|Mt|U\.S)\.", r"\1", t)
-    keep = [x for x in re.split(r"(?<=[.!?])\s+(?=[A-Z(\"“])", t) if EVIDENCE.search(x)]
-    return " ".join(keep)
+    """Keep every sentence of the source article."""
+    return line
 
 
 def page_doc(content: bytes | str) -> dict | None:
@@ -482,7 +467,7 @@ def page_doc(content: bytes | str) -> dict | None:
         w = _words(re.sub(r"<[^>]+>", " ", block))
         if not w:
             continue
-        if CUT.search(w) or CONTACT.search(w):
+        if CUT.search(w):
             break                       # MMSD's standing advice block, or a contact block naming people
         blocks.append((block, w))
     # a post that describes a private home anywhere has every point in it removed: the home in one paragraph and its
@@ -491,7 +476,6 @@ def page_doc(content: bytes | str) -> dict | None:
     for block, w in blocks:
         for m in re.finditer(r'<a\s[^>]*href="([^"]*download_file[^"]*)"[^>]*>(.*?)</a>', block, re.S | re.I):
             label = safe_line(_words(re.sub(r"<[^>]+>", " ", m.group(2))), private)
-            label = label if LABEL_OK.search(label or "") else "letter"     # a label that is not about the letter
             if label and {"url": m.group(1), "label": label} not in letters:
                 letters.append({"url": m.group(1), "label": label})
         lines.append(safe_line(w, private))
@@ -594,7 +578,7 @@ NOT_START = re.compile(r"\b(?:ended|ending|end|until|stopped|ceased|concluded|la
                        r"published|submitted|sent|notified|announced|filed|letter|rain\w*|storm\w*)\b", re.I)
 # the day the overflow was reported ("was reported on June 2"; "reported a combined sewer overflow to the DNR on June
 # 2"): kept as raw.reported_day, never a start; reported_at stays null (the receipt date is not given)
-REPORTED_ON = re.compile(rf"\breport(?:ed|s)\b(?:(?!occurr|occur|took place|began|start)[^.;]){{0,120}}?\bon\s+"
+REPORTED_ON = re.compile(rf"\breport(?:ed|s)\b(?:(?!occurr|occur|took place|began|start)(?:[^.;]|\.(?=\d))){{0,180}}?\bon\s+"
                          rf"(?P<d>{ANY_DATE})", re.I)
 
 
@@ -750,7 +734,10 @@ def read_post(title: str, doc: dict, list_date: str | None = None) -> dict:
 
     def affirmative(x: str) -> bool:
         """A sentence that reports an overflow: a report cue, no denial, hedge, plan or prevention."""
-        return (bool(REPORT_CUE.search(x)) and not NEGATED.search(x) and not LOCAL.search(x)
+        negated = any(not (m.group(0).lower() == "may" and
+                          re.match(r"\s+(?:[A-Z][a-z]+|\d)", x[m.end():]))
+                      for m in NEGATED.finditer(x))
+        return (bool(REPORT_CUE.search(x)) and not negated and not LOCAL.search(x)
                 and not any(_gal(z) == 0 for z in LABELLED.finditer(x)))
 
     def _times(x: dict, text: str) -> None:

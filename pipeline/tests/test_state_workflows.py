@@ -129,7 +129,7 @@ def simulate(workflow: str, tmp: Path, env: dict | None = None, event: str = "sc
         w.chmod(w.stat().st_mode | stat.S_IEXEC)
     base = {**os.environ, "PATH": f"{bin_dir}:{os.environ['PATH']}", "FAKE_R2": str(tmp / "r2"),
             "CLOUDFLARE_API_TOKEN": "t", "CLOUDFLARE_ACCOUNT_ID": "a", "STATE_FETCH_RETRY_S": "0",
-            "STATE_NOW": NOW, "GITHUB_RUN_ID": "1234", "GITHUB_RUN_ATTEMPT": "1",
+            "R2_S3_ENDPOINT": "https://r2.invalid", "STATE_NOW": NOW, "GITHUB_RUN_ID": "1234", "GITHUB_RUN_ATTEMPT": "1",
             "COPYFILE_DISABLE": "1",          # a Mac's tar adds AppleDouble members the runner's GNU tar never writes
             **(env or {})}
     github_env = tmp / "github_env"
@@ -169,6 +169,13 @@ def simulate(workflow: str, tmp: Path, env: dict | None = None, event: str = "sc
 def checkout(tmp: Path) -> Path:
     (tmp / "scripts").mkdir(parents=True)
     shutil.copy(ROOT / "scripts" / "state_paths.py", tmp / "scripts" / "state_paths.py")
+    shutil.copy(ROOT / "scripts/removal_list.py", tmp / "scripts/removal_list.py")
+    (tmp / "pipeline/export").mkdir(parents=True)
+    shutil.copy(ROOT / "pipeline/export/removals.py", tmp / "pipeline/export/removals.py")
+    shutil.copy(ROOT / "pipeline/common.py", tmp / "pipeline/common.py")
+    # S3 routing/masking has its own tests; this fixture's object store is WRANGLER.
+    (tmp / "scripts/wrangler_redact.py").write_text(
+        "import subprocess, sys\nsys.exit(subprocess.call(['wrangler', *sys.argv[1:]]))\n")
     (tmp / "r2" / "state").mkdir(parents=True)
     return tmp
 
@@ -820,3 +827,25 @@ def test_p1_2_a_run_close_to_its_time_limit_skips_the_optional_uploads_and_still
     assert not r["failed"], r["log"]
     assert puts(tmp) == ["put state/out.tar.gz", "put state/build.tar.gz", "put state/raw-cache.tar.gz"]
     assert "skipped" in r["log"] and "the restored state could not be held" in r["log"]
+
+
+def test_refresh_restores_private_removals_without_logging_contents(tmp_path):
+    tmp = checkout(tmp_path)
+    entry = {"id": "request-1", "added": "2026-11-25", "kind": "text", "match": "PRIVATE-REQUEST-SENTINEL"}
+    (tmp / "r2/state/removal-list.json").write_text(json.dumps([entry]))
+    result = simulate("refresh.yml", tmp)
+    assert not result["failed"], result["log"]
+    local = tmp / "data/private/removal-list.json"
+    assert json.loads(local.read_text()) == [entry]
+    assert local.stat().st_mode & 0o777 == 0o600
+    assert entry["match"] not in result["log"]
+    assert not any("removal-list" in key for key in puts(tmp))
+
+
+def test_refresh_refuses_malformed_private_removal_state(tmp_path):
+    tmp = checkout(tmp_path)
+    (tmp / "r2/state/removal-list.json").write_text('PRIVATE-REQUEST-SENTINEL')
+    result = simulate("refresh.yml", tmp)
+    assert result["failed"]
+    assert not puts(tmp)
+    assert "PRIVATE-REQUEST-SENTINEL" not in result["log"]

@@ -114,12 +114,8 @@ POINT_DECIMALS = 3
 
 
 def safe_row(attrs: dict) -> dict:
-    """A row cut to SAFE_FIELDS with its point rounded to POINT_DECIMALS (module docstring: privacy)."""
-    row = {k: attrs.get(k) for k in SAFE_FIELDS}
-    for k in ("Lat_DD", "Lon_DD"):
-        if isinstance(row.get(k), (int, float)):
-            row[k] = round(float(row[k]), POINT_DECIMALS)
-    return row
+    """Preserve the source public record (decision 57)."""
+    return {k: attrs.get(k) for k in SAFE_FIELDS}
 
 
 def clean(v) -> str:
@@ -202,7 +198,7 @@ def record(a: dict, key: str, fetched_at: str) -> dict:
     waters, place = waterway(a.get("Affected_Waterway"))
     water = "; ".join(waters) or None
     a = safe_row(a)
-    private = src.lower() in PRIVATE_SOURCES
+    private = False  # published source locations are kept
     lat, lon = (None, None) if private else (a.get("Lat_DD"), a.get("Lon_DD"))
     bad = BAD_POINTS.get(clean(a.get("OERS_No")))
     raw = {"state": "OR", "time_zone": zone,

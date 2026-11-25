@@ -141,7 +141,7 @@ def safe_attributes(a: dict) -> dict:
     for k in ("Latitude", "Longitude"):
         v = fnum(out.get(k))
         if v is not None:
-            out[k] = round(v, 3)
+            out[k] = v
     if a.get("_address_match_sha256"):
         out["_address_match_sha256"] = a["_address_match_sha256"]
     if out.get("LOCATION"):
@@ -421,7 +421,10 @@ def build_record(a: dict, base: dict, raw: dict, prev: dict | None) -> dict:
 
 def identity_location(a: dict) -> tuple | None:
     """Street plus rounded point; the time is checked separately, never proximity alone."""
-    loc = strip_house_numbers(str(a.get("LOCATION") or "")).lower()
+    loc = str(a.get("LOCATION") or "").lower()
+    # Identity comparison remains street-level for historical crosswalks; published text stays exact.
+    loc = loc.replace("[house number removed]", " ")
+    loc = re.sub(r"(?<![a-z0-9])\d{1,6}[a-z]?\s+(?=[a-z])", "", loc)
     loc = re.sub(r"[^a-z0-9]+", "", loc)
     lat, lon = fnum(a.get("Latitude")), fnum(a.get("Longitude"))
     if not loc or lat is None or lon is None:
@@ -550,7 +553,7 @@ def main(argv=None) -> int:
     for r in prev:      # records saved before the safe-field and three-decimal rules
         for k in ("lat", "lon"):
             if fnum(r.get(k)) is not None:
-                r[k] = round(float(r[k]), 3)
+                r[k] = float(r[k])
         rr = r.get("raw") or {}
         rr.update(safe_attributes(rr))
         if r.get("outfall_name"):
@@ -559,7 +562,7 @@ def main(argv=None) -> int:
             rr.pop(k, None)
         for k in ("Latitude", "Longitude"):
             if fnum(rr.get(k)) is not None:
-                rr[k] = round(float(rr[k]), 3)
+                rr[k] = float(rr[k])
     try:
         records, stats = build(features, fetched_at, prev)
     except Exception as e:  # noqa: BLE001 - preserve previous records on identity conflicts

@@ -161,9 +161,9 @@ def parse(page: str) -> dict:
                 if re.fullmatch(r"(?i)tntc|too numerous( to count)?", v["text"]):
                     v["text"], v["uncountable"] = "too numerous to count", True     # above any limit
                 elif v["red"]:
-                    v["text"] = "[marked red, not a number]"    # the park's own mark of an exceedance
+                    pass    # retain the text and the park's own mark of an exceedance
                 else:
-                    v["text"], v["unread"] = "[not a result]", True   # unread: listed, the read not healthy
+                    v["unread"] = True   # unread: listed, the read not healthy
         results = {d: vals[n] for n, d in enumerate(dates) if n < len(vals) and vals[n]["text"]}
         mean = vals[len(dates)] if has_mean and vals[len(dates)]["text"] else None
         rows.append({"place": place, "results": results, "mean": mean})

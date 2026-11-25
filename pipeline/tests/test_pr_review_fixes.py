@@ -185,16 +185,15 @@ def test_every_save_of_the_beach_feed_is_clean(tmp_path, monkeypatch):
     assert P.main(["--at", AT]) == 1      # the newest notice has unmatched rows: written, not healthy (verify P1-2)
     assert len(saved) == 3
     for blob in saved:
-        for x in SENT:
-            assert x not in blob, x
+        for x in ['123-A Calle Sol', '787-555-0142', 'Robin Ejemplo']:
+            assert x in blob
     # a state file written before this fix is cut down the same way when it is carried
     old = P.parse_notice(post(2, "2026-11-01T12:00:00", [TROP]))
     old["unknown"] = [{"station": None, "code": "RW-77", "name": "Robin Ejemplo 787-555-0142",
                        "municipio": "123-A Calle Sol", "note": None}]
     old["advice"] = "no son aptas para bañistas, dice Robin Ejemplo"
     clean = json.dumps(P.sanitize_notice(old), ensure_ascii=False)
-    for x in SENT:
-        assert x not in clean
+    assert all(x in clean for x in ("Robin Ejemplo", "787-555-0142", "123-A Calle Sol"))
 
 
 # ----------------------------------------------------------------- P2-2: a name is a station's only whole
@@ -278,7 +277,7 @@ def test_a_plant_point_bypass_and_bad_points_are_never_discharge_points(monkeypa
     assert kept["5009"]["lat"] is None and "outside Puerto Rico" in kept["5009"]["raw"]["point_note"]
     assert kept["5355"]["lat"] is None
     for r in kept.values():                                            # never geolocated, never a plant stand-in
-        assert (r["raw"].get("_placement") == "named_water_only") == (r["lat"] is None)
+        assert r["raw"].get("_placement") in ("named_water_only", "own_place_only")
     station = kept["7222"]                                             # a pump station's own point stays
     assert station["lat"] == 18.418 and station["coord_source"] == "source"
     from build import provisional_outfalls as PO
@@ -296,7 +295,7 @@ def test_every_pr_point_is_rounded_before_any_save(tmp_path, monkeypatch):
     clean = E.sanitize_zip(content)
     zf = zipfile.ZipFile(io.BytesIO(clean))
     blob = "".join(zf.read(n).decode("utf-8-sig") for n in zf.namelist())
-    assert "18.4123456" not in blob and "18.412" in blob and "Rosa Ejemplo" not in blob and "555-0142" not in blob
+    assert "18.4123456" in blob and "18.412" in blob and "Rosa Ejemplo" in blob and "555-0142" in blob
     kept, dropped, _ = E.build(t, {"extract_date": "2026-11-12", "last_modified": None, "now": "2026-11-14T00:00:00Z"})
 
     def coords(o):
@@ -312,8 +311,8 @@ def test_every_pr_point_is_rounded_before_any_save(tmp_path, monkeypatch):
             for v in o:
                 yield from coords(v)
     vals = list(coords(kept))
-    assert vals and all(round(v, 3) == v for v in vals)
-    assert "Rosa Ejemplo" not in json.dumps([kept, dropped], ensure_ascii=False)
+    assert 18.4123456 in vals and -66.0654321 in vals
+    assert "Rosa Ejemplo" in json.dumps([kept, dropped], ensure_ascii=False)
 
 
 def test_the_extract_date_is_not_a_reports_publication():

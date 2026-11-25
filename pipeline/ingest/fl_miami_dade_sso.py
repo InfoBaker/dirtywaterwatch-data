@@ -74,12 +74,10 @@ def safe_attributes(a):
     out = {k:a[k] for k in SAFE_FIELDS if k in a}
     for k in ('LAT','LON'):
         n = number(out.get(k))
-        out[k] = round(n,3) if n is not None else None
+        out[k] = n
     for k in ('DISCCAUSECAT','DISCHARGECAUSE','WATBODYTYPE','SURFWATNAME','WATDISCTYPE'):
         if isinstance(out.get(k),str):
             out[k] = strip_house_numbers(scrub_name_field(scrub(out[k])) or '') or None
-    if out.get('UTILITYNAME') not in UTILITIES:
-        out['UTILITYNAME'] = None
     for k, pattern in (('INCIDENTID', r'\d{20}'), ('TRACKNUM',r'[A-Za-z0-9.\-/]{1,30}')):
         if out.get(k) is not None and not re.fullmatch(pattern,str(out[k])):
             out[k] = None

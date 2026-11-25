@@ -1028,13 +1028,9 @@ def size_check(files: list[str], root: Path = ROOT, limit: int | None = None) ->
 
 
 def _patterns(root: Path):
-    """The pipeline's own patterns (this repository's code) and the blocklist of root's data/build."""
-    if str(ROOT / "pipeline") not in sys.path:
-        sys.path.insert(0, str(ROOT / "pipeline"))
-    from common import EMAIL_RE, PHONE_RE  # noqa: E402
-    from build.redact import BlockScan, blocklist  # noqa: E402
-    names = blocklist(root / "data")
-    return EMAIL_RE, PHONE_RE, (BlockScan(names) if names else None)
+    """Retired public-record filters; infrastructure log masking is independent."""
+    never = re.compile(r"(?!)")
+    return never, never, None
 
 
 def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root: Path = ROOT,
@@ -1045,16 +1041,6 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
     ::warning:: lines, and the exit is 0."""
     level = "::warning::" if warn else "::error::"
     email, phone, block = _patterns(root)
-    if block is None:
-        if require_blocklist and not warn:
-            print("::error::the private name blocklist (data/build/name-blocklist.json) is not here: it comes with the "
-                  "restored build state; without it names cannot be checked, so nothing is published", flush=True)
-            return 1
-        if require_blocklist:
-            print("::warning::the private name blocklist (data/build/name-blocklist.json) is not here: names cannot be "
-                  "checked this round (e-mail and phone shapes only)", flush=True)
-        else:
-            say("no name blocklist here: e-mail and phone shapes only")
     hits = 0
     multi = launch_block(block) if block else None   # a launches item: entries of two or more words only (LAUNCH_KEY)
 

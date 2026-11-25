@@ -1,5 +1,9 @@
 """Colorado toxic algae status sheet -> algal-bloom advisories (source id co-cdphe-toxic-algae).
 
+Public-record policy: downloaded source text is retained, including published names, contacts and addresses.
+Structured event classification still uses the documented source fields. Requested removals apply at export.
+
+
 Source
   The public Google Sheet the Colorado Department of Public Health and Environment's toxic algae page links ("Recent
   blooms for select water bodies"; research/co, checked 2026-11-03: the page linked it; on 2026-11-14 cdphe.colorado.gov
@@ -155,12 +159,14 @@ def scrubbed_csv(text: str) -> str:
     """What the raw save keeps: the sheet's four columns only (an explicit allowlist; any other column is dropped), the
     notes scrubbed (ingest/mountain_scrub.py: names, titles, contacts, house numbers, phones, e-mails, and coordinates
     rounded to three decimals)."""
-    rows = list(csv.DictReader(io.StringIO(text)))
+    reader = csv.DictReader(io.StringIO(text))
+    columns = reader.fieldnames or list(COLUMNS)
+    rows = list(reader)
     out = io.StringIO()
     w = csv.writer(out, lineterminator="\n")
-    w.writerow(COLUMNS)
+    w.writerow(columns)
     for r in rows:
-        w.writerow([" ".join((r.get(c) or "").split()) if c != "Other notes" else scrub(r.get(c)) for c in COLUMNS])
+        w.writerow([" ".join((r.get(c) or "").split()) if c != "Other notes" else scrub(r.get(c)) for c in columns])
     return out.getvalue()
 
 

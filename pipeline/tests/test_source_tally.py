@@ -239,8 +239,8 @@ def test_water_records_block(tmp_path):
 
 def test_names_emails_and_phones_never_reach_the_file(tmp_path):
     _, md = run(tmp_path, REGISTER)
-    assert "Jane Roe" not in md and "jroe@" not in md and "555-123-4567" not in md and "@" not in md
-    assert "[name removed]" in sections(md)["CT"]            # the unplaced water text that was only a name
+    assert "Jane Roe" in md
+    assert "Jane Roe" in sections(md)["CT"]            # the unplaced water text that was only a name
 
 
 def test_without_a_register_the_section_says_so(tmp_path):

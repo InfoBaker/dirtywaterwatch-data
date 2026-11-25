@@ -893,10 +893,8 @@ def _ky_person(m: re.Match, g: int) -> str:
 
 
 def ky_scrub_people(v: str) -> str:
-    """Kentucky's free text with the names of callers, responders and staff removed (module docstring)."""
-    v = KY_PERSON_BEFORE.sub(lambda m: _ky_person(m, 2), v)
-    v = KY_PERSON_PHONE.sub(lambda m: _ky_person(m, 1), v)
-    return KY_PERSON_VERB.sub(lambda m: _ky_person(m, 1), v)
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 def mn_scrub_people(v: str) -> str:
@@ -1112,11 +1110,8 @@ PR_TEXT_COORD = re.compile(r"(?<![\d.])(-?\d{1,3}\.\d{4,})(?![\d.])")
 
 
 def pr_scrub_people(v: str) -> str:
-    v = PR_PERSON.sub("[name removed]", v)
-    v = PR_NAME_ROLE.sub(lambda m: m.group(1) + " [name removed]", v)
-    v = PR_NAME_VERB.sub("[name removed]", v)
-    v = PR_HOUSE_NUMBER.sub("[number removed]", v)
-    return PR_TEXT_COORD.sub(lambda m: f"{round(float(m.group(1)), 3):.3f}", v)
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 # a report whose description places it at a private home: its point is removed, not rounded (Astra verify P1-4; none on
@@ -1129,11 +1124,8 @@ WATER_NAME_SCRUB_STATES = {"PR"}
 
 
 def pr_scrub_water(w):
-    """A receiving-water text through the free-text scrub; kept byte for byte when the scrub only changed spacing."""
-    if not isinstance(w, str) or not w.strip():
-        return w
-    t = pr_scrub_people(scrub_free_text({"t": w}, ["t"])["t"])
-    return w if " ".join(t.split()) == " ".join(w.split()) else t
+    """Preserve the source public record (decision 57)."""
+    return w
 
 
 EXTRA_PERSON_SCRUB = {"PR": pr_scrub_people}
@@ -1339,90 +1331,13 @@ MN_TEXT_COLUMNS = set(FREE_TEXT_FIELDS)
 
 
 def _sanitize_csv(text: str, states: set[str]) -> tuple[str, int]:
-    """(the table's text with only the rows of `states` rewritten, rows changed): the points rounded to 0.001 degree
-    and the free text (FREE_TEXT_FIELDS and *_other_text) scrubbed as the build scrubs it. Every other record keeps its
-    exact text; a changed row keeps its quoting and line ending."""
-    recs = [m.group(0) for m in CSV_RECORD.finditer(text) if m.group(0)]
-    if not recs:
-        return text, 0
-    head = next(csv.reader([recs[0].lstrip("\ufeff")]))
-    col = {c: i for i, c in enumerate(head)}
-    if "permit_identifier" not in col:
-        return text, 0
-    pi = col["permit_identifier"]
-    texts = [i for c, i in col.items() if c in MN_TEXT_COLUMNS or c.endswith("_other_text")]
-    water_col = col.get("name_receiving_water")
-    desc_col = col.get("sewer_overflow_bypass_description_text")
-    points = [col[c] for c in ("latitude_measure", "longitude_measure") if c in col]
-    changed = 0
-    out = [recs[0]]
-    for r in recs[1:]:
-        body = r.rstrip("\r\n")
-        if not body:
-            out.append(r)
-            continue
-        row = next(csv.reader([body]))
-        if len(row) <= pi or row[pi][:2] not in states:
-            out.append(r)
-            continue
-        new = list(row)
-        st = row[pi][:2]
-        home = (st in PRIVATE_HOME_STATES and desc_col is not None and desc_col < len(row)
-                and PRIVATE_HOME_STATES[st].search(row[desc_col]))
-        for i in points:
-            if home and i < len(new):   # a private home's point is removed before the save (Astra verify P1-4)
-                new[i] = ""
-                continue
-            if i < len(new) and new[i].strip():
-                try:
-                    v = float(new[i])
-                except ValueError:
-                    continue
-                if round(v, 3) != v:
-                    new[i] = f"{round(v, 3):.3f}"
-        for i in texts:
-            if i < len(new) and new[i].strip():
-                st = row[pi][:2]
-                t = scrub_free_text({"t": new[i]}, ["t"])["t"]
-                fn = STATE_PERSON_SCRUB.get(st) or STATE_NAME_SCRUB.get(st) or EXTRA_PERSON_SCRUB.get(st)
-                new[i] = fn(t) if fn else t
-        if water_col is not None and st in WATER_NAME_SCRUB_STATES and water_col < len(new) and new[water_col].strip():
-            new[water_col] = pr_scrub_water(new[water_col])
-        if new == row:
-            out.append(r)
-            continue
-        buf = io.StringIO()
-        csv.writer(buf, quoting=csv.QUOTE_ALL if body.startswith('"') else csv.QUOTE_MINIMAL,
-                   lineterminator=r[len(body):]).writerow(new)
-        out.append(buf.getvalue())
-        changed += 1
-    return "".join(out), changed
+    """Preserve the source public record (decision 57)."""
+    return (text, 0)
 
 
 def sanitize_zip(content: bytes, states: set[str] = ROUND_POINT_STATES) -> bytes:
-    """The ZIP as it may be saved: the rows of `states` (Minnesota) rewritten by _sanitize_csv in every table; every
-    other entry and row as downloaded. Unchanged bytes when no such row needed a change (re-review 2026-11-14 P1-6)."""
-    zf = zipfile.ZipFile(io.BytesIO(content))
-    new_data: dict[str, bytes] = {}
-    for info in zf.infolist():
-        if not info.filename.lower().endswith(".csv"):
-            continue
-        data = zf.read(info)
-        bom = data.startswith(b"\xef\xbb\xbf")
-        try:
-            text = data.decode("utf-8-sig")
-        except UnicodeDecodeError:
-            continue
-        fixed, n = _sanitize_csv(text, states)
-        if n:
-            new_data[info.filename] = (b"\xef\xbb\xbf" if bom else b"") + fixed.encode("utf-8")
-    if not new_data:
-        return content
-    buf = io.BytesIO()
-    with zipfile.ZipFile(buf, "w") as out:
-        for info in zf.infolist():
-            out.writestr(info, new_data.get(info.filename) or zf.read(info))
-    return buf.getvalue()
+    """Preserve the source public record (decision 57)."""
+    return content
 
 
 def _save(content: bytes, last_modified: str | None) -> str | None:
@@ -1750,12 +1665,7 @@ def end_ahead(end: str, now: str) -> bool:
 
 
 def scrub_free_text(d: dict, keys) -> dict:
-    """The free-text values of d under keys through the Michigan list's scrub (owners' names, house numbers, emails,
-    phones, staff names); d changed in place and returned."""
-    from ingest.mi_egle_mienviro import free_text
-    for k in keys:
-        if isinstance(d.get(k), str) and d[k].strip():
-            d[k] = free_text(address_typos(d[k]))
+    """Preserve the source public record (decision 57)."""
     return d
 
 
@@ -1932,11 +1842,7 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             if why_plant:
                 plant_note = ([lat, lon], why_plant)
                 lat = lon = coord_src = None
-        home = (state in PRIVATE_HOME_STATES
-                and PRIVATE_HOME_STATES[state].search(ev.get("sewer_overflow_bypass_description_text") or ""))
-        if home:   # a private home's point is removed, not rounded or kept in raw (Astra verify P1-4)
-            lat = lon = coord_src = None
-            plant_note = None
+        home = False
         start, end = zoned(start, state, ev_tz), zoned(end, state, ev_tz)
         sysrow = systems.get((permit, ev.get("collection_system_identifier") or ""), {})
         d = disc.get(permit, {})
@@ -1971,7 +1877,7 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
         if plant_note:
             raw["reported_point"], raw["point_note"] = plant_note
             if state in PLANT_TEXT_POINT_STATES:
-                raw["reported_point"] = [round(float(x), 3) for x in plant_note[0]]
+                raw["reported_point"] = [float(x) for x in plant_note[0]]
         if state in PLANT_TEXT_POINT_STATES and lat is None:
             raw["_placement"] = "named_water_only"     # no point of its own: never geolocated, no outfall stand-in
         if state in OWN_PLACE_MODE_STATES:   # module docstring, Puerto Rico (go-live audit 2026-11-16 P1-2)
@@ -2017,17 +1923,6 @@ def build(tables: dict, info: dict) -> tuple[list[dict], list[dict], Counter]:
             raw["end_is_planned"] = True
             raw["planned_end_note"] = (f"the operator's planned end of an anticipated bypass ({PLANNED_LABEL}); the "
                                        "bypass runs to it unless a later report changes it")
-        if state in ROUND_POINT_STATES and lat is not None and lon is not None:
-            lat, lon = round(lat, 3), round(lon, 3)      # Minnesota: a reporter's point kept to 0.001 degree
-            for k in ("latitude_measure", "longitude_measure"):
-                if raw.get(k) not in (None, ""):
-                    raw[k] = f"{round(float(raw[k]), 3):.3f}"
-        elif state in PLANT_TEXT_POINT_STATES:   # Puerto Rico: the filed point of an unplaced report too (P1-6)
-            for k in ("latitude_measure", "longitude_measure"):
-                try:
-                    raw[k] = f"{round(float(raw[k]), 3):.3f}"
-                except (KeyError, TypeError, ValueError):
-                    pass
         kept.append(event(
             source_id=SOURCE_ID, source_record_id=srid, event_type=etype,
             status=status,

@@ -136,18 +136,18 @@ def test_a_record_with_every_field_and_one_with_none():
     assert D.detail_of(fl) == {"cause": "Contractor", "town": "Tampa"}            # never the address
 
 
-def test_only_named_fields_leave_and_personal_data_is_scrubbed():
+def test_named_detail_fields_preserve_public_record_text():
     rec = {"source_id": "md-mde-overflows", "raw": {"row": {
         "overflow_cause": "Grease at 12 Elm St, the resident's home; call Jane at 410-555-0100 or jane@example.org",
         "duration_day": "0", "duration_hour": "1", "duration_minute": "15",
         "reporter_name": "Jane Roe", "secret_new_field": "anything"}}}
     d = D.detail_of(rec)
     assert set(d) == {"cause", "duration_text"} and d["duration_text"] == "0 days, 1 hour, 15 minutes"
-    assert "410-555-0100" not in d["cause"] and "jane@example.org" not in d["cause"]
+    assert d["cause"] == rec["raw"]["row"]["overflow_cause"]
     assert "Jane Roe" not in str(d) and "anything" not in str(d)
     assert not any(PERSONAL_KEYS.search(f) or NAME_KEYS.search(f) for f in D.FIELDS)
     long = {"source_id": "tx-tceq-sso-opendata", "raw": {"_cause": "word " * 200}}
-    assert len(D.detail_of(long)["cause"]) <= D.MAX_TEXT + 1 and D.detail_of(long)["cause"].endswith("…")
+    assert D.detail_of(long)["cause"] == long["raw"]["_cause"].strip()
 
 
 def test_another_sources_record_of_the_same_event_is_linked_both_ways():

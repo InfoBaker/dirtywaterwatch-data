@@ -305,24 +305,8 @@ def actions(text: str | None) -> str | None:
 
 
 def street_of(cell: str | None) -> str | None:
-    """The Address cell with every house number removed, strictly (review 2026-11-17 P1-3): unit designators and
-    their numbers go, then every word holding a digit ("1234", "1234AB", "REAR-1234", "1/2") except an ordinal
-    ("18TH"), a route written as one word ("I-45") and a number a route word precedes ("FM 1960", "HIGHWAY 6",
-    "BELTWAY 8"). common.scrub_text last."""
-    s = UNIT.sub(" ", _norm(cell or ""))
-    if not s:
-        return None
-    kept: list[str] = []
-    for tok in s.split():
-        if re.search(r"\d", tok) and not ORDINAL.match(tok) and not ROUTE_TOKEN.match(tok) \
-                and not (kept and ROUTE_WORD.search(" ".join(kept))):
-            continue
-        kept.append(tok)
-    s = " ".join(kept)
-    s = re.sub(r"\s*([&/])\s*", r" \1 ", re.sub(r"\s+,", ",", " ".join(s.split())))
-    s = " ".join(s.split()).strip(" ,&/-")
-    s = common.scrub_text(" ".join(s.split()))
-    return s or None
+    """Keep the published Address cell, including house and unit numbers."""
+    return _norm(cell or "") or None
 
 
 def permit_of(cell: str | None) -> tuple[str | None, bool]:
@@ -739,7 +723,7 @@ def retained(prev: dict, state: dict, recs: list[dict], voided: dict) -> list[di
 # ---------------------------------------------------------------- one event, one record
 
 # the words after a house number TCEQ's scrub removed; never after "SSO ID#" (the City's id, scrubbed as a number)
-AFTER_NUMBER = re.compile(r"(?<!#)(?<!# )(?<!ID )" + re.escape(common.HOUSE_NUMBER_REMOVED) + r"\s*([^(/,;:]*)")
+AFTER_NUMBER = re.compile(r"(?<!#)(?<!# )(?<!ID )" + r"(?:" + re.escape(common.HOUSE_NUMBER_REMOVED) + r"|\b\d{1,6}(?:-[A-Z])?)\s+([^(/,;:]*)")
 # a street ends where a sentence goes on ("TARTAN was caused by", "Sage Park Ln had a discharge")
 SENTENCE_WORDS = {"was", "were", "is", "had", "has", "caused", "discharged", "discharge", "overflowed", "on", "in", "at",
                   "due", "from", "near", "and", "the", "of", "to", "by", "for", "with", "which", "that", "an", "a"}
@@ -813,6 +797,8 @@ def street_key_of(street: str | None) -> tuple[str, frozenset] | None:
     ("SAM HOUSTON PKWY", "SAM HOUSTON" -> "SAMHOUSTON") and its direction at either end ("N WAYSIDE DR" -> "WAYSIDE",
     {"N"}). None when no name is left."""
     toks = re.findall(r"[A-Z0-9]+", str(street or "").upper().replace(common.HOUSE_NUMBER_REMOVED.upper(), " "))
+    if toks and toks[0].isdigit():
+        toks.pop(0)  # comparison only; the source address stays complete
     dirs = set()
     while toks and toks[-1] in STREET_TYPES | DIRECTIONS and len(toks) > 1:
         if toks[-1] in DIRECTIONS:
@@ -1021,7 +1007,7 @@ def safe_history_feature(f: dict) -> dict:
     g = f.get("geometry") or {}
     x, y = _number(g.get("x")), _number(g.get("y"))
     # A service returning its projected geometry despite outSR must not become a geographic point.
-    point = {"x": round(x, 3), "y": round(y, 3)} if (
+    point = {"x": x, "y": y} if (
         x is not None and y is not None and -97 < x < -94 and 28 < y < 31) else None
     return {"attributes": a, "geometry": point}
 
@@ -1163,7 +1149,7 @@ def history_record(f: dict, hist: dict) -> dict:
     return event(source_id=SOURCE_ID, source_record_id=sid, event_type="sso", status="ended" if ended else "unknown",
                  outfall_name=a.get("ADDRESS"), started_at=started, ended_at=ended, time_precision=precision,
                  lat=g.get("y"), lon=g.get("x"), coord_source="source" if g else None,
-                 coord_precision_m=100 if g else None, volume_gal=gal,
+                 coord_precision_m=None, volume_gal=gal,
                  volume_text=f"{gal:g} gallons (City estimate)" if gal else "Volume unknown",
                  estimate_flag="estimated" if gal is not None else "unknown", material="untreated sewage",
                  authority="City of Houston, Houston Public Works, SSO history", source_url=url,
@@ -1421,7 +1407,7 @@ def run(now: str, state_path: Path = STATE_PATH, out: Path | None = None, get=_g
                         "checked_at": (state.get("history") or {}).get("checked_at"), "error": history_error},
             "tceq_links": dict(tlinks), "newest_listed": listed[-1] if listed else None,
             "retained_from_previous_events": sorted({(r.get("raw") or {}).get("report_month") or "" for r in held}),
-            "placement_rule": ("We use the City's history-layer point, rounded to about 100 meters, and receiving "
+            "placement_rule": ("We use the City's history-layer point as published and receiving "
                                "waters named by linked TCEQ records. We never locate an overflow by its street or permit.")}
     problems = [f"report {m} not read ({v['reason']})" for m, v in sorted(pend.items())]
     if history_error:

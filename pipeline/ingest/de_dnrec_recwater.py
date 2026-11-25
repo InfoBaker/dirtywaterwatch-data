@@ -88,17 +88,8 @@ def _strip_addresses(v: str) -> str:
 
 
 def scrub_unit_name(v):
-    """A beach's name from the station layer or the history (UnitName, unitname), before any save: a contact sentence,
-    telephone or e-mail is cut (verify2 P1-3), and every street address's house number (verify3 P1-2), suffixed and
-    fractional forms included. Only DNREC's own numbered beach name at the start ("3 R's Road Beach",
-    OWN_NUMBERED_NAMES) keeps its number."""
-    if not isinstance(v, str) or not v:
-        return v
-    from common import scrub_text as _common_scrub
-    from ingest.de_dnrec_derns import NAMED_PERSON, _cut_name
-    m = OWN_NUMBERED_NAMES.match(v)
-    head, tail = (v[:m.end()], v[m.end():]) if m else ("", v)
-    return head + NAMED_PERSON.sub(_cut_name, _common_scrub(_strip_addresses(tail)))
+    """Keep DNREC public names and text as published."""
+    return v
 
 
 def scrub_carried(prev: dict) -> dict:
@@ -237,7 +228,7 @@ def point(st: dict | None) -> tuple[float | None, float | None]:
     if not st:
         return None, None
     try:
-        return round(float(st["Latitude"]), 3), round(float(st["Longitude"]), 3)
+        return float(st["Latitude"]), float(st["Longitude"])
     except (KeyError, TypeError, ValueError):
         return None, None
 

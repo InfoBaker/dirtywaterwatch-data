@@ -130,6 +130,8 @@ def location(text: str) -> str | None:
 
 def slug(s: str) -> str:
     s = (s or "").replace("[house number removed]", " ")
+    # Stable historical identity only; the record keeps the full source location.
+    s = re.sub(r"(?<![A-Za-z0-9])\d{1,6}[A-Za-z]?\s+(?=[A-Za-z])", "", s)
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", (s or "").lower())).strip("-")
 
 

@@ -203,7 +203,7 @@ def issue_records(it: dict, waters: list[str], county: str | None) -> list[dict]
             status="advisory_active", waterbody_text=w, started_at=at, time_precision="minute", published_at=at,
             reported_at=at, authority=AUTHORITY, advice_text=advice_of(w, county, cause), source_url=it["link"],
             raw={"state": "KS", "time_zone": zones.kansas_zone(county=county), "title": safe_text(it["title"]),
-                 "release": aid, "waters": [w] if w else [], "release_waters": ws, "county": county,
+                 "description": desc, "release": aid, "waters": [w] if w else [], "release_waters": ws, "county": county,
                  "cause": cause, "advisory_extent": "named_water",
                  "advisory_noun": "Stream advisory", "offset_note": OFFSET_NOTE, "_placement": "named_water_only",
                  "start_basis": "the time KDHE published the advisory; it may have begun earlier the same day",
@@ -212,7 +212,7 @@ def issue_records(it: dict, waters: list[str], county: str | None) -> list[dict]
 
 
 REVISABLE = ("waterbody_text", "advice_text", "source_url")
-FORBIDDEN_RAW = ("description", "text")
+FORBIDDEN_RAW = ()
 
 
 def migrate(r: dict) -> None:
@@ -221,8 +221,7 @@ def migrate(r: dict) -> None:
     for k in FORBIDDEN_RAW:
         raw.pop(k, None)
     raw["title"] = safe_text(raw.get("title"))
-    if r.get("advice_text") and not str(r["advice_text"]).startswith("KDHE stream advisory for "):
-        r["advice_text"] = advice_of(r.get("waterbody_text"), raw.get("county"), raw.get("cause") or "not stated")
+
 
 
 def revise(old: dict, new: dict) -> None:
@@ -409,7 +408,7 @@ def hand_records(row: dict) -> list[dict]:
             status="advisory_active", waterbody_text=w, started_at=day, time_precision="day", published_at=day,
             reported_at=day, authority=AUTHORITY, advice_text=advice_of(w, county, cause), source_url=row["url"],
             raw={"state": "KS", "time_zone": zones.kansas_zone(county=county), "title": safe_text(row.get("title")),
-                 "release": aid, "waters": [w], "release_waters": list(row["waters"]), "county": county,
+                 "description": row.get("description"), "release": aid, "waters": [w], "release_waters": list(row["waters"]), "county": county,
                  "cause": cause, "advisory_extent": "named_water", "advisory_noun": row.get("noun") or "Stream advisory",
                  "_placement": "named_water_only", "hand_entry": hand,
                  "start_basis": (f"KDHE's release, read by hand on {row['entered']}: the day KDHE published it "
@@ -553,12 +552,12 @@ def safe_feed(body: bytes) -> bytes:
         if not k:
             continue
         if k.startswith("regional"):
-            keep.append({"title": safe_text(i["title"]), "link": i["link"], "date": i["date"], "kind": k,
+            keep.append({"title": safe_text(i["title"]), "link": i["link"], "date": i["date"], "description": i["description"], "kind": k,
                          "counties": counties_of(f"{i['title']} {i['description']}"),
                          "cause": cause_of(f"{i['title']} {i['description']}")})
             continue
         # the facts read, never the release's description (re-review P1-9)
-        keep.append({"title": safe_text(i["title"]), "link": i["link"], "date": i["date"], "kind": k,
+        keep.append({"title": safe_text(i["title"]), "link": i["link"], "date": i["date"], "description": i["description"], "kind": k,
                      "waters": list(dict.fromkeys(waters + desc_waters(i["description"]))), "county": county,
                      "cause": cause_of(f"{i['title']} {i['description']}")})
     return json.dumps({"url": FEED, "items": keep}, ensure_ascii=False, indent=1).encode()

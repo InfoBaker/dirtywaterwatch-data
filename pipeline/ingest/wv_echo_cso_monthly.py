@@ -132,7 +132,7 @@ def fetch(permit: str, since: date) -> tuple[dict | None, str]:
 
 
 def _r3(v):
-    return None if v is None else round(float(v), 3)
+    return None if v is None else float(v)
 
 
 def ddmon(s) -> date | None:

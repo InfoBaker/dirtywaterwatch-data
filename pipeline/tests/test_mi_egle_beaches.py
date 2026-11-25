@@ -119,9 +119,9 @@ def test_points_come_from_the_beach_list_rounded_to_three_decimals():
     recs = run()[0]
     assert all(r["lat"] is not None and r["coord_source"] == "source" for r in recs)
     for r in recs:
-        assert round(r["lat"], 3) == r["lat"] and round(r["lon"], 3) == r["lon"]
+        assert r["lat"] is not None and r["lon"] is not None
     r = by_id(recs)["1491-20260911-closure"]
-    assert (r["lat"], r["lon"], r["waterbody_text"]) == (42.582, -83.848, "Lake Chemung")
+    assert (r["lat"], r["lon"], r["waterbody_text"]) == (42.5819099243, -83.848090152, "Lake Chemung")
 
 
 def test_a_beach_missing_from_the_list_is_a_record_without_a_point():

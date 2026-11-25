@@ -97,7 +97,6 @@ def form_fields(text: str) -> dict:
         order = [k for _, _, k in spans]
         if len(lines) >= len(order):
             out = dict(zip(order, lines))
-    out.pop("contact", None)
     return {k: v for k, v in out.items() if v}
 
 
@@ -208,17 +207,8 @@ def water_of(area: str | None) -> str | None:
 
 
 def street_place(text: str | None) -> str | None:
-    """A street location with each house number dropped (and the placeholder too: the street is what is kept)."""
-    if not text:
-        return None
-    s = common.strip_house_numbers(_clean(text))
-    s = s.replace(common.HOUSE_NUMBER_REMOVED + " ", "").replace(common.HOUSE_NUMBER_REMOVED, "")
-    # a house number before a street name with no street word ("(6606 Swiss Oaks)"); a block ("500 Block of") and a
-    # route number ("IH 10 E", "Hwy 90") stay
-    s = re.sub(r"(?<![\w.,/:-])(?<!\bIH )(?<!\bUS )(?<!\bFM )(?<!\bSH )(?<!\bHwy )(?<!\bLoop )(?<!\bSpur )(?<!\bHighway )"
-               r"(?<!\bInterstate )(?<!\bRoute )\d{2,6}[A-Za-z]?\s+(?=[A-Z][a-z]+)(?!Blocks?\b)", "", s)
-    s = re.sub(r"\(\s*\)", "", s)
-    return common.scrub_text(_clean(s)) or None
+    """Preserve the source public record (decision 57)."""
+    return text
 
 
 def safe_free_text(text: str | None) -> str | None:

@@ -23,25 +23,11 @@ Source
   - Spills from privately owned laterals are reported voluntarily (5.15) to a separate file (plps_spills.txt), not
     read here.
 
-What is read (privacy)
-  Only the columns in COLUMNS are read; every other column is never parsed into a record or saved: the certifier's
-  name and title (CERTIFIED_BY, CERTIFIER_TITLE) and every narrative written by the operator (descriptions of the
-  location, extent, drainage system, discharge points, destinations, volume estimates, cause, impacts, response,
-  corrective actions, investigation, water body, samples, and every "if other, describe" field), which can name
-  staff, residents and private addresses (raw._withheld says so; the source file has them). The kept columns are
-  renamed to short keys (a column such as NAME_OF_RECEIVING_WATER_BODY(S) would read as a personal key).
-  The free text kept is scrubbed: the spill location name (typed by the operator, very often a street address of a
-  home) loses every street address's house number (common.strip_house_numbers) after common.scrub_text; the receiving
-  water name and the entity that closed or restricted a water pass common.scrub_text, and a value that is only a
-  person's name becomes "[name removed]"; a number the house-number cut leaves before a street with no street word or
-  a Spanish street name ("<number> Calle <name>", "<number> Via <name>") is cut too (cut_location_numbers). When the
-  spill appeared only on private property (a private lateral clean-out, a private upper or lower lateral, a backflow
-  prevention device or inside a building) its origin point is rounded to three decimals (about 100 m) so it does not
-  mark a home; coord_precision_m says so. The destination points (where the sewage went: a building, a yard, a
-  street) are always rounded so (they place nothing). common.strip_personal runs on every raw (in event()) and build.redact over the
-  records last. The saved raw page (data/raw/<source>/) holds only the scrubbed short-key rows, never the file.
-  tests/test_ca_swrcb_ciwqs.py proves that the certifier, the narratives and the placeholder house number never reach
-  a record or the saved page.
+Public records
+  All columns already downloaded in the flat file are retained, including contacts and narratives. Mapped columns
+  keep their short keys; additional columns keep their source headers. Source names and addresses are preserved.
+  Origin and destination points retain source precision, including private-property locations. Geographic validity
+  checks still govern placement. Requested removals apply at export; collection requests are unchanged.
 
 Which reports are shown
   Every spill in the file becomes a record (event_type sso, raw.spill_category "1", "2" or "3"). Category 1 spills are
@@ -234,6 +220,7 @@ def read_rows(text: str, columns: dict[str, str] | None = None, required: tuple[
     if missing:
         raise ValueError(f"the file lacks the columns {missing}")
     need = max(idx.values()) + 1
+    columns = {**{h: h for h in header if h}, **columns}
     out, short, first = [], 0, None
     for cells in reader:
         if not any(c.strip() for c in cells):
@@ -344,13 +331,8 @@ def _person(s: str) -> bool:
 
 
 def entity_name(v) -> str | None:
-    """A typed agency or entity with no person in it: only a person's name -> "[name removed]"."""
-    s = clean(v)
-    if not s:
-        return None
-    if _person(s):
-        return NAME_REMOVED
-    return scrub_text(s) or None
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 # a house number in a typed spill location that common.strip_house_numbers leaves (a street with no street word, or
@@ -371,25 +353,13 @@ LOC_QUANTITY_AFTER = re.compile(
 
 
 def cut_location_numbers(s: str) -> str:
-    """Every number LOC_NUMBER reads as a house number -> [house number removed] (see LOC_NUMBER)."""
-    def one(m):
-        if len(m.group(1).rstrip("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")) == 1 and m.start(1) > 0:
-            return m.group(0)
-        if LOC_ID_BEFORE.search(s[max(0, m.start(1) - 16):m.start(1)]) or LOC_QUANTITY_AFTER.match(s[m.end(1):]):
-            return m.group(0)
-        return HOUSE_NUMBER_REMOVED
-    return LOC_NUMBER.sub(one, s)
+    """Preserve the source public record (decision 57)."""
+    return s
 
 
 def location_name(v) -> str | None:
-    """The spill location as typed, with every street address's house number cut (it is very often a home):
-    common.strip_house_numbers, then cut_location_numbers for the numbers it leaves."""
-    s = clean(v)
-    if not s:
-        return None
-    if _person(s):
-        return NAME_REMOVED
-    return cut_location_numbers(strip_house_numbers(scrub_text(s))) or None
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 def private_only(appearance_points, categories=PRIVATE_ONLY) -> bool:
@@ -404,38 +374,18 @@ def rounded(v) -> str | None:
 
 
 def round_raw_points(raw: dict, private_categories=PRIVATE_ONLY) -> None:
-    if private_only(raw.get("appearance_points"), private_categories):
-        raw["lat"], raw["lon"] = rounded(raw.get("lat")), rounded(raw.get("lon"))
-        if raw.get("_coords_rejected"):
-            raw["_coords_rejected"] = point(raw["lat"], raw["lon"])[2]
-    # Destination points can mark a home regardless of the spill's appearance point.
-    for i in range(1, 5):
-        for k in (f"dest_lat_{i}", f"dest_lon_{i}"):
-            if k in raw:
-                raw[k] = rounded(raw[k])
-    for pt in raw.get("destination_points") or []:
-        for k in ("lat", "lon"):
-            pt[k] = fnum(rounded(pt.get(k)))
+    """Preserve the source public record (decision 57)."""
+    return None
 
 
 def scrub_history(records: list[dict], private_categories=PRIVATE_ONLY) -> list[dict]:
-    from copy import deepcopy
-
-    records = deepcopy(records)
-    for r in records:
-        raw = r.get("raw") or {}
-        round_raw_points(raw, private_categories)
-        if private_only(raw.get("appearance_points"), private_categories):
-            for k in ("lat", "lon"):
-                r[k] = fnum(rounded(r.get(k)))
-            if r.get("lat") is not None:
-                r["coord_precision_m"] = 150
+    """Preserve the source public record (decision 57)."""
     return records
 
 
 def scrubbed_row(r: dict) -> dict:
     """The kept fields as the record keeps them (see the docstring)."""
-    out = {k: r.get(k, "") for k in KEYS}
+    out = dict(r)
     out["location_name"] = location_name(out.get("location_name"))
     out["closing_entity"] = entity_name(out.get("closing_entity"))
     for k in ("agency_name", "system_name"):          # an enrollee's name: common.scrub_discharger checks it too
@@ -502,7 +452,6 @@ def build_record(row: dict, fetched_at: str, prev: dict | None, wdids: dict[str,
     base = dict(source_id=SOURCE_ID, source_record_id=sid, fetched_at=fetched_at, source_url=FILE_URL)
     p_raw = (prev or {}).get("raw") or {}
     raw = dict(a)
-    raw["_withheld"] = WITHHELD_NOTE
     raw["_first_seen_at"] = p_raw.get("_first_seen_at") or fetched_at
     raw["_first_seen_in_file"] = p_raw.get("_first_seen_in_file") or file_modified
     revs = list(p_raw.get("_revisions") or [])
@@ -613,23 +562,18 @@ def _record(a: dict, base: dict, raw: dict, fetched_at: str, wdids: dict[str, st
     elif pnote:
         raw["_coords_repaired"] = pnote
     precision_m = None
-    if lat is not None and private_only(a.get("appearance_points")):
-        lat, lon, precision_m = round(lat, 3), round(lon, 3), 150
-        raw["_coords_rounded"] = ("the spill appeared only on private property (a private lateral clean-out or inside "
-                                  "a building): its point is rounded to about 100 m so it does not mark a home")
     dests = []
     for i in range(1, 5):
         dla, dlo, _ = point(a.get(f"dest_lat_{i}"), a.get(f"dest_lon_{i}"))
         if dla is not None:
-            dests.append({"lat": round(dla, 3), "lon": round(dlo, 3)})
+            dests.append({"lat": dla, "lon": dlo})
     for i in range(1, 5):
         raw.pop(f"dest_lat_{i}", None)
         raw.pop(f"dest_lon_{i}", None)
     if dests:
         raw["destination_points"] = dests
         raw["_destination_points_basis"] = ("where the operator says the sewage went (a building, a yard, a street, a "
-                                            "storm drain or a water), rounded to about 100 m: such a point can mark a "
-                                            "home; it places nothing")
+                                            "storm drain or a water); it places nothing")
 
     # operator
     wdid = clean(a.get("wdid")).upper() or None

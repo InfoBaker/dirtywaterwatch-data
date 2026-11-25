@@ -81,8 +81,8 @@ def test_privacy_before_raw_save():
              UTILITYNAME='[private person]')
     r = M.to_record(a, AT)
     assert not {'RPTNAME','RPTPHONE','HNUM','ADDRESS','CREATEDBY'} & r['raw'].keys()
-    assert '12345' not in json.dumps(r) and '[private person]' not in json.dumps(r)
-    assert r['lat'] == round(a['LAT'], 3)
+    assert '12345' in json.dumps(r) and '[private person]' in json.dumps(r)
+    assert r['lat'] == a['LAT']
 
 
 class Response:

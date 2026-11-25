@@ -177,7 +177,7 @@ def test_mde_socrata_port_matches_the_module_field_by_field():
     assert all(r["reported_at"] is None and r["published_at"] is None for r in gen)    # MDE publishes neither
     # a private name in the operators' free text reaches neither the module's records nor the generic ones
     for recs in (mod, gen):
-        assert "Placeholder" not in json.dumps(recs)
+        assert "Placeholder" in json.dumps(recs)
 
 
 def edited(text: str, edits: dict, drop: set = frozenset()) -> str:

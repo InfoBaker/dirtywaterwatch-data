@@ -207,25 +207,8 @@ def cut_person_cues(v: str) -> str:
 
 
 def scrubbed_row(r: dict) -> dict:
-    """The fields as the record and the raw save keep them (module docstring, privacy)."""
-    out = safe_row(r)
-    if out.get("siteName") is not None:
-        site = mi.party_name(out["siteName"])
-        out["siteName"] = mi.cut_address_numbers(strip_house_numbers(site)) if site else site
-    for k in ("featureNumber", "featureDescription", "receivingWater", "landImpacted", "dischargeType",
-              "dischargeDescription"):
-        if isinstance(out.get(k), str):
-            v = cut_person_cues(mi.free_text(out[k])) or None
-            # a value that is only a person's name (a filer who typed a name in the water or place field)
-            out[k] = NAME_REMOVED if v and v != NAME_REMOVED and mi._person(v) else v
-    for k in TIME_FIELDS:
-        # a time field holds a time or nothing: any other text is not kept (it could hold a name or an address)
-        if out.get(k) is not None and parse_ts(out[k]) is None:
-            out[k] = UNREADABLE
-    for k in ("permitNumber", "countyDescription", "dischargeVolume", "dischargeQuality"):
-        if isinstance(out.get(k), str):
-            out[k] = scrub_text(clean(out[k])) or None
-    return out
+    """Preserve the source public record (decision 57)."""
+    return safe_row(r)
 
 
 row_key = mi.row_key
@@ -658,7 +641,7 @@ def main(argv=None) -> int:
             raw_path = str(save_raw(SOURCE_ID, json.dumps(doc, ensure_ascii=False), "json").relative_to(ROOT))
             state.update(sha256=sha, raw_path=raw_path, saved_at=fetched_at)
     left_state = state.setdefault("left_out", {})
-    unread = {row_key(r) for r in scrubbed if any(r.get(k) == UNREADABLE for k in TIME_FIELDS)}
+    unread = {row_key(r) for r in scrubbed if any(r.get(k) is not None and parse_ts(r[k]) is None for k in TIME_FIELDS)}
     records, stats = build(scrubbed, fetched_at, prev, permit_index(), complete_read=not args.file,
                            left_state=left_state, unread=unread)
     records = redact.redact_events(records)

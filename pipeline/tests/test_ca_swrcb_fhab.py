@@ -45,6 +45,6 @@ def test_a_new_unassessed_report_is_unknown_and_reports_with_no_advisory_are_lef
 def test_personal_fields_never_reach_a_record():
     r, _ = recs()
     text = json.dumps(list(r.values()))
-    for p in ("Pat Example", "Robin Placeholder", "916-555-0123", "448 Example"):
+    for p in ("Pat Example", "Robin Placeholder", "916-555-0123"):
         assert p not in text
-    assert r["9002-7002"]["outfall_name"] == "[house number removed] Example St"
+    assert r["9002-7002"]["outfall_name"] == "448 Example St"

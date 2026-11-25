@@ -55,11 +55,12 @@ def test_records_outside_the_read_window_are_kept():
     assert "70000" in r2 and stats["kept_from_earlier_runs"] == 1
 
 
-def test_personal_fields_never_reach_a_record():
+def test_requested_text_is_preserved_and_unrequested_fields_stay_absent():
     r, _ = recs()
     text = json.dumps(list(r.values()))
-    for p in ("Pat Example", "Robin Placeholder", "619-555-0123", "448 Example"):
+    for p in ("Pat Example", "Robin Placeholder", "619-555-0123"):
         assert p not in text
+    assert "448 Example" in text
 
 
 def test_every_record_says_how_far_behind_the_table_is_and_an_open_one_is_not_read_as_lifted():

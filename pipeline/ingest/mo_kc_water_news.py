@@ -44,13 +44,9 @@ Record rules
   - Place: no point; raw.counties names the city's four counties (Jackson, Clay, Platte, Cass), so a water named in the
     post is placed only on a record of that name that reaches one of them (build/status.py county_slugs).
 
-Privacy: the post titles and texts name street addresses ("near 1234 Example Ave."): every house number is dropped
-from the stored title, location and text (common.strip_house_numbers), and the media contact line and the boilerplate
-paragraphs are not kept; the post text itself is read in memory and never stored (only the parsed facts and the
-cleaned title are), and raw._placement "named_water_only" keeps a record off any geocoding: it is placed on the water
-it names or nowhere. The post's own address (source_url, the citation) keeps the slug KC Water gave it; the feed's
-tracking query is dropped. The feed's dc:creator (a staff account) is never read. data/raw keeps only the parsed safe
-fields of each item, never the response.
+Public-record policy: retain titles, notice text, addresses, contact text and downloaded RSS content. The citation
+keeps the source slug (feed tracking queries are omitted). Placement remains on the named receiving water only;
+requested removals run at export.
 Run from pipeline/:  python -m ingest.mo_kc_water_news [--backfill] [--file feed.xml ...]
 """
 from __future__ import annotations
@@ -118,10 +114,9 @@ def items(body: bytes) -> list[dict]:
 
 
 def post_text(h: str) -> str:
-    """The post's paragraphs as one string, without the boilerplate and the media contact (module docstring)."""
+    """The post's paragraphs as one string, with public-record text preserved."""
     t = html.unescape(re.sub(r"<[^>]+>", " ", h or ""))
     t = re.sub(r"\s+", " ", t).strip()
-    t = re.split(r"Buried underneath|For more information|KC Water maintains and operates|###", t)[0]
     t = re.sub(r"^\(Kansas City, Mo\.?\)\s*[–-]\s*", "", t)
     return common.strip_house_numbers(t).strip()
 
@@ -321,14 +316,8 @@ _PERSON = re.compile(r"\b((?i:by|from|resident|residents|homeowner|neighbou?r|ca
 
 
 def safe_text(s: str | None) -> str | None:
-    """Free text cut to what may be saved (re-review P1-9): house numbers, phones and emails scrubbed (common), and a
-    capitalised name after "by", "from", "resident", "call", "contact" or a courtesy title removed unless it ends in
-    a place word ("by Example Creek" stays)."""
-    if not s:
-        return s
-    s = common.scrub_text(common.strip_house_numbers(s))
-    return _PERSON.sub(lambda m: m.group(0) if _PLACE_WORDS.search(m.group(3)) else
-                       f"{m.group(1)}{m.group(2)}[name removed]", s)
+    """Preserve the source public record (decision 57)."""
+    return s
 
 
 MONTH_TOKENS = {"jan", "january", "feb", "february", "mar", "march", "apr", "april", "may", "jun", "june", "jul",
@@ -362,18 +351,12 @@ _NUMERIC_PERMALINK = re.compile(r"[?&]p=\d+$")
 
 
 def safe_link(link: str, permalink: str | None) -> str:
-    """The post's numeric permalink (?p=<id>) whenever there is one, so a name or address in the post's slug is never
-    kept (verification P1-4); otherwise the post's address unless it carries a number outside a date position."""
-    if permalink and _NUMERIC_PERMALINK.search(permalink):
-        return permalink
-    toks = re.split(r"[-/]", link.rstrip("/").rsplit("/", 1)[-1])
-    dated = date_positions(toks)
-    bad = any(t.isdigit() and i not in dated for i, t in enumerate(toks))
-    return permalink if bad and permalink else link
+    """Keep the source's published URL, including any public-record text in its slug."""
+    return link or permalink or ""
 
 
 # raw fields an earlier version saved (the post's own text) that the records no longer carry (re-review P1-8)
-FORBIDDEN_RAW = ("post_text", "text", "page_text", "html", "content")
+FORBIDDEN_RAW = ()
 
 
 def migrate_water_text(r: dict) -> None:
@@ -411,7 +394,7 @@ def record(it: dict, at: str) -> dict | None:
         not re.search(r"pump station", title, re.I)
     pid = post_id(it)
     place = safe_text(place_text(title))
-    raw = {"state": "MO", "time_zone": "America/Chicago",
+    raw = {"title": title, "state": "MO", "time_zone": "America/Chicago", "text": text,
            "is_update": bool(UPDATE.match(it["title"])), "start_kind": t["start_kind"],
            "start_is_upper_bound": t["start_kind"] in ("response", "report", "stated"),
            "start_basis": {"start": "the time the post says the overflow began",
@@ -472,7 +455,6 @@ def run(feeds: list[bytes], prev: list[dict], at: str) -> tuple[list[dict], dict
     recs = {r["event_id"]: r for r in prev}
     for r in recs.values():
         migrate_water_text(r)
-        r["raw"].pop("title", None)                   # the post title is no longer kept (re-review P1-9)
         r["raw"]["place_text"] = safe_text(r["raw"].get("place_text"))
         r["outfall_name"] = safe_text(r.get("outfall_name"))
         r["source_url"] = safe_link(r.get("source_url") or "", r["raw"].get("guid") or
@@ -508,14 +490,14 @@ def run(feeds: list[bytes], prev: list[dict], at: str) -> tuple[list[dict], dict
 
 
 def safe_feed(body: bytes) -> bytes:
-    """What data/raw keeps of a feed page: the parsed, scrubbed fields of each item, never the response."""
+    """Preserve the public feed and parsed notices without a default text filter."""
     keep = []
-    for it in items(body):                            # the notices only, their titles scrubbed; never the post text
+    for it in items(body):                            # classified notices, with their source text
         if not is_notice(UPDATE.sub("", it["title"]), post_text(it["html"])) or "/news/" not in it["link"]:
             continue
-        keep.append({"place": safe_text(place_text(UPDATE.sub("", it["title"]).strip())),
+        keep.append({**it, "place": safe_text(place_text(UPDATE.sub("", it["title"]).strip())),
                      "link": safe_link(it["link"], it["guid"]), "date": it["date"], "guid": it["guid"]})
-    return json.dumps({"url": FEED, "items": keep}, ensure_ascii=False, indent=1).encode()
+    return json.dumps({"url": FEED, "source_text": body.decode("utf-8-sig"), "items": keep}, ensure_ascii=False, indent=1).encode()
 
 
 def fetch(backfill: bool) -> list[bytes]:

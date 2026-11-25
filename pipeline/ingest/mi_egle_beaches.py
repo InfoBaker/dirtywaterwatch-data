@@ -209,7 +209,7 @@ def parse_sites(text: str) -> dict[str, dict]:
     for r in rd:
         s = {v: _clean(r.get(k)) or None for k, v in SITE_FIELDS.items()}
         try:                                      # a point is both coordinates or none (Astra review P2-3)
-            s["lat"], s["lon"] = round(float(s["lat"]), POINT_DECIMALS), round(float(s["lon"]), POINT_DECIMALS)
+            s["lat"], s["lon"] = float(s["lat"]), float(s["lon"])
         except (TypeError, ValueError):
             s["lat"] = s["lon"] = None
         if s["lat"] is not None and not (40 <= s["lat"] <= 49 and -91.5 <= s["lon"] <= -81):

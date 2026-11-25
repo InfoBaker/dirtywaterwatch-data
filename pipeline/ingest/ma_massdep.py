@@ -100,19 +100,7 @@ PERMIT_RE = re.compile(r"^MA[A-Z0-9]{7}$")
 # ---------------------------------------------------------------- privacy
 
 def scrub(obj):
-    """Drop personal keys (reporterName, createdBy, modifiedBy, uploadedBy ...) and mask email
-    addresses in free text, recursively. Used on everything before it is saved."""
-    if isinstance(obj, dict):
-        out = {}
-        for k, v in obj.items():
-            if k not in KEEP_KEYS and (PERSONAL_KEYS.search(str(k)) or str(k).lower() in EXTRA_PERSONAL):
-                continue
-            out[k] = scrub(v)
-        return out
-    if isinstance(obj, list):
-        return [scrub(v) for v in obj]
-    if isinstance(obj, str) and "@" in obj:
-        return EMAIL_RE.sub("[email removed]", obj)
+    """Preserve the source public record (decision 57)."""
     return obj
 
 

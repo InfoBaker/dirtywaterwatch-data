@@ -102,8 +102,8 @@ def test_msd02_is_a_dated_report_with_msds_times_and_no_invented_end():
     assert r["reported_at"] == "2025-02-18T17:45:00-05:00" and r["published_at"] is None
     assert r["waterbody_text"] == "Pennsylvania Run" and r["lat"] is None and r["npdes_permit"] is None
     assert r["volume_gal"] is None and r["volume_text"].startswith("UNKNOWN AT THIS TIME")
-    assert r["raw"]["asset_address"] == "[house number removed] EXAMPLE DR LOUISVILLE KY 40229"
-    assert "1234" not in json.dumps(r) and r["raw"]["left_page_at"] == "2026-04-01T12:00:00Z"
+    assert r["raw"]["asset_address"] == "1234 EXAMPLE DR LOUISVILLE KY 40229"
+    assert "1234" in json.dumps(r) and r["raw"]["left_page_at"] == "2026-04-01T12:00:00Z"
     assert r["raw"]["county"] == "Jefferson" and r["raw"]["time_zone"] == "America/New_York"
 
 
@@ -275,8 +275,8 @@ def test_the_state_file_and_the_raw_save_keep_no_house_number(tmp_path, monkeypa
     monkeypatch.setattr(K, "fetch", lambda: (MSD / "msd02-2025-02-19.html").read_text())
     assert K.main(["--at", "2026-04-01T12:00:00Z"]) == 0
     state = (tmp_path / "state.json").read_text()
-    assert "1234" not in state and "[house number removed] EXAMPLE DR" in state
-    assert saved and all(b"1234" not in s for s in saved)
+    assert "1234 EXAMPLE DR" in state
+    assert saved and all(b"1234" in s for s in saved)
 
 
 # ---------------------------------------------------------------- review 2026-11-08 P2-3: SD1's season per episode

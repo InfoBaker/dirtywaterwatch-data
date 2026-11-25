@@ -139,7 +139,7 @@ def _in_sc(lat, lon) -> bool:
 
 def _pt(geom: dict | None) -> tuple[float | None, float | None]:
     try:
-        lat, lon = round(float(geom["y"]), 3), round(float(geom["x"]), 3)
+        lat, lon = float(geom["y"]), float(geom["x"])
     except (TypeError, KeyError, ValueError):
         return None, None
     return (lat, lon) if _in_sc(lat, lon) else (None, None)

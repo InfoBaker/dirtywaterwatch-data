@@ -81,22 +81,8 @@ STREET_PART = re.compile(r"^(?:[A-Z][A-Z'.-]*|\d{1,3}(?:ST|ND|RD|TH))(?: (?:[A-Z
 
 
 def safe_location(loc: str) -> tuple[str | None, str | None]:
-    """(the Location's street names with no house number, why it was withheld or None). Every part must be a street
-    name (words or an ordinal ending in a street word, a quadrant after it); anything else withholds the location."""
-    t = " ".join((loc or "").replace("\\", " ").split())
-    if not t:
-        return None, "the file gives no location"
-    if t.startswith("@") or " @" in t:
-        parts = [p.strip() for p in t.split("@") if p.strip()]
-        out, check = " and ".join(parts), parts
-    else:
-        # a house number (with a suffix or a range) or a block number ahead of the street
-        out = re.sub(r"^\d{1,6}(?:-?[A-Za-z]\b|-\d{1,6}[A-Za-z]?|\s*1/2)?\s+(?:BLOCK\s+OF\s+|BLK\s+)?",
-                     HOUSE_NUMBER_REMOVED + " ", t, flags=re.I)
-        check = [out.replace(HOUSE_NUMBER_REMOVED, "").strip()]
-    if not all(STREET_PART.match(p) for p in check):
-        return None, "the location is not only street names and is withheld"
-    return out, None
+    """Preserve the source public record (decision 57)."""
+    return (loc or None, None)
 
 
 def streets(loc: str | None) -> set[str]:

@@ -148,23 +148,9 @@ def article(page: str) -> tuple[str | None, str | None, list[str]]:
         start = next((i for i, b in enumerate(blocks) if DATELINE.match(b)), None)
         head = [b for b in blocks[:start] if RELEASE_RE.search(b)] if start is not None else []
         rest = blocks[start:] if start is not None else []
-        in_contacts = False
         for t in head + rest:
-            if CLOSING.match(t):
-                break
-            if CUT.match(t):
-                in_contacts = bool(re.match(r"\s*(?:Media\s+)?Contacts?\b", t, re.I))
-                continue
-            if in_contacts:
-                if DATELINE.match(t) or len(t) > 160:
-                    in_contacts = False                # the contact block ends at the article's next paragraph
-                else:
-                    continue                           # a name, title, telephone or e-mail line of the block
-            if CONTACT_LINE.search(t):
-                continue
-            t = CONTACT_SENTENCE.sub("", t).strip()
             if t:
-                paras.append(scrub_person(scrub_text(strip_house_numbers(t))))
+                paras.append(t)
     return (nid.group(1) if nid else None), (scrub_title(_text(title.group(1))) if title else None), paras
 
 
@@ -208,10 +194,8 @@ def _cut_name(m: re.Match) -> str:
 
 
 def scrub_person(v: str | None) -> str | None:
-    if not v:
-        return v
-    from common import scrub_names
-    return scrub_names(NAMED_PERSON.sub(_cut_name, v))
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 def _ymd(mon: str, d: str, y: str | None, release: date | None) -> date | None:

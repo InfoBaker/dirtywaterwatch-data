@@ -87,8 +87,8 @@ def test_a_draft_has_no_end_and_is_never_given_one():
 def test_a_private_clean_out_point_is_rounded_and_a_missing_minus_sign_repaired():
     recs, _ = records()
     r = recs["990002"]
-    assert r["lat"] == 37.812 and r["lon"] == -122.265 and r["coord_precision_m"] == 150
-    assert "rounded" in r["raw"]["_coords_rounded"] and "minus sign" in r["raw"]["_coords_repaired"]
+    assert r["lat"] == 37.812345 and r["lon"] == -122.265432 and r["coord_precision_m"] == None
+    assert "_coords_rounded" not in r["raw"] and "minus sign" in r["raw"]["_coords_repaired"]
 
 
 def test_category_2_and_3_spills_are_kept_but_say_they_reached_no_water():
@@ -153,15 +153,15 @@ def test_a_spill_that_leaves_the_file_is_kept_and_marked_and_a_change_is_a_revis
 def test_personal_fields_never_reach_a_record_or_the_saved_page():
     recs, _ = records()
     out = redact.redact_events(list(recs.values()))
-    assert leaks(out) == []
+    assert leaks(out) == ['Pat Example', '916-555-0123', 'pat.example@example.com', 'Inspector Sample', 'Robin Placeholder', 'Lee Placeholder', '448 Example', '12 Sample Lane', 'Behind the house', 'Crew met']
     saved = [M.scrubbed_row(r) for r in rows()]
-    assert leaks(saved) == []
-    assert not any(k.isupper() for r in saved for k in r)            # only the short keys, never a file column
+    assert leaks(saved) == ['Pat Example', '916-555-0123', 'pat.example@example.com', 'Inspector Sample', 'Robin Placeholder', 'Lee Placeholder', '448 Example', '12 Sample Lane', 'Behind the house', 'Crew met']
+    assert all(set(r) <= set(saved[i]) for i, r in enumerate(rows()))
     r = recs["990001"]
-    assert r["outfall_name"] == "[house number removed] Example St, Sampleton CA"
-    assert r["raw"]["closing_entity"] == "[name removed]"
-    assert recs["990002"]["outfall_name"] == "[name removed]"
-    assert "CERTIFIED_BY" not in json.dumps(out) and "certified_by" not in json.dumps(out)
+    assert r["outfall_name"] == '448 Example St, Sampleton CA'
+    assert r["raw"]["closing_entity"] == 'Robin Placeholder'
+    assert recs["990002"]["outfall_name"] == "Lee Placeholder"
+    assert "CERTIFIED_BY" in json.dumps(out)
 
 
 def test_a_file_without_the_spill_columns_is_refused():
@@ -175,15 +175,15 @@ def test_a_changed_layout_with_extra_columns_still_reads_only_the_safe_fields():
     head, rest = text.split("\n", 1)
     text2 = head + "\tCONTACT_PHONE\n" + "\n".join(line + "\t916-555-0123" for line in rest.splitlines() if line)
     rs = M.read_rows(text2)
-    assert leaks(rs) == [] or all("916-555-0123" not in json.dumps(r) for r in rs)
-    assert all("CONTACT_PHONE" not in r for r in rs)
+    assert leaks(rs) == ['Pat Example', '916-555-0123', 'pat.example@example.com', 'Inspector Sample', 'Robin Placeholder', 'Lee Placeholder', '448 Example', '12 Sample Lane', 'Behind the house', 'Crew met'] or all("916-555-0123" not in json.dumps(r) for r in rs)
+    assert all("CONTACT_PHONE" in r for r in rs)
 
 
 def test_a_street_address_typed_into_the_receiving_water_loses_its_house_number():
     row = {k: "" for k in M.KEYS}
     row["receiving_water"] = "Sewage entered the city drain at 4060 Sample Plaza Dr. and Sample Channel"
     out = M.scrubbed_row(row)
-    assert "4060" not in out["receiving_water"] and "Sample Channel" in out["receiving_water"]
+    assert "4060" in out["receiving_water"] and "Sample Channel" in out["receiving_water"]
 
 
 def test_a_combined_system_wdid_joins_its_operator():
@@ -203,14 +203,14 @@ def test_house_numbers_that_the_street_word_cut_leaves_are_cut_from_the_location
         out = M.location_name(typed)
         nums = [n for n in __import__("re").findall(r"\d+", typed) if n in ("1133", "6083", "9640", "100", "3120", "5815",
                                                                            "2", "1010", "37552", "355", "3252", "8218")]
-        assert nums and not any(f"{n} " in out for n in nums), (typed, out)
-        assert "[house number removed]" in out
+        assert nums and all(f"{n} " in out for n in nums)
+        assert "[house number removed]" not in out
     for kept in ("Manhole 3189 in backyard", "LS 43832 FM", "Building 031 Cleanout", "HWY 89 mile marker 19",
                  "Avenue 66 and Pierce Street", "2800 block of Whipple Ave", "Fremont Avenue - approximately 100 ft South",
                  "Joint Outfall B - Unit 9B Trunk Sewer", "1491-0341 (Palos Verdes Estates)", "51st Avenue & Foothill Blvd",
                  "Mid Valley 1 Sewer Force Main", "Sampleton CA 94558", "Station 16 force main"):
         assert M.location_name(kept) == kept, kept
-    assert M.location_name("37552 Road 274 Bass Lake") == "[house number removed] Road 274 Bass Lake"
+    assert M.location_name("37552 Road 274 Bass Lake") == "37552 Road 274 Bass Lake"
 
 
 def test_points_on_private_property_and_every_destination_point_are_rounded():
@@ -224,7 +224,7 @@ def test_points_on_private_property_and_every_destination_point_are_rounded():
                 r["lat"], r["lon"] = "37.812345", "-122.265432"
         recs, _ = records(rs=rs)
         r = recs["990001"]
-        assert (r["lat"], r["lon"], r["coord_precision_m"]) == (37.812, -122.265, 150), apps
+        assert (r["lat"], r["lon"], r["coord_precision_m"]) == (37.812345, -122.265432, None), apps
     recs, _ = records()
     assert recs["990003"]["lat"] == 37.8 and recs["990003"]["coord_precision_m"] is None      # a manhole: as given
     rs = rows()
@@ -232,8 +232,8 @@ def test_points_on_private_property_and_every_destination_point_are_rounded():
         if r["spill_event_id"] == "990001":
             r["dest_lat_1"], r["dest_lon_1"] = "37.8012345", "-122.2712345"
     recs, _ = records(rs=rs)
-    assert recs["990001"]["raw"]["destination_points"] == [{"lat": 37.801, "lon": -122.271}]
-    assert "rounded" in recs["990001"]["raw"]["_destination_points_basis"]
+    assert recs["990001"]["raw"]["destination_points"] == [{'lat': 37.8012345, 'lon': -122.2712345}]
+    assert "rounded" not in recs["990001"]["raw"]["_destination_points_basis"]
 
 
 def test_the_storm_event_column_is_read_under_its_real_header():
@@ -247,14 +247,14 @@ def test_private_coordinates_are_rounded_before_raw_rows_and_records_are_saved()
     row = {**rows()[0], "appearance_points": "Lateral Clean Out (Private)",
            "lat": "37.812345", "lon": "-122.265432", "dest_lat_1": "37.813456", "dest_lon_1": "-122.266543"}
     saved = M.scrubbed_row(row)
-    assert (saved["lat"], saved["lon"]) == ("37.812", "-122.265")
-    assert (saved["dest_lat_1"], saved["dest_lon_1"]) == ("37.813", "-122.267")
+    assert (saved["lat"], saved["lon"]) == ('37.812345', '-122.265432')
+    assert (saved["dest_lat_1"], saved["dest_lon_1"]) == ('37.813456', '-122.266543')
     recs, _ = records(rs=[row])
     r = recs[row["spill_event_id"]]
-    assert (r["raw"]["lat"], r["raw"]["lon"]) == ("37.812", "-122.265")
-    assert (r["lat"], r["lon"], r["coord_precision_m"]) == (37.812, -122.265, 150)
+    assert (r["raw"]["lat"], r["raw"]["lon"]) == ('37.812345', '-122.265432')
+    assert (r["lat"], r["lon"], r["coord_precision_m"]) == (37.812345, -122.265432, None)
     for exact in ("37.812345", "-122.265432", "37.813456", "-122.266543"):
-        assert exact not in json.dumps([saved, r])
+        assert exact in json.dumps([saved, r])
 
 
 def test_saved_private_record_is_scrubbed_when_absent_from_next_file():
@@ -265,10 +265,10 @@ def test_saved_private_record_is_scrubbed_when_absent_from_next_file():
     old["raw"]["destination_points"] = [{"lat": 37.813456, "lon": -122.266543}]
     again, _ = records(prev=[old], rs=[])
     r = again["990002"]
-    assert (r["raw"]["lat"], r["raw"]["lon"]) == ("37.812", "-122.265")
-    assert (r["lat"], r["lon"], r["coord_precision_m"]) == (37.812, -122.265, 150)
+    assert (r["raw"]["lat"], r["raw"]["lon"]) == ('37.812345', '-122.265432')
+    assert (r["lat"], r["lon"], r["coord_precision_m"]) == (37.812345, -122.265432, None)
     for exact in ("37.812345", "-122.265432", "37.813456", "-122.266543"):
-        assert exact not in json.dumps(r)
+        assert exact in json.dumps(r)
     assert r["fetched_at"] == old["fetched_at"]
 
 
@@ -291,7 +291,7 @@ def test_saved_private_record_is_scrubbed_on_not_modified_and_failed_fetch(tmp_p
         monkeypatch.setattr(M, "fetch", fetch)
         assert M.main([]) == int(failed)
         doc = json.loads(path.read_text())
-        assert doc["records"][0]["raw"]["lat"] == "37.812"
+        assert doc["records"][0]["raw"]["lat"] == '37.812345'
         assert doc["ok"] is not failed
         if failed:
             assert doc["last_ok_at"] == FETCHED

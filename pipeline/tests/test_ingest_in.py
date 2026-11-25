@@ -621,7 +621,7 @@ def test_a_plant_point_is_withheld_points_are_rounded_and_charts_get_events_and_
     reg[("IN0000004", "2")] = dict(reg[("IN0000004", "2")], lat=41.612345, lon=-86.712345)
     cells, names = M.collect(_results(), reg, defaultdict(Counter))
     r = M.build_records(cells, names, reg, {}, defaultdict(Counter))[0]
-    assert (r["lat"], r["lon"]) == (41.612, -86.712)
+    assert (r["lat"], r["lon"]) == (41.612345, -86.712345)
     assert charts.total_measures(r) == {"gallons": 1_100_000.0, "events": 1.0, "hours": 4.0}
     reg[("IN0000004", "2")] = dict(reg[("IN0000004", "2")], coords_from="facility")
     r = M.build_records(cells, names, reg, {}, defaultdict(Counter))[0]
