@@ -288,11 +288,10 @@ def main(argv=None) -> int:
             "newest_reported": max((x["reported_at"] for x in rows), default=None),
             "coordinates": "the file gives none"}
     err = f"{bad} rows whose date or cells could not be read were skipped" if bad else None
-    # DC Water's page attaches "not for any commercial, legal or other use" to this file: the records are kept in the
-    # events file but withheld from the status build and the export until the owner has decided on that condition, as
-    # New Hampshire's swimming layer is (build/status.py load_events reads meta.distribution_discouraged)
-    meta["distribution_discouraged"] = True
     meta["use_condition"] = "DC Water's page: 'not for any commercial, legal or other use'"
+    meta["terms"] = meta["use_condition"]
+    meta["credit"] = "DC Water, Sanitary Sewer Dashboard; use condition read Nov. 25, 2026 (UTC)."
+    meta["homepage"] = PAGE
     out = write_events(SOURCE_ID, recs, ok=not bad, error=err, meta=meta, partial=bool(bad))
     print(f"{SOURCE_ID}: {len(recs)} records ({len(held)} no longer listed, {dups} linked to EPA rows) -> {out}")
     return 0 if not bad else 1

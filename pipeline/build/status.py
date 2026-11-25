@@ -3435,8 +3435,11 @@ def annotate_beach_reasons(events: list[dict], by_id: dict, duplicates: dict, ru
     under a notice naming the sewage spill); a record shown for a closure takes the reason a linked duplicate of the same
     closure states (RIDOH's feed beside its sheet). Both are resolved together until nothing changes, so a reason passes
     through any chain of parents and duplicates (Astra review 2026-11-21, finding 4); a cycle ends, as each step only
-    turns a record with no reason into one with a reason. Returns the counts for status.json (beach_reason block)."""
-    if not BR.config(rules):
+    turns a record with no reason into one with a reason. A child's source can disable parent inheritance with
+    inherit_parent_reason: false when its links track successive statuses rather than the same advisory (NHDES).
+    Its own reason and linked duplicates still apply. Returns the counts for status.json (beach_reason block)."""
+    cfg = BR.config(rules)
+    if not cfg:
         return {"enabled": False}
     cur = {}
     for ev in events:
@@ -3454,7 +3457,9 @@ def annotate_beach_reasons(events: list[dict], by_id: dict, duplicates: dict, ru
             if v["stated"] is not False:
                 continue
             par = by_id[eid].get("parent_event_id")
-            if par and par != eid and good(cur.get(par)) and not history_only_rule(by_id.get(par) or {}, rules):
+            source = (cfg.get("sources") or {}).get(by_id[eid].get("source_id")) or {}
+            if source.get("inherit_parent_reason") is not False and par and par != eid \
+                    and good(cur.get(par)) and not history_only_rule(by_id.get(par) or {}, rules):
                 cur[eid] = {**cur[par], "how": "parent", "parent": par}
                 changed = True
                 continue
