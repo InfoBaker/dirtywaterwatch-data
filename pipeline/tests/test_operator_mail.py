@@ -799,3 +799,33 @@ def test_the_shipped_lists_let_only_holyoke_stand_alone():
     alone = [lid for lid, s in lists.items() if (s.get("platform") or {}).get("stands_alone")]
     assert alone == ["holyoke"]
     assert set(lists["holyoke"]["platform"]["body_marks"]) == {"MA0101630", "453003085611624"}
+
+
+def test_stands_alone_never_lets_a_platform_ceased_notice_clear_an_active_one(tmp_path):
+    """Astra 2026-11-27 P1: with stands_alone, a Ceased notice proven only by Everbridge (its marks are public text)
+    could close an open discharge. It is held; the Active notice stays the record shown, ongoing. An operator-proven
+    Ceased notice still closes it; a lone platform Ceased notice (nothing to close) stands, since it only adds red."""
+    spec = {**LISTS["holyoke"], "platform": {**LISTS["holyoke"]["platform"], "stands_alone": True}}
+    act = eml("City of Holyoke <noreply@everbridge.net>", "holyoke@x", "CSO", HOLYOKE_ACTIVE, auth=cf("everbridge.net"))
+    ceased = eml("City of Holyoke <noreply@everbridge.net>", "holyoke@x", "CSO", HOLYOKE_CEASED,
+                 auth=cf("everbridge.net"))
+    rows = [{"id": "e1", "received_at": "2026-01-11T00:00:00Z", "list_id": "holyoke", "raw_key": "k1", "size": 1},
+            {"id": "e2", "received_at": "2026-01-11T03:50:00Z", "list_id": "holyoke", "raw_key": "k2", "size": 1},
+            {"id": "e3", "received_at": "2026-01-11T03:55:00Z", "list_id": "holyoke", "raw_key": "k3", "size": 1}]
+    ev_dir = tmp_path / "events"
+    run_feed(FakeTransport(rows, {"k1": act, "k2": ceased, "k3": ceased}), {"holyoke": spec}, tmp_path / "i.json",
+             ev_dir, now=NOW)
+    ev = json.loads((ev_dir / "ma-holyoke-everbridge.json").read_text())
+    assert ev["count"] == 1 and ev["meta"]["held_platform_only"] == 2           # the Ceased notice and its re-send
+    assert ev["records"][0]["status"] == "ongoing" and not ev["records"][0].get("ended_at")
+    # only the Ceased notice: nothing to close, it stands (48 h of red from its end)
+    run_feed(FakeTransport(rows[1:2], {"k2": ceased}), {"holyoke": spec}, tmp_path / "j.json",
+             tmp_path / "ev2", now=NOW)
+    ev = json.loads((tmp_path / "ev2" / "ma-holyoke-everbridge.json").read_text())
+    assert ev["count"] == 1 and ev["records"][0]["status"] == "ended" and ev["meta"]["held_platform_only"] == 0
+    # the operator's own domain closes it as before
+    own = eml("City of Holyoke <cso@holyoke.org>", "holyoke@x", "CSO", HOLYOKE_CEASED, auth=cf("holyoke.org"))
+    run_feed(FakeTransport(rows[:2], {"k1": act, "k2": own}), {"holyoke": spec}, tmp_path / "k.json",
+             tmp_path / "ev3", now=NOW)
+    ev = json.loads((tmp_path / "ev3" / "ma-holyoke-everbridge.json").read_text())
+    assert ev["meta"]["held_platform_only"] == 0 and any(r["status"] == "ended" for r in ev["records"])

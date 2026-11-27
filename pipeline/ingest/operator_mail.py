@@ -311,10 +311,27 @@ def build_list(lid: str, spec: dict, entries: list[dict], others: dict, now: dat
     # a record stand alone: a forged notice could only make the map more cautious. Linking to the portal is unchanged.
     alone = bool(((spec.get("platform") or {}).get("stands_alone"))
                  and ((spec.get("platform") or {}).get("body_marks") or (spec.get("platform") or {}).get("header_marks")))
-    held_chains = set() if alone else {r["raw"].get("_chain") or r["event_id"] for r in recs
-                                       if r["raw"].get("_trust") == "platform" and not r.get("duplicate_of")}
-    held = [r for r in recs if (r["raw"].get("_chain") or r["event_id"]) in held_chains]
-    recs = [r for r in recs if (r["raw"].get("_chain") or r["event_id"]) not in held_chains]
+    if alone:
+        # ... but a platform-only notice never closes an open one (Astra 2026-11-27 P1): a Ceased notice that joined
+        # an earlier notice's chain is held, with any re-send of it, so the earlier notice stays the record shown and
+        # stays ongoing until the portal's record of the same overflow (duplicate_of) or an operator-proven notice
+        # ends it. A forged notice can then only add red, never clear it. A Ceased notice that closes nothing stands.
+        by_id = {r["event_id"]: r for r in recs}
+        closing = {r["event_id"] for r in recs
+                   if r["raw"].get("_trust") == "platform" and not r.get("duplicate_of")
+                   and r["raw"].get("_notice_state") == "ceased" and r.get("parent_event_id") in by_id}
+        grew = True
+        while grew:                              # re-sends of a held Ceased notice are its children
+            more = {r["event_id"] for r in recs if r.get("parent_event_id") in closing and r["event_id"] not in closing
+                    and r["raw"].get("_trust") == "platform" and not r.get("duplicate_of")}
+            grew, closing = bool(more), closing | more
+        held = [r for r in recs if r["event_id"] in closing]
+        recs = [r for r in recs if r["event_id"] not in closing]
+    else:
+        held_chains = {r["raw"].get("_chain") or r["event_id"] for r in recs
+                       if r["raw"].get("_trust") == "platform" and not r.get("duplicate_of")}
+        held = [r for r in recs if (r["raw"].get("_chain") or r["event_id"]) in held_chains]
+        recs = [r for r in recs if (r["raw"].get("_chain") or r["event_id"]) not in held_chains]
     stats["held_platform_only"] = len(held)
     res = Counter(e.get("result") for e in entries)
     received = [e.get("received_at") for e in entries if e.get("received_at")]
