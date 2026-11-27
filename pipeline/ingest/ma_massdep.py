@@ -641,7 +641,41 @@ def link(records: list[dict], rows: dict) -> dict:
                 r["started_at"] and dt(p["ended_at"]) < dt(r["started_at"])):
             r["ended_at"] = p["ended_at"]
             r["raw"]["_ended_at_basis"] = f"parent notice's verified end ({p['raw'].get('_ended_at_basis')})"
+    stats["ended_by_bound"] = bound_ceased(records)
     return dict(stats)
+
+
+def bound_ceased(records: list[dict]) -> int:
+    """A notice the portal says has ceased, with no cessation time and no verified end yet, ended at the latest when
+    the portal published the ceased report: its own (Initial-Ceased, Ceased) or its earliest Ceased child's (a parent
+    Initial-Ongoing). ended_at stays null; raw._ended_before is that time, time_precision "bound", and status.py
+    counts the windows from it (the same rule as Manchester's all-clear, ingest.nh_permittees). Without it the record
+    stayed 'end not confirmed' for 30 days after the city had reported it ceased. Returns the records bounded."""
+    dt = datetime.fromisoformat
+    first_child: dict[str, dict] = {}
+    for r in records:
+        if r["raw"].get("reportingType") == "Ceased" and r.get("parent_event_id") and r.get("published_at"):
+            c = first_child.get(r["parent_event_id"])
+            if c is None or dt(r["published_at"]) < dt(c["published_at"]):
+                first_child[r["parent_event_id"]] = r
+    n = 0
+    for r in records:
+        r["raw"].pop("_ended_before", None)
+        r["raw"].pop("_ended_before_basis", None)
+        if (r["raw"].get("_report_class") != "Public Notification Report" or r.get("status") != "ended"
+                or r.get("ended_at")):
+            continue
+        rtype = r["raw"].get("reportingType")
+        src = r if rtype in ("Initial-Ceased", "Ceased") else first_child.get(r["event_id"])
+        if src is None or not src.get("published_at"):
+            continue
+        r["time_precision"] = "bound"
+        r["raw"]["_ended_before"] = src["published_at"]
+        r["raw"]["_ended_before_basis"] = (
+            f"the portal's ceased report {src['raw'].get('incidentNumber')} was published {src['published_at']}; "
+            "it gives no cessation time, so the discharge ended by then at the latest")
+        n += 1
+    return n
 
 
 # ---------------------------------------------------------------- main

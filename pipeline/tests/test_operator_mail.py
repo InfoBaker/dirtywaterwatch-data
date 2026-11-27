@@ -767,3 +767,35 @@ def test_a_copy_list_counts_its_notices_as_copies_and_makes_no_record():
     # the kind is part of the rule, so a list moved from pending to copy has its stored messages read again
     assert R.rule_of(spec) != R.rule_of({**spec, "kind": "pending"})
     assert O.load_lists()["al-adem-sso"]["kind"] == "copy"
+
+
+def test_a_platform_list_marked_stands_alone_publishes_on_its_own(tmp_path):
+    """Owner, 2026-11-27: Holyoke's Everbridge notices (both of Holyoke's marks present) stand alone while the portal
+    lags; another Everbridge customer's mail still fails the marks, and a list without the flag still holds."""
+    spec = {**LISTS["holyoke"], "platform": {**LISTS["holyoke"]["platform"], "stands_alone": True}}
+    raw = eml("City of Holyoke <noreply@everbridge.net>", "holyoke@x", "CSO Notification", HOLYOKE_ACTIVE,
+              auth=cf("everbridge.net"))
+    forged = eml("Someone <noreply@everbridge.net>", "holyoke@x", "CSO Notification",
+                 HOLYOKE_ACTIVE.replace("453003085611624", "000000000000000"), auth=cf("everbridge.net"))
+    rows = [{"id": "e1", "received_at": "2026-11-17T02:00:00Z", "list_id": "holyoke", "raw_key": "k1", "size": 1},
+            {"id": "e2", "received_at": "2026-11-17T02:05:00Z", "list_id": "holyoke", "raw_key": "k2", "size": 1}]
+    ev_dir = tmp_path / "events"
+    run_feed(FakeTransport(rows, {"k1": raw, "k2": forged}), {"holyoke": spec}, tmp_path / "i.json", ev_dir, now=NOW)
+    ev = json.loads((ev_dir / "ma-holyoke-everbridge.json").read_text())
+    assert ev["count"] == 1 and ev["meta"]["held_platform_only"] == 0
+    rec = ev["records"][0]
+    assert rec["raw"]["_trust"] == "platform" and rec["status"] == "ongoing" and not rec.get("duplicate_of")
+    assert ev["meta"]["results"] == {"notice": 1, "unverified": 1}
+    # a portal record of the same overflow later still takes the e-mail as its duplicate
+    (ev_dir / "ma-massdep.json").write_text(json.dumps({"records": [
+        portal("p1", "HOL021", "2026-01-10T18:50:00-05:00", "2026-01-12T09:00:00-05:00")]}))
+    run_feed(FakeTransport(rows, {"k1": raw, "k2": forged}), {"holyoke": spec}, tmp_path / "i2.json", ev_dir, now=NOW)
+    ev = json.loads((ev_dir / "ma-holyoke-everbridge.json").read_text())
+    assert ev["count"] == 1 and ev["records"][0]["duplicate_of"] == "ma-massdep:p1"
+
+
+def test_the_shipped_lists_let_only_holyoke_stand_alone():
+    lists = json.loads((Path(__file__).resolve().parents[2] / "data/mail-lists.json").read_text())["lists"]
+    alone = [lid for lid, s in lists.items() if (s.get("platform") or {}).get("stands_alone")]
+    assert alone == ["holyoke"]
+    assert set(lists["holyoke"]["platform"]["body_marks"]) == {"MA0101630", "453003085611624"}
