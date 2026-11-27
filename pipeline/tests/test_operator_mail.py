@@ -829,3 +829,22 @@ def test_stands_alone_never_lets_a_platform_ceased_notice_clear_an_active_one(tm
              tmp_path / "ev3", now=NOW)
     ev = json.loads((tmp_path / "ev3" / "ma-holyoke-everbridge.json").read_text())
     assert ev["meta"]["held_platform_only"] == 0 and any(r["status"] == "ended" for r in ev["records"])
+
+
+def test_an_operator_ceased_after_a_held_platform_ceased_still_closes_the_active_one(tmp_path):
+    """Astra 2026-11-27 pass 2 P2: Active -> platform Ceased -> platform re-send -> operator Ceased (same end): the
+    operator's record pointed at the held re-send, so the Active notice was never replaced."""
+    spec = {**LISTS["holyoke"], "platform": {**LISTS["holyoke"]["platform"], "stands_alone": True}}
+    act = eml("City of Holyoke <noreply@everbridge.net>", "holyoke@x", "CSO", HOLYOKE_ACTIVE, auth=cf("everbridge.net"))
+    plat = eml("City of Holyoke <noreply@everbridge.net>", "holyoke@x", "CSO", HOLYOKE_CEASED, auth=cf("everbridge.net"))
+    own = eml("City of Holyoke <cso@holyoke.org>", "holyoke@x", "CSO", HOLYOKE_CEASED, auth=cf("holyoke.org"))
+    rows = [{"id": f"e{i}", "received_at": f"2026-01-11T0{i}:00:00Z", "list_id": "holyoke", "raw_key": f"k{i}",
+             "size": 1} for i in range(1, 5)]
+    ev_dir = tmp_path / "events"
+    run_feed(FakeTransport(rows, {"k1": act, "k2": plat, "k3": plat, "k4": own}), {"holyoke": spec},
+             tmp_path / "i.json", ev_dir, now=NOW)
+    ev = json.loads((ev_dir / "ma-holyoke-everbridge.json").read_text())
+    ids = {r["event_id"] for r in ev["records"]}
+    assert ev["meta"]["held_platform_only"] == 2 and len(ev["records"]) == 2
+    closer = next(r for r in ev["records"] if r["status"] == "ended")
+    assert closer["parent_event_id"] in ids                      # points at the Active notice, which it replaces

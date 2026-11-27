@@ -327,6 +327,13 @@ def build_list(lid: str, spec: dict, entries: list[dict], others: dict, now: dat
             grew, closing = bool(more), closing | more
         held = [r for r in recs if r["event_id"] in closing]
         recs = [r for r in recs if r["event_id"] not in closing]
+        # a kept record whose parent was held points to the nearest kept ancestor, so a later operator-proven Ceased
+        # notice still replaces the Active one (Astra 2026-11-27 pass 2, P2)
+        for r in recs:
+            p = r.get("parent_event_id")
+            while p in closing:
+                p = by_id[p].get("parent_event_id")
+            r["parent_event_id"] = p
     else:
         held_chains = {r["raw"].get("_chain") or r["event_id"] for r in recs
                        if r["raw"].get("_trust") == "platform" and not r.get("duplicate_of")}
