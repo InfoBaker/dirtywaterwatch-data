@@ -18,8 +18,10 @@ supplemental one within 24 hours. Four permittees publish something parseable:
    ongoing until a later "No Activations for 12 Hours" post. That post closes every earlier open
    activation: status ended, ended_at null (no end time is ever stated), raw._ended_before = its
    publish time - 12 h (the latest possible end) with raw._ended_before_basis, time_precision
-   "bound"; status.py's no-end rule then applies. The all-clear is itself a record with the same
-   bound, linked to the activation it closes (parent_event_id). Waters: the city's two receiving
+   "bound"; status.py's no-end rule then applies. The all-clear is kept in this file with the same
+   bound, linked to the activation it closes (parent_event_id), and is never published as an
+   event (common.no_discharge_notice: no page, window, place or count). Both notices are read
+   from their own sentence, the title only when the body has neither. Waters: the city's two receiving
    waters (Merrimack, Piscataquog), water_match inferred.
 3. Portsmouth (NH0100234), CSO page table "Summary of Combined Sewer Overflow Events"
    https://www.portsmouthnh.gov/publicworks/wastewater/combined-sewer-overflows-cso
@@ -285,6 +287,38 @@ def nashua(pdf: bytes, fetched_at: str) -> list[dict]:
 
 # --------------------------------------------------------------------------- Manchester
 
+_MAN_CLEAR = re.compile(r"(?i)has experienced no CSO activations\b(?:\s+during the past\s+(\d+)\s+hours)?")
+_MAN_TITLE_HOURS = re.compile(r"(?i)no activations? for\s+(\d+)\s+hours")
+_MAN_ACTIVATION = re.compile(r"(?i)has experienced CSO activations\b")
+
+
+def manchester_kind(title: str | None, body: str | None) -> str:
+    """all_clear, activation or other, from the notice's own sentence; the title decides only when the body has
+    neither sentence. The city posts both notices under the bare title "City of Manchester CSO Notification" too
+    (Item14079 and Item14081, Nov. 12 and 13, 2026), so the title alone left those unread."""
+    body, low = body or "", (title or "").lower()
+    if _MAN_CLEAR.search(body):
+        return "all_clear"
+    if _MAN_ACTIVATION.search(body):
+        return "activation"
+    return "all_clear" if "no activation" in low else ("activation" if "activation" in low else "other")
+
+
+def manchester_clear_hours(title: str | None, body: str | None) -> int | None:
+    """The hours an all-clear states ("during the past 12 hours", or the title's "No Activations for 12 Hours");
+    None when it states none, and then the notice bounds an end by its own publication time only."""
+    m = _MAN_CLEAR.search(body or "")
+    if m and m.group(1):
+        return int(m.group(1))
+    m = _MAN_TITLE_HOURS.search(title or "")
+    return int(m.group(1)) if m else None
+
+
+def _manchester_fields(kind: str) -> dict:
+    return {"event_type": "cso" if kind != "other" else "unknown",
+            "material": CSO_MATERIAL if kind != "other" else None}
+
+
 def manchester(html: str, fetched_at: str) -> list[dict]:
     out = []
     for m in re.finditer(r'<div id="(Item\d+)" class="Announcement">(.*?)(?=<div id="Item\d+" class="Announcement">|</div>\s*</div>\s*<div class="DNN|$)', html, re.S):
@@ -295,17 +329,16 @@ def manchester(html: str, fetched_at: str) -> list[dict]:
         published = None
         if pub:
             published = datetime.strptime(f"{pub.group(1)} {pub.group(2)}", "%m/%d/%Y %I:%M %p").replace(tzinfo=TZ)
-        low = title.lower()
-        kind = "all_clear" if "no activation" in low else ("activation" if "activation" in low else "other")
+        kind = manchester_kind(title, text)
         out.append(_ev("manchester", iid,
-                       event_type="cso" if kind != "other" else "unknown",
+                       event_type=_manchester_fields(kind)["event_type"],
                        status="ongoing" if kind == "activation" else ("ended" if kind == "all_clear" else "unknown"),
                        waterbody_text=None, water_slugs=["merrimack-river-nh", "piscataquog-river-nh"],
                        water_match="inferred",
                        reported_at=published.isoformat() if published else None,
                        published_at=published.isoformat() if published else None,
                        time_precision="minute" if published else None, fetched_at=fetched_at,
-                       material=CSO_MATERIAL if kind != "other" else None,
+                       material=_manchester_fields(kind)["material"],
                        source_url=f"{URLS['manchester']}#{iid}",
                        raw={"item_id": iid, "title": title, "published": pub.group(0) if pub else None,
                             "body": text[:1000], "kind": kind},
@@ -320,7 +353,9 @@ def _require(recs: list[dict], what: str) -> list[dict]:
 
 
 def pair_manchester(records: list[dict]) -> None:
-    """An all-clear ("No Activations for 12 Hours") closes every earlier open activation. The
+    """An all-clear ("No Activations for 12 Hours") closes every earlier open activation notice (each is about the
+    whole system: the city names no outfall in either notice). The all-clear itself is not an event
+    (common.no_discharge_notice): it stays in this file as the basis of those bounds and is never published. The
     notice gives only an upper bound on the end (no activation in the 12 h before it was
     published), so ended_at stays null: status ended, raw._ended_before = publish time - 12 h,
     time_precision "bound". The all-clear record links to the activation it closes."""
@@ -328,6 +363,12 @@ def pair_manchester(records: list[dict]) -> None:
     ms.sort(key=lambda r: (r["reported_at"], int(re.sub(r"\D", "", r["raw"]["item_id"]) or 0)))
     open_acts: list[dict] = []
     for r in ms:
+        if r["raw"].get("kind") == "other":
+            # a post kept from an earlier read, when only the title was read: its own sentence decides
+            kind = manchester_kind(r["raw"].get("title"), r["raw"].get("body"))
+            if kind != "other":
+                r["raw"]["kind"] = kind
+                r.update(_manchester_fields(kind))
         kind = r["raw"].get("kind")
         r["ended_at"] = None
         r["raw"].pop("ended_at_basis", None)               # older runs wrote an exact end here
@@ -337,9 +378,19 @@ def pair_manchester(records: list[dict]) -> None:
             r["raw"].pop("_ended_before_basis", None)
             open_acts.append(r)
         elif kind == "all_clear":
-            bound = (datetime.fromisoformat(r["reported_at"]) - timedelta(hours=12)).isoformat()
-            basis = (f"'No Activations for 12 Hours' notice {r['raw']['item_id']} ({r['raw'].get('published')}): "
-                     f"no activation in the 12 hours before it was published")
+            # the hours the notice itself states; a record kept from before the body was read (no title, no body:
+            # the title then said "No Activations for 12 Hours") reads as 12; a notice that states none bounds the
+            # end by its publication only (Astra 2026-11-27 P2: never a 12 the notice did not say)
+            stated = "title" in r["raw"] or "body" in r["raw"]
+            hours = manchester_clear_hours(r["raw"].get("title"), r["raw"].get("body")) if stated else 12
+            r["raw"]["_all_clear_hours"] = hours
+            bound = (datetime.fromisoformat(r["reported_at"]) - timedelta(hours=hours or 0)).isoformat()
+            if hours:
+                basis = (f"'No Activations for {hours} Hours' notice {r['raw']['item_id']} "
+                         f"({r['raw'].get('published')}): no activation in the {hours} hours before it was published")
+            else:
+                basis = (f"no-activation notice {r['raw']['item_id']} ({r['raw'].get('published')}), which states no "
+                         f"period: no activation at the time it was published")
             r["parent_event_id"] = open_acts[-1]["event_id"] if open_acts else None
             r.update(status="ended", time_precision="bound")
             r["raw"]["_ended_before"], r["raw"]["_ended_before_basis"] = bound, basis

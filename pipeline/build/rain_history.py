@@ -154,6 +154,11 @@ def is_advisory(r: dict) -> bool:
     return bool(system_wide_advisory(r) or raw.get("keeps_rain_caution") is True)
 
 
+def no_discharge_notice(r: dict) -> bool:
+    from common import no_discharge_notice as f
+    return f(r)
+
+
 def report_spans(records: list[dict], permit_of, skip=frozenset(), cfg: dict | None = None) -> dict[str, list[dict]]:
     """{permit: [{first, last, outfall, precision, source_id, event_id, started_at}]} for every dated combined sewer
     discharge report (started_at as the source gives it). permit_of(record) gives the record's permit (or None); skip:
@@ -163,8 +168,8 @@ def report_spans(records: list[dict], permit_of, skip=frozenset(), cfg: dict | N
     out: dict = defaultdict(list)
     left = defaultdict(lambda: defaultdict(int))
     for r in records:
-        if r.get("event_type") not in WET_TYPES:
-            continue
+        if r.get("event_type") not in WET_TYPES or no_discharge_notice(r):
+            continue                    # a notice that no discharge happened is not a report, dated or undated
         permit = permit_of(r)
         if not permit:
             continue

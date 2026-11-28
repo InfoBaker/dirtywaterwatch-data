@@ -526,6 +526,16 @@ def system_wide_advisory(ev: dict) -> bool:
     return raw.get("advisory_scope") == "system-wide"
 
 
+def no_discharge_notice(rec: dict) -> bool:
+    """A notice that says no discharge happened (raw.kind "all_clear": Manchester's "no CSO activations during the
+    past 12 hours" post and e-mail, ingest/nh_permittees.py and ingest/mail/manchester.py). It is kept in its source's
+    file, where it bounds the end of the activation notices before it, and it is never an event: build/status.py
+    load_events leaves it out, so it has no page, no place, no window, no colour and no count (2026-11-27: the
+    Nov. 13 notice was published as "CSO reported" with a 72-hour window of its own)."""
+    raw = rec.get("raw") if isinstance(rec.get("raw"), dict) else {}
+    return raw.get("kind") == "all_clear"
+
+
 def event(**f) -> dict:
     """An event record with every field present (docs/plan.md §3); validates the enumerations."""
     rec = {
