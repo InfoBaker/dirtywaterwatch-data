@@ -279,8 +279,10 @@ def test_review_rain_lift_survives_replacement_banner():
     assert after['started_at'] is after['reported_at'] is None
 
 
-@pytest.mark.parametrize('cut_after', ['</h1>', '</li>'])
-def test_review_truncated_5501_retains_saved_records_and_cache(tmp_path, monkeypatch, cut_after):
+@pytest.mark.parametrize('cut_after,trailer', [
+    ('</h1>', ''), ('</li>', ''), ('</li>', '<p>Upstream request timed out</p>'),
+])
+def test_review_truncated_5501_retains_saved_records_and_cache(tmp_path, monkeypatch, cut_after, trailer):
     import shutil
     saved = tmp_path / 'saved'; saved.mkdir()
     for filename in ('la.kml', 'pr-5501.html'):
@@ -295,7 +297,7 @@ def test_review_truncated_5501_retains_saved_records_and_cache(tmp_path, monkeyp
     before = json.loads(out.read_text())
     cache = json.loads(state.read_text())['releases']['5501']
     body = (saved / 'pr-5501.html').read_text()
-    (saved / 'pr-5501.html').write_text(body.split(cut_after, 1)[0] + cut_after)
+    (saved / 'pr-5501.html').write_text(body.split(cut_after, 1)[0] + cut_after + trailer)
     monkeypatch.setattr(LA, 'now_iso', lambda: '2026-11-29T15:00:00Z')
     result = LA.main(args)
     after = json.loads(out.read_text())
@@ -303,6 +305,51 @@ def test_review_truncated_5501_retains_saved_records_and_cache(tmp_path, monkeyp
     assert after['records'] == before['records']
     assert result == 1 and not after['ok']
     assert json.loads(state.read_text())['releases']['5501'] == cache
+
+
+def test_reread_active_map_after_press_lift_remains_visible(tmp_path, monkeypatch):
+    from build import status
+    from datetime import datetime
+
+    rows, updated = LA.parse_map((FIX / 'la.kml').read_text())
+    rows = [row for row in rows if row['station_id'] == 'DPH106']
+    first = LA.combine([notice('5501')], rows, updated, [], '2026-11-25T23:45:00Z')
+    before = next(r for r in first if r['raw'].get('station_id') == 'DPH106')
+    assert before['duplicate_of']
+    # Synthetic explicit lift, followed by a newer source map still showing ADVISORY.
+    lift = LA.parse_release('''For Immediate Release: November 26, 2026
+        <h1>Ocean Water Use Warning</h1><p>BEACH AREAS NOW CLEARED:</p>
+        <ul><li>Strand Street extensions at Santa Monica Beach</li></ul>
+        <p>FOR MORE INFORMATION</p>''', '9999')
+    lifted = LA.combine([notice('5501'), lift], rows, updated, first, '2026-11-26T23:45:00Z')
+    after = LA.combine([notice('5501'), lift], rows, '2026-11-28T06:30:00-08:00', lifted, POLL)
+    current = next(r for r in after if r['event_id'] == before['event_id'])
+    target = next(r for r in after if r['event_id'] == before['duplicate_of'])
+    assert {r['event_id'] for r in after} == {r['event_id'] for r in first}
+    assert target['ended_at'] == '2026-11-26T00:00:00-08:00'
+    assert current['started_at'] is current['ended_at'] is current['reported_at'] is None
+    assert current['source_updated_at'] == '2026-11-28T06:30:00-08:00'
+    (tmp_path / 'la.json').write_text(json.dumps({'source_id': LA.SOURCE_ID, 'ok': True, 'records': after}))
+    monkeypatch.setattr(status, '_STATES', {'CA'})
+    built, history = status.build(
+        now=datetime.fromisoformat(POLL.replace('Z', '+00:00')), events_dir=tmp_path,
+        write=False, waters={}, outfalls=[], registry={}, reaches={}, flows=({}, {}),
+        discharger_towns={}, discharger_waters={}, discharger_aliases_map={}, rain={},
+        placement_cache=False)
+    points = {p['event_id']: p for p in built['advisory_points']}
+    assert current['event_id'] in points
+    assert points[current['event_id']]['status'] == 'red'
+    assert history['points'][current['event_id']][-1] == 'R'
+    assert current['duplicate_of'] is None and '_duplicate_basis' not in current['raw']
+
+
+def test_reread_complete_shorter_warning_list_can_be_corrected():
+    body = (FIX / 'pr-5501.html').read_text()
+    # A correction can remove locations while retaining the list's closing section.
+    shorter = body.split('</li>', 1)[0] + '</li></ul><p>REASON FOR WARNING:' + body.split('REASON FOR WARNING:', 1)[1]
+    parsed = LA.parse_release(shorter, '5501')
+    assert len(parsed['warnings']) == 1
+    assert parsed['warnings'][0]['name'] == notice('5501')['warnings'][0]['name']
 
 
 def test_review_map_reopening_keeps_historical_duplicate_links():

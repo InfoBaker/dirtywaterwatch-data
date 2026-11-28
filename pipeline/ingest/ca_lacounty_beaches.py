@@ -36,7 +36,7 @@ INDEX = 'https://admin.publichealth.lacounty.gov/phcommon/public/media/mediapubO
 RELEASE = 'https://admin.publichealth.lacounty.gov/phcommon/public/media/mediapubhpdetail.cfm?prid='
 AUTHORITY = 'Los Angeles County Department of Public Health'
 NS = {'k': 'http://www.opengis.net/kml/2.2'}
-PARSER_VERSION = 3
+PARSER_VERSION = 4
 STATION_REFERENCES = {
     'DPH111': 'https://www.waterqualitydata.us/provider/STORET/CABEACH_WQX/CABEACH_WQX-DPH%20111/',
 }
@@ -196,7 +196,8 @@ def parse_release(body, rid):
     plain = C.text(narrative)
     if not plain:
         raise ValueError('LA release narrative missing')
-    warnings = bullets(section(narrative, r'BEACH AREA WARNINGS:?', r'REASON FOR WARNING|BEACH AREAS NOW CLEARED|FOR MORE INFORMATION|Recorded information'))
+    warning_end = r'REASON FOR WARNING|BEACH AREAS NOW CLEARED|FOR MORE INFORMATION|Recorded information'
+    warnings = bullets(section(narrative, r'BEACH AREA WARNINGS:?', warning_end))
     cleared = bullets(section(narrative, r'BEACH AREAS NOW CLEARED:?', r'FOR MORE INFORMATION|Recorded information'))
     closures = bullets(section(narrative, r'OCEAN WATER CLOSURE:', r'BEACH AREA WARNINGS|FOR MORE INFORMATION|Recorded information'))
     closure_lifted = 'closure lifted' in title.lower()
@@ -219,8 +220,15 @@ def parse_release(body, rid):
     rain_action = 'rain advisory' in title.lower() and re.search(r'avoid.*?water contact', plain, re.I)
     if not (warnings or cleared or closures or rain_action):
         raise ValueError('LA release has no complete recognized beach action')
-    if re.search(r'BEACH AREA WARNINGS', narrative, re.I) and not warnings:
-        raise ValueError('LA release warning list incomplete')
+    warning_heading = re.search(r'BEACH AREA WARNINGS', narrative, re.I)
+    if warning_heading:
+        # One valid bullet is not a complete list. Require the following source
+        # section or closing reason sentence (older notices omit its heading),
+        # even when a truncated HTTP-200 body appends an error trailer.
+        complete = re.search(warning_end + r'|These warnings (?:have been|are) issued',
+                             C.text(narrative[warning_heading.end():]), re.I)
+        if not warnings or not complete:
+            raise ValueError('LA release warning list incomplete')
     return {'id': rid, 'title': title, 'published': published, 'text': plain, 'body_html': narrative,
             'warnings': warnings, 'cleared': cleared, 'closures': closures, 'closure_lifted': closure_lifted,
             'warning_list': bool(re.search(r'BEACH AREA WARNINGS', narrative, re.I)),
@@ -381,14 +389,12 @@ def combine(notices, stations, updated, previous, fetched, page=''):
             candidates.setdefault(r['raw'].get('area_key'), []).append(r)
     press_ids = {p['event_id'] for p in press}
     for r in maps:
-        # Historical map observations still describe the same notice after Open.
-        # Retain only internal links whose target remains in this archive.
-        if r.get('duplicate_of') in press_ids:
-            if r['raw'].get('_unlisted_since'):
-                continue
-        else:
-            r['duplicate_of'] = None
-            r['raw'].pop('_duplicate_basis', None)
+        # Historical observations keep their links after Open. Active map
+        # evidence must qualify again: its prior target may have since lifted.
+        if r['raw'].get('_unlisted_since') and r.get('duplicate_of') in press_ids:
+            continue
+        r['duplicate_of'] = None
+        r['raw'].pop('_duplicate_basis', None)
         area = r['raw']['row'].get('area_key')
         targets = candidates.get(area, [])
         if len(targets) == 1 and not r['raw'].get('_unlisted_since') and r['event_type'] == 'beach_advisory':
