@@ -88,7 +88,7 @@ fetch:
     keep_missing: true
     revisions: true
   meta:
-    parser_version: 3  # re-read unchanged batches for Houston's operator coordinates in incident_description
+    parser_version: 4  # re-read unchanged batches to retain Houston's exact points and coordinate text
     credit: "Texas Commission on Environmental Quality, Sanitary Sewer Overflows (SSO), data.texas.gov"
     license: "No licence stated; data.texas.gov site terms"
     caveat: "Reported to TCEQ's regional offices by the permittee; the table is published in batches months after the reports, gives dates without times, gives a receiving water on about one report in four, and a water's own name on about one in eight. Some City of Houston descriptions include the operator's coordinates."

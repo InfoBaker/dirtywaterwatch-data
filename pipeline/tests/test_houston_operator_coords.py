@@ -13,11 +13,11 @@ from ingest.generic import runner as R
 # TCEQ incident ids from the 2026-11-14 export. No addresses or personal fields.
 REAL_ROWS = [
     ("462666", "RN101611069", "(3163210,13875092) / Manhole / Backyard. Manhole TW001009",
-     "TW001009", "Backyard", 29.848, -95.231),
+     "TW001009", "Backyard", 29.84787919551619, -95.23062219351459),
     ("462056", "RN100217603", "(3084994,13856284)/Manhole/Street. Manhole IA034044",
-     "IA034044", "Street", 29.803, -95.479),
+     "IA034044", "Street", 29.802886073224176, -95.47902970511512),
     ("458019", "RN101607174", "(3045421,13829898) / Manhole / Parking Lot. Manhole AR001214",
-     "AR001214", "Parking Lot", 29.734, -95.606),
+     "AR001214", "Parking Lot", 29.73357297411615, -95.60616958241563),
 ]
 
 
@@ -57,13 +57,15 @@ def test_lambert_against_independent_pyproj_constants_under_one_meter(x, y, lat,
 @pytest.mark.parametrize("rid,rn,text,manhole,location,lat,lon", REAL_ROWS)
 def test_real_houston_manholes(rid, rn, text, manhole, location, lat, lon):
     e = record(text, rn, rid)
-    assert (e["lat"], e["lon"]) == (lat, lon)
+    assert (e["lat"], e["lon"]) == pytest.approx((lat, lon), abs=1e-10)
+    assert e["raw"]["row"]["incident_description"] == text
+    assert e["coord_precision_m"] is None
     assert e["coord_source"] == "source"
     p = e["raw"]["_place_from_operator_coords"]
     assert p["manhole_id"] == manhole and p["location_type"] == location
     assert p["place_tier"] == 1 and p["source_crs"] == "EPSG:2278"
     assert p["place_method"] == "operator_coordinates"
-    assert p["place_precision_m"] == 100
+    assert p["place_precision_m"] is None
     assert "operator's coordinates" in p["place_basis"] and "we converted" in p["place_basis"]
     assert e["raw"]["_placement"] == "named_water_only"
 
@@ -88,7 +90,7 @@ def test_other_operator_is_not_assumed_to_use_houstons_projection():
     assert e["lat"] is None and "_place_from_operator_coords" not in e["raw"]
 
 
-def test_rejection_reason_survives_privacy_scrub():
+def test_rejection_reason_survives_record_build():
     assert "outside Houston" in record("(1,1)/Manhole/Street")["raw"]["_place_coords_rejected"]
 
 
@@ -101,12 +103,17 @@ def test_existing_source_point_is_not_replaced():
     assert (rec["lat"], rec["lon"]) == (29.7, -95.4) and not notes
 
 
-@pytest.mark.parametrize("location", ["Backyard", "Side of Building", "Private Property", "Backlot Easement"])
-def test_private_points_rounded_and_original_pair_not_leaked(location):
-    e = record("(3084994,13856284)/Manhole/" + location)
-    assert (e["lat"], e["lon"]) == (29.803, -95.479)
-    assert e["raw"]["_place_from_operator_coords"]["private_location"] is True
-    assert "3084994" not in json.dumps(e) and "13856284" not in json.dumps(e)
+@pytest.mark.parametrize("location", ["Backyard", "Front Yard", "Side Yard", "Side of Building",
+                                      "Private Property", "Backlot Easement", "Street", "Parking Lot"])
+def test_operator_points_and_original_pair_are_preserved(location):
+    text = "(3084994,13856284)/Manhole/" + location
+    e = record(text)
+    assert (e["lat"], e["lon"]) == pytest.approx((29.802886073224176, -95.47902970511512), abs=1e-10)
+    assert e["raw"]["row"]["incident_description"] == text
+    public = X.public_record(e, {}, redactor_for([e]))
+    assert public["raw"]["row"]["incident_description"] == text
+    for output in (public, X.slim_event(public)):
+        assert (output["lat"], output["lon"]) == (e["lat"], e["lon"])
 
 
 def test_basis_survives_full_and_slim_export():
@@ -115,9 +122,12 @@ def test_basis_survives_full_and_slim_export():
     for output in (public, X.slim_event(public)):
         assert output["place_tier"] == 1
         assert output["place_method"] == "operator_coordinates"
-        assert output["place_precision_m"] == 100
-        assert "operator's coordinates" in output["place_basis"]
-    assert X.index_obj(public)["lat"] == 29.803
+        assert output.get("place_precision_m") is None
+        assert output["place_basis"] == (
+            "Location: the operator's coordinates in the report, which we converted from Texas State "
+            "Plane South Central to latitude and longitude.")
+    # The shared compact index uses five decimals for every source point.
+    assert X.index_obj(public)["lat"] == round(e["lat"], 5)
 
 
 def resolver(monkeypatch):
@@ -178,19 +188,22 @@ def test_not_contained_is_not_read_as_contained(monkeypatch):
     assert resolver(monkeypatch).resolve(e)["water_match"] == "geometry"
 
 
-def test_unchanged_source_batch_is_reprocessed_for_coordinate_parser(tmp_path, monkeypatch):
+@pytest.mark.parametrize("old_version", [2, 3])
+def test_unchanged_source_batch_is_reprocessed_for_coordinate_parser(tmp_path, monkeypatch, old_version):
     from ingest.generic import socrata
     _, block = R.load_source("tx-tceq-sso-opendata")
     path = tmp_path / "events.json"
     path.write_text(json.dumps({"ok": True, "records": [record()],
-                                "meta": {"table_version": "1", "parser_version": 2}}))
+                                "meta": {"table_version": "1", "parser_version": old_version}}))
     monkeypatch.setattr(socrata, "current_version", lambda *args: "1")
     assert R.keep_unchanged("tx-tceq-sso-opendata", block, path, "2026-11-24T12:00:00Z") is None
 
 
-def test_coordinate_metadata_exception_keeps_personal_field_guard():
+def test_coordinate_metadata_and_public_contact_fields_pass_through():
     from common import strip_personal
     p = record()["raw"]["_place_from_operator_coords"]
-    assert strip_personal({"_place_from_operator_coords": {**p, "operator": "removed", "extra": "removed"}}) == {
-        "_place_from_operator_coords": p}
-    assert strip_personal({"_place_from_operator_coords": "removed", "operator": "removed"}) == {}
+    raw = {"_place_from_operator_coords": {**p, "operator": "Fixture operator", "extra": "source value"},
+           "reporter": {"name": "Fixture reporter", "phone": "512-555-0142"}}
+    assert strip_personal(raw) == raw
+    text_value = {"_place_from_operator_coords": "source value", "operator": "Fixture operator"}
+    assert strip_personal(text_value) == text_value

@@ -65,7 +65,7 @@ ZONE_NOTE = "{zone} time ({county}; 49 CFR 71.9-71.10); dates only"
 PLACEMENT = ("We convert the City of Houston's coordinates in a report to a map point. Other reports are placed "
              "on the water they name or listed with their county.")
 OPERATOR_COORDS_BASIS = ("Location: the operator's coordinates in the report, which we converted from Texas State "
-                         "Plane South Central to latitude and longitude and rounded to three decimals.")
+                         "Plane South Central to latitude and longitude.")
 # One comma separates the axes; internal spaces are transcription whitespace (e.g. 1386235 2).
 # No digit insertion, axis swapping, alternative projection, address or model inference.
 OPERATOR_PAIR = re.compile(r"\(\s*([0-9][0-9\s]*(?:\.[0-9]+)?)\s*,\s*"
@@ -74,17 +74,15 @@ MANHOLE = re.compile(r"\bmanhole\s*(?:id\s*)?[:#]?\s*([A-Z]{2}[0-9]{6}[A-Z]?)\b"
 LOCATION_TYPE = re.compile(
     r"/\s*(Back\s*yard|Front\s*yard|Side\s*yard|Side of Building|Backlot Easement|Private Property|"
     r"Back of Curb(?:\s*/\s*Off Pavement)?|Open Unpaved Area|Open Paved Area|Parking Lot|Street|Underground)\b", re.I)
-PRIVATE_LOCATION = re.compile(r"\b(?:back\s*yard|front\s*yard|side\s*yard|yard|building|backlot|private)\b", re.I)
 CONTAINED_FLOW = re.compile(r"(?:^|[.;/]\s*|Observed Flow Route:\s*)"
                             r"(?:Contained\s+on\s*site\b|Storm Sewer\s*[-(]\s*contained\b)", re.I)
 
 
 def houston_operator_coords(row: dict, rec: dict, notes: dict) -> None:
-    """Read only Houston's own text pair, after operator identity and strict text scrubbing.
+    """Convert Houston's reported pair after operator identity is resolved.
 
-    All converted points use a 0.001-degree display grid (about 100 m), including
-    yards and buildings. Remove the reversible source pair from record text too;
-    the report's source_url remains the citation for the original coordinates.
+    Keep the source coordinate text and the full converted point. The source
+    does not state coordinate accuracy, so no precision is assigned.
     """
     if rec.get("discharger_id") != "tx-city-of-houston" or rec.get("lat") is not None or rec.get("lon") is not None:
         return
@@ -113,27 +111,16 @@ def houston_operator_coords(row: dict, rec: dict, notes: dict) -> None:
     manholes = sorted(set(m.upper() for m in MANHOLE.findall(text)))
     notes["_place_from_operator_coords"] = {
         "place_tier": 1, "place_method": "operator_coordinates", "place_basis": OPERATOR_COORDS_BASIS,
-        "place_precision_m": 100, "source_crs": "EPSG:2278", "source_field": "incident_description",
+        "place_precision_m": None, "source_crs": "EPSG:2278", "source_field": "incident_description",
         "source_units": "US survey feet", "manhole_id": manholes[0] if len(manholes) == 1 else None,
-        "location_type": location, "private_location": bool(PRIVATE_LOCATION.search(text)),
+        "location_type": location,
     }
-    rec.update(lat=round(lat, 3), lon=round(lon, 3), coord_source="source", coord_precision_m=100)
+    rec.update(lat=lat, lon=lon, coord_source="source", coord_precision_m=None)
     # A contained spill's new point must not create a water placement. A source-named
     # receiving water stays authoritative; the existing status reader handles its words.
     if not rec.get("waterbody_text") and CONTAINED_FLOW.search(text):
         notes["reached_water"] = False
         notes["_no_water_reason"] = "the operator reports the spill was contained on site"
-
-    def without_pair(value):
-        if isinstance(value, str):
-            return OPERATOR_PAIR.sub("[coordinates rounded to three decimals]", value)
-        if isinstance(value, dict):
-            return {k: without_pair(v) for k, v in value.items()}
-        return value
-
-    for obj in (rec, notes):
-        for k, v in list(obj.items()):
-            obj[k] = without_pair(v)
 
 
 # TCEQ's wordings for "no receiving water given" (and their typing slips); a bare number is a segment number, not a name
