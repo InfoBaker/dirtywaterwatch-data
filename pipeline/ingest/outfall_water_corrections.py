@@ -27,7 +27,8 @@ pipeline/tests/test_outfall_water_corrections.py checks that the files as commit
 
 Each corrected row gets water_slug, water_name, water_kind, distance_m (metres from the row's point to the record, as
 measured for the correction), match ('geometry+name': the record carries the stated water's name and lies within 400 m
-of the point), water_match (the basis), water_matched_by (BY) and replaced_match (the earlier tie). The row's own
+of the point; 'permit_stated' for an entry whose rule is 'permit_states': the permit states this outfall's receiving
+water, quoted with its address, whatever the distance from the row's point), water_match (the basis), water_matched_by (BY) and replaced_match (the earlier tie). The row's own
 receiving-water text and point are not changed.
 """
 from __future__ import annotations
@@ -44,6 +45,13 @@ BEFORE_FIELDS = ("water_kind", "distance_m", "water_match", "no_water_reason")
 WHY_RETIED = "the permit names another water, which has its own record at the point"
 WHY_NO_WATER = "the row had no water record; the receiving water the permit names has one"
 _LOADED: dict = {}
+TIE_M = 400                 # a tie by distance: the record lies within this of the row's point
+# rule "permit_states" (untraced-outfall fixes 2026-11-28, Euclid's 'Lake Erie via storm sewer'): the permit itself
+# states the receiving water for this outfall; the tie rests on that statement, quoted with its address, and on no
+# distance (the row's point is the regulator, inland of where the sewer reaches the water). Its match is
+# PERMIT_MATCH, never 'geometry+name'.
+PERMIT_STATES = "permit_states"
+PERMIT_MATCH = "permit_stated"
 
 
 def load(path: Path | None = None) -> list[dict]:
@@ -120,6 +128,29 @@ def revert(o: dict) -> None:
         o.pop("water_matched_by", None)
 
 
+def entry_problems(c: dict) -> list[str]:
+    """What an entry lacks: a tie by distance (no rule) within TIE_M of the point; a PERMIT_STATES entry the permit's
+    own phrase (permit_text, naming the record's water), quoted in its basis, and the permit's address (url)."""
+    k = f"{c.get('file')} {c.get('npdes_permit')}:{c.get('outfall')}"
+    rule = c.get("rule")
+    if rule is None:
+        d = c.get("distance_m")
+        return [] if isinstance(d, (int, float)) and 0 <= d <= TIE_M else [f"{k}: distance {d!r} is not within {TIE_M} m"]
+    if rule != PERMIT_STATES:
+        return [f"{k}: unknown rule {rule!r}"]
+    out = []
+    text = str(c.get("permit_text") or "").strip()
+    if not text:
+        out.append(f"{k}: the permit's phrase (permit_text) is missing")
+    elif f"'{text}'" not in str(c.get("basis") or ""):
+        out.append(f"{k}: the basis does not quote the permit's phrase '{text}'")
+    elif str(c.get("water_name") or "").lower() not in text.lower():
+        out.append(f"{k}: the permit's phrase '{text}' does not name {c.get('water_name')}")
+    if not str(c.get("url") or "").startswith("https://"):
+        out.append(f"{k}: the permit's address (url) is missing")
+    return out
+
+
 def written(o: dict, c: dict) -> dict:
     """The fields an entry writes onto its row."""
     before = o.get("replaced_match")
@@ -128,7 +159,7 @@ def written(o: dict, c: dict) -> dict:
                   "by": o.get("water_matched_by"), "why": WHY_RETIED if o.get("water_slug") else WHY_NO_WATER,
                   **{f: o[f] for f in BEFORE_FIELDS if o.get(f) is not None}}
     return {"water_slug": c["water_slug"], "water_name": c["water_name"], "water_kind": c["water_kind"],
-            "distance_m": c["distance_m"], "match": "geometry+name",
+            "distance_m": c["distance_m"], "match": PERMIT_MATCH if c.get("rule") == PERMIT_STATES else "geometry+name",
             "water_match": f"hand correction: {c['basis']}",
             "water_matched_by": f"{BY}, {c['date']})", "replaced_match": before}
 
@@ -216,6 +247,7 @@ def check_registry(data_dir: Path | None = None, corrections: list[dict] | None 
             for c in cs if c["file"] not in names]
     loaded = {key_of(o): o for o in load_outfall_registry(d, provisional=False)}
     out += list(OUTFALL_REGISTRY_SKIPPED)
+    out += [p for c in cs for p in entry_problems(c)]
     for c in cs:
         o = loaded.get(key_of(c))
         if o is None:

@@ -44,7 +44,7 @@ def test_every_entry_names_a_record_of_its_state_with_its_name_and_kind():
     from build import status as S
     waters = S.load_waters()
     cs = H.load()
-    assert len(cs) == 138
+    assert len(cs) == 149
     for c in cs:
         w = waters.get(c["water_slug"])
         assert w, c["water_slug"]
@@ -52,7 +52,7 @@ def test_every_entry_names_a_record_of_its_state_with_its_name_and_kind():
         assert (w.get("name"), w.get("kind")) == (c["water_name"], c["water_kind"]), c
         # was None: the row had no water at all (untraced-outfall water fixes 2026-11-28: Defiance's Preston Run rows)
         assert c["was"] is None or (c["was"] in waters and c["was"] != c["water_slug"])
-        assert 0 <= c["distance_m"] <= 400
+        assert H.entry_problems(c) == [], c
         assert c["stated"] in c["basis"] and c["basis"].startswith("the permit's receiving water")
     assert len({(c["file"], c["npdes_permit"], c["outfall"]) for c in cs}) == len(cs)
 
@@ -278,3 +278,40 @@ def test_a_copy_with_no_receiving_water_text_in_another_file_takes_the_entry():
     # a copy in another file whose text names another water still needs review
     other = [_no_water_row(npdes_permit="OH0043991", outfall="211", receiving_water_echo="Euclid Creek")]
     assert H.apply_rows("outfalls-us.json", other, [_ninemile()]) and other[0]["water_slug"] is None
+
+
+# ---------------------------------------------------------------- the permit states the water (Euclid, 2026-11-28)
+
+def _euclid(**kw):
+    e = {"file": "outfalls-us.json", "npdes_permit": "OH0031062", "outfall": "006", "state": "OH",
+         "stated": "City of Euclid-Frontal Lake Erie", "was": None, "water_slug": "lake-erie-oh", "water_name": "Lake Erie",
+         "water_kind": "lake", "distance_m": 1558, "date": "2026-11-28", "rule": "permit_states",
+         "permit_text": "Lake Erie via storm sewer",
+         "basis": "the permit's receiving water for outfall 006 in Ohio EPA permit 3PE00003 is 'Lake Erie via storm sewer'",
+         "url": "https://dam.assets.ohio.gov/image/upload/epa.ohio.gov/Portals/35/permits/doc/3PE00003.pdf"}
+    e.update(kw)
+    return e
+
+
+def test_an_entry_on_the_permits_statement_needs_the_quoted_phrase_and_its_address_not_a_distance():
+    assert H.entry_problems(_euclid()) == []
+    assert H.entry_problems(_entry()) == []
+    assert H.entry_problems(_entry(distance_m=401))                     # a tie by distance keeps its 400 m limit
+    assert H.entry_problems(_euclid(url=""))
+    assert H.entry_problems(_euclid(permit_text=""))
+    assert H.entry_problems(_euclid(basis="the permit's receiving water is Lake Erie"))   # the phrase not quoted
+    assert H.entry_problems(_euclid(permit_text="Euclid Creek via storm sewer"))           # names another water
+    assert H.entry_problems(_euclid(rule="nearest"))
+
+
+def test_a_row_tied_on_the_permits_statement_says_the_permit_names_the_water():
+    rows = [_no_water_row(npdes_permit="OH0031062", outfall="006", receiving_water_echo="City of Euclid-Frontal Lake Erie",
+                          lat=41.610833, lon=-81.502222)]
+    assert H.apply_rows("outfalls-us.json", rows, [_euclid()]) == []
+    o = rows[0]
+    assert o["water_slug"] == "lake-erie-oh" and o["match"] == "permit_stated" and o["distance_m"] == 1558
+    assert "'Lake Erie via storm sewer'" in o["water_match"] and (o["lat"], o["lon"]) == (41.610833, -81.502222)
+    from build.status import Resolver
+    how = Resolver.registry_how(o)
+    assert how.startswith("the water its permit names, 1558 m from the point"), how
+    assert "geometry" not in how

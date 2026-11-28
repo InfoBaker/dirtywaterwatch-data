@@ -2828,6 +2828,8 @@ class Resolver:
         wm = str(row.get("water_match") or "")
         step = wm.split(":", 1)[0].strip() if by.startswith("ingest.outfall_waters") and ":" in wm[:40] else \
             (row.get("match") or "registry")
+        if step == "permit_stated":     # a hand tie on the permit's own statement (ingest.outfall_water_corrections)
+            step = "the water its permit names"
         d = row.get("distance_m")
         return f"{step}, " + (f"{d} m from the point" if d is not None else "no point") + f"; {by}"
 

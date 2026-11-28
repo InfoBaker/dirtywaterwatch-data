@@ -140,3 +140,25 @@ def test_neorsd_nine_mile_creek_outfalls_are_tied_in_both_copies(resolver, oid):
     assert len(rows) == 2 and {o["water_slug"] for o in rows} == {"ninemile-creek-cleveland-oh"}
     loaded = [o for o in load_outfall_registry(provisional=False) if (o["npdes_permit"], o["outfall"]) == ("OH0043991", oid)]
     assert loaded[0]["_file"].endswith("outfalls-oh.json")
+
+
+# ------------------------------------------------------------------ 6. Euclid: 'Lake Erie via storm sewer'
+
+EUCLID = ["005", "006", "008", "009", "010", "011", "012", "015", "018", "019", "022"]
+
+
+@pytest.mark.parametrize("oid", EUCLID)
+def test_euclids_outfalls_take_lake_erie_on_the_permits_statement_and_keep_their_points(resolver, oid):
+    import json
+    row = next(o for o in json.loads((Path(__file__).resolve().parents[2] / "data" / "outfalls-us.json").read_text())["outfalls"]
+               if (o.get("npdes_permit"), o.get("outfall")) == ("OH0031062", oid))
+    assert row["match"] == "permit_stated" and "'Lake Erie via storm sewer'" in row["water_match"]
+    assert (row["lat"], row["lon"]) != (None, None) and "epa_lat" not in row          # the point is EPA's, not moved
+    pl = resolver.resolve(_oh("OH0031062", oid, row["lat"], row["lon"]))
+    assert pl["water_slugs"] == ["lake-erie-oh"], pl
+    assert "the water its permit names" in (pl.get("note") or ""), pl.get("note")
+
+
+@pytest.mark.parametrize("oid", ["023", "024"])
+def test_euclids_ravine_outfalls_stay_untied(resolver, oid):
+    assert resolver.resolve(_oh("OH0031062", oid))["water_slugs"] == []
