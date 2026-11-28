@@ -479,3 +479,72 @@ def test_a_trace_walks_nhdplus_once_nldi_navigation_is_spent(cache, monkeypatch)
     assert rec["method"] == "nhdplus_catchment" and rec["segments"]
     R.MODE.update(walk=False, nldi_low_until=0.0)
     R._ATTR_MEMO.pop(11, None)
+
+
+# ---------------------------------------------------------------- cached traces that no longer agree with the registry
+# (registry water review 2026-11-28, P2-1: a hand correction moved an outfall's water, the old trace stayed in use)
+
+SHORE = {"lakes": [{"name": "Lake Erie", "wikidata": "Q5492"}]}
+STALE_WATERS = {
+    "lake-erie-pa": {"slug": "lake-erie-pa", "kind": "lake", "state": "PA", "name": "Lake Erie", "wikidata": "Q5492"},
+    "mill-creek-erie-pa": {"slug": "mill-creek-erie-pa", "kind": "stream", "state": "PA", "name": "Mill Creek"},
+    "charles-river-ma": {"slug": "charles-river-ma", "kind": "river", "state": "MA", "name": "Charles River"},
+    "boston-harbor-ma": {"slug": "boston-harbor-ma", "kind": "bay", "state": "MA", "name": "Boston Harbor"},
+}
+
+
+def stale_cands(registry, skipped):
+    return R.candidate_outfalls(waters=STALE_WATERS, registry=registry, live={"PA", "MA"}, skipped=skipped,
+                                reported=set(), plants=False, shore=SHORE)
+
+
+def test_a_cached_trace_that_no_longer_agrees_with_its_registry_row_is_retired_before_anything_reads_it(cache):
+    # PA0026301:008, re-tied from Lake Erie to Mill Creek: its Lake Erie shoreline stretch; MA0103284:C03, re-tied from
+    # the Charles River to a bay: its Charles River trace; one river trace whose water is now Lake Erie; one outfall
+    # the registry no longer lists; a river trace whose river was renamed (kept: the touch path updates it); an event
+    # point and a plant trace waiting for --plants (kept)
+    registry = [row("PA0026301", "008", "PA", "mill-creek-erie-pa"),
+                row("MA0103284", "C03", "MA", "boston-harbor-ma"),
+                row("PA0026301", "009", "PA", "lake-erie-pa"),
+                row("PA0026301", "010", "PA", "mill-creek-erie-pa"),
+                row("PA0026301", "011", "PA", "mill-creek-erie-pa", outfall_kind="plant")]
+    cached = {
+        "PA0026301-008": rec("PA0026301-008", NOW, permit="PA0026301", outfall="008", water_slug="lake-erie-pa",
+                             model=R.SH.MODEL, state="PA"),
+        "MA0103284-C03": rec("MA0103284-C03", NOW, permit="MA0103284", outfall="C03", water_slug="charles-river-ma",
+                             state="MA"),
+        "PA0026301-009": rec("PA0026301-009", NOW, permit="PA0026301", outfall="009", water_slug="mill-creek-erie-pa",
+                             state="PA"),
+        "PA0026301-010": rec("PA0026301-010", NOW, permit="PA0026301", outfall="010", water_slug="old-name-pa",
+                             state="PA"),
+        "PA0026301-011": rec("PA0026301-011", NOW, permit="PA0026301", outfall="011", water_slug="mill-creek-erie-pa",
+                             state="PA"),
+        "PA0026301-099": rec("PA0026301-099", NOW, permit="PA0026301", outfall="099", water_slug="mill-creek-erie-pa",
+                             state="PA"),
+        "pt-abc": rec("pt-abc", NOW, outfall=None, sources=["event-point"], water_slug="charles-river-ma"),
+    }
+    for k, d in cached.items():
+        R.write_json(cache / f"{k}.json", d)
+    skipped = {}
+    cs = stale_cands(registry, skipped)
+    assert {c["key"]: c.get("model") for c in cs} == {"PA0026301-008": None, "PA0026301-009": R.SH.MODEL,
+                                                       "PA0026301-010": None}
+    assert skipped["MA0103284-C03"]["why"] == "not_river" and skipped["PA0026301-011"]["why"] == "plant_deferred"
+    stale = R.stale_traces(R.load_reaches(), cs, skipped, {"PA", "MA"})
+    assert set(stale) == {"PA0026301-008", "MA0103284-C03", "PA0026301-009", "PA0026301-099"}
+    assert "shoreline stretch of lake-erie-pa" in stale["PA0026301-008"] and "not_river" in stale["MA0103284-C03"]
+    # with a registry file unread, an outfall missing from it is not taken as gone
+    assert "PA0026301-099" not in R.stale_traces(R.load_reaches(), cs, skipped, {"PA", "MA"}, registry_complete=False)
+    moved = R.retire_stale(R.load_reaches(), cs, skipped, {"PA", "MA"})
+    assert moved == stale
+    left = R.load_reaches()          # what status, the rain caution and the export read
+    assert set(left) == {"PA0026301-010", "PA0026301-011", "pt-abc"}
+    assert R.read_json(cache / "retired" / "PA0026301-008.json")["retired"]["why"] == stale["PA0026301-008"]
+    # the rain caution's targets no longer reach the Charles River through the bay outfall's old trace
+    from build import rain_likely as RL
+    keys, tags, _, _ = RL.targets("MA0103284", STALE_WATERS, [dict(registry[1], _file="data/outfalls-new-england.json")],
+                                  [], left, lambda r, w: [r.get("water_slug")] if r.get("water_slug") else [])
+    assert "charles-river-ma" not in tags and not keys
+    # and the re-tied river outfall is due with the first traces, ahead of the old ones
+    todo, _ = R.plan([c for c in cs if c.get("model") != R.SH.MODEL], left, NOW)
+    assert [c["key"] for c in todo] == ["PA0026301-008"]

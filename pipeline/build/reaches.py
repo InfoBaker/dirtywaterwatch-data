@@ -20,7 +20,11 @@ data/rules.json reach.shoreline; build/shoreline.py) is not traced with NLDI: it
 shoreline, built here without a request (run_shorelines, plant outfalls included), cached beside the traces with
 model "shoreline". NBC pins are covered by the ECHO rows of
 RI0100315 / RI0100072. A cached trace of an outfall the registry now lists as closed (and no state
-layer lists as open) is moved to data/build/reaches/retired/, so the rain caution never uses it.
+layer lists as open) is moved to data/build/reaches/retired/, so the rain caution never uses it; so is any cached
+trace that no longer agrees with its registry row (stale_traces, 2026-11-28: the outfall now skipped as closed,
+not_river, coords_problem or no_location, or gone from the registry; a shoreline stretch whose water is now a river or
+another lake; a river trace whose water is now a shoreline water), before status, the rain caution or the export read
+the cache, and the outfall is then due with the first traces.
 
 Trace: NLDI downstream-main from the EPA reach-indexed NPDES point
   https://api.water.usgs.gov/nldi/linked-data/npdes/<permit><outfall>/navigation/DM/flowlines?distance=D&trimStart=true
@@ -1412,6 +1416,19 @@ class Budget:
         return None
 
 
+def _retire(k: str, why: str) -> bool:
+    """Move the cached record `k` to RETIRED_DIR with {retired: {at, why}}; False when there is none."""
+    p = REACH_DIR / f"{k}.json"
+    if not p.exists():
+        return False
+    RETIRED_DIR.mkdir(parents=True, exist_ok=True)
+    d = read_json(p) or {}
+    d["retired"] = {"at": now_iso(), "why": why}
+    write_json(RETIRED_DIR / p.name, d)
+    p.unlink()
+    return True
+
+
 def retire_closed(skipped: dict[str, dict], cands: list[dict]) -> list[str]:
     """Move cached traces of outfalls the registry lists as closed (and no state layer lists as open)
     to RETIRED_DIR: the rain caution and the map never use a closed outfall. Returns the keys."""
@@ -1420,14 +1437,68 @@ def retire_closed(skipped: dict[str, dict], cands: list[dict]) -> list[str]:
     for k, v in sorted(skipped.items()):
         if v.get("why") != "closed" or k in live:
             continue
-        p = REACH_DIR / f"{k}.json"
-        if p.exists():
-            RETIRED_DIR.mkdir(parents=True, exist_ok=True)
-            d = read_json(p) or {}
-            d["retired"] = {"at": now_iso(), "why": f"the outfall registry lists this outfall as closed ({v.get('note')})"}
-            write_json(RETIRED_DIR / p.name, d)
-            p.unlink()
+        if _retire(k, f"the outfall registry lists this outfall as closed ({v.get('note')})"):
             out.append(k)
+    return out
+
+
+# why a registry outfall is not traced (candidate_outfalls' skipped) that makes its cached trace invalid; plant_deferred
+# is not one (a plant's trace waits for --plants and stays valid)
+STALE_SKIPS = ("closed", "not_river", "coords_problem", "no_location")
+
+
+def stale_traces(cached: dict[str, dict], cands: list[dict], skipped: dict[str, dict], live: set,
+                 registry_complete: bool = True) -> dict[str, str]:
+    """{key: why} of the cached records of registry outfalls that no longer agree with the registry row (registry
+    review 2026-11-28, P2-1). A cached trace is valid only while
+      - the outfall is still a traceable outfall: a candidate, or skipped only as plant_deferred (one the registry now
+        skips as closed, not_river, coords_problem or no_location is stale: MA0103284:C03, re-tied to a bay, kept a
+        Charles River trace the rain caution read);
+      - it was built by the model the row's water now takes: a shoreline stretch for a shoreline water, a river trace
+        for any other (PA0026301:008, re-tied from Lake Erie to Mill Creek, kept its Lake Erie stretch until the
+        trace budget reached it);
+      - a shoreline stretch is of the row's water (a river trace's water is metadata: plan()'s touch path updates it
+        without a request);
+      - the row is still in the registry (a live state's outfall no registry file lists; only when every registry file
+        was read, registry_complete).
+    Event points, advisory stretches and the separate sewer caution's points are not registry outfalls: never here."""
+    by = {c["key"]: c for c in cands}
+    out: dict[str, str] = {}
+    for k, d in sorted((cached or {}).items()):
+        if not d or d.get("kind") == ADVISORY_KIND or d.get("outfall") in (None, "") or k.startswith(("pt-", "adv-")):
+            continue
+        c = by.get(k)
+        if c is None:
+            v = skipped.get(k)
+            if v:
+                if v.get("why") in STALE_SKIPS:
+                    out[k] = f"the outfall registry no longer traces this outfall ({v['why']}: {v.get('note')})"
+                continue
+            st = str(d.get("state") or str(d.get("permit") or "")[:2]).upper()
+            if registry_complete and st in live:
+                out[k] = "the outfall registry no longer lists this outfall"
+            continue
+        shore_now, shore_was = c.get("model") == SH.MODEL, d.get("model") == SH.MODEL
+        if shore_now and not shore_was:
+            out[k] = (f"a river trace; the outfall's water is now a shoreline water ({c.get('water_slug')}): "
+                      "a shoreline stretch replaces it")
+        elif shore_was and not shore_now:
+            out[k] = (f"a shoreline stretch of {d.get('water_slug')}; the outfall's water is now "
+                      f"{c.get('water_slug') or 'without a record'}: a river trace replaces it")
+        elif shore_was and d.get("water_slug") != c.get("water_slug"):
+            out[k] = f"a shoreline stretch of {d.get('water_slug')}; the outfall's water is now {c.get('water_slug')}"
+    return out
+
+
+def retire_stale(cached: dict[str, dict], cands: list[dict], skipped: dict[str, dict], live: set,
+                 registry_complete: bool = True) -> dict[str, str]:
+    """Move the stale_traces() records to RETIRED_DIR (as retire_closed does), so status, the rain caution and the
+    export never read them, and plan() sees the outfall as never traced: due with the first traces (as a moved
+    outfall is). Returns {key: why} of those moved."""
+    out = {}
+    for k, why in stale_traces(cached, cands, skipped, live, registry_complete).items():
+        if _retire(k, why):
+            out[k] = why
     return out
 
 
@@ -2304,6 +2375,15 @@ def main() -> int:
                     if retired:
                         print(f"reaches: {len(retired)} cached traces of closed outfalls moved to {RETIRED_DIR.name}/: "
                               f"{', '.join(retired[:10])}{' ...' if len(retired) > 10 else ''}", flush=True)
+                    # a cached trace that no longer agrees with its registry row (stale_traces): retired before
+                    # anything reads the cache, so the next trace or stretch replaces it
+                    stale = retire_stale(load_reaches(), cands, skipped, live,
+                                         registry_complete=not getattr(common, "OUTFALL_REGISTRY_SKIPPED", None))
+                    if stale:
+                        print(f"reaches: {len(stale)} cached traces that no longer agree with the registry moved to "
+                              f"{RETIRED_DIR.name}/: {', '.join(list(stale)[:10])}{' ...' if len(stale) > 10 else ''}",
+                              flush=True)
+                    retired += list(stale)
                     pts = event_points()
                     stretches = stretch_points()
                     from build.status import EVENTS_DIR
