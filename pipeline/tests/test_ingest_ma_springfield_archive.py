@@ -294,3 +294,17 @@ def test_committed_transcript():
     recs, counts = S.build(d, {}, "2026-11-28T12:00:00Z")
     assert len(recs) == 742 and counts["zero_rows"] == 458
     assert all(r["time_precision"] == "month" and r["outfall_id"].startswith("SPR") for r in recs)
+
+
+def test_export_detail_and_chart_label():
+    from export import detail
+    recs, _ = build()
+    d = detail.detail_of(recs["ma-springfield-archive:MA0101613:SPR010:2022-08"])
+    assert d["report_kind"] == "Monthly overflow report" and d["duration_text"] == "15.3 hours"
+    assert "volume_method" not in d                       # a reported figure: no method of ours
+    months, annual = year_2021(500, revisions={"2021-08": 60},
+                               annual_extra={"ev010": 2, "gal010": 530, "ev024": 1, "gal024": 30})
+    recs, _ = build({"watersheds": {}, "months": {**months, "2021-10": S.compute_october(months, annual)}})
+    d = detail.detail_of(recs["ma-springfield-archive:MA0101613:SPR010:2021-10"])
+    assert d["report_kind"] == "Computed from the annual sheet" and d["volume_method"].startswith("Computed by us")
+    assert charts.SOURCE_LABEL["ma-springfield-archive"].startswith("Springfield Water and Sewer Commission monthly")

@@ -138,6 +138,7 @@ SOURCE_LABEL = {
     "me-bangor-sso-log": "City of Bangor sewer overflow logs, from its yearly reports to the U.S. Environmental Protection Agency",
     "ma-somerville-cso-table": "City of Somerville combined sewer overflow table",
     "ma-springfield-aquasight": "Springfield Water and Sewer Commission combined sewer overflow map",
+    "ma-springfield-archive": "Springfield Water and Sewer Commission monthly combined sewer overflow reports, 2019 to 2023",
     "tx-houston-sso-monthly": "City of Houston monthly sanitary sewer overflow reports",
     "me-healthy-beaches": "Maine Healthy Beaches",
     "nh-des-swimming": "New Hampshire Department of Environmental Services Healthy Swimming",

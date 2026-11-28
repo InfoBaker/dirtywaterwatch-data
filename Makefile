@@ -25,6 +25,9 @@
 #                  Massachusetts: ma_massdep (MassDEP's portal), then ma_somerville_cso and ma_springfield_aquasight
 #                  (Springfield's live CSO map) and operator_mail (sorted order matters: each links its records as
 #                  duplicates of the ma-massdep events file of the same run, so they run after it).
+#                  ma_springfield_archive reads a committed transcript of Springfield's monthly CSO reports, 2019 to
+#                  2023 (data/reference/; `python -m ingest.ma_springfield_archive --extract RAW_DIR` rebuilds it from
+#                  the PDFs); month-precision totals, no request.
 #                  Virginia: va_alexrenew_cso (status layer snapshot state machine: poll every 15
 #                  minutes), va_deq_prep (DEQ PReP sewage reports, last 30 days; `--backfill` from
 #                  2025-01-01), va_richmond_cso (Richmond monthly workbooks; `--backfill` from

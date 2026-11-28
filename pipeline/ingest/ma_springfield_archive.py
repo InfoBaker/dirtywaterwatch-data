@@ -59,7 +59,7 @@ import re
 import sys
 from pathlib import Path
 
-from common import DATA_DIR, event, now_iso, write_events, write_json
+from common import DATA_DIR, error_text, event, now_iso, write_events, write_json
 from ingest import ma_springfield_aquasight as A
 
 SOURCE_ID = "ma-springfield-archive"
@@ -135,7 +135,7 @@ def hours_tolerance(rows: list[dict]) -> float:
     return round(0.05 * n + 0.05, 2)
 
 
-def check_month(rows: list[dict], total: dict, known: dict | None = None) -> dict:
+def check_month(rows: list[dict], total: dict, known: dict | None = None, where: str = "") -> dict:
     """Rows against the Total row: events and gallons exactly, hours within rounding. known: the differences printed
     in the source itself (KNOWN_DIFFERENCES[month]), each {field: printed total minus the rows' sum}; a difference
     passes only when it is exactly the one listed. Raises TranscriptError."""
@@ -157,7 +157,8 @@ def check_month(rows: list[dict], total: dict, known: dict | None = None) -> dic
             bad.append("hours")
     unused = sorted(set(known) - {"why"} - set(accepted))
     if bad or unused:
-        raise TranscriptError(f"rows do not add up to the Total row ({', '.join(bad + unused)}): {out}")
+        raise TranscriptError(f"{where + ': ' if where else ''}rows do not add up to the Total row "
+                              f"({', '.join(bad + unused)}): {out}")
     out["ok"] = True
     if accepted:
         out["source_difference"] = {**{k: known[k] for k in accepted}, "why": known.get("why")}
@@ -184,10 +185,7 @@ def validate(doc: dict) -> list[str]:
             if not m.get("method"):
                 raise TranscriptError(f"{ym}: computed with no method stated")
             continue
-        try:
-            check_month(rows, m.get("total_row") or {}, m.get("known_difference"))
-        except TranscriptError as e:
-            raise TranscriptError(f"{ym}: {e}") from None
+        check_month(rows, m.get("total_row") or {}, m.get("known_difference"), where=ym)
     return sorted(months)
 
 
@@ -339,7 +337,7 @@ def run(reference: Path = REFERENCE, out: Path | None = None, ctx: dict | None =
         doc = json.loads(Path(reference).read_text())
         months = validate(doc)
     except (OSError, ValueError, TranscriptError, KeyError, TypeError) as e:
-        why = f"the transcript {Path(reference).name} cannot be used ({type(e).__name__}: {str(e)[:300]})"
+        why = f"the transcript {Path(reference).name} cannot be used ({error_text(e)})"
         write_events(SOURCE_ID, [], ok=False, error=why, path=out)
         print(f"{SOURCE_ID}: FAILED {why}", file=sys.stderr)
         return 1
@@ -566,7 +564,7 @@ def extract(raw_dir: Path, out: Path = REFERENCE) -> dict:
         am = re.match(r"^CSO-Overflow-Volumes-(20\d\d)\.pdf$", p.name)
         if ym:
             m = parse_month(pdf_text(p), ym)
-            m["check"] = check_month(m["rows"], m["total_row"], KNOWN_DIFFERENCES.get(ym))
+            m["check"] = check_month(m["rows"], m["total_row"], KNOWN_DIFFERENCES.get(ym), where=ym)
             if ym in KNOWN_DIFFERENCES:
                 m["known_difference"] = KNOWN_DIFFERENCES[ym]
             months[ym] = {"file": file_entry(p, idx), **m}
@@ -581,7 +579,7 @@ def extract(raw_dir: Path, out: Path = REFERENCE) -> dict:
                           "how": ("read from the commission's archive page on " + site["read_at"] +
                                   " (the Internet Archive holds no copy); the text was extracted in the browser")},
                  "rows": rows, "total_row": m["total_row"], "duration_label": "Hours"}
-        entry["check"] = check_month(rows, m["total_row"], KNOWN_DIFFERENCES.get(ym))
+        entry["check"] = check_month(rows, m["total_row"], KNOWN_DIFFERENCES.get(ym), where=ym)
         if ym in KNOWN_DIFFERENCES:
             entry["known_difference"] = KNOWN_DIFFERENCES[ym]
         months[ym] = entry
