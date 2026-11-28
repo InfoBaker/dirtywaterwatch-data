@@ -832,8 +832,14 @@ def candidate_outfalls(waters: dict | None = None, registry: list[dict] | None =
         for o in me:
             if str(o.get("status") or "").upper() == "CLOSED":
                 continue
-            add(o.get("permit"), o.get("outfall"), o.get("lat"), o.get("lon"), o.get("water_slug"), "me-dep-layer",
-                o.get("name"))
+            # where both name a water, the registry row's wins (ingest.me_dep_cso reads it first too): a retained layer
+            # snapshot can still name the water a hand correction replaced (registry water review 2026-11-28, second
+            # pass). A layer row naming no water stays as it is (traced with no water record).
+            e = by_po.get((o.get("permit"), norm_oid(o.get("outfall"))))
+            slug = o.get("water_slug")
+            if slug and e and e.get("water_slug"):
+                slug = e["water_slug"]
+            add(o.get("permit"), o.get("outfall"), o.get("lat"), o.get("lon"), slug, "me-dep-layer", o.get("name"))
     if skipped is not None:
         for k, v in skip.items():
             if k not in out:                # a state layer listing it open wins over the registry's CLS
@@ -1462,13 +1468,14 @@ def runs_along(d: dict, slug: str | None, waters: dict) -> bool:
 
 
 def stale_traces(cached: dict[str, dict], cands: list[dict], skipped: dict[str, dict], live: set,
-                 waters: dict | None = None, registry_complete: bool = True) -> dict[str, str]:
+                 waters: dict | None = None, registry_complete: bool = True, registry: list[dict] | None = None,
+                 shore: dict | None = None) -> dict[str, str]:
     """{key: why} of the cached records of registry outfalls that are now wrong for their registry row (registry
     review 2026-11-28, P2-1). The project errs on showing likely-affected water, so a trace is retired only when it is
     wrong, not because the outfall would not be traced afresh today (a row that lost its coordinates, or is now tied
     to the lake, reservoir or bay its trace runs on below, keeps its trace):
       1. a shoreline stretch for a row whose water is not a shoreline water now, or a shoreline stretch of another
-         water than the row's (PA0026301:008, re-tied from Lake Erie to Mill Creek, kept its Lake Erie stretch until
+         water than the row's (a row with no water record now keeps its stretch) (PA0026301:008, re-tied from Lake Erie to Mill Creek, kept its Lake Erie stretch until
          the trace budget reached it);
       2. the row's water changed since the trace (the record's water_slug is another water record than the row's)
          and the trace neither runs along nor from the row's water now (runs_along: a segment's name or COMID):
@@ -1480,47 +1487,76 @@ def stale_traces(cached: dict[str, dict], cands: list[dict], skipped: dict[str, 
       3. the outfall is gone from the registry (a live state's outfall no registry file lists; only when every
          registry file was read, registry_complete).
     A closed outfall's trace is retire_closed()'s. Event points, advisory stretches and the separate sewer caution's
-    points are not registry outfalls: never here."""
+    points are not registry outfalls: never here.
+
+    Each trace is checked against its registry row itself (`registry`, the rows as the loader reads them, hand
+    corrections included; default registry_outfalls()), whether or not the row is traced today: a row with no point
+    keeps a right shoreline stretch, and a state layer snapshot still naming an old water does not stand in for the
+    corrected row. Rows are matched by the loader's key (common.outfall_key), so '8' is the outfall traced as '008'.
+    Only an outfall a state layer alone lists is checked against its candidate (registry water review 2026-11-28,
+    second pass)."""
+    waters = waters or {}
+    shore = shore_rule() if shore is None else shore
+    rows: dict[tuple, dict] = {}
+    for o in (registry if registry is not None else registry_outfalls()):
+        if o.get("npdes_permit") and o.get("outfall") not in (None, ""):
+            rows.setdefault(common.outfall_key(o["npdes_permit"], o["outfall"]), o)     # the first row wins
     by = {c["key"]: c for c in cands}
+    by_id: dict[tuple, dict] = {}
+    for c in cands:
+        if c.get("permit") and c.get("outfall") not in (None, ""):
+            by_id.setdefault(common.outfall_key(c["permit"], c["outfall"]), c)
+    skip_id: dict[tuple, dict] = {}
+    for sk, v in (skipped or {}).items():
+        if v.get("permit") and v.get("outfall") not in (None, ""):
+            skip_id.setdefault(common.outfall_key(v["permit"], v["outfall"]), v)
     out: dict[str, str] = {}
     for k, d in sorted((cached or {}).items()):
         if not d or d.get("kind") == ADVISORY_KIND or d.get("outfall") in (None, "") or k.startswith(("pt-", "adv-")):
             continue
-        c = by.get(k)
-        v = skipped.get(k)
-        if c is None and v is None:
+        ident = common.outfall_key(d.get("permit") or k.rsplit("-", 1)[0], d["outfall"])
+        r = rows.get(ident)
+        c = by.get(k) or by_id.get(ident)
+        v = skipped.get(k) or skip_id.get(ident)
+        if r is None and c is None and v is None:
             st = str(d.get("state") or str(d.get("permit") or "")[:2]).upper()
             if registry_complete and st in live:
                 out[k] = "the outfall registry no longer lists this outfall"
             continue
-        if c is None and v.get("why") == "closed":
+        if c is None and ((v is not None and v.get("why") == "closed") or (r is not None and is_closed(r))):
             continue                                # retire_closed
-        row_slug = c.get("water_slug") if c is not None else v.get("water_slug")
+        if r is not None:
+            row_slug = r.get("water_slug")
+        else:
+            row_slug = (c if c is not None else v).get("water_slug")
+        row_slug = row_slug if row_slug in waters else None     # no water record now: not a changed water
         was = d.get("water_slug")
         if d.get("model") == SH.MODEL:
-            if c is None or c.get("model") != SH.MODEL:
-                out[k] = (f"a shoreline stretch of {was}; the outfall's water is now "
-                          f"{row_slug or 'without a record'}, not a shoreline water")
+            if row_slug is None:
+                continue        # the row has no water record now: not certain the stretch is wrong
+            if not SH.is_shoreline(waters[row_slug], shore):
+                out[k] = (f"a shoreline stretch of {was}; the outfall's water is now {row_slug}, not a shoreline "
+                          "water")
                 continue
             if was != row_slug:
                 out[k] = f"a shoreline stretch of {was}; the outfall's water is now {row_slug}"
-                continue
             continue
-        if not d.get("segments") and c is not None:
+        if not d.get("segments") and c is not None and (r is None or c.get("water_slug") == row_slug):
             continue                # no path (tidal or lake at the outfall, no trace): plan()'s touch path relabels it
-        if was and row_slug and was != row_slug and was in (waters or {}) and not runs_along(d, row_slug, waters or {}):
+        if was and row_slug and was != row_slug and was in waters and not runs_along(d, row_slug, waters):
             out[k] = (f"traced for {was}; the outfall's water is now {row_slug}, which the trace neither runs along "
                       "nor starts from")
     return out
 
 
 def retire_stale(cached: dict[str, dict], cands: list[dict], skipped: dict[str, dict], live: set,
-                 waters: dict | None = None, registry_complete: bool = True) -> dict[str, str]:
+                 waters: dict | None = None, registry_complete: bool = True, registry: list[dict] | None = None,
+                 shore: dict | None = None) -> dict[str, str]:
     """Move the stale_traces() records to RETIRED_DIR (as retire_closed does), so status, the rain caution and the
     export never read them, and plan() sees the outfall as never traced: due with the first traces (as a moved
     outfall is). Returns {key: why} of those moved."""
     out = {}
-    for k, why in stale_traces(cached, cands, skipped, live, waters, registry_complete).items():
+    for k, why in stale_traces(cached, cands, skipped, live, waters, registry_complete, registry, shore).items():
         if _retire(k, why):
             out[k] = why
     return out
@@ -2381,8 +2417,10 @@ def main() -> int:
                 shore = shore_rule()
                 from build.status import load_waters, with_outline_areas
                 waters = with_outline_areas(load_waters(), shore)    # the size rule's areas (rule on only)
-                cands = candidate_outfalls(waters=waters, live=live, skipped=skipped, plants=a.plants or None,
-                                           shore=shore)
+                registry = registry_outfalls()      # read once: the candidates and the stale-trace check
+                registry_complete = not getattr(common, "OUTFALL_REGISTRY_SKIPPED", None)
+                cands = candidate_outfalls(waters=waters, registry=registry, live=live, skipped=skipped,
+                                           plants=a.plants or None, shore=shore)
                 log = lambda m: print(m, flush=True)       # noqa: E731
                 if a.outfall:
                     permit, oid = a.outfall.split(":", 1)
@@ -2402,7 +2440,7 @@ def main() -> int:
                     # a cached trace that no longer agrees with its registry row (stale_traces): retired before
                     # anything reads the cache, so the next trace or stretch replaces it
                     stale = retire_stale(load_reaches(), cands, skipped, live, waters,
-                                         registry_complete=not getattr(common, "OUTFALL_REGISTRY_SKIPPED", None))
+                                         registry_complete=registry_complete, registry=registry, shore=shore)
                     if stale:
                         print(f"reaches: {len(stale)} cached traces that no longer agree with the registry moved to "
                               f"{RETIRED_DIR.name}/: {', '.join(list(stale)[:10])}{' ...' if len(stale) > 10 else ''}",

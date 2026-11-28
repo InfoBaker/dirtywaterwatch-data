@@ -507,6 +507,11 @@ def stale_rec(key, slug, **kw):
     return rec(key, NOW, permit=permit, outfall=oid, water_slug=slug, state=permit[:2], **kw)
 
 
+def at(registry):
+    """stale_traces() reads the registry rows themselves (the authoritative water, after corrections)."""
+    return {"registry": registry, "shore": SHORE}
+
+
 def stale_setup(cache, registry, cached):
     for k, d in cached.items():
         R.write_json(cache / f"{k}.json", d)
@@ -535,14 +540,14 @@ def test_the_two_review_cases_are_retired_before_anything_reads_the_cache(cache)
     assert {c["key"]: c.get("model") for c in cs} == {"PA0026301-008": None, "PA0026301-009": R.SH.MODEL,
                                                        "PA0026301-010": None}
     assert skipped["MA0103284-C03"]["why"] == "not_river" and skipped["PA0026301-011"]["why"] == "plant_deferred"
-    stale = R.stale_traces(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS)
+    stale = R.stale_traces(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS, **at(registry))
     assert set(stale) == {"PA0026301-008", "MA0103284-C03", "PA0026301-009", "PA0026301-099"}
     assert "shoreline stretch of lake-erie-pa" in stale["PA0026301-008"]
     assert "traced for charles-river-ma" in stale["MA0103284-C03"]
     # with a registry file unread, an outfall missing from it is not taken as gone
     assert "PA0026301-099" not in R.stale_traces(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS,
-                                                 registry_complete=False)
-    moved = R.retire_stale(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS)
+                                                 registry_complete=False, **at(registry))
+    moved = R.retire_stale(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS, **at(registry))
     assert moved == stale
     left = R.load_reaches()          # what status, the rain caution and the export read
     assert set(left) == {"PA0026301-010", "PA0026301-011", "pt-abc"}
@@ -574,8 +579,8 @@ def test_a_trace_that_is_still_right_stays_though_the_outfall_would_not_be_trace
     cs = R.candidate_outfalls(waters=STALE_WATERS, registry=registry, live=live, skipped=skipped, reported=set(),
                               plants=False, shore=SHORE)
     assert skipped["MA0101613-036A"]["why"] == "not_river" and skipped["MD0021598-002"]["why"] == "no_location"
-    assert R.stale_traces(R.load_reaches(), cs, skipped, live, STALE_WATERS) == {}
-    assert R.retire_stale(R.load_reaches(), cs, skipped, live, STALE_WATERS) == {}
+    assert R.stale_traces(R.load_reaches(), cs, skipped, live, STALE_WATERS, **at(registry)) == {}
+    assert R.retire_stale(R.load_reaches(), cs, skipped, live, STALE_WATERS, **at(registry)) == {}
     assert set(R.load_reaches()) == {"MA0101613-036A", "MA0101613-037", "MA0101613-038", "MD0021598-002"}
 
 
@@ -585,4 +590,70 @@ def test_a_tidal_answer_of_a_traced_row_is_relabelled_and_one_of_a_bay_row_with_
     cs, skipped = stale_setup(cache, registry, {
         "MA0103284-MWR010": stale_rec("MA0103284-MWR010", "sudbury-river-ma", cut="tidal_at_outfall", segs=False),
         "MA0103284-MWR203": stale_rec("MA0103284-MWR203", "charles-river-ma", cut="tidal_at_outfall", segs=False)})
-    assert set(R.stale_traces(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS)) == {"MA0103284-MWR203"}
+    assert set(R.stale_traces(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS, **at(registry))) == {"MA0103284-MWR203"}
+
+
+# (registry water review 2026-11-28, second pass: a trace is checked against the registry row itself)
+
+def test_a_shoreline_stretch_stays_when_its_row_loses_its_coordinates(cache):
+    # P2: a Lake Erie row, water unchanged, now without a point: no_location (no candidate), but the stretch is right
+    registry = [row("PA0026301", "009", "PA", "lake-erie-pa", lat=None, lon=None, reach_id=None)]
+    cs, skipped = stale_setup(cache, registry, {
+        "PA0026301-009": stale_rec("PA0026301-009", "lake-erie-pa", model=R.SH.MODEL, segs=False)})
+    assert cs == [] and skipped["PA0026301-009"]["why"] == "no_location"
+    assert R.stale_traces(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS, **at(registry)) == {}
+    assert R.retire_stale(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS, **at(registry)) == {}
+    assert set(R.load_reaches()) == {"PA0026301-009"}
+
+
+def test_an_outfall_number_written_another_way_is_the_same_outfall_not_a_gone_one(cache):
+    # P2: EPA writes '8' where the trace was made for '008' (common.outfall_key: one outfall); a shoreline row too.
+    # An outfall truly gone is still retired.
+    registry = [row("PA0026301", "8", "PA", "mill-creek-erie-pa"),
+                row("PA0026301", "9", "PA", "lake-erie-pa")]
+    cs, skipped = stale_setup(cache, registry, {
+        "PA0026301-008": stale_rec("PA0026301-008", "mill-creek-erie-pa"),
+        "PA0026301-009": stale_rec("PA0026301-009", "lake-erie-pa", model=R.SH.MODEL, segs=False),
+        "PA0026301-010": stale_rec("PA0026301-010", "mill-creek-erie-pa")})
+    assert {c["key"] for c in cs} == {"PA0026301-8", "PA0026301-9"}
+    stale = R.stale_traces(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS, **at(registry))
+    assert stale == {"PA0026301-010": "the outfall registry no longer lists this outfall"}
+    # the same outfall re-tied to another water under its new spelling is still checked against that water
+    registry[0] = row("PA0026301", "8", "PA", "sudbury-river-ma")
+    cs = stale_cands(registry, skipped := {})
+    stale = R.stale_traces(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS, **at(registry))
+    assert set(stale) == {"PA0026301-008", "PA0026301-010"} and "now sudbury-river-ma" in stale["PA0026301-008"]
+
+
+def test_a_stale_state_layer_cannot_hide_a_trace_the_corrected_registry_row_makes_wrong(cache, monkeypatch):
+    # P2: Maine's retained DEP layer still names the river; the corrected registry row says the bay (not_river). The
+    # river trace is retired, the layer does not make the outfall a river candidate again, and the rain caution no
+    # longer reaches the river through it.
+    waters = {**STALE_WATERS,
+              "fore-river-me": {"slug": "fore-river-me", "kind": "river", "state": "ME", "name": "Fore River"},
+              "back-cove-me": {"slug": "back-cove-me", "kind": "bay", "state": "ME", "name": "Back Cove"}}
+    monkeypatch.setattr(R, "BUILD_DIR", cache.parent)
+    R.write_json(cache.parent / "me-cso-outfalls.json", {"outfalls": [
+        {"permit": "ME0102075", "outfall": "010", "lat": 43.67, "lon": -70.27, "water_slug": "fore-river-me",
+         "status": "ACTIVE", "name": "Back Cove CSO"}]})
+    registry = [row("ME0102075", "010", "ME", "back-cove-me", lat=43.67, lon=-70.27)]
+    seg = {"km_start": 0, "km_end": 1, "gnis_name": "Fore River", "comid": 9}
+    for k, d in {"ME0102075-010": dict(stale_rec("ME0102075-010", "fore-river-me"), segments=[seg])}.items():
+        R.write_json(cache / f"{k}.json", d)
+    live = STALE_LIVE | {"ME"}
+    skipped = {}
+    cs = R.candidate_outfalls(waters=waters, registry=registry, live=live, skipped=skipped, reported=set(),
+                              plants=False, shore=SHORE)
+    assert cs == [] and skipped["ME0102075-010"]["why"] == "not_river"
+    stale = R.stale_traces(R.load_reaches(), cs, skipped, live, waters, **at(registry))
+    assert set(stale) == {"ME0102075-010"} and "now back-cove-me" in stale["ME0102075-010"]
+    # even when a candidate still carries the layer's old river (a candidate list built before the fix), the
+    # registry row decides
+    old = [{"key": "ME0102075-010", "permit": "ME0102075", "outfall": "010", "water_slug": "fore-river-me",
+            "lat": 43.67, "lon": -70.27, "sources": ["me-dep-layer"]}]
+    assert set(R.stale_traces(R.load_reaches(), old, {}, live, waters, **at(registry))) == {"ME0102075-010"}
+    R.retire_stale(R.load_reaches(), cs, skipped, live, waters, **at(registry))
+    from build import rain_likely as RL
+    keys, tags, _, _ = RL.targets("ME0102075", waters, [dict(registry[0], _file="data/outfalls-new-england.json")],
+                                  [], R.load_reaches(), lambda r, w: [r.get("water_slug")] if r.get("water_slug") else [])
+    assert "fore-river-me" not in tags and not keys
