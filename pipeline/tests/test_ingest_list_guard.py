@@ -25,6 +25,10 @@ EXCLUDED = {
     "nj_cso_likely": "INGEST_SNAPSHOTS: a snapshot read by build/, run after the feeds; writes no events file",
     "tx_houston_tceq_link": "INGEST_SNAPSHOTS: links Houston's monthly SSO rows to TCEQ's records again after the generic "
                             "readers; its feed, tx_houston_sso_monthly, is in the ingest list",
+    "oh_msdgc_cso": "INGEST_SNAPSHOTS: Cincinnati MSDGC's CSO map, run after the feeds so its events link to the ECHO "
+                    "and registry records of the same outfalls; it writes its events file there, every hour",
+    "pa_echo_violations": "INGEST_SNAPSHOTS: Pennsylvania's ECHO single-event violations, run after PWD, ALCOSAN and Erie "
+                          "have refreshed so its records link to theirs; it writes its events file there",
     "rainfall": "INGEST_EXTRA (make rainfall), after the feeds; writes no events file",
     "waters_from_nhd": "INGEST_SKIP: runs as waters-nhd (INGEST_EXTRA) with a time budget",
     "waters_extra": "INGEST_SKIP: a water-record builder, no events file",
