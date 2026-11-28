@@ -103,3 +103,40 @@ def test_each_new_alias_belongs_to_one_michigan_record(waters):
         for t in texts:
             assert t in aliases[slug]
             assert [s for s, v in aliases.items() if t in v] == [slug], t
+
+
+# ------------------------------------------------------------------ 5 and 7c. Akron at the permit's points; NEORSD 211, 212
+
+def _oh(permit, oid, lat=None, lon=None):
+    return event(source_id="oh-echo-dmr-cso", source_record_id=f"{permit}-{oid}", event_type="cso", status="ended",
+                 npdes_permit=permit, outfall_id=oid, lat=lat, lon=lon, raw={"state": "OH"})
+
+
+AKRON_WATERS = {**{n: "little-cuyahoga-river-oh" for n in ("046", "049", "053", "054", "057", "058", "065", "069", "070",
+                                                           "071", "072", "081", "083", "084")},
+                **{n: "cuyahoga-river-oh" for n in ("075", "076", "077", "078")}}
+
+
+@pytest.mark.parametrize("oid,slug", sorted(AKRON_WATERS.items()))
+def test_akrons_monthly_reports_take_the_water_its_permit_names(resolver, oid, slug):
+    pl = resolver.resolve(_oh("OH0023833", oid))
+    assert pl["water_slugs"] == [slug] and pl["water_match"] == "outfall_registry", pl
+
+
+@pytest.mark.parametrize("oid", ["047", "055", "059", "060", "062", "080"])
+def test_akrons_ohio_canal_and_camp_brook_outfalls_stay_untied(resolver, oid):
+    assert resolver.resolve(_oh("OH0023833", oid))["water_slugs"] == []
+
+
+@pytest.mark.parametrize("oid", ["211", "212"])
+def test_neorsd_nine_mile_creek_outfalls_are_tied_in_both_copies(resolver, oid):
+    from common import load_outfall_registry
+    import json
+    pl = resolver.resolve(_oh("OH0043991", oid))
+    assert pl["water_slugs"] == ["ninemile-creek-cleveland-oh"], pl
+    rows = [o for name in ("outfalls-oh.json", "outfalls-us.json")
+            for o in json.loads((Path(__file__).resolve().parents[2] / "data" / name).read_text())["outfalls"]
+            if (o.get("npdes_permit"), o.get("outfall")) == ("OH0043991", oid)]
+    assert len(rows) == 2 and {o["water_slug"] for o in rows} == {"ninemile-creek-cleveland-oh"}
+    loaded = [o for o in load_outfall_registry(provisional=False) if (o["npdes_permit"], o["outfall"]) == ("OH0043991", oid)]
+    assert loaded[0]["_file"].endswith("outfalls-oh.json")
