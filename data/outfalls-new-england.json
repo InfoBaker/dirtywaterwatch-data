@@ -44,14 +44,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039877194",
    "lat": 41.154126,
    "lon": -73.220611,
-   "water_slug": "cedar-creek-ct",
-   "water_name": "Cedar Creek",
-   "water_kind": "river",
-   "distance_m": 216,
+   "water_slug": "black-rock-harbor-ct",
+   "water_name": "Black Rock Harbor",
+   "water_kind": "bay",
+   "distance_m": 94,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 216 m from Cedar Creek (cedar-creek-ct), the nearest openboatlaunch water within 400 m; the receiving water ('Black Rock Harbor') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Black Rock Harbor'; Black Rock Harbor (black-rock-harbor-ct) lies 94 m from EPA's point, and Cedar Creek (cedar-creek-ct), the nearest-water tie it replaces, 282 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "cedar-creek-ct",
+    "water_name": "Cedar Creek",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "CT0100056",
@@ -2100,14 +2107,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110001730770",
    "lat": 41.29701,
    "lon": -72.910758,
-   "water_slug": "long-island-sound-ct",
-   "water_name": "Long Island Sound",
-   "water_kind": "sound",
-   "distance_m": 0,
+   "water_slug": "new-haven-harbor-ct",
+   "water_name": "New Haven Harbor",
+   "water_kind": "bay",
+   "distance_m": 7,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Long Island Sound (long-island-sound-ct), the nearest openboatlaunch water within 400 m; the receiving water ('New Haven Harbor') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'New Haven Harbor'; New Haven Harbor (new-haven-harbor-ct) lies 7 m from EPA's point, and Long Island Sound (long-island-sound-ct), the nearest-water tie it replaces, 0 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "long-island-sound-ct",
+    "water_name": "Long Island Sound",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "CT0100366",
@@ -2125,14 +2139,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110001730770",
    "lat": 41.282798,
    "lon": -72.925145,
-   "water_slug": "long-island-sound-ct",
-   "water_name": "Long Island Sound",
-   "water_kind": "sound",
+   "water_slug": "new-haven-harbor-ct",
+   "water_name": "New Haven Harbor",
+   "water_kind": "bay",
    "distance_m": 0,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Long Island Sound (long-island-sound-ct), the nearest openboatlaunch water within 400 m; the receiving water ('New Haven Harbor') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'New Haven Harbor'; New Haven Harbor (new-haven-harbor-ct) lies 0 m from EPA's point, and Long Island Sound (long-island-sound-ct), the nearest-water tie it replaces, 0 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "long-island-sound-ct",
+    "water_name": "Long Island Sound",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "CT0100366",
@@ -2150,14 +2171,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110001730770",
    "lat": 41.295852,
    "lon": -72.916205,
-   "water_slug": "long-island-sound-ct",
-   "water_name": "Long Island Sound",
-   "water_kind": "sound",
-   "distance_m": 11,
+   "water_slug": "new-haven-harbor-ct",
+   "water_name": "New Haven Harbor",
+   "water_kind": "bay",
+   "distance_m": 5,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 11 m from Long Island Sound (long-island-sound-ct), the nearest openboatlaunch water within 400 m; the receiving water ('New Haven Harbor') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'New Haven Harbor'; New Haven Harbor (new-haven-harbor-ct) lies 5 m from EPA's point, and Long Island Sound (long-island-sound-ct), the nearest-water tie it replaces, 13 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "long-island-sound-ct",
+    "water_name": "Long Island Sound",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "CT0100412",
@@ -2772,14 +2800,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000732592",
    "lat": 41.6799933,
    "lon": -71.1948204,
-   "water_slug": "narragansett-bay-ma",
-   "water_name": "Narragansett Bay",
+   "water_slug": "mount-hope-bay-ma",
+   "water_name": "Mount Hope Bay",
    "water_kind": "bay",
-   "distance_m": 233,
+   "distance_m": 0,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 233 m from Narragansett Bay (narragansett-bay-ma), the nearest openboatlaunch water within 400 m; the receiving water ('Mount Hope Bay') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Mount Hope Bay'; Mount Hope Bay (mount-hope-bay-ma) lies 0 m from EPA's point, and Narragansett Bay (narragansett-bay-ma), the nearest-water tie it replaces, 280 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "narragansett-bay-ma",
+    "water_name": "Narragansett Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "MA0100382",
@@ -2797,14 +2832,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000732592",
    "lat": 41.6849515,
    "lon": -71.1898772,
-   "water_slug": "narragansett-bay-ma",
-   "water_name": "Narragansett Bay",
+   "water_slug": "mount-hope-bay-ma",
+   "water_name": "Mount Hope Bay",
    "water_kind": "bay",
-   "distance_m": 361,
+   "distance_m": 44,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 361 m from Narragansett Bay (narragansett-bay-ma), the nearest openboatlaunch water within 400 m; the receiving water ('Mount Hope Bay') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Mount Hope Bay'; Mount Hope Bay (mount-hope-bay-ma) lies 44 m from EPA's point, and Narragansett Bay (narragansett-bay-ma), the nearest-water tie it replaces, 433 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "narragansett-bay-ma",
+    "water_name": "Narragansett Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "MA0100382",
@@ -2872,14 +2914,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000732592",
    "lat": 41.6966583,
    "lon": -71.1782887,
-   "water_slug": "narragansett-bay-ma",
-   "water_name": "Narragansett Bay",
+   "water_slug": "mount-hope-bay-ma",
+   "water_name": "Mount Hope Bay",
    "water_kind": "bay",
-   "distance_m": 385,
+   "distance_m": 1,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 385 m from Narragansett Bay (narragansett-bay-ma), the nearest openboatlaunch water within 400 m; the receiving water ('Mount Hope Bay') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Mount Hope Bay'; Mount Hope Bay (mount-hope-bay-ma) lies 1 m from EPA's point, and Narragansett Bay (narragansett-bay-ma), the nearest-water tie it replaces, 419 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "narragansett-bay-ma",
+    "water_name": "Narragansett Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "MA0100382",
@@ -3614,14 +3663,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110024329289",
    "lat": 42.6594629,
    "lon": -71.3187252,
-   "water_slug": "merrimack-river-ma",
-   "water_name": "Merrimack River",
-   "water_kind": "river",
-   "distance_m": 366,
+   "water_slug": "beaver-brook-lowell-ma",
+   "water_name": "BEAVER BROOK",
+   "water_kind": "stream",
+   "distance_m": 12,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 366 m from Merrimack River (merrimack-river-ma), the nearest openboatlaunch water within 400 m; the receiving water ('Lower Beaver Brook') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Lower Beaver Brook'; BEAVER BROOK (beaver-brook-lowell-ma) lies 12 m from EPA's point, and Merrimack River (merrimack-river-ma), the nearest-water tie it replaces, 371 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "merrimack-river-ma",
+    "water_name": "Merrimack River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "MA0100633",
@@ -6570,14 +6626,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110008405573",
    "lat": 42.0966198,
    "lon": -72.5640809,
-   "water_slug": "lake-massasoit-ma",
-   "water_name": "Lake Massasoit",
-   "water_kind": "reservoir",
-   "distance_m": 132,
+   "water_slug": "mill-river-springfield-ma",
+   "water_name": "Mill River",
+   "water_kind": "river",
+   "distance_m": 7,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 132 m from Lake Massasoit (lake-massasoit-ma), the nearest openboatlaunch water within 400 m; the receiving water ('Mill River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Mill River'; Mill River (mill-river-springfield-ma) lies 7 m from EPA's point, and Lake Massasoit (lake-massasoit-ma), the nearest-water tie it replaces, 157 m; Lake Massasoit is the Mill River's dammed stretch: the outfall is on that stretch, and the river is the water the permit names",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "lake-massasoit-ma",
+    "water_name": "Lake Massasoit",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "MA0101613",
@@ -6595,14 +6658,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110008405573",
    "lat": 42.0966511,
    "lon": -72.5639444,
-   "water_slug": "lake-massasoit-ma",
-   "water_name": "Lake Massasoit",
-   "water_kind": "reservoir",
-   "distance_m": 122,
+   "water_slug": "mill-river-springfield-ma",
+   "water_name": "Mill River",
+   "water_kind": "river",
+   "distance_m": 5,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 122 m from Lake Massasoit (lake-massasoit-ma), the nearest openboatlaunch water within 400 m; the receiving water ('Mill River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Mill River'; Mill River (mill-river-springfield-ma) lies 5 m from EPA's point, and Lake Massasoit (lake-massasoit-ma), the nearest-water tie it replaces, 143 m; Lake Massasoit is the Mill River's dammed stretch: the outfall is on that stretch, and the river is the water the permit names",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "lake-massasoit-ma",
+    "water_name": "Lake Massasoit",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "MA0101613",
@@ -6819,14 +6889,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110008405573",
    "lat": 42.0970288,
    "lon": -72.5639326,
-   "water_slug": "lake-massasoit-ma",
-   "water_name": "Lake Massasoit",
-   "water_kind": "reservoir",
-   "distance_m": 95,
+   "water_slug": "mill-river-springfield-ma",
+   "water_name": "Mill River",
+   "water_kind": "river",
+   "distance_m": 10,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 95 m from Lake Massasoit (lake-massasoit-ma), the nearest openboatlaunch water within 400 m; the receiving water ('Mill River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Mill River'; Mill River (mill-river-springfield-ma) lies 10 m from EPA's point, and Lake Massasoit (lake-massasoit-ma), the nearest-water tie it replaces, 120 m; Lake Massasoit is the Mill River's dammed stretch: the outfall is on that stretch, and the river is the water the permit names",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "lake-massasoit-ma",
+    "water_name": "Lake Massasoit",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "MA0101613",
@@ -8118,14 +8195,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110025247720",
    "lat": 42.368944,
    "lon": -71.060917,
-   "water_slug": "charles-river-ma",
-   "water_name": "Charles River",
-   "water_kind": "river",
-   "distance_m": 25,
+   "water_slug": "boston-inner-harbor-ma",
+   "water_name": "Boston Inner Harbor",
+   "water_kind": "bay",
+   "distance_m": 0,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 25 m from Charles River (charles-river-ma), the nearest openboatlaunch water within 400 m; the receiving water ('ATLANTIC OCEAN (BOSTON HARBOR)') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'ATLANTIC OCEAN (BOSTON HARBOR)'; Boston Inner Harbor (boston-inner-harbor-ma) lies 0 m from EPA's point, and Charles River (charles-river-ma), the nearest-water tie it replaces, 29 m; Boston Inner Harbor is the part of Boston Harbor where the point lies",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "charles-river-ma",
+    "water_name": "Charles River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "MA0103284",
@@ -8926,14 +9010,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110009913086",
    "lat": 43.926972,
    "lon": -69.810861,
-   "water_slug": "sagadahoc-river-me",
-   "water_name": "Sagadahoc River",
+   "water_slug": "kennebec-river-bath-me",
+   "water_name": "Kennebec River (Bath)",
    "water_kind": "river",
-   "distance_m": 197,
+   "distance_m": 283,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 197 m from Sagadahoc River (sagadahoc-river-me), the nearest openboatlaunch water within 400 m; the receiving water ('Kennebec River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Kennebec River'; Kennebec River (Bath) (kennebec-river-bath-me) lies 283 m from EPA's point, and Sagadahoc River (sagadahoc-river-me), the nearest-water tie it replaces, 268 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "sagadahoc-river-me",
+    "water_name": "Sagadahoc River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "ME0100021",
@@ -8951,14 +9042,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110009913086",
    "lat": 43.926972,
    "lon": -69.810861,
-   "water_slug": "sagadahoc-river-me",
-   "water_name": "Sagadahoc River",
+   "water_slug": "kennebec-river-bath-me",
+   "water_name": "Kennebec River (Bath)",
    "water_kind": "river",
-   "distance_m": 197,
+   "distance_m": 283,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 197 m from Sagadahoc River (sagadahoc-river-me), the nearest openboatlaunch water within 400 m; the receiving water ('Kennebec River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Kennebec River'; Kennebec River (Bath) (kennebec-river-bath-me) lies 283 m from EPA's point, and Sagadahoc River (sagadahoc-river-me), the nearest-water tie it replaces, 268 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "sagadahoc-river-me",
+    "water_name": "Sagadahoc River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "ME0100021",
@@ -8976,14 +9074,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110009913086",
    "lat": 43.926972,
    "lon": -69.810861,
-   "water_slug": "sagadahoc-river-me",
-   "water_name": "Sagadahoc River",
+   "water_slug": "kennebec-river-bath-me",
+   "water_name": "Kennebec River (Bath)",
    "water_kind": "river",
-   "distance_m": 197,
+   "distance_m": 283,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 197 m from Sagadahoc River (sagadahoc-river-me), the nearest openboatlaunch water within 400 m; the receiving water ('Kennebec River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Kennebec River'; Kennebec River (Bath) (kennebec-river-bath-me) lies 283 m from EPA's point, and Sagadahoc River (sagadahoc-river-me), the nearest-water tie it replaces, 268 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "sagadahoc-river-me",
+    "water_name": "Sagadahoc River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "ME0100048",
@@ -10244,14 +10349,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110028276595",
    "lat": 43.6438,
    "lon": -70.24829,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "portland-harbor-me",
+   "water_name": "Portland Harbor",
    "water_kind": "bay",
    "distance_m": 0,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Portland Harbor') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Portland Harbor'; Portland Harbor (portland-harbor-me) lies 0 m from EPA's point, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 0 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "ME0100633",
@@ -11466,14 +11578,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000568877",
    "lat": 43.6692,
    "lon": -70.27724,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "back-cove-me",
+   "water_name": "Back Cove",
    "water_kind": "bay",
-   "distance_m": 17,
+   "distance_m": 9,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 17 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Back Cove'; Back Cove (back-cove-me) lies 9 m from EPA's point, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 17 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "ME0101435",
@@ -11541,14 +11660,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000568877",
    "lat": 43.66801,
    "lon": -70.26042,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "back-cove-me",
+   "water_name": "Back Cove",
    "water_kind": "bay",
    "distance_m": 0,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Back Cove'; Back Cove (back-cove-me) lies 0 m from EPA's point, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 0 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "ME0101435",
@@ -12004,14 +12130,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000568877",
    "lat": 43.67731,
    "lon": -70.27461,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "back-cove-me",
+   "water_name": "Back Cove",
    "water_kind": "bay",
-   "distance_m": 16,
+   "distance_m": 0,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 16 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Back Cove'; Back Cove (back-cove-me) lies 0 m from EPA's point, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 18 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "ME0102075",
@@ -12029,14 +12162,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000568877",
    "lat": 43.67609,
    "lon": -70.27547,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "back-cove-me",
+   "water_name": "Back Cove",
    "water_kind": "bay",
    "distance_m": 0,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Back Cove'; Back Cove (back-cove-me) lies 0 m from EPA's point, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 0 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "ME0102075",
@@ -12054,14 +12194,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000568877",
    "lat": 43.67477,
    "lon": -70.27613,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "back-cove-me",
+   "water_name": "Back Cove",
    "water_kind": "bay",
-   "distance_m": 0,
+   "distance_m": 21,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Back Cove'; Back Cove (back-cove-me) lies 21 m from EPA's point, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 0 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "ME0102075",
@@ -12079,14 +12226,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000568877",
    "lat": 43.67386,
    "lon": -70.27658,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "back-cove-me",
+   "water_name": "Back Cove",
    "water_kind": "bay",
-   "distance_m": 0,
+   "distance_m": 6,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Back Cove'; Back Cove (back-cove-me) lies 6 m from EPA's point, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 0 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "ME0102075",
@@ -12608,14 +12762,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110020041774",
    "lat": 44.538362,
    "lon": -69.628631,
-   "water_slug": "kennebec-river-me",
-   "water_name": "Kennebec River",
+   "water_slug": "sebasticook-river-me",
+   "water_name": "Sebasticook River",
    "water_kind": "river",
-   "distance_m": 187,
+   "distance_m": 41,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 187 m from Kennebec River (kennebec-river-me), the nearest openboatlaunch water within 400 m; the receiving water ('Sebasticook River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Sebasticook River'; Sebasticook River (sebasticook-river-me) lies 41 m from EPA's point, and Kennebec River (kennebec-river-me), the nearest-water tie it replaces, 210 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "kennebec-river-me",
+    "water_name": "Kennebec River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "ME0102695",
@@ -12683,14 +12844,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110007686110",
    "lat": 42.7488009,
    "lon": -71.4417535,
-   "water_slug": "merrimack-river-nh",
-   "water_name": "Merrimack River",
-   "water_kind": "river",
-   "distance_m": 88,
+   "water_slug": "salmon-brook-nh",
+   "water_name": "Salmon Brook",
+   "water_kind": "stream",
+   "distance_m": 40,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 88 m from Merrimack River (merrimack-river-nh), the nearest openboatlaunch water within 400 m; the receiving water ('Salmon Brook') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Salmon Brook'; Salmon Brook (salmon-brook-nh) lies 40 m from EPA's point, and Merrimack River (merrimack-river-nh), the nearest-water tie it replaces, 118 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "merrimack-river-nh",
+    "water_name": "Merrimack River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "NH0100170",
@@ -14326,10 +14494,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110004911926",
    "lat": 41.87556,
    "lon": -71.38417,
-   "water_slug": "pawtucket-river-ri",
-   "water_name": "Pawtucket River",
+   "water_slug": "seekonk-river-pawtucket-ri",
+   "water_name": "Seekonk River",
    "water_kind": "river",
-   "distance_m": 35,
+   "distance_m": 29,
    "alternatives": [
     {
      "slug": "blackstone-river-ri",
@@ -14337,15 +14505,22 @@
      "distance_m": 120
     }
    ],
-   "match": "geometry",
-   "water_match": "EPA's point lies 35 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Seekonk River'; Seekonk River (seekonk-river-pawtucket-ri) lies 29 m from EPA's point, and Pawtucket River (pawtucket-river-ri), the nearest-water tie it replaces, 43 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
    "also_permits": [
     {
      "npdes_permit": "RISS00024",
      "outfall": "213A"
     }
-   ]
+   ],
+   "replaced_match": {
+    "water_slug": "pawtucket-river-ri",
+    "water_name": "Pawtucket River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "RI0100072",
@@ -14363,10 +14538,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110004911926",
    "lat": 41.87417,
    "lon": -71.38472,
-   "water_slug": "pawtucket-river-ri",
-   "water_name": "Pawtucket River",
+   "water_slug": "seekonk-river-pawtucket-ri",
+   "water_name": "Seekonk River",
    "water_kind": "river",
-   "distance_m": 33,
+   "distance_m": 27,
    "alternatives": [
     {
      "slug": "blackstone-river-ri",
@@ -14374,15 +14549,22 @@
      "distance_m": 277
     }
    ],
-   "match": "geometry",
-   "water_match": "EPA's point lies 33 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Seekonk River'; Seekonk River (seekonk-river-pawtucket-ri) lies 27 m from EPA's point, and Pawtucket River (pawtucket-river-ri), the nearest-water tie it replaces, 44 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
    "also_permits": [
     {
      "npdes_permit": "RISS00024",
      "outfall": "214A"
     }
-   ]
+   ],
+   "replaced_match": {
+    "water_slug": "pawtucket-river-ri",
+    "water_name": "Pawtucket River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "RI0100072",
@@ -14400,20 +14582,27 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110004911926",
    "lat": 41.8725,
    "lon": -71.38389,
-   "water_slug": "pawtucket-river-ri",
-   "water_name": "Pawtucket River",
+   "water_slug": "seekonk-river-pawtucket-ri",
+   "water_name": "Seekonk River",
    "water_kind": "river",
-   "distance_m": 13,
+   "distance_m": 29,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 13 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Seekonk River'; Seekonk River (seekonk-river-pawtucket-ri) lies 29 m from EPA's point, and Pawtucket River (pawtucket-river-ri), the nearest-water tie it replaces, 15 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
    "also_permits": [
     {
      "npdes_permit": "RISS00024",
      "outfall": "215A"
     }
-   ]
+   ],
+   "replaced_match": {
+    "water_slug": "pawtucket-river-ri",
+    "water_name": "Pawtucket River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "RI0100072",
@@ -14431,20 +14620,27 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110004911926",
    "lat": 41.86944,
    "lon": -71.38028,
-   "water_slug": "pawtucket-river-ri",
-   "water_name": "Pawtucket River",
+   "water_slug": "seekonk-river-pawtucket-ri",
+   "water_name": "Seekonk River",
    "water_kind": "river",
-   "distance_m": 67,
+   "distance_m": 68,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 67 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Seekonk River'; Seekonk River (seekonk-river-pawtucket-ri) lies 68 m from EPA's point, and Pawtucket River (pawtucket-river-ri), the nearest-water tie it replaces, 77 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
    "also_permits": [
     {
      "npdes_permit": "RISS00024",
      "outfall": "216A"
     }
-   ]
+   ],
+   "replaced_match": {
+    "water_slug": "pawtucket-river-ri",
+    "water_name": "Pawtucket River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "RI0100072",
@@ -14462,20 +14658,27 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110004911926",
    "lat": 41.86722,
    "lon": -71.38056,
-   "water_slug": "pawtucket-river-ri",
-   "water_name": "Pawtucket River",
+   "water_slug": "seekonk-river-pawtucket-ri",
+   "water_name": "Seekonk River",
    "water_kind": "river",
-   "distance_m": 58,
+   "distance_m": 64,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 58 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Seekonk River'; Seekonk River (seekonk-river-pawtucket-ri) lies 64 m from EPA's point, and Pawtucket River (pawtucket-river-ri), the nearest-water tie it replaces, 76 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
    "also_permits": [
     {
      "npdes_permit": "RISS00024",
      "outfall": "217A"
     }
-   ]
+   ],
+   "replaced_match": {
+    "water_slug": "pawtucket-river-ri",
+    "water_name": "Pawtucket River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "RI0100072",
@@ -16711,10 +16914,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110004911926",
    "lat": 41.87556,
    "lon": -71.38417,
-   "water_slug": "pawtucket-river-ri",
-   "water_name": "Pawtucket River",
+   "water_slug": "seekonk-river-pawtucket-ri",
+   "water_name": "Seekonk River",
    "water_kind": "river",
-   "distance_m": 35,
+   "distance_m": 29,
    "alternatives": [
     {
      "slug": "blackstone-river-ri",
@@ -16722,9 +16925,9 @@
      "distance_m": 120
     }
    ],
-   "match": "geometry",
-   "water_match": "EPA's point lies 35 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Seekonk River'; Seekonk River (seekonk-river-pawtucket-ri) lies 29 m from EPA's point, and Pawtucket River (pawtucket-river-ri), the nearest-water tie it replaces, 43 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
    "same_outfall_as": {
     "npdes_permit": "RI0100072",
     "outfall": "213A",
@@ -16740,6 +16943,13 @@
      }
     ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   },
+   "replaced_match": {
+    "water_slug": "pawtucket-river-ri",
+    "water_name": "Pawtucket River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
    }
   },
   {
@@ -16758,10 +16968,10 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110004911926",
    "lat": 41.87417,
    "lon": -71.38472,
-   "water_slug": "pawtucket-river-ri",
-   "water_name": "Pawtucket River",
+   "water_slug": "seekonk-river-pawtucket-ri",
+   "water_name": "Seekonk River",
    "water_kind": "river",
-   "distance_m": 33,
+   "distance_m": 27,
    "alternatives": [
     {
      "slug": "blackstone-river-ri",
@@ -16769,9 +16979,9 @@
      "distance_m": 277
     }
    ],
-   "match": "geometry",
-   "water_match": "EPA's point lies 33 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Seekonk River'; Seekonk River (seekonk-river-pawtucket-ri) lies 27 m from EPA's point, and Pawtucket River (pawtucket-river-ri), the nearest-water tie it replaces, 44 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
    "same_outfall_as": {
     "npdes_permit": "RI0100072",
     "outfall": "214A",
@@ -16787,6 +16997,13 @@
      }
     ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   },
+   "replaced_match": {
+    "water_slug": "pawtucket-river-ri",
+    "water_name": "Pawtucket River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
    }
   },
   {
@@ -16805,14 +17022,14 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110004911926",
    "lat": 41.8725,
    "lon": -71.38389,
-   "water_slug": "pawtucket-river-ri",
-   "water_name": "Pawtucket River",
+   "water_slug": "seekonk-river-pawtucket-ri",
+   "water_name": "Seekonk River",
    "water_kind": "river",
-   "distance_m": 13,
+   "distance_m": 29,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 13 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Seekonk River'; Seekonk River (seekonk-river-pawtucket-ri) lies 29 m from EPA's point, and Pawtucket River (pawtucket-river-ri), the nearest-water tie it replaces, 15 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
    "same_outfall_as": {
     "npdes_permit": "RI0100072",
     "outfall": "215A",
@@ -16828,6 +17045,13 @@
      }
     ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   },
+   "replaced_match": {
+    "water_slug": "pawtucket-river-ri",
+    "water_name": "Pawtucket River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
    }
   },
   {
@@ -16846,14 +17070,14 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110004911926",
    "lat": 41.86944,
    "lon": -71.38028,
-   "water_slug": "pawtucket-river-ri",
-   "water_name": "Pawtucket River",
+   "water_slug": "seekonk-river-pawtucket-ri",
+   "water_name": "Seekonk River",
    "water_kind": "river",
-   "distance_m": 67,
+   "distance_m": 68,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 67 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Seekonk River'; Seekonk River (seekonk-river-pawtucket-ri) lies 68 m from EPA's point, and Pawtucket River (pawtucket-river-ri), the nearest-water tie it replaces, 77 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
    "same_outfall_as": {
     "npdes_permit": "RI0100072",
     "outfall": "216A",
@@ -16869,6 +17093,13 @@
      }
     ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   },
+   "replaced_match": {
+    "water_slug": "pawtucket-river-ri",
+    "water_name": "Pawtucket River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
    }
   },
   {
@@ -16887,14 +17118,14 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110004911926",
    "lat": 41.86722,
    "lon": -71.38056,
-   "water_slug": "pawtucket-river-ri",
-   "water_name": "Pawtucket River",
+   "water_slug": "seekonk-river-pawtucket-ri",
+   "water_name": "Seekonk River",
    "water_kind": "river",
-   "distance_m": 58,
+   "distance_m": 64,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 58 m from Pawtucket River (pawtucket-river-ri), the nearest openboatlaunch water within 400 m; the receiving water ('Seekonk River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Seekonk River'; Seekonk River (seekonk-river-pawtucket-ri) lies 64 m from EPA's point, and Pawtucket River (pawtucket-river-ri), the nearest-water tie it replaces, 76 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
    "same_outfall_as": {
     "npdes_permit": "RI0100072",
     "outfall": "217A",
@@ -16910,6 +17141,13 @@
      }
     ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   },
+   "replaced_match": {
+    "water_slug": "pawtucket-river-ri",
+    "water_name": "Pawtucket River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
    }
   },
   {
@@ -20438,14 +20676,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110010911102",
    "lat": 44.4105,
    "lon": -72.01825,
-   "water_slug": "passumpsic-river-vt",
-   "water_name": "Passumpsic River",
+   "water_slug": "sleepers-river-vt",
+   "water_name": "Sleepers River",
    "water_kind": "river",
-   "distance_m": 326,
+   "distance_m": 135,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 326 m from Passumpsic River (passumpsic-river-vt), the nearest openboatlaunch water within 400 m; the receiving water ('SLEEPERS RIVER') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'SLEEPERS RIVER'; Sleepers River (sleepers-river-vt) lies 135 m from EPA's point, and Passumpsic River (passumpsic-river-vt), the nearest-water tie it replaces, 428 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "passumpsic-river-vt",
+    "water_name": "Passumpsic River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "VT0100579",
@@ -20943,14 +21188,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110010911102",
    "lat": 44.4105,
    "lon": -72.01825,
-   "water_slug": "passumpsic-river-vt",
-   "water_name": "Passumpsic River",
+   "water_slug": "sleepers-river-vt",
+   "water_name": "Sleepers River",
    "water_kind": "river",
-   "distance_m": 326,
+   "distance_m": 135,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 326 m from Passumpsic River (passumpsic-river-vt), the nearest openboatlaunch water within 400 m; the receiving water ('Sleepers River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Sleepers River'; Sleepers River (sleepers-river-vt) lies 135 m from EPA's point, and Passumpsic River (passumpsic-river-vt), the nearest-water tie it replaces, 428 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "passumpsic-river-vt",
+    "water_name": "Passumpsic River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "VT0100579",
@@ -20968,14 +21220,21 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110010911102",
    "lat": 44.4105,
    "lon": -72.01825,
-   "water_slug": "passumpsic-river-vt",
-   "water_name": "Passumpsic River",
+   "water_slug": "sleepers-river-vt",
+   "water_name": "Sleepers River",
    "water_kind": "river",
-   "distance_m": 326,
+   "distance_m": 135,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 326 m from Passumpsic River (passumpsic-river-vt), the nearest openboatlaunch water within 400 m; the receiving water ('Sleepers River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Sleepers River'; Sleepers River (sleepers-river-vt) lies 135 m from EPA's point, and Passumpsic River (passumpsic-river-vt), the nearest-water tie it replaces, 428 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "passumpsic-river-vt",
+    "water_name": "Passumpsic River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "VT0100579",
@@ -22317,14 +22576,21 @@
    "echo_url": "",
    "lat": 44.5272754,
    "lon": -69.6563083,
-   "water_slug": "kennebec-river-me",
-   "water_name": "Kennebec River",
-   "water_kind": "river",
-   "distance_m": 178,
+   "water_slug": "messalonskee-stream-me",
+   "water_name": "Messalonskee Stream",
+   "water_kind": "stream",
+   "distance_m": 114,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 178 m from Kennebec River (kennebec-river-me), the nearest openboatlaunch water within 400 m; the receiving water ('Messalonskee Stream') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Messalonskee Stream'; Messalonskee Stream (messalonskee-stream-me) lies 114 m from EPA's point, and Kennebec River (kennebec-river-me), the nearest-water tie it replaces, 202 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "kennebec-river-me",
+    "water_name": "Kennebec River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point"
+   }
   },
   {
    "npdes_permit": "MEU250309",
