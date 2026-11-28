@@ -4,7 +4,7 @@
  "waters": 0,
  "reports": 0,
  "resolved_names": 5,
- "resolved_reports": 53,
+ "resolved_reports": 55,
  "build": {
   "date": "2026-11-28",
   "command": "python -m ingest.waters_from_nhd --names research/oh/receiving-waters-followup-2026-11-28.json --state OH --hand-only",
@@ -33,7 +33,7 @@
   },
   {
    "name": "Spring Creek",
-   "reports": 19,
+   "reports": 21,
    "slugs": [
     "spring-creek-oh"
    ],
