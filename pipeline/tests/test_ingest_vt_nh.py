@@ -227,7 +227,8 @@ def test_an_all_clear_is_kept_in_the_file_and_is_never_an_event(tmp_path):
                                                     "count": len(rs), "records": rs}))
     files, events, problems = S.load_events(d)
     assert not problems and [e["event_id"] for e in events] == [a["event_id"]]
-    assert files["nh-permittees"]["no_discharge_notices"] == 2 and files["nh-permittees"]["records"] == 3
+    # the source's published count is its reports; the notices are counted apart
+    assert files["nh-permittees"]["no_discharge_notices"] == 2 and files["nh-permittees"]["records"] == 1
     assert files["nh-manchester-cso-email"]["no_discharge_notices"] == 1
 
 
@@ -241,6 +242,107 @@ def test_an_all_clear_starts_no_window_even_if_it_reaches_the_status_rules():
     NH.pair_manchester([a, c])
     assert S._event_intervals(c, "NH", now, None, rules) == []
     assert S._event_intervals(a, "NH", now, None, rules)                # the activation keeps its windows
+
+
+def _write_events(d, sid, rs):
+    import json
+    (d / f"{sid}.json").write_text(json.dumps({"source_id": sid, "fetched_at": "2026-11-20T10:00:00Z", "ok": True,
+                                                "count": len(rs), "records": rs}))
+
+
+def _mail(rid, kind, at, **f):
+    return event(source_id="nh-manchester-cso-email", source_record_id=rid, event_type="cso",
+                 status="ongoing" if kind == "activation" else "ended", reported_at=at, published_at=at,
+                 time_precision="minute", raw={"_channel": "email", "kind": kind, "_all_clear_hours": 12}, **f)
+
+
+def test_an_all_clear_that_came_by_e_mail_only_still_ends_the_page_activation(tmp_path):
+    """The e-mail all-clear bounds the e-mail activation, which is shown as the copy of the page's post; with the
+    all-clear no longer an event, the page's post takes that bound, or it would read as never ended."""
+    from datetime import UTC, datetime
+    from ingest.mail import manchester as M
+    S = _status()
+    post = mh(1, "activation", "2026-11-12T16:00:00-05:00")
+    NH.pair_manchester([post])
+    assert post["status"] == "ongoing"
+    a = _mail("a", "activation", "2026-11-12T16:05:00-05:00")
+    c = _mail("c", "all_clear", "2026-11-13T04:10:00-05:00")
+    M.pair([a, c])
+    assert M.link_page([a, c], [post]) == 1 and a["duplicate_of"] == post["event_id"]
+    d = tmp_path / "events"
+    d.mkdir()
+    _write_events(d, "nh-permittees", [post])
+    _write_events(d, "nh-manchester-cso-email", [a, c])
+    _, events, _ = S.load_events(d)
+    shown = next(e for e in events if e["event_id"] == post["event_id"])
+    assert shown["status"] == "ended" and shown["time_precision"] == "bound"
+    assert shown["raw"]["_ended_before"] == a["raw"]["_ended_before"] == "2026-11-12T16:10:00-05:00"
+    assert shown["raw"]["_ended_before_from"] == a["event_id"] and "e-mail" in shown["raw"]["_ended_before_basis"]
+    rules = S.read_json(S.DATA_DIR / "rules.json")
+    ivs = S._event_intervals(shown, "NH", datetime(2026, 11, 13, 12, 0, tzinfo=UTC), None, rules)
+    assert any(iv["rule"] == "authority_window" for iv in ivs)          # the 72 hours after the bound still count
+    # a page post with its own end keeps it
+    post2 = mh(2, "activation", "2026-11-12T16:00:00-05:00")
+    clear2 = mh(3, "all_clear", "2026-11-13T09:00:00-05:00")
+    NH.pair_manchester([post2, clear2])
+    a2 = _mail("a2", "activation", "2026-11-12T16:05:00-05:00")
+    c2 = _mail("c2", "all_clear", "2026-11-13T04:10:00-05:00")
+    M.pair([a2, c2])
+    M.link_page([a2, c2], [post2, clear2])
+    _write_events(d, "nh-permittees", [post2, clear2])
+    _write_events(d, "nh-manchester-cso-email", [a2, c2])
+    _, events, _ = S.load_events(d)
+    shown = next(e for e in events if e["event_id"] == post2["event_id"])
+    assert shown["raw"]["_ended_before"] == "2026-11-12T21:00:00-05:00" and "_ended_before_from" not in shown["raw"]
+
+
+def test_a_record_linked_to_a_dropped_all_clear_stands_on_its_own(tmp_path):
+    S = _status()
+    clear = mh(4, "all_clear", "2026-11-13T04:10:00-05:00")
+    NH.pair_manchester([clear])
+    stale = _mail("stale", "activation", "2026-11-12T16:00:00-05:00", duplicate_of=clear["event_id"],
+                  parent_event_id=clear["event_id"])
+    d = tmp_path / "events"
+    d.mkdir()
+    _write_events(d, "nh-permittees", [clear])
+    _write_events(d, "nh-manchester-cso-email", [stale])
+    _, events, _ = S.load_events(d)
+    assert [(e["event_id"], e["duplicate_of"], e["parent_event_id"]) for e in events] == [(stale["event_id"], None, None)]
+
+
+def test_an_all_clear_bounds_by_the_hours_it_states_and_never_by_hours_it_does_not():
+    def post(item, title, body, at):
+        r = mh(item, "other", at)
+        r["raw"].update(title=title, body=body)
+        return r
+    a = mh(1, "activation", "2026-11-12T08:00:00-05:00")
+    six = post(2, "City of Manchester CSO Notification",
+               "the City of Manchester has experienced no CSO activations during the past 6 hours.",
+               "2026-11-12T12:00:00-05:00")
+    NH.pair_manchester([a, six])
+    assert six["raw"]["kind"] == "all_clear" and six["raw"]["_all_clear_hours"] == 6
+    assert a["raw"]["_ended_before"] == "2026-11-12T06:00:00-05:00" and "6 Hours" in a["raw"]["_ended_before_basis"]
+    b = mh(3, "activation", "2026-11-14T08:00:00-05:00")
+    none = post(4, "City of Manchester CSO Notification",
+                "the City of Manchester has experienced no CSO activations.", "2026-11-14T12:00:00-05:00")
+    NH.pair_manchester([b, none])
+    assert none["raw"]["_all_clear_hours"] is None
+    assert b["raw"]["_ended_before"] == "2026-11-14T12:00:00-05:00" and "12 Hours" not in b["raw"]["_ended_before_basis"]
+    c = mh(5, "activation", "2026-11-15T08:00:00-05:00")
+    title = post(6, "City Of Manchester CSO Notification - No Activations for 12 Hours", "", "2026-11-16T12:00:00-05:00")
+    NH.pair_manchester([c, title])
+    assert c["raw"]["_ended_before"] == "2026-11-16T00:00:00-05:00"
+    assert NH.manchester_clear_hours("x - No Activations for 12 Hours",
+                                     "has experienced no CSO activations during the past 6 hours") == 6
+
+
+def test_an_all_clear_is_not_counted_among_the_rain_history_reports():
+    from build import rain_history as RH
+    a = mh(1, "activation", "2026-11-12T16:04:00-05:00")
+    c = mh(2, "all_clear", "2026-11-13T04:09:00-05:00")
+    NH.pair_manchester([a, c])
+    spans = RH.report_spans([a, c], lambda r: r.get("npdes_permit"))
+    assert spans[None] == {"NH0100447": {"no_start": 1}}                # the activation only
 
 
 # --------------------------------------------------------------------------- NH #14

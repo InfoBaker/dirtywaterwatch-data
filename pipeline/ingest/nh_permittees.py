@@ -287,7 +287,8 @@ def nashua(pdf: bytes, fetched_at: str) -> list[dict]:
 
 # --------------------------------------------------------------------------- Manchester
 
-_MAN_CLEAR = re.compile(r"(?i)has experienced no CSO activations\b")
+_MAN_CLEAR = re.compile(r"(?i)has experienced no CSO activations\b(?:\s+during the past\s+(\d+)\s+hours)?")
+_MAN_TITLE_HOURS = re.compile(r"(?i)no activations? for\s+(\d+)\s+hours")
 _MAN_ACTIVATION = re.compile(r"(?i)has experienced CSO activations\b")
 
 
@@ -301,6 +302,16 @@ def manchester_kind(title: str | None, body: str | None) -> str:
     if _MAN_ACTIVATION.search(body):
         return "activation"
     return "all_clear" if "no activation" in low else ("activation" if "activation" in low else "other")
+
+
+def manchester_clear_hours(title: str | None, body: str | None) -> int | None:
+    """The hours an all-clear states ("during the past 12 hours", or the title's "No Activations for 12 Hours");
+    None when it states none, and then the notice bounds an end by its own publication time only."""
+    m = _MAN_CLEAR.search(body or "")
+    if m and m.group(1):
+        return int(m.group(1))
+    m = _MAN_TITLE_HOURS.search(title or "")
+    return int(m.group(1)) if m else None
 
 
 def _manchester_fields(kind: str) -> dict:
@@ -367,9 +378,19 @@ def pair_manchester(records: list[dict]) -> None:
             r["raw"].pop("_ended_before_basis", None)
             open_acts.append(r)
         elif kind == "all_clear":
-            bound = (datetime.fromisoformat(r["reported_at"]) - timedelta(hours=12)).isoformat()
-            basis = (f"'No Activations for 12 Hours' notice {r['raw']['item_id']} ({r['raw'].get('published')}): "
-                     f"no activation in the 12 hours before it was published")
+            # the hours the notice itself states; a record kept from before the body was read (no title, no body:
+            # the title then said "No Activations for 12 Hours") reads as 12; a notice that states none bounds the
+            # end by its publication only (Astra 2026-11-27 P2: never a 12 the notice did not say)
+            stated = "title" in r["raw"] or "body" in r["raw"]
+            hours = manchester_clear_hours(r["raw"].get("title"), r["raw"].get("body")) if stated else 12
+            r["raw"]["_all_clear_hours"] = hours
+            bound = (datetime.fromisoformat(r["reported_at"]) - timedelta(hours=hours or 0)).isoformat()
+            if hours:
+                basis = (f"'No Activations for {hours} Hours' notice {r['raw']['item_id']} "
+                         f"({r['raw'].get('published')}): no activation in the {hours} hours before it was published")
+            else:
+                basis = (f"no-activation notice {r['raw']['item_id']} ({r['raw'].get('published')}), which states no "
+                         f"period: no activation at the time it was published")
             r["parent_event_id"] = open_acts[-1]["event_id"] if open_acts else None
             r.update(status="ended", time_precision="bound")
             r["raw"]["_ended_before"], r["raw"]["_ended_before_basis"] = bound, basis

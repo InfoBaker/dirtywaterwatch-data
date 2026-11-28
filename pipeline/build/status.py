@@ -783,6 +783,7 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
     and the publish failed the wording scan). None (tests, batches, audits with a scratch rules file) keeps every
     state's records as before."""
     files, events, problems = {}, [], []
+    dropped_notices: set = set()
     WITHHELD.clear()
     NOT_LIVE.clear()
     live_up = {str(x).upper() for x in live} if live is not None else None
@@ -816,6 +817,8 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
                 # a notice that no discharge happened (Manchester's all-clear): kept in the source's file, where it
                 # bounds the notices before it; never an event, a window, a place or a count
                 files[sid]["no_discharge_notices"] = files[sid].get("no_discharge_notices", 0) + 1
+                files[sid]["records"] -= 1
+                dropped_notices.add(r["event_id"])
                 continue
             r = dict(r)
             r["_fixture"] = fixture
@@ -837,7 +840,38 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
                     NOT_LIVE.append((sid, st))
                     continue
             events.append(r)
+    settle_dropped_notices(events, dropped_notices)
     return files, events, problems
+
+
+def settle_dropped_notices(events: list[dict], dropped: set) -> None:
+    """After the no-discharge notices are left out (common.no_discharge_notice), in place:
+    - a record linked to a dropped notice (duplicate_of, parent_event_id) stands on its own: a link to a record the
+      build does not hold would hide it (Astra 2026-11-27 P2);
+    - the end a notice gave an activation is carried to the record shown for it. The city's e-mail all-clear bounds
+      the e-mail activation, which is the copy of the page's post; where the page's post has no end of its own (the
+      all-clear came by e-mail only), it takes the copy's bound and basis, so the window the notice set is kept
+      (Astra 2026-11-27 P1). Only between two activation notices (raw.kind "activation") that an ingester linked, and
+      never over an end the shown record already has."""
+    by_id = {e["event_id"]: e for e in events}
+    for e in events:
+        for k in ("duplicate_of", "parent_event_id"):
+            if e.get(k) in dropped:
+                e[k] = None
+    for e in events:
+        t = by_id.get(e.get("duplicate_of"))
+        raw = e.get("raw") if isinstance(e.get("raw"), dict) else {}
+        if t is None or t is e or raw.get("kind") != "activation" or not raw.get("_ended_before") \
+                or e.get("status") != "ended" or e.get("time_precision") != "bound":
+            continue
+        traw = t.get("raw") if isinstance(t.get("raw"), dict) else {}
+        if traw.get("kind") != "activation" or t.get("ended_at") or traw.get("_ended_before") \
+                or t.get("status") == "ended":
+            continue
+        t["raw"] = {**traw, "_ended_before": raw["_ended_before"],
+                    "_ended_before_basis": raw.get("_ended_before_basis"),
+                    "_ended_before_from": e["event_id"]}
+        t.update(status="ended", time_precision="bound")
 
 
 # read last, in this order, tagged extra: OSM receiving waters, DC's NHD waters (ingest/dc_waters.py), the NHD
