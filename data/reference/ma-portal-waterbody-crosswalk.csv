@@ -16,17 +16,19 @@ WEST BRANCH WESTFIELD RIVER,,none,no slug for the West Branch
 MERRIMACK RIVER,merrimack-river-ma,high,Lowell/Lawrence/Haverhill
 MERIMACK RIVER,merrimack-river-ma,high,misspelling in Lowell records
 CONCORD RIVER,concord-river-ma,high,Lowell
-BEAVER BROOK,,none,Lowell's Beaver Brook; beaver-brook-ma is Westford (different stream)
-LITTLE RIVER,,none,Haverhill Little River - no slug
+BEAVER BROOK,,none,several Beaver Brooks in MA (beaver-brook-ma is Westford; beaver-brook-ware-ma is Ware); Lowell's has its own row below
+BEAVER BROOK@LOWELL,beaver-brook-lowell-ma,high,Lowell's Beaver Brook (outfall LOW007; the permit's 'Lower Beaver Brook'): the record beaver-brook-lowell-ma (Dracut and Lowell); registry water audit 2026-11-28
+LITTLE RIVER,,none,two Little Rivers in MA (little-river-ma is Haverhill; little-river-cambridge-ma is Cambridge); Haverhill's has its own row below
+LITTLE RIVER@HAVERHILL,little-river-ma,high,Haverhill's Little River (outfall HAV021B): the record little-river-ma (Haverhill); registry water audit 2026-11-28
 SPICKETT HARBOR,,none,GLSD/Lawrence - no MA Spicket slug (spicket-river-nh exists)
 CHARLES RIVER,charles-river-ma,high,
 CHARLES RIVER BASIN,charles-river-ma,high,
 MYSTIC RIVER,mystic-river-ma,high,
 ALEWIFE BROOK,,none,tributary of Mystic - no slug
-CHELSEA RIVER,,none,Chelsea Creek - no slug
+CHELSEA RIVER,chelsea-river-ma,high,Chelsea Creek (Boston outfall BOS014): the record chelsea-river-ma made since; registry water audit 2026-11-28
 LITTLE MYSTIC CHANNEL,,none,Boston Harbor - no slug
-BOSTON INNER HARBOR,,none,no Boston Harbor slug
-FORT POINT CHANNEL,,none,no slug
+BOSTON INNER HARBOR,boston-inner-harbor-ma,high,Boston outfalls BOS009 BOS010 BOS012: the record boston-inner-harbor-ma made since; registry water audit 2026-11-28
+FORT POINT CHANNEL,fort-point-channel-ma,high,Boston outfall BOS062: the record fort-point-channel-ma made since; registry water audit 2026-11-28
 RESERVED CHANNEL,,none,no slug
 MUDDY RIVER,,none,no slug
 DORCHESTER BAY,dorchester-bay-ma,high,
@@ -41,7 +43,7 @@ SALEM SOUND,,none,no slug (salem-harbor-ma is nearby)
 SANDY BAY,sandy-bay-ma,high,Rockport
 MANCHESTER BAY,,none,no slug
 TAUNTON RIVER,taunton-river-ma,high,Fall River/Taunton
-MOUNT HOPE BAY,,none,no MA slug
+MOUNT HOPE BAY,mount-hope-bay-ma,high,Fall River outfalls FAL002 FAL003 FAL006: the record mount-hope-bay-ma (Fall River and Somerset and Swansea) made since; registry water audit 2026-11-28
 QUEQUECHAN RIVER,,none,Fall River - no slug
 QUECUECHAN RIVER,,none,spelling variant
 ACUSHNET RIVER,acushnet-river-ma,high,New Bedford

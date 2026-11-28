@@ -142411,7 +142411,9 @@
   "notification_channel": "Notice to EGLE, the local health departments and a daily newspaper within 24 hours (MCL 324.3112a(1)); EGLE posts each notice on the MiEnviro CSO/SSO List (MCL 324.3112a(2)): https://mienviro.michigan.gov/ncore/external/overflow/list. As a Great Lakes CSO permittee it also owes public notice within 4 hours of becoming aware of a discharge under its public notification plan (40 CFR 122.38); the plan read (GLWA's) gives that notice through the same list. The operator's own pages were not searched individually.",
   "notification_feed_machine_readable": true,
   "notification_signup_url": null,
-  "towns": [],
+  "towns": [
+   "Manistee"
+  ],
   "notes": "Permittee from EPA ICIS-NPDES permit name; facility as EPA's CSO inventory names it.",
   "verified": "inferred",
   "checked": "2026-11-04",
