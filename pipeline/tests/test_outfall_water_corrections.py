@@ -44,7 +44,7 @@ def test_every_entry_names_a_record_of_its_state_with_its_name_and_kind():
     from build import status as S
     waters = S.load_waters()
     cs = H.load()
-    assert len(cs) == 150
+    assert len(cs) == 173
     for c in cs:
         w = waters.get(c["water_slug"])
         assert w, c["water_slug"]

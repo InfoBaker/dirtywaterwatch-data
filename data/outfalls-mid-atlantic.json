@@ -19337,14 +19337,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000760515",
    "lat": 43.1758333,
    "lon": -78.686666,
-   "water_slug": "erie-canal-albion-ny",
-   "water_name": "Erie Canal",
-   "water_kind": "canal",
-   "distance_m": 49,
+   "water_slug": "eighteenmile-creek-lockport-ny",
+   "water_name": "Eighteenmile Creek",
+   "water_kind": "river",
+   "distance_m": 210,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 49 m from Erie Canal (erie-canal-albion-ny), the nearest openboatlaunch water within 400 m; the receiving water ('Eighteenmile Creek') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Eighteenmile Creek'; Eighteenmile Creek (eighteenmile-creek-lockport-ny) lies 210 m from EPA's point, the only record of the name near it, and Erie Canal (erie-canal-albion-ny), the nearest-water tie it replaces, 54 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "erie-canal-albion-ny",
+    "water_name": "Erie Canal",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "canal",
+    "distance_m": 49,
+    "water_match": "EPA's point lies 49 m from Erie Canal (erie-canal-albion-ny), the nearest openboatlaunch water within 400 m; the receiving water ('Eighteenmile Creek') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "NY0027057",
@@ -19362,14 +19372,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000760515",
    "lat": 43.1755555,
    "lon": -78.686944,
-   "water_slug": "erie-canal-albion-ny",
-   "water_name": "Erie Canal",
-   "water_kind": "canal",
-   "distance_m": 42,
+   "water_slug": "eighteenmile-creek-lockport-ny",
+   "water_name": "Eighteenmile Creek",
+   "water_kind": "river",
+   "distance_m": 184,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 42 m from Erie Canal (erie-canal-albion-ny), the nearest openboatlaunch water within 400 m; the receiving water ('Eighteenmile Creek') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Eighteenmile Creek'; Eighteenmile Creek (eighteenmile-creek-lockport-ny) lies 184 m from EPA's point, the only record of the name near it, and Erie Canal (erie-canal-albion-ny), the nearest-water tie it replaces, 46 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "erie-canal-albion-ny",
+    "water_name": "Erie Canal",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "canal",
+    "distance_m": 42,
+    "water_match": "EPA's point lies 42 m from Erie Canal (erie-canal-albion-ny), the nearest openboatlaunch water within 400 m; the receiving water ('Eighteenmile Creek') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "NY0027057",
@@ -19412,14 +19432,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000760515",
    "lat": 43.1752777,
    "lon": -78.687222,
-   "water_slug": "erie-canal-albion-ny",
-   "water_name": "Erie Canal",
-   "water_kind": "canal",
-   "distance_m": 35,
+   "water_slug": "eighteenmile-creek-lockport-ny",
+   "water_name": "Eighteenmile Creek",
+   "water_kind": "river",
+   "distance_m": 143,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 35 m from Erie Canal (erie-canal-albion-ny), the nearest openboatlaunch water within 400 m; the receiving water ('Eighteenmile Creek') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Eighteenmile Creek'; Eighteenmile Creek (eighteenmile-creek-lockport-ny) lies 143 m from EPA's point, the only record of the name near it, and Erie Canal (erie-canal-albion-ny), the nearest-water tie it replaces, 38 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "erie-canal-albion-ny",
+    "water_name": "Erie Canal",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "canal",
+    "distance_m": 35,
+    "water_match": "EPA's point lies 35 m from Erie Canal (erie-canal-albion-ny), the nearest openboatlaunch water within 400 m; the receiving water ('Eighteenmile Creek') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "NY0027073",
@@ -29027,14 +29057,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110001063312",
    "lat": 39.736944,
    "lon": -79.903611,
-   "water_slug": "monongahela-river-pa",
-   "water_name": "Monongahela River",
-   "water_kind": "river",
-   "distance_m": 88,
+   "water_slug": "camp-run-pa",
+   "water_name": "Camp Run",
+   "water_kind": "stream",
+   "distance_m": 195,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 88 m from Monongahela River (monongahela-river-pa), the nearest openboatlaunch water within 400 m; the receiving water ('Camp Run') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Camp Run'; Camp Run (camp-run-pa) lies 195 m from EPA's point, the only record of the name near it, and Monongahela River (monongahela-river-pa), the nearest-water tie it replaces, 110 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "monongahela-river-pa",
+    "water_name": "Monongahela River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "river",
+    "distance_m": 88,
+    "water_match": "EPA's point lies 88 m from Monongahela River (monongahela-river-pa), the nearest openboatlaunch water within 400 m; the receiving water ('Camp Run') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "PA0021407",
@@ -36328,20 +36368,30 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110001085076",
    "lat": 40.446912,
    "lon": -80.024803,
-   "water_slug": "ohio-river-pa",
-   "water_name": "Ohio River",
-   "water_kind": "river",
-   "distance_m": 131,
+   "water_slug": "sawmill-run-pa",
+   "water_name": "Sawmill Run",
+   "water_kind": "stream",
+   "distance_m": 231,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 131 m from Ohio River (ohio-river-pa), the nearest openboatlaunch water within 400 m; the receiving water ('Sawmill Run') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Sawmill Run'; Sawmill Run (sawmill-run-pa) lies 231 m from EPA's point, the only record of the name near it, and Ohio River (ohio-river-pa), the nearest-water tie it replaces, 134 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
    "also_permits": [
     {
      "npdes_permit": "PA0217611",
      "outfall": "056"
     }
-   ]
+   ],
+   "replaced_match": {
+    "water_slug": "ohio-river-pa",
+    "water_name": "Ohio River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "river",
+    "distance_m": 131,
+    "water_match": "EPA's point lies 131 m from Ohio River (ohio-river-pa), the nearest openboatlaunch water within 400 m; the receiving water ('Sawmill Run') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "PA0025984",
@@ -51396,14 +51446,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000550476",
    "lat": 40.550833,
    "lon": -79.765556,
-   "water_slug": "allegheny-river-pa",
-   "water_name": "Allegheny River",
-   "water_kind": "river",
-   "distance_m": 32,
+   "water_slug": "pucketa-creek-pa",
+   "water_name": "Pucketa Creek",
+   "water_kind": "stream",
+   "distance_m": 183,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 32 m from Allegheny River (allegheny-river-pa), the nearest openboatlaunch water within 400 m; the receiving water ('Pucketa Creek') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Pucketa Creek'; Pucketa Creek (pucketa-creek-pa) lies 183 m from EPA's point, the only record of the name near it, and Allegheny River (allegheny-river-pa), the nearest-water tie it replaces, 39 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "allegheny-river-pa",
+    "water_name": "Allegheny River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "river",
+    "distance_m": 32,
+    "water_match": "EPA's point lies 32 m from Allegheny River (allegheny-river-pa), the nearest openboatlaunch water within 400 m; the receiving water ('Pucketa Creek') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "PA0027111",
@@ -61358,14 +61418,14 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110017754072",
    "lat": 40.446912,
    "lon": -80.024803,
-   "water_slug": "ohio-river-pa",
-   "water_name": "Ohio River",
-   "water_kind": "river",
-   "distance_m": 131,
+   "water_slug": "sawmill-run-pa",
+   "water_name": "Sawmill Run",
+   "water_kind": "stream",
+   "distance_m": 231,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 131 m from Ohio River (ohio-river-pa), the nearest openboatlaunch water within 400 m; the receiving water ('Sawmill Run') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)",
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Sawmill Run'; Sawmill Run (sawmill-run-pa) lies 231 m from EPA's point, the only record of the name near it, and Ohio River (ohio-river-pa), the nearest-water tie it replaces, 134 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
    "same_outfall_as": {
     "npdes_permit": "PA0025984",
     "outfall": "212",
@@ -61387,6 +61447,16 @@
      }
     ],
     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   },
+   "replaced_match": {
+    "water_slug": "ohio-river-pa",
+    "water_name": "Ohio River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "river",
+    "distance_m": 131,
+    "water_match": "EPA's point lies 131 m from Ohio River (ohio-river-pa), the nearest openboatlaunch water within 400 m; the receiving water ('Sawmill Run') does not share its name; scripts/match_outfalls.py"
    }
   },
   {
@@ -74686,14 +74756,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110039833525",
    "lat": 40.59528,
    "lon": -79.75833,
-   "water_slug": "allegheny-river-pa",
-   "water_name": "Allegheny River",
-   "water_kind": "river",
-   "distance_m": 15,
+   "water_slug": "bull-creek-pa",
+   "water_name": "Bull Creek",
+   "water_kind": "stream",
+   "distance_m": 131,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 15 m from Allegheny River (allegheny-river-pa), the nearest openboatlaunch water within 400 m; the receiving water ('Bull Creek') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Bull Creek'; Bull Creek (bull-creek-pa) lies 131 m from EPA's point, the only record of the name near it, and Allegheny River (allegheny-river-pa), the nearest-water tie it replaces, 16 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "allegheny-river-pa",
+    "water_name": "Allegheny River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "river",
+    "distance_m": 15,
+    "water_match": "EPA's point lies 15 m from Allegheny River (allegheny-river-pa), the nearest openboatlaunch water within 400 m; the receiving water ('Bull Creek') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "PA0027391",

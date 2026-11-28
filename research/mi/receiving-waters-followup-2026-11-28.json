@@ -1,0 +1,45 @@
+{
+ "about": "Receiving-water names of reports that name a registered outfall and sat on no water page, for which the waters follow-up of 2026-11-28 found a public line and a public name (research/registry/waters-followup-2026-11-28.md): for python -m ingest.waters_from_nhd --names <this file> --state MI --hand-only, which builds only the hand records that name this file (ingest/waters_from_nhd.py HAND, names_file). Points are the outfalls' own.",
+ "state": "MI",
+ "waters": 0,
+ "reports": 0,
+ "resolved_names": 1,
+ "resolved_reports": 105,
+ "build": {
+  "date": "2026-11-28",
+  "command": "python -m ingest.waters_from_nhd --names research/mi/receiving-waters-followup-2026-11-28.json --state MI --hand-only",
+  "records_built": 5,
+  "names_resolved": 5,
+  "network_requests": 6
+ },
+ "rows": [],
+ "resolved": [
+  {
+   "name": "St. Louis Creek",
+   "reports": 105,
+   "slugs": [
+    "st-louis-creek-mi"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     47.2339669,
+     -88.428109
+    ]
+   ],
+   "towns": [
+    "Calumet"
+   ]
+  }
+ ],
+ "left_after_review": {
+  "names": [
+   "Big Beaver Creek",
+   "Holly Drain",
+   "Crystal Creek",
+   "Bradshaw Drain"
+  ],
+  "reports": 4,
+  "why": "left: a statewide name with no locality check. Michigan is not a county state in the resolver, so a report with no point naming one of these common names in another county would take the record; the four records were built and then removed (research/registry/waters-followup-2026-11-28.md)"
+ }
+}

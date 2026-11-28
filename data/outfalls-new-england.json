@@ -3021,14 +3021,28 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000732592",
    "lat": 41.7118901,
    "lon": -71.1589881,
-   "water_slug": "narragansett-bay-ma",
-   "water_name": "Narragansett Bay",
-   "water_kind": "bay",
-   "distance_m": 285,
+   "water_slug": "taunton-river-ma",
+   "water_name": "Taunton River",
+   "water_kind": "river",
+   "distance_m": 560,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 285 m from Narragansett Bay (narragansett-bay-ma), the nearest openboatlaunch water within 400 m; the receiving water ('Taunton River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "permit_stated",
+   "water_match": "hand correction: the permit's receiving water for outfall 010 (City Pier, Fall River) is 'Taunton River' in EPA's CSO inventory and in MassDEP's own CSO outfall layer (FAL010, RECVING_WA 'TAUNTON RIVER', at 41.711899, -71.158989, the same point as EPA's), and MassDEP's CSO portal reports for the outfall are placed on the Taunton River; the Taunton River's record (taunton-river-ma, a centre line) lies 560 m from that point, beyond the tie distance, and Mount Hope Bay's outline 7 m, so the tie rests on the permit's statement and no stretch is modeled from the point; Narragansett Bay (narragansett-bay-ma), the nearest-water tie it replaces, 359 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "narragansett-bay-ma",
+    "water_name": "Narragansett Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "bay",
+    "distance_m": 285,
+    "water_match": "EPA's point lies 285 m from Narragansett Bay (narragansett-bay-ma), the nearest openboatlaunch water within 400 m; the receiving water ('Taunton River') does not share its name; scripts/match_outfalls.py"
+   },
+   "distance_from": [
+    41.7118901,
+    -71.1589881
+   ]
   },
   {
    "npdes_permit": "MA0100382",
@@ -11528,14 +11542,28 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000568877",
    "lat": 43.673111,
    "lon": -70.251389,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "back-cove-me",
+   "water_name": "Back Cove",
    "water_kind": "bay",
-   "distance_m": 47,
+   "distance_m": 644,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 47 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "permit_stated",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Back Cove'; EPA's point (the permit's shared point) lies 644 m from Back Cove (back-cove-me), beyond the tie distance, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 47 m, so the tie rests on the stated water: Maine DEP's outfall layer gives outfall 006 ('Johansen Street') the waterbody 'BACK COVE' at its own point (43.679151, -70.264745), 0 m from Back Cove (back-cove-me); EPA's point is the permit's shared point for its open CSOs, so EPA's distance says nothing about the outfall; back-cove-me lies almost wholly inside casco-bay-me's outline, so the change narrows the water rather than moving it",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "bay",
+    "distance_m": 47,
+    "water_match": "EPA's point lies 47 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py"
+   },
+   "distance_from": [
+    43.673111,
+    -70.251389
+   ]
   },
   {
    "npdes_permit": "ME0101435",
@@ -12080,14 +12108,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000568877",
    "lat": 43.673944,
    "lon": -70.254389,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "back-cove-me",
+   "water_name": "Back Cove",
    "water_kind": "bay",
-   "distance_m": 0,
+   "distance_m": 297,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Back Cove'; Back Cove (back-cove-me) lies 297 m from EPA's point, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 0 m; Maine DEP's outfall layer gives outfall 005 ('Randall Street') the waterbody 'BACK COVE' at its own point (43.678646, -70.262426), 2 m from Back Cove (back-cove-me); EPA's point is the permit's shared point for its open CSOs, so EPA's distance says nothing about the outfall; back-cove-me lies almost wholly inside casco-bay-me's outline, so the change narrows the water rather than moving it",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "bay",
+    "distance_m": 0,
+    "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "ME0102075",
@@ -12105,14 +12143,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000568877",
    "lat": 43.673944,
    "lon": -70.254389,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "back-cove-me",
+   "water_name": "Back Cove",
    "water_kind": "bay",
-   "distance_m": 0,
+   "distance_m": 297,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Back Cove'; Back Cove (back-cove-me) lies 297 m from EPA's point, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 0 m; Maine DEP's outfall layer gives outfall 007 ('Ocean Avenue') the waterbody 'BACK COVE' at its own point (43.679695, -70.270885), 4 m from Back Cove (back-cove-me); EPA's point is the permit's shared point for its open CSOs, so EPA's distance says nothing about the outfall; back-cove-me lies almost wholly inside casco-bay-me's outline, so the change narrows the water rather than moving it",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "bay",
+    "distance_m": 0,
+    "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "ME0102075",
@@ -12258,14 +12306,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000568877",
    "lat": 43.673944,
    "lon": -70.254389,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "back-cove-me",
+   "water_name": "Back Cove",
    "water_kind": "bay",
-   "distance_m": 0,
+   "distance_m": 297,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Back Cove'; Back Cove (back-cove-me) lies 297 m from EPA's point, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 0 m; Maine DEP's outfall layer gives outfall 012 ('Vannah Avenue') the waterbody 'BACK COVE' at its own point (43.670953, -70.277336), 0 m from Back Cove (back-cove-me); EPA's point is the permit's shared point for its open CSOs, so EPA's distance says nothing about the outfall; back-cove-me lies almost wholly inside casco-bay-me's outline, so the change narrows the water rather than moving it",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "bay",
+    "distance_m": 0,
+    "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "ME0102075",
@@ -12283,14 +12341,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000568877",
    "lat": 43.673944,
    "lon": -70.254389,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "back-cove-me",
+   "water_name": "Back Cove",
    "water_kind": "bay",
-   "distance_m": 0,
+   "distance_m": 297,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Back Cove'; Back Cove (back-cove-me) lies 297 m from EPA's point, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 0 m; Maine DEP's outfall layer gives outfall 015 ('Dartmouth At Baxter') the waterbody 'BACK COVE' at its own point (43.669029, -70.276266), 0 m from Back Cove (back-cove-me); EPA's point is the permit's shared point for its open CSOs, so EPA's distance says nothing about the outfall; back-cove-me lies almost wholly inside casco-bay-me's outline, so the change narrows the water rather than moving it",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "bay",
+    "distance_m": 0,
+    "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "ME0102075",
@@ -12308,14 +12376,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000568877",
    "lat": 43.673944,
    "lon": -70.254389,
-   "water_slug": "casco-bay-me",
-   "water_name": "Casco Bay",
+   "water_slug": "back-cove-me",
+   "water_name": "Back Cove",
    "water_kind": "bay",
-   "distance_m": 0,
+   "distance_m": 297,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'Back Cove'; Back Cove (back-cove-me) lies 297 m from EPA's point, and Casco Bay (casco-bay-me), the nearest-water tie it replaces, 0 m; Maine DEP's outfall layer gives outfall 016 ('Bank Road') the waterbody 'BACK COVE' at its own point (43.665489, -70.270684), 0 m from Back Cove (back-cove-me); EPA's point is the permit's shared point for its open CSOs, so EPA's distance says nothing about the outfall; back-cove-me lies almost wholly inside casco-bay-me's outline, so the change narrows the water rather than moving it",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "casco-bay-me",
+    "water_name": "Casco Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "bay",
+    "distance_m": 0,
+    "water_match": "EPA's point lies 0 m from Casco Bay (casco-bay-me), the nearest openboatlaunch water within 400 m; the receiving water ('Back Cove') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "ME0102075",
@@ -21933,14 +22011,24 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110002047464",
    "lat": 43.646389,
    "lon": -72.31475,
-   "water_slug": "connecticut-river-vt",
-   "water_name": "Connecticut River",
+   "water_slug": "white-river-vt",
+   "water_name": "White River",
    "water_kind": "river",
-   "distance_m": 119,
+   "distance_m": 249,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 119 m from Connecticut River (connecticut-river-vt), the nearest openboatlaunch water within 400 m; the receiving water ('WHITE RIVER') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in EPA's CSO inventory is 'WHITE RIVER'; White River (white-river-vt) lies 249 m from EPA's point, the only record of the name near it, and Connecticut River (connecticut-river-vt), the nearest-water tie it replaces, 165 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "connecticut-river-vt",
+    "water_name": "Connecticut River",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "river",
+    "distance_m": 119,
+    "water_match": "EPA's point lies 119 m from Connecticut River (connecticut-river-vt), the nearest openboatlaunch water within 400 m; the receiving water ('WHITE RIVER') does not share its name; scripts/match_outfalls.py"
+   }
   },
   {
    "npdes_permit": "VT0101010",

@@ -1,0 +1,35 @@
+{
+ "about": "Receiving-water names of reports that name a registered outfall and sat on no water page, for which the waters follow-up of 2026-11-28 found a public line and a public name (research/registry/waters-followup-2026-11-28.md): for python -m ingest.waters_from_nhd --names <this file> --state WA --hand-only, which builds only the hand records that name this file (ingest/waters_from_nhd.py HAND, names_file). Points are the outfalls' own.",
+ "state": "WA",
+ "waters": 0,
+ "reports": 0,
+ "resolved_names": 1,
+ "resolved_reports": 1,
+ "build": {
+  "date": "2026-11-28",
+  "command": "python -m ingest.waters_from_nhd --names research/wa/receiving-waters-followup-2026-11-28.json --state WA --hand-only",
+  "records_built": 1,
+  "names_resolved": 1,
+  "network_requests": 3
+ },
+ "rows": [],
+ "resolved": [
+  {
+   "name": "Longfellow Creek",
+   "reports": 1,
+   "slugs": [
+    "longfellow-creek-wa"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     47.5291595,
+     -122.3638
+    ]
+   ],
+   "towns": [
+    "Seattle"
+   ]
+  }
+ ]
+}
