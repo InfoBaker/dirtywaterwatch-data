@@ -8,7 +8,9 @@ State objects:
                            on migration, changed membership, unknown markers or changed file bytes/source versions:
                            MD meta.table_version, CA state's last_modified and sha256, NY state's sha256. Checked/read clocks
                            are not source versions. Michigan, Baltimore, Houston and Miami-Dade remain hot:
-                           those histories still include changing/current reports.
+                           those histories still include changing/current reports. BEACON's complete feed (including
+                           rolling seasons) is also stored here: it pulls every 7/30 days, and the manifest detects
+                           any hourly relinking change. Its large saved-row companion is never copied into hot runtime.
                            A manifest checks every member digest and requires every named events file before
                            extraction. A fetch/unpack failure stops the run. Missing is allowed only before the
                            first split; frozen-required.json in hot state makes subsequent absence fatal.
@@ -1507,12 +1509,18 @@ FROZEN_SCHEMAS = {1: {
     "ca-swrcb-ciwqs-sso-2006-order": ("ca-swrcb-ciwqs-sso-2006-state.json",),
     "ny-dec-sprtk-2013-2021": ("ny-sprtk-history-state.json",),
 }}
+# BEACON rewrites from saved rows hourly but pulls only every 7/30 days. Keep its complete
+# feed together (historic and rolling seasons): links and first-read IDs retain their existing semantics.
+FROZEN_SCHEMAS[2] = {
+    "fed-beacon-beach-actions": ("fed-beacon-beach-actions-state.json",),
+}
 # Never remove a historical schema when changing the current packing configuration.
 FROZEN_FEEDS = {sid: FROZEN_SCHEMAS[1][sid] for sid in (
     "md-mde-sewer-overflows-2005-2023",
     "ca-swrcb-ciwqs-sso-2006-order",
     "ny-dec-sprtk-2013-2021",
 )}
+FROZEN_FEEDS.update(FROZEN_SCHEMAS[2])
 FROZEN_HOT = "frozen-hot.json"
 FROZEN_MANIFEST = "frozen-manifest.json"
 FROZEN_REQUIRED = "frozen-required.json"
@@ -1562,6 +1570,15 @@ def frozen_versions(root: Path = ROOT) -> dict:
             version = {"table_version": meta.get("table_version")}
         elif sid.startswith("ca-"):
             version = {k: state.get(k) for k in ("last_modified", "sha256")}
+        elif sid == "fed-beacon-beach-actions":
+            # No upstream version marker. Hash the saved rows, first-seen map and pull clock;
+            # the manifest separately hashes events, so a relink still forces replacement.
+            years = state.get("years")
+            if not state_path.exists() or not isinstance(years, dict) or not years or any(
+                    not isinstance(v, dict) or not isinstance(v.get("rows"), dict)
+                    for v in years.values()) or not any(v["rows"] for v in years.values()):
+                raise Unreadable("BEACON saved rows are missing or invalid")
+            version = {"sha256": hashlib.sha256(state_path.read_bytes()).hexdigest()}
         else:
             version = {"sha256": state.get("sha256")}
         versions[sid] = version
@@ -1622,6 +1639,10 @@ def pack_frozen(out: Path, root: Path = ROOT, baseline: Path | None = None) -> i
     # when an operational clock or companion changes; this map never substitutes for saved history bytes.
     runtime = {"versions": versions, "states": {}, "meta": {}}
     for sid, states in FROZEN_FEEDS.items():
+        # BEACON's companion contains the entire row history, not a tiny polling checkpoint.
+        # Its exact bytes (including pulled_at) already travel in frozen; never duplicate them hot.
+        if sid == "fed-beacon-beach-actions":
+            continue
         if sid in versions:
             meta = read_json_dict(build / f"events/{sid}.json").get("meta") or {}
             runtime["meta"][sid] = {k: meta[k] for k in (

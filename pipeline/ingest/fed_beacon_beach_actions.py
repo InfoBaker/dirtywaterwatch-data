@@ -118,8 +118,8 @@ MAIN_COLUMNS = ("Jurisdiction", "Year", "Beach ID", "BeachName", "County", "Wate
 DETAIL_COLUMNS = ("Jurisdiction", "Year", "Beach Id", "Activity ID", "Action Type", "Action StartDate",
                   "Action EndDate", "Action Reasons", "Action ReasonsComment", "Action Indicator",
                   "Action IndicatorComment", "Action Possible Source", "Action PossibleSourceComment")
-TYPE_CODE = {"Closure": "closure", "Contamination Advisory": "advisory", "Rain Advisory": "rain", "Posting": "posting"}
-EVENT_TYPE = {"Closure": "beach_closure", "Contamination Advisory": "beach_advisory", "Rain Advisory": "beach_advisory",
+TYPE_CODE = {"Closure": "closure", "Permanent Closure": "permanent-closure", "Contamination Advisory": "advisory", "Rain Advisory": "rain", "Posting": "posting"}
+EVENT_TYPE = {"Closure": "beach_closure", "Permanent Closure": "beach_closure", "Contamination Advisory": "beach_advisory", "Rain Advisory": "beach_advisory",
               "Posting": "beach_advisory"}
 # EPA's codes in plain words (ours, for a reader; the codes stay as filed in raw.reasons and the others)
 REASON_WORDS = {"ELEV_BACT": "bacteria above the state's standard", "RAINFALL": "rainfall",
@@ -276,7 +276,8 @@ def normalize(main_text: str, detail_text: str) -> tuple[dict[str, dict], Counte
     detail = defaultdict(list)
     for d in rows_of(detail_text):
         detail[d.get("Activity ID", "")].append(d)
-    rows = rows_of(main_text)
+    # Stable collision suffixes even when EPA reorders otherwise repeated report rows.
+    rows = sorted(rows_of(main_text), key=lambda r: tuple(sorted(r.items())))
     out, n = {}, Counter()
     for r in rows:
         ids = sorted(action_ids(r.get("Action ID")), key=_num)
@@ -285,7 +286,7 @@ def normalize(main_text: str, detail_text: str) -> tuple[dict[str, dict], Counte
             continue
         base = f"{ids[0]}-{TYPE_CODE.get(r.get('Action Type') or '') or _slug(r.get('Action Type'))}"
         key, i = base, 1
-        while key in out:              # the same ids and type twice in one report (not seen in 2014 to 2026)
+        while key in out:              # repeated ids/type: keep each row; the full source row determines suffix order
             i += 1
             key = f"{base}~{i}"
         ds = [d for a in ids for d in detail.get(a, [])]
@@ -302,6 +303,7 @@ def normalize(main_text: str, detail_text: str) -> tuple[dict[str, dict], Counte
             "end_text": r.get("ActionEnd Date") or None, "reasons": codes(r.get("ActionReasons")),
             "indicators": codes(r.get("ActionIndicator")), "possible_sources": codes(r.get("ActionPossible Source")),
             "duration_days": r.get("ActionDurationDays") or None,
+            "time_affected_hours_text": r.get("Time affected(in hours)") or None,
             "detail_rows": len(ds), **{k: v for k, v in comments.items() if v},
         }
         n["rows"] += 1
@@ -384,7 +386,7 @@ def to_record(row: dict, reg: dict | None, fetched_at: str, prev: dict | None, f
     praw = (prev or {}).get("raw") or {}
     raw = {k: row.get(k) for k in ("jurisdiction", "year", "beach_id", "beach_name", "county", "waterbody_name",
                                    "waterbody_type", "tier", "station_ids", "action_ids", "action_type", "reasons",
-                                   "indicators", "possible_sources", "duration_days", "start_text", "end_text",
+                                   "indicators", "possible_sources", "duration_days", "time_affected_hours_text", "start_text", "end_text",
                                    "reason_comments", "indicator_comments",
                                    "possible_source_comments") if row.get(k) not in (None, [], "")}
     raw["reason_words"] = [REASON_WORDS.get(c, c) for c in row.get("reasons") or []]
@@ -722,8 +724,8 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
         state_file: Path = STATE_FILE, registry_file: Path = REGISTRY_FILE) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--force", action="store_true", help="pull now, before the interval since the last pull is up")
-    ap.add_argument("--backfill", type=int, metavar="FROM_YEAR",
-                    help="pull the years from FROM_YEAR to the one before the previous year (by hand)")
+    ap.add_argument("--backfill", type=int, nargs="?", const=2014, metavar="FROM_YEAR",
+                    help="pull FROM_YEAR (default 2014) through the year before the previous year (by hand)")
     ap.add_argument("--from-dir", type=Path, help="read saved CSVs instead of BEACON (no network)")
     ap.add_argument("--fetched-at", help="with --from-dir: when the saved CSVs were fetched (ISO time)")
     args = ap.parse_args(argv)
