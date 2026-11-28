@@ -240,3 +240,64 @@ def test_season_refresh_without_history_does_not_close_or_extend_advisory(tmp_pa
         assert set(strip[gap:]) == {"g"}
         exported = X.public_record(parent, st["placements"][parent_id], redact.redactor_for(records, tmp_path))
         assert exported["ended_at"] is None
+
+
+@pytest.mark.parametrize("monitoring_days", [(3,), (3, 4)])
+def test_explicit_lift_after_monitoring_listing_ends_advisory(tmp_path, monkeypatch, monitoring_days):
+    """Persist the Nov. 1 advisory, intervening listings and Nov. 5 lift, without dated history."""
+    events = tmp_path / "events"
+    events.mkdir()
+    for mod in (common, NH):
+        monkeypatch.setattr(mod, "EVENTS_DIR", events)
+    monkeypatch.setattr(NH, "match_waters", lambda *args: (["example-lake-nh"], []))
+    monkeypatch.setattr(NH, "_licence", lambda sess: (NH.LICENCE_FALLBACK, "NHDES"))
+    monkeypatch.setattr(NH, "_layer_info", lambda *args: {})
+    monkeypatch.setattr(NH, "fetch_hab", lambda *args: [])
+    monkeypatch.setattr(S, "_STATES", {"NH"})
+    waters = {"example-lake-nh": {"slug": "example-lake-nh", "name": "Example Lake",
+                               "kind": "lake", "state": "NH", "area_km2": 1}}
+    saved = {}
+    preserved = ("event_id", "source_record_id", "started_at", "ended_at", "reported_at",
+                 "published_at", "source_updated_at", "fetched_at")
+    snapshots = [(1, "Advisory"), *[(d, "Monitoring Season Completed") for d in monitoring_days],
+                 (5, "No advisory"), (6, "No advisory")]
+    for day, label in snapshots:
+        fetched = f"2026-11-{day:02}T12:00:00Z"
+        sample_day = min(day, 5)  # Repeat the same Nov. 5 lift on the next refresh.
+        stamp = int(datetime(2026, 11, sample_day, 12, tzinfo=UTC).timestamp() * 1000)
+        attrs = {"EPA_ID": "TEST", "Beach_Name": "Example Beach", "Waterbody_Name": "Example Lake",
+                 "Status": label, "SampleDate": stamp, "DateIssued": stamp if day == 1 else None}
+        monkeypatch.setattr(NH, "now_iso", lambda: fetched)
+        monkeypatch.setattr(common, "now_iso", lambda: fetched)
+        monkeypatch.setattr(NH, "_query_all", lambda *args: [{"attributes": attrs}])
+        assert NH.main([]) == 0
+        _, records, problems = S.load_events(events)
+        assert not problems
+        by_id = {r["event_id"]: r for r in records}
+        slug = label.lower().replace(" ", "-")
+        current_id = f"nh-des-swimming:beach:TEST:{slug}:2026-11-{sample_day:02}"
+        assert set(by_id) == set(saved) | {current_id}
+        for eid, prior in saved.items():
+            keys = [k for k in preserved if k != "fetched_at" or eid != current_id]
+            assert {k: by_id[eid][k] for k in keys} == {k: prior[k] for k in keys}
+        saved = {eid: {k: r[k] for k in preserved} for eid, r in by_id.items()}
+        if label != "No advisory":
+            continue
+        st, hist = S.build(now=datetime(2026, 11, 6, 18, tzinfo=UTC), write=False,
+                           events_dir=events, waters=waters, outfalls=[], registry={}, reaches={},
+                           flows=({}, {}), rules=S.load_rules(), placement_cache=False)
+        assert st["waters"]["example-lake-nh"]["status"] == "grey"
+        assert not st["advisory_points"]
+        assert not [r for r in st["waters"]["example-lake-nh"]["reasons"]
+                    if r["status"] in ("red", "yellow", "unresolved")]
+        strip = hist["waters"]["example-lake-nh"]
+        assert strip[hist["hours"].index("2026-11-04T12:00:00Z")] == "R"
+        assert set(strip[hist["hours"].index("2026-11-05T13:00:00Z"):]) == {"g"}
+        parent_id = "nh-des-swimming:beach:TEST:advisory:2026-11-01"
+        assert by_id[current_id]["parent_event_id"] == parent_id
+        assert all(r["ended_at"] is None for r in records)
+        redactor = redact.redactor_for(records, tmp_path)
+        for r in records:
+            exported = X.public_record(r, st["placements"][r["event_id"]], redactor)
+            assert exported["started_at"] == r["started_at"]
+            assert exported["ended_at"] is None

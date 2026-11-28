@@ -14,7 +14,8 @@ https://services1.arcgis.com/MAcUimSes4gPY4sM/arcgis/rest/services/2024_Healthy_
   on refresh without changing their identifiers or source times.
   Records: the current state per beach, one record per distinct state (id = EPA_ID + status +
   date), chained per beach with parent_event_id. A season-completed listing does not close or
-  reconfirm the preceding advisory; plus one advisory_lifted record per Advisory_history range (year = the season of
+  reconfirm the preceding advisory. Later advisory states link past monitoring listings to the
+  preceding advisory state; plus one advisory_lifted record per Advisory_history range (year = the season of
   SampleDate, day precision, ended_at = the last day of the range at 00:00 local). Earlier
   states and past seasons' ranges are kept across runs (records are replaced by id only).
 - Layer 9 "CyanobacteriaMapperLayer2": 2,401 waterbody polygons, nearly all "No bloom reported"
@@ -293,7 +294,14 @@ def chain(records: list[dict]) -> None:
         for i, r in enumerate(reps):
             if r["raw"].get("_was_active"):
                 r["status"], r["ended_at"] = "advisory_active", None
-            r["parent_event_id"] = reps[i - 1]["event_id"] if i else None
+            parent = i - 1
+            if r["status"] in ("advisory_active", "advisory_lifted"):
+                # A definite advisory update revises the preceding advisory state, not
+                # an intervening monitoring notice. Revision resolution can then honor
+                # an explicit lift without inventing an ended_at on the older record.
+                while parent >= 0 and _season_completed(reps[parent]):
+                    parent -= 1
+            r["parent_event_id"] = reps[parent]["event_id"] if parent >= 0 else None
             if i + 1 < len(reps):
                 if _season_completed(reps[i + 1]):
                     # The sample date is neither a lift nor confirmation across the gap.
