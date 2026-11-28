@@ -42,6 +42,7 @@ from collections import defaultdict
 from datetime import UTC, datetime, timedelta
 
 from common import BUILD_DIR, DATA_DIR, load_outfall_registry, public_error, read_json, system_wide_advisory
+from ingest.outfall_water_corrections import stated_off_water
 
 RULE = "rain_likely"
 # the site default where the state publishes no rain trigger of its own (owner, 2026-11-03: no other operator's
@@ -612,7 +613,8 @@ def targets(permit: str, waters: dict, outfalls: list[dict], rain_outfalls: list
     and outfalls already tidal ("tidal"). A lake, pond or reservoir is filled only when the outfall
     registry matched it by name (the receiving water the permit names agrees) or the outfall lies in
     it or at its shore (within INSIDE_M); a match by distance alone further off is set aside, since
-    filling a whole lake is a strong claim."""
+    filling a whole lake is a strong claim. A registry row tied by the permit's statement alone whose point lies
+    beyond the tie distance of the water (ingest.outfall_water_corrections.stated_off_water) is not read."""
     keys, tags, reach_of, aside = [], {}, defaultdict(set), []
     for key, r in sorted((reaches or {}).items()):
         if r.get("permit") != permit or r.get("cut_reason") == "no_trace":
@@ -633,7 +635,8 @@ def targets(permit: str, waters: dict, outfalls: list[dict], rain_outfalls: list
             tags.setdefault(r["water_slug"], "tidal")
     found = {}
     for o in outfalls or []:
-        if o.get("npdes_permit") == permit and cso_open(o) and o.get("water_slug"):
+        # a row tied by the permit's statement alone at a point away from the water is not read (Astra 2026-11-28)
+        if o.get("npdes_permit") == permit and cso_open(o) and o.get("water_slug") and not stated_off_water(o):
             found.setdefault(o["water_slug"], []).append((o.get("outfall"), o.get("match"), o.get("distance_m")))
     for o in rain_outfalls or []:
         if o.get("water_slug"):

@@ -3493,14 +3493,22 @@
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
    },
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: the NHD builder's records for 'Nine Mile Creek' (ninemile-creek-oh) lie elsewhere in the state",
-   "no_water_reason": "the NHD builder's records for 'Nine Mile Creek' (ninemile-creek-oh) lie elsewhere in the state",
-   "water_matched_by": "ingest.outfall_waters (2026-11-17)"
+   "water_slug": "ninemile-creek-cleveland-oh",
+   "water_name": "Ninemile Creek",
+   "water_kind": "stream",
+   "distance_m": 9,
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water for outfall 211 on NEORSD's CSO notification map is 'Nine Mile Creek'; Ninemile Creek (ninemile-creek-cleveland-oh, USGS NHD high-resolution GNIS 1066864, built 2026-11-28) lies 9 m from the map's point; the row had no water (the only Ninemile Creek record then was near Loramie, Shelby County); EPA's copy of the outfall in data/outfalls-us.json gives no receiving water and is corrected with it",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": null,
+    "water_name": null,
+    "match": "none",
+    "by": "ingest.outfall_waters (2026-11-17)",
+    "why": "the row had no water record; the receiving water the permit names has one",
+    "water_match": "none: the NHD builder's records for 'Nine Mile Creek' (ninemile-creek-oh) lie elsewhere in the state",
+    "no_water_reason": "the NHD builder's records for 'Nine Mile Creek' (ninemile-creek-oh) lie elsewhere in the state"
+   }
   },
   {
    "npdes_permit": "OH0043991",
@@ -3538,14 +3546,22 @@
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
    },
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: the NHD builder's records for 'Nine Mile Creek' (ninemile-creek-oh) lie elsewhere in the state",
-   "no_water_reason": "the NHD builder's records for 'Nine Mile Creek' (ninemile-creek-oh) lie elsewhere in the state",
-   "water_matched_by": "ingest.outfall_waters (2026-11-17)"
+   "water_slug": "ninemile-creek-cleveland-oh",
+   "water_name": "Ninemile Creek",
+   "water_kind": "stream",
+   "distance_m": 2,
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water for outfall 212 on NEORSD's CSO notification map is 'Nine Mile Creek'; Ninemile Creek (ninemile-creek-cleveland-oh, USGS NHD high-resolution GNIS 1066864, built 2026-11-28) lies 2 m from the map's point; the row had no water (the only Ninemile Creek record then was near Loramie, Shelby County); EPA's copy of the outfall in data/outfalls-us.json gives no receiving water and is corrected with it",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": null,
+    "water_name": null,
+    "match": "none",
+    "by": "ingest.outfall_waters (2026-11-17)",
+    "why": "the row had no water record; the receiving water the permit names has one",
+    "water_match": "none: the NHD builder's records for 'Nine Mile Creek' (ninemile-creek-oh) lie elsewhere in the state",
+    "no_water_reason": "the NHD builder's records for 'Nine Mile Creek' (ninemile-creek-oh) lie elsewhere in the state"
+   }
   },
   {
    "npdes_permit": "OH0043991",

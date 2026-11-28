@@ -1194,6 +1194,9 @@ def hand_kept(o: dict, counts) -> bool:
     if HAND.holds(o):
         counts[st]["kept: hand correction"] += 1
         return True
+    if HAND.refused_kept(o):    # the entry is refused, nothing else changed: left as it stands (never the replaced tie)
+        counts[st]["kept as it stands: hand correction refused (see the check)"] += 1
+        return True
     HAND.revert(o)
     counts[st]["hand correction no longer applies: matched again"] += 1
     return False

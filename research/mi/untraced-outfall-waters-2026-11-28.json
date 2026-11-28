@@ -1,0 +1,982 @@
+{
+ "about": "Receiving waters for Michigan MiEnviro CSO/SSO reports (source mi-egle-mienviro-cso-sso-list) that name a permit and outfall but sit on no water page: rows of the untraced-outfall worklist of 2026-11-28 (4,590 reports with a permit and outfall and no water) whose key starts with MI|. One entry per permit, or per permit and outfall group where outfalls go to different waters. Research only; nothing applied. Distances are from the stated point to each record's own outline (openboatlaunch out/water/<slug>.json or the record's inline NHD geometry), measured with build.status.water_geometry and shapely on 2026-11-28.",
+ "made": "2026-11-28",
+ "worklist_rows": 66,
+ "worklist_reports": 3592,
+ "summary": {
+  "reports_settled": 3461,
+  "reports_cannot_tell": 21,
+  "reports_need_new_record": 110,
+  "entries": 49,
+  "rows_not_covered": []
+ },
+ "decisions": [
+  "MI0022802 outfall 082 (246 reports): placed on river-rouge-detroit-mi (the lower-Rouge remainder) by the Oakwood facility's location and outfall 109's ECHO point; the resolver's remainder rule would send a pointless 'Rouge River' to river-rouge-mi, so this needs an explicit placement (or outfall 109's point lent to 082 as its successor, which would be our inference and should be labelled).",
+  "MI0022802 outfall 104 (1 report): the report names the Rouge River but the Conner Creek basin is on the Detroit River 15 km away; placing on detroit-river-mi overrides the report's text.",
+  "MI0043982 outfall 001 (105 reports): St. Louis Creek has no NHD or GNIS name found; build a hand record from the creek's NHD flowline, or decide whether to start the reach on trap-rock-river-mi.",
+  "Duplicate river records found while choosing: paint-river-mi and paint-river-mastodon-mi overlap at Crystal Falls; st-joseph-river-mi and saint-joseph-river-jonesville-mi overlap at Niles and Jonesville. The remainder records were built against a different parent (paint-river-iron-river-mi, saint-joseph-river-mi) than the openboatlaunch record that already covers the stretch.",
+  "The worklist notes still list river-rouge-detroit-mi, saint-clair-river-algonac-mi and paint-river-mastodon-mi as candidates although each is a covers_part_of remainder of another candidate; merge_remainders should have set them aside when no point is given. Check that path runs for name matches with no point (status.py around the 'names N waters' note).",
+  "Aliases the reports need: 'Raisin River South Branch', 'River Rasin', 'St. Joe River', 'Big Cedar River', 'Beguns Creek'/'BeGunns Creek'."
+ ],
+ "entries": [
+  {
+   "permit": "MI0023833",
+   "facility_as_reported": "Port Huron WWTP",
+   "outfalls": [
+    "003",
+    "012",
+    "013",
+    "014",
+    "015",
+    "016",
+    "017",
+    "019",
+    "020",
+    "024"
+   ],
+   "reports": 1357,
+   "receiving_water_as_reported": "St. Clair River",
+   "water_slug": "saint-clair-river-mi",
+   "verdict": "settled",
+   "why": "Port Huron WWTP, St. Clair County. Of the two 'Saint Clair River' records, saint-clair-river-mi (openboatlaunch, GNIS 1624885, bbox lat 42.619 to 43.003) runs from Lake Huron at Port Huron down to Marine City; saint-clair-river-algonac-mi is the NHD remainder of it (covers_part_of saint-clair-river-mi, bbox lat 42.526 to 42.619, Clay Township near Algonac), about 35 km downstream of Port Huron. The plant's ECHO outfall 001 (42.977456, -82.418548) is 262 m from saint-clair-river-mi and 40.8 km from the Algonac record. All of Port Huron's St. Clair River frontage lies on saint-clair-river-mi. The reports name the St. Clair River (not the Black River, which also receives Port Huron CSOs; outfall 005 is on black-river-port-huron-mi), so the river they name is the main record at Port Huron. The resolver's own remainder rule (merge_remainders: with no point, a remainder steps aside for its main record) gives the same answer.",
+   "evidence": [
+    {
+     "name": "US EPA, Combined Sewer Overflows in the Great Lakes Basin - Michigan (permit list with receiving waters)",
+     "url": "https://www.epa.gov/node/253663"
+    },
+    {
+     "name": "EPA ECHO detailed facility report (Port Huron WWTP MI0023833; see registry row MI0023833 001); discharge-point coordinates as carried in data/outfalls-us.json or data/outfalls-plants-us.json (coords_from permitted_feature)",
+     "url": "https://echo.epa.gov/detailed-facility-report?fid=110000737043"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0025542",
+   "facility_as_reported": "Dearborn CSO",
+   "outfalls": [
+    "005",
+    "007",
+    "008",
+    "010",
+    "012",
+    "020"
+   ],
+   "reports": 1051,
+   "receiving_water_as_reported": "Rouge River, Lower Branch",
+   "water_slug": "lower-river-rouge-mi",
+   "verdict": "settled",
+   "why": "Dearborn CSO, Wayne County. The reports name the Lower Branch. The alias 'Rouge River, Lower Branch' is carried only by lower-river-rouge-mi in data/water-aliases.json on this branch (commit 5659b533, 2026-11-28), so the name now resolves to one record; the worklist notes for these rows are blank because the audit build predates the alias. lower-river-rouge-mi (GNIS 631181) runs through Dearborn Heights and Dearborn; the permit's registry outfalls on the Lower Rouge (001 to 004, 006, 106, 108, ECHO points) are 3 to 47 m from it. These six outfalls have no point in ECHO (not in the registry) and none is estimated here.",
+   "evidence": [
+    {
+     "name": "US EPA, Combined Sewer Overflows in the Great Lakes Basin - Michigan (permit list with receiving waters)",
+     "url": "https://www.epa.gov/node/253663"
+    },
+    {
+     "name": "EPA ECHO detailed facility report (Dearborn CSO MI0025542; outfall 001 'Lower Rouge River'); discharge-point coordinates as carried in data/outfalls-us.json or data/outfalls-plants-us.json (coords_from permitted_feature)",
+     "url": "https://echo.epa.gov/detailed-facility-report?fid=110006740642"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0025542",
+   "facility_as_reported": "Dearborn CSO",
+   "outfalls": [
+    "011",
+    "015"
+   ],
+   "reports": 359,
+   "receiving_water_as_reported": "Rouge River",
+   "water_slug": "river-rouge-mi",
+   "verdict": "settled",
+   "why": "Dearborn CSO. These two outfalls name the main Rouge River (the same permit's other reports say 'Rouge River, Lower Branch' when they mean the Lower Rouge). The candidates: river-rouge-mi (openboatlaunch, bbox -83.311 to -83.144, the main Rouge from Oakland County down through Dearborn) and river-rouge-detroit-mi, which is the NHD remainder of it (covers_part_of river-rouge-mi): a stretch from about -83.143, 42.291 down to the mouth at Zug Island in Detroit and River Rouge, plus a 20 m stub at 42.632 in Oakland County. The permit's registry outfalls on the main Rouge in Dearborn (009, 013, 014, 016, 017, 117; ECHO points) were all tied to river-rouge-mi; outfall 014 is 19 m from it and 5.3 km from the remainder. Dearborn's reach of the main Rouge lies upstream of the remainder. 011 and 015 have no point in ECHO, so a position downstream of the Ford Rouge turning basin (outfall 017's area, 1.1 km from river-rouge-mi and 2.1 km from the remainder) cannot be excluded from a document; the city's reach makes river-rouge-mi the record.",
+   "evidence": [
+    {
+     "name": "US EPA, Combined Sewer Overflows in the Great Lakes Basin - Michigan (permit list with receiving waters)",
+     "url": "https://www.epa.gov/node/253663"
+    },
+    {
+     "name": "EPA ECHO detailed facility report (Dearborn CSO MI0025542; outfalls 009 to 017 on the Rouge River); discharge-point coordinates as carried in data/outfalls-us.json or data/outfalls-plants-us.json (coords_from permitted_feature)",
+     "url": "https://echo.epa.gov/detailed-facility-report?fid=110006740642"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "medium"
+  },
+  {
+   "permit": "MI0020362",
+   "facility_as_reported": "Manistee WWTP / Manistee CM",
+   "outfalls": [
+    "018"
+   ],
+   "reports": 295,
+   "receiving_water_as_reported": "Manistee Lake",
+   "water_slug": "manistee-lake-mi",
+   "verdict": "settled",
+   "why": "Manistee WWTP, Manistee County. manistee-lake-mi (GNIS 1620682) is the lake at the city of Manistee (bbox -86.318 to -86.278, 44.209 to 44.264); manistee-lake-darragh-mi (GNIS 631384) is in Kalkaska County, 118 km away. The plant's ECHO outfall 001 (44.23972, -86.30469) lies on manistee-lake-mi (0 m). The 2019 SSO report for outfall 018 gives 'Fifth Street and Ramsdell', a Manistee street corner.",
+   "evidence": [
+    {
+     "name": "US EPA, Combined Sewer Overflows in the Great Lakes Basin - Michigan (permit list with receiving waters)",
+     "url": "https://www.epa.gov/node/253663"
+    },
+    {
+     "name": "EPA ECHO detailed facility report (Manistee WWTP MI0020362); discharge-point coordinates as carried in data/outfalls-us.json or data/outfalls-plants-us.json (coords_from permitted_feature)",
+     "url": "https://echo.epa.gov/detailed-facility-report?fid=110071711321"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "3112a-0142",
+   "facility_as_reported": "Manistee CM",
+   "outfalls": [
+    "018"
+   ],
+   "reports": 25,
+   "receiving_water_as_reported": "Manistee Lake",
+   "water_slug": "manistee-lake-mi",
+   "verdict": "settled",
+   "why": "City of Manistee collection system (Manistee CM, Manistee County), the same outfall 018 at '5th Street and Ramsdell' as permit MI0020362. The only Manistee Lake in Manistee County is manistee-lake-mi; the other record is in Kalkaska County (118 km).",
+   "evidence": [
+    {
+     "name": "US EPA, Combined Sewer Overflows in the Great Lakes Basin - Michigan (permit list with receiving waters)",
+     "url": "https://www.epa.gov/node/253663"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0022802",
+   "facility_as_reported": "GLWA WRRF",
+   "outfalls": [
+    "082"
+   ],
+   "reports": 246,
+   "receiving_water_as_reported": "O`Brien Drain (tributary to Rouge River)",
+   "water_slug": "river-rouge-detroit-mi",
+   "verdict": "settled",
+   "why": "GLWA (formerly DWSD) outfall 082 was the untreated CSO at the Oakwood Pump Station (reports: 'Oakwood Pump Station - Sander & Liddesdale', 2001 to 2012). The permit's long-term control program replaced it with the Oakwood RTB and new pump station (outfall 109, in service 2012); the 2019 permit no longer lists 082. The Oakwood facility is on Pleasant St between Deacon and Liddesdale in southwest Detroit, and its discharge reaches the Rouge River 'using the O'Brien Drain', which runs north from the facility. O'Brien Drain has no water record; it is a short enclosed drain, so the reach starts in the Rouge. ECHO's point for outfall 109 (42.2836, -83.1419), the same facility and drain, is 324 m from river-rouge-detroit-mi and 1,111 m from river-rouge-mi; the permit's outfall 056 'Fort St. (Oakwood District)' at 42°17'27\" N 083°08'33\" W is 7 m from river-rouge-detroit-mi and 328 m from river-rouge-mi. The Oakwood district's Rouge frontage is the lower Rouge below Fort St, which is the river-rouge-detroit-mi remainder. Note: the resolver's remainder rule would send a pointless 'Rouge River' to river-rouge-mi; this outfall needs the explicit record (or outfall 109's point) instead.",
+   "evidence": [
+    {
+     "name": "MDEQ NPDES permit MI0022802, City of Detroit WWTP (copy on detroitmi.gov): 'Long-term CSO Control Program for Rouge River Outfall 082/Oakwood Pump Station'; Outfall 109 (Oakwood RTB) 'discharge to the Rouge River'",
+     "url": "https://devtraining.detroitmi.gov/sites/training.detroitmi/files/2018-05/dwsd_wwtp_npdes_permit.pdf"
+    },
+    {
+     "name": "EGLE NPDES permit MI0022802 (2019), GLWA WRRF: Part I.A.6 'Outfall 104 discharges to Conner Creek'; outfall 056 'Fort St. (Oakwood District)' 42°17'27\" 083°08'33\" Rouge River; outfall 082 no longer listed",
+     "url": "https://www.glwater.org/wp-content/uploads/2024/04/2019-NPDES-Permit-FINAL_GLWA-WRRF.pdf"
+    },
+    {
+     "name": "MDEQ Air Quality Division inspection report, Oakwood CSO RTB (SRN N7704), 12082 Pleasant St, 2017-08-02: located 'between Deacon and Liddesdale Streets'; treated water 'can be discharged to the Rouge River using the O'Brien Drain', which 'runs north from the Oakwood facility'",
+     "url": "https://www.deq.state.mi.us/Aps/downloads/SRN/N7704/N7704_SAR_20170802.pdf"
+    },
+    {
+     "name": "EPA ECHO detailed facility report (GLWA WRRF MI0022802; outfall 109 Oakwood RTB, 'Rouge River'); discharge-point coordinates as carried in data/outfalls-us.json or data/outfalls-plants-us.json (coords_from permitted_feature)",
+     "url": "https://echo.epa.gov/detailed-facility-report?fid=110000555435"
+    }
+   ],
+   "outfall_coordinates": [
+    {
+     "outfall": "109 (Oakwood RTB, successor of 082; not 082 itself)",
+     "lat": 42.2836,
+     "lon": -83.1419,
+     "source": "EPA ICIS permitted feature via ECHO (registry row MI0022802 109)"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "permit": "MI0022802",
+   "facility_as_reported": "GLWA WRRF",
+   "outfalls": [
+    "104"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Rouge River (one report); the other 21 reports for this outfall say Detroit River",
+   "water_slug": "detroit-river-mi",
+   "verdict": "settled",
+   "why": "Conner Creek CSO RTB, on Detroit's east side at the mouth of Conner Creek (ECHO point 42.3628328, -82.958461), 15 km from the Rouge. The permit says 'Outfall 104 discharges to Conner Creek'; Conner Creek is enclosed and has no NHD or OSM record (registry no_water_reason), and the basin discharges at its outlet on the Detroit River. 21 of the 22 MiEnviro reports for this outfall name the Detroit River; the one in the worklist names the Rouge River, which is a slip in that report. The water it really enters is the Detroit River. Decision: placing it on detroit-river-mi overrides the report's own text, so the page should say the report named the Rouge River.",
+   "evidence": [
+    {
+     "name": "EGLE NPDES permit MI0022802 (2019), GLWA WRRF: Part I.A.6 'Outfall 104 discharges to Conner Creek'; outfall 056 'Fort St. (Oakwood District)' 42°17'27\" 083°08'33\" Rouge River; outfall 082 no longer listed",
+     "url": "https://www.glwater.org/wp-content/uploads/2024/04/2019-NPDES-Permit-FINAL_GLWA-WRRF.pdf"
+    },
+    {
+     "name": "EPA ECHO detailed facility report (GLWA WRRF MI0022802; outfall 104 Conner Creek RTB); discharge-point coordinates as carried in data/outfalls-us.json or data/outfalls-plants-us.json (coords_from permitted_feature)",
+     "url": "https://echo.epa.gov/detailed-facility-report?fid=110000555435"
+    }
+   ],
+   "outfall_coordinates": [
+    {
+     "outfall": "104",
+     "lat": 42.3628328,
+     "lon": -82.958461,
+     "source": "EPA ICIS permitted feature via ECHO (registry row MI0022802 104)"
+    }
+   ],
+   "confidence": "medium"
+  },
+  {
+   "permit": "MI0043982",
+   "facility_as_reported": "North Houghton Co W&SA CSO",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 105,
+   "receiving_water_as_reported": "St. Louis Creek",
+   "water_slug": null,
+   "verdict": "needs a new water record",
+   "why": "North Houghton County Water & Sewer Authority CSO (Calumet and Laurium area), outfall 001 'the intersection of First Street and Isle Royal'. EPA's permit list gives the receiving waters 'St. Louis Creek; Douglas Creek'. No record of that name exists in data/waters-*.json, and the registry's NHD builder found no NHD flowline or waterbody of that name in Michigan (nearest named NHD stream: Scales Creek). A Keweenaw waterfall guide describes St. Louis Creek as a small creek from swamps near Laurium in the Trap Rock River system, with St. Louis Falls at 47.22895, -88.40872, about 1.6 km southeast of the ECHO outfall point. So the creek runs to the Trap Rock River (trap-rock-river-mi exists) and on to Torch Lake (torch-lake-hubbell-mi). Not found in GNIS from here; it may be an unnamed NHD flowline locally called St. Louis Creek. Build a hand record for St. Louis Creek from the outfall point down to the Trap Rock River from the NHD flowline it follows; until then the reach can start at trap-rock-river-mi only if the owner accepts the downstream water as the entry water (it is not what the report names).",
+   "evidence": [
+    {
+     "name": "US EPA, Combined Sewer Overflows in the Great Lakes Basin - Michigan (permit list with receiving waters)",
+     "url": "https://www.epa.gov/node/253663"
+    },
+    {
+     "name": "EPA ECHO detailed facility report (North Houghton Co W&SA CSO MI0043982; outfall 001 receiving water 'St. Louis Creek'); discharge-point coordinates as carried in data/outfalls-us.json or data/outfalls-plants-us.json (coords_from permitted_feature)",
+     "url": "https://echo.epa.gov/detailed-facility-report?fid=110071710639"
+    },
+    {
+     "name": "Waterfalls of the Keweenaw, St. Louis Falls (St. Louis Creek): 'runs down from some swamps near Laurium', Trap Rock River system, falls at 47.22895, -88.40872",
+     "url": "https://www.waterfallsofthekeweenaw.com/st-louis-creek/st-louis-falls"
+    }
+   ],
+   "outfall_coordinates": [
+    {
+     "outfall": "001",
+     "lat": 47.2339669,
+     "lon": -88.428109,
+     "source": "EPA ICIS permitted feature via ECHO (registry row MI0043982 001)"
+    }
+   ],
+   "confidence": "medium",
+   "new_water_record": {
+    "name": "St. Louis Creek",
+    "point_on_it": {
+     "lat": 47.22895,
+     "lon": -88.40872,
+     "what": "St. Louis Falls, from the waterfall guide (not an outfall)"
+    },
+    "flows_to": "trap-rock-river-mi, then Torch Lake (torch-lake-hubbell-mi)",
+    "gnis_id": null,
+    "nhd": "no NHD flowline of this name (registry NHD builder, 2026-11-04)"
+   }
+  },
+  {
+   "permit": "MI0043982",
+   "facility_as_reported": "North Houghton Co W&SA CSO",
+   "outfalls": [
+    "003A"
+   ],
+   "reports": 2,
+   "receiving_water_as_reported": "Begunn Creek / Beguns Creek (BeGunns Creek)",
+   "water_slug": "begunn-creek-mi",
+   "verdict": "settled",
+   "why": "Same authority; the reports name Begunn Creek with spelling variants. begunn-creek-mi (NHD, Calumet and Osceola townships) is the only record of that name; the permit's ECHO outfall 003 (47.244867, -88.492413) is 31 m from it. Needs aliases 'Beguns Creek' and 'BeGunns Creek' if the resolver does not fold them.",
+   "evidence": [
+    {
+     "name": "EPA ECHO detailed facility report (outfall 003 Begunn Creek); discharge-point coordinates as carried in data/outfalls-us.json or data/outfalls-plants-us.json (coords_from permitted_feature)",
+     "url": "https://echo.epa.gov/detailed-facility-report?fid=110071710639"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "high",
+   "alias_needed": [
+    "Beguns Creek",
+    "Begunn Creek",
+    "BeGunns Creek"
+   ]
+  },
+  {
+   "permit": "GW1810192",
+   "facility_as_reported": "Crystal Falls WWTP",
+   "outfalls": [
+    "002"
+   ],
+   "reports": 55,
+   "receiving_water_as_reported": "Paint River",
+   "water_slug": "paint-river-mi",
+   "verdict": "settled",
+   "why": "Crystal Falls WWTP, Iron County; the Paint River runs through the city of Crystal Falls. Three records: paint-river-iron-river-mi is the upper river near Iron River, 18 km from Crystal Falls. paint-river-mi (openboatlaunch; towns Crystal Falls, Erickson Landing) and paint-river-mastodon-mi (NHD, GNIS 634300, the remainder of paint-river-iron-river-mi) both pass Crystal Falls, each about 640 m from the city centre (46.0977, -88.3335), and in a box around the city they are the same line within about 100 m: a duplicate pair, not two rivers. paint-river-mi is the main record at Crystal Falls; the resolver's remainder rule also sets paint-river-mastodon-mi aside when its parent is a candidate. The permit is a state groundwater permit with no ECHO discharge points, so there is no outfall coordinate.",
+   "evidence": [
+    {
+     "name": "City of Crystal Falls (sewer ordinance, city site)",
+     "url": "https://crystalfalls.org/wp-content/uploads/2023/04/ORD.-NO.-2.17-SEWER.pdf"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "medium"
+  },
+  {
+   "permit": "MI0048046",
+   "facility_as_reported": "Bloomfield Village CSO RTB",
+   "outfalls": [
+    "103"
+   ],
+   "reports": 47,
+   "receiving_water_as_reported": "Rouge River via Luz & Nichols",
+   "water_slug": "river-rouge-mi",
+   "verdict": "settled",
+   "why": "Bloomfield Village CSO RTB, Oakland County, outfall 'Retention Treatment Basin outfall - Cranbrook & 14'. The discharge runs through the Luz and Nichols drains (county drains, no water records) to the main Rouge in Bloomfield Township. EPA lists the permit's receiving water as the Rouge River. The only Rouge record in Bloomfield Township is river-rouge-mi; the same permit's ECHO outfall 102 (42.5311111, -83.243333) is 323 m from it and 12.5 km from the river-rouge-detroit-mi remainder. Whether the reach should start on the drains is a separate question; the drains have no record.",
+   "evidence": [
+    {
+     "name": "US EPA, Combined Sewer Overflows in the Great Lakes Basin - Michigan (permit list with receiving waters)",
+     "url": "https://www.epa.gov/node/253663"
+    },
+    {
+     "name": "EPA ECHO detailed facility report (Bloomfield Village CSO MI0048046); discharge-point coordinates as carried in data/outfalls-us.json or data/outfalls-plants-us.json (coords_from permitted_feature)",
+     "url": "https://echo.epa.gov/detailed-facility-report?fid=110006649975"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0025534",
+   "facility_as_reported": "Birmingham CSO RTB",
+   "outfalls": [
+    "102"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Rouge River",
+   "water_slug": "river-rouge-mi",
+   "verdict": "settled",
+   "why": "Birmingham CSO RTB, Oakland County. The report says 'Outfall 101 discharges treated combined sewage to the Rouge River'. The permit's ECHO outfall 101 (42.5391858, -83.22798) is 2 m from river-rouge-mi and 11.1 km from the remainder.",
+   "evidence": [
+    {
+     "name": "US EPA, Combined Sewer Overflows in the Great Lakes Basin - Michigan (permit list with receiving waters)",
+     "url": "https://www.epa.gov/node/253663"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "3112a-0128",
+   "facility_as_reported": "Rouge Valley Sewage Disposal System CM",
+   "outfalls": [
+    "U-1"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Rouge River",
+   "water_slug": "river-rouge-mi",
+   "verdict": "settled",
+   "why": "Rouge Valley Sewage Disposal System (Wayne County), regulator U-1 'near Joy Rd & Hazelton Ave.', in the main Rouge valley of western Detroit and Redford, about 8 km north of the river-rouge-detroit-mi remainder, which is confined to the lower river below about 42.29 N. The main Rouge there is river-rouge-mi.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "medium"
+  },
+  {
+   "permit": "3112a-0128",
+   "facility_as_reported": "Rouge Valley Sewage Disposal System CM",
+   "outfalls": [
+    "L-39"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "none given (overflow 'conveyed to the Inkster CSO RTB which dewaters to the Rouge Valley Interceptor')",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "The report says the overflow went to a basin that drains back to the interceptor; it names no water and no water was reached by its own account.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0020656",
+   "facility_as_reported": "Marysville CM",
+   "outfalls": [
+    "101"
+   ],
+   "reports": 5,
+   "receiving_water_as_reported": "St. Clair River",
+   "water_slug": "saint-clair-river-mi",
+   "verdict": "settled",
+   "why": "Marysville, St. Clair County. The plant's ECHO outfall 001 (42.906639, -82.466139) is 290 m from saint-clair-river-mi and 32 km from the Algonac remainder.",
+   "evidence": [
+    {
+     "name": "US EPA, Combined Sewer Overflows in the Great Lakes Basin - Michigan (permit list with receiving waters)",
+     "url": "https://www.epa.gov/node/253663"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0020591",
+   "facility_as_reported": "St Clair WWTP",
+   "outfalls": [
+    "013"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "St. Clair River",
+   "water_slug": "saint-clair-river-mi",
+   "verdict": "settled",
+   "why": "City of St. Clair, outfall 013 'Pine Street'. The plant's ECHO outfall 001 (42.819647, -82.484931) is 369 m from saint-clair-river-mi and 22.5 km from the Algonac remainder.",
+   "evidence": [
+    {
+     "name": "US EPA, Combined Sewer Overflows in the Great Lakes Basin - Michigan (permit list with receiving waters)",
+     "url": "https://www.epa.gov/node/253663"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0023701",
+   "facility_as_reported": "Niles WWTP",
+   "outfalls": [
+    "004",
+    "005"
+   ],
+   "reports": 2,
+   "receiving_water_as_reported": "St. Joseph River",
+   "water_slug": "st-joseph-river-mi",
+   "verdict": "settled",
+   "why": "Niles WWTP, Berrien County. ECHO outfall 001 (41.842222, -86.266667) is 20 m from st-joseph-river-mi, 75 m from the Jonesville remainder and 31 km from saint-joseph-river-mi. Three candidates: saint-joseph-river-mi (openboatlaunch) is only the mouth at St. Joseph (bbox lat 42.074 to 42.113); saint-joseph-river-jonesville-mi is its NHD remainder; st-joseph-river-mi (openboatlaunch, GNIS 1624891, towns include Niles, Buchanan, Three Rivers) is the main river record from Jonesville to St. Joseph. Near the city both st-joseph-river-mi and the Jonesville remainder are within tens of metres (they overlap: a duplicate pair), so st-joseph-river-mi, the main record, is chosen. The registry itself split Niles between the two (001 on st-joseph-river-mi, 007 on the remainder).",
+   "evidence": [
+    {
+     "name": "US EPA, Combined Sewer Overflows in the Great Lakes Basin - Michigan (permit list with receiving waters)",
+     "url": "https://www.epa.gov/node/253663"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "medium"
+  },
+  {
+   "permit": "MIG570106",
+   "facility_as_reported": "Riverside Estates MHC - Buchanan",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Saint Joseph River",
+   "water_slug": "st-joseph-river-mi",
+   "verdict": "settled",
+   "why": "Riverside Estates MHC, Buchanan, Berrien County; 'Effluent Discharge line from WWTF to St Joseph River'. Buchanan city centre is 1.5 km from st-joseph-river-mi and 29 km from saint-joseph-river-mi. Three candidates: saint-joseph-river-mi (openboatlaunch) is only the mouth at St. Joseph (bbox lat 42.074 to 42.113); saint-joseph-river-jonesville-mi is its NHD remainder; st-joseph-river-mi (openboatlaunch, GNIS 1624891, towns include Niles, Buchanan, Three Rivers) is the main river record from Jonesville to St. Joseph. Near the city both st-joseph-river-mi and the Jonesville remainder are within tens of metres (they overlap: a duplicate pair), so st-joseph-river-mi, the main record, is chosen.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "medium"
+  },
+  {
+   "permit": "MI0020109",
+   "facility_as_reported": "Jonesville WWTP",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "St. Joe River (in the location field; receiving water blank)",
+   "water_slug": "st-joseph-river-mi",
+   "verdict": "settled",
+   "why": "Jonesville WWTP, Hillsdale County. ECHO outfall 001 (41.990691, -84.670478) is 19 m from st-joseph-river-mi, 5 m from the Jonesville remainder and 149 km from saint-joseph-river-mi. Three candidates: saint-joseph-river-mi (openboatlaunch) is only the mouth at St. Joseph (bbox lat 42.074 to 42.113); saint-joseph-river-jonesville-mi is its NHD remainder; st-joseph-river-mi (openboatlaunch, GNIS 1624891, towns include Niles, Buchanan, Three Rivers) is the main river record from Jonesville to St. Joseph. Near the city both st-joseph-river-mi and the Jonesville remainder are within tens of metres (they overlap: a duplicate pair), so st-joseph-river-mi, the main record, is chosen. Needs alias 'St. Joe River' or a read of the location field.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "medium",
+   "alias_needed": [
+    "St. Joe River"
+   ]
+  },
+  {
+   "permit": "3112a-0890",
+   "facility_as_reported": "Traverse City CM",
+   "outfalls": [
+    "CB-2020"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Boardman River",
+   "water_slug": "boardman-river-mi",
+   "verdict": "settled",
+   "why": "Traverse City collection system, catch basin in the alley north of E Front St (downtown). boardman-river-mi is the main record through downtown; boardman-river-traverse-city-mi is its NHD remainder (covers_part_of boardman-river-mi). Downtown Front St is about 90 m from boardman-river-mi and 1.1 km from the remainder.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "medium"
+  },
+  {
+   "permit": "MI0027481",
+   "facility_as_reported": "Traverse City WWTP",
+   "outfalls": [
+    "001A"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Boardman River",
+   "water_slug": "boardman-river-mi",
+   "verdict": "settled",
+   "why": "Traverse City WWTP, 'North West end of Boardman Lake'. ECHO outfall 001 (44.757238, -85.614414) is 27 m from boardman-river-mi and 274 m from its remainder.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0028444",
+   "facility_as_reported": "Richmond Twp WWTP-Marquette Co",
+   "outfalls": [
+    "001A"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Warner Creek",
+   "water_slug": "warner-creek-richmond-mi",
+   "verdict": "settled",
+   "why": "Richmond Township WWTP, Marquette County. ECHO outfall 001 (46.43694, -87.59528) is 2 m from warner-creek-richmond-mi; warner-creek-mi is 246 km away.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MIG580000",
+   "facility_as_reported": "Yale WWSL",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 2,
+   "receiving_water_as_reported": "Mill Creek",
+   "water_slug": "mill-creek-kenockee-mi",
+   "verdict": "settled",
+   "why": "Yale WWSL, St. Clair County, 'Discharges into Mill Creek off of HWY 19'. mill-creek-kenockee-mi (NHD, GNIS 1624740, towns include Yale) passes the city; mill-creek-lexington-mi is 21 km away and mill-creek-mi 124 km. Measured from Yale's town centre (43.130, -82.798): 163 m.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MIG580212",
+   "facility_as_reported": "Powers WWSL",
+   "outfalls": [
+    "001A"
+   ],
+   "reports": 2,
+   "receiving_water_as_reported": "Big Cedar River",
+   "water_slug": "cedar-river-mi",
+   "verdict": "settled",
+   "why": "Powers WWSL, Menominee County, 'Open ditch discharge to Big Cedar River'. ECHO outfall 001 (45.68666, -87.49799) lies on cedar-river-mi (0 m); the Bellaire and Gladwin Cedar Rivers are 195 and 287 km away. The Cedar River in Menominee County is the record; 'Big Cedar River' needs an alias.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "medium",
+   "alias_needed": [
+    "Big Cedar River"
+   ]
+  },
+  {
+   "permit": "MI0020401",
+   "facility_as_reported": "Dundee WWTP",
+   "outfalls": [
+    "001A"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "River Rasin / River Raisin",
+   "water_slug": "river-raisin-mi",
+   "verdict": "settled",
+   "why": "Dundee WWTP, Monroe County. ECHO outfall 001 (41.954334, -83.649686) is 14 m from river-raisin-mi. 'River Rasin' is a misspelling in one report.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high",
+   "alias_needed": [
+    "River Rasin"
+   ]
+  },
+  {
+   "permit": "3112a-0066",
+   "facility_as_reported": "Adrian CM",
+   "outfalls": [
+    "1101"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Raisin River South Branch",
+   "water_slug": "south-branch-river-raisin-mi",
+   "verdict": "settled",
+   "why": "City of Adrian collection system, Lenawee County. south-branch-river-raisin-mi (NHD) runs through Adrian; Adrian's plant outfall 001 (ECHO, 41.91806, -84.015) is 7 m from it. The name form 'Raisin River South Branch' matches no alias (the record carries 'South Branch Raisin River').",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high",
+   "alias_needed": [
+    "Raisin River South Branch"
+   ]
+  },
+  {
+   "permit": "MI0021091",
+   "facility_as_reported": "Tawas Utility Authority WWTP",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Tawas River (in the location field)",
+   "water_slug": "tawas-river-mi",
+   "verdict": "settled",
+   "why": "Tawas Utility Authority WWTP, Iosco County. The report itself gives 'longitude-83.5048, latitude 44.2834', which lies on tawas-river-mi (0 m) and matches ECHO outfall 001 (44.284105, -83.504695).",
+   "evidence": [],
+   "outfall_coordinates": [
+    {
+     "outfall": "001",
+     "lat": 44.2834,
+     "lon": -83.5048,
+     "source": "the MiEnviro report's own location text"
+    }
+   ],
+   "confidence": "high"
+  },
+  {
+   "permit": "3112a-0350",
+   "facility_as_reported": "Ontwa Township CM",
+   "outfalls": [
+    "JPC3"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Juno Lake",
+   "water_slug": "painter-juno-christiana-lake-mi",
+   "verdict": "settled",
+   "why": "Ontwa Township collection system, Cass County, grinder station force main. The only record holding Juno Lake is the combined openboatlaunch lake record 'Painter/Juno/Christiana Lake' (bbox -86.006 to -85.978, 41.796 to 41.823, Cass County). No point for the station.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "medium"
+  },
+  {
+   "permit": "MI0024295",
+   "facility_as_reported": "Warren WWTP",
+   "outfalls": [
+    "004"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Big Beaver Creek",
+   "water_slug": null,
+   "verdict": "needs a new water record",
+   "why": "Warren WWTP, Macomb County, bypass at outfall 004. The two 'Beaver Creek' candidates are 125 and 530 km away. Big Beaver Creek is a Red Run tributary in Troy and Warren (named in the Red Run subwatershed plan); no record exists. The plant's main outfall 001 is on red-run-mi. Build a Big Beaver Creek record from NHD (or place on red-run-mi only by decision).",
+   "evidence": [
+    {
+     "name": "Clinton River Watershed Council, Red Run Subwatershed Plan (lists Big Beaver Creek at Wattles Road)",
+     "url": "https://www.crwc.org/s/Red-Run-Subwatershed-Plan.pdf"
+    }
+   ],
+   "outfall_coordinates": [],
+   "confidence": "low",
+   "new_water_record": {
+    "name": "Big Beaver Creek",
+    "point_on_it": null,
+    "flows_to": "red-run-mi",
+    "gnis_id": null
+   }
+  },
+  {
+   "permit": "MI0022063",
+   "facility_as_reported": "Durand WWTP",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Holly Drain",
+   "water_slug": null,
+   "verdict": "needs a new water record",
+   "why": "Durand WWTP, Shiawassee County. No Holly Drain record. ECHO places the plant's outfall 002 on shiawassee-river-mi. Holly Drain needs a record (NHD or county drain).",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "low",
+   "new_water_record": {
+    "name": "Holly Drain",
+    "point_on_it": null,
+    "flows_to": "not established here",
+    "gnis_id": null
+   }
+  },
+  {
+   "permit": "MI0053180",
+   "facility_as_reported": "Deerfield Pines MHC",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Crystal Creek",
+   "water_slug": null,
+   "verdict": "needs a new water record",
+   "why": "Deerfield Pines MHC, Lapeer County; no Crystal Creek record in Michigan.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "low",
+   "new_water_record": {
+    "name": "Crystal Creek (Lapeer County)",
+    "point_on_it": null,
+    "gnis_id": null
+   }
+  },
+  {
+   "permit": "MI0056677",
+   "facility_as_reported": "Rawsonville Woods MHC",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Bradshaw Drain",
+   "water_slug": null,
+   "verdict": "needs a new water record",
+   "why": "Rawsonville Woods MHC, Wayne County (Van Buren Township); no Bradshaw Drain record.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "low",
+   "new_water_record": {
+    "name": "Bradshaw Drain",
+    "point_on_it": null,
+    "gnis_id": null
+   }
+  },
+  {
+   "permit": "3112a-1040",
+   "facility_as_reported": "GM Flint Complex",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "Call Drain",
+   "water_slug": null,
+   "verdict": "needs a new water record",
+   "why": "GM Flint complex oil-water separator, Genesee County; no Call Drain record.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "low",
+   "new_water_record": {
+    "name": "Call Drain",
+    "point_on_it": null,
+    "gnis_id": null
+   }
+  },
+  {
+   "permit": "3112a-0546",
+   "facility_as_reported": "Kalamazoo CM",
+   "outfalls": [
+    "FM-0599"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "none",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "Kalamazoo force main break; no water named.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "3112a-0546",
+   "facility_as_reported": "Kalamazoo CM",
+   "outfalls": [
+    "KC1939"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "STDBKC190010 - Detention Basin",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "A detention basin, not a public water; no downstream water named.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "3112a-0890",
+   "facility_as_reported": "Traverse City CM",
+   "outfalls": [
+    "SSM-421"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "none",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "Sanitary manhole 421; no water named.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "3112a-0994",
+   "facility_as_reported": "General Motors LLC - Lansing Delta Township",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "none",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "GM Lansing Delta Township, 'North of General Assembly'; no water named.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "3112a-1000",
+   "facility_as_reported": "Western Townships Utilities Authority",
+   "outfalls": [
+    "15b",
+    "6a"
+   ],
+   "reports": 2,
+   "receiving_water_as_reported": "none",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "Vent stacks leaking in a road median; no water named.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "GW1010302",
+   "facility_as_reported": "Suds of St Helen",
+   "outfalls": [
+    "LA-1"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "N/A",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "Drainfield; the report says no water.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "GW1810038",
+   "facility_as_reported": "Highland Greens MHP WWTP",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 4,
+   "receiving_water_as_reported": "Storm Water Pond",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "An on-site storm water pond at a mobile home park; no public water named.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "GW1810062",
+   "facility_as_reported": "Torch Lake Area-Tamarack Sys",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "none",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "Seepage cell; no water named.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0020478",
+   "facility_as_reported": "Sparta WWTP",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "N/A",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "Sparta WWTP plant bypass; the report says N/A. Not settled from the permit here.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0023825",
+   "facility_as_reported": "Oakland Co-Pontiac WWTP",
+   "outfalls": [
+    "M-59"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "none",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "Pontiac system point 'M-59'; no water or location named.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0026751",
+   "facility_as_reported": "Mackinac Island WWTP",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "NA",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "Closed concrete effluent vault; the report says no water.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0043281",
+   "facility_as_reported": "West Iron Co SA WWTP",
+   "outfalls": [
+    "001A"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "none",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "'RBC spill onto the grounds'.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MI0057012",
+   "facility_as_reported": "Saline Valley Farms",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "None",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "'ground around the plant'.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MIG580303",
+   "facility_as_reported": "Pilot Travel Centers 26-Monroe",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "McClure Drain (location says McGlenn Drain)",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "The report gives two drain names that disagree, and neither has a record.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MIG580400",
+   "facility_as_reported": "Baraga WWSL",
+   "outfalls": [
+    "snm443"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "none",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "US-41 right of way; no water named.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  },
+  {
+   "permit": "MIS210409",
+   "facility_as_reported": "GM-CPC-Romulus Engine",
+   "outfalls": [
+    "001"
+   ],
+   "reports": 1,
+   "receiving_water_as_reported": "On site East Storm Pond",
+   "water_slug": null,
+   "verdict": "cannot tell",
+   "why": "The water field says an on-site storm pond; the location text describes the permit outfall's route 'via the McClaughrey Drain to the Lower Rouge River', not where this spill went. Not placed on the Lower Rouge without a statement that it got there.",
+   "evidence": [],
+   "outfall_coordinates": [],
+   "confidence": "high"
+  }
+ ]
+}

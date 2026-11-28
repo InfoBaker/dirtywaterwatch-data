@@ -1429,6 +1429,10 @@ def outfall_name_id(row: dict) -> str | None:
     return norm_oid(m.group(1)) if m else None
 
 
+# Permits whose overflow feed numbers an outfall without the registry's suffix A ('OF 107' for '107A'): the Narragansett
+# Bay Commission's (ri-nbc; Resolver.outfall_rows)
+NBC_A_SUFFIX_PERMITS = {"RI0100072", "RI0100315"}
+
 # States whose reports carry an island (raw.island) and no point: a name resolves only to a record on that island
 ISLAND_STATES = {"HI"}
 
@@ -1570,8 +1574,10 @@ COUNTY_FIELD_STATES.add("IA")
 COUNTY_STATES["ID"] = "id-counties.json"       # Idaho: DEQ's bloom table gives each water's county
 COUNTY_FIELD_STATES.add("ID")
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
-# (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
-REMAINDER_MERGE_STATES = {"TN"}
+# (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3). Michigan
+# (untraced-outfall fixes 2026-11-28, research/mi/untraced-outfall-waters-2026-11-28.json): Port Huron's St. Clair
+# River, the main Rouge at Dearborn and Birmingham, Niles' St. Joseph River
+REMAINDER_MERGE_STATES = {"TN", "MI"}
 _COUNTIES: dict[str, list] = {}
 _RECORD_COUNTIES: dict[tuple, frozenset] = {}
 
@@ -2463,6 +2469,12 @@ class Resolver:
         hit = [r for r in rows if norm_oid(r.get("outfall")) == want or outfall_name_id(r) == want]
         if not hit and oid_key(oid) and not re.search(r"\d-\d", str(oid)):      # "002-1" is not outfall 021
             hit = [r for r in rows if oid_key(r.get("outfall")) == oid_key(oid) and outfall_name_id(r) in (None, want)]
+        if not hit and permit in NBC_A_SUFFIX_PERMITS and re.fullmatch(r"(?:OF)?\d+", want):
+            # the Narragansett Bay Commission's feed says 'OF 107' for the registry's '107A' (untraced-outfall fixes
+            # 2026-11-28): the number with the suffix A, when the permit has exactly one such row
+            k = oid_key(oid)
+            a = [r for r in rows if oid_key(r.get("outfall")) == (k[0], "A")]
+            hit = a if len(a) == 1 else []
         return hit
 
     def canon(self, slug):
@@ -2636,7 +2648,7 @@ class Resolver:
                 if not slugs:
                     continue
             if state in REMAINDER_MERGE_STATES and len(slugs) > 1:
-                slugs = self.merge_remainders(slugs, lat, lon)
+                slugs = self.remainder_pick(slugs, state, lat, lon, ev or {})
             if len(slugs) == 1:
                 out.append(slugs[0])
                 continue
@@ -2675,6 +2687,58 @@ class Resolver:
             if slugs:
                 found[n] = slugs
         return found
+
+    def permit_points(self, ev: dict) -> list[tuple[float, float]]:
+        """The registry outfall points of the report's permit (outfall_rows for the report's outfall when it names one
+        the registry has, else every row of the permit), rows with flagged coordinates left out."""
+        permit = ev.get("npdes_permit")
+        if not permit:
+            return []
+        rows = self.outfall_rows(permit, ev.get("outfall_id")) or self.by_permit.get(permit) or []
+        return [(o["lat"], o["lon"]) for o in rows if isinstance(o.get("lat"), (int, float))
+                and isinstance(o.get("lon"), (int, float)) and not o.get("coords_problem")]
+
+    def remainder_pick(self, slugs: list, state, lat, lon, ev: dict) -> list:
+        """The records of a name a river's main record and its remainder (covers_part_of) share, in a
+        REMAINDER_MERGE_STATES state. With a point: merge_remainders. With none (Astra review 2026-11-28, P2: Algonac's
+        'St. Clair River' went to the main record because Algonac is in no record's town list; missing town data must
+        not decide): (a) the discharger's town, where it picks exactly one record (GLWA's 'Rouge River' in Detroit is
+        the Detroit remainder); (b) else the record nearest the permit's registry outfall points (permit_points), when
+        it lies within NAME_MATCH_M of one of them and no other record is as near (Port Huron's outfall 001 lies 262 m
+        from the main record, Algonac's 001 on the Algonac remainder), and only when the records are one river's main
+        record and its remainders (one_family; Astra review 2026-11-28 pass 2, P2: two unrelated 'Mill Creek' records
+        are not settled by a registry point the report does not name); (c) else in Tennessee the remainder steps aside
+        for its main record (merge_remainders, final audit 2026-11-08 P2-3); in other states every record stays, and
+        the name is ambiguous unless a later step settles it."""
+        if lat is not None:
+            return self.merge_remainders(slugs, lat, lon)
+        towns = self.event_towns(ev)
+        by_town = [x for x in slugs if towns & water_town_keys(self.waters[x].get("towns"))]
+        if len(by_town) == 1:
+            return by_town
+        pts = self.permit_points(ev) if self.one_family(slugs) else []
+        if pts:
+            best = {}
+            for x in slugs:
+                ds = [d for d in (self.distance_m(x, a, b) for a, b in pts) if d is not None]
+                if ds:
+                    best[x] = min(ds)
+            if best:
+                m = min(best.values())
+                near = [x for x, d in best.items() if d == m]
+                if m <= NAME_MATCH_M and len(near) == 1:
+                    return near
+        if state == "TN":
+            return self.merge_remainders(slugs, lat, lon)
+        return slugs
+
+    def one_family(self, slugs: list) -> bool:
+        """Whether the records are one river: a main record and its remainders, each remainder's covers_part_of naming
+        that main record, which is among them. Unrelated records of one name are not."""
+        if len(slugs) < 2:
+            return False
+        roots = {self.waters[x].get("covers_part_of") or x for x in slugs}
+        return len(roots) == 1 and next(iter(roots)) in slugs
 
     def merge_remainders(self, slugs: list, lat, lon) -> list:
         """A river's remainder record (covers_part_of: the NHD record of the part the main record lacks) and its
@@ -2825,6 +2889,8 @@ class Resolver:
         wm = str(row.get("water_match") or "")
         step = wm.split(":", 1)[0].strip() if by.startswith("ingest.outfall_waters") and ":" in wm[:40] else \
             (row.get("match") or "registry")
+        if step == "permit_stated":     # a hand tie on the permit's own statement (ingest.outfall_water_corrections)
+            step = "the water its permit names"
         d = row.get("distance_m")
         return f"{step}, " + (f"{d} m from the point" if d is not None else "no point") + f"; {by}"
 

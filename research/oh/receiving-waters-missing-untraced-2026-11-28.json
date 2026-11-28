@@ -1,0 +1,66 @@
+{
+ "about": "Receiving-water names of registered outfalls whose reports sat on no water page (untraced-outfall water fixes, 2026-11-28; research/registry/untraced-outfall-waters-2026-11-28.csv): the names NHD carries at the outfalls' own points (USGS NHD high-resolution flowlines, GNIS Ninemile Creek 1066864 at NEORSD outfalls 211 and 212; Preston Run 1066155 at Defiance's outfalls 014 and 039), for python -m ingest.waters_from_nhd --names <this file> --state OH. Points are the registry rows' own.",
+ "state": "OH",
+ "waters": 0,
+ "reports": 0,
+ "resolved_names": 2,
+ "resolved_reports": 14,
+ "build": {
+  "date": "2026-11-28",
+  "command": "python -m ingest.waters_from_nhd --names research/oh/receiving-waters-missing-untraced-2026-11-28.json --state OH",
+  "records_built": 2,
+  "names_resolved": 2,
+  "network_requests": 5
+ },
+ "rows": [],
+ "resolved": [
+  {
+   "name": "Nine Mile Creek",
+   "reports": 12,
+   "slugs": [
+    "ninemile-creek-cleveland-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.555461,
+     -81.591469
+    ],
+    [
+     41.547422,
+     -81.546337
+    ]
+   ],
+   "places_failed": [
+    {
+     "lon": -81.59147,
+     "lat": 41.55546,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.55546, -81.59147) (the nearest is 132.2 km away)"
+    },
+    {
+     "lon": -81.54634,
+     "lat": 41.54742,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.54742, -81.54634) (the nearest is 135.9 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Preston Run",
+   "reports": 2,
+   "slugs": [
+    "preston-run-oh"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     41.284722,
+     -84.346944
+    ],
+    [
+     41.271389,
+     -84.345278
+    ]
+   ]
+  }
+ ]
+}

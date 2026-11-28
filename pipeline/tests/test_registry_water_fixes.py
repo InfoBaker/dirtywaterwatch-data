@@ -73,8 +73,10 @@ def test_dearborns_lower_branch_of_the_rouge_is_the_lower_river_rouge(resolver):
     towns lack Dearborn."""
     pl = resolver.resolve(_mi_event("Rouge River, Lower Branch", "MI0025542", "mi-dearborn-cso-mi0025542"))
     assert pl["water_slugs"] == ["lower-river-rouge-mi"] and pl["water_match"] == "name"
-    # the plain 'Rouge River' is still two records and still unplaced without a point
-    assert resolver.resolve(_mi_event("Rouge River", "MI0025542", "mi-dearborn-cso-mi0025542"))["water_slugs"] == []
+    # the plain 'Rouge River' is the main record (its NHD remainder steps aside without a point: untraced-outfall
+    # fixes 2026-11-28, Michigan in REMAINDER_MERGE_STATES), not the Lower Rouge
+    assert resolver.resolve(_mi_event("Rouge River", "MI0025542", "mi-dearborn-cso-mi0025542"))["water_slugs"] == \
+        ["river-rouge-mi"]
 
 
 def test_manistee_lake_goes_to_the_lake_at_manistee_by_the_dischargers_town(resolver):
