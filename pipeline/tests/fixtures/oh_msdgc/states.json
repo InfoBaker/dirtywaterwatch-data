@@ -1,0 +1,324 @@
+{
+  "jobIds": [
+    "4a7be22e-579f-4360-a4ea-15430e343994"
+  ],
+  "results": [
+    {
+      "jobId": "4a7be22e-579f-4360-a4ea-15430e343994",
+      "result": {
+        "data": {
+          "timestamp": "2026-11-28T13:13:01.292Z",
+          "rootActivityId": "05874bb8-d34b-4ef6-848c-f2992d117c53",
+          "descriptor": {
+            "Select": [
+              {
+                "Kind": 1,
+                "Depth": 0,
+                "Value": "G0",
+                "Format": "0",
+                "GroupKeys": [
+                  {
+                    "Source": {
+                      "Entity": "CSOs",
+                      "Property": "facility_id"
+                    },
+                    "Calc": "G0",
+                    "IsSameAsSelect": true
+                  }
+                ],
+                "Name": "c.facility_id"
+              },
+              {
+                "Kind": 1,
+                "Depth": 0,
+                "Value": "G1",
+                "GroupKeys": [
+                  {
+                    "Source": {
+                      "Entity": "CSOs",
+                      "Property": "Current State"
+                    },
+                    "Calc": "G1",
+                    "IsSameAsSelect": true
+                  }
+                ],
+                "Name": "c.Current State"
+              },
+              {
+                "Kind": 1,
+                "Depth": 0,
+                "Value": "G2",
+                "Format": "G",
+                "GroupKeys": [
+                  {
+                    "Source": {
+                      "Entity": "CSOs",
+                      "Property": "timestamp"
+                    },
+                    "Calc": "G2",
+                    "IsSameAsSelect": true
+                  }
+                ],
+                "Name": "c.timestamp"
+              },
+              {
+                "Kind": 1,
+                "Depth": 0,
+                "Value": "G3",
+                "GroupKeys": [
+                  {
+                    "Source": {
+                      "Entity": "CSOs",
+                      "Property": "Site Status"
+                    },
+                    "Calc": "G3",
+                    "IsSameAsSelect": true
+                  }
+                ],
+                "Name": "c.Site Status"
+              },
+              {
+                "Kind": 1,
+                "Depth": 0,
+                "Value": "G4",
+                "GroupKeys": [
+                  {
+                    "Source": {
+                      "Entity": "CSOs",
+                      "Property": "Overflow Timer"
+                    },
+                    "Calc": "G4",
+                    "IsSameAsSelect": true
+                  }
+                ],
+                "Name": "c.Overflow Timer"
+              },
+              {
+                "Kind": 1,
+                "Depth": 0,
+                "Value": "G5",
+                "GroupKeys": [
+                  {
+                    "Source": {
+                      "Entity": "CSOs",
+                      "Property": "Active Status"
+                    },
+                    "Calc": "G5",
+                    "IsSameAsSelect": true
+                  }
+                ],
+                "Name": "c.Active Status"
+              },
+              {
+                "Kind": 1,
+                "Depth": 0,
+                "Value": "G6",
+                "GroupKeys": [
+                  {
+                    "Source": {
+                      "Entity": "CSOs",
+                      "Property": "State"
+                    },
+                    "Calc": "G6",
+                    "IsSameAsSelect": true
+                  }
+                ],
+                "Name": "c.State"
+              }
+            ],
+            "Expressions": {
+              "Primary": {
+                "Groupings": [
+                  {
+                    "Keys": [
+                      {
+                        "Source": {
+                          "Entity": "CSOs",
+                          "Property": "facility_id"
+                        },
+                        "Select": 0
+                      },
+                      {
+                        "Source": {
+                          "Entity": "CSOs",
+                          "Property": "Current State"
+                        },
+                        "Select": 1
+                      },
+                      {
+                        "Source": {
+                          "Entity": "CSOs",
+                          "Property": "timestamp"
+                        },
+                        "Select": 2
+                      },
+                      {
+                        "Source": {
+                          "Entity": "CSOs",
+                          "Property": "Site Status"
+                        },
+                        "Select": 3
+                      },
+                      {
+                        "Source": {
+                          "Entity": "CSOs",
+                          "Property": "Overflow Timer"
+                        },
+                        "Select": 4
+                      },
+                      {
+                        "Source": {
+                          "Entity": "CSOs",
+                          "Property": "Active Status"
+                        },
+                        "Select": 5
+                      },
+                      {
+                        "Source": {
+                          "Entity": "CSOs",
+                          "Property": "State"
+                        },
+                        "Select": 6
+                      }
+                    ],
+                    "Member": "DM0"
+                  }
+                ]
+              }
+            },
+            "Version": 2
+          },
+          "fromCache": false,
+          "dsr": {
+            "Version": 2,
+            "MinorVersion": 1,
+            "DS": [
+              {
+                "N": "DS0",
+                "PH": [
+                  {
+                    "DM0": [
+                      {
+                        "S": [
+                          {
+                            "N": "G0",
+                            "T": 4
+                          },
+                          {
+                            "N": "G1",
+                            "T": 1,
+                            "DN": "D0"
+                          },
+                          {
+                            "N": "G2",
+                            "T": 7
+                          },
+                          {
+                            "N": "G3",
+                            "T": 3
+                          },
+                          {
+                            "N": "G4",
+                            "T": 3
+                          },
+                          {
+                            "N": "G5",
+                            "T": 1,
+                            "DN": "D1"
+                          },
+                          {
+                            "N": "G6",
+                            "T": 1,
+                            "DN": "D2"
+                          }
+                        ],
+                        "C": [
+                          10902003,
+                          0,
+                          1795852865000,
+                          1,
+                          0,
+                          0
+                        ],
+                        "\u00d8": 64
+                      },
+                      {
+                        "C": [
+                          10902015,
+                          1,
+                          1795852806000,
+                          0,
+                          0
+                        ],
+                        "R": 48
+                      },
+                      {
+                        "C": [
+                          11413001,
+                          1794330980000
+                        ],
+                        "R": 48,
+                        "\u00d8": 74
+                      },
+                      {
+                        "C": [
+                          11413031,
+                          0,
+                          1795852725000,
+                          1
+                        ],
+                        "R": 112
+                      },
+                      {
+                        "C": [
+                          11503001,
+                          1795852868000,
+                          10.432446,
+                          1
+                        ],
+                        "R": 64,
+                        "\u00d8": 10
+                      },
+                      {
+                        "C": [
+                          11504034,
+                          0,
+                          1795852725000,
+                          1,
+                          0,
+                          0
+                        ],
+                        "R": 64
+                      }
+                    ]
+                  }
+                ],
+                "IC": true,
+                "HAD": true,
+                "ValueDicts": {
+                  "D0": [
+                    "Recently Active",
+                    "Data Unavailable",
+                    "Currently Active",
+                    "Flooded"
+                  ],
+                  "D1": [
+                    "Inactive",
+                    "Active in the last 72 hours",
+                    "Active"
+                  ],
+                  "D2": [
+                    "Data Unavailable",
+                    "Recently Active",
+                    "Active",
+                    "Flooded"
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

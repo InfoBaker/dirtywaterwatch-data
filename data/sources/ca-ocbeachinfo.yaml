@@ -1,0 +1,25 @@
+# Feed row: pipeline/ingest/ca_oc_beaches.py; current page hourly, closure PDFs daily.
+id: "ca-ocbeachinfo"
+name: "Orange County ocean and bay water closures and advisories"
+url: "https://ocbeachinfo.com/"
+homepage: "https://ocbeachinfo.com/"
+kind: "html"
+level: "county"
+enabled: true
+role: "advisories"
+states: ["CA"]
+event_types: ["beach_advisory", "beach_closure"]
+registry_ids: ["ca-ocbeachinfo"]
+raw_fields:
+  reporter_contact: []
+  customer_identifier: []
+  description: ["row.title", "row.extent", "row.program_reason", "phases[].source_text", "phases[].agency_reason", "phases[].area", "phases[].amount_spilled"]
+access: ["html", "pdf"]
+machine_readable: true
+access_detail: "Current CLOSURES, WARNINGS and ADVISORIES sections; annual Closure-Chart PDFs discovered from /download/. Pacific day precision. One chart action per spill number, all contiguous closure-area phases retained; source revised spilled, recovered and released amounts stay separate. Default charts: this year and the previous year, checked daily; --backfill YEAR requests earlier discovered charts. Unknown table layouts fail visibly and retain history."
+cadence: "hourly current page; daily annual charts"
+license: "No dataset redistribution license found; public read access. Retain county attribution."
+attribution: "Orange County Health Care Agency, Ocean Water Protection Program"
+legal_basis: "California Health and Safety Code 115885 and 17 CCR 7958 govern county beach posting and closure. This is a voluntary web channel; the statute names a hotline and signs."
+checked: "2026-11-28"
+notes: "Refused from the Mac (connection timeouts), Nov. 28, 2026. Web client read current page and 2024-2026 charts. One current Aliso Beach advisory; chart spill counts 2024: 3, 2025: 2, 2026: 1. Native HTML and PDF extraction still need a runner check. Fixtures transcribe trimmed public text, not a captured DOM or PDF extraction. No inferred reopening or coordinates; source text preserved."

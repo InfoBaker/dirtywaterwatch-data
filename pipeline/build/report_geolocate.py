@@ -22,8 +22,8 @@ records the step that placed it:
       (at most 1.5 km; a street found in pieces over 1 km apart is not placed). Confidence low.
   (e) a receiving water named and nothing else -> no point is invented; the reports stay on that water as today and
       the operator is listed (geolocation.water_only).
-  With no usable location at all: the operator's plant point from EPA FRS (ECHO facility coordinates of its permit)
-  stands in, confidence low, labelled "treatment plant location, not an overflow point".
+  With no usable location at all: no point; the report remains listed with its operator and any named water.
+Our lookups are rounded to three decimals and kept as listings without map points at publication.
 Never a town or county centroid. Every result is checked: inside the state (1 km slack), not a point three or more
 operators share, within 30 km of the operator's other places when it has some.
 
@@ -786,7 +786,6 @@ def geolocate(unlocated: list[dict], args, key=None, by_id=None, anchors=None) -
     judge = getattr(args, "judge", None)
     placed = []          # (lat, lon, ev, info)
     review, water_only = [], defaultdict(int)
-    plant_fallback = defaultdict(list)
     model_notes = Counter()
     for k in order:
         op, state, _, _ = k
@@ -816,7 +815,7 @@ def geolocate(unlocated: list[dict], args, key=None, by_id=None, anchors=None) -
                            "reports": len(evs), "why": "the report names several outfalls: no single place"})
             continue
         if kind in ("none", "unknown"):
-            plant_fallback[(op, state)].extend(evs)
+            stats["no usable location; listed without a point"] += len(evs)
             if kind == "unknown":
                 review.append({"operator": op, "state": state, "text": parsed["text"][:200], "town": town,
                                "reports": len(evs), "why": "rules could not read it (no model this run)"})
@@ -858,32 +857,10 @@ def geolocate(unlocated: list[dict], args, key=None, by_id=None, anchors=None) -
         n0 = len(placed)
         placed = [x for x in placed if (round(x[0], P.CENTROID_ROUND), round(x[1], P.CENTROID_ROUND)) not in shared]
         stats[f"rejected: a point {P.CENTROID_OPERATORS} or more operators share"] += n0 - len(placed)
-    # the plant stands in for an operator with no usable location and no other place this step found
-    stand_ins = []
-    placed_ops = {e["_op"] for _, _, e, _ in placed}
-    for (op, state), evs in plant_fallback.items():
-        if op in placed_ops:
-            continue
-        permit = next((e.get("npdes_permit") for e in evs if e.get("npdes_permit")), None) or \
-            (by_id.get(op) or {}).get("npdes_permit")
-        if not permit or has_official(op):
-            stats["no location, no stand-in (an official point exists or no permit)"] += len(evs)
-            continue
-        f = geo.echo_facility(permit)
-        if not f:
-            stats["no location, no EPA facility point"] += len(evs)
-            continue
-        if P.coord_problem(f["lat"], f["lon"], state, P.state_outlines()):
-            continue
-        info = {"status": "placed", "lat": f["lat"], "lon": f["lon"], "step": "frs", "precision_m": None,
-                "confidence": "low", "detail": f"EPA FRS facility coordinates of {permit}: {P.PLANT_LABEL}",
-                "kind": "frs_stand_in", "stand_in": True}
-        for e in evs:
-            stand_ins.append((f["lat"], f["lon"], {**e, "coord_source": "geocode"}, info))
     geo.save()
     if judge is not None:
         judge.save()
-    places = build_geo_places(placed, by_id) + build_geo_places(stand_ins, by_id)
+    places = build_geo_places(placed, by_id)
     out_stats = {
         "reports_in": len(unlocated), "by_outcome": dict(stats.most_common()),
         "places": len(places), "reports_placed": sum(p["report_count"] for p in places),

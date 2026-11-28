@@ -831,6 +831,11 @@ def public_record(e: dict, pl: dict, r: Redactor, swaps=()) -> dict:
     rec["fixture"] = bool(e.get("_fixture"))
     rec["state"] = status_mod.event_state(e)
     rec["category"] = status_mod.category_of(e.get("event_type"))       # sewage, beach or bloom (§2.z)
+    # Our conversion of the operator's reported point, separate from source detail.
+    operator_place = (e.get("raw") or {}).get("_place_from_operator_coords")
+    if isinstance(operator_place, dict) and e.get("lat") is not None and e.get("lon") is not None:
+        rec.update({k: operator_place[k] for k in
+                    ("place_basis", "place_tier", "place_method", "place_precision_m") if k in operator_place})
     rec["water_slugs"] = pl.get("water_slugs", rec.get("water_slugs") or [])
     rec["water_match"] = pl.get("water_match", rec.get("water_match"))
     rec["placement_note"] = pl.get("note")
@@ -1638,7 +1643,9 @@ def outfall_lists(outfalls: list[dict], aliases: dict[str, str] | None = None) -
     counts and the reports); one without a permit is listed under its operator (discharger_id, aliases resolved)."""
     aliases = aliases or {}
     by_water, by_permit, by_operator = defaultdict(list), defaultdict(list), defaultdict(list)
+    from reported_places import public_place
     for o in outfalls:
+        o = public_place(o, listing=True) if is_provisional(o) else o
         if o.get("outfall_kind") == "other":
             continue                    # a row EPA flags CSO that is no sewage outfall (kind_note)
         slug = status_mod.SLUG_ALIASES.get(o["water_slug"], o["water_slug"]) if o.get("water_slug") else None

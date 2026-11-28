@@ -41179,6 +41179,78 @@
   "area": "pa"
  },
  {
+  "id": "pa-echo-violations",
+  "name": "EPA ECHO Pennsylvania single-event sewer violations",
+  "jurisdiction": "PA",
+  "operator": "U.S. EPA, with Pennsylvania DEP state-entered violations",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "sso",
+   "bypass",
+   "unknown"
+  ],
+  "waters_covered": "Pennsylvania permits; no dedicated receiving-water or outfall columns. One historical comment names Singer Run and a manhole.",
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/files/echodownloads/npdes_downloads.zip",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "Public ZIP, no key. Comments are preserved, including the named water Singer Run in one historical row. HTTP ranges read all rows of NPDES_SE_VIOLATIONS.csv and NPDES_SICS.csv; PA prefix, codes F024S/A0020 (SSO); F036S/A0011 (generic bypass) and D0011 (discharge without a valid permit) require sewerage SIC 4952. No permit census limit. Validator checks avoid rereading unchanged archives.",
+  "machine_readable": true,
+  "fields": [
+   "NPDES_ID",
+   "NPDES_VIOLATION_ID",
+   "VIOLATION_TYPE_CODE",
+   "VIOLATION_CODE",
+   "VIOLATION_DESC",
+   "SINGLE_EVENT_VIOLATION_DATE",
+   "SINGLE_EVENT_END_DATE",
+   "SINGLE_EVENT_VIOLATION_COMMENT",
+   "SINGLE_EVENT_AGENCY_TYPE_CODE",
+   "RNC_DETECTION_CODE",
+   "RNC_DETECTION_DESC",
+   "RNC_DETECTION_DATE",
+   "RNC_RESOLUTION_CODE",
+   "RNC_RESOLUTION_DESC",
+   "RNC_RESOLUTION_DATE"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "npdes_permit",
+   "event_type from explicit code; D0011 remains unknown",
+   "started_at (violation start, day precision)",
+   "source_end_date (regulatory violation closure, not discharge end)",
+   "source_updated_at (archive Last-Modified only)",
+   "authority",
+   "source_url",
+   "raw"
+  ],
+  "cannot_fill": [
+   "clock times",
+   "confirmed discharge end",
+   "per-event volume",
+   "cause",
+   "receiving water",
+   "outfall",
+   "coordinates",
+   "publication date",
+   "receipt date"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Hourly validator check; EPA archive usually weekly, violations entered weeks to months after the event.",
+  "history": "Live ZIP contains historical violations; retained records survive later disappearance and outages.",
+  "license": "U.S. federal government data (public domain); cite EPA ECHO.",
+  "legal_basis": "Compliance records reported to regulators, not a public-notice channel named by the reviewed Pennsylvania law or permit.",
+  "status": "used",
+  "status_reason": "Reads the PA bulk violation file and sewerage SIC join. Preserves each violation ID and regulatory dates; no invented volume or discharge end. Links compatible utility reports and separately flags uncertain matches. Multiple codes per permit/start day with compatible reported locations are grouped for counting as our interpretation; conflicting waters or outlets remain separate.",
+  "verified": "fetched",
+  "checked": "2026-11-28",
+  "notes": "Follows Rhode Island ECHO DFR field conventions but uses the full bulk file. The ALCOSAN March 2026 power-outage violation is linked to its March 6 utility notice despite the EPA March 7 date. Its July 17 regulatory closure is not used as a discharge end. PWD poll records and routine Erie/ALCOSAN CSOs are not automatically equated with SSOs. The shared ZIP reader and row-selection function can later serve other states; only PA is enabled.",
+  "area": "pa"
+ },
+ {
   "id": "md-law-env-9-331-1",
   "name": "Md. Code, Environment § 9-331.1 (sewer overflow and treatment plant bypass reporting and public notification)",
   "jurisdiction": "MD",
@@ -52967,67 +53039,124 @@
   "role": "advisories",
   "event_types": [
    "beach_advisory",
-   "sso"
+   "beach_closure"
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://www.sdbeachinfo.com/",
+  "url": "https://cosdapps.sandiegocounty.gov/sdbeachinfo/",
   "access": [
-   "html"
+   "api"
   ],
-  "access_detail": "Redirects to an OutSystems React app (cosdapps.sandiegocounty.gov/sdbeachinfo/); guessed /api paths 404. The CivicData 'Beach and Bay Postings' resource cd5f21db-... has 780 rows but the tail rows are empty.",
-  "machine_readable": false,
-  "sample_record": null,
-  "fields": [],
-  "fills_event_fields": [],
-  "cannot_fill": [],
-  "has_coordinates": false,
+  "access_detail": "Verified anonymous OutSystems MainFlow.Home calls: moduleinfo manifest and component scripts provide version values; BlockNotification/ScreenDataSetGetEventsList with EventTypeId 1, 2, 3 and StartIndex/MaxRecords. Home counters validate completeness. LastUpdate is UTC. No login or static credential.",
+  "machine_readable": true,
+  "sample_record": "pipeline/tests/fixtures/ca_county_beaches/sd_notifications.json",
+  "fields": [
+   "StationID",
+   "BeachName",
+   "LocationName",
+   "Latitude",
+   "Longitude",
+   "EventType.Id",
+   "Event.IssueDateTime",
+   "Event.LiftedDateTime",
+   "Event.DescriptionIssue",
+   "Event.Reason",
+   "LastUpdate"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "event_type",
+   "started_at",
+   "ended_at where supplied",
+   "waterbody_text as named",
+   "authority",
+   "advice_text",
+   "volume_gal where stated"
+  ],
+  "cannot_fill": [
+   "discharge start/end from beach action dates",
+   "reported_at",
+   "published_at"
+  ],
+  "has_coordinates": true,
   "has_outfall_ids": false,
-  "cadence": null,
-  "history": null,
-  "license": null,
-  "legal_basis": null,
-  "status": "watch",
-  "status_reason": "Live closures (incl. sewage and Tijuana closures) but no documented API; Beach Watch carries the same records later. The prompt's 'API' lead was not confirmed.",
+  "cadence": "Hourly current list",
+  "history": "Current snapshot: starts 1997, 2025 and 2026; not a complete action archive.",
+  "license": "No explicit dataset redistribution license found; public read access, county attribution retained.",
+  "legal_basis": "California Health and Safety Code 115885 and 17 CCR 7958; the web page is voluntary (law names a hotline and signs).",
+  "status": "used",
+  "status_reason": "Built ca_sd_beaches hourly reader; native live read Nov. 28: 7 advisories, 6 closures, no warnings. Most rows have no current-event reason and are listed without color.",
   "verified": "fetched",
-  "checked": "2026-11-03",
-  "notes": "",
+  "checked": "2026-11-28",
+  "notes": "No inferred end on disappearance. Our station/type/issue-time keys avoid zero placeholder IDs. Source narrative preserves the 160,000-gallon San Diego River sewage release. Conservative post-feed Beach Watch links; BEACON linker follows. Regional IBWC spill totals are different records from beach closures.",
   "area": "ca"
  },
  {
   "id": "ca-lacounty-beach",
-  "name": "Los Angeles County Public Health ocean water quality and beach closures",
+  "name": "Los Angeles County beach water quality map and ocean notices",
   "jurisdiction": "CA",
   "operator": "Los Angeles County Department of Public Health",
   "operator_type": "municipal",
   "role": "advisories",
   "event_types": [
    "beach_advisory",
+   "beach_closure",
+   "rain_advisory",
    "sso"
   ],
-  "waters_covered": null,
+  "waters_covered": "Los Angeles County coastal beaches",
   "water_slugs": [],
-  "url": "http://publichealth.lacounty.gov/phcommon/public/eh/water_quality/beach_grades.cfm",
+  "url": "https://admin.publichealth.lacounty.gov/phcommon/public/eh/water_quality/beach_grades.cfm",
   "access": [
-   "html"
+   "html",
+   "kml"
   ],
-  "access_detail": null,
-  "machine_readable": false,
+  "access_detail": "Public KML linked from the county page, with station IDs and source coordinates; paged ocean release index with native prid identifiers. No login. The local archive retains prior years when the live index rolls over.",
+  "machine_readable": true,
   "sample_record": null,
-  "fields": [],
-  "fills_event_fields": [],
-  "cannot_fill": [],
-  "has_coordinates": false,
+  "fields": [
+   "station_id",
+   "name",
+   "status",
+   "cause",
+   "source update date"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "event_type",
+   "waterbody_text",
+   "published_at",
+   "source_updated_at",
+   "authority",
+   "source_url"
+  ],
+  "cannot_fill": [
+   "advisory start time",
+   "discharge end time",
+   "receipt date"
+  ],
+  "has_coordinates": true,
   "has_outfall_ids": false,
-  "cadence": null,
-  "history": null,
-  "license": null,
-  "legal_basis": null,
-  "status": "watch",
-  "status_reason": "Closures for sewage spills in LA County; not fetched in the time box. LA County also publishes 'sewage discharge reporting guidelines'.",
-  "verified": "search_only",
-  "checked": "2026-11-03",
-  "notes": "",
+  "cadence": "Hourly; current map and complete current-year press-release index. New notices fetched once, recent notices rechecked daily.",
+  "history": "Current-year ocean notices plus our retained observations and cached prior-year notices.",
+  "license": "No explicit reuse license found; public agency notices.",
+  "legal_basis": "HSC 115885 and 17 CCR 7958 govern health-officer beach posting and closure; the website is voluntary. The law names signs and a telephone hotline.",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/ca_lacounty_beaches.py; paged archive and KML checked live November 28, 2026: 176 notices and 97 stations.",
+  "verified": "fetched",
+  "checked": "2026-11-28",
+  "notes": "Public text is preserved. Unknown starts and ends remain null. Notice dates, source updates and observations stay separate. The source-linking pass reconciles exact station/area and dated action evidence with Beach Watch.",
+  "raw_fields": {
+   "reporter_contact": [],
+   "customer_identifier": [],
+   "description": [
+    "notices[].text",
+    "notice.text",
+    "notice.body_html",
+    "row.fields.Location",
+    "extent"
+   ]
+  },
   "area": "ca"
  },
  {
@@ -53039,31 +53168,58 @@
   "role": "advisories",
   "event_types": [
    "beach_advisory",
-   "sso"
+   "beach_closure"
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://www.ocbeachinfo.com/",
+  "url": "https://ocbeachinfo.com/",
   "access": [
-   "html"
+   "html",
+   "pdf"
   ],
-  "access_detail": null,
-  "machine_readable": false,
-  "sample_record": null,
-  "fields": [],
-  "fills_event_fields": [],
-  "cannot_fill": [],
+  "access_detail": "Home page CLOSURES/WARNINGS/ADVISORIES and annual closure PDF links from /download/. Web client verified one current Aliso Beach advisory, three chart spills in 2024, two in 2025, one in 2026. Requests to both host forms and the PDF timed out from the Mac.",
+  "machine_readable": true,
+  "sample_record": "pipeline/tests/fixtures/ca_county_beaches/oc_current.html",
+  "fields": [
+   "notice section",
+   "posted on",
+   "affected area",
+   "spill number",
+   "date closed",
+   "date opened",
+   "agency/reason",
+   "amount spilled",
+   "amount recovered",
+   "amount released",
+   "closure phases"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "event_type",
+   "started_at",
+   "ended_at where supplied",
+   "waterbody_text as named",
+   "authority",
+   "advice_text",
+   "volume_gal where stated"
+  ],
+  "cannot_fill": [
+   "discharge start/end from beach action dates",
+   "reported_at",
+   "published_at",
+   "coordinates"
+  ],
   "has_coordinates": false,
   "has_outfall_ids": false,
-  "cadence": null,
-  "history": null,
-  "license": null,
-  "legal_basis": null,
-  "status": "watch",
-  "status_reason": "Sewage-spill closures with extent; not fetched.",
-  "verified": "search_only",
-  "checked": "2026-11-03",
-  "notes": "",
+  "cadence": "Hourly current notices; daily closure charts",
+  "history": "Charts listed 1999-2026; 2024-2026 read through web client, default ingestion requests current and previous year. Current page has no archive.",
+  "license": "No explicit dataset redistribution license found; public read access, county attribution retained.",
+  "legal_basis": "California Health and Safety Code 115885 and 17 CCR 7958; the web page is voluntary (law names a hotline and signs).",
+  "status": "used",
+  "status_reason": "Built ca_oc_beaches reader with strict table validation and retention on failure. Native HTML/PDF extraction awaits runner verification; real-record fixtures are trimmed public-text transcriptions.",
+  "verified": "fetched",
+  "checked": "2026-11-28",
+  "notes": "Charts group closure extent phases by source spill number; source revisions override initial volume, without arithmetic. Unknown layout fails visibly. No coordinates invented. No reporter-contact or customer-identifier structured keys occur in the read schema; public free text is preserved.",
   "area": "ca"
  },
  {
@@ -53201,6 +53357,69 @@
   "verified": "fetched",
   "checked": "2026-11-03",
   "notes": "",
+  "area": "ca"
+ },
+ {
+  "id": "ca-long-beach-water-quality",
+  "name": "Long Beach recreational water conditions",
+  "jurisdiction": "CA",
+  "operator": "Long Beach Department of Health and Human Services",
+  "operator_type": "municipal",
+  "role": "advisories",
+  "event_types": [
+   "beach_advisory",
+   "beach_closure",
+   "rain_advisory"
+  ],
+  "waters_covered": "Long Beach ocean and bay sampling locations",
+  "water_slugs": [],
+  "url": "https://www.longbeach.gov/health/inspections-and-reporting/inspections/recreational-water-samples/",
+  "access": [
+   "html"
+  ],
+  "access_detail": "Public HTML conditions table; station ID, location, and dot position under Open, Advisory, Rain Advisory or Closed. Current snapshot only; monthly sample sheets are not historical advisories.",
+  "machine_readable": true,
+  "sample_record": null,
+  "fields": [
+   "station_id",
+   "name",
+   "status",
+   "cause",
+   "source update date"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "event_type",
+   "waterbody_text",
+   "published_at",
+   "source_updated_at",
+   "authority",
+   "source_url"
+  ],
+  "cannot_fill": [
+   "advisory start time",
+   "discharge end time",
+   "receipt date"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Hourly observations; page dated to the day, sampling generally weekly.",
+  "history": "Current conditions only. Our observations accumulate from first collection.",
+  "license": "No explicit reuse license found; public agency page.",
+  "legal_basis": "HSC 115885 and 17 CCR 7958 govern health-officer beach posting and closure; the web page is voluntary.",
+  "status": "used",
+  "status_reason": "Read hourly by pipeline/ingest/ca_long_beach_water_quality.py; 15 stations, all Open, updated November 25, 2026, read November 28.",
+  "verified": "fetched",
+  "checked": "2026-11-28",
+  "notes": "Public text is preserved. Unknown starts and ends remain null. Notice dates, source updates and observations stay separate. The source-linking pass reconciles exact station/area and dated action evidence with Beach Watch.",
+  "raw_fields": {
+   "reporter_contact": [],
+   "customer_identifier": [],
+   "description": [
+    "row.status_definition",
+    "cause"
+   ]
+  },
   "area": "ca"
  },
  {
@@ -61342,25 +61561,56 @@
   "water_slugs": [],
   "url": "https://msdgc.org/programs/cso-notification-program/",
   "access": [
-   "map_only"
+   "json"
   ],
-  "access_detail": null,
-  "machine_readable": false,
+  "access_detail": "Public Power BI publish-to-web querydata POST (model 346), CSOs and CSO_Info joined by facility_id; complete 5000-row windows with no sign-in. https://wabi-us-north-central-k-primary-api.analysis.windows.net/public/reports/querydata?synchronous=true",
+  "machine_readable": true,
   "sample_record": null,
-  "fields": [],
-  "fills_event_fields": [],
-  "cannot_fill": [],
-  "has_coordinates": false,
-  "has_outfall_ids": false,
-  "cadence": null,
-  "history": null,
+  "fields": [
+   "facility_id",
+   "Current State",
+   "timestamp",
+   "Site Status",
+   "Overflow Timer",
+   "Active Status",
+   "State",
+   "asset_type",
+   "facility_name",
+   "facility_name_edmr",
+   "watershed",
+   "sewershed",
+   "latitude",
+   "longitude",
+   "event_trigger",
+   "include_in_cso_dashboard",
+   "raingauge_name"
+  ],
+  "fills_event_fields": [
+   "status",
+   "outfall_name",
+   "lat",
+   "lon",
+   "source_updated_at"
+  ],
+  "cannot_fill": [
+   "volume_gal",
+   "cause",
+   "reported_at",
+   "published_at",
+   "exact event start",
+   "exact event end"
+  ],
+  "has_coordinates": true,
+  "has_outfall_ids": true,
+  "cadence": "hourly",
+  "history": "Current snapshot only; history accumulates from our first active observation. Recent-only sites do not have a known start.",
   "license": null,
-  "legal_basis": "40 CFR 122.38 (Lake Erie basin) or CSO permit/consent decree",
-  "status": "watch",
-  "status_reason": "Power BI embed (app.powerbi.com/view?r=...), updated hourly, outfalls active now or in the past 72 hours; no machine-readable output. MSD advises avoiding streams for 72 hours after rain.",
+  "legal_basis": "MSDGC consent-decree report Q3 2026, section G.2, CSO Public Notification Program (Ohio River basin; 40 CFR 122.38 does not apply).",
+  "status": "used",
+  "status_reason": "We read the public query hourly and retain suspected-overflow events. Active observations open events; a later Recently Active observation confirms water levels returned to normal and bounds the stop. Missing or unavailable readings retain ongoing events. No volume or cause is supplied.",
   "verified": "fetched",
-  "checked": "2026-11-03",
-  "notes": "",
+  "checked": "2026-11-28",
+  "notes": "Live read: 205 sites (200 CSO, 4 RTC, 1 HRT), 199 points; 4 Currently Active. Source legend describes suspected overflows and possible false alerts. Numeric timestamps are interpreted as Eastern wall time, with seconds retained; event boundaries have poll precision. The 72-hour timer is preserved without deriving event dates. Numbered CSOs join OH0105457 in the registry; OH0025461 (Mill Creek), OH0025453 (Little Miami) and OH0025470 (Muddy Creek) are treatment-plant links from sewershed, not replacements for the outfall permit. Receiving water comes from the matched registry, not sewershed. Monthly DMRs remain separate context; uniquely matched dated notices link as duplicates. Program: https://msdgc.org/programs/cso-notification-program/ ; consent report: https://msdgc.org/sites/default/assets/downloads/programs/Progress/Consent_Decree_Quarterly_Reports/CD_Q3_2026.pdf",
   "area": "oh"
  },
  {

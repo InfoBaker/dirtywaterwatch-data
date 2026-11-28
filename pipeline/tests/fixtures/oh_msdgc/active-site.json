@@ -1,0 +1,22 @@
+{
+  "facility_id": "19701004",
+  "Current State": "Currently Active",
+  "timestamp": 1795855519000,
+  "Site Status": 6,
+  "Overflow Timer": 72,
+  "Active Status": "Active",
+  "State": "Active",
+  "info": {
+    "facility_id": "19701004",
+    "asset_type": "CSO",
+    "facility_name": "CSO-223",
+    "facility_name_edmr": "CSO-223",
+    "watershed": null,
+    "sewershed": "Muddy Creek",
+    "latitude": "39.08892",
+    "longitude": "-84.64595",
+    "event_trigger": null,
+    "include_in_cso_dashboard": 1,
+    "raingauge_name": null
+  }
+}

@@ -289,7 +289,9 @@ def red_rule_for(ev: dict, state: str | None, rules: dict) -> dict:
     if ev.get("advice_window_hours") is not None:
         return {"rule": "red.event", "hours": float(ev["advice_window_hours"]),
                 "rationale": ev.get("advice_window_basis") or "stated in the source record",
-                "source": ev.get("source_url"), "clock": "end_of_discharge"}
+                "source": ev.get("source_url"),
+                "clock": ("observed_return_to_normal" if ev.get("source_id") == "oh-msdgc-cso-activity-map"
+                          else "end_of_discharge")}
     by_d = (rules.get("red") or {}).get("by_discharger") or {}
     did = ev.get("discharger_id")
     if did not in by_d and ev.get("discharger_id_source") in by_d:    # a rule written under the ingester's id
@@ -841,6 +843,7 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
                     continue
             events.append(r)
     settle_dropped_notices(events, dropped_notices)
+    prefer_msdgc_observations(events)
     carry_map_ends(events)
     return files, events, problems
 
@@ -873,6 +876,28 @@ def settle_dropped_notices(events: list[dict], dropped: set) -> None:
                     "_ended_before_basis": raw.get("_ended_before_basis"),
                     "_ended_before_from": e["event_id"]}
         t.update(status="ended", time_precision="bound")
+
+
+def prefer_msdgc_observations(events: list[dict]) -> None:
+    """Keep the map's observed status/bounds when a linked dated report has no end.
+
+    Reverse only an explicit, bounded same-outfall link from the MSDGC reader.
+    Both IDs and both source records survive; no dates are copied or invented.
+    This runs on load for both status and public export. A reported end wins.
+    """
+    by_id = {e["event_id"]: e for e in events}
+    for e in events:
+        t = by_id.get(e.get("duplicate_of"))
+        if (e.get("source_id") != "oh-msdgc-cso-activity-map" or t is None or t is e
+                or t.get("source_id") == e["source_id"] or t.get("duplicate_of")
+                or t.get("ended_at") or t.get("status") not in {"unknown", "ongoing"}
+                or e.get("status") not in {"ongoing", "ended"}):
+            continue
+        e["duplicate_of"] = None
+        t["duplicate_of"] = e["event_id"]
+        raw = dict(t.get("raw") or {})
+        raw["duplicate_basis"] = "The linked MSDGC map record retains the observed activity and return to normal water levels."
+        t["raw"] = raw
 
 
 # operator sources whose linked duplicates give their end to the shown record (ingest/ma_springfield_aquasight.py)
@@ -3366,6 +3391,11 @@ class Resolver:
 
         state = event_state(ev)
         point = []                          # by_point, computed once when needed
+        operator_point = (ev.get("raw") or {}).get("_place_from_operator_coords")
+        operator_point = operator_point if isinstance(operator_point, dict) and operator_point.get("place_tier") == 1 \
+            and ev.get("coord_source") == "source" and ev.get("lat") is not None and ev.get("lon") is not None else None
+        operator_named_water = bool(operator_point and (known or
+                                    (ev.get("waterbody_text") and not no_water_text(ev["waterbody_text"]))))
 
         def on_a_water():
             if not point:
@@ -3375,15 +3405,14 @@ class Resolver:
 
         def yields_to_point(slugs, relaxed):
             """A named water kept only beyond NAME_MATCH_M gives way to a point that lies on a water."""
-            if slugs and all(x in relaxed for x in slugs) and on_a_water():
+            if not operator_point and slugs and all(x in relaxed for x in slugs) and on_a_water():
                 aside.extend((x, relaxed[x].replace("named in the report; ", "named in the report but not used: ")
                               + "; the report's point lies on another water") for x in slugs)
                 return True
             return False
 
-        # a source whose rule places a report only on the water it names (raw._placement named_water_only: Texas's TCEQ
-        # table, which gives no point or outfall): never on its permit's outfalls' water, never by a point (final
-        # audit 2026-11-07 P1-1); a report naming no water stays unplaced, listed with its county
+        # named_water_only excludes permit/plant fallback. The operator-coordinate
+        # exception below can use the report's own point after trying its named water.
         named_only = named_water_only(ev)
         own_only = own_place_only(ev)
         yielded = False
@@ -3419,9 +3448,12 @@ class Resolver:
             if slugs:
                 return placed(slugs, "name", nnote or note, [relaxed[x] for x in slugs if x in relaxed],
                               outfalls=self.named_water_outfalls(ev, state, slugs))
-        near = None if named_only else on_a_water()
+        # Houston's operator coordinates are source points. Keep the named-only guard
+        # for registry/plant fallback and give an explicit named water first priority.
+        near = None if (named_only and not operator_point) or operator_named_water else on_a_water()
         if near:
-            return placed([near[1]], "geometry", f"point {round(near[0])} m from the water")
+            return placed([near[1]], "geometry", f"point {round(near[0])} m from the water",
+                          [operator_point["place_basis"]] if operator_point else [])
         reason = None
         text = (ev.get("waterbody_text") or "").strip()
         names_none = not text or (placeholder_text(text) and ev.get("event_type") == "cso")
@@ -3449,7 +3481,9 @@ class Resolver:
             out.pop("unplaced_reason", None)
             out["no_receiving_water"] = nw
             return out
-        if named_only and not text and not out.get("unplaced_reason"):
+        if operator_point and not out.get("unplaced_reason"):
+            out["unplaced_reason"] = "the operator's reported location did not match a water in our records"
+        if named_only and not operator_point and not text and not out.get("unplaced_reason"):
             out["unplaced_reason"] = NAMED_ONLY_NONE
         if own_only and not text and not out.get("unplaced_reason"):
             out["unplaced_reason"] = OWN_PLACE_NONE
@@ -4204,6 +4238,19 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                 return out + ([note] if note["end"] > note["start"] else [])
             return [_iv(ev, start, None, rule, red, yellow)]
         if st == "advisory_lifted":
+            raw = ev.get("raw") or {}
+            if not ev.get("started_at") and raw.get("_publication_anchored_advisory") is True:
+                # A dated local beach warning followed by an explicit lifting keeps
+                # its observed history; publication remains separate from the unknown start.
+                published = pt(ev.get("published_at"))
+                lifted = end
+                if lifted is None and et == "sso":
+                    # The closure's lifting is not the sewage discharge's end.
+                    lifted = pt(raw.get("closure_lifted_at"))
+                    if lifted is not None and ev.get("time_precision") == "day":
+                        lifted = end_of_local_day(lifted, tz)
+                return ([_iv(ev, published, lifted, rule, red, yellow)]
+                        if published is not None and lifted is not None and lifted > published else [])
             # needs its own (or inherited) start; ends at ended_at, else when the lifting was reported
             real_start = pt(ev.get("started_at"))
             if real_start is None:
@@ -5407,6 +5454,9 @@ def find_duplicates(events: list[dict]) -> dict[str, str]:
     different particular waters (waters_differ) are not linked at all: they may be two spills of one system."""
     groups = defaultdict(list)
     for ev in events:
+        # PA regulatory violations use explicit links: a same-day CSO or poll alone is not an SSO match.
+        if ev.get("source_id") == "pa-echo-violations":
+            continue
         if ev.get("_fixture") or ev.get("time_precision") in COARSE_PRECISION or ev.get("duplicate_of"):
             continue
         if citizen_report(ev):

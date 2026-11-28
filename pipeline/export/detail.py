@@ -409,6 +409,12 @@ _mt_density.with_record = True
 
 
 SOURCES: dict[str, dict] = {
+    "ca-sdcounty-beachinfo": {"cause": text("cause"),
+                               "town": text("row.City.Label"),
+                               "location_description": text("row.Site.LocationName")},
+    "ca-ocbeachinfo": {"cause": text("cause", "reason"),
+                       "location_description": joined(text("row.extent"), text("phases[].area")),
+                       "volume_to_water_gal": number("volume_to_water_gal")},
     "mo-dnr-hab-map": {
         "confirmation_method": text("confirmation_method"),
         "source_end_date": text("dissolved_on"),
@@ -475,6 +481,15 @@ SOURCES: dict[str, dict] = {
                         "duration_text": _nc_duration,
                         "volume_to_water_gal": number("dwr_volume_waterbody_5d", "dwr_volume_waterbody", "volume_waterbody"),
                         "town": text("deq_municipality", "municipality")},
+    "pa-echo-violations": {
+        "report_kind": text("row.VIOLATION_DESC"),
+        "description": text("row.SINGLE_EVENT_VIOLATION_COMMENT"),
+        "overflow_point": text("overflow_point"),
+        "source_end_date": text("source_end_date"),
+        "source_end_text": text("source_end_text"),
+        "notes": joined(text("note"), text("time_basis"), text("source_updated_at_basis"),
+                        text("count_basis"), text("_duplicate_basis")),
+    },
     "echo-sewer-overflow": {
         "report_kind": text("program_report_npdes_data_group_desc"), "cause": text("causes[]"),
         "duration_text": with_unit("sewer_overflow_bypass_duration_hours", "hours"),
@@ -491,6 +506,9 @@ SOURCES: dict[str, dict] = {
                                     "rainfall_label": lambda raw: "Rainfall before the event" if plain_inches("row.RAINFALL_BEFORE_EVENT")(raw) else None},
     "oh-clyde-cso-notification": {"cause": text("row.cause"), "rainfall_in": plain_inches("row.rain_total_in"),
                                   "rainfall_label": lambda raw: "Total rainfall" if plain_inches("row.rain_total_in")(raw) else None},
+    "oh-msdgc-cso-activity-map": {"source_status": text("source_status"),
+                                     "confirmation_method": text("confirmation_method"),
+                                     "notes": text("source_words")},
     "oh-neorsd-cso-notification-map": {"volume_qualifier": _neorsd_qualifier,
                                       "duration_text": with_unit("duration_h", "hours", singular="hour")},
     "va-richmond-cso": {"rainfall_in": plain_inches("rain_in"),
@@ -505,6 +523,12 @@ SOURCES: dict[str, dict] = {
                                       "overflow_point": text("appearance_points")},
     "or-deq-oers-spills-2013-2025": {"cause": text("cause")},
     "ca-beachwatch-advisories": {"cause": text("cause")},
+    "ca-lacounty-beach": {"cause": text("cause"), "location_description": text("extent"),
+                           "source_status": text("source_status"),
+                           "source_end_date": text("closure_lifted_at"),
+                           "source_end_text": text("end_basis")},
+    "ca-long-beach-water-quality": {"cause": text("cause"), "source_status": text("source_status"),
+                                    "notes": text("row.status_definition")},
     "nj-beaches": NJ,
     "hi-doh-cwb-events-api": {"cause": text("row.cause")},
     "me-healthy-beaches": {"cause": beach_comment("comment", "cause"), "notes": beach_comment("comment", "notes")},

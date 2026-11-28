@@ -620,9 +620,12 @@ def test_register_monitors_the_operator_pages_and_clyde_has_its_real_permit():
     by_permit = {}
     for r in rows:
         by_permit.setdefault(r.get("permit"), []).append(r)
-    for permit in ("OH0024686", "OH0105457", "OH0020001"):
+    for permit in ("OH0024686", "OH0020001"):
         mon = [r for r in by_permit[permit] if r["monitored"]]
         assert mon and all(r.get("records") is False and r["urls"] for r in mon), permit
+    # MSD Cincinnati's CSO activity map has been read by its own feed since 2026-11-28 (oh_msdgc_cso): its row is the
+    # feed's, no longer a monitored page
+    assert "oh-msdgc-cso-activity-map" in [r.get("feed_source_id") for r in by_permit["OH0105457"]]
     assert [r.get("feed_source_id") for r in by_permit["OH0026018"]] == ["oh-lakewood-cso-map"]
     clyde = by_permit["OH0024686"]
     assert any(r.get("feed_source_id") == "oh-clyde-cso-notification" for r in clyde)

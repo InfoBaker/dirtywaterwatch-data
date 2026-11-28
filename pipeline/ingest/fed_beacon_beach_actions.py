@@ -19,8 +19,10 @@ Cadence (pull_interval): a full pull of the current and the previous calendar ye
   October (a missing events file pulls at once; a failed pull is tried again the next hour); between pulls the records are written again from the saved rows (data/build/fed-beacon-beach-actions-state.json)
   without the network, so the links to the state feeds follow their files every hour. The events file's header keeps
   the time of the last pull (last_ok_at). --backfill FROM_YEAR pulls the years from FROM_YEAR to the one before the
-  previous year by hand (not in the refresh); they stay in the saved rows. A failed pull keeps the previous records and
-  rows (ok false, the error a fixed reason and the exception's class).
+  previous year by hand (not in the refresh); they stay in the saved rows. Requested and outstanding backfill seasons
+  stay in the saved-row companion across rolling pulls and relinking. Health stays false until a manual retry reads
+  every outstanding season successfully. A failed pull keeps the previous records and rows (the error a fixed reason
+  and the exception's class).
 Scope: the fifty states, the District of Columbia and Puerto Rico (IN_SCOPE). American Samoa, Guam, the Northern
   Mariana Islands, the Virgin Islands and the four tribal programs (BR, GP, MK, ST) are counted in meta
   (out_of_scope), not written.
@@ -62,7 +64,8 @@ Copies, not second reports (link_copies; the ingester's own duplicate_of, as ing
   failed pull (the saved rows written again, health false), so a copy never hides behind a record that has gone.
 Checks (check_year): every row of both reports is the requested year, and the detailed report covers at least 95% of
   the main report's action ids (100% in 2014 to 2026); a year whose rows we hold, or a backfill year, may not come
-  back empty; both refresh years empty is a failed pull. A backfill naming no year exits 2 and writes nothing.
+  back empty; both refresh years empty is a failed pull. Bare --backfill starts at 2014; a range with no historical
+  year exits 2 and writes nothing.
 Meta: counts by state and year, the newest action per state (a source-health signal: when each state last filed),
   the out-of-scope count, the private-owner and historical beaches' actions, the links and the rows with no point.
 Run from pipeline/: python -m ingest.fed_beacon_beach_actions [--force] [--backfill FROM_YEAR]
@@ -87,7 +90,8 @@ from zoneinfo import ZoneInfo
 import requests
 
 import zones
-from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, event, now_iso, read_json, write_events, write_json)
+from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, error_text, event, now_iso, read_json, write_events,
+                    write_json)
 
 SOURCE_ID = "fed-beacon-beach-actions"
 BASE = "https://beacon.epa.gov/ords/beacon2"
@@ -118,8 +122,8 @@ MAIN_COLUMNS = ("Jurisdiction", "Year", "Beach ID", "BeachName", "County", "Wate
 DETAIL_COLUMNS = ("Jurisdiction", "Year", "Beach Id", "Activity ID", "Action Type", "Action StartDate",
                   "Action EndDate", "Action Reasons", "Action ReasonsComment", "Action Indicator",
                   "Action IndicatorComment", "Action Possible Source", "Action PossibleSourceComment")
-TYPE_CODE = {"Closure": "closure", "Contamination Advisory": "advisory", "Rain Advisory": "rain", "Posting": "posting"}
-EVENT_TYPE = {"Closure": "beach_closure", "Contamination Advisory": "beach_advisory", "Rain Advisory": "beach_advisory",
+TYPE_CODE = {"Closure": "closure", "Permanent Closure": "permanent-closure", "Contamination Advisory": "advisory", "Rain Advisory": "rain", "Posting": "posting"}
+EVENT_TYPE = {"Closure": "beach_closure", "Permanent Closure": "beach_closure", "Contamination Advisory": "beach_advisory", "Rain Advisory": "beach_advisory",
               "Posting": "beach_advisory"}
 # EPA's codes in plain words (ours, for a reader; the codes stay as filed in raw.reasons and the others)
 REASON_WORDS = {"ELEV_BACT": "bacteria above the state's standard", "RAINFALL": "rainfall",
@@ -276,7 +280,8 @@ def normalize(main_text: str, detail_text: str) -> tuple[dict[str, dict], Counte
     detail = defaultdict(list)
     for d in rows_of(detail_text):
         detail[d.get("Activity ID", "")].append(d)
-    rows = rows_of(main_text)
+    # Stable collision suffixes even when EPA reorders otherwise repeated report rows.
+    rows = sorted(rows_of(main_text), key=lambda r: tuple(sorted(r.items())))
     out, n = {}, Counter()
     for r in rows:
         ids = sorted(action_ids(r.get("Action ID")), key=_num)
@@ -285,7 +290,7 @@ def normalize(main_text: str, detail_text: str) -> tuple[dict[str, dict], Counte
             continue
         base = f"{ids[0]}-{TYPE_CODE.get(r.get('Action Type') or '') or _slug(r.get('Action Type'))}"
         key, i = base, 1
-        while key in out:              # the same ids and type twice in one report (not seen in 2014 to 2026)
+        while key in out:              # repeated ids/type: keep each row; the full source row determines suffix order
             i += 1
             key = f"{base}~{i}"
         ds = [d for a in ids for d in detail.get(a, [])]
@@ -302,6 +307,7 @@ def normalize(main_text: str, detail_text: str) -> tuple[dict[str, dict], Counte
             "end_text": r.get("ActionEnd Date") or None, "reasons": codes(r.get("ActionReasons")),
             "indicators": codes(r.get("ActionIndicator")), "possible_sources": codes(r.get("ActionPossible Source")),
             "duration_days": r.get("ActionDurationDays") or None,
+            "time_affected_hours_text": r.get("Time affected(in hours)") or None,
             "detail_rows": len(ds), **{k: v for k, v in comments.items() if v},
         }
         n["rows"] += 1
@@ -384,7 +390,7 @@ def to_record(row: dict, reg: dict | None, fetched_at: str, prev: dict | None, f
     praw = (prev or {}).get("raw") or {}
     raw = {k: row.get(k) for k in ("jurisdiction", "year", "beach_id", "beach_name", "county", "waterbody_name",
                                    "waterbody_type", "tier", "station_ids", "action_ids", "action_type", "reasons",
-                                   "indicators", "possible_sources", "duration_days", "start_text", "end_text",
+                                   "indicators", "possible_sources", "duration_days", "time_affected_hours_text", "start_text", "end_text",
                                    "reason_comments", "indicator_comments",
                                    "possible_source_comments") if row.get(k) not in (None, [], "")}
     raw["reason_words"] = [REASON_WORDS.get(c, c) for c in row.get("reasons") or []]
@@ -671,7 +677,26 @@ def build(state: dict, registry: dict[str, dict], files: dict[str, dict], prev_r
                       "state_files_read": sorted(files),
                       "withheld_not_linked": sorted(s for s, f in files.items()
                                                     if (f.get("meta") or {}).get("distribution_discouraged"))}}
+    meta.update(backfill_meta(state))
     return records, meta
+
+
+def backfill_meta(state: dict) -> dict:
+    """Rebuild coverage from durable state, including when only links or rolling seasons change."""
+    backfill = state.get("backfill")
+    if backfill is None:
+        return {}  # Older companions never recorded which historical years were requested.
+    outstanding = backfill["outstanding_years"]
+    return {"backfill": {"requested_years": backfill["requested_years"],
+                         "outstanding_years": sorted(outstanding)},
+            "years_not_read": [f"{y}: {outstanding[y]}" for y in sorted(outstanding)]}
+
+
+def backfill_error(meta: dict) -> str | None:
+    outstanding = (meta.get("backfill") or {}).get("outstanding_years") or []
+    if outstanding:
+        return f"BEACON historical reports not read: {', '.join(outstanding)}"
+    return None
 
 
 def pull_interval(now: datetime) -> timedelta:
@@ -691,6 +716,8 @@ def rewrite(records: list[dict], meta: dict, path: Path | None = None) -> Path:
     path = Path(path) if path is not None else EVENTS_DIR / f"{SOURCE_ID}.json"
     prev = read_json(path, {}) or {}
     out = {**prev, "source_id": SOURCE_ID, "meta": meta, "count": len(records), "records": records}
+    if error := backfill_error(meta):
+        out.update(ok=False, error=error)
     write_json(path, out)
     return path
 
@@ -722,8 +749,8 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
         state_file: Path = STATE_FILE, registry_file: Path = REGISTRY_FILE) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--force", action="store_true", help="pull now, before the interval since the last pull is up")
-    ap.add_argument("--backfill", type=int, metavar="FROM_YEAR",
-                    help="pull the years from FROM_YEAR to the one before the previous year (by hand)")
+    ap.add_argument("--backfill", type=int, nargs="?", const=2014, metavar="FROM_YEAR",
+                    help="pull FROM_YEAR (default 2014) through the year before the previous year (by hand)")
     ap.add_argument("--from-dir", type=Path, help="read saved CSVs instead of BEACON (no network)")
     ap.add_argument("--fetched-at", help="with --from-dir: when the saved CSVs were fetched (ISO time)")
     args = ap.parse_args(argv)
@@ -744,6 +771,7 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
     due = bool(args.force or args.backfill or args.from_dir or last is None or not out_path.exists()
                or now - last >= pull_interval(now))
     pulled, failed, counts = {}, [], Counter()
+    failed_years = {}
     if due:
         sess = sess or (None if args.from_dir else new_session())
         for y in years:
@@ -758,11 +786,20 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
                 pulled[str(y)] = {"pulled_at": fetched_at, "rows": rows}
                 counts.update(n)
             except (requests.RequestException, PullError, OSError, csv.Error, UnicodeError) as e:
-                failed.append(f"{y}: {type(e).__name__}")
+                # Keep only the sanitized class, never exception text from a response or a local path.
+                failed_years[str(y)] = error_text(e).split(":", 1)[0]
+                failed.append(f"{y}: {failed_years[str(y)]}")
                 if not args.backfill:
                     break
         if not failed and not args.backfill and pulled and not any(v["rows"] for v in pulled.values()):
             failed.append("every year: PullError")      # the reports answered, and listed no action at all
+        if args.backfill:
+            backfill = state.setdefault("backfill", {"requested_years": [], "outstanding_years": {}})
+            backfill["requested_years"] = sorted(set(backfill["requested_years"]) | {str(y) for y in years})
+            backfill["outstanding_years"].update(failed_years)
+            if not pulled:
+                # A completely failed first attempt must also survive the next refresh.
+                write_json(state_file, state)
         if failed and (not args.backfill or not pulled):
             err = f"BEACON pull failed ({'; '.join(failed)})"
             if state["years"]:
@@ -770,14 +807,18 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
                 # has gone is dropped, though BEACON could not be read (health stays false, last_ok_at the last pull)
                 prev = (read_json(out_path, {}) or {}).get("records") or []
                 records, meta = build(state, load_registry(registry_file), load_files(events_dir), prev)
-                meta["years_not_read"] = failed
+                meta["years_not_read"] = sorted(set(meta.get("years_not_read", [])) | set(failed))
                 write_events(SOURCE_ID, records, ok=False, error=err, meta=meta, path=out_path, partial=True)
             else:
-                write_events(SOURCE_ID, [], ok=False, error=err, path=out_path)
+                write_events(SOURCE_ID, [], ok=False, error=err, meta=backfill_meta(state), path=out_path)
             print(f"{SOURCE_ID}: FAILED {err}", file=sys.stderr)
             return 1
         state["years"].update(pulled)
         note_first_seen(state, pulled)
+        if "backfill" in state:
+            # Only accepted season rows clear a failure; a different successful range proves nothing about it.
+            for y in pulled:
+                state["backfill"]["outstanding_years"].pop(y, None)
         if not args.backfill:
             state["pulled_at"] = fetched_at
         write_json(state_file, state)
@@ -786,11 +827,11 @@ def run(argv=None, sess=None, sleep=time.sleep, now: datetime | None = None, eve
     if counts:
         meta["this_pull"] = dict(sorted(counts.items()))
     if failed:
-        meta["years_not_read"] = failed
+        meta["years_not_read"] = sorted(set(meta.get("years_not_read", [])) | set(failed))
     if due:
-        write_events(SOURCE_ID, records, ok=not failed, error=None if not failed else
-                     f"BEACON backfill: {len(failed)} year(s) not read", meta=meta, path=out_path,
-                     partial=bool(failed))
+        error = backfill_error(meta)
+        write_events(SOURCE_ID, records, ok=not error, error=error, meta=meta, path=out_path,
+                     partial=bool(error))
     else:
         rewrite(records, meta, out_path)
     print(summary(records, meta, "pulled " + ", ".join(pulled) if due else

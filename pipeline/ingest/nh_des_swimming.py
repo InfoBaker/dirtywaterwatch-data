@@ -8,10 +8,14 @@ https://services1.arcgis.com/MAcUimSes4gPY4sM/arcgis/rest/services/2024_Healthy_
   "Advisory" / "No advisory" / "Monitoring Season Completed"; DateIssued (advisory issue date),
   SampleDate, Sample_Results, Advisory_history (this season's advisory ranges as "7/3-7/5,
   8/4-8/6", month/day only). Fecal-bacteria advisories under Env-Wq 1108.14, posted about 24 h
-  after sampling; "NHDES does not close waterbodies", so every record is beach_advisory.
+  after sampling; "NHDES does not close waterbodies", so advisories are beach_advisory.
+  "Monitoring Season Completed" is a monitoring listing (unknown type/status, no parse error),
+  quoting the source status and colouring nothing. Previously saved season listings are corrected
+  on refresh without changing their identifiers or source times.
   Records: the current state per beach, one record per distinct state (id = EPA_ID + status +
-  date), chained per beach with parent_event_id and closed by the next state like the VT
-  advisories; plus one advisory_lifted record per Advisory_history range (year = the season of
+  date), chained per beach with parent_event_id. A season-completed listing does not close or
+  reconfirm the preceding advisory. Later advisory states link past monitoring listings to the
+  preceding advisory state; plus one advisory_lifted record per Advisory_history range (year = the season of
   SampleDate, day precision, ended_at = the last day of the range at 00:00 local). Earlier
   states and past seasons' ranges are kept across runs (records are replaced by id only).
 - Layer 9 "CyanobacteriaMapperLayer2": 2,401 waterbody polygons, nearly all "No bloom reported"
@@ -131,6 +135,26 @@ def _point(g: dict) -> tuple[float | None, float | None]:
 
 # --------------------------------------------------------------------------- beaches (layer 0)
 
+def _season_completed(rec: dict) -> bool:
+    return (rec.get("source_id") == SOURCE_ID
+            and str(rec.get("source_record_id") or "").startswith("beach:")
+            and str((rec.get("raw") or {}).get("Status") or "").strip().lower() == "monitoring season completed")
+
+
+def monitoring_listing(rec: dict) -> None:
+    """Keep season status as a listing, like Burlington's non-advisory beach states.
+
+    The event vocabulary uses unknown/unknown for these (vt_advisories.btv_records;
+    also tx_transforms.tx_beachwatch_record's sample-only states), not an advisory lift.
+    Apply to retained snapshots too; the source status and date still determine the ID.
+    """
+    raw = rec.get("raw") or {}
+    status = str(raw.get("Status") or "").strip()
+    if _season_completed(rec):
+        rec.update(event_type="unknown", status="unknown", started_at=None, ended_at=None, material=None,
+                   advice_text=f'NHDES Healthy Swimming Mapper status: "{status}".', parse_error=None)
+
+
 def beach_records(feats: list[dict], fetched_at: str, updated: str | None) -> list[dict]:
     out = []
     for f in feats:
@@ -146,7 +170,7 @@ def beach_records(feats: list[dict], fetched_at: str, updated: str | None) -> li
         low = status_txt.lower()
         if low == "advisory":
             st = "advisory_active"
-        elif low in ("no advisory", "monitoring season completed"):
+        elif low == "no advisory":
             st = "advisory_lifted"
         else:
             st = "unknown"
@@ -164,6 +188,7 @@ def beach_records(feats: list[dict], fetched_at: str, updated: str | None) -> li
                          status=st, started_at=_iso(issued) if st == "advisory_active" else None,
                          time_precision="minute" if when else None, reported_at=_iso(when), raw=raw,
                          parse_error=None if st != "unknown" else f"unrecognised Status {status_txt!r}"))
+        monitoring_listing(out[-1])
         # this season's past advisories
         hist = a.get("Advisory_history") or ""
         season = (sampled or issued)
@@ -257,9 +282,10 @@ def hab_records(feats: list[dict], fetched_at: str, updated: str | None) -> list
 # --------------------------------------------------------------------------- history
 
 def chain(records: list[dict]) -> None:
-    """Per site, oldest first: parent_event_id -> previous state; a replaced state is closed."""
+    """Link successive states; a monitoring listing supplies no advisory end or confirmation."""
     by: dict[str, list[dict]] = {}
     for r in records:
+        monitoring_listing(r)
         k = (r.get("raw") or {}).get("_site_key")
         if k and not k.endswith(":hist"):
             by.setdefault(k, []).append(r)
@@ -268,8 +294,20 @@ def chain(records: list[dict]) -> None:
         for i, r in enumerate(reps):
             if r["raw"].get("_was_active"):
                 r["status"], r["ended_at"] = "advisory_active", None
-            r["parent_event_id"] = reps[i - 1]["event_id"] if i else None
+            parent = i - 1
+            if r["status"] in ("advisory_active", "advisory_lifted"):
+                # A definite advisory update revises the preceding advisory state, not
+                # an intervening monitoring notice. Revision resolution can then honor
+                # an explicit lift without inventing an ended_at on the older record.
+                while parent >= 0 and _season_completed(reps[parent]):
+                    parent -= 1
+            r["parent_event_id"] = reps[parent]["event_id"] if parent >= 0 else None
             if i + 1 < len(reps):
+                if _season_completed(reps[i + 1]):
+                    # The sample date is neither a lift nor confirmation across the gap.
+                    # Resetting _was_active above also repairs previously saved inferred ends.
+                    # Leave the last advisory open to the status rules' confirmation limit.
+                    continue
                 nxt = reps[i + 1].get("reported_at")
                 if r["status"] == "advisory_active" and nxt:
                     r["ended_at"] = nxt

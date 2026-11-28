@@ -4,7 +4,9 @@ tx_tceq_record: TCEQ's "Sanitary Sewer Overflows (SSO)" table on data.texas.gov 
 Socrata 8kc5-95uk): one row per incident reported to a TCEQ regional office since September 2010 (30 TAC 305.125(9),
 319.301-319.303). The rows give dates only (start, end, received; every value is midnight), a volume, the cause, the
 source of the spill, the TCEQ region, the county, the regulated entity (RN) and its permits, and often a receiving water;
-no coordinates and no time of day. The table is refreshed in batches months apart.
+no coordinate columns and no time of day. Some Houston descriptions carry the operator's
+State Plane coordinates; those become source points with our conversion basis.
+The table is refreshed in batches months apart.
   - Zone: dates only; each date is midnight in the zone its county keeps, and the record says that zone
     (raw.time_zone, raw.timezone_note), so the status build ends a day at that zone's midnight: Mountain time in El Paso and Hudspeth counties, Central time in the other 252
     (49 CFR 71.9 and 71.10: the boundary between the Central and Mountain zones in Texas follows the eastern lines of
@@ -54,13 +56,73 @@ from zoneinfo import ZoneInfo
 
 from common import DATA_DIR, NAME_REMOVED, scrub_discharger
 from ingest.generic import fieldmap as F
+from geo.stateplane import texas_south_central_to_wgs84
 
 MOUNTAIN_COUNTIES = {"EL PASO", "HUDSPETH"}
 ROW_IN_RECORD = {"incident_number", "start_date", "end_date", "received_date", "amount", "amount_unit", "material_type",
                  "source", "cause", "tceq_region", "receiving_water_body"}
 ZONE_NOTE = "{zone} time ({county}; 49 CFR 71.9-71.10); dates only"
-PLACEMENT = ("TCEQ's table gives no coordinates: a report is placed only on the water it names; a report naming none is "
-             "listed with its county and is never placed at the plant or geolocated from its text")
+PLACEMENT = ("We convert the City of Houston's coordinates in a report to a map point. Other reports are placed "
+             "on the water they name or listed with their county.")
+OPERATOR_COORDS_BASIS = ("Location: the operator's coordinates in the report, which we converted from Texas State "
+                         "Plane South Central to latitude and longitude.")
+# One comma separates the axes; internal spaces are transcription whitespace (e.g. 1386235 2).
+# No digit insertion, axis swapping, alternative projection, address or model inference.
+OPERATOR_PAIR = re.compile(r"\(\s*([0-9][0-9\s]*(?:\.[0-9]+)?)\s*,\s*"
+                           r"([0-9][0-9\s]*(?:\.[0-9]+)?)\s*\)")
+MANHOLE = re.compile(r"\bmanhole\s*(?:id\s*)?[:#]?\s*([A-Z]{2}[0-9]{6}[A-Z]?)\b", re.I)
+LOCATION_TYPE = re.compile(
+    r"/\s*(Back\s*yard|Front\s*yard|Side\s*yard|Side of Building|Backlot Easement|Private Property|"
+    r"Back of Curb(?:\s*/\s*Off Pavement)?|Open Unpaved Area|Open Paved Area|Parking Lot|Street|Underground)\b", re.I)
+CONTAINED_FLOW = re.compile(r"(?:^|[.;/]\s*|Observed Flow Route:\s*)"
+                            r"(?:Contained\s+on\s*site\b|Storm Sewer\s*[-(]\s*contained\b)", re.I)
+
+
+def houston_operator_coords(row: dict, rec: dict, notes: dict) -> None:
+    """Convert Houston's reported pair after operator identity is resolved.
+
+    Keep the source coordinate text and the full converted point. The source
+    does not state coordinate accuracy, so no precision is assigned.
+    """
+    if rec.get("discharger_id") != "tx-city-of-houston" or rec.get("lat") is not None or rec.get("lon") is not None:
+        return
+    text = F.clean(row.get("incident_description"))
+    pairs = {tuple(float(re.sub(r"\s+", "", v)) for v in m.groups()) for m in OPERATOR_PAIR.finditer(text)}
+    if not pairs:
+        return
+    if len(pairs) != 1:
+        notes["_place_coords_rejected"] = "the report gives conflicting coordinate pairs"
+        return
+    x, y = next(iter(pairs))
+    # Houston plus Kingwood: conservative local envelope, entirely inside Texas.
+    # Bounds reject placeholders, metres, swapped axes and wrong-zone pairs before conversion.
+    if not (2950000 <= x <= 3300000 and 13650000 <= y <= 14050000):
+        notes["_place_coords_rejected"] = "the pair is outside Houston's State Plane coordinate range"
+        return
+    lat, lon = texas_south_central_to_wgs84(x, y)
+    if not (29.45 <= lat <= 30.20 and -95.85 <= lon <= -94.95):
+        notes["_place_coords_rejected"] = "the converted point is outside the Houston area"
+        return
+    types = LOCATION_TYPE.search(text)
+    location = re.sub(r"\s*/\s*", "/", types.group(1)).title() if types else None
+    # Stable spelling of source location types, including lowercase linking words.
+    if location:
+        location = location.replace(" Of ", " of ")
+    manholes = sorted(set(m.upper() for m in MANHOLE.findall(text)))
+    notes["_place_from_operator_coords"] = {
+        "place_tier": 1, "place_method": "operator_coordinates", "place_basis": OPERATOR_COORDS_BASIS,
+        "place_precision_m": None, "source_crs": "EPSG:2278", "source_field": "incident_description",
+        "source_units": "US survey feet", "manhole_id": manholes[0] if len(manholes) == 1 else None,
+        "location_type": location,
+    }
+    rec.update(lat=lat, lon=lon, coord_source="source", coord_precision_m=None)
+    # A contained spill's new point must not create a water placement. A source-named
+    # receiving water stays authoritative; the existing status reader handles its words.
+    if not rec.get("waterbody_text") and CONTAINED_FLOW.search(text):
+        notes["reached_water"] = False
+        notes["_no_water_reason"] = "the operator reports the spill was contained on site"
+
+
 # TCEQ's wordings for "no receiving water given" (and their typing slips); a bare number is a segment number, not a name
 NOT_GIVEN = re.compile(
     r"^\s*(?:not\s*provide\w*|no\s+water\s*bod(?:y|ies)\s+(?:provided|listed|given|identified|noted|reported)|"
@@ -219,6 +281,7 @@ def tx_tceq_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     if rec.get("volume_gal") is not None and unit != "GALLONS":
         rec["volume_gal"] = None
         notes["_volume_unit"] = unit or "no unit given"
+    houston_operator_coords(row, rec, notes)
 
 
 # ---------------------------------------------------------------- Texas Beach Watch
