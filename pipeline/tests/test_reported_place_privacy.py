@@ -2,7 +2,10 @@
 import json
 from types import SimpleNamespace
 
-from build import provisional_outfalls as P, report_geolocate as RG
+import pytest
+
+import common
+from build import provisional_outfalls as P, report_geolocate as RG, reaches, status
 from common import load_outfall_registry
 from export import build as E, outfalls as O
 
@@ -18,20 +21,46 @@ def place(**kw):
                              'precision_m': 50, 'method': 'US Census geocoder, address-range match'}, **kw)
 
 
-def test_address_geocode_is_rounded_but_never_a_parcel_dot():
-    row = P.public_row(place())
-    assert (row['lat'], row['lon']) == (41.312, -73.123)
+@pytest.mark.parametrize('kind', ['address', 'intersection', 'street', 'pump_station', 'plant', 'unknown'])
+def test_derived_place_keeps_coordinates_but_only_exports_a_listing(kind):
+    p = place()
+    p['geolocation']['kind'] = kind
+    row = P.public_row(p)
+    assert (row['lat'], row['lon']) == (p['lat'], p['lon'])
     assert row['on_map'] is False
-    assert row['place_method'] == 'address'
-    assert row['place_precision_m'] >= 100
+    assert row['place_method'] == kind
+    assert row['place_precision_m'] == 50
     assert row['place_basis'].startswith('Our approximate location')
-    assert 'Census' in row['place_basis']
+    assert 'rounded' not in row['place_basis']
+    if kind == 'address':
+        assert 'Census' in row['place_basis']
     assert O.outfall_rows([row], {'CT'}) == []
     by_water, by_permit, _ = E.outfall_lists([row])
     listing = by_permit['CT0100013'][0]
     assert listing['lat'] is None and listing['lon'] is None
     assert listing['place_basis'] == row['place_basis']
     assert by_water['test-river'] == [listing]
+
+
+def test_unknown_lookup_precision_is_not_invented():
+    p = place()
+    p['geolocation'].pop('precision_m')
+    assert P.public_row(p)['place_precision_m'] is None
+
+
+def test_cached_derived_place_keeps_coordinates_but_cannot_place_status_or_reaches(tmp_path, monkeypatch):
+    p = place()
+    (tmp_path / 'build').mkdir()
+    (tmp_path / 'build/outfalls-reported.json').write_text(json.dumps({'outfalls': [p]}))
+    row, = load_outfall_registry(tmp_path)
+    assert (row['lat'], row['lon']) == (p['lat'], p['lon'])
+    assert row['on_map'] is False
+    assert O.outfall_rows([row], {'CT'}) == []
+    assert load_outfall_registry(tmp_path, provisional=False) == []
+    monkeypatch.setattr(common, 'DATA_DIR', tmp_path)
+    monkeypatch.setattr(status, 'DATA_DIR', tmp_path)
+    assert status.load_registry_outfalls() == []
+    assert reaches.registry_outfalls() == []
 
 
 def test_operator_point_is_unchanged_even_when_agency_geocoded_it():
@@ -79,10 +108,12 @@ def test_no_location_never_requests_a_plant_point(monkeypatch):
     assert stats['by_outcome']['no usable location; listed without a point'] == 1
 
 
-def test_rounded_place_keeps_its_id_on_the_next_refresh():
+def test_legacy_rounded_place_keeps_its_id_on_the_next_refresh():
     p = place()
     p.update(id='fresh-id', lat=41.31249, lon=-73.12349)
     old = P.public_row(p)
+    old.update(lat=round(p['lat'], 3), lon=round(p['lon'], 3))
+    assert P.dist_m(p['lat'], p['lon'], old['lat'], old['lon']) > P.CLUSTER_M
     old['id'] = old['outfall'] = 'rep-stable'
     P.carry_over([p], {'ct-test': [old]}, '2026-11-24T00:00:00Z')
     assert p['id'] == 'rep-stable'

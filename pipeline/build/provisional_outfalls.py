@@ -1324,6 +1324,7 @@ def carry_over(places: list[dict], prev: dict[str, list[dict]], now: str) -> Non
                 d = dist_m(p["lat"], p["lon"], float(r["lat"]), float(r["lon"]))
             except (TypeError, ValueError):
                 continue
+            # Preserve IDs from legacy three-decimal outputs when rebuilding at lookup precision.
             same_rounded_place = (p.get("geolocation") and r.get("place_method")
                                   and set(p.get("event_ids") or []) & set(r.get("event_ids") or [])
                                   and all(round(p[k], 3) == r[k] for k in ("lat", "lon")))
