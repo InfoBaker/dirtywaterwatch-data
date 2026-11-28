@@ -778,7 +778,10 @@ def placement(entry: dict, waters: dict, reaches: dict, reach_waters_fn, placeme
     traced stretches below the points of its rain-driven reports (tag "reach" on the waters each stretch runs along),
     and a bay or sound that MIN_REPORTS_TIDAL or more of them reached (tag "tidal", as a report there is placed). A
     river with no stretch traced yet, a lake, pond or reservoir (filling a whole lake is a strong claim) and a water no
-    rain-driven report reached get no mark; every water a report reached is named with the reason. Pure."""
+    rain-driven report reached get no mark; every water a report reached is named with the reason. A stretch from a
+    report's own point that the status build's point-trace rule withheld (status.point_trace_withheld) is never used.
+    Pure."""
+    from build.status import point_trace_withheld
     by_event = reach_index(reaches) if by_event is None else by_event
     pl_all = placements or {}
     keys, tags, reach_of = [], {}, defaultdict(set)
@@ -798,6 +801,9 @@ def placement(entry: dict, waters: dict, reaches: dict, reach_waters_fn, placeme
             if eid not in (r.get("event_ids") or []) or r.get("outfall") not in (None, ""):
                 continue            # a registry outfall's reach, or one traced for other reports: never this caution's
                 #                     place (review 2026-11-16 P1-3)
+            if point_trace_withheld(pl, k):
+                continue            # the status build's point-trace rule set this report's point aside (denied, a
+                #                     location it cannot use, too far from a stream): it is never the caution's place
             if k not in keys:
                 keys.append(k)
             reach_hits[k] += 1

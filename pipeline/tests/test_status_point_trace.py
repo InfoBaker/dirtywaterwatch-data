@@ -45,10 +45,15 @@ def point_reach(eid, start=(-71.95, 42.0605)):
                       "gnis_name": "Test River", "coords": [[-71.95, 42.0], [-71.9, 42.0]]}]}
 
 
-def run(records, reaches=None):
+def _ma():
+    from shapely.geometry import box
+    return {"MA": box(-73.51, 41.23, -69.92, 42.89), "NC": box(-84.33, 33.84, -75.46, 36.59)}
+
+
+def run(records, reaches=None, outlines=None):
     w = world(tmp_events(records))
     w["reaches"] = dict(reaches or {})
-    st, hist = S.build(now=NOW, write=False, **w)
+    st, hist = S.build(now=NOW, write=False, state_outlines=_ma() if outlines is None else outlines, **w)
     return st, hist
 
 
@@ -178,3 +183,122 @@ def test_a_named_outlet_with_no_water_record_takes_its_outlets_stretch():
     assert pl["reach"] == r["key"] and pl["reach_basis"] == S.POINT_TRACE_OUTLET
     assert pl["note"].endswith(S.POINT_TRACE_TAIL_OUTLET) and pl["water_slugs"] == ["test-river-ma"]
     assert st["needs_reach"] == []
+
+
+# ---------------------------------------------------------------- review 2026-11-28 (Astra P1, P2 x4)
+
+def test_a_water_the_report_says_was_not_reached_is_never_coloured_or_listed():
+    e = spill("x", waterbody_text="Did not impact Test River; sewage entered Bear Creek")    # Bear Creek: no record
+    k, r = point_reach(e["event_id"])                       # its stretch runs down the brook into the Test River
+    st, hist = run([e], {k: r})
+    pl = st["placements"][e["event_id"]]
+    assert pl["water_slugs"] == [] and "reach" not in pl and k not in st["reaches"]
+    river = st["waters"].get("test-river-ma") or {}
+    assert river.get("status", "grey") == "grey" and not river.get("reasons")
+    assert e["event_id"] not in str(river)
+    assert S.POINT_TRACE_TAIL not in (pl.get("note") or "") and "not placed there" in pl["note"]
+    assert pl["point_trace_aside"] == S.POINT_TRACE_NOT_REACHED
+    assert st["counts"]["point_trace"]["aside"] == {S.POINT_TRACE_NOT_REACHED: 1}
+    assert k not in (hist.get("reaches") or {})
+
+
+def test_a_written_recovery_or_denial_is_never_traced_and_partial_recovery_is():
+    recs = [spill("all", raw={"description": "All sewage fully recovered"}),
+            spill("before", raw={"comments": "Spill was cleaned up before reaching the stream."}),
+            spill("vol", volume_text="50 gallons, completely contained in the manhole"),
+            spill("nod", raw={"remarks": "No discharge to waters of the state"}),
+            spill("part", raw={"description": "Sewage partially recovered"}),
+            spill("most", raw={"description": "Most of it was recovered; not all recovered"})]
+    st, _ = run(recs)
+    assert sorted(n["event_id"] for n in st["needs_reach"]) == ["ma-test:most", "ma-test:part"]
+    assert st["counts"]["point_trace"]["aside"] == {
+        "the source says no water was reached, or the spill was contained or recovered": 4}
+    # a cached trace of a written recovery is not drawn either
+    e = spill("all2", raw={"description": "All of the spill was recovered by vacuum truck"})
+    k, r = point_reach(e["event_id"])
+    st, _ = run([e], {k: r})
+    assert k not in st["reaches"] and (st["waters"].get("test-river-ma") or {}).get("status", "grey") == "grey"
+    # words saying it reached a water win (err on safety)
+    assert S.written_denial(spill("y", raw={"description": "Spill entered Bear Creek; all recovered"})) is None
+
+
+def test_a_rejected_trace_is_not_the_rain_cautions_place():
+    from build import rain_sso as SS
+    far, denied, near = spill("d"), spill("bal", raw={"_water_reach": "No"}), spill("c")
+    kf, rf = point_reach(far["event_id"], start=(-71.95, 42.07))      # 1.1 km: no basis, too far
+    kd, rd = point_reach(denied["event_id"])
+    kn, rn = point_reach(near["event_id"])
+    reaches = {kf: rf, kd: rd, kn: rn}
+    st, _ = run([far, denied, near], reaches)
+    assert st["placements"][far["event_id"]]["point_trace_aside"].startswith("no stated basis")
+    assert st["placements"][denied["event_id"]]["point_trace_aside"].startswith("the source says")
+    entry = {"places": {"events": [{"event_id": x["event_id"], "point": [x["lat"], x["lon"]], "water_slugs": [],
+                                    "reaches": []} for x in (far, denied, near)], "waters": []}}
+    keys, tags, _, _ = SS.placement(entry, {}, reaches, lambda r, w: ["test-river-ma"], st["placements"])
+    assert keys == [kn] and tags == {"test-river-ma": "reach"}
+    # the caution's own trace of a report on a river (no point-trace verdict) is used as before
+    keys, _, _, _ = SS.placement(entry, {}, reaches, lambda r, w: [], {})
+    assert keys == sorted([kf, kd, kn])
+
+
+def test_a_point_outside_its_state_or_malformed_is_not_traced():
+    recs = [spill("zero", raw={"reached_water": True}, lat=0.0, lon=0.0),
+            spill("swap", raw={"reached_water": True}, lat=-71.95, lon=42.06),
+            spill("nc", raw={"reached_water": True}, lat=35.78, lon=-78.64),        # an MA report located in NC
+            spill("sign", event_type="cso", lat=42.06, lon=71.95),
+            spill("ok", raw={"reached_water": True})]
+    st, _ = run(recs)
+    assert [n["event_id"] for n in st["needs_reach"]] == ["ma-test:ok"]
+    aside = st["counts"]["point_trace"]["aside"]
+    assert aside == {"its location cannot be used (at (0, 0))": 1,
+                     "its location cannot be used (latitude and longitude swapped)": 1,
+                     "its location cannot be used (outside MA)": 1,
+                     "its location cannot be used (longitude without its minus sign)": 1}
+    # with no outline to check against, nothing is traced (fail closed) and the reason is counted
+    st, _ = run([spill("ok", raw={"reached_water": True})], outlines={})
+    assert st["needs_reach"] == [] and st["counts"]["point_trace"]["aside"] == {
+        "its location cannot be used (no MA outline to check the point against)": 1}
+
+
+def test_a_stated_basis_still_needs_the_stretch_to_start_near_the_point():
+    near_a = spill("a", raw={"reached_water": True})
+    far_a = spill("fa", raw={"reached_water": True})
+    far_b = spill("fb", event_type="cso")
+    ka, ra = point_reach(near_a["event_id"], start=(-71.95, 42.07))          # 1.1 km: within 2 km
+    kfa, rfa = point_reach(far_a["event_id"], start=(-71.95, 42.0855))      # about 2.8 km
+    kfb, rfb = point_reach(far_b["event_id"], start=(-71.95, 42.0855))
+    st, _ = run([near_a, far_a, far_b], {ka: ra, kfa: rfa, kfb: rfb})
+    assert st["placements"][near_a["event_id"]]["reach"] == ka
+    for e, k in ((far_a, kfa), (far_b, kfb)):
+        pl = st["placements"][e["event_id"]]
+        assert "reach" not in pl and pl["water_slugs"] == [] and k not in st["reaches"]
+    assert st["counts"]["point_trace"]["aside"] == {f"its stretch starts over {S.POINT_TRACE_FAR_M:,} m from its location": 2}
+    assert S.POINT_TRACE_FAR_M == 2000
+
+
+def test_a_named_registered_outlet_needs_no_point_of_its_own():
+    from tests.test_status import _reach
+    segs = point_reach("x")[1]["segments"]
+    no_water = {**_reach(slug=None), "segments": segs}
+    # no point, the registry's own outfall number written with its prefix (SPR013 for 013)
+    e = ev("o", event_type="cso", status="ongoing", started_at=iso(NOW - 2 * H), npdes_permit="MA0101613",
+           outfall_id="SPR013", water_slugs=[])
+    st, hist = run([e], {no_water["key"]: no_water})
+    pl = st["placements"][e["event_id"]]
+    assert pl["reach"] == no_water["key"] and pl["reach_basis"] == S.POINT_TRACE_OUTLET
+    assert pl["note"].endswith(S.POINT_TRACE_TAIL_OUTLET) and pl["water_slugs"] == ["test-river-ma"]
+    assert st["waters"]["test-river-ma"]["status"] == "red" and st["reaches"][no_water["key"]]["status"] == "red"
+    assert st["needs_reach"] == [] and st["counts"]["point_trace"]["traced"] == {S.POINT_TRACE_OUTLET: 1}
+    # one interval for the water, one for the stretch: nothing counted twice
+    assert len(st["waters"]["test-river-ma"]["reasons"]) == 1
+    # an outlet whose trace starts on a water record the report is not placed on: the same
+    with_water = {**_reach(), "segments": segs}
+    st, _ = run([e], {with_water["key"]: with_water})
+    pl = st["placements"][e["event_id"]]
+    assert pl["reach_basis"] == S.POINT_TRACE_OUTLET and pl["water_slugs"] == ["test-river-ma"]
+    # a monthly total naming the same outlet: never a reach, as before
+    m = ev("m", event_type="cso", status="ended", started_at=iso(NOW - 40 * 24 * H), time_precision="month",
+           npdes_permit="MA0101613", outfall_id="013", water_slugs=[])
+    st, _ = run([m], {no_water["key"]: no_water})
+    assert "reach" not in st["placements"][m["event_id"]] or not st["placements"][m["event_id"]].get("reach_basis")
+    assert st["counts"]["point_trace"] == {"traced": {}, "queued": {}, "aside": {}}
