@@ -534,9 +534,9 @@ SOURCES: dict[str, dict] = {
     "ma-springfield-aquasight": {"volume_qualifier": lambda raw: "estimated" if raw.get("volume_method") else None,
                                  "volume_method": text("volume_method"), "notes": text("row.remarks")},
     # Springfield's monthly CSO reports, 2019 to 2023 (ingest/ma_springfield_archive.py): the duration as printed under
-    # the report's own heading, and for October 2021 (no report online) how we computed the month
+    # the report's own heading; for October 2021 (no report online) where the figure is printed and why no outfall
     "ma-springfield-archive": {"report_kind": text("report_kind"), "duration_text": text("duration_text"),
-                               "volume_method": text("volume_method")},
+                               "notes": text("public_note")},
 }
 
 

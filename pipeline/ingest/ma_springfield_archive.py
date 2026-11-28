@@ -17,13 +17,18 @@ The transcript (data/reference/ma-springfield-cso-archive-2019-2023.json)
   the rows; the Total row; and the check that the rows add up to it (events and gallons exactly, hours within the
   rounding of the rows). A month that does not add up stops the extraction; HAND_CORRECTIONS lists any row corrected
   by hand (none). The annual sheets are transcribed beside the months (events and gallons per outfall, gallons per
-  month; they give no hours).
+  month; they give no hours). The hourly run checks every month again: its rows against its Total row, with only the
+  differences KNOWN_DIFFERENCES lists (a transcript that lists another fails); no month is exempt.
 
-October 2021 (computed)
-  Per outfall: the 2021 annual sheet's events and gallons minus the sum of the other eleven monthly reports. No hours
-  (the annual sheet gives none). The record says so (raw.computed, raw.volume_method, raw.events_method). An outfall
-  whose difference is negative is not published for the month (meta.computed_not_published). The annual sheet writes
-  CSO 036A and CSO 037A where the monthly reports write CSO 036 (or 036A) and CSO 037: one outfall each, joined.
+October 2021 (the annual sheet's own line, all outfalls combined)
+  No monthly report, so no per-outfall figures. One record with no outfall carries the gallons the 2021 annual sheet
+  prints for October in its "Discharge Summary By Month" (31,039,264): the commission's figure, not a computation. The
+  sheet prints no October event count or hours, so none are given. The transcript's October entry must equal the
+  sheet's October line, and the sheet's month lines must add up to its System Total (within the reports' 1 gallon).
+  The record is placed as any CSO report of the permit that names no outfall (build/status.py: every water the
+  permit's registry outfalls reach, rules.placement.no_outfall_all_waters). Per-outfall differences between the
+  annual sheet and the eleven other reports are not published: the sheet revises May, July and August, and which
+  outfalls those revisions belong to cannot be told from the figures (research/ma/springfield-archive-comparison.md).
 
 Records (EPA monthly DMR shape, ingest/echo_cso_dmr_monthly.py)
   One per outfall per month with at least one event: event_type cso, status ended, started_at the first and ended_at
@@ -74,12 +79,9 @@ SPEC = {**A.SPEC, "source_id": SOURCE_ID}
 FOOTNOTE = ("*A storm event is any period of precipitation which is preceded and followed by 24 hours of dry weather")
 EVENT_DEFINITION = ("The reports count overflow events per storm: \"A storm event is any period of precipitation which "
                     "is preceded and followed by 24 hours of dry weather\" (the reports' footnote).")
-COMPUTED_MONTH = "2021-10"
-COMPUTED_VOLUME_METHOD = ("Computed by us: the outfall's 2021 total on the commission's annual sheet minus the sum of "
-                          "its other eleven monthly reports for 2021 (the commission's October 2021 report is not "
-                          "online)")
-COMPUTED_EVENTS_METHOD = ("Computed by us the same way: the annual sheet's 2021 event count minus the eleven other "
-                          "monthly reports' counts")
+# months with no monthly report online, published from the annual sheet's month line (all outfalls combined)
+SHEET_MONTHS = {"2021-10": ("The commission's monthly report for October 2021 is not on its CSO Data Archive page "
+                            "(the page's link to it is broken), so no per-outfall figures are published for the month.")}
 # event-level records of the same permit and outfalls (meta.overlap)
 EVENT_LEVEL = [{"source_id": "ma-springfield-aquasight", "from": "2022-03-19",
                 "what": "the commission's CSO map log, one record per overflow"},
@@ -92,7 +94,8 @@ HANDCORRECTIONS: list[dict] = []
 # Months whose own Total row differs from the sum of their rows, as printed by the commission (the rows are kept as
 # printed; nothing is corrected). Each value is the printed total minus the rows' sum; the check passes only for
 # exactly this difference, so a new one still stops the extraction. The extraction writes each into its month
-# (known_difference), and the hourly run checks the transcript against what the transcript itself lists. For the
+# (known_difference); the hourly run requires the transcript's entry to equal this one and checks with this one,
+# never with a value the transcript supplies. For the
 # 1-gallon months the annual sheet's month line equals the printed total (March 2019 apart, whose line differs by more,
 # as several 2019 lines do: research/ma/springfield-archive-comparison.md).
 GALLON_ROUNDING = "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
@@ -165,15 +168,46 @@ def check_month(rows: list[dict], total: dict, known: dict | None = None, where:
     return out
 
 
+def check_sheet_month(doc: dict, ym: str, m: dict) -> None:
+    """A month published from the annual sheet: its gallons are the sheet's own line for the month, the sheet's rows
+    add up to its System Total and its month lines to the same total within the reports' 1 gallon; no rows, events
+    or hours (the sheet prints none for a month). Raises TranscriptError."""
+    if m.get("rows") or m.get("events") is not None or m.get("hours") is not None or m.get("report_online") is not False:
+        raise TranscriptError(f"{ym}: a month from the annual sheet carries rows, events or hours, or a report")
+    if m.get("why") != SHEET_MONTHS[ym]:
+        raise TranscriptError(f"{ym}: the note on the missing report is not the code's")
+    year = ym[:4]
+    annual = (doc.get("annual") or {}).get(year)
+    if m.get("from_annual_sheet") != year or not isinstance(annual, dict):
+        raise TranscriptError(f"{ym}: no {year} annual sheet in the transcript")
+    lines, total, rows = annual.get("monthly_volume_gal") or {}, annual.get("system_total") or {}, annual.get("rows") or []
+    line = lines.get(ym)
+    if not isinstance(line, int) or line <= 0 or m.get("volume_gal") != line:
+        raise TranscriptError(f"{ym}: {m.get('volume_gal')} gallons is not the annual sheet's line ({line})")
+    if len(lines) != 12 or not rows or sum(r["events"] for r in rows) != total.get("events") \
+            or sum(r["volume_gal"] for r in rows) != total.get("volume_gal") \
+            or abs(sum(lines.values()) - total["volume_gal"]) > 1:
+        raise TranscriptError(f"annual {year}: the sheet's rows or month lines do not add up to its System Total")
+
+
 def validate(doc: dict) -> list[str]:
-    """Every month of the transcript checked again (the reported months against their Total row, the computed month
-    against the annual sheet). Returns the months; raises TranscriptError."""
+    """Every month of the transcript checked again: the reported months against their Total row with only the code's
+    KNOWN_DIFFERENCES, a month from the annual sheet against the sheet's line. No month is exempt. Returns the months;
+    raises TranscriptError."""
     months = doc.get("months") if isinstance(doc, dict) else None
     if not isinstance(months, dict) or not months:
         raise TranscriptError("the transcript has no months")
     for ym, m in sorted(months.items()):
         if not re.fullmatch(r"20\d\d-(0[1-9]|1[0-2])", ym):
             raise TranscriptError(f"{ym}: not a month")
+        if not isinstance(m, dict) or {"computed", "method"} & set(m):
+            raise TranscriptError(f"{ym}: a computed month (none is read)")
+        if ym in SHEET_MONTHS:
+            try:
+                check_sheet_month(doc, ym, m)
+            except (KeyError, TypeError) as e:
+                raise TranscriptError(f"{ym}: the annual sheet cannot be read ({error_text(e)})") from e
+            continue
         rows = m.get("rows")
         if not isinstance(rows, list) or not rows:
             raise TranscriptError(f"{ym}: no rows")
@@ -181,11 +215,9 @@ def validate(doc: dict) -> list[str]:
             if not isinstance(r.get("events"), int) or r["events"] < 0 or not isinstance(r.get("volume_gal"), int) \
                     or r["volume_gal"] < 0:
                 raise TranscriptError(f"{ym}: a row without a whole, non-negative count and volume")
-        if m.get("computed"):
-            if not m.get("method"):
-                raise TranscriptError(f"{ym}: computed with no method stated")
-            continue
-        check_month(rows, m.get("total_row") or {}, m.get("known_difference"), where=ym)
+        if m.get("known_difference") != KNOWN_DIFFERENCES.get(ym):
+            raise TranscriptError(f"{ym}: the transcript's known difference is not the code's KNOWN_DIFFERENCES")
+        check_month(rows, m.get("total_row") or {}, KNOWN_DIFFERENCES.get(ym), where=ym)
     return sorted(months)
 
 
@@ -229,16 +261,10 @@ def to_record(ym: str, m: dict, row: dict, doc: dict, ctx: dict, fetched_at: str
     oid, num, suf = outfall_of(label)
     start, end = month_bounds(ym)
     water = row.get("watershed") or (doc.get("watersheds") or {}).get(key_of(label))
-    computed = bool(m.get("computed"))
-    figures = not computed or bool(row.get("figures_published"))
     raw = {"month": ym, "outfall_as_printed": label, "watershed_as_printed": row.get("watershed"),
-           "event_definition": EVENT_DEFINITION,
-           "report_kind": "Computed from the annual sheet" if computed else "Monthly overflow report",
-           "note": ("monthly figure computed by us from the commission's reports, not an individual event" if computed
-                    else "monthly total reported by the commission, not an individual event"), "state": "MA",
-           "_channel": "web"}
-    if figures:
-        raw.update({"events": row["events"], "volume_gal": row["volume_gal"], "hours": row.get("hours")})
+           "event_definition": EVENT_DEFINITION, "report_kind": "Monthly overflow report",
+           "note": "monthly total reported by the commission, not an individual event", "state": "MA",
+           "_channel": "web", "events": row["events"], "volume_gal": row["volume_gal"], "hours": row.get("hours")}
     if row.get("hours") is not None:
         raw["duration_label"] = m.get("duration_label")
         raw["duration_text"] = (f"{row['hours']:.1f} hours" if m.get("duration_label") == "Hours" else
@@ -247,48 +273,21 @@ def to_record(ym: str, m: dict, row: dict, doc: dict, ctx: dict, fetched_at: str
         raw["_water_basis"] = "the receiving water the commission's annual sheet gives for this outfall"
     if key_of(label) != re.sub(r"[\s-]+", "", label).upper():
         named = f"{key_of(label)[:3]} {key_of(label)[3:]}"
-        raw["_outfall_note"] = (f"the annual sheet prints {label}; the monthly reports and the commission's map name "
-                                f"this outfall {named}" if computed else
-                                f"the report prints {label}; the commission's annual sheets and map name this outfall "
+        raw["_outfall_note"] = (f"the report prints {label}; the commission's annual sheets and map name this outfall "
                                 f"{named}")
     if not oid:
         raw["_outfall_note"] = "not in the crosswalk to the portal's outfall ids: the report's own id is kept"
-    file_ = m.get("file") or {}
-    if computed:
-        meth = m["method"]
-        raw.update({"computed": True, "events_method": meth["events"],
-                    "volume_method": meth["volume"] if figures else (meth["volume"] + ". " + meth["withheld"]),
-                    "computed_difference": {k: row[k] for k in ("events", "volume_gal", "annual_events",
-                                                                "annual_volume_gal", "other_months_events",
-                                                                "other_months_volume_gal")},
-                    "volume_basis": (f"2021 annual sheet {row['annual_volume_gal']:,} gallons minus "
-                                     f"{row['other_months_volume_gal']:,} gallons in the other eleven monthly reports"),
-                    "events_basis": (f"2021 annual sheet {row['annual_events']} events minus "
-                                     f"{row['other_months_events']} in the other eleven monthly reports"),
-                    "revisions": m.get("revisions"), "inputs": m.get("inputs")})
-        source_url = m["inputs"]["annual_sheet"]
-    else:
-        raw["file"] = {k: file_.get(k) for k in ("name", "url", "sha256", "bytes", "read_at") if file_.get(k)}
-        cap = file_.get("capture")
-        if cap:
-            raw["capture"] = cap
-            raw["available_no_later_than"] = cap.get("date")
-        source_url = file_.get("url") or PAGE_URL
-    raw["archive_page"] = PAGE_URL
+    source_url = file_fields(raw, m.get("file") or {})
     lat, lon, csrc, cnote, oname, slugs, wmatch, wnote = place_of(ctx, oid, num, suf, water)
     if cnote:
         raw["_coords"] = cnote
     if wnote:
         raw["_water"] = wnote
-    if figures:
-        how = " (computed)" if computed else ""
-        parts = [plural(row["events"], "discharge event") + how]
-        if row.get("hours") is not None:
-            parts.append(raw["duration_text"])
-        parts.append(f"{row['volume_gal']:,} gallons{how}")
-        vtext, vgal = "; ".join(parts), row["volume_gal"]
-    else:
-        vtext, vgal = ("computed from the commission's 2021 annual sheet; count and gallons not given", None)
+    parts = [plural(row["events"], "discharge event")]
+    if row.get("hours") is not None:
+        parts.append(raw["duration_text"])
+    parts.append(f"{row['volume_gal']:,} gallons")
+    vtext, vgal = "; ".join(parts), row["volume_gal"]
     return event(
         source_id=SOURCE_ID, source_record_id=f"{PERMIT}:{oid or key_of(label)}:{ym}", event_type="cso",
         status="ended", discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER, npdes_permit=PERMIT,
@@ -301,10 +300,57 @@ def to_record(ym: str, m: dict, row: dict, doc: dict, ctx: dict, fetched_at: str
     )
 
 
+def file_fields(raw: dict, file_: dict) -> str:
+    """The file, its Internet Archive capture and the archive page into raw; returns the record's source_url."""
+    raw["file"] = {k: file_.get(k) for k in ("name", "url", "sha256", "bytes", "read_at") if file_.get(k)}
+    cap = file_.get("capture")
+    if cap:
+        raw["capture"] = cap
+        raw["available_no_later_than"] = cap.get("date")
+    raw["archive_page"] = PAGE_URL
+    return file_.get("url") or PAGE_URL
+
+
+def sheet_record(ym: str, m: dict, doc: dict, ctx: dict, fetched_at: str) -> dict:
+    """A month with no monthly report: one record, no outfall, the gallons the annual sheet prints for the month (all
+    outfalls combined). Placed as a CSO report of the permit that names no outfall (build/status.py)."""
+    year = ym[:4]
+    annual = doc["annual"][year]
+    gal, mt = m["volume_gal"], month_text(ym)
+    start, end = month_bounds(ym)
+    sheet = (annual.get("file") or {}).get("name") or "the annual sheet"
+    raw = {"month": ym, "report_kind": "Annual summary, month line", "permit_level": True, "volume_gal": gal,
+           "note": "the month's total for all of the commission's outfalls combined, not an individual event",
+           "volume_basis": (f"Printed by the commission: the {MONTHS[int(ym[5:]) - 1]} line of the \"Discharge Summary "
+                            f"By Month\" table on its {year} annual sheet ({sheet}). Not computed."),
+           "report_missing": SHEET_MONTHS[ym], "events_hours": "The annual sheet gives no event count or hours for a month.",
+           "_outfall_note": "the annual sheet's month line names no outfall: the figure is for all outfalls combined",
+           "state": "MA", "_channel": "web"}
+    source_url = file_fields(raw, annual.get("file") or {})
+    raw["public_note"] = (f"{mt} total for all outfalls combined, as printed on the commission's {year} annual sheet "
+                          f"(not computed). {SHEET_MONTHS[ym]} The sheet gives no event count or hours for the month.")
+    *_, slugs, wmatch, wnote = place_of(ctx, None, None, "", None)
+    if wnote:
+        raw["_water"] = wnote
+    return event(
+        source_id=SOURCE_ID, source_record_id=f"{PERMIT}:all-outfalls:{ym}", event_type="cso", status="ended",
+        discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER, npdes_permit=PERMIT, outfall_id=None,
+        outfall_name=None, waterbody_text=None, water_slugs=slugs, water_match=wmatch, lat=None, lon=None,
+        coord_source=None, started_at=start, ended_at=end, time_precision="month", reported_at=None,
+        published_at=None, source_updated_at=None, fetched_at=fetched_at, material="combined sewage and stormwater",
+        volume_gal=gal, volume_text=f"{gal:,} gallons, all outfalls combined, from the commission's {year} annual sheet",
+        estimate_flag="unknown", authority=AUTHORITY, source_url=source_url, raw=raw,
+    )
+
+
 def build(doc: dict, ctx: dict, fetched_at: str) -> tuple[list[dict], dict]:
-    """(records, counts) from a validated transcript: one record per outfall-month with events, none for zero rows."""
+    """(records, counts) from a validated transcript: one record per outfall-month with events, none for zero rows;
+    one record, no outfall, for a month from the annual sheet."""
     recs, zero, latest = [], 0, {}
     for ym, m in sorted(doc["months"].items()):
+        if ym in SHEET_MONTHS:
+            recs.append(sheet_record(ym, m, doc, ctx, fetched_at))
+            continue
         for row in m["rows"]:
             oid = outfall_of(row["outfall"])[0] or key_of(row["outfall"])
             k = f"{PERMIT}|{oid}"
@@ -345,11 +391,10 @@ def run(reference: Path = REFERENCE, out: Path | None = None, ctx: dict | None =
         from ingest import operator_mail as O
         ctx = O.ma_context({"springfield": SPEC})
     recs, counts = build(doc, ctx, fetched_at)
-    comp = doc["months"].get(COMPUTED_MONTH) or {}
     meta = {"registry_ids": [SOURCE_ID], "url": PAGE_URL, "credit": CREDIT, "reference": REFERENCE.name,
             "months": [months[0], months[-1]], "months_read": len(months), "records": len(recs),
-            "zero_event_rows": counts["zero_rows"], "computed_months": [COMPUTED_MONTH] if comp.get("computed") else [],
-            "computed_not_published": comp.get("not_published") or [],
+            "zero_event_rows": counts["zero_rows"],
+            "annual_sheet_months": {ym: SHEET_MONTHS[ym] for ym in months if ym in SHEET_MONTHS},
             "hand_corrections": doc.get("hand_corrections") or [], "event_definition": EVENT_DEFINITION,
             "latest_month_by_outfall": counts["latest_month_by_outfall"], "overlap": overlap(months),
             "crosswalk": A.crosswalk_check(ctx), "covers_permits": [PERMIT], "statewide": False}
@@ -476,82 +521,11 @@ def parse_annual(text: str, year: str) -> dict:
                       "months_volume_gal": sum(months.values())}}
 
 
-def _names(months: dict) -> str:
-    """{"2021-05": ..., "2021-07": ...} -> "May and July" (three or more: "May, July and August")."""
-    n = [MONTHS[int(m[5:]) - 1] for m in sorted(months)]
-    return n[0] if len(n) == 1 else ", ".join(n[:-1]) + " and " + n[-1]
-
-
-def compute_october(months: dict, annual: dict) -> dict:
-    """October 2021 per outfall from the 2021 annual sheet and the other eleven monthly reports.
-
-    The difference per outfall (the sheet's 2021 events and gallons minus the other months') would be October's if the
-    sheet carried the monthly reports' figures. It does not quite: its month lines exceed the reports' Total rows for
-    some months (revisions: in 2021 May by 11,554,000 gallons, July by 6,944,000, August by 149,000). A revision equal
-    to one outfall's whole difference is that outfall's, not October's (May: CSO 024, whose May report shows 0; July:
-    CSO 042, absent from the July report). What remains unplaced may sit in any outfall's difference. So an outfall is
-    published for October only when its gallons exceed the unplaced remainder and it has an event left: it certainly
-    discharged in October. Its count and gallons are published only when nothing is unplaced; otherwise the record
-    says the outfall discharged and gives no figure. Every difference is kept in the transcript."""
-    others = [f"2021-{i:02d}" for i in range(1, 13) if i != 10]
-    missing = [m for m in others if m not in months]
-    if missing:
-        raise TranscriptError(f"October 2021: other months missing {missing}")
-    keys = {key_of(a["outfall"]) for a in annual["rows"]}
-    stray = sorted({r["outfall"] for m in others for r in months[m]["rows"] if key_of(r["outfall"]) not in keys})
-    if stray:
-        raise TranscriptError(f"October 2021: monthly outfalls not on the annual sheet {stray}")
-    diffs = []
-    for a in annual["rows"]:
-        k = key_of(a["outfall"])
-        ev = sum(r["events"] for m in others for r in months[m]["rows"] if key_of(r["outfall"]) == k)
-        gal = sum(r["volume_gal"] for m in others for r in months[m]["rows"] if key_of(r["outfall"]) == k)
-        diffs.append({"outfall": a["outfall"], "watershed": a["watershed"], "events": a["events"] - ev,
-                      "volume_gal": a["volume_gal"] - gal, "hours": None, "annual_events": a["events"],
-                      "annual_volume_gal": a["volume_gal"], "other_months_events": ev, "other_months_volume_gal": gal})
-    sheet = annual["monthly_volume_gal"]
-    revisions = {m: sheet[m] - months[m]["total_row"]["volume_gal"] for m in others
-                 if abs(sheet[m] - months[m]["total_row"]["volume_gal"]) > 1}       # 1 gallon: the reports' rounding
-    placed = {}
-    for m, amount in sorted(revisions.items()):
-        hit = [d for d in diffs if d["volume_gal"] == amount and amount > 0]
-        if len(hit) == 1:
-            placed[m] = hit[0]["outfall"]
-    unplaced = sum(v for m, v in revisions.items() if m not in placed)
-    rest = sum(d["volume_gal"] for d in diffs) - sum(revisions[m] for m in placed) - unplaced
-    if abs(rest - sheet[COMPUTED_MONTH]) > 1:
-        raise TranscriptError(f"October 2021: the differences less the revisions ({rest:,}) do not give the sheet's "
-                              f"October line ({sheet[COMPUTED_MONTH]:,})")
-    rows, skipped = [], []
-    for d in diffs:
-        rev = next((m for m, o in placed.items() if o == d["outfall"]), None)
-        if d["events"] == 0 and d["volume_gal"] == 0:
-            continue                                                      # nothing left for October: a zero row
-        why = (f"the difference is the annual sheet's revision of {rev} (its month line exceeds that report's Total "
-               f"row by exactly these gallons)" if rev else
-               "the difference is negative (the reports' 1-gallon rounding)" if d["volume_gal"] < 0 else
-               f"the difference is not more than the {unplaced:,} gallons of revisions the sheet does not place"
-               if d["volume_gal"] <= unplaced else
-               "an event count of zero or less is left" if d["events"] <= 0 else None)
-        if why:
-            skipped.append({**d, "why": why})
-            continue
-        rows.append({**d, "figures_published": unplaced == 0})
-    return {"computed": True, "rows": rows, "not_published": skipped,
-            "method": {"volume": COMPUTED_VOLUME_METHOD, "events": COMPUTED_EVENTS_METHOD,
-                       "withheld": None if unplaced == 0 else (
-                           f"The annual sheet's figures for {_names(revisions)} 2021 are higher than those months' "
-                           f"reports by {sum(revisions.values()):,} gallons, and {unplaced:,} gallons of that cannot "
-                           f"be placed at an outfall. We show only outfalls whose difference is larger than that, "
-                           f"without a count or gallons.")},
-            "inputs": {"annual_sheet": annual["file"]["url"],
-                       "monthly_reports": [months[m]["file"]["url"] for m in others]},
-            "revisions": {m: {"gallons": v, "outfall": placed.get(m)} for m, v in sorted(revisions.items())},
-            "unplaced_gal": unplaced,
-            "check": {"differences_volume_gal": sum(d["volume_gal"] for d in diffs),
-                      "less_revisions_volume_gal": rest,
-                      "annual_sheet_october_volume_gal": sheet[COMPUTED_MONTH],
-                      "differences_events": sum(d["events"] for d in diffs)}}
+def sheet_month(annual: dict, ym: str) -> dict:
+    """A month with no report, as the annual sheet prints it: its month line (all outfalls), no rows, events or
+    hours."""
+    return {"report_online": False, "why": SHEET_MONTHS[ym], "from_annual_sheet": ym[:4],
+            "volume_gal": annual["monthly_volume_gal"][ym], "events": None, "hours": None}
 
 
 def extract(raw_dir: Path, out: Path = REFERENCE) -> dict:
@@ -583,11 +557,12 @@ def extract(raw_dir: Path, out: Path = REFERENCE) -> dict:
         if ym in KNOWN_DIFFERENCES:
             entry["known_difference"] = KNOWN_DIFFERENCES[ym]
         months[ym] = entry
-    if COMPUTED_MONTH in months:
-        raise TranscriptError("October 2021 has a report: it should not be computed")
-    if "2021" not in annual:
-        raise TranscriptError("no 2021 annual sheet")
-    months[COMPUTED_MONTH] = compute_october(months, annual["2021"])
+    for ym in sorted(SHEET_MONTHS):
+        if ym in months:
+            raise TranscriptError(f"{ym} has a report: it should not come from the annual sheet")
+        if ym[:4] not in annual:
+            raise TranscriptError(f"no {ym[:4]} annual sheet")
+        months[ym] = sheet_month(annual[ym[:4]], ym)
     expected = [f"{y}-{mo:02d}" for y in range(2019, 2024) for mo in range(1, 13) if f"{y}-{mo:02d}" <= "2023-04"]
     gaps = [m for m in expected if m not in months]
     if gaps:
@@ -597,13 +572,13 @@ def extract(raw_dir: Path, out: Path = REFERENCE) -> dict:
         for r in annual[y]["rows"]:
             watersheds.setdefault(key_of(r["outfall"]), r["watershed"])
     for m in months.values():
-        for r in m["rows"]:
+        for r in m.get("rows") or []:
             if r.get("watershed"):
                 watersheds.setdefault(key_of(r["outfall"]), r["watershed"])
     doc = {"what": ("Springfield Water and Sewer Commission (NPDES MA0101613) monthly CSO reports, January 2019 to "
                     "April 2023, and its annual sheets 2019 to 2022, transcribed from the PDFs on its CSO Data Archive "
-                    "page. Rain-gauge columns not transcribed. October 2021 has no report online and is computed "
-                    "from the 2021 annual sheet and the other eleven months."),
+                    "page. Rain-gauge columns not transcribed. October 2021 has no report online: it is the 2021 "
+                    "annual sheet's October line (all outfalls combined)."),
            "page": PAGE_URL, "permit": PERMIT, "footnote": FOOTNOTE,
            "built_by": "python -m ingest.ma_springfield_archive --extract RAW_DIR (pypdf text extraction)",
            "hand_corrections": HANDCORRECTIONS, "watersheds": dict(sorted(watersheds.items())),

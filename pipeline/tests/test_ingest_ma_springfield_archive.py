@@ -171,94 +171,141 @@ def test_parse_month_text():
 
 # ---------------------------------------------------------------- October 2021
 
-def year_2021(oct_line, revisions=None, annual_extra=None):
-    """Eleven months of two outfalls (CSO 010: 1 event, 100 gal a month; CSO 024: none), and an annual sheet whose
-    October line is oct_line and whose month lines carry the given revisions."""
-    months = {}
-    for i in range(1, 13):
-        if i == 10:
-            continue
-        ym = f"2021-{i:02d}"
-        months[ym] = month(ym, [("CSO 010", "Connecticut River", 1, 100, 1.0), ("CSO 024", "Mill River", 0, 0, 0.0)])
-        months[ym]["file"]["url"] = f"https://example.org/{ym}.pdf"
-    lines = {f"2021-{i:02d}": 100 + (revisions or {}).get(f"2021-{i:02d}", 0) for i in range(1, 13)}
+ANNUAL_URL = "https://springfieldalerts.com/Suez/wp-content/uploads/2022/03/CSO-Overflow-Volumes-2021.pdf"
+
+
+def with_october(oct_line=31039264, entry=None):
+    """The fixture plus an annual 2021 sheet (two outfalls; month lines adding up to the System Total) and the October
+    entry the extraction writes."""
+    d = doc()
+    lines = {f"2021-{i:02d}": 1000 for i in range(1, 13)}
     lines["2021-10"] = oct_line
-    extra = annual_extra or {}
-    annual = {"file": {"url": "https://example.org/annual-2021.pdf"},
-              "rows": [{"outfall": "CSO 010", "watershed": "Connecticut River", "events": 11 + extra.get("ev010", 0),
-                        "volume_gal": 1100 + extra.get("gal010", 0)},
-                       {"outfall": "CSO 024", "watershed": "Mill River", "events": extra.get("ev024", 0),
-                        "volume_gal": extra.get("gal024", 0)}],
-              "monthly_volume_gal": lines, "system_total": {"events": 11 + sum(v for k, v in extra.items() if k[:2] == "ev")}}
-    return months, annual
+    total = sum(lines.values())
+    d["annual"] = {"2021": {"file": {**capture("Overflow-Volumes-2021"), "name": "CSO-Overflow-Volumes-2021.pdf",
+                                     "url": ANNUAL_URL},
+                            "rows": [{"outfall": "CSO 010", "watershed": "Connecticut River", "events": 30,
+                                      "volume_gal": total - 500},
+                                     {"outfall": "CSO 046", "watershed": "Mill River", "events": 5, "volume_gal": 500}],
+                            "system_total": {"events": 35, "volume_gal": total}, "monthly_volume_gal": lines}}
+    d["months"]["2021-10"] = entry or S.sheet_month(d["annual"]["2021"], "2021-10")
+    return d
 
 
-def test_october_2021_computed_and_worded():
-    months, annual = year_2021(500, annual_extra={"ev010": 2, "gal010": 500})
-    oc = S.compute_october(months, annual)
-    assert oc["computed"] and oc["unplaced_gal"] == 0 and not oc["not_published"]
-    [row] = oc["rows"]
-    assert (row["outfall"], row["events"], row["volume_gal"], row["hours"]) == ("CSO 010", 2, 500, None)
-    assert row["figures_published"] is True
-    d = {"watersheds": {}, "months": {**months, "2021-10": oc}}
-    recs, _ = build(d)
-    r = recs["ma-springfield-archive:MA0101613:SPR010:2021-10"]
-    assert r["volume_gal"] == 500 and r["volume_text"] == "2 discharge events (computed); 500 gallons (computed)"
-    assert r["raw"]["computed"] is True and r["raw"]["report_kind"] == "Computed from the annual sheet"
-    assert r["raw"]["volume_method"].startswith("Computed by us: the outfall's 2021 total on the commission's annual "
-                                                "sheet minus the sum of its other eleven monthly reports")
-    assert r["raw"]["volume_basis"] == ("2021 annual sheet 1,600 gallons minus 1,100 gallons in the other eleven "
-                                        "monthly reports")
-    assert r["source_url"] == "https://example.org/annual-2021.pdf" and r["raw"]["hours"] is None   # the sheet has none
-    assert ST.monthly_mark(r)["events"] == 2
-
-
-def test_october_2021_revision_of_another_month_is_not_october():
-    # May's line exceeds May's report by 7,000 gallons, CSO 024's whole difference: that is May's, not October's
-    months, annual = year_2021(500, revisions={"2021-05": 7000},
-                               annual_extra={"ev010": 2, "gal010": 500, "ev024": 1, "gal024": 7000})
-    oc = S.compute_october(months, annual)
-    assert [r["outfall"] for r in oc["rows"]] == ["CSO 010"] and oc["rows"][0]["figures_published"]
-    [skip] = oc["not_published"]
-    assert skip["outfall"] == "CSO 024" and "revision of 2021-05" in skip["why"]
-    assert oc["revisions"] == {"2021-05": {"gallons": 7000, "outfall": "CSO 024"}}
-
-
-def test_october_2021_unplaced_revision_withholds_figures():
-    # August's line exceeds August's report by 60 gallons that match no outfall: CSO 010 (530 left) still discharged
-    # in October, but its count and gallons are not given; an outfall whose difference is under 60 is not shown
-    months, annual = year_2021(500, revisions={"2021-08": 60},
-                               annual_extra={"ev010": 2, "gal010": 530, "ev024": 1, "gal024": 30})
-    oc = S.compute_october(months, annual)
-    [row] = oc["rows"]
-    assert row["outfall"] == "CSO 010" and row["figures_published"] is False
-    [skip] = oc["not_published"]
-    assert skip["outfall"] == "CSO 024" and "not more than the 60 gallons" in skip["why"]
-    assert oc["method"]["withheld"].startswith("The annual sheet's figures for August 2021 are higher than those "
-                                               "months' reports by 60 gallons")
-    recs, _ = build({"watersheds": {}, "months": {**months, "2021-10": oc}})
-    r = recs["ma-springfield-archive:MA0101613:SPR010:2021-10"]
-    assert r["volume_gal"] is None and "events" not in r["raw"]
-    assert r["volume_text"] == "computed from the commission's 2021 annual sheet; count and gallons not given"
-    assert "We show only outfalls whose difference is larger than that" in r["raw"]["volume_method"]
+def test_october_2021_is_one_record_of_the_sheets_printed_line():
+    """Astra review 2026-11-28 P2: no per-outfall October records; one record, no outfall, the gallons the annual
+    sheet prints for October (not computed), citing the sheet and its capture, saying the report is not online."""
+    recs, counts = build(with_october())
+    octs = [r for r in recs.values() if r["started_at"].startswith("2021-10")]
+    [r] = octs
+    assert r["event_id"] == "ma-springfield-archive:MA0101613:all-outfalls:2021-10"
+    assert r["outfall_id"] is None and r["waterbody_text"] is None and r["lat"] is None
+    assert r["npdes_permit"] == "MA0101613" and r["event_type"] == "cso" and r["time_precision"] == "month"
+    assert (r["started_at"], r["ended_at"]) == ("2021-10-01", "2021-10-31")
+    assert r["reported_at"] is None and r["published_at"] is None
+    assert r["volume_gal"] == 31039264 and r["source_url"] == ANNUAL_URL
+    assert r["volume_text"] == "31,039,264 gallons, all outfalls combined, from the commission's 2021 annual sheet"
+    raw = r["raw"]
+    assert raw["permit_level"] is True and "computed" not in raw and "events" not in raw and "hours" not in raw
+    assert raw["available_no_later_than"] == "2022-09-28" and raw["capture"]["service"] == "Internet Archive"
+    assert raw["volume_basis"].startswith("Printed by the commission: the October line of the \"Discharge Summary By "
+                                          "Month\" table on its 2021 annual sheet") and "Not computed" in raw["volume_basis"]
+    assert raw["public_note"] == (
+        "October 2021 total for all outfalls combined, as printed on the commission's 2021 annual sheet (not "
+        "computed). The commission's monthly report for October 2021 is not on its CSO Data Archive page (the page's "
+        "link to it is broken), so no per-outfall figures are published for the month. The sheet gives no event count "
+        "or hours for the month.")
     mark = ST.monthly_mark(r)
-    assert mark["discharged"] and mark["events"] is None
+    assert mark["discharged"] and mark["events"] is None and mark["month"] == "2021-10"
+    assert not [k for k in counts["latest_month_by_outfall"] if "all-outfalls" in k]
+    assert len(recs) == 5
 
 
-def test_october_2021_negative_difference_not_published():
-    months, annual = year_2021(498, annual_extra={"ev010": 2, "gal010": 499})
-    months["2021-03"]["rows"][1].update(events=0, volume_gal=1)     # CSO 024: 1 gallon in March, 0 on the sheet
-    months["2021-03"]["total_row"]["volume_gal"] += 1
-    annual["monthly_volume_gal"]["2021-03"] += 1
-    oc = S.compute_october(months, annual)
-    assert [r["outfall"] for r in oc["not_published"]] == ["CSO 024"]
-    assert "negative" in oc["not_published"][0]["why"]
-
-
-def test_october_2021_must_meet_the_sheet():
-    months, annual = year_2021(900, annual_extra={"ev010": 2, "gal010": 500})       # 500 left, the sheet says 900
+def test_october_2021_must_be_the_sheets_line():
+    """Astra review 2026-11-28 P3: the October entry is checked against the annual sheet's printed line."""
+    d = with_october()
+    d["months"]["2021-10"]["volume_gal"] += 1
+    with pytest.raises(S.TranscriptError, match="annual sheet's line"):
+        S.validate(d)
+    d = with_october()
+    d["annual"]["2021"]["monthly_volume_gal"]["2021-03"] += 5        # the month lines no longer meet the System Total
+    with pytest.raises(S.TranscriptError, match="System Total"):
+        S.validate(d)
+    d = with_october()
+    d["months"]["2021-10"]["rows"] = [{"outfall": "CSO 010", "events": 1, "volume_gal": 5, "hours": None}]
     with pytest.raises(S.TranscriptError):
-        S.compute_october(months, annual)
+        S.validate(d)
+    d = with_october()
+    del d["annual"]
+    with pytest.raises(S.TranscriptError):
+        S.validate(d)
+
+
+def test_no_month_skips_reconciliation_for_a_method():
+    """Astra review 2026-11-28 P3: a month carrying a method (or marked computed) fails; it is never exempt."""
+    d = doc()
+    d["months"]["2022-08"]["method"] = {"volume": "computed"}
+    with pytest.raises(S.TranscriptError, match="computed"):
+        S.validate(d)
+    d = doc()
+    d["months"]["2022-08"]["computed"] = True
+    d["months"]["2022-08"]["rows"][0]["volume_gal"] = 999_999_999
+    with pytest.raises(S.TranscriptError):
+        S.validate(d)
+    assert not hasattr(S, "compute_october") and not hasattr(S, "COMPUTED_MONTH")
+
+
+def test_known_difference_must_be_the_codes():
+    """Astra review 2026-11-28 P3: a transcript allowance the code does not list fails, and the check uses the
+    code's value, never the transcript's."""
+    d = doc()
+    d["months"]["2019-02"]["rows"][0]["volume_gal"] += 1_000_000
+    d["months"]["2019-02"]["known_difference"] = {"volume_gal": -1_000_000, "why": "invented"}
+    with pytest.raises(S.TranscriptError, match="KNOWN_DIFFERENCES"):
+        S.validate(d)
+    # a listed month: the transcript must carry the code's entry; an altered one fails
+    rows = [("CSO 010", None, 2, 100, 1.0)]
+    m = month("Mar-2019", rows, total={"events": 2, "volume_gal": 101, "hours": 1.0})
+    d = {"watersheds": {}, "months": {"2019-03": {**m, "known_difference": S.KNOWN_DIFFERENCES["2019-03"]}}}
+    S.validate(d)
+    d["months"]["2019-03"]["known_difference"] = {"volume_gal": 1, "why": "something else"}
+    with pytest.raises(S.TranscriptError, match="KNOWN_DIFFERENCES"):
+        S.validate(d)
+    del d["months"]["2019-03"]["known_difference"]
+    with pytest.raises(S.TranscriptError, match="KNOWN_DIFFERENCES"):
+        S.validate(d)
+
+
+def _chart(recs, kind="discharger"):
+    import types
+    from datetime import UTC, datetime
+    b = charts.Bucket(kind, "example")
+    b.state = "MA"
+    b.totals = list(recs)
+    waters = {"example": {"slug": "example", "name": "Example River", "kind": "river", "state": "MA"}}
+    data = types.SimpleNamespace(history={}, status={}, waters=waters, by_id={}, dropped={}, effective={},
+                                 placements={}, now=datetime(2026, 11, 28, tzinfo=UTC), rules={}, events=[],
+                                 dischargers={})
+    doc_ = charts.build_entity(b, data, {}, {}, "Example")
+    [tot] = doc_["charts"]["reported_totals"]
+    return tot["x"], {s["key"]: s["values"] for s in tot["series"]}
+
+
+def test_chart_totals_never_turn_a_missing_volume_into_zero():
+    """Astra review 2026-11-28 P2: a record of this source with no volume is null in the totals, never 0.0; a month
+    with no record stays 0 (the source lists every month); on a water's chart the all-outfalls October figure is
+    unknown (it is for every water of the permit combined), on the operator's chart it is the sheet's figure."""
+    recs, _ = build(with_october())
+    by = {r["started_at"][:7]: r for r in recs.values() if r["outfall_id"] in (None, "SPR010")}
+    sep = {**by["2021-10"], "event_id": "x:2021-09", "started_at": "2021-09-01", "ended_at": "2021-09-30",
+           "volume_gal": None}
+    x, s = _chart([by["2021-10"], sep, by["2022-08"]])
+    assert x[:2] == ["2021-09", "2021-10"]
+    assert s["gallons"][0] is None and s["gallons"][1] == 31039264.0
+    assert s["gallons"][2] == 0.0 and s["gallons"][-1] == 5677000.0          # November 2021: no record, no events
+    x, s = _chart([by["2021-10"], by["2022-08"]], kind="water")
+    assert s["gallons"][0] is None and s["gallons"][-1] == 5677000.0
+    other = {**sep, "source_id": "xx-example-monthly"}
+    assert _chart([other, {**by["2021-10"], "source_id": "xx-example-monthly"}])[1]["gallons"][0] == 0.0
 
 
 # ---------------------------------------------------------------- overlap and the committed transcript
@@ -281,19 +328,21 @@ def test_committed_transcript():
     assert months[0] == "2019-01" and months[-1] == "2023-04" and len(months) == 52
     assert d["hand_corrections"] == []
     oc = d["months"]["2021-10"]
-    assert oc["computed"] and oc["unplaced_gal"] == 149000
-    assert {r["outfall"] for r in oc["rows"]} == {"CSO 010", "CSO 012", "CSO 013", "CSO 014", "CSO 016", "CSO 045",
-                                                  "CSO 049"}
-    assert not any(r["figures_published"] for r in oc["rows"])
-    assert oc["revisions"]["2021-05"] == {"gallons": 11554000, "outfall": "CSO 024"}
-    assert oc["revisions"]["2021-07"] == {"gallons": 6944000, "outfall": "CSO 042"}
+    assert oc == {"report_online": False, "why": S.SHEET_MONTHS["2021-10"], "from_annual_sheet": "2021",
+                  "volume_gal": 31039264, "events": None, "hours": None}
+    assert d["annual"]["2021"]["monthly_volume_gal"]["2021-10"] == 31039264     # the sheet's own October line
     for ym, m in d["months"].items():
-        if not m.get("computed"):
+        assert "computed" not in m and "method" not in m
+        if ym not in S.SHEET_MONTHS:
             assert m["check"]["ok"] and m["file"]["url"].startswith("https://springfieldalerts.com/Suez/")
             assert ("capture" in m["file"]) != ("sha256" in m["file"])
     recs, counts = S.build(d, {}, "2026-11-28T12:00:00Z")
-    assert len(recs) == 742 and counts["zero_rows"] == 458
-    assert all(r["time_precision"] == "month" and r["outfall_id"].startswith("SPR") for r in recs)
+    assert len(recs) == 736 and counts["zero_rows"] == 458
+    assert all(r["time_precision"] == "month" for r in recs)
+    [oct_] = [r for r in recs if r["started_at"].startswith("2021-10")]
+    assert oct_["outfall_id"] is None and oct_["volume_gal"] == 31039264
+    assert oct_["raw"]["available_no_later_than"] == "2022-09-28" and oct_["source_url"].endswith("Volumes-2021.pdf")
+    assert all(r["outfall_id"].startswith("SPR") for r in recs if r is not oct_)
 
 
 def test_export_detail_and_chart_label():
@@ -301,10 +350,10 @@ def test_export_detail_and_chart_label():
     recs, _ = build()
     d = detail.detail_of(recs["ma-springfield-archive:MA0101613:SPR010:2022-08"])
     assert d["report_kind"] == "Monthly overflow report" and d["duration_text"] == "15.3 hours"
-    assert "volume_method" not in d                       # a reported figure: no method of ours
-    months, annual = year_2021(500, revisions={"2021-08": 60},
-                               annual_extra={"ev010": 2, "gal010": 530, "ev024": 1, "gal024": 30})
-    recs, _ = build({"watersheds": {}, "months": {**months, "2021-10": S.compute_october(months, annual)}})
-    d = detail.detail_of(recs["ma-springfield-archive:MA0101613:SPR010:2021-10"])
-    assert d["report_kind"] == "Computed from the annual sheet" and d["volume_method"].startswith("Computed by us")
+    assert "volume_method" not in d and "notes" not in d    # a reported figure: no method of ours
+    recs, _ = build(with_october())
+    d = detail.detail_of(recs["ma-springfield-archive:MA0101613:all-outfalls:2021-10"])
+    assert d["report_kind"] == "Annual summary, month line" and "volume_method" not in d
+    assert d["notes"].startswith("October 2021 total for all outfalls combined, as printed on the commission's 2021 "
+                                 "annual sheet (not computed).")
     assert charts.SOURCE_LABEL["ma-springfield-archive"].startswith("Springfield Water and Sewer Commission monthly")

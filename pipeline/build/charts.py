@@ -777,6 +777,11 @@ UNKNOWN_IS_NULL_SOURCES = frozenset({"in-echo-dmr-cso",
                                      # EPA's per-state DMR files (ingest/echo_dmr_cso_states.py): the same reports
                                      "oh-echo-dmr-cso", "ky-echo-dmr-cso", "il-echo-dmr-cso", "tn-echo-dmr-cso",
                                      "ks-echo-dmr-cso", "ga-echo-dmr-cso", "ma-echo-dmr-cso-files"})
+# monthly-total sources whose month with a record lacking a measure is null for that measure, never zero; a month
+# with no record stays zero, because the source lists every month and a month without a record is one with no events
+# (Springfield's monthly CSO reports, ingest/ma_springfield_archive.py; Astra review 2026-11-28 P2). On a water's chart
+# a record of the permit's outfalls combined (raw.permit_level: October 2021 from the annual sheet) is unknown too.
+MISSING_MEASURE_IS_NULL_SOURCES = frozenset({"ma-springfield-archive"})
 
 MEASURE_LABEL = {"gallons": ("Reported volume", "gallons"), "events": ("Discharges reported", "discharges"),
                  "hours": ("Hours of discharge reported", "hours"), "event_days": ("Days with a combined sewer discharge", "days")}
@@ -1153,6 +1158,8 @@ def build_entity(bucket: Bucket, data: Data, spans: dict, per: dict, name: str |
             rows[xi[k]] += 1
             perms.add(e.get("discharger_name") or disch_key(e))
             tm = total_measures(e)
+            if bucket.kind == "water" and sid in MISSING_MEASURE_IS_NULL_SOURCES and (e.get("raw") or {}).get("permit_level"):
+                tm = {}           # a figure for all the permit's outfalls combined is unknown for any one water
             month_meas[xi[k]].append(tm)
             for mk, v in tm.items():
                 meas[mk][xi[k]] += v
@@ -1162,6 +1169,9 @@ def build_entity(bucket: Bucket, data: Data, spans: dict, per: dict, name: str |
             for mk in meas:
                 meas[mk] = [None if not mm or any(mk not in m for m in mm) else meas[mk][i]
                             for i, mm in enumerate(month_meas)]
+        elif sid in MISSING_MEASURE_IS_NULL_SOURCES:
+            for mk in meas:
+                meas[mk] = [None if any(mk not in m for m in mm) else meas[mk][i] for i, mm in enumerate(month_meas)]
         series = [{"key": mk, "label": MEASURE_LABEL[mk][0], "unit": MEASURE_LABEL[mk][1],
                    "values": [None if v is None else round(v, 1) for v in vals_]}
                   for mk, vals_ in sorted(meas.items(), key=lambda kv: list(MEASURE_LABEL).index(kv[0]))]
