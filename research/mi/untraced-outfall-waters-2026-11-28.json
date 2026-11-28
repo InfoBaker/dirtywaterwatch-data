@@ -1,5 +1,5 @@
 {
- "about": "Receiving waters for Michigan MiEnviro CSO/SSO reports (source mi-egle-mienviro-cso-sso-list) that name a permit and outfall but sit on no water page: rows of .coordinator/untraced-outfalls-worklist.json whose key starts with MI|. One entry per permit, or per permit and outfall group where outfalls go to different waters. Research only; nothing applied. Distances are from the stated point to each record's own outline (openboatlaunch out/water/<slug>.json or the record's inline NHD geometry), measured with build.status.water_geometry and shapely on 2026-11-28.",
+ "about": "Receiving waters for Michigan MiEnviro CSO/SSO reports (source mi-egle-mienviro-cso-sso-list) that name a permit and outfall but sit on no water page: rows of the untraced-outfall worklist of 2026-11-28 (4,590 reports with a permit and outfall and no water) whose key starts with MI|. One entry per permit, or per permit and outfall group where outfalls go to different waters. Research only; nothing applied. Distances are from the stated point to each record's own outline (openboatlaunch out/water/<slug>.json or the record's inline NHD geometry), measured with build.status.water_geometry and shapely on 2026-11-28.",
  "made": "2026-11-28",
  "worklist_rows": 66,
  "worklist_reports": 3592,
