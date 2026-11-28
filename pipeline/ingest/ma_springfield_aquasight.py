@@ -289,6 +289,11 @@ def local_time(s, later: bool = False) -> tuple[datetime | None, str | None]:
     return dt, None
 
 
+def utc(dt: datetime) -> datetime:
+    """The instant (two datetimes of one zone compare by their wall clocks, which ignores a repeated hour)."""
+    return dt.astimezone(UTC)
+
+
 def ambiguous(dt: datetime) -> bool:
     return dt.replace(fold=0).utcoffset() != dt.replace(fold=1).utcoffset()
 
@@ -330,9 +335,9 @@ def to_record(row: dict, cfg: dict | None, ctx: dict, fetched_at: str) -> dict:
         end, why = local_time(row.get("end_timestamp"))
         if end is None:
             problems.append(f"end not read ({why})")
-        elif start is not None and end < start:
+        elif start is not None and utc(end) < utc(start):
             later, _ = local_time(row.get("end_timestamp"), later=True)
-            if later is not None and ambiguous(end) and later >= start:
+            if later is not None and ambiguous(end) and utc(later) >= utc(start):
                 end = later
                 raw["_time_note"] = ("the end falls in the hour repeated when daylight time ends; read as its second "
                                      "occurrence, since the first is before the start")
@@ -355,7 +360,7 @@ def to_record(row: dict, cfg: dict | None, ctx: dict, fetched_at: str) -> dict:
     avg = (cfg or {}).get("avg_volume")
     since, _ = local_time((cfg or {}).get("row_create_time"))
     if isinstance(avg, (int, float)) and not isinstance(avg, bool) and avg > 0 and since is not None and start is not None:
-        if start >= since:
+        if utc(start) >= utc(since):
             vol, vol_text = int(avg), f"{int(avg):,} gallons"
             raw["volume_method"] = VOLUME_METHOD
             raw["volume_basis"] = (f"the map's average for this outfall (note \"{(cfg or {}).get('note')}\", set "
@@ -470,7 +475,7 @@ def outfall_status(config: list[dict], status: list[dict] | None, log: list[dict
         a = str(c.get("asset"))
         s = by_asset.get(a)
         recent = [r for r in log if str(r.get("asset")) == a
-                  and (st := local_time(r.get("start_timestamp"))[0]) is not None and st >= recent_from]
+                  and (st := local_time(r.get("start_timestamp"))[0]) is not None and utc(st) >= utc(recent_from)]
         upd = local_time((s or {}).get("last_updated"))[0]
         given = (s or {}).get("status")
         if c.get("not_monitored") == 1:
@@ -479,7 +484,7 @@ def outfall_status(config: list[dict], status: list[dict] | None, log: list[dict
             shown = "notActive"
         elif given == "noOverflow" and recent:
             shown = "overflowed"
-        elif given == "noOverflow" and (upd is None or upd <= stale_from):
+        elif given == "noOverflow" and (upd is None or utc(upd) <= utc(stale_from)):
             shown = "notActive"
         else:
             shown = given
@@ -576,17 +581,23 @@ def main(argv=None) -> int:
         config, status, log = clean_config(_rows(a.files[0])), _rows(a.files[1]), _rows(a.files[2])
         code, _, _ = run(config, status, log, now, out=Path(a.out))
         return code
+    with requests.Session() as sess:
+        return live(sess, now)
+
+
+def live(sess, now: datetime, events_dir: Path = EVENTS_DIR, ctx: dict | None = None) -> int:
+    """One live read: the key, the three tables, the raw saves (never the key or the bundle), the events file."""
+    out = events_dir / f"{SOURCE_ID}.json"
     try:
-        with requests.Session() as sess:
-            config, status, log, serr = fetch_all(sess, now)
+        config, status, log, serr = fetch_all(sess, now)
     except Exception as e:  # noqa: BLE001
-        write_events(SOURCE_ID, [], ok=False, error=error_text(e))
+        write_events(SOURCE_ID, [], ok=False, error=error_text(e), path=out)
         print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
     for name, rows in (("config", config), ("status", status), ("log", log)):
         if rows is not None:        # the answers as read, the config without row_create_user; never the key
             save_raw(SOURCE_ID, json.dumps({"resource": rows}, ensure_ascii=False), f"{name}.json")
-    code, _, _ = run(config, status, log, now, status_error=serr)
+    code, _, _ = run(config, status, log, now, events_dir=events_dir, out=out, ctx=ctx, status_error=serr)
     return code
 
 
