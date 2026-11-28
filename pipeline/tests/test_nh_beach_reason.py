@@ -177,3 +177,66 @@ def test_successive_refreshes_do_not_lend_a_parent_reason(tmp_path, monkeypatch,
             assert rows[current["source_record_id"]]["event_type"] == "unknown"
             assert rows[current["source_record_id"]]["listed_without_colour"] == ""
             assert rows[history["source_record_id"]]["listed_without_colour"] == ""
+
+
+@pytest.mark.parametrize("legacy_closed", [False, True])
+def test_season_refresh_without_history_does_not_close_or_extend_advisory(tmp_path, monkeypatch, legacy_closed):
+    """A Nov. 23 sample cannot lift or reconfirm the Nov. 1 advisory across an unread gap."""
+    events = tmp_path / "events"
+    events.mkdir()
+    for mod in (common, NH):
+        monkeypatch.setattr(mod, "EVENTS_DIR", events)
+    monkeypatch.setattr(NH, "match_waters", lambda *args: (["example-lake-nh"], []))
+    monkeypatch.setattr(NH, "_licence", lambda sess: (NH.LICENCE_FALLBACK, "NHDES"))
+    monkeypatch.setattr(NH, "_layer_info", lambda *args: {})
+    monkeypatch.setattr(NH, "fetch_hab", lambda *args: [])
+    monkeypatch.setattr(S, "_STATES", {"NH"})
+    waters = {"example-lake-nh": {"slug": "example-lake-nh", "name": "Example Lake",
+                                   "kind": "lake", "state": "NH", "area_km2": 1}}
+    parent_id = "nh-des-swimming:beach:TEST:advisory:2026-11-01"
+    season_id = "nh-des-swimming:beach:TEST:monitoring-season-completed:2026-11-23"
+    saved_parent = None
+    for step, day in enumerate((1, 23, 24)):
+        fetched = f"2026-11-{day:02}T12:00:00Z"
+        sample_day = 1 if step == 0 else 23
+        stamp = int(datetime(2026, 11, sample_day, 12, tzinfo=UTC).timestamp() * 1000)
+        attrs = {"EPA_ID": "TEST", "Beach_Name": "Example Beach", "Waterbody_Name": "Example Lake",
+                 "Status": "Advisory" if step == 0 else "Monitoring Season Completed",
+                 "SampleDate": stamp, "DateIssued": stamp if step == 0 else None}
+        monkeypatch.setattr(NH, "now_iso", lambda: fetched)
+        monkeypatch.setattr(common, "now_iso", lambda: fetched)
+        monkeypatch.setattr(NH, "_query_all", lambda *args: [{"attributes": attrs}])
+        assert NH.main([]) == 0
+        path = events / f"{NH.SOURCE_ID}.json"
+        doc = common.read_json(path)
+        if step == 0:
+            saved_parent, = doc["records"]
+            if legacy_closed:
+                # A retained record already closed by the old chain() must be repaired too.
+                doc["records"][0] = {**saved_parent, "status": "advisory_lifted",
+                                     "ended_at": "2026-11-23T07:00:00-05:00"}
+                common.write_json(path, doc)
+            continue
+        _, records, problems = S.load_events(events)
+        assert not problems
+        by_id = {r["event_id"]: r for r in records}
+        assert set(by_id) == {parent_id, season_id}
+        parent, season = by_id[parent_id], by_id[season_id]
+        assert season["event_type"] == season["status"] == "unknown"
+        assert season["parent_event_id"] == parent_id
+        assert season["started_at"] is season["ended_at"] is None
+        assert parent["ended_at"] is None
+        assert parent["status"] == "advisory_active"  # last source advisory, no confirmed lift
+        for key in ("source_record_id", "started_at", "reported_at", "source_updated_at", "fetched_at"):
+            assert parent[key] == saved_parent[key]
+        st, hist = S.build(now=NOW, write=False, events_dir=events, waters=waters, outfalls=[], registry={},
+                           reaches={}, flows=({}, {}), rules=S.load_rules(), placement_cache=False)
+        assert st["waters"]["example-lake-nh"]["status"] == "grey"
+        strip = hist["waters"]["example-lake-nh"]
+        # The first confirmed window remains; the unconfirmed Nov. 16–23 gap stays grey.
+        early = hist["hours"].index("2026-11-02T12:00:00Z")
+        gap = hist["hours"].index("2026-11-16T12:00:00Z")
+        assert strip[early] == "R"
+        assert set(strip[gap:]) == {"g"}
+        exported = X.public_record(parent, st["placements"][parent_id], redact.redactor_for(records, tmp_path))
+        assert exported["ended_at"] is None
