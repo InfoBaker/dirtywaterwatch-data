@@ -31,6 +31,11 @@ on:
         description: "Ingest modules to run once with --backfill before the refresh, space-separated (e.g. nc_dwr_sso nc_algal_blooms fl_dep_pnp); their history then lives in the saved state"
         required: false
         default: ''
+      release:
+        description: "Dataset release: yes (always), no (never), daily (when the latest release's dataset is over 20 hours old; the Worker's update chain sends this)"
+        type: choice
+        options: ['yes', 'no', 'daily']
+        default: 'yes'
   schedule:
     - cron: '7 * * * *'   # hourly, off the hour (enabled 2026-11-04 after run 3 restored the seeded state and uploaded)
 
@@ -59,13 +64,28 @@ jobs:
         id: release
         # the daily release is the scheduled run that starts in the 03Z hour (a dated one on Sundays); a dispatch always
         # releases. Decided here, at the start, from the clock (github.run_started_at is no context property, so the old
-        # condition never held), so a run that takes past the hour still releases (SOL wave1 P2-13)
+        # condition never held), so a run that takes past the hour still releases (SOL wave1 P2-13). A dispatch's
+        # release input (2026-11-27): no skips it; daily releases when the latest dataset is over 20 hours old, so the
+        # Worker's update chain (site repo worker/src/chain.ts) uploads the 700 MB dataset once a day, not every run
         env:
           EVENT: ${{ github.event_name }}
+          RELEASE: ${{ github.event.inputs.release }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           hour=$(date -u +%H); dow=$(date -u +%u)
           due=0
-          if [ "$EVENT" = workflow_dispatch ]; then due=1
+          if [ "$EVENT" = workflow_dispatch ] && [ "$RELEASE" = no ]; then due=0
+          elif [ "$EVENT" = workflow_dispatch ] && [ "$RELEASE" = daily ]; then
+            # a lookup that fails for any reason but a missing release skips the release this run, so an API error
+            # cannot upload the 700 MB dataset on every run (Astra 2026-11-27 P3)
+            rc=0; last=$(gh release view latest -R "$GITHUB_REPOSITORY" --json assets -q '.assets[] | select(.name == "dataset.zip") | .updatedAt' 2>"$RUNNER_TEMP/rel.err") || rc=$?
+            if [ "$rc" != 0 ]; then
+              if grep -qi 'release not found' "$RUNNER_TEMP/rel.err"; then due=1
+              else echo "::warning::the latest release could not be read, so this run skips the dataset release: $(head -c 200 "$RUNNER_TEMP/rel.err")"; fi
+            elif [ -z "$last" ]; then due=1
+            elif [ $(( $(date -u +%s) - $(date -u -d "$last" +%s) )) -gt 72000 ]; then due=1; fi
+            echo "latest dataset uploaded ${last:-never}"
+          elif [ "$EVENT" = workflow_dispatch ]; then due=1
           elif [ "$EVENT" = schedule ] && [ "$hour" = 03 ]; then due=1; fi
           weekly=0; [ "$due" = 1 ] && [ "$dow" = 7 ] && weekly=1
           echo "due=$due" >> "$GITHUB_OUTPUT"; echo "weekly=$weekly" >> "$GITHUB_OUTPUT"
