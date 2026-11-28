@@ -516,3 +516,29 @@ def test_an_ongoing_map_record_gives_no_end(tmp_path, ctx):
     m = _mapped(ctx, "2026-11-27 19:55:00", None, p["event_id"])        # as if linked by an older run
     _, ev = _load(tmp_path, [p], [m])
     assert ev[p["event_id"]]["status"] == "ongoing" and ev[p["event_id"]]["ended_at"] is None
+
+
+# ---------------------------------------------------------------- Astra 2026-11-28, pass 2
+
+def test_overflows_that_do_not_overlap_are_not_linked(tmp_path, ctx):
+    """A portal overflow that starts as the row ends, and a portal record over before the row began, are others."""
+    ended = portal_rec("n7", "SPR012", "2026-11-20T09:52:00-05:00")
+    ended["ended_at"] = "2026-11-20T09:58:00-05:00"                      # over before the map's row began
+    write_json(tmp_path / "ma-massdep.json", {"source_id": "ma-massdep", "ok": True, "records": [
+        portal_rec("n6", "SPR010", "2026-11-20T10:05:00-05:00"), ended]})
+    log = [row(1, "CSO010", "2026-11-20 10:00:00", "2026-11-20 10:05:00"),
+           row(2, "CSO012", "2026-11-20 10:00:00", "2026-11-20 10:30:00")]
+    code, recs, meta = S.run(CONFIG, STATUS, log, NOW, events_dir=tmp_path, out=tmp_path / "out.json", ctx=ctx)
+    assert [r["duplicate_of"] for r in recs] == [None, None] and meta["links"]["linked_to_portal"] == 0
+
+
+def test_a_map_end_after_the_map_was_read_changes_nothing(tmp_path, ctx):
+    """A mistyped end (2036) must not turn an ongoing portal record into an ended one."""
+    p = portal_rec("n9", "SPR010", "2026-11-27T19:55:00-05:00")
+    p["status"] = "ongoing"
+    m = _mapped(ctx, "2026-11-27 19:55:00", "2026-11-27 20:30:00", p["event_id"])
+    m["ended_at"] = "2036-11-27T20:30:00-05:00"
+    m["fetched_at"] = "2026-11-28T01:00:00Z"
+    _, ev = _load(tmp_path, [p], [m])
+    t = ev[p["event_id"]]
+    assert t["status"] == "ongoing" and t["ended_at"] is None and "_ended_at_from" not in t["raw"]

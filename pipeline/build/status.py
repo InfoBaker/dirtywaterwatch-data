@@ -899,6 +899,9 @@ def carry_map_ends(events: list[dict]) -> None:
         start = parse_time(t.get("started_at"))
         if start is not None and end < start:
             continue
+        read = parse_time(e.get("fetched_at")) or datetime.now(UTC)
+        if end > read:
+            continue        # an end after the map was read is a mistyped time: the shown record keeps its own status
         traw = dict(t.get("raw") if isinstance(t.get("raw"), dict) else {})
         was = t.get("status")
         basis = f"end time from the operator's CSO map, record {e['event_id']}"
