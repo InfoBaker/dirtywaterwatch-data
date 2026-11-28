@@ -20,7 +20,7 @@ def record(monkeypatch, label, **extra):
     return NH.beach_records([{"attributes": attrs}], AT, AT)
 
 
-@pytest.mark.parametrize("label", ["Closed", "Monitoring Season Completed", "Unrecognized status"])
+@pytest.mark.parametrize("label", ["Closed", "Unrecognized status"])
 def test_reasonless_status_is_listed_without_colour(monkeypatch, label):
     r, = record(monkeypatch, label)
     rules = S.load_rules()
@@ -29,6 +29,37 @@ def test_reasonless_status_is_listed_without_colour(monkeypatch, label):
     assert S.event_intervals(r, "NH", NOW, rules=rules) == []
     assert r["status"] != "advisory_active"
     assert BR.label(r, BR.config(rules)) == "Beach status listed; the source gives no water-quality reason"
+
+
+def test_completed_season_is_a_monitoring_listing_with_the_existing_id(monkeypatch):
+    current, history = record(monkeypatch, "Monitoring Season Completed", Advisory_history="7/3-7/5")
+    assert current["event_id"] == "nh-des-swimming:beach:TEST:monitoring-season-completed:2026-11-23"
+    assert current["event_type"] == current["status"] == "unknown"
+    assert current["parse_error"] is None
+    assert current["started_at"] is current["ended_at"] is current["material"] is None
+    assert current["advice_text"] == 'NHDES Healthy Swimming Mapper status: "Monitoring Season Completed".'
+    assert current["raw"]["Status"] == "Monitoring Season Completed"
+    assert S.event_intervals(current, "NH", NOW, rules={}) == []
+    assert history["event_type"] == "beach_advisory"
+    assert history["status"] == "advisory_lifted"
+    assert history["advice_text"] == NH.BEACH_ADVICE
+    assert history["material"] == "fecal indicator bacteria"
+
+
+def test_saved_completed_seasons_are_corrected_without_changing_identity(monkeypatch):
+    current, history = record(monkeypatch, "Monitoring Season Completed", Advisory_history="7/3-7/5")
+    # An old season retained by main(), even after the source has moved on to another state.
+    current.update(event_type="beach_advisory", status="advisory_lifted",
+                   advice_text=NH.BEACH_ADVICE, material="fecal indicator bacteria")
+    ids = (current["event_id"], current["source_record_id"])
+    times = {k: current[k] for k in ("reported_at", "source_updated_at", "fetched_at")}
+    NH.chain([current, history])
+    assert current["event_type"] == current["status"] == "unknown"
+    assert (current["event_id"], current["source_record_id"]) == ids
+    assert {k: current[k] for k in times} == times
+    assert current["raw"]["Status"] == "Monitoring Season Completed"
+    assert current["parse_error"] is None
+    assert history["event_type"] == "beach_advisory"
 
 
 def test_program_advisory_and_dated_history_keep_their_reason(monkeypatch):
@@ -119,7 +150,12 @@ def test_successive_refreshes_do_not_lend_a_parent_reason(tmp_path, monkeypatch,
             assert current["_beach_reason"]["stated"] is True
             assert "no_stated_reason" not in exported[parent_id]
             continue
-        assert current["_beach_reason"]["stated"] is False
+        if label == "Monitoring Season Completed":
+            assert current.get("_beach_reason") is None
+            assert exported[child_id]["event_type"] == exported[child_id]["status"] == "unknown"
+            assert exported[child_id]["advice_text"] == current["advice_text"]
+        else:
+            assert current["_beach_reason"]["stated"] is False
         assert S.event_intervals(current, "NH", NOW, rules=rules) == []
         assert not [p for p in st["advisory_points"] if p["event_id"] == child_id]
         assert not [r for r in st["waters"]["example-lake-nh"]["reasons"] if r["event_id"] == child_id]
@@ -131,13 +167,13 @@ def test_successive_refreshes_do_not_lend_a_parent_reason(tmp_path, monkeypatch,
         if earlier == "Advisory":
             assert history["parent_event_id"] == parent_id
         if label == "Monitoring Season Completed":
-            note = exported[child_id]["no_stated_reason"]
-            assert note["label"] == "Beach status listed; the source gives no water-quality reason"
+            assert "no_stated_reason" not in exported[child_id]
             assert st["waters"]["example-lake-nh"]["status"] == "grey"
-            assert st["beach_reason"]["listed_without_colour"] == {NH.SOURCE_ID: 1}
+            assert st["beach_reason"]["listed_without_colour"] == {}
             out = tmp_path / f"csv-{step}"
             csv_export.write_csvs(list(exported.values()), [], [], out, page_ids=set())
             with (out / "all-reports-2026.csv").open(newline="", encoding="utf-8") as f:
                 rows = {r["record_id"]: r for r in csv.DictReader(f)}
-            assert rows[current["source_record_id"]]["listed_without_colour"] == note["label"]
+            assert rows[current["source_record_id"]]["event_type"] == "unknown"
+            assert rows[current["source_record_id"]]["listed_without_colour"] == ""
             assert rows[history["source_record_id"]]["listed_without_colour"] == ""
