@@ -328,6 +328,9 @@ def test_a_rebuilt_delta_row_with_another_reach_is_reported_not_corrected(mod, c
 
 AKRON = ["046", "049", "053", "054", "057", "058", "065", "069", "070", "071", "072", "075", "076", "077", "078", "081",
          "083", "084"]
+# the six outfalls to the Ohio Canal and Camp Brook, which have no record (waters follow-up 2026-11-28): points only
+AKRON_UNTIED = ["047", "055", "059", "060", "062", "080"]
+AKRON = sorted(AKRON + AKRON_UNTIED)
 
 
 def test_the_permit_coordinates_are_read_as_decimal_degrees(mod):
@@ -357,3 +360,13 @@ def test_a_rebuilt_akron_row_at_the_plant_point_is_corrected_again_and_a_changed
     # EPA gives the outfall its own point now: looked at, not overwritten
     changed = dict(copy.deepcopy(epa), lat=41.07, lon=-81.49, coords_from="permitted_feature")
     assert "not changed" in mod.state("permit", changed, mod.PERMIT[k])
+
+
+@pytest.mark.parametrize("n", AKRON_UNTIED)
+def test_akrons_ohio_canal_and_camp_brook_outfalls_take_the_permits_point_and_no_water(mod, committed, n):
+    """The permit names the Ohio Canal or Camp Brook for these outfalls; neither has a record, and no other water is
+    tied by the moved point."""
+    o = next(r for r in committed["outfalls-us.json"]["outfalls"] if (r["npdes_permit"], r["outfall"]) == ("OH0023833", n))
+    assert o["water_slug"] is None and o["match"] == "none"
+    water = mod.PERMIT[("outfalls-us.json", "OH0023833", n)][3]["name"]
+    assert ("to Camp Brook" if n == "055" else "to Ohio Canal") in water

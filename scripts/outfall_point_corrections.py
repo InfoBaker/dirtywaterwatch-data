@@ -151,6 +151,13 @@ AKRON_OUTFALLS = (
     ("083", "Cuyahoga Street Storage Facility (former Racks 40/31)", "Little Cuyahoga River", "41 06'46.3\"",
      "81 31'39.4\""),
     ("084", "Ohio Canal Interceptor Tunnel", "Little Cuyahoga River", "41 05'40.9\"", "81 31'21.1\""),
+    # the six outfalls to waters with no record (waters follow-up 2026-11-28): the points only; their rows stay untied
+    ("047", "Mill Street - Rack 4", "Ohio Canal", "41 05'01\"", "81 31'13\""),
+    ("055", "Camp Brook Storage Basin (former Rack 12)", "Camp Brook", "41 05'34.5\"", "81 29'0.7\""),
+    ("059", "Wolf Ledges Trunk - Rack 16", "Ohio Canal", "41 04'44\"", "81 31'23\""),
+    ("060", "Exchange Street - Rack 17", "Ohio Canal", "41 04'45\"", "81 31'23\""),
+    ("062", "West Market Street - Rack 19", "Ohio Canal", "41 05'11\"", "81 31'09\""),
+    ("080", "South Main Street - Rack 37", "Ohio Canal", "41 04'49.8\"", "81 31'12.1\""),
 )
 
 
