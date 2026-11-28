@@ -2054,12 +2054,14 @@ UNSURE_REACH = re.compile(r"\bnot\s+(?:sure|clear|positive|certain|known)\s+(?:i
                           re.I)
 DID_REACH = re.compile(r"\b(?:entered|enters|entering|reached|reaches|reaching|impacted|affected)\s+(?:an?\s+|the\s+)?"
                        r"(?:[\w'’-]+\s+){0,3}?(?:streams?|creeks?|rivers?|brooks?|run|branch|tributary|ponds?|lakes?|bay|"
-                       r"cove|harbou?r|waterways?|wetlands?|marsh|reservoir|falls|sound|inlet)\b|"   # "sewage entered Bear Creek"
+                       r"cove|harbou?r|waterways?|wetlands?|marsh|reservoir|falls|sound|inlet|surface\s+waters?|"
+                       r"waters?\s+of\s+the\s+(?:state|united\s+states))\b|"   # "sewage entered Bear Creek"
                        r"\b(?:did|does)\s+(?:reach|enter|go\s+into|flow\s+into)\b|"
                        r"\b(?:went|go(?:es|ing)?|flow(?:ed|s|ing)?|ran|runs|drain(?:ed|s|ing)?|discharg(?:ed|es|ing)|spill(?:ed|s|ing)|"
                        r"overflow(?:ed|s|ing)|poured|washed|seeped|emptied|released|enter(?:ed|s|ing)|reached)\s+(?:in)?to\s+"
                        r"(?:an?\s+|the\s+)?(?:[\w'’-]+\s+){0,3}?(?:streams?|creeks?|rivers?|brooks?|run|branch|tributary|"
-                       r"ponds?|lakes?|bay|cove|harbou?r|waterways?|wetlands?|marsh)\b", re.I)
+                       r"ponds?|lakes?|bay|cove|harbou?r|waterways?|wetlands?|marsh|surface\s+waters?|"
+                       r"waters?\s+of\s+the\s+(?:state|united\s+states))\b", re.I)
 QUOTE_CHARS = 160                   # a statement is quoted this long (build/redact.QUOTE_LENGTHS holds it)
 
 
@@ -4603,13 +4605,316 @@ def permit_outlet_reaches(ev: dict, named: list[str], index: dict, waters: dict,
     return list(picks.values())
 
 
+# A recent discharge report that gives its own point and is placed on no water (it names none, or one we hold no
+# record of, and its point lies on no water record within GEOMETRY_MATCH_M) is traced downstream from that point
+# (build/reaches.py event_points, keys pt-<hash>, the same trace and key as a point on a river: rain_sso.trace_key)
+# when there is a basis to say the discharge went to water (owner, 2026-11-21: find a determinable place for reports
+# with no stated place, labelled as ours):
+#   POINT_TRACE_REACHED (a): the source says it reached water: its own flag (raw.reached_water true or "text", Reach
+#       Waterbody Yes, surfaceWater Yes, isImpactThreatWaterbody Y, Baltimore's OVFL_REACH_WW Yes, an EPA sewer
+#       overflow report kept because it reached a water), a storm drain or ditch named as the receiving water (ADEM's
+#       conduit, Houston's "Storm Sewer (not contained)" or "Bayou/surface water/drainage ditch"), or a receiving-water
+#       text that names a water we hold no record of (a water word, or words saying it entered one);
+#   POINT_TRACE_OUTLET (b): a report of a kind that leaves through an outlet to water by definition (PERMIT_OUTLET_TYPES:
+#       a combined sewer overflow, a treatment plant bypass or blend);
+#   POINT_TRACE_NEAR (c): neither, and the start of its trace (the point snapped to the NHDPlus flowline of its
+#       catchment) lies within POINT_TRACE_NEAR_M of the point: the point is on or beside a mapped stream. Known only
+#       once traced, so such a point is traced once to measure it; a far one is counted and drawn nothing.
+# A report that names a registered outlet whose own trace exists takes that stretch on the same bases, worded as
+# drawn from the outlet it names; a report of an outlet type (PERMIT_OUTLET_TYPES) needs no point of its own for it,
+# and the outlet's water record need not be one the report is placed on (event_reaches matches the outfall number:
+# SPR013 is 013). A report's own point must be a place in its own state (point_coord_problem), and on basis (a) or (b)
+# its stretch must start within POINT_TRACE_FAR_M of it. A stretch along a water the report says was not reached
+# ("Did not impact Test River; sewage entered Bear Creek": a water record, or a segment's own name, trace_along_denied)
+# is never drawn for it, nor for a report placed on another water (it keeps that water's colour, with no stretch).
+# Never traced: a report the source says reached no water, was contained or was all recovered, by its flags, its
+# volumes or its words (point_trace_denied, written_denial: a written denial must be about a water, a written recovery
+# about the whole discharge, and a flag or words saying it reached water win over both); a report classed no receiving
+# water (a text naming only a storm drain, the ground: no_receiving_water). With no outline of the report's state to
+# check its point against, its point is not traced at any age, counted in counts.point_trace.outline_missing and in
+# problems. A report set aside carries placements[].point_trace_aside, and its
+# point's stretch is withheld everywhere, the separate sewer rain caution included (point_trace_withheld). The report
+# is queued only within POINT_TRACE_DAYS of its start (the window event points always had); a traced one keeps its
+# stretch. The stretch is labelled as ours, from the report's own location, with the basis (point_trace_note); the
+# record's own fields are not changed. Counted in status.json counts.point_trace (point_trace_summary).
+POINT_TRACE_REACHED = "point_source_says_water"
+POINT_TRACE_OUTLET = "point_outlet_type"
+POINT_TRACE_NEAR = "point_near_stream"
+POINT_TRACE_BASES = (POINT_TRACE_REACHED, POINT_TRACE_OUTLET, POINT_TRACE_NEAR)
+POINT_TRACE_NEAR_M = GEOMETRY_MATCH_M     # the distance a report's own point is placed on a water record (400 m)
+POINT_TRACE_DAYS = 30
+POINT_TRACE_MATCH = "point_trace"         # water_match of a report whose waters come from its point's stretch
+POINT_TRACE_LEAD = "The report names no water on our map."
+POINT_TRACE_TAIL = "We drew the stretch downstream from the report's own location (our estimate, not the report's)."
+POINT_TRACE_TAIL_OUTLET = "We drew the stretch downstream from the outlet the report names (our estimate, not the report's)."
+POINT_TRACE_OUTLET_WHY = {
+    "cso": "A combined sewer overflow discharges to water through its outlet.",
+    "bypass": "A treatment plant bypass discharges to water through the plant's outlet.",
+    "plant_bypass": "A treatment plant bypass discharges to water through the plant's outlet.",
+    "blended": "A blended discharge leaves the treatment plant through its outlet to water."}
+FLOW_TO_WATER = re.compile(r"(?i)^\s*(?:bayou\s*/\s*surface\s+water|storm\s+sewer\s*\(\s*not\s+contained)")
+FLOW_CONTAINED = re.compile(r"(?i)(?<!not\s)\bcontained\b")
+RECOVERED_KEYS = ("volume_recovered_gal", "ESTGALRECOVER", "volume_recovered")
+# a report's point must be a place in its own state: provisional_outfalls.coord_problem (not (0, 0), not swapped, not
+# missing the longitude's minus sign, inside the Census outline of the report's state or within its STATE_SLACK_DEG,
+# about 1 km); a point that fails is never traced and is counted aside with the reason
+# a report drawn from its own point on a stated basis (a) or (b): the start of its stretch (the point snapped to its
+# catchment's flowline) must lie within POINT_TRACE_FAR_M of the point (NAME_MATCH_M, the distance a named water is
+# matched to a report's point); beyond it the point is not on the stream the model found, and nothing is drawn
+POINT_TRACE_FAR_M = NAME_MATCH_M
+POINT_TRACE_NOT_REACHED = "its stretch runs along a water the report says was not reached"
+# the words that say all of a spill was recovered, or that it was cleaned up before reaching water (a written
+# recovery; "partially recovered", "some was recovered", "not all recovered" are not); the rest of a written denial
+# ("did not reach", "completely contained", "no discharge to waters") is STATED_NO_WATER's (stated_no_water)
+RECOVERED_ALL = re.compile(
+    r"\b(?:fully|completely|totally|entirely|100\s*%)\s+(?:recovered|cleaned\s+up|captured|vacuumed\s+up|removed)\b|"
+    r"\ball\s+(?:of\s+(?:the\s+|it\b)\s*)?(?:(?:sewage|spill(?:ed)?|wastewater|overflow|discharge|material|liquid|flow|"
+    r"volume|effluent|water)\s+)?(?:(?:was|were|has\s+been|have\s+been|is|been)\s+)?(?:recovered|cleaned\s+up|captured|"
+    r"vacuumed\s+up|pumped\s+back)\b|"
+    r"\b(?:recovered|cleaned\s+up|captured|vacuumed\s+up|pumped\s+back)\s+(?:[\w'-]+\s+){0,3}?before\s+(?:it\s+|they\s+)?"
+    r"(?:could\s+)?(?:reach|enter)\w*", re.I)
+RECOVERED_PARTLY = re.compile(r"\b(?:partial(?:ly)?|partly|some|portion|most|majority|part|not\s+all|not\s+(?:fully|"
+                              r"completely|totally|entirely)|n't\s+(?:fully|completely|all))\b", re.I)
+# a recovery of less than the whole discharge: a stated part ("recovered 500 of 5,000 gallons") or only its solids or
+# debris ("all visible solids fully recovered"); a written recovery denies only the whole of it (err on safety)
+RECOVERY_WORD = re.compile(r"recover|clean|captur|vacuum|pump", re.I)
+RECOVERED_NOT_WHOLE = re.compile(r"\b(?:solids?|debris|residue|rags?|paper|grease|visible|floatables?|trash)\b", re.I)
+RECOVERED_OF = re.compile(r"\b(?:recovered|captured|vacuumed(?:\s+up)?|pumped\s+back|cleaned\s+up)\s+(?:about\s+|approx\w*\s+|"
+                          r"~\s*)?(\d[\d,]*(?:\.\d+)?)\s*(?:gal\w*\s+)?(?:of|out\s+of)\s+(?:the\s+|an?\s+)?(?:estimated\s+)?"
+                          r"(\d[\d,]*(?:\.\d+)?)", re.I)
+# what a written denial must be about to deny a trace: a water ("did not reach the creek", "no discharge to waters of
+# the state", a named water) or a storm drain, ditch or culvert that leads to one; "did not impact the road" or "did
+# not leave the property" denies nothing. A containment ("completely contained in the manhole") denies, unless it
+# was contained in a water ("contained in the creek")
+DENIAL_TARGET = re.compile(WATER_WORD.pattern + r"|\bwaters?\b(?!\s+(?:main|line|service|meter|supply|heater|valve))|"
+                           r"\bwater\s*(?:bod(?:y|ies)|ways?)\b|\bstorm\s*(?:drain|sewer|water)s?\b|\bcatch\s*basins?\b|"
+                           r"\bditch(?:es)?\b|\bculverts?\b", re.I)
+CONTAINED_IN_WATER = re.compile(r"\bcontained\s+(?:in|within|to)\s+(?:an?\s+|the\s+)?(?:[\w'-]+\s+){0,3}?(?:"
+                                + WATER_WORD.pattern + r")", re.I)
+REPORT_TEXT_KEYS = re.compile(r"(?i)desc|comment|remark|note|narrative|cause|action|clean|recover|summary|detail|"
+                              r"contain|disposition|reach|text|impact|response")
+
+
+def _gallons(v) -> float | None:
+    if isinstance(v, bool):
+        return None
+    if isinstance(v, (int, float)):
+        return float(v)
+    m = re.search(r"\d[\d,]*(?:\.\d+)?", str(v or ""))
+    return float(m.group(0).replace(",", "")) if m else None
+
+
+def point_trace_denied(ev: dict, pl: dict) -> str | None:
+    """Why a report is never traced from its point: the source says it reached no water or was contained
+    (no_receiving_water, reached_no_water, Baltimore's OVFL_REACH_WW No, Houston's contained flow), or that all of
+    it was recovered (a recovered volume at least the spilled one). None when it says none of these."""
+    if pl.get("no_receiving_water"):
+        return pl["no_receiving_water"]
+    said = reached_no_water(ev)
+    if said:
+        return said[0]
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    if str(raw.get("_water_reach") or "").strip().lower() == "no":
+        return "the report says the overflow did not reach a waterway (OVFL_REACH_WW: No)"
+    flow = str(raw.get("flow_location") or "")
+    if flow and FLOW_CONTAINED.search(flow) and not FLOW_TO_WATER.search(flow):
+        return "the report says the overflow was contained (flow location)"
+    spilled = _gallons(ev.get("volume_gal"))
+    for k in RECOVERED_KEYS:
+        got = _gallons(raw.get(k))
+        if spilled and got is not None and got >= spilled:
+            return "the report says all of the spill was recovered"
+    return written_denial(ev)
+
+
+def report_texts(ev: dict) -> list[str]:
+    """The report's own words beyond its receiving-water text: its volume text and the narrative fields of its raw
+    record (a description, comment, cause, action or clean-up field; raw.row and raw.report included)."""
+    out = [ev.get("volume_text")]
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    for d in (raw, raw.get("row"), raw.get("report")):
+        if isinstance(d, dict):
+            out += [v for k, v in d.items() if isinstance(v, str) and REPORT_TEXT_KEYS.search(str(k))]
+    return [t for t in out if isinstance(t, str) and t.strip()]
+
+
+def _recovered_part(clause: str) -> bool:
+    """Whether a clause recovers less than the whole discharge: partly (RECOVERED_PARTLY), only its solids or debris
+    (RECOVERED_NOT_WHOLE), or a stated part ("recovered 500 of 5,000 gallons": RECOVERED_OF)."""
+    if RECOVERED_PARTLY.search(clause) or RECOVERED_NOT_WHOLE.search(clause):
+        return True
+    return any(float(a.replace(",", "")) < float(b.replace(",", "")) for a, b in RECOVERED_OF.findall(clause))
+
+
+def _denies_water(clause: str) -> bool:
+    """Whether a clause states the discharge reached no water (STATED_NO_WATER) about a water (DENIAL_TARGET), or was
+    contained (not in a water: CONTAINED_IN_WATER)."""
+    for rx in STATED_NO_WATER:
+        for m in rx.finditer(clause):
+            if "contain" in m.group(0).lower():
+                if NOT_CONTAINED.search(clause[max(0, m.start() - 20):m.end()]) or CONTAINED_IN_WATER.search(clause):
+                    continue
+                return True
+            if DENIAL_TARGET.search(clause):
+                return True
+    return False
+
+
+def written_denial(ev: dict) -> str | None:
+    """Why the report's own words say no water was reached (point_trace_denied): a written denial in its narrative
+    about a water (stated_no_water's statements: "did not reach the creek", "completely contained", "no discharge to
+    waters"; never "did not impact the road": _denies_water), or a written recovery of the whole of it (RECOVERED_ALL:
+    "all sewage fully recovered", "cleaned up before reaching the stream"; never a part or its solids:
+    _recovered_part). None when the source's own flag or words say it reached a water, or its words are unsure: that
+    statement wins over any recovery or denial (err on safety)."""
+    if reach_flag(ev):
+        return None
+    texts = [ev.get("waterbody_text")] + report_texts(ev)
+    # "cleaned up before reaching the stream" is not a statement that it reached one
+    if any(UNSURE_REACH.search(str(t or "")) or any(_reached_in(RECOVERED_ALL.sub(" ", c)) for c in clauses(t))
+           for t in texts):
+        return None
+    said = [c for t in texts[1:] for c in clauses(t)]
+    if any(_denies_water(c) for c in said):
+        return "the report says the discharge reached no water"
+    # one partial recovery anywhere ("Not fully recovered. All visible solids fully recovered.") and none is whole
+    if any(RECOVERED_ALL.search(c) for c in said) and \
+            not any(_recovered_part(c) for c in said if RECOVERY_WORD.search(c)):
+        return "the report says all of the spill was recovered"
+    return None
+
+
+def trace_along_denied(ev: dict, found: list, waters: dict, resolver) -> bool:
+    """Whether a modeled stretch of the report (found: [(reach, slug)]) runs along a water its receiving-water text
+    says was not reached ("Did not impact Test River; sewage entered Bear Creek"): a water record
+    (Resolver.negated_waters), or a segment whose NHDPlus name a negated clause names and no clause saying it reached a
+    water names (a water we hold no record of), both normalised as water names are (norm_name_in)."""
+    text = ev.get("waterbody_text")
+    if not found or not PLACE_STEPS["stated_no_water"] or not negated_clauses(text):
+        return False
+    st = event_state(ev)
+    along = {x for r, _ in found for x in reach_waters(r, waters)} | \
+        {r.get("water_slug") for r, _ in found if r.get("water_slug") in waters}
+    if along & resolver.negated_waters(text, st, ev):
+        return True
+    said = [f" {norm_name_in(c, st)} " for c in negated_clauses(text)]
+    did = [f" {norm_name_in(c, st)} " for c in clauses(text) if _reached_in(c)]
+    names = {norm_name_in(s["gnis_name"], st) for r, _ in found for s in r.get("segments") or [] if s.get("gnis_name")}
+    return any(n and any(f" {n} " in c for c in said) and not any(f" {n} " in c for c in did) for n in names)
+
+
+def point_coord_problem(ev: dict, outlines: dict) -> str | None:
+    """Why a report's own point cannot be traced: provisional_outfalls.coord_problem against the report's own state
+    (event_state), or None."""
+    from build import provisional_outfalls as PO
+    return PO.coord_problem(ev.get("lat"), ev.get("lon"), event_state(ev), outlines)
+
+
+def is_point_key(key) -> bool:
+    """A stretch traced from a report's own point (build/reaches event_points, rain_sso.trace_key: pt-<hash>)."""
+    return str(key or "").startswith("pt-")
+
+
+def point_trace_withheld(pl: dict | None, key) -> bool:
+    """Whether the stretch `key` traced from a report's own point is withheld from that report: the point-trace rule
+    set the report aside (placements[].point_trace_aside: denied, a location that cannot be used, too far from a
+    stream, or running along a water the report says was not reached). The status build and the separate sewer rain
+    caution (rain_sso.placement) both ask this, so a rejected trace colours nothing anywhere."""
+    return is_point_key(key) and bool((pl or {}).get("point_trace_aside"))
+
+
+def reach_flag(ev: dict) -> str | None:
+    """The source's own flag that the discharge reached water, as the note words it, or None (source_says_water's
+    flags; a written recovery or denial never outweighs one: written_denial)."""
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    for k in REACH_FLAG_KEYS:
+        if str(raw.get(k) or "").strip().lower() == "yes":
+            return f"The report says the discharge reached a waterbody ({k}: Yes)."
+    row = raw.get("row") if isinstance(raw.get("row"), dict) else {}
+    if str(row.get("surfaceWater") or "").strip().lower() == "yes":
+        return "The report says the discharge reached surface water (surfaceWater: Yes)."
+    rep = raw.get("report") if isinstance(raw.get("report"), dict) else {}
+    if rep.get("water_threatened") == "Y":
+        return "The report says a water was impacted or threatened (isImpactThreatWaterbody: Y)."
+    if str(raw.get("_water_reach") or "").strip().lower() == "yes":
+        return "The report says the overflow reached a waterway (OVFL_REACH_WW: Yes)."
+    if raw.get("reached_water") is True or raw.get("reached_water") == TEXT_OVER_FLAG:
+        return "The source says the discharge reached water."
+    if raw.get("reached_water_rule"):           # EPA's sewer overflow reports: kept only when a water was reached
+        return "The report to EPA records a discharge that reached water."
+    return None
+
+
+def source_says_water(ev: dict) -> str | None:
+    """What says a report with no water placed reached water (POINT_TRACE_REACHED), as the note words it, or None."""
+    flag = reach_flag(ev)
+    if flag:
+        return flag
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    parts = raw.get("receiving_water_parts")
+    if isinstance(parts, list) and any(isinstance(p, dict) and p.get("kind") == "conduit" for p in parts):
+        return "The report names a storm drain or ditch as the receiving water."
+    if FLOW_TO_WATER.search(str(raw.get("flow_location") or "")):
+        return "The report says the overflow reached a storm sewer, bayou, surface water or drainage ditch."
+    text = str(ev.get("waterbody_text") or "")
+    if text.strip() and not no_water_text(text) and not stated_no_water(text) and (
+            WATER_WORD.search(text) or DID_REACH.search(text) or DESTINATION.search(text)):
+        return "The water the report names is not on our map."
+    return None
+
+
+def point_trace_basis(ev: dict, pl: dict) -> tuple[str, str | None]:
+    """("denied", why) for a report never traced from its point (point_trace_denied); else its basis and the words
+    the note gives it: POINT_TRACE_REACHED, POINT_TRACE_OUTLET, or POINT_TRACE_NEAR (decided by the trace itself)."""
+    no = point_trace_denied(ev, pl)
+    if no:
+        return "denied", no
+    why = source_says_water(ev)
+    if why:
+        return POINT_TRACE_REACHED, why
+    if ev.get("event_type") in PERMIT_OUTLET_TYPES:
+        return POINT_TRACE_OUTLET, POINT_TRACE_OUTLET_WHY.get(ev["event_type"])
+    return POINT_TRACE_NEAR, None
+
+
+def point_offset_m(ev: dict, reach: dict) -> float | None:
+    """Metres from the report's point to the start of its traced stretch (the first segment's first vertex: the point
+    on its catchment's flowline the trace was cut at), or None when the reach has no segments."""
+    from build import reaches as reaches_mod
+    segs = [s for s in reach.get("segments") or [] if s.get("coords")]
+    if not segs or ev.get("lat") is None or ev.get("lon") is None:
+        return None
+    x, y = min(segs, key=lambda s: s.get("km_start") or 0.0)["coords"][0][:2]
+    return reaches_mod.seg_km([[float(ev["lon"]), float(ev["lat"])], [x, y]]) * 1000.0
+
+
+def point_trace_note(basis: str, why: str | None, offset_m: float | None, from_point: bool = True) -> str:
+    """The placement note of a report drawn from its own point (from_point; else from the registered outlet it names):
+    what it names, the basis, and that the stretch is ours."""
+    if basis == POINT_TRACE_NEAR:
+        m = int(round(offset_m or 0.0))
+        why = (f"Its location is {int(round(m * 3.28084)):,} feet ({m:,} m) from a mapped stream, within our limit "
+               f"of {int(round(POINT_TRACE_NEAR_M * 3.28084)):,} feet ({POINT_TRACE_NEAR_M:,} m).")
+    return " ".join(x for x in (POINT_TRACE_LEAD, why, POINT_TRACE_TAIL if from_point else POINT_TRACE_TAIL_OUTLET) if x)
+
+
+def point_trace_summary(counts: dict) -> str:
+    """The status step's one line on recent reports with a point and no water (counts.point_trace)."""
+    c = counts or {}
+    return (f"status: recent reports with a point and no water: traced {dict(sorted((c.get('traced') or {}).items()))}, "
+            f"waiting for a trace {dict(sorted((c.get('queued') or {}).items()))}, left aside "
+            f"{dict(sorted((c.get('aside') or {}).items()))}"
+            + (f", withheld at any age for want of a state outline {dict(sorted(c['outline_missing'].items()))}"
+               if c.get("outline_missing") else ""))
+
+
 def outlet_basis_summary(placements: dict) -> str:
     """The status step's one line on the records drawn from an outlet the build chose (reach_basis): how many under
     each basis, on how many reaches, and how many of them have a river taken from the permit. Counts only."""
     by, reaches, inferred = Counter(), set(), 0
     for pl in (placements or {}).values():
         b = pl.get("reach_basis")
-        if not b:
+        if b not in PERMIT_OUTLET_BASES:
             continue
         by[b] += 1
         outs = pl.get("reach_basis_outfalls") or []
@@ -5422,7 +5727,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
           registry: dict | None = None, include_restricted: bool = False, rules: dict | None = None,
           reaches: dict | None = None, flows: tuple | None = None, discharger_towns: dict | None = None,
           rain: dict | None = None, discharger_waters: dict | None = None, discharger_aliases_map: dict | None = None,
-          placement_cache: Path | None | bool = True, live_only: bool = False):
+          placement_cache: Path | None | bool = True, live_only: bool = False, state_outlines: dict | None = None):
     """rain: {"rainfall", "history", "thresholds"} (build/rain_likely.py); read from data/build/ when
     None and rules.rain_likely.enabled is true. Placement reads every outfall registry file
     (load_registry_outfalls) when outfalls is None, else the outfalls given.
@@ -5432,7 +5737,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     hour. Everything else (intervals, colours, counts) is computed for every record as before. True: the file
     PLACEMENT_CACHE when this build writes the shared outputs (write and the default events directory); a path: that
     file; None or False: no cache. The same file also holds the resolver's pure text matches, shared by
-    reports of any age; changing a report's point or other placement inputs still runs its guards afresh."""
+    reports of any age; changing a report's point or other placement inputs still runs its guards afresh.
+    state_outlines: {state: shapely geometry} that a report's own point is checked against before it is traced
+    (point_coord_problem); read once, when first needed, from provisional_outfalls.state_outlines when None."""
     now = now or datetime.now(UTC)
     loaded = waters is None
     waters = load_waters() if loaded else waters
@@ -5556,6 +5863,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     future_starts = defaultdict(int)
     reach_ivs, reach_events, reaches_on_water = defaultdict(list), defaultdict(list), defaultdict(set)
     needs_reach = []        # recent river discharges with a point but no traced reach: build.reaches traces them
+    # recent reports with a point and no water (POINT_TRACE_BASES): traced, waiting for a trace, left aside and why
+    point_counts = {"traced": Counter(), "queued": Counter(), "aside": Counter()}
+    outline_missing = Counter()     # state -> reports whose point could not be checked: no outline was read (any age)
     aside_events = defaultdict(lambda: defaultdict(int))
     duplicates = find_duplicates(events)
     for ev in events:               # an ingester's own duplicate_of (CT annual sheet -> dashboard) wins
@@ -5672,12 +5982,93 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     for p in picks for slug in p["water_slugs"]]
                 placements[eid]["reach_basis_note"] = permit_outlet_note(picks, waters, outlet_basis, named)
         basis_tag = {"reach_basis": outlet_basis} if outlet_basis else {}
+        # a report with its own point placed on no water: the stretch traced from that point, on a basis
+        # (POINT_TRACE_BASES); queued for its trace while recent, counted either way
+        point_basis = None
+        has_point = ev.get("lat") is not None and ev.get("lon") is not None
+        # the stretch of a registered outlet the report names (event_reaches: its permit and outfall id), which an
+        # outlet-type report takes with or without a point of its own
+        named_outlet_reach = [x for x in found if not is_point_key(x[0].get("key"))]
+        if (is_discharge and live and not future and not coarse and not stretched and not outlet_basis
+                and not pl["water_slugs"] and (has_point or (named_outlet_reach
+                                                             and ev.get("event_type") in PERMIT_OUTLET_TYPES))):
+            # its start, else its report time; an undated report is not recent (NC's 2022-2025 rows give no start)
+            began = parse_time(ev.get("started_at") or ev.get("reported_at"))
+            recent = began is not None and began > now - timedelta(days=POINT_TRACE_DAYS)
+            # its stretch: the trace from its own point (pt-), or that of the registered outlet it names; a trace
+            # cached for its point (the rain caution's too) is judged here whatever its age, so a rejection holds
+            own = list(found)
+            from_point = not named_outlet_reach
+            if own or recent or (has_point and reach_index.get(("event", eid))):
+                kind, why = point_trace_basis(ev, pl)
+                aside = None
+                bad = None
+                if from_point:
+                    if state_outlines is None:
+                        from build import provisional_outfalls as PO
+                        state_outlines = PO.state_outlines()
+                    bad = point_coord_problem(ev, state_outlines)
+                    if bad and event_state(ev) and event_state(ev) not in state_outlines:
+                        outline_missing[event_state(ev)] += 1      # counted at any age: a cached trace is withheld
+                if kind == "denied":
+                    aside = "the source says no water was reached, or the spill was contained or recovered"
+                elif bad:
+                    aside = f"its location cannot be used ({bad})"
+                elif not own:
+                    needs_reach.append({"event_id": eid, "lat": ev["lat"], "lon": ev["lon"], "water_slug": None,
+                                        "permit": ev.get("npdes_permit"), "basis": kind})
+                    if recent:
+                        point_counts["queued"][kind] += 1
+                elif not any(r.get("segments") for r, _ in own):
+                    aside = "the trace found no river path (tidal water or a lake at the start)"
+                else:
+                    own = [x for x in own if x[0].get("segments")]
+                    off = point_offset_m(ev, own[0][0]) if has_point else None
+                    if kind == POINT_TRACE_NEAR and (off is None or off > POINT_TRACE_NEAR_M):
+                        aside = f"no stated basis, and its location is over {POINT_TRACE_NEAR_M} m from a mapped stream"
+                    elif from_point and (off is None or off > POINT_TRACE_FAR_M):
+                        aside = f"its stretch starts over {POINT_TRACE_FAR_M:,} m from its location"
+                    elif trace_along_denied(ev, own, waters, resolver):
+                        # a water the report says was not reached ("Did not impact Test River; sewage entered Bear
+                        # Creek"), a record or a name: a stretch along it is never drawn for it
+                        aside = POINT_TRACE_NOT_REACHED
+                    else:
+                        point_basis = kind
+                        found = own
+                        note = point_trace_note(kind, why, off, from_point)
+                        placements[eid]["reach_basis"] = kind
+                        placements[eid]["reach_basis_note"] = note
+                        placements[eid]["note"] = "; ".join(x for x in (placements[eid].get("note"), note) if x)
+                        basis_tag = {"reach_basis": kind}
+                        if recent:
+                            point_counts["traced"][kind] += 1
+                if aside:
+                    placements[eid]["point_trace_aside"] = aside
+                    # the stretch from its point is withheld here and from the rain caution (point_trace_withheld);
+                    # a named outlet's stretch carries only the waters the report is placed on (none), as before
+                    found = [x for x in found if not point_trace_withheld(placements[eid], x[0].get("key"))]
+                    if aside == POINT_TRACE_NOT_REACHED:
+                        found = []          # nor listed with that water by a named outlet's stretch
+                    if recent:
+                        point_counts["aside"][aside] += 1
+        # a modeled stretch along a water the report says was not reached is never drawn for it, whatever water it is
+        # also placed on ("Did not impact Test River; sewage entered Other Brook": Other Brook keeps its colour as a
+        # water with no stretch); its point's stretch is withheld from the rain caution too (point_trace_withheld)
+        if (found and is_discharge and not stretched and not placements[eid].get("point_trace_aside")
+                and trace_along_denied(ev, found, waters, resolver)):
+            placements[eid]["point_trace_aside"] = POINT_TRACE_NOT_REACHED
+            found, basis_tag = [], {}
+            for field in ("reach_basis", "reach_basis_outfalls", "reach_basis_note"):
+                placements[eid].pop(field, None)
         # the river waters each reach carries: all of the record's (its own outfall or point), or the water of the
         # one registry outfall it starts at (a report naming several outfalls: one reach per outfall), or the waters
-        # a permit's outlet was chosen for (a list: PERMIT_OUTLET_BASIS)
+        # a permit's outlet was chosen for (a list: PERMIT_OUTLET_BASIS); a report drawn from its own point
+        # (POINT_TRACE_BASES): the river waters its stretch runs along, perhaps none (a stream we hold no record of)
         carry = [(r, list(river_slugs) if s is None else [x for x in river_slugs if x in ([s] if isinstance(s, str) else s)])
                  for r, s in found]
-        modeled = [(r, c) for r, c in carry if r.get("segments") and c]
+        if point_basis:
+            carry = [(r, reach_waters(r, waters)) for r, _ in found]
+        modeled = [(r, c) for r, c in carry if r.get("segments") and (c or point_basis)]
         carried = {x for _, c in modeled for x in c}
         reach = found[0][0] if found else None
         if reach:
@@ -5718,6 +6109,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                 iv["placement"] = tag
                 intervals[slug].append(iv)
         if (is_discharge and live and not future and not coarse and river_slugs and not reach and ev.get("lat") is not None
+                and not placements[eid].get("point_trace_aside")
                 and (parse_time(ev.get("started_at")) or now) > now - timedelta(days=30)):
             first = next((x for x in river_slugs if x not in shore_slugs), river_slugs[0])     # a river first
             needs_reach.append({"event_id": eid, "lat": ev["lat"], "lon": ev["lon"], "water_slug": first,
@@ -5726,12 +6118,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         if modeled and live:
             done = set()                # one record colours a water once, however many of its reaches run along it
             for reach, carries in modeled:
-                start_slug = reach.get("water_slug") if reach.get("water_slug") in waters else carries[0]
-                w0 = {**waters[start_slug], "slug": start_slug}
-                ivs = event_intervals(eff, w0.get("state"), now, water=w0, rules=rules)
+                start_slug = reach.get("water_slug") if reach.get("water_slug") in waters else \
+                    (carries[0] if carries else None)
+                w0 = {**waters[start_slug], "slug": start_slug} if start_slug else None
+                ivs = event_intervals(eff, w0.get("state") if w0 else event_state(ev), now, water=w0, rules=rules)
                 for iv in ivs:
                     reach_ivs[reach["key"]].append({**iv, "placement": "reach", "reach": reach["key"], **basis_tag})
-                on_reach = set(reach_waters(reach, waters)) | {start_slug}
+                on_reach = set(reach_waters(reach, waters)) | ({start_slug} if start_slug else set())
                 for slug in sorted(on_reach | set(carries)):
                     if eid not in per_water_events[slug]:
                         per_water_events[slug].append(eid)
@@ -5743,6 +6136,12 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     for iv in ivs:
                         intervals[slug].append({**iv, "placement": tag, "reach": reach["key"], **basis_tag})
                 reach_events[reach["key"]].append(eid)
+            if point_basis:     # its waters are the ones its stretch runs along (the record's own fields unchanged)
+                along = list(dict.fromkeys(x for _, c in modeled for x in c))
+                if along:
+                    placements[eid]["water_slugs"] = along
+                    placements[eid]["water_match"] = POINT_TRACE_MATCH
+                    placements[eid].pop("unplaced_reason", None)
         # the monthly mark (docs/plan.md §2.x): the reported month in the history, and the outfall's latest report
         mark = monthly_mark(ev) if live and pl["water_slugs"] else None
         if mark:
@@ -6210,6 +6609,11 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         problems.append(f"water slug {s} on {n} event(s) is not in the water records")
     outlines = outline_coverage(waters)
     problems.extend(outline_problems(outlines))
+    if outline_missing:     # a point is never traced unchecked (fail closed): the withheld traces are counted
+        point_counts["outline_missing"] = outline_missing
+        problems.append("point_trace: no state outline to check report points against for "
+                        + ", ".join(f"{st} ({n} report(s))" for st, n in sorted(outline_missing.items()))
+                        + "; their traces from their own points are withheld at any age")
     # reports that name no receiving water (no_receiving_water: decision 3 and its like) colour nothing and
     # are counted apart from the unplaced ones (a water named but not placed)
     no_water = sorted(i for i, p in placements.items() if not p["water_slugs"] and p.get("no_receiving_water"))
@@ -6244,7 +6648,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         "advisory_windows": {"file": "data/rules.json", "version": rules.get("version")},
         "constants": {"advisory_no_end_days": ADVISORY_NO_END_DAYS, "confirm_days": CONFIRM_DAYS,
                       "history_days": HISTORY_DAYS, "unresolved": rules.get("unresolved"),
-                      "reach": rules.get("reach")},
+                      "reach": rules.get("reach"), "point_trace_near_m": POINT_TRACE_NEAR_M,
+                      "point_trace_days": POINT_TRACE_DAYS},
         "legend": LEGEND,
         "counts": {"waters": {st: dict(c) for st, c in sorted(counts.items())},
                    "events": len(events), "placed": len(events) - len(unplaced) - len(no_water),
@@ -6257,7 +6662,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                    "future_start": sum(future_starts.values()),
                    "monthly_outfalls": len(monthly_outfalls),
                    "duplicates": len(duplicates),
-                   "no_stated_reason": sum(1 for p in placements.values() if p.get("no_stated_reason"))},
+                   "no_stated_reason": sum(1 for p in placements.values() if p.get("no_stated_reason")),
+                   # recent reports with a point and no water (POINT_TRACE_BASES): the gap stays measurable
+                   "point_trace": {k: dict(sorted(c.items())) for k, c in point_counts.items()}},
         "beach_reason": {**beach_reason, "listed_without_colour": dict(sorted(Counter(
             by_id[i]["source_id"] for i, p in placements.items() if p.get("no_stated_reason")).items()))},
         "waters": out_waters,
@@ -6317,6 +6724,7 @@ def main() -> None:
           f"({status['counts']['unplaced']} unplaced, {status['counts']['no_receiving_water']} name no receiving "
           f"water); fixtures {'in' if status['fixtures_included'] else 'out'}")
     print(outlet_basis_summary(status.get("placements")))
+    print(point_trace_summary(status["counts"].get("point_trace")))
     cov = status.get("outlines") or {}
     print("status: water records with an outline here, by state: "
           + ", ".join(f"{st} {c['with_outline']}/{c['records']}" for st, c in cov.items()))
