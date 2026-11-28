@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ma-springfield-aquasight"
 name: "Springfield Water and Sewer Commission live CSO map (Aquasight)"
 url: "https://springfieldalerts.com/Suez/index.php/map-of-cso-locations/"
