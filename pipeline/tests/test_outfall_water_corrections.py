@@ -199,3 +199,82 @@ def test_a_corrected_row_whose_receiving_water_text_changed_goes_back_to_the_mat
     held = [_matchers_row()]
     H.apply_rows("outfalls-new-england.json", held, [_entry()])
     assert OW.hand_kept(held[0], counts) is True and counts["MA"]["kept: hand correction"] == 1
+
+
+# ---------------------------------------------------------------- untraced-outfall fixes 2026-11-28 (the module's defects)
+
+def _no_water_row(**kw):
+    """A row the registry pass left with no water (ingest.outfall_waters: no record of the permit's name then)."""
+    o = {"npdes_permit": "OH0024899", "outfall": "014", "state": "OH", "receiving_water_echo": "Preston Run",
+         "lat": 41.28, "lon": -84.36, "water_slug": None, "water_name": None, "water_kind": None, "distance_m": None,
+         "match": "none", "water_match": "none: no record named 'Preston Run' in OH",
+         "no_water_reason": "no record named 'Preston Run' in OH", "water_matched_by": "ingest.outfall_waters (2026-11-17)"}
+    o.update(kw)
+    return o
+
+
+def _preston(**kw):
+    e = {"file": "outfalls-us.json", "npdes_permit": "OH0024899", "outfall": "014", "state": "OH", "stated": "Preston Run",
+         "was": None, "water_slug": "preston-run-oh", "water_name": "Preston Run", "water_kind": "stream",
+         "distance_m": 96, "date": "2026-11-28",
+         "basis": "the permit's receiving water in EPA's CSO inventory is 'Preston Run'"}
+    e.update(kw)
+    return e
+
+
+def test_a_row_that_had_no_water_is_not_said_to_have_had_another_one():
+    rows = [_no_water_row()]
+    assert H.apply_rows("outfalls-us.json", rows, [_preston()]) == []
+    why = rows[0]["replaced_match"]["why"]
+    assert "another water" not in why and "no water record" in why
+    # a row that had a water keeps the wording of a re-tie
+    rows = [_matchers_row()]
+    H.apply_rows("outfalls-new-england.json", rows, [_entry()])
+    assert rows[0]["replaced_match"]["why"] == "the permit names another water, which has its own record at the point"
+
+
+def test_revert_gives_back_the_reason_the_row_had_no_water():
+    rows = [_no_water_row()]
+    H.apply_rows("outfalls-us.json", rows, [_preston()])
+    o = rows[0]
+    assert "no_water_reason" not in o and o["replaced_match"]["no_water_reason"] == "no record named 'Preston Run' in OH"
+    o["receiving_water_echo"] = "Preston Ditch"                 # the permit's text changed: the correction goes back
+    assert H.apply_rows("outfalls-us.json", rows, [_preston()])
+    assert o["water_slug"] is None and o["match"] == "none" and not H.is_hand(o)
+    assert o["no_water_reason"] == "no record named 'Preston Run' in OH"
+    assert o["water_match"] == "none: no record named 'Preston Run' in OH" and "replaced_match" not in o
+
+
+def test_the_committed_rows_that_had_no_water_say_so_and_keep_their_reason():
+    for o in _rows("outfalls-us.json"):
+        before = o.get("replaced_match") if H.is_hand(o) else None
+        if before is not None and not before.get("water_slug"):
+            assert "another water" not in before["why"], (o["npdes_permit"], o["outfall"])
+            assert before.get("no_water_reason"), (o["npdes_permit"], o["outfall"])
+
+
+def _ninemile(**kw):
+    e = {"file": "outfalls-oh.json", "npdes_permit": "OH0043991", "outfall": "211", "state": "OH",
+         "stated": "Nine Mile Creek", "was": None, "water_slug": "ninemile-creek-cleveland-oh",
+         "water_name": "Ninemile Creek", "water_kind": "stream", "distance_m": 10, "date": "2026-11-28",
+         "basis": "the permit's receiving water in NEORSD's CSO notification layer is 'Nine Mile Creek'"}
+    e.update(kw)
+    return e
+
+
+def test_a_copy_with_no_receiving_water_text_in_another_file_takes_the_entry():
+    """NEORSD's outfall 211: the row the loader reads (data/outfalls-oh.json) names Nine Mile Creek; EPA's copy in
+    data/outfalls-us.json has no text at all, which says nothing against the entry, so it is corrected too and not
+    flagged for review. The entry's own row must still carry the text."""
+    us = [_no_water_row(npdes_permit="OH0043991", outfall="211", receiving_water_echo=None)]
+    assert H.apply_rows("outfalls-us.json", us, [_ninemile()]) == []
+    assert us[0]["water_slug"] == "ninemile-creek-cleveland-oh" and H.is_hand(us[0])
+    assert H.check("outfalls-us.json", us, [_ninemile()]) == []
+    assert H.holds(us[0], [_ninemile()])
+    # the entry's own file: a row with no text is not the row the correction read
+    oh = [_no_water_row(npdes_permit="OH0043991", outfall="211", receiving_water_echo=None)]
+    p = H.apply_rows("outfalls-oh.json", oh, [_ninemile()])
+    assert p and "needs review" in p[0] and oh[0]["water_slug"] is None
+    # a copy in another file whose text names another water still needs review
+    other = [_no_water_row(npdes_permit="OH0043991", outfall="211", receiving_water_echo="Euclid Creek")]
+    assert H.apply_rows("outfalls-us.json", other, [_ninemile()]) and other[0]["water_slug"] is None

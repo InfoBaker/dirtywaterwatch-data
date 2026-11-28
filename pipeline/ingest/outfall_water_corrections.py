@@ -10,7 +10,9 @@ An entry is applied only while the row still says what it said when the correcti
 text from EPA (`stated`). A row whose text changed is not corrected, and a row corrected before its text changed goes
 back to the tie the correction replaced (revert(); ingest.outfall_waters then matches it as any other row); check()
 reports the entry as needing review, so changed evidence is looked at rather than overwritten (registry water review
-2026-11-28, P3).
+2026-11-28, P3). A copy of the outfall in another registry file that has no receiving-water text at all is corrected
+too (agrees(): it says nothing against the entry); the entry's own row must keep the text. A row that had no water
+keeps its no_water_reason in replaced_match, and revert() gives it back (untraced-outfall fixes 2026-11-28).
 
 Rows are found by the registry loader's key (common.outfall_key: permit upper case, outfall number without leading
 zeros), so '002' and '2' are one outfall, and every copy of the row is corrected, in the entry's file and in any other
@@ -36,7 +38,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 FILE = ROOT / "data" / "outfall-water-corrections.json"
 BY = "data/outfall-water-corrections.json (hand correction"
-BEFORE_FIELDS = ("water_kind", "distance_m", "water_match")   # kept in replaced_match beside slug, name, match, by
+# kept in replaced_match beside slug, name, match, by; no_water_reason: why a row with no water had none (revert() gives
+# it back; untraced-outfall fixes 2026-11-28)
+BEFORE_FIELDS = ("water_kind", "distance_m", "water_match", "no_water_reason")
+WHY_RETIED = "the permit names another water, which has its own record at the point"
+WHY_NO_WATER = "the row had no water record; the receiving water the permit names has one"
 _LOADED: dict = {}
 
 
@@ -83,11 +89,20 @@ def entry_for(o: dict, corrections: list[dict] | None = None) -> dict | None:
     return next((c for c in (_default() if corrections is None else corrections) if key_of(c) == k), None)
 
 
-def holds(o: dict, corrections: list[dict] | None = None) -> bool:
+def agrees(o: dict, c: dict, name: str | None = None) -> bool:
+    """Whether the row's receiving-water text is still the one the entry read: the same text, or, on a copy of the
+    outfall in another registry file than the entry's, no text at all (EPA's national copy of NEORSD's 211 and 212 has
+    none: it says nothing against the entry; untraced-outfall fixes 2026-11-28). The entry's own row must keep the
+    text. name: the row's registry file (None: not known, as in the registry pass; a row with no text then agrees)."""
+    s = stated_of(o)
+    return s == c["stated"] or (not s and name != c["file"])
+
+
+def holds(o: dict, corrections: list[dict] | None = None, name: str | None = None) -> bool:
     """A corrected row whose correction still applies: its entry is in the file, the row's receiving-water text is
-    still the entry's, and the row carries the entry's water."""
+    still the entry's (agrees), and the row carries the entry's water."""
     c = entry_for(o, corrections)
-    return bool(is_hand(o) and c and stated_of(o) == c["stated"] and o.get("water_slug") == c["water_slug"])
+    return bool(is_hand(o) and c and agrees(o, c, name) and o.get("water_slug") == c["water_slug"])
 
 
 def revert(o: dict) -> None:
@@ -110,8 +125,7 @@ def written(o: dict, c: dict) -> dict:
     before = o.get("replaced_match")
     if not is_hand(o) or not before:
         before = {"water_slug": o.get("water_slug"), "water_name": o.get("water_name"), "match": o.get("match"),
-                  "by": o.get("water_matched_by"),
-                  "why": "the permit names another water, which has its own record at the point",
+                  "by": o.get("water_matched_by"), "why": WHY_RETIED if o.get("water_slug") else WHY_NO_WATER,
                   **{f: o[f] for f in BEFORE_FIELDS if o.get(f) is not None}}
     return {"water_slug": c["water_slug"], "water_name": c["water_name"], "water_kind": c["water_kind"],
             "distance_m": c["distance_m"], "match": "geometry+name",
@@ -150,13 +164,13 @@ def apply_rows(name: str, rows: list[dict], corrections: list[dict] | None = Non
             problems.append(f"{name} {c['npdes_permit']}:{c['outfall']}: no such row")
             continue
         for o in found:
-            if stated_of(o) != c["stated"]:
+            if not agrees(o, c, name):
                 if is_hand(o):
                     revert(o)
                 problems.append(_review(name, c, o))
                 continue
             o.update(written(o, c))
-            o.pop("no_water_reason", None)
+            o.pop("no_water_reason", None)          # kept in replaced_match (written); revert() gives it back
     return problems
 
 
@@ -171,7 +185,7 @@ def check(name: str, rows: list[dict], corrections: list[dict] | None = None) ->
         if not found:
             out.append(f"{name} {c['npdes_permit']}:{c['outfall']}: no such row")
         for o in found:
-            if stated_of(o) != c["stated"]:
+            if not agrees(o, c, name):
                 out.append(_review(name, c, o) + ("; the row still carries the correction" if is_hand(o) else ""))
                 continue
             want = written(o, c)
@@ -206,7 +220,7 @@ def check_registry(data_dir: Path | None = None, corrections: list[dict] | None 
         o = loaded.get(key_of(c))
         if o is None:
             out.append(f"{c['file']} {c['npdes_permit']}:{c['outfall']}: the registry loader reads no row for it")
-        elif stated_of(o) == c["stated"] and any(o.get(k) != v for k, v in written(o, c).items()):
+        elif agrees(o, c, Path(str(o.get("_file") or "")).name) and any(o.get(k) != v for k, v in written(o, c).items()):
             out.append(f"{c['file']} {c['npdes_permit']}:{c['outfall']}: the registry loader reads the row of "
                        f"{o.get('_file')} (outfall '{o.get('outfall')}'), which is not corrected")
     return list(dict.fromkeys(out))

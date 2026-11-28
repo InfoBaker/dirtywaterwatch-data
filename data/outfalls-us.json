@@ -107315,8 +107315,9 @@
     "water_name": null,
     "match": "none",
     "by": "ingest.outfall_waters (2026-11-17)",
-    "why": "the permit names another water, which has its own record at the point",
-    "water_match": "none: no record named 'Preston Run' in OH"
+    "why": "the row had no water record; the receiving water the permit names has one",
+    "water_match": "none: no record named 'Preston Run' in OH",
+    "no_water_reason": "no record named 'Preston Run' in OH"
    }
   },
   {
@@ -108108,8 +108109,9 @@
     "water_name": null,
     "match": "none",
     "by": "ingest.outfall_waters (2026-11-17)",
-    "why": "the permit names another water, which has its own record at the point",
-    "water_match": "none: no record named 'Preston Run' in OH"
+    "why": "the row had no water record; the receiving water the permit names has one",
+    "water_match": "none: no record named 'Preston Run' in OH",
+    "no_water_reason": "no record named 'Preston Run' in OH"
    }
   },
   {
