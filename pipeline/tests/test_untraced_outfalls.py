@@ -193,3 +193,28 @@ def test_the_a_suffix_rule_is_only_the_nbc_permits_and_only_a_single_a_row(resol
     # a lettered report ('OF 107 B' style) or a plant outfall ('OF 002 BP') is not changed
     assert resolver.outfall_rows("RI0100072", "OF 002 BP") == [] or \
         all(r["outfall"] != "002A" for r in resolver.outfall_rows("RI0100072", "OF 002 BP"))
+
+
+# ------------------------------------------------------------------ 3. GLWA's outfall 082 (Oakwood), closed in 2012
+
+def test_glwa_082_is_a_closed_registry_row_with_no_point_on_the_lower_rouge(resolver):
+    import json
+    rows = [o for o in json.loads((Path(__file__).resolve().parents[2] / "data" / "outfalls-us.json").read_text())["outfalls"]
+            if (o.get("npdes_permit"), o.get("outfall")) == ("MI0022802", "082")]
+    assert len(rows) == 1
+    o = rows[0]
+    assert o["lat"] is None and o["lon"] is None and o["no_point_reason"]          # no other outfall's point lent
+    assert o["outfall_status"].startswith("CLS") and "109" in o["outfall_status"]
+    assert o["water_slug"] == "river-rouge-detroit-mi" and o["match"] == "permit_stated"
+    for phrase in ("Outfall 082/Oakwood Pump Station", "O'Brien Drain", "N7704"):
+        assert phrase in o["water_match"], phrase
+    ev = _mi("O`Brien Drain (tributary to Rouge River)", "MI0022802", "mi-glwa-wrrf-mi0022802", "082",
+             "Oakwood Pump Station - Sander & Liddesdale")
+    pl = resolver.resolve(ev)
+    assert pl["water_slugs"] == ["river-rouge-detroit-mi"] and pl["water_match"] == "outfall_registry", pl
+
+
+def test_glwa_104s_one_rouge_river_report_is_left_alone(resolver):
+    """Outfall 104 (Conner Creek, on the Detroit River 15 km away): its one report naming the Rouge River is not moved."""
+    pl = resolver.resolve(_mi("Rouge River", "MI0022802", "mi-glwa-wrrf-mi0022802", "104"))
+    assert "detroit-river-mi" not in pl["water_slugs"]

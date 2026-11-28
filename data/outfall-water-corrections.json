@@ -2290,6 +2290,24 @@
    "date": "2026-11-28",
    "source": "research/registry/untraced-outfall-waters-2026-11-28.csv",
    "url": "https://dam.assets.ohio.gov/image/upload/epa.ohio.gov/Portals/35/permits/doc/3PE00003.pdf"
+  },
+  {
+   "file": "outfalls-us.json",
+   "npdes_permit": "MI0022802",
+   "outfall": "082",
+   "state": "MI",
+   "stated": "",
+   "was": null,
+   "water_slug": "river-rouge-detroit-mi",
+   "water_name": "River Rouge",
+   "water_kind": "river",
+   "distance_m": null,
+   "rule": "permit_states",
+   "permit_text": "Rouge River Outfall 082/Oakwood Pump Station",
+   "basis": "the permit's receiving water for outfall 082 is the Rouge River: its long-term CSO control program names the outfall 'Rouge River Outfall 082/Oakwood Pump Station' (MDEQ NPDES permit MI0022802); the reports name 'O`Brien Drain (tributary to Rouge River)', an enclosed drain with no record. Of the two River Rouge records, the Oakwood facility (Pleasant St between Deacon and Liddesdale, southwest Detroit) is on the lower river below Fort St, the river-rouge-detroit-mi stretch: MDEQ's inspection of the Oakwood CSO basin (SRN N7704, 2017-08-02) says its water 'can be discharged to the Rouge River using the O'Brien Drain', which runs north from the facility; ECHO's point for outfall 109, the basin that replaced 082 at the same facility and drain, lies 324 m from river-rouge-detroit-mi and 1,111 m from river-rouge-mi, and the 2019 permit's outfall 056 'Fort St. (Oakwood District)' (42 17'27\" N, 83 08'33\" W) 7 m and 328 m. The row has no point: none is published for 082",
+   "date": "2026-11-28",
+   "source": "research/mi/untraced-outfall-waters-2026-11-28.json",
+   "url": "https://devtraining.detroitmi.gov/sites/training.detroitmi/files/2018-05/dwsd_wwtp_npdes_permit.pdf; https://www.deq.state.mi.us/Aps/downloads/SRN/N7704/N7704_SAR_20170802.pdf; https://www.glwater.org/wp-content/uploads/2024/04/2019-NPDES-Permit-FINAL_GLWA-WRRF.pdf"
   }
  ]
 }

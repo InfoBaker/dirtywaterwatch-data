@@ -34,6 +34,7 @@ receiving-water text and point are not changed.
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -144,7 +145,8 @@ def entry_problems(c: dict) -> list[str]:
         out.append(f"{k}: the permit's phrase (permit_text) is missing")
     elif f"'{text}'" not in str(c.get("basis") or ""):
         out.append(f"{k}: the basis does not quote the permit's phrase '{text}'")
-    elif str(c.get("water_name") or "").lower() not in text.lower():
+    elif not set(re.findall(r"[a-z]+", str(c.get("water_name") or "").lower())) <= set(re.findall(r"[a-z]+", text.lower())):
+        # the record's name, its words in any order ('River Rouge' for the permit's 'Rouge River')
         out.append(f"{k}: the permit's phrase '{text}' does not name {c.get('water_name')}")
     if not str(c.get("url") or "").startswith("https://"):
         out.append(f"{k}: the permit's address (url) is missing")

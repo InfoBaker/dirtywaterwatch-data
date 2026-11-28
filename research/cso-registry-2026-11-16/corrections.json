@@ -4104,6 +4104,53 @@
     "water_match": "none: no point and no receiving water read for this outfall: the plan's table pairs numbers with locations and streams in a layout that does not read row by row; untied until a source gives either",
     "water_matched_by": "scripts/outfall_point_corrections.py (2026-11-16)"
    }
+  },
+  {
+   "file": "outfalls-us.json",
+   "source": [
+    {
+     "name": "EGLE NPDES permit MI0022802 (2019), GLWA WRRF: outfall 082 no longer listed",
+     "url": "https://www.glwater.org/wp-content/uploads/2024/04/2019-NPDES-Permit-FINAL_GLWA-WRRF.pdf",
+     "read_at": "2026-11-28"
+    },
+    {
+     "name": "MDEQ NPDES permit MI0022802, City of Detroit WWTP: 'Long-term CSO Control Program for Rouge River Outfall 082/Oakwood Pump Station'; outfall 109 (Oakwood RTB) discharges to the Rouge River",
+     "url": "https://devtraining.detroitmi.gov/sites/training.detroitmi/files/2018-05/dwsd_wwtp_npdes_permit.pdf",
+     "read_at": "2026-11-28"
+    }
+   ],
+   "row": {
+    "npdes_permit": "MI0022802",
+    "permittee": "GLWA WRRF",
+    "state": "MI",
+    "city": "DETROIT",
+    "outfall": "082",
+    "outfall_name": "Oakwood Pump Station - Sander & Liddesdale",
+    "outfall_status": "CLS (replaced in 2012 by outfall 109, the Oakwood CSO retention treatment basin; not listed in the 2019 permit)",
+    "feature_type": null,
+    "receiving_water_echo": null,
+    "reach_id": null,
+    "in_icis": null,
+    "permit_status": "EFF",
+    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000555435",
+    "lat": null,
+    "lon": null,
+    "water_slug": null,
+    "water_name": null,
+    "water_kind": null,
+    "distance_m": null,
+    "alternatives": [],
+    "match": "none",
+    "outfall_kind": "cso",
+    "country": "US",
+    "coords_from": null,
+    "receiving_water_source": null,
+    "added_from": "MDEQ NPDES permit MI0022802 (City of Detroit WWTP), its long-term CSO control program 'for Rouge River Outfall 082/Oakwood Pump Station'; MiEnviro's CSO reports for the permit's outfall 082 (2001 to 2012); EPA's national CSO inventory does not list it",
+    "no_point_reason": "neither the permit, EPA's CSO inventory nor its discharge-point file (ICIS) gives a point for outfall 082 (read 2026-11-28), and no point is used: the point of outfall 109, the basin that replaced it, is not lent to it",
+    "no_water_reason": "no receiving water read for this outfall until 2026-11-28 (data/outfall-water-corrections.json)",
+    "water_match": "none: no receiving water read for this outfall until 2026-11-28 (data/outfall-water-corrections.json)",
+    "water_matched_by": "scripts/outfall_point_corrections.py (2026-11-16)"
+   }
   }
  ],
  "shared": [

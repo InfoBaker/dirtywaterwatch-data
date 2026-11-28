@@ -65,7 +65,8 @@ def one(docs, f, permit, outfall):
 # ------------------------------------------------ the tables as committed
 
 def test_every_change_names_its_source_and_keeps_epas_value(docs):
-    assert len(FIXES["status"]) == 97 and len(FIXES["add"]) == 61 and len(FIXES["shared"]) == 213
+    # add: GLWA's 61 untreated outfalls, and its closed outfall 082 (Oakwood; untraced-outfall fixes 2026-11-28)
+    assert len(FIXES["status"]) == 97 and len(FIXES["add"]) == 62 and len(FIXES["shared"]) == 213
     for e in FIXES["status"]:
         o = one(docs, e["file"], e["npdes_permit"], e["outfall"])
         assert o["outfall_status"] == e["status"] and o["epa_outfall_status"] == e["expect_status"]
@@ -78,10 +79,13 @@ def test_every_change_names_its_source_and_keeps_epas_value(docs):
 def test_glwa_untreated_outfalls_are_added_without_an_invented_point(docs, registry):
     rows = rows_of(docs, "outfalls-us.json", "MI0022802")
     added = [o for o in rows if o.get("added_from")]
-    assert len(added) == 61 and len(rows) == 70                  # EPA's nine control facilities stay
+    # EPA's nine control facilities stay; 082 (Oakwood, closed in 2012) is added from the permit's control program
+    assert len(added) == 62 and len(rows) == 71
+    assert [o["outfall"] for o in added if not cso_open(o)] == ["082"]
     for o in added:
         assert o["lat"] is None and o["lon"] is None and o["coords_from"] is None
-        assert "no point is used" in o["no_point_reason"] and o["no_water_reason"]
+        # a row with no water says why; one a hand correction ties (082) keeps it in replaced_match
+        assert "no point is used" in o["no_point_reason"] and (o.get("no_water_reason") or o["water_slug"])
     glwa = [o for o in registry if o["npdes_permit"] == "MI0022802" and cso_open(o)]
     assert len(glwa) == 70
 
@@ -187,8 +191,10 @@ def _as_epa_gives_it(o: dict) -> dict:
 
 @pytest.mark.parametrize("f", ["outfalls-us.json", "outfalls-mid-atlantic.json", "outfalls-new-england.json"])
 def test_a_rebuilt_file_gets_every_correction_again(mod, docs, f):
+    from ingest import outfall_water_corrections as H
     rebuilt = [_as_epa_gives_it(o) for o in docs[f]["outfalls"] if not o.get("added_from")]
     bad = mod.for_builder(f, rebuilt)
+    assert H.apply_rows(f, rebuilt) == []          # scripts/match_outfalls.py writes the hand ties after (GLWA 082)
     assert bad == [] and rebuilt == docs[f]["outfalls"]
 
 

@@ -1,7 +1,7 @@
 {
  "source": "EPA ECHO national CSO inventory (ALL_CSO_DOWNLOADS.csv, fetched 2026-11-01 by the federal research agent), the states and territories outside the 12 live ones, matched to openboatlaunch water geometry (out/water as on disk 2026-11-03); scripts/match_outfalls.py --national",
  "rule": "nearest water of the same state within 400 m whose name shares a distinctive word and the kind of water, else the nearest within 400 m ('geometry'); name_only when no geometry is within range and exactly one water of the state has the receiving water's name and lies within 10 km of the point; a facility's point is matched by name only",
- "count": 5785,
+ "count": 5786,
  "outfalls": [
   {
    "npdes_permit": "AK0023213",
@@ -81623,6 +81623,60 @@
      "by": "scripts/outfall_point_corrections.py (2026-11-16)"
     }
    ]
+  },
+  {
+   "npdes_permit": "MI0022802",
+   "permittee": "GLWA WRRF",
+   "state": "MI",
+   "city": "DETROIT",
+   "outfall": "082",
+   "outfall_name": "Oakwood Pump Station - Sander & Liddesdale",
+   "outfall_status": "CLS (replaced in 2012 by outfall 109, the Oakwood CSO retention treatment basin; not listed in the 2019 permit)",
+   "feature_type": null,
+   "receiving_water_echo": null,
+   "reach_id": null,
+   "in_icis": null,
+   "permit_status": "EFF",
+   "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000555435",
+   "lat": null,
+   "lon": null,
+   "water_slug": "river-rouge-detroit-mi",
+   "water_name": "River Rouge",
+   "water_kind": "river",
+   "distance_m": null,
+   "alternatives": [],
+   "match": "permit_stated",
+   "outfall_kind": "cso",
+   "country": "US",
+   "coords_from": null,
+   "receiving_water_source": null,
+   "added_from": "MDEQ NPDES permit MI0022802 (City of Detroit WWTP), its long-term CSO control program 'for Rouge River Outfall 082/Oakwood Pump Station'; MiEnviro's CSO reports for the permit's outfall 082 (2001 to 2012); EPA's national CSO inventory does not list it",
+   "no_point_reason": "neither the permit, EPA's CSO inventory nor its discharge-point file (ICIS) gives a point for outfall 082 (read 2026-11-28), and no point is used: the point of outfall 109, the basin that replaced it, is not lent to it",
+   "water_match": "hand correction: the permit's receiving water for outfall 082 is the Rouge River: its long-term CSO control program names the outfall 'Rouge River Outfall 082/Oakwood Pump Station' (MDEQ NPDES permit MI0022802); the reports name 'O`Brien Drain (tributary to Rouge River)', an enclosed drain with no record. Of the two River Rouge records, the Oakwood facility (Pleasant St between Deacon and Liddesdale, southwest Detroit) is on the lower river below Fort St, the river-rouge-detroit-mi stretch: MDEQ's inspection of the Oakwood CSO basin (SRN N7704, 2017-08-02) says its water 'can be discharged to the Rouge River using the O'Brien Drain', which runs north from the facility; ECHO's point for outfall 109, the basin that replaced 082 at the same facility and drain, lies 324 m from river-rouge-detroit-mi and 1,111 m from river-rouge-mi, and the 2019 permit's outfall 056 'Fort St. (Oakwood District)' (42 17'27\" N, 83 08'33\" W) 7 m and 328 m. The row has no point: none is published for 082",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "added_source": [
+    {
+     "name": "EGLE NPDES permit MI0022802 (2019), GLWA WRRF: outfall 082 no longer listed",
+     "url": "https://www.glwater.org/wp-content/uploads/2024/04/2019-NPDES-Permit-FINAL_GLWA-WRRF.pdf",
+     "read_at": "2026-11-28",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    },
+    {
+     "name": "MDEQ NPDES permit MI0022802, City of Detroit WWTP: 'Long-term CSO Control Program for Rouge River Outfall 082/Oakwood Pump Station'; outfall 109 (Oakwood RTB) discharges to the Rouge River",
+     "url": "https://devtraining.detroitmi.gov/sites/training.detroitmi/files/2018-05/dwsd_wwtp_npdes_permit.pdf",
+     "read_at": "2026-11-28",
+     "by": "scripts/outfall_point_corrections.py (2026-11-16)"
+    }
+   ],
+   "replaced_match": {
+    "water_slug": null,
+    "water_name": null,
+    "match": "none",
+    "by": "scripts/outfall_point_corrections.py (2026-11-16)",
+    "why": "the row had no water record; the receiving water the permit names has one",
+    "water_match": "none: no receiving water read for this outfall until 2026-11-28 (data/outfall-water-corrections.json)",
+    "no_water_reason": "no receiving water read for this outfall until 2026-11-28 (data/outfall-water-corrections.json)"
+   }
   },
   {
    "npdes_permit": "MI0022802",
