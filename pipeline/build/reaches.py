@@ -1140,7 +1140,9 @@ def trace(o: dict, cap: float, prev: dict | None = None) -> dict:
 @publication_inputs
 def event_points() -> list[dict]:
     """Recent river discharges with a point but no outfall reach (status.json needs_reach: sewer
-    breaks, pump stations): traced from the event's own coordinates."""
+    breaks, pump stations), and recent discharges with a point placed on no water that have a basis to be traced
+    (status.POINT_TRACE_BASES; water_slug None, the entry's basis): traced from the event's own coordinates. The key
+    is rain_sso.trace_key's, so a point the rain caution also traces is traced once."""
     import hashlib
     st = read_json(BUILD_DIR / "status.json") or {}
     out = []

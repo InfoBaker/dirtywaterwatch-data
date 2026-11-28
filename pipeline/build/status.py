@@ -4603,13 +4603,156 @@ def permit_outlet_reaches(ev: dict, named: list[str], index: dict, waters: dict,
     return list(picks.values())
 
 
+# A recent discharge report that gives its own point and is placed on no water (it names none, or one we hold no
+# record of, and its point lies on no water record within GEOMETRY_MATCH_M) is traced downstream from that point
+# (build/reaches.py event_points, keys pt-<hash>, the same trace and key as a point on a river: rain_sso.trace_key)
+# when there is a basis to say the discharge went to water (owner, 2026-11-21: find a determinable place for reports
+# with no stated place, labelled as ours):
+#   POINT_TRACE_REACHED (a): the source says it reached water: its own flag (raw.reached_water true or "text", Reach
+#       Waterbody Yes, surfaceWater Yes, isImpactThreatWaterbody Y, Baltimore's OVFL_REACH_WW Yes, an EPA sewer
+#       overflow report kept because it reached a water), a storm drain or ditch named as the receiving water (ADEM's
+#       conduit, Houston's "Storm Sewer (not contained)" or "Bayou/surface water/drainage ditch"), or a receiving-water
+#       text that names a water we hold no record of (a water word, or words saying it entered one);
+#   POINT_TRACE_OUTLET (b): a report of a kind that leaves through an outlet to water by definition (PERMIT_OUTLET_TYPES:
+#       a combined sewer overflow, a treatment plant bypass or blend);
+#   POINT_TRACE_NEAR (c): neither, and the start of its trace (the point snapped to the NHDPlus flowline of its
+#       catchment) lies within POINT_TRACE_NEAR_M of the point: the point is on or beside a mapped stream. Known only
+#       once traced, so such a point is traced once to measure it; a far one is counted and drawn nothing.
+# Never traced: a report the source says reached no water, was contained or was all recovered (point_trace_denied);
+# a report classed no receiving water (a text naming only a storm drain, the ground: no_receiving_water). The report
+# is queued only within POINT_TRACE_DAYS of its start (the window event points always had); a traced one keeps its
+# stretch. The stretch is labelled as ours, from the report's own location, with the basis (point_trace_note); the
+# record's own fields are not changed. Counted in status.json counts.point_trace (point_trace_summary).
+POINT_TRACE_REACHED = "point_source_says_water"
+POINT_TRACE_OUTLET = "point_outlet_type"
+POINT_TRACE_NEAR = "point_near_stream"
+POINT_TRACE_BASES = (POINT_TRACE_REACHED, POINT_TRACE_OUTLET, POINT_TRACE_NEAR)
+POINT_TRACE_NEAR_M = GEOMETRY_MATCH_M     # the distance a report's own point is placed on a water record (400 m)
+POINT_TRACE_DAYS = 30
+POINT_TRACE_MATCH = "point_trace"         # water_match of a report whose waters come from its point's stretch
+POINT_TRACE_LEAD = "The report names no water on our map."
+POINT_TRACE_TAIL = "We drew the stretch downstream from the report's own location (our estimate, not the report's)."
+POINT_TRACE_OUTLET_WHY = {
+    "cso": "A combined sewer overflow discharges to water through its outlet.",
+    "bypass": "A treatment plant bypass discharges to water through the plant's outlet.",
+    "plant_bypass": "A treatment plant bypass discharges to water through the plant's outlet.",
+    "blended": "A blended discharge leaves the treatment plant through its outlet to water."}
+FLOW_TO_WATER = re.compile(r"(?i)^\s*(?:bayou\s*/\s*surface\s+water|storm\s+sewer\s*\(\s*not\s+contained)")
+FLOW_CONTAINED = re.compile(r"(?i)(?<!not\s)\bcontained\b")
+RECOVERED_KEYS = ("volume_recovered_gal", "ESTGALRECOVER", "volume_recovered")
+
+
+def _gallons(v) -> float | None:
+    if isinstance(v, bool):
+        return None
+    if isinstance(v, (int, float)):
+        return float(v)
+    m = re.search(r"\d[\d,]*(?:\.\d+)?", str(v or ""))
+    return float(m.group(0).replace(",", "")) if m else None
+
+
+def point_trace_denied(ev: dict, pl: dict) -> str | None:
+    """Why a report is never traced from its point: the source says it reached no water or was contained
+    (no_receiving_water, reached_no_water, Baltimore's OVFL_REACH_WW No, Houston's contained flow), or that all of
+    it was recovered (a recovered volume at least the spilled one). None when it says none of these."""
+    if pl.get("no_receiving_water"):
+        return pl["no_receiving_water"]
+    said = reached_no_water(ev)
+    if said:
+        return said[0]
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    if str(raw.get("_water_reach") or "").strip().lower() == "no":
+        return "the report says the overflow did not reach a waterway (OVFL_REACH_WW: No)"
+    flow = str(raw.get("flow_location") or "")
+    if flow and FLOW_CONTAINED.search(flow) and not FLOW_TO_WATER.search(flow):
+        return "the report says the overflow was contained (flow location)"
+    spilled = _gallons(ev.get("volume_gal"))
+    for k in RECOVERED_KEYS:
+        got = _gallons(raw.get(k))
+        if spilled and got is not None and got >= spilled:
+            return "the report says all of the spill was recovered"
+    return None
+
+
+def source_says_water(ev: dict) -> str | None:
+    """What says a report with no water placed reached water (POINT_TRACE_REACHED), as the note words it, or None."""
+    raw = ev.get("raw") if isinstance(ev.get("raw"), dict) else {}
+    for k in REACH_FLAG_KEYS:
+        if str(raw.get(k) or "").strip().lower() == "yes":
+            return f"The report says the discharge reached a waterbody ({k}: Yes)."
+    row = raw.get("row") if isinstance(raw.get("row"), dict) else {}
+    if str(row.get("surfaceWater") or "").strip().lower() == "yes":
+        return "The report says the discharge reached surface water (surfaceWater: Yes)."
+    rep = raw.get("report") if isinstance(raw.get("report"), dict) else {}
+    if rep.get("water_threatened") == "Y":
+        return "The report says a water was impacted or threatened (isImpactThreatWaterbody: Y)."
+    if str(raw.get("_water_reach") or "").strip().lower() == "yes":
+        return "The report says the overflow reached a waterway (OVFL_REACH_WW: Yes)."
+    if raw.get("reached_water") is True or raw.get("reached_water") == TEXT_OVER_FLAG:
+        return "The source says the discharge reached water."
+    if raw.get("reached_water_rule"):           # EPA's sewer overflow reports: kept only when a water was reached
+        return "The report to EPA records a discharge that reached water."
+    parts = raw.get("receiving_water_parts")
+    if isinstance(parts, list) and any(isinstance(p, dict) and p.get("kind") == "conduit" for p in parts):
+        return "The report names a storm drain or ditch as the receiving water."
+    if FLOW_TO_WATER.search(str(raw.get("flow_location") or "")):
+        return "The report says the overflow reached a storm sewer, bayou, surface water or drainage ditch."
+    text = str(ev.get("waterbody_text") or "")
+    if text.strip() and not no_water_text(text) and not stated_no_water(text) and (
+            WATER_WORD.search(text) or DID_REACH.search(text) or DESTINATION.search(text)):
+        return "The water the report names is not on our map."
+    return None
+
+
+def point_trace_basis(ev: dict, pl: dict) -> tuple[str, str | None]:
+    """("denied", why) for a report never traced from its point (point_trace_denied); else its basis and the words
+    the note gives it: POINT_TRACE_REACHED, POINT_TRACE_OUTLET, or POINT_TRACE_NEAR (decided by the trace itself)."""
+    no = point_trace_denied(ev, pl)
+    if no:
+        return "denied", no
+    why = source_says_water(ev)
+    if why:
+        return POINT_TRACE_REACHED, why
+    if ev.get("event_type") in PERMIT_OUTLET_TYPES:
+        return POINT_TRACE_OUTLET, POINT_TRACE_OUTLET_WHY.get(ev["event_type"])
+    return POINT_TRACE_NEAR, None
+
+
+def point_offset_m(ev: dict, reach: dict) -> float | None:
+    """Metres from the report's point to the start of its traced stretch (the first segment's first vertex: the point
+    on its catchment's flowline the trace was cut at), or None when the reach has no segments."""
+    from build import reaches as reaches_mod
+    segs = [s for s in reach.get("segments") or [] if s.get("coords")]
+    if not segs or ev.get("lat") is None or ev.get("lon") is None:
+        return None
+    x, y = min(segs, key=lambda s: s.get("km_start") or 0.0)["coords"][0][:2]
+    return reaches_mod.seg_km([[float(ev["lon"]), float(ev["lat"])], [x, y]]) * 1000.0
+
+
+def point_trace_note(basis: str, why: str | None, offset_m: float | None) -> str:
+    """The placement note of a report drawn from its own point: what it names, the basis, and that the stretch is ours."""
+    if basis == POINT_TRACE_NEAR:
+        m = int(round(offset_m or 0.0))
+        why = (f"Its location is {int(round(m * 3.28084)):,} feet ({m:,} m) from a mapped stream, within our limit "
+               f"of {int(round(POINT_TRACE_NEAR_M * 3.28084)):,} feet ({POINT_TRACE_NEAR_M:,} m).")
+    return " ".join(x for x in (POINT_TRACE_LEAD, why, POINT_TRACE_TAIL) if x)
+
+
+def point_trace_summary(counts: dict) -> str:
+    """The status step's one line on recent reports with a point and no water (counts.point_trace)."""
+    c = counts or {}
+    return (f"status: recent reports with a point and no water: traced {dict(sorted((c.get('traced') or {}).items()))}, "
+            f"waiting for a trace {dict(sorted((c.get('queued') or {}).items()))}, left aside "
+            f"{dict(sorted((c.get('aside') or {}).items()))}")
+
+
 def outlet_basis_summary(placements: dict) -> str:
     """The status step's one line on the records drawn from an outlet the build chose (reach_basis): how many under
     each basis, on how many reaches, and how many of them have a river taken from the permit. Counts only."""
     by, reaches, inferred = Counter(), set(), 0
     for pl in (placements or {}).values():
         b = pl.get("reach_basis")
-        if not b:
+        if b not in PERMIT_OUTLET_BASES:
             continue
         by[b] += 1
         outs = pl.get("reach_basis_outfalls") or []
@@ -5556,6 +5699,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     future_starts = defaultdict(int)
     reach_ivs, reach_events, reaches_on_water = defaultdict(list), defaultdict(list), defaultdict(set)
     needs_reach = []        # recent river discharges with a point but no traced reach: build.reaches traces them
+    # recent reports with a point and no water (POINT_TRACE_BASES): traced, waiting for a trace, left aside and why
+    point_counts = {"traced": Counter(), "queued": Counter(), "aside": Counter()}
     aside_events = defaultdict(lambda: defaultdict(int))
     duplicates = find_duplicates(events)
     for ev in events:               # an ingester's own duplicate_of (CT annual sheet -> dashboard) wins
@@ -5672,12 +5817,54 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     for p in picks for slug in p["water_slugs"]]
                 placements[eid]["reach_basis_note"] = permit_outlet_note(picks, waters, outlet_basis, named)
         basis_tag = {"reach_basis": outlet_basis} if outlet_basis else {}
+        # a report with its own point placed on no water: the stretch traced from that point, on a basis
+        # (POINT_TRACE_BASES); queued for its trace while recent, counted either way
+        point_basis = None
+        if (is_discharge and live and not future and not coarse and not stretched and not outlet_basis
+                and not pl["water_slugs"] and ev.get("lat") is not None and ev.get("lon") is not None):
+            recent = (parse_time(ev.get("started_at")) or now) > now - timedelta(days=POINT_TRACE_DAYS)
+            own = [x for x in found if str(x[0].get("key") or "").startswith("pt-")]
+            if own or (recent and not found):
+                kind, why = point_trace_basis(ev, pl)
+                aside = None
+                if kind == "denied":
+                    found = [x for x in found if x not in own]
+                    aside = "the source says no water was reached, or the spill was contained or recovered"
+                elif not own:
+                    needs_reach.append({"event_id": eid, "lat": ev["lat"], "lon": ev["lon"], "water_slug": None,
+                                        "permit": ev.get("npdes_permit"), "basis": kind})
+                    if recent:
+                        point_counts["queued"][kind] += 1
+                elif not own[0][0].get("segments"):
+                    aside = "the trace from its location found no river path (tidal water or a lake at the point)"
+                else:
+                    off = point_offset_m(ev, own[0][0])
+                    if kind == POINT_TRACE_NEAR and (off is None or off > POINT_TRACE_NEAR_M):
+                        found = [x for x in found if x not in own]
+                        aside = f"no stated basis, and its location is over {POINT_TRACE_NEAR_M} m from a mapped stream"
+                    else:
+                        point_basis = kind
+                        found = own
+                        note = point_trace_note(kind, why, off)
+                        placements[eid]["reach_basis"] = kind
+                        placements[eid]["reach_basis_note"] = note
+                        placements[eid]["note"] = "; ".join(x for x in (placements[eid].get("note"), note) if x)
+                        basis_tag = {"reach_basis": kind}
+                        if recent:
+                            point_counts["traced"][kind] += 1
+                if aside and recent:
+                    point_counts["aside"][aside] += 1
+            elif recent and found:
+                point_counts["aside"]["its named outlet's trace carries no water record"] += 1
         # the river waters each reach carries: all of the record's (its own outfall or point), or the water of the
         # one registry outfall it starts at (a report naming several outfalls: one reach per outfall), or the waters
-        # a permit's outlet was chosen for (a list: PERMIT_OUTLET_BASIS)
+        # a permit's outlet was chosen for (a list: PERMIT_OUTLET_BASIS); a report drawn from its own point
+        # (POINT_TRACE_BASES): the river waters its stretch runs along, perhaps none (a stream we hold no record of)
         carry = [(r, list(river_slugs) if s is None else [x for x in river_slugs if x in ([s] if isinstance(s, str) else s)])
                  for r, s in found]
-        modeled = [(r, c) for r, c in carry if r.get("segments") and c]
+        if point_basis:
+            carry = [(r, reach_waters(r, waters)) for r, _ in found]
+        modeled = [(r, c) for r, c in carry if r.get("segments") and (c or point_basis)]
         carried = {x for _, c in modeled for x in c}
         reach = found[0][0] if found else None
         if reach:
@@ -5726,12 +5913,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         if modeled and live:
             done = set()                # one record colours a water once, however many of its reaches run along it
             for reach, carries in modeled:
-                start_slug = reach.get("water_slug") if reach.get("water_slug") in waters else carries[0]
-                w0 = {**waters[start_slug], "slug": start_slug}
-                ivs = event_intervals(eff, w0.get("state"), now, water=w0, rules=rules)
+                start_slug = reach.get("water_slug") if reach.get("water_slug") in waters else \
+                    (carries[0] if carries else None)
+                w0 = {**waters[start_slug], "slug": start_slug} if start_slug else None
+                ivs = event_intervals(eff, w0.get("state") if w0 else event_state(ev), now, water=w0, rules=rules)
                 for iv in ivs:
                     reach_ivs[reach["key"]].append({**iv, "placement": "reach", "reach": reach["key"], **basis_tag})
-                on_reach = set(reach_waters(reach, waters)) | {start_slug}
+                on_reach = set(reach_waters(reach, waters)) | ({start_slug} if start_slug else set())
                 for slug in sorted(on_reach | set(carries)):
                     if eid not in per_water_events[slug]:
                         per_water_events[slug].append(eid)
@@ -5743,6 +5931,12 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                     for iv in ivs:
                         intervals[slug].append({**iv, "placement": tag, "reach": reach["key"], **basis_tag})
                 reach_events[reach["key"]].append(eid)
+            if point_basis:     # its waters are the ones its stretch runs along (the record's own fields unchanged)
+                along = list(dict.fromkeys(x for _, c in modeled for x in c))
+                if along:
+                    placements[eid]["water_slugs"] = along
+                    placements[eid]["water_match"] = POINT_TRACE_MATCH
+                    placements[eid].pop("unplaced_reason", None)
         # the monthly mark (docs/plan.md §2.x): the reported month in the history, and the outfall's latest report
         mark = monthly_mark(ev) if live and pl["water_slugs"] else None
         if mark:
@@ -6244,7 +6438,8 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         "advisory_windows": {"file": "data/rules.json", "version": rules.get("version")},
         "constants": {"advisory_no_end_days": ADVISORY_NO_END_DAYS, "confirm_days": CONFIRM_DAYS,
                       "history_days": HISTORY_DAYS, "unresolved": rules.get("unresolved"),
-                      "reach": rules.get("reach")},
+                      "reach": rules.get("reach"), "point_trace_near_m": POINT_TRACE_NEAR_M,
+                      "point_trace_days": POINT_TRACE_DAYS},
         "legend": LEGEND,
         "counts": {"waters": {st: dict(c) for st, c in sorted(counts.items())},
                    "events": len(events), "placed": len(events) - len(unplaced) - len(no_water),
@@ -6257,7 +6452,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                    "future_start": sum(future_starts.values()),
                    "monthly_outfalls": len(monthly_outfalls),
                    "duplicates": len(duplicates),
-                   "no_stated_reason": sum(1 for p in placements.values() if p.get("no_stated_reason"))},
+                   "no_stated_reason": sum(1 for p in placements.values() if p.get("no_stated_reason")),
+                   # recent reports with a point and no water (POINT_TRACE_BASES): the gap stays measurable
+                   "point_trace": {k: dict(sorted(c.items())) for k, c in point_counts.items()}},
         "beach_reason": {**beach_reason, "listed_without_colour": dict(sorted(Counter(
             by_id[i]["source_id"] for i, p in placements.items() if p.get("no_stated_reason")).items()))},
         "waters": out_waters,
@@ -6317,6 +6514,7 @@ def main() -> None:
           f"({status['counts']['unplaced']} unplaced, {status['counts']['no_receiving_water']} name no receiving "
           f"water); fixtures {'in' if status['fixtures_included'] else 'out'}")
     print(outlet_basis_summary(status.get("placements")))
+    print(point_trace_summary(status["counts"].get("point_trace")))
     cov = status.get("outlines") or {}
     print("status: water records with an outline here, by state: "
           + ", ".join(f"{st} {c['with_outline']}/{c['records']}" for st, c in cov.items()))
