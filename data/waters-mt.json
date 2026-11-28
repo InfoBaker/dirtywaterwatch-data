@@ -1,6 +1,6 @@
 {
  "state": "MT",
- "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
  "count": 159,
  "waters": [
   {
@@ -3035,12 +3035,13 @@
    "gnis_id": null,
    "geometry_hash": "0247463482097abdbaac4a1b4620b03b5ce0c76da15db2719eccffb0f7c9ad43",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "lost-lake-mt",
