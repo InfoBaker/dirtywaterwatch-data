@@ -55,6 +55,17 @@ PERMIT_STATES = "permit_states"
 PERMIT_MATCH = "permit_stated"
 
 
+def stated_off_water(o: dict) -> bool:
+    """A row tied to its water by the permit's statement alone (match PERMIT_MATCH) whose point is not within TIE_M of
+    that water (distance_m, measured for the correction): the tie holds (reports name the water), but the point is not
+    where the outfall meets the water, so no stretch is modeled from it and the rain caution does not read it
+    (build.reaches.candidate_outfalls, build.rain_likely.targets; Astra review 2026-11-28, P2: Euclid's regulators)."""
+    if o.get("match") != PERMIT_MATCH:
+        return False
+    d = o.get("distance_m")
+    return not (isinstance(d, (int, float)) and 0 <= d <= TIE_M)
+
+
 def load(path: Path | None = None) -> list[dict]:
     p = path or FILE
     if not p.exists():

@@ -657,3 +657,31 @@ def test_a_stale_state_layer_cannot_hide_a_trace_the_corrected_registry_row_make
     keys, tags, _, _ = RL.targets("ME0102075", waters, [dict(registry[0], _file="data/outfalls-new-england.json")],
                                   [], R.load_reaches(), lambda r, w: [r.get("water_slug")] if r.get("water_slug") else [])
     assert "fore-river-me" not in tags and not keys
+
+
+def test_a_row_tied_by_the_permits_statement_alone_draws_no_stretch_from_a_point_away_from_the_water(cache):
+    """Astra review 2026-11-28 (P2): Euclid's rows are tied to Lake Erie because the permit says 'Lake Erie via storm
+    sewer', at points (a regulator, the plant) away from the lake. Such a row keeps its water (reports stay on the
+    lake's page) but is no candidate for a modeled stretch, river or shoreline, unless its own point lies within the
+    tie distance of the water; a stretch traced from it before is retired, and the rain caution does not read it."""
+    stated = dict(match="permit_stated", water_match="hand correction: the permit's receiving water is 'Lake Erie "
+                  "via storm sewer'")
+    registry = [row("PA0031062", "006", "PA", "lake-erie-pa", distance_m=1558, **stated),       # inland regulator
+                row("PA0031062", "007", "PA", "mill-creek-erie-pa", distance_m=900, **stated),  # a river, the same
+                row("PA0031062", "005", "PA", "lake-erie-pa", distance_m=202, **stated),        # at the shore
+                row("PA0031062", "009", "PA", "lake-erie-pa", distance_m=1344, match="geometry+name")]
+    cs, skipped = stale_setup(cache, registry, {
+        "PA0031062-006": stale_rec("PA0031062-006", "lake-erie-pa", model=R.SH.MODEL)})
+    assert {c["key"]: c.get("model") for c in cs} == {"PA0031062-005": R.SH.MODEL, "PA0031062-009": R.SH.MODEL}
+    for k in ("PA0031062-006", "PA0031062-007"):
+        assert skipped[k]["why"] == R.PERMIT_STATED_OFF_WATER and skipped[k]["water_slug"] == registry[0 if k.endswith("6") else 1]["water_slug"]
+        assert "permit" in skipped[k]["note"] and "m from" in skipped[k]["note"]
+    stale = R.stale_traces(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS, **at(registry))
+    assert set(stale) == {"PA0031062-006"}
+    idx = R.write_index(cs, skipped, {}, STALE_LIVE, None)
+    assert idx["outfalls"]["PA0031062-006"]["status"] == R.PERMIT_STATED_OFF_WATER
+    assert R.PERMIT_STATED_OFF_WATER in idx["statuses"]
+    from build import rain_likely as RL
+    keys, tags, _, aside = RL.targets("PA0031062", STALE_WATERS, [registry[0], registry[1]], [], {},
+                                      lambda r, w: [r.get("water_slug")] if r.get("water_slug") else [])
+    assert tags == {} and keys == [] and aside == []
