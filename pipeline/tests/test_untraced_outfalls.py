@@ -71,3 +71,35 @@ def test_crystal_falls_paint_river_is_still_two_unrelated_records(resolver):
     pl = resolver.resolve(_mi("Paint River", "GW1810192", None, "002"))
     assert pl["water_slugs"] == []
     assert "paint-river-mastodon-mi" not in (pl.get("note") or "")
+
+
+# ------------------------------------------------------------------ 2. spellings the reports use
+
+@pytest.mark.parametrize("text,permit,slug", [
+    ("Raisin River South Branch", "3112a-0066", "south-branch-river-raisin-mi"),
+    ("River Rasin", "MI0020401", "river-raisin-mi"),
+    ("St. Joe River", "MI0020109", "st-joseph-river-mi"),
+    ("Big Cedar River", "MIG580212", "cedar-river-mi"),
+    ("Open ditch discharge to Big Cedar River", "MIG580212", "cedar-river-mi"),
+    ("Beguns Creek", "MI0043982", "begunn-creek-mi"),
+    ("BeGunns Creek", "MI0043982", "begunn-creek-mi"),
+    # Bloomfield Village's basin reaches the main Rouge through two county drains with no record (EPA lists the
+    # permit's receiving water as the Rouge River; the permit's ECHO outfall 102 is 323 m from river-rouge-mi)
+    ("Rouge River via Luz & Nichols", "MI0048046", "river-rouge-mi"),
+])
+def test_the_reports_spellings_name_the_record_the_research_settled(resolver, text, permit, slug):
+    pl = resolver.resolve(_mi(text, permit))
+    assert pl["water_slugs"] == [slug], pl
+
+
+def test_each_new_alias_belongs_to_one_michigan_record(waters):
+    import json
+    aliases = json.loads((Path(__file__).resolve().parents[2] / "data" / "water-aliases.json").read_text())
+    for slug, texts in {"south-branch-river-raisin-mi": ["Raisin River South Branch"], "river-raisin-mi": ["River Rasin"],
+                        "st-joseph-river-mi": ["St. Joe River"], "cedar-river-mi": ["Big Cedar River"],
+                        "begunn-creek-mi": ["Beguns Creek", "BeGunns Creek"],
+                        "river-rouge-mi": ["Rouge River via Luz & Nichols"]}.items():
+        assert waters[slug]["state"] == "MI"
+        for t in texts:
+            assert t in aliases[slug]
+            assert [s for s, v in aliases.items() if t in v] == [slug], t
