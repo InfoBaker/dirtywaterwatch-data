@@ -133,7 +133,7 @@ def test_if_changed_keeps_the_last_read_while_the_table_is_unchanged(tmp_path, m
     recs, _ = tceq()
     path = tmp_path / "tx.json"
     path.write_text(json.dumps({"ok": True, "records": list(recs.values()),
-                                "meta": {"table_version": "1790274119", "parser_version": 2, "rows": 11}}))
+                                "meta": {"table_version": "1790274119", "parser_version": 3, "rows": 11}}))
     _, block = R.load_source("tx-tceq-sso-opendata")
     monkeypatch.setattr(socrata, "current_version", lambda b, s: "1790274119")
     line = R.keep_unchanged("tx-tceq-sso-opendata", block, path, "2026-11-07T14:00:00Z")

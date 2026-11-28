@@ -518,6 +518,13 @@ def strip_personal(rec):
         out = {}
         for k, v in rec.items():
             ks = str(k)
+            if ks == "_place_from_operator_coords" and isinstance(v, dict):
+                # A generated coordinate-conversion record, not an operator's personal
+                # details. Keep only its reviewed metadata; nested personal keys still drop.
+                keys = {"place_tier", "place_method", "place_basis", "place_precision_m", "source_crs",
+                        "source_field", "source_units", "manhole_id", "location_type", "private_location"}
+                out[k] = strip_personal({a: b for a, b in v.items() if a in keys})
+                continue
             if NAME_KEYS.search(ks) or (PERSONAL_KEYS.search(ks) and not KEEP_KEYS.search(ks)):
                 continue
             out[k] = strip_personal(v)

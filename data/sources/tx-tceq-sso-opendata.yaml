@@ -86,10 +86,10 @@ fetch:
     keep_missing: true
     revisions: true
   meta:
-    parser_version: 2  # re-read unchanged batches once to preserve explicit Houston SSO references before scrubbing
+    parser_version: 3  # re-read unchanged batches for Houston's operator coordinates in incident_description
     credit: "Texas Commission on Environmental Quality, Sanitary Sewer Overflows (SSO), data.texas.gov"
     license: "No licence stated; data.texas.gov site terms"
-    caveat: "Reported to TCEQ's regional offices by the permittee; the table is published in batches months after the reports, gives dates without times and no locations, gives a receiving water on about one report in four, and a water's own name on about one in eight."
+    caveat: "Reported to TCEQ's regional offices by the permittee; the table is published in batches months after the reports, gives dates without times, gives a receiving water on about one report in four, and a water's own name on about one in eight. Some City of Houston descriptions include the operator's coordinates."
     time_basis: "Dates only (start, end and the date TCEQ received the report); no time of day is given."
     published_in_batches: true      # the coverage grade states the delay from the newest report to the snapshot
-    placement_rule: "TCEQ's table gives no coordinates: a report is placed only on the water it names; a report naming none is listed with its county and is never placed at the plant or geolocated from its text (raw._placement named_water_only)."
+    placement_rule: "We convert the City of Houston's coordinates in a report to a map point. Other reports are placed on the water they name or listed with their county."
