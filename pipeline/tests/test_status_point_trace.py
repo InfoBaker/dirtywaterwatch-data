@@ -167,3 +167,14 @@ def test_month_precision_and_advisories_are_unaffected():
     st, _ = run([month, adv])
     assert st["needs_reach"] == []
     assert st["counts"]["point_trace"] == {"traced": {}, "queued": {}, "aside": {}}
+
+
+def test_a_named_outlet_with_no_water_record_takes_its_outlets_stretch():
+    from tests.test_status import _reach
+    e = spill("o", event_type="cso", npdes_permit="MA0101613", outfall_id="013")
+    r = {**_reach(slug=None), "segments": point_reach("x")[1]["segments"]}
+    st, _ = run([e], {r["key"]: r})
+    pl = st["placements"][e["event_id"]]
+    assert pl["reach"] == r["key"] and pl["reach_basis"] == S.POINT_TRACE_OUTLET
+    assert pl["note"].endswith(S.POINT_TRACE_TAIL_OUTLET) and pl["water_slugs"] == ["test-river-ma"]
+    assert st["needs_reach"] == []

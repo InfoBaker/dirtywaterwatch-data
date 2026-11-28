@@ -4618,6 +4618,8 @@ def permit_outlet_reaches(ev: dict, named: list[str], index: dict, waters: dict,
 #   POINT_TRACE_NEAR (c): neither, and the start of its trace (the point snapped to the NHDPlus flowline of its
 #       catchment) lies within POINT_TRACE_NEAR_M of the point: the point is on or beside a mapped stream. Known only
 #       once traced, so such a point is traced once to measure it; a far one is counted and drawn nothing.
+# A report that names a registered outlet whose own trace exists (an outlet with no water record) takes that stretch
+# on the same bases, worded as drawn from the outlet it names.
 # Never traced: a report the source says reached no water, was contained or was all recovered (point_trace_denied);
 # a report classed no receiving water (a text naming only a storm drain, the ground: no_receiving_water). The report
 # is queued only within POINT_TRACE_DAYS of its start (the window event points always had); a traced one keeps its
@@ -4632,6 +4634,7 @@ POINT_TRACE_DAYS = 30
 POINT_TRACE_MATCH = "point_trace"         # water_match of a report whose waters come from its point's stretch
 POINT_TRACE_LEAD = "The report names no water on our map."
 POINT_TRACE_TAIL = "We drew the stretch downstream from the report's own location (our estimate, not the report's)."
+POINT_TRACE_TAIL_OUTLET = "We drew the stretch downstream from the outlet the report names (our estimate, not the report's)."
 POINT_TRACE_OUTLET_WHY = {
     "cso": "A combined sewer overflow discharges to water through its outlet.",
     "bypass": "A treatment plant bypass discharges to water through the plant's outlet.",
@@ -4729,13 +4732,14 @@ def point_offset_m(ev: dict, reach: dict) -> float | None:
     return reaches_mod.seg_km([[float(ev["lon"]), float(ev["lat"])], [x, y]]) * 1000.0
 
 
-def point_trace_note(basis: str, why: str | None, offset_m: float | None) -> str:
-    """The placement note of a report drawn from its own point: what it names, the basis, and that the stretch is ours."""
+def point_trace_note(basis: str, why: str | None, offset_m: float | None, from_point: bool = True) -> str:
+    """The placement note of a report drawn from its own point (from_point; else from the registered outlet it names):
+    what it names, the basis, and that the stretch is ours."""
     if basis == POINT_TRACE_NEAR:
         m = int(round(offset_m or 0.0))
         why = (f"Its location is {int(round(m * 3.28084)):,} feet ({m:,} m) from a mapped stream, within our limit "
                f"of {int(round(POINT_TRACE_NEAR_M * 3.28084)):,} feet ({POINT_TRACE_NEAR_M:,} m).")
-    return " ".join(x for x in (POINT_TRACE_LEAD, why, POINT_TRACE_TAIL) if x)
+    return " ".join(x for x in (POINT_TRACE_LEAD, why, POINT_TRACE_TAIL if from_point else POINT_TRACE_TAIL_OUTLET) if x)
 
 
 def point_trace_summary(counts: dict) -> str:
@@ -5825,29 +5829,32 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
             # its start, else its report time; an undated report is not recent (NC's 2022-2025 rows give no start)
             began = parse_time(ev.get("started_at") or ev.get("reported_at"))
             recent = began is not None and began > now - timedelta(days=POINT_TRACE_DAYS)
-            own = [x for x in found if str(x[0].get("key") or "").startswith("pt-")]
-            if own or (recent and not found):
+            # its stretch: the trace from its own point (pt-), or that of the registered outlet it names
+            own = list(found)
+            if own or recent:
                 kind, why = point_trace_basis(ev, pl)
                 aside = None
                 if kind == "denied":
-                    found = [x for x in found if x not in own]
+                    found = [x for x in found if not str(x[0].get("key") or "").startswith("pt-")]
                     aside = "the source says no water was reached, or the spill was contained or recovered"
                 elif not own:
                     needs_reach.append({"event_id": eid, "lat": ev["lat"], "lon": ev["lon"], "water_slug": None,
                                         "permit": ev.get("npdes_permit"), "basis": kind})
                     if recent:
                         point_counts["queued"][kind] += 1
-                elif not own[0][0].get("segments"):
-                    aside = "the trace from its location found no river path (tidal water or a lake at the point)"
+                elif not any(r.get("segments") for r, _ in own):
+                    aside = "the trace found no river path (tidal water or a lake at the start)"
                 else:
+                    own = [x for x in own if x[0].get("segments")]
                     off = point_offset_m(ev, own[0][0])
                     if kind == POINT_TRACE_NEAR and (off is None or off > POINT_TRACE_NEAR_M):
-                        found = [x for x in found if x not in own]
+                        found = [x for x in found if not str(x[0].get("key") or "").startswith("pt-")]
                         aside = f"no stated basis, and its location is over {POINT_TRACE_NEAR_M} m from a mapped stream"
                     else:
                         point_basis = kind
                         found = own
-                        note = point_trace_note(kind, why, off)
+                        note = point_trace_note(kind, why, off, all(str(r.get("key") or "").startswith("pt-")
+                                                                    for r, _ in own))
                         placements[eid]["reach_basis"] = kind
                         placements[eid]["reach_basis_note"] = note
                         placements[eid]["note"] = "; ".join(x for x in (placements[eid].get("note"), note) if x)
@@ -5856,8 +5863,6 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                             point_counts["traced"][kind] += 1
                 if aside and recent:
                     point_counts["aside"][aside] += 1
-            elif recent and found:
-                point_counts["aside"]["its named outlet's trace carries no water record"] += 1
         # the river waters each reach carries: all of the record's (its own outfall or point), or the water of the
         # one registry outfall it starts at (a report naming several outfalls: one reach per outfall), or the waters
         # a permit's outlet was chosen for (a list: PERMIT_OUTLET_BASIS); a report drawn from its own point
