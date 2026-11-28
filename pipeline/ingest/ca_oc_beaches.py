@@ -1,9 +1,9 @@
 """Orange County ocean health: current notices hourly and annual closure charts daily.
 
 The home page is a current list, not an archive. Annual PDFs supply closure dates,
-spill numbers, changing closure extents, cause and source-estimated volumes. One
-chart record per spill number retains all extent phases; the closing and final
-reopening dates are beach-action dates, never discharge start/end dates. A chart
+spill numbers, changing closure extents, cause and source-estimated volumes. Each
+area phase has its own record under the shared spill number; its closing and
+reopening or reduction dates are beach-action dates, never discharge dates. A chart
 revision replaces the same identity. A missing current notice has no inferred end.
 No coordinates, receipt or publication times are invented. The home page's posted
 on date has Pacific day precision. Source text is retained in raw.
@@ -174,9 +174,7 @@ def chart_records(content, url, at, year):
     records = []
     for number, phases in groups.items():
         phases.sort(key=lambda p: (day(p['date_closed']), p['row_number']))
-        first, last = phases[0], phases[-1]
-        start = day(first['date_closed'])
-        end = day(last['date_opened']) if last['date_opened'] and not last['reduced_on'] else None
+        first = phases[0]
         if any(p['date_opened'] and day(p['date_opened']) < day(p['date_closed']) for p in phases):
             raise ValueError('closure chart reopening precedes closure')
         # Do not bridge separated closures that reused a spill number.
@@ -191,20 +189,70 @@ def chart_records(content, url, at, year):
         if not amounts:
             raise ValueError('closure chart has no recognized source volumes')
         cause = first['agency_reason']
-        records.append(event(source_id=SOURCE_ID, source_record_id='closure-' + number,
+        for index, phase in enumerate(phases):
+            start = day(phase['date_closed'])
+            end = day(phase['date_opened']) if phase['date_opened'] else None
+            # Keep the already published ID on its original area. Later phases use their
+            # source start date, so volume/area wording revisions do not change their ID.
+            key = 'closure-' + number + (('-phase-' + start[:10]) if index else '')
+            records.append(event(source_id=SOURCE_ID, source_record_id=key,
                              event_type='beach_closure', status='advisory_lifted' if end else 'advisory_active',
-                             outfall_name=first['area'], waterbody_text=first['area'],
+                             outfall_name=phase['area'], waterbody_text=phase['area'],
                              started_at=start, ended_at=end, time_precision='day', fetched_at=at,
-                             volume_gal=amounts.get('spilled'), volume_text=volume_text, estimate_flag='estimated',
+                             volume_gal=amounts.get('spilled') if index == 0 else None,
+                             volume_text=volume_text if index == 0 else None, estimate_flag='estimated',
                              authority=AUTHORITY, source_url=url,
-                             advice_text='; '.join(dict.fromkeys(p['area'] for p in phases if p['area'])),
-                             raw={'phases': phases, 'cause': cause, 'reason': 'Sewage spill',
+                             advice_text=phase['area'],
+                             raw={'phases': phases, 'phase': phase, 'cause': cause, 'reason': 'Sewage spill',
+                                  'spill_record_id': 'closure-' + number,
+                                  'phase_end_kind': 'reduction' if phase['reduced_on'] else 'reopening' if end else None,
                                   'spill_number': number, 'volume_to_water_gal': amounts.get('released'),
                                   'volume_recovered_gal': amounts.get('recovered'), 'collection': 'chart',
+                                  **({'_other_source_record': SOURCE_ID + ':closure-' + number} if index else {}),
                                   'state': 'CA', 'county': 'Orange', 'time_zone': 'America/Los_Angeles',
-                                  '_columns_unparsed': any(p['area'] is None for p in phases),
-                                  '_time_basis': 'Beach closure and reopening dates from the county chart.',
+                                  '_columns_unparsed': phase['area'] is None,
+                                  '_time_basis': 'Dates for this closure area from the county chart; an area may end when the closure is reduced.',
                                   '_phase_basis': 'We group contiguous closure areas by the source spill number; each area keeps its own dates.'}))
+    return records
+
+
+def reconcile_current(records):
+    """Retain both citations/IDs, but let an exact chart phase supply the action window.
+
+    Recompute only our own links, including on cached-chart reads. No fuzzy area
+    match or posting-date inference: ambiguous or conflicting records stay visible.
+    """
+    from ingest.ca_county_beach_link import local_day, norm
+
+    def key(r):
+        area, start = norm(r.get('outfall_name')), local_day(r.get('started_at'))
+        return (r['event_type'], area, start) if area and start else None
+
+    charts = defaultdict(list)
+    for r in records:
+        raw = r.get('raw') or {}
+        # An old aggregate spanning several areas must first be reread as phases.
+        if raw.get('collection') == 'chart' and (raw.get('phase') or len(raw.get('phases') or []) == 1):
+            if not r.get('duplicate_of') and key(r):
+                charts[key(r)].append(r)
+    for r in records:
+        raw = r.get('raw') or {}
+        if raw.get('_chart_reconciled'):
+            r['duplicate_of'] = None
+            for field in ('_chart_reconciled', '_duplicate_basis', '_other_source_record', 'copy_of'):
+                raw.pop(field, None)
+        if raw.get('collection') != 'current' or r.get('duplicate_of'):
+            continue
+        matches = charts.get(key(r), [])
+        if len(matches) != 1:
+            continue
+        target = matches[0]
+        if r.get('ended_at') and local_day(r['ended_at']) != local_day(target.get('ended_at')):
+            continue
+        r['duplicate_of'] = target['event_id']
+        raw.update(_chart_reconciled=True, _other_source_record=target['event_id'],
+                   _duplicate_basis='The county chart gives the same action, affected area and local issue date.',
+                   copy_of={k: target[k] for k in ('event_id', 'source_id', 'source_url')})
     return records
 
 
@@ -288,7 +336,7 @@ def main(argv=None):
                     write_json(state_path, state)
             except Exception as exc:
                 errors.append(error_text(exc))
-    records = retain(new, previous, at, scope={'current'})
+    records = reconcile_current(retain(new, previous, at, scope={'current'}))
     records = redact_events(records)
     write_events(SOURCE_ID, records, ok=not errors, partial=bool(errors), error='; '.join(errors) or None, path=out,
                  meta={'registry_ids': [SOURCE_ID], 'page': PAGE, 'charts_read': charts_read,

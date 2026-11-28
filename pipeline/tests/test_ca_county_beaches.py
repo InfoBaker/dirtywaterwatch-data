@@ -93,12 +93,12 @@ def test_oc_current_day_precision_and_no_inferred_lift():
         OC.parse_current('<html>Temporarily unavailable</html>')
 
 
-def test_oc_chart_one_record_per_spill_with_all_extent_phases_and_revised_volume():
+def test_oc_chart_phases_share_spill_identity_and_revised_volume():
     from ingest import ca_oc_beaches as OC
     r = OC.chart_records((FIX / 'oc_closures_2026.txt').read_text(), OC.chart_url(2026), AT, 2026)[0]
     assert r['source_record_id'] == 'closure-26-035'
     assert r['started_at'] == '2026-07-02T00:00:00-07:00'
-    assert r['ended_at'] == '2026-07-05T00:00:00-07:00'
+    assert r['ended_at'] == '2026-07-04T00:00:00-07:00'
     assert r['volume_gal'] == 500 and r['estimate_flag'] == 'estimated'
     assert r['raw']['volume_to_water_gal'] == 500
     assert r['raw']['volume_recovered_gal'] == 0
@@ -108,9 +108,12 @@ def test_oc_chart_one_record_per_spill_with_all_extent_phases_and_revised_volume
     assert r['event_type'] == 'beach_closure' and r['status'] == 'advisory_lifted'
     assert r['reported_at'] is None and r['published_at'] is None
     two = OC.chart_records((FIX / 'oc_closures_2025.txt').read_text(), OC.chart_url(2025), AT, 2025)
-    assert len(two) == 2
+    assert len(two) == 4
     assert two[0]['volume_gal'] == 589500 and two[0]['raw']['volume_to_water_gal'] == 464700
-    assert two[0]['ended_at'].startswith('2025-01-19')
+    assert two[0]['ended_at'].startswith('2025-01-17')
+    assert two[2]['ended_at'].startswith('2025-01-19')
+    assert {r['raw']['spill_number'] for r in two} == {'25-003', '25-020'}
+    assert [r['volume_gal'] for r in two] == [589500, None, None, 4000]
     assert len(two[0]['raw']['phases']) == 3
 
 
@@ -216,7 +219,7 @@ def test_oc_chart_failure_preserves_history_and_marks_partial_health(tmp_path, m
     assert OC.main(['--out', str(out), '--state', str(tmp_path / 'state.json')]) == 1
     after = json.loads(out.read_text())
     assert after['ok'] is False and after['last_ok_at'] == before['last_ok_at']
-    assert len(after['records']) == 3
+    assert len(after['records']) == len(archive) + 1
     for r in archive:
         assert next(x for x in after['records'] if x['event_id'] == r['event_id']) == r
 

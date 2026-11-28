@@ -140,7 +140,7 @@ def build(rows, fetched_at, updated_at, previous):
         raw = {'row': row, 'cause': cause, 'state': 'CA', 'county': 'San Diego',
                'time_zone': 'America/Los_Angeles', 'collection': 'current',
                '_identity_basis': 'Our key combines the station, action type and source issue time.'}
-        if issue and lift and lift < issue:
+        if issue and lift and datetime.fromisoformat(lift) < datetime.fromisoformat(issue):
             raw['_end_not_used'] = 'The source lift time precedes the issue time.'
             lift = None
         volume, volume_text, qualifier = spill_volume(description)
