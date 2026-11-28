@@ -1740,6 +1740,38 @@
    "basis": "the permit's receiving water in EPA's CSO inventory is 'Sleepers River'; Sleepers River (sleepers-river-vt) lies 135 m from EPA's point, and Passumpsic River (passumpsic-river-vt), the nearest-water tie it replaces, 428 m",
    "date": "2026-11-28",
    "source": "research/registry/outfall-water-audit-2026-11-28.md (class ii-strong)"
+  },
+  {
+   "file": "outfalls-us.json",
+   "npdes_permit": "OH0024899",
+   "outfall": "014",
+   "state": "OH",
+   "stated": "Preston Run",
+   "was": null,
+   "water_slug": "preston-run-oh",
+   "water_name": "Preston Run",
+   "water_kind": "stream",
+   "distance_m": 96,
+   "basis": "the permit's receiving water in EPA's CSO inventory is 'Preston Run'; Preston Run (preston-run-oh, NHDPlus V2.1 GNIS 1066155, built 2026-11-28 from research/oh/receiving-waters-missing-untraced-2026-11-28.json) lies 96 m from EPA's point and is the only record of that name in Ohio; the row had no water (no record of the name until then)",
+   "date": "2026-11-28",
+   "source": "research/registry/untraced-outfall-waters-2026-11-28.csv",
+   "url": "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6 (GNIS 1066155, Preston Run); https://echo.epa.gov/detailed-facility-report?fid=110000544082"
+  },
+  {
+   "file": "outfalls-us.json",
+   "npdes_permit": "OH0024899",
+   "outfall": "039",
+   "state": "OH",
+   "stated": "Preston Run",
+   "was": null,
+   "water_slug": "preston-run-oh",
+   "water_name": "Preston Run",
+   "water_kind": "stream",
+   "distance_m": 306,
+   "basis": "the permit's receiving water in EPA's CSO inventory is 'Preston Run'; Preston Run (preston-run-oh, NHDPlus V2.1 GNIS 1066155, built 2026-11-28 from research/oh/receiving-waters-missing-untraced-2026-11-28.json) lies 306 m from EPA's point and is the only record of that name in Ohio; the row had no water (no record of the name until then)",
+   "date": "2026-11-28",
+   "source": "research/registry/untraced-outfall-waters-2026-11-28.csv",
+   "url": "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6 (GNIS 1066155, Preston Run); https://echo.epa.gov/detailed-facility-report?fid=110000544082"
   }
  ]
 }

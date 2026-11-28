@@ -44,13 +44,14 @@ def test_every_entry_names_a_record_of_its_state_with_its_name_and_kind():
     from build import status as S
     waters = S.load_waters()
     cs = H.load()
-    assert len(cs) == 116
+    assert len(cs) == 118
     for c in cs:
         w = waters.get(c["water_slug"])
         assert w, c["water_slug"]
         assert w.get("state") == c["state"], c
         assert (w.get("name"), w.get("kind")) == (c["water_name"], c["water_kind"]), c
-        assert c["was"] in waters and c["was"] != c["water_slug"]
+        # was None: the row had no water at all (untraced-outfall water fixes 2026-11-28: Defiance's Preston Run rows)
+        assert c["was"] is None or (c["was"] in waters and c["was"] != c["water_slug"])
         assert 0 <= c["distance_m"] <= 400
         assert c["stated"] in c["basis"] and c["basis"].startswith("the permit's receiving water")
     assert len({(c["file"], c["npdes_permit"], c["outfall"]) for c in cs}) == len(cs)
