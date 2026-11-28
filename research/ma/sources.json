@@ -1503,7 +1503,7 @@
    "started_at and ended_at of an overflow (month only)",
    "reported_at",
    "published_at",
-   "October 2021 (no report online)"
+   "October 2021 per outfall (no report online)"
   ],
   "has_coordinates": false,
   "has_outfall_ids": true,
@@ -1512,7 +1512,7 @@
   "license": null,
   "legal_basis": "314 CMR 16.05(1)",
   "status": "used",
-  "status_reason": "Feed ma-springfield-archive: one month-precision cso record per outfall-month with events, January 2019 to April 2023",
+  "status_reason": "Feed ma-springfield-archive: one month-precision cso record per outfall-month with events, January 2019 to April 2023; October 2021 one record for all outfalls combined, the annual sheet's printed line",
   "verified": "fetched",
   "checked": "2026-11-28",
   "notes": "An event is a storm event (preceded and followed by 24 hours of dry weather). The annual sheets carry revisions the monthly reports do not (research/ma/springfield-archive-comparison.md)."

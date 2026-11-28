@@ -24,7 +24,7 @@ No row was corrected by hand.
 |---|---|---|---|
 | 2019 | 460 / 346,780,127 | 452 / 345,910,042 | -870,085 |
 | 2020 | 341 / 208,286,829 | 341 / 208,287,415 | 586 |
-| 2021 | 426 / 726,240,778 (11 months; October computed) | 465 / 775,927,041 | 49,686,263 |
+| 2021 | 426 / 726,240,778 (11 months; no October report) | 465 / 775,927,041 | 49,686,263 |
 | 2022 | 375 / 382,262,401 | 374 / 382,262,401 | 0 |
 
 The annual sheets are not a plain sum of the monthly reports: their month lines differ from the reports' Total rows in these months (sheet minus report):
@@ -43,32 +43,34 @@ Per outfall the 2019 sheet also differs from the sum of the months: in events at
 
 ## October 2021 (no report online)
 
-Per outfall, the 2021 sheet less the other eleven months gives 49,686,263 gallons; the sheet's own October line is 31,039,264. The gap is the sheet's revisions of other months:
+The commission's archive page links no working file for October 2021. What the feed publishes for the month is one record with no outfall: the 31,039,264 gallons the 2021 annual sheet prints on its October line ("Discharge Summary By Month"), all outfalls combined, as the commission printed it. The sheet prints no October event count or hours, so the record gives none. The hourly run checks the transcript's October entry against that line, and the sheet's twelve month lines against its System Total (775,927,040 against 775,927,041: the reports' 1 gallon). The record is placed as any CSO report of the permit that names no outfall: on every water the permit's registry outfalls reach.
 
-- 2021-05: 11,554,000 gallons, exactly the whole difference at CSO 024 (so it is that month's, not October's)
-- 2021-07: 6,944,000 gallons, exactly the whole difference at CSO 042 (so it is that month's, not October's)
-- 2021-08: 149,000 gallons, at no single outfall: unplaced
+No per-outfall October figures are published. The arithmetic below is kept here only: it does not establish which outfalls discharged in October. Per outfall, the 2021 sheet less the other eleven months gives 49,686,263 gallons; the sheet's own October line is 31,039,264. The gap is the sheet's revisions of other months (its month line minus that month's report):
 
-Less the placed revisions and the 149,000 unplaced gallons the differences give 31,039,263 gallons, the sheet's October line to the gallon. Published: the outfalls whose difference exceeds the unplaced 149,000 gallons (they certainly discharged in October), without a count or gallons; the others are not published:
+- 2021-05: 11,554,000 gallons, equal to the whole difference at CSO 024
+- 2021-07: 6,944,000 gallons, equal to the whole difference at CSO 042
+- 2021-08: 149,000 gallons, equal to no single outfall's difference
 
-| Outfall | Events left | Gallons left | Published |
-|---|---|---|---|
-| CSO 010 | 4 | 3,696,000 | yes, without figures |
-| CSO 011 | 0 | -1 | no: the difference is negative (the reports' 1-gallon rounding) |
-| CSO 012 | 4 | 24,617,000 | yes, without figures |
-| CSO 013 | 2 | 790,000 | yes, without figures |
-| CSO 014 | 2 | 745,000 | yes, without figures |
-| CSO 015A | 1 | 9,000 | no: the difference is not more than the 149,000 gallons of revisions the sheet does not place |
-| CSO 016 | 1 | 822,000 | yes, without figures |
-| CSO 017 | 1 | 4,000 | no: the difference is not more than the 149,000 gallons of revisions the sheet does not place |
-| CSO 018 | 2 | 10,264 | no: the difference is not more than the 149,000 gallons of revisions the sheet does not place |
-| CSO 024 | 1 | 11,554,000 | no: the difference is the annual sheet's revision of 2021-05 (its month line exceeds that report's Total row by exactly these gallons) |
-| CSO 025 | 2 | 33,000 | no: the difference is not more than the 149,000 gallons of revisions the sheet does not place |
-| CSO 042 | 8 | 6,944,000 | no: the difference is the annual sheet's revision of 2021-07 (its month line exceeds that report's Total row by exactly these gallons) |
-| CSO 045 | 4 | 155,000 | yes, without figures |
-| CSO 046 | 2 | 127,000 | no: the difference is not more than the 149,000 gallons of revisions the sheet does not place |
-| CSO 048 | 1 | 4,000 | no: the difference is not more than the 149,000 gallons of revisions the sheet does not place |
-| CSO 049 | 4 | 176,000 | yes, without figures |
+A revision that equals one outfall's difference need not belong to that outfall: the sheet gives each revision as a month total, not by outfall, so part of July's 6,944,000 gallons could sit at CSO 045 and the same amount of CSO 042's difference could be October's. The totals reconcile either way (less all three revisions the differences give 31,039,263 gallons, the sheet's October line to the gallon), but which outfalls discharged in October cannot be read from them. An earlier build published seven outfalls (CSO 010, 012, 013, 014, 016, 045 and 049) as discharging in October 2021 on this reasoning; those records were withdrawn after review on 2026-11-28.
+
+| Outfall | Annual sheet less the other eleven months (events / gal) |
+|---|---|
+| CSO 010 | 4 / 3,696,000 |
+| CSO 011 | 0 / -1 |
+| CSO 012 | 4 / 24,617,000 |
+| CSO 013 | 2 / 790,000 |
+| CSO 014 | 2 / 745,000 |
+| CSO 015A | 1 / 9,000 |
+| CSO 016 | 1 / 822,000 |
+| CSO 017 | 1 / 4,000 |
+| CSO 018 | 2 / 10,264 |
+| CSO 024 | 1 / 11,554,000 |
+| CSO 025 | 2 / 33,000 |
+| CSO 042 | 8 / 6,944,000 |
+| CSO 045 | 4 / 155,000 |
+| CSO 046 | 2 / 127,000 |
+| CSO 048 | 1 / 4,000 |
+| CSO 049 | 4 / 176,000 |
 
 ## The months that event-level records also cover
 

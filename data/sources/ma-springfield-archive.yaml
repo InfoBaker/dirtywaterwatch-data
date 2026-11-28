@@ -11,10 +11,12 @@ level: "utility"
 #   gallons and the hours, and a Total row. Static since May 2023. Transcribed once into
 #   data/reference/ma-springfield-cso-archive-2019-2023.json (`--extract` from the PDFs: Internet Archive copies checked
 #   by digest, January to April 2023 from the commission's page); the hourly run reads only that file.
-# Records: one month-precision cso record per outfall-month with at least one event (742), the monthly mark only.
-#   October 2021 has no report online: computed from the 2021 annual sheet less the other eleven months; the sheet's
-#   own revisions of May, July and August leave 149,000 gallons unplaced, so seven outfalls are shown as discharging
-#   that month without a count or gallons.
+# Records: one month-precision cso record per outfall-month with at least one event (735), the monthly mark only.
+#   October 2021 has no report online: one record with no outfall, the 31,039,264 gallons the 2021 annual sheet prints
+#   on its October line for all outfalls combined (the commission's figure, not computed; no events or hours, which
+#   the sheet does not print for a month), placed as a report of the permit that names no outfall. No per-outfall
+#   October figures: the sheet revises May, July and August, and the figures do not tell which outfalls those
+#   revisions belong to (research/ma/springfield-archive-comparison.md). 736 records in all.
 # Beside event records: from 2022-03-19 the CSO map log (ma-springfield-aquasight) and from July 2022 MassDEP's portal
 #   hold the same overflows one by one; a monthly total stands beside them, never counted as an event.
 cadence: "Static archive: January 2019 to April 2023; nothing posted after April 2023."
