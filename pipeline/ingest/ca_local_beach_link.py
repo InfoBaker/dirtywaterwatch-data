@@ -27,7 +27,9 @@ def day(value):
 
 
 def action(record):
-    return {'beach_advisory': 'warning', 'beach_closure': 'closure', 'sso': 'closure',
+    # A Beach Watch closure contributes only to beach status, even with a sewage
+    # cause. Keep the local sewage contribution independently counted.
+    return {'beach_advisory': 'warning', 'beach_closure': 'closure', 'sso': 'sewage',
             'rain_advisory': 'rain'}.get(record.get('event_type'))
 
 

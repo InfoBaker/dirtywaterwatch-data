@@ -36,7 +36,7 @@ INDEX = 'https://admin.publichealth.lacounty.gov/phcommon/public/media/mediapubO
 RELEASE = 'https://admin.publichealth.lacounty.gov/phcommon/public/media/mediapubhpdetail.cfm?prid='
 AUTHORITY = 'Los Angeles County Department of Public Health'
 NS = {'k': 'http://www.opengis.net/kml/2.2'}
-PARSER_VERSION = 2
+PARSER_VERSION = 3
 STATION_REFERENCES = {
     'DPH111': 'https://www.waterqualitydata.us/provider/STORET/CABEACH_WQX/CABEACH_WQX-DPH%20111/',
 }
@@ -194,6 +194,8 @@ def parse_release(body, rid):
     # Keep the record body, including public narrative. No automatic text redaction.
     narrative = content.split('</h1>', 1)[1]
     plain = C.text(narrative)
+    if not plain:
+        raise ValueError('LA release narrative missing')
     warnings = bullets(section(narrative, r'BEACH AREA WARNINGS:?', r'REASON FOR WARNING|BEACH AREAS NOW CLEARED|FOR MORE INFORMATION|Recorded information'))
     cleared = bullets(section(narrative, r'BEACH AREAS NOW CLEARED:?', r'FOR MORE INFORMATION|Recorded information'))
     closures = bullets(section(narrative, r'OCEAN WATER CLOSURE:', r'BEACH AREA WARNINGS|FOR MORE INFORMATION|Recorded information'))
@@ -214,6 +216,11 @@ def parse_release(body, rid):
     if until:
         announced = datetime.strptime(f'{until[1]} {until[2].replace(" ", "")}', '%B %d, %Y %I:%M%p').replace(tzinfo=ZoneInfo(C.TZ)).isoformat()
     raw_links = re.findall(r'(?i)prid=(\d+)', narrative)
+    rain_action = 'rain advisory' in title.lower() and re.search(r'avoid.*?water contact', plain, re.I)
+    if not (warnings or cleared or closures or rain_action):
+        raise ValueError('LA release has no complete recognized beach action')
+    if re.search(r'BEACH AREA WARNINGS', narrative, re.I) and not warnings:
+        raise ValueError('LA release warning list incomplete')
     return {'id': rid, 'title': title, 'published': published, 'text': plain, 'body_html': narrative,
             'warnings': warnings, 'cleared': cleared, 'closures': closures, 'closure_lifted': closure_lifted,
             'warning_list': bool(re.search(r'BEACH AREA WARNINGS', narrative, re.I)),
@@ -260,6 +267,7 @@ def release_records(notices, previous, fetched):
                           authority=AUTHORITY, source_url=RELEASE + note['id'],
                           raw={'state': 'CA', 'county': 'Los Angeles', 'time_zone': C.TZ, 'area_key': key[1],
                                'action_kind': kind, 'cause': None, 'notices': [], 'extent': part['extent'],
+                               '_publication_anchored_advisory': not lifted,
                                'grouping_basis': 'We group consecutive notices by the named area and action; this is our grouping, not a source incident identifier.',
                                '_first_seen_at': fetched, 'publication_basis': 'The first notice we hold for this action; the source does not give its start time.'})
                 records[r['event_id']] = r
@@ -278,6 +286,7 @@ def release_records(notices, previous, fetched):
                 r['event_type'] = 'sso'
                 raw['cause'] = 'Sewage discharge'
                 raw['sewage_cause'] = True
+                raw['_ages_after_confirmation'] = True
                 raw['advisory_noun'] = 'Sewage-related beach closure'
                 raw['time_basis'] = 'The dates describe the beach closure, not the sewage discharge duration.'
                 if note['volume_text']:
@@ -308,13 +317,28 @@ def release_records(notices, previous, fetched):
                     active.pop(key)
     for eid, r in records.items():
         if eid in prev:
-            r['raw']['_first_seen_at'] = prev[eid]['raw'].get('_first_seen_at', fetched)
+            old = prev[eid]
+            r['raw']['_first_seen_at'] = old['raw'].get('_first_seen_at', fetched)
+            for key in ('_last_seen_in_source', 'map_updated_at'):
+                if key in old['raw']:
+                    r['raw'][key] = old['raw'][key]
+            # A rotating status-page banner is independent of the press archive.
+            # Its explicitly observed lift remains evidence after the banner changes.
+            if (not r.get('ended_at') and old.get('ended_at')
+                    and old['raw'].get('end_source_url') == PAGE):
+                r.update(ended_at=old['ended_at'], status='advisory_lifted')
+                for key in ('ended_at_precision', 'end_source_url', 'end_basis'):
+                    if key in old['raw']:
+                        r['raw'][key] = old['raw'][key]
     # An archive rollover or shortened index must never discard our earlier records.
     notice_ids = {n['id'] for n in notices}
     for eid, r in prev.items():
         first_notice = next(iter(r['raw'].get('notices', [])), {}).get('id')
         if eid not in records and r['raw'].get('action_kind') and first_notice not in notice_ids:
             records[eid] = copy.deepcopy(r)
+    for r in records.values():
+        if r['raw'].get('action_kind') and r['event_type'] == 'sso':
+            r['raw']['_ages_after_confirmation'] = True
     return list(records.values())
 
 
@@ -355,8 +379,16 @@ def combine(notices, stations, updated, previous, fetched, page=''):
     for r in press:
         if r['event_type'] == 'beach_advisory' and not r['raw'].get('_unlisted_since') and not r.get('ended_at'):
             candidates.setdefault(r['raw'].get('area_key'), []).append(r)
+    press_ids = {p['event_id'] for p in press}
     for r in maps:
-        r['duplicate_of'] = None
+        # Historical map observations still describe the same notice after Open.
+        # Retain only internal links whose target remains in this archive.
+        if r.get('duplicate_of') in press_ids:
+            if r['raw'].get('_unlisted_since'):
+                continue
+        else:
+            r['duplicate_of'] = None
+            r['raw'].pop('_duplicate_basis', None)
         area = r['raw']['row'].get('area_key')
         targets = candidates.get(area, [])
         if len(targets) == 1 and not r['raw'].get('_unlisted_since') and r['event_type'] == 'beach_advisory':
@@ -418,6 +450,11 @@ def main(argv=None):
                 continue
             body = cached['body'] if cached and cached.get('parser_version') != PARSER_VERSION and cached.get('body') else get(RELEASE + item['id'])
             parsed = parse_release(body, item['id'])
+            previous_text = (cached or {}).get('notice', {}).get('text', '')
+            if previous_text != parsed['text'] and previous_text.startswith(parsed['text']):
+                # An HTTP-200 prefix can contain a valid first beach while losing
+                # the rest of the action list. Keep the complete cached evidence.
+                raise ValueError('LA release narrative truncated compared with saved notice')
             cache[item['id']] = {'notice': parsed, 'checked': fetched, 'body': body, 'parser_version': PARSER_VERSION}
             write_json(state_path, state)  # retain successful work if a later page fails
         records = combine([x['notice'] for x in cache.values()], stations, updated, prev.get('records', []), fetched, page)

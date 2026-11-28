@@ -226,3 +226,132 @@ def test_rebuild_does_not_retain_obsolete_group_when_same_notice_is_reparsed():
     historical = copy.deepcopy(changed)
     historical['raw']['notices'][0]['id'] = '1'
     assert any(r['event_id'] == historical['event_id'] for r in LA.release_records([notice('5501')], [historical], POLL))
+
+
+def intervals(record):
+    from build import status
+    from datetime import datetime
+    return status.event_intervals(record, 'CA', datetime.fromisoformat(POLL.replace('Z', '+00:00')),
+                                  None, status.load_rules())
+
+
+def test_review_avalon_confirmation_ages_without_discharge_end():
+    from datetime import datetime, timedelta
+    r = next(r for r in LA.release_records([notice(k) for k in ('5285', '5286', '5287')], [], POLL)
+             if r['event_type'] == 'sso')
+    red = [iv for iv in intervals(r) if iv['color'] == 'red']
+    assert red and all(iv['end'] is not None for iv in red)
+    assert max(iv['end'] for iv in red) == datetime.fromisoformat(r['source_updated_at']) + timedelta(days=14)
+    assert r['started_at'] is r['ended_at'] is r['reported_at'] is None
+
+
+def test_review_topanga_lifting_keeps_publication_anchored_history():
+    from build import status
+    from datetime import datetime, timedelta
+    first = LA.release_records([notice('5487')], [], POLL)
+    before = next(r for r in first if r['raw']['area_key'] == 'SMB-1-18')
+    after = next(r for r in LA.release_records([notice('5487'), notice('5488')], first, POLL)
+                 if r['event_id'] == before['event_id'])
+    assert after['status'] == 'advisory_lifted'
+    assert after['started_at'] is after['reported_at'] is None
+    assert after['ended_at'] == '2026-11-09T00:00:00-08:00'
+    cursor = datetime.fromisoformat(before['published_at'])
+    until = datetime.fromisoformat('2026-11-10T00:00:00-08:00')
+    prior, lifted = intervals(before), intervals(after)
+    while cursor < until:
+        assert status.status_at(prior, cursor)[0] == 'red'
+        assert status.status_at(lifted, cursor)[0] == 'red'
+        cursor += timedelta(hours=1)
+    assert status.status_at(lifted, until)[0] == 'grey'
+
+
+def test_review_rain_lift_survives_replacement_banner():
+    first = LA.combine([notice('5496')], [], '2026-11-25T15:30:00-08:00', [], POLL,
+                       (FIX / 'la-rain-lift.html').read_text())
+    before = first[0]
+    after = LA.combine([notice('5496')], [], '2026-11-26T15:30:00-08:00', first,
+                       '2026-11-29T15:00:00Z', 'Beach Water Quality: Current beach warnings')[0]
+    assert after['event_id'] == before['event_id']
+    assert after['ended_at'] == before['ended_at'] == '2026-11-23T12:00:00-08:00'
+    assert after['status'] == 'advisory_lifted'
+    for key in ('ended_at_precision', 'end_source_url', 'end_basis'):
+        assert after['raw'][key] == before['raw'][key]
+    assert after['started_at'] is after['reported_at'] is None
+
+
+@pytest.mark.parametrize('cut_after', ['</h1>', '</li>'])
+def test_review_truncated_5501_retains_saved_records_and_cache(tmp_path, monkeypatch, cut_after):
+    import shutil
+    saved = tmp_path / 'saved'; saved.mkdir()
+    for filename in ('la.kml', 'pr-5501.html'):
+        shutil.copyfile(FIX / filename, saved / filename)
+    (saved / 'la.html').write_text('Beach Water Quality')
+    monkeypatch.setattr(LA, 'fetch_index', lambda get: [
+        {'id': '5501', 'date': 'November 25, 2026', 'title': notice('5501')['title']}])
+    monkeypatch.setattr(LA, 'now_iso', lambda: POLL)
+    out, state = tmp_path / 'events.json', tmp_path / 'state.json'
+    args = ['--directory', str(saved), '--out', str(out), '--state', str(state)]
+    assert LA.main(args) == 0
+    before = json.loads(out.read_text())
+    cache = json.loads(state.read_text())['releases']['5501']
+    body = (saved / 'pr-5501.html').read_text()
+    (saved / 'pr-5501.html').write_text(body.split(cut_after, 1)[0] + cut_after)
+    monkeypatch.setattr(LA, 'now_iso', lambda: '2026-11-29T15:00:00Z')
+    result = LA.main(args)
+    after = json.loads(out.read_text())
+    assert {r['event_id'] for r in after['records']} == {r['event_id'] for r in before['records']}
+    assert after['records'] == before['records']
+    assert result == 1 and not after['ok']
+    assert json.loads(state.read_text())['releases']['5501'] == cache
+
+
+def test_review_map_reopening_keeps_historical_duplicate_links():
+    rows, updated = LA.parse_map((FIX / 'la.kml').read_text())
+    first = LA.combine([notice('5501')], rows, updated, [], POLL)
+    links = {r['event_id']: r['duplicate_of'] for r in first if r['raw'].get('station_id')}
+    assert links and all(links.values())
+    for row in rows:
+        row['status'] = 'OPEN'
+    after = LA.combine([notice('5501')], rows, updated, first, '2026-11-29T15:00:00Z')
+    assert {r['event_id']: r['duplicate_of'] for r in after if r['raw'].get('station_id')} == links
+    assert sum(not r['duplicate_of'] for r in first) == sum(not r['duplicate_of'] for r in after)
+    assert {r['event_id'] for r in after} == {r['event_id'] for r in first}
+
+
+@pytest.mark.parametrize('cause', ['Bacterial Standards Violation', 'Sewage Spill'])
+def test_review_cross_feed_link_preserves_sewage_category(cause):
+    from ingest.ca_local_beach_link import reconcile
+    from ingest.ca_beachwatch import build_record
+    local = next(r for r in LA.release_records([notice('5285')], [], POLL) if r['event_type'] == 'sso')
+    other = build_record({'Advisory id': 'test-avalon', 'AdvisoryType': 'Closure', 'AdvisoryCause': cause,
+                          'Beach_Name': 'Avalon Beach', 'Station_Name': 'Avalon station',
+                          'DateofAdvisory': '2026-03-24', 'DateOpened': '2026-03-28'}, POLL, '2026-03-28')
+    result = reconcile([local], [other], [])[0]
+    assert result['event_id'] == local['event_id'] and result['event_type'] == 'sso'
+    assert result['duplicate_of'] is None
+
+
+def test_review_lift_history_uses_explicit_rain_minute_and_separate_closure_end():
+    from datetime import datetime
+    rain = LA.combine([notice('5496')], [], '2026-11-25T15:30:00-08:00', [], POLL,
+                      (FIX / 'la-rain-lift.html').read_text())[0]
+    assert intervals(rain)[0]['end'] == datetime.fromisoformat('2026-11-23T12:00:00-08:00')
+    # Mutate a saved lifting notice's area/date to exercise sewage closure handling.
+    lift = notice('5224')
+    lift.update(id='9999', published='2026-03-28T00:00:00-07:00',
+                closures=[{'name': 'Avalon Beach', 'extent': None}])
+    r = next(r for r in LA.release_records([notice('5285'), lift], [], POLL) if r['event_type'] == 'sso')
+    assert r['status'] == 'advisory_lifted'
+    assert r['started_at'] is r['ended_at'] is r['reported_at'] is None
+    assert intervals(r)[0]['end'] == datetime.fromisoformat('2026-03-29T00:00:00-07:00')
+    assert intervals(r)[0]['start'] == datetime.fromisoformat(r['published_at'])
+
+
+def test_review_lifting_alone_and_unflagged_unknown_start_do_not_invent_history():
+    lone = next(r for r in LA.release_records([notice('5488')], [], POLL)
+                if r['raw']['area_key'] == 'SMB-1-18')
+    assert lone['status'] == 'advisory_lifted' and intervals(lone) == []
+    known = next(r for r in LA.release_records([notice('5487'), notice('5488')], [], POLL)
+                 if r['raw']['area_key'] == 'SMB-1-18')
+    known['raw'].pop('_publication_anchored_advisory', None)
+    assert intervals(known) == []

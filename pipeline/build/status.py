@@ -4136,6 +4136,19 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
                 return out + ([note] if note["end"] > note["start"] else [])
             return [_iv(ev, start, None, rule, red, yellow)]
         if st == "advisory_lifted":
+            raw = ev.get("raw") or {}
+            if not ev.get("started_at") and raw.get("_publication_anchored_advisory") is True:
+                # A dated local beach warning followed by an explicit lifting keeps
+                # its observed history; publication remains separate from the unknown start.
+                published = pt(ev.get("published_at"))
+                lifted = end
+                if lifted is None and et == "sso":
+                    # The closure's lifting is not the sewage discharge's end.
+                    lifted = pt(raw.get("closure_lifted_at"))
+                    if lifted is not None and ev.get("time_precision") == "day":
+                        lifted = end_of_local_day(lifted, tz)
+                return ([_iv(ev, published, lifted, rule, red, yellow)]
+                        if published is not None and lifted is not None and lifted > published else [])
             # needs its own (or inherited) start; ends at ended_at, else when the lifting was reported
             real_start = pt(ev.get("started_at"))
             if real_start is None:
