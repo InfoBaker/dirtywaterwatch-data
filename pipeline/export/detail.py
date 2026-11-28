@@ -529,6 +529,10 @@ SOURCES: dict[str, dict] = {
                                 "rainfall_label": lambda raw: "Event rainfall" if plain_inches("row.rainfall_in")(raw) else None,
                                 "duration_text": text("row.duration"),
                                 "volume_qualifier": lambda raw: "estimated" if text("row.volume_mg")(raw) else None},
+    # Springfield's CSO map (ingest/ma_springfield_aquasight.py): the volume is the outfall's three-year average per
+    # event, the commission's estimate for its notice; the log's remarks as written
+    "ma-springfield-aquasight": {"volume_qualifier": lambda raw: "estimated" if raw.get("volume_method") else None,
+                                 "volume_method": text("volume_method"), "notes": text("row.remarks")},
 }
 
 

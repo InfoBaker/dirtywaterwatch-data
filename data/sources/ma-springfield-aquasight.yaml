@@ -1,0 +1,30 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
+id: "ma-springfield-aquasight"
+name: "Springfield Water and Sewer Commission live CSO map (Aquasight)"
+url: "https://springfieldalerts.com/Suez/index.php/map-of-cso-locations/"
+homepage: "https://springfieldalerts.com/Suez/index.php/map-of-cso-locations/"
+kind: "api"
+level: "utility"
+# Feed row: written by pipeline/ingest/ma_springfield_aquasight.py (data/build/events/ma-springfield-aquasight.json).
+# Built 2026-11-28: hourly. The commission's map is an Aquasight (ADS Environmental Services) app over a DreamFactory
+#   API at api2.aquasight.io; the app's own script carries the key it sends, read at each run and never stored. Three
+#   tables: the outfall list (24 outfalls), the current status per outfall (to meta) and the overflow log, one row per
+#   overflow with start and end (2,134 rows, 2022-03-19 to 2026-11-26, on 2026-11-28). One cso record per log row, to
+#   the minute in Eastern time (the map states no zone).
+# Volume: the map prints each outfall's three-year average discharge per event, the commission's estimate for its
+#   notice; carried as an estimate only on events since that average was set (2026-01-12).
+# One event, not two: a row and MassDEP's portal record of the same overflow (permit MA0101613, same outfall, starts
+#   within 10 minutes) are linked with duplicate_of to the portal's shown record. Against the portal file of
+#   2026-11-14: 1,286 rows linked, the rest before the portal's first day (2022-07-06), after the file or not filed.
+cadence: "1 hour"
+license: "none stated"
+attribution: "Springfield Water and Sewer Commission"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["MA"]
+access: ["api", "map_only"]
+access_detail: "Aquasight app at external.aquasight.io, embedded on the commission's CSO map page. DreamFactory tables ads_us_config, cso_status and cso_status_log on api2.aquasight.io, GET with a filter on community springfield_ma_ads_us and the X-Dreamfactory-API-Key header the app sends. Times are local clock with no zone."
+machine_readable: true
+legal_basis: "M.G.L. c. 21 s. 43A; 314 CMR 16.05(1) (the CSO permittee's website)"
+checked: "2026-11-28"
