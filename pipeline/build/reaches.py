@@ -1498,9 +1498,12 @@ def stale_traces(cached: dict[str, dict], cands: list[dict], skipped: dict[str, 
          (a renamed slug: plan()'s touch path writes the new one) is not changed water; a record with no path (tidal
          or lake at the outfall) of a row still traced is only relabelled by the touch path, since its answer comes
          from the point, not the water;
-      3. the row is tied by the permit's statement alone and its point lies beyond the tie distance of the water
-         (skipped as permit_stated_off_water: Euclid's regulators; a stretch from that point is drawn where the outfall
-         is not);
+      3. the row is tied by the permit's statement alone and the trace's own start point is known to lie beyond the
+         tie distance of the water (skipped as permit_stated_off_water, and the trace starts at the point the row's
+         distance was measured from, ingest.outfall_water_corrections.point_off_water: Euclid's regulators; a stretch
+         from that point is drawn where the outfall is not). A row skipped so for an unknown distance (no point now,
+         or a point other than the measured one) keeps a trace of the same water (Astra review 2026-11-28 pass 2: an
+         unknown distance blocks a new stretch but does not remove one);
       4. the outfall is gone from the registry (a live state's outfall no registry file lists; only when every
          registry file was read, registry_complete).
     A closed outfall's trace is retire_closed()'s. Event points, advisory stretches and the separate sewer caution's
@@ -1542,10 +1545,11 @@ def stale_traces(cached: dict[str, dict], cands: list[dict], skipped: dict[str, 
             continue
         if c is None and ((v is not None and v.get("why") == "closed") or (r is not None and is_closed(r))):
             continue                                # retire_closed
-        if c is None and v is not None and v.get("why") == PERMIT_STATED_OFF_WATER:
+        if c is None and v is not None and v.get("why") == PERMIT_STATED_OFF_WATER and r is not None \
+                and HAND.point_off_water(r, d.get("lat"), d.get("lon")) is True:
             out[k] = ("traced from a point the outfall is not at: the row is tied to its water by the permit's "
                       "statement alone, and its point lies beyond the tie distance of the water")
-            continue
+            continue        # not known off (the row lost its point, or moved): the water checks below decide (pass 2)
         if r is not None:
             row_slug = r.get("water_slug")
         else:

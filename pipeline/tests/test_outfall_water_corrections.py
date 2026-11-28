@@ -332,10 +332,81 @@ def test_an_invalid_entry_is_refused_when_applied_and_a_row_it_corrected_goes_ba
     rows = [row()]
     assert H.apply_rows("outfalls-us.json", rows, [_euclid()]) == [] and rows[0]["water_slug"] == "lake-erie-oh"
     assert H.holds(rows[0], [_euclid()])
-    assert not H.holds(rows[0], [_euclid(url="")])                   # the registry pass does not keep it either
+    assert not H.holds(rows[0], [_euclid(url="")])
+    # a row it corrected before is left as it stands (pass 2: the replaced tie may be the wrong water); the problem is
+    # reported, and the check exits non-zero on it
+    keep = copy.deepcopy(rows)
     probs = H.apply_rows("outfalls-us.json", rows, [_euclid(url="")])
-    assert probs and rows[0]["water_slug"] is None and not H.is_hand(rows[0])
-    assert rows[0].get("no_water_reason") == row()["no_water_reason"]
+    assert probs and any("refused" in p for p in probs) and rows == keep
+
+
+def test_a_refused_entry_does_not_bring_back_the_water_it_replaced():
+    """Astra review 2026-11-28 pass 2 (P2): MA0100382:002 names Mount Hope Bay; its earlier tie (Narragansett Bay) is
+    the known-wrong water. An entry refused for missing evidence leaves the row as it stands, in apply_rows and in the
+    registry pass (hand_kept), and says so."""
+    from ingest import outfall_waters as OW
+    rows = [_matchers_row()]
+    assert H.apply_rows("outfalls-new-england.json", rows, [_entry()]) == []
+    assert rows[0]["water_slug"] == "mount-hope-bay-ma"
+    bad = _entry(rule="permit_states", permit_text="Mount Hope Bay", url="")
+    assert H.entry_problems(bad)
+    keep = copy.deepcopy(rows)
+    probs = H.apply_rows("outfalls-new-england.json", rows, [bad])
+    assert probs and all(p.startswith("refused") for p in probs), probs
+    assert rows == keep and rows[0]["water_slug"] == "mount-hope-bay-ma"
+    counts = defaultdict(Counter)
+    import unittest.mock as um
+    with um.patch.object(H, "_default", lambda: [bad]):
+        assert OW.hand_kept(rows[0], counts) is True
+    assert rows == keep and rows[0]["water_slug"] != "narragansett-bay-ma"
+
+
+def test_a_qualifier_joined_by_of_or_to_is_another_water():
+    """Astra review 2026-11-28 pass 2 (P2): 'South Branch of the Kalamazoo River' is the South Branch's own record, not
+    the Kalamazoo River; a qualifier joined to the name by 'of', 'of the', 'to' or 'to the' belongs to it."""
+    kal = dict(water_slug="kalamazoo-river-mi", water_name="Kalamazoo River", water_kind="river")
+    def e(text):
+        return _euclid(**kal, permit_text=text, basis=f"the permit's receiving water is '{text}'")
+    for text in ("South Branch of the Kalamazoo River", "North Fork of Kalamazoo River", "tributary to the Kalamazoo River",
+                 "Tributary of Kalamazoo River", "an unnamed tributary to Kalamazoo River"):
+        assert H.entry_problems(e(text)), text
+    for text in ("Kalamazoo River", "Kalamazoo River via storm sewer", "the Kalamazoo River at Plainwell",
+                 "Outfall 3 to the Kalamazoo River"):
+        assert H.entry_problems(e(text)) == [], text
+
+
+def test_the_distance_counts_only_from_the_point_it_was_measured_from():
+    """Astra review 2026-11-28 pass 2 (P2): a permit-stated row is near its water only at the point the entry's
+    distance was measured from (distance_from). A row moved to another point, or with no measured point, or with no
+    distance, is off the water for new modeling."""
+    shore = _euclid(outfall="005", stated="", distance_m=202, distance_from=[41.611828, -81.527876])
+    rows = [_no_water_row(npdes_permit="OH0031062", outfall="005", receiving_water_echo=None,
+                          lat=41.611828, lon=-81.527876)]
+    assert H.apply_rows("outfalls-us.json", rows, [shore]) == []
+    o = rows[0]
+    assert o["distance_from"] == [41.611828, -81.527876] and not H.stated_off_water(o)
+    moved = dict(copy.deepcopy(o), lat=41.610833, lon=-81.502222)        # 006's inland point
+    assert H.apply_rows("outfalls-us.json", [moved], [shore]) == [] and moved["distance_m"] == 202
+    assert H.stated_off_water(moved)
+    assert H.stated_off_water(dict(o, lat=None, lon=None))
+    assert H.stated_off_water(dict(o, distance_m=None))
+    no_point = {k: v for k, v in o.items() if k != "distance_from"}
+    assert H.stated_off_water(no_point)
+    assert H.point_off_water(o, 41.611828, -81.527876) is False
+    assert H.point_off_water(dict(o, distance_m=1558), 41.611828, -81.527876) is True
+    assert H.point_off_water(o, 41.610833, -81.502222) is None                # another point: not known
+    H.revert(o)
+    assert "distance_from" not in o
+
+
+def test_the_committed_permit_stated_entries_carry_the_point_of_their_distance():
+    for c in H.load():
+        if c.get("rule") == H.PERMIT_STATES and c.get("distance_m") is not None:
+            assert isinstance(c.get("distance_from"), list) and len(c["distance_from"]) == 2, c["outfall"]
+    row = next(o for o in _rows("outfalls-us.json") if (o["npdes_permit"], o["outfall"]) == ("OH0031062", "005"))
+    assert not H.stated_off_water(row)                         # Euclid 005 at the plant's point, 202 m from the lake
+    row = next(o for o in _rows("outfalls-us.json") if (o["npdes_permit"], o["outfall"]) == ("OH0031062", "006"))
+    assert H.stated_off_water(row)
 
 
 def test_a_qualified_name_in_the_permits_phrase_is_another_water():

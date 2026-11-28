@@ -29,7 +29,9 @@ Each corrected row gets water_slug, water_name, water_kind, distance_m (metres f
 measured for the correction), match ('geometry+name': the record carries the stated water's name and lies within 400 m
 of the point; 'permit_stated' for an entry whose rule is 'permit_states': the permit states this outfall's receiving
 water, quoted with its address, whatever the distance from the row's point), water_match (the basis), water_matched_by (BY) and replaced_match (the earlier tie). The row's own
-receiving-water text and point are not changed.
+receiving-water text and point are not changed. A 'permit_states' entry with a distance also carries distance_from
+([lat, lon], the point it was measured from), written onto the row: the distance counts only at that point
+(stated_off_water, point_off_water).
 """
 from __future__ import annotations
 
@@ -55,15 +57,36 @@ PERMIT_STATES = "permit_states"
 PERMIT_MATCH = "permit_stated"
 
 
+def _same_point(a, b) -> bool:
+    try:
+        return abs(float(a[0]) - float(b[0])) < 1e-6 and abs(float(a[1]) - float(b[1])) < 1e-6
+    except (TypeError, ValueError, IndexError):
+        return False
+
+
+def point_off_water(o: dict, lat, lon) -> bool | None:
+    """For a row tied by the permit's statement alone (match PERMIT_MATCH): whether the point (lat, lon) is known to lie
+    beyond TIE_M of the row's water. Known only at the point the entry's distance was measured from (distance_from,
+    written with the correction) with a distance: True beyond TIE_M, False within it; None when not known (another
+    point, no measured point, no distance), and None for a row of another match."""
+    if o.get("match") != PERMIT_MATCH:
+        return None
+    d = o.get("distance_m")
+    if not isinstance(d, (int, float)) or d < 0 or not _same_point((lat, lon), o.get("distance_from")):
+        return None
+    return d > TIE_M
+
+
 def stated_off_water(o: dict) -> bool:
-    """A row tied to its water by the permit's statement alone (match PERMIT_MATCH) whose point is not within TIE_M of
-    that water (distance_m, measured for the correction): the tie holds (reports name the water), but the point is not
-    where the outfall meets the water, so no stretch is modeled from it and the rain caution does not read it
-    (build.reaches.candidate_outfalls, build.rain_likely.targets; Astra review 2026-11-28, P2: Euclid's regulators)."""
+    """A row tied to its water by the permit's statement alone (match PERMIT_MATCH) whose point is not known to lie
+    within TIE_M of that water: the tie holds (reports name the water), but the point may not be where the outfall
+    meets the water, so no stretch is modeled from it and the rain caution does not read it (build.reaches.
+    candidate_outfalls, build.rain_likely.targets; Astra review 2026-11-28, P2: Euclid's regulators). The distance
+    counts only at the point it was measured from (distance_from; pass 2: a row moved inland kept 202 m); a row whose
+    point differs, or with no measured point or distance, is off the water here (point_off_water: not False)."""
     if o.get("match") != PERMIT_MATCH:
         return False
-    d = o.get("distance_m")
-    return not (isinstance(d, (int, float)) and 0 <= d <= TIE_M)
+    return point_off_water(o, o.get("lat"), o.get("lon")) is not False
 
 
 def load(path: Path | None = None) -> list[dict]:
@@ -138,6 +161,16 @@ def revert(o: dict) -> None:
             o.pop(f, None)
     if not o.get("water_matched_by"):
         o.pop("water_matched_by", None)
+    o.pop("distance_from", None)
+
+
+def refused_kept(o: dict, corrections: list[dict] | None = None, name: str | None = None) -> bool:
+    """A corrected row whose entry is refused (entry_problems) but otherwise unchanged: the row's text is still the
+    entry's and it carries the entry's water. It is left as it stands, never sent back to the replaced tie (that tie
+    may be the water known to be wrong: MA0100382:002 on Narragansett Bay; Astra review 2026-11-28 pass 2); check()
+    reports the entry, and the check exits non-zero on it."""
+    c = entry_for(o, corrections)
+    return bool(is_hand(o) and c and not valid(c) and agrees(o, c, name) and o.get("water_slug") == c["water_slug"])
 
 
 # Words that make another water of a name they stand next to: 'Little Cuyahoga River', 'West Branch Huron River',
@@ -145,6 +178,9 @@ def revert(o: dict) -> None:
 # River'). The list of build.status.STATE_QUALIFIER_BEFORE (the widest the resolver uses), read on either side.
 QUALIFIERS = frozenset({"little", "big", "middle", "upper", "lower", "east", "west", "north", "south", "northeast",
                         "northwest", "southeast", "southwest", "branch", "fork", "prong", "arm", "tributary", "trib"})
+# Words that join a qualifier to the name after them: 'South Branch of the Kalamazoo River', 'tributary to X' (Astra
+# review 2026-11-28 pass 2, P2). A qualifier before them qualifies the name.
+CONNECTORS = frozenset({"of", "the", "to"})
 ALIASES_FILE = ROOT / "data" / "water-aliases.json"
 
 
@@ -155,8 +191,9 @@ def _words(s) -> list[str]:
 def names_water(text: str, c: dict) -> bool:
     """Whether the permit's phrase names the entry's water: the record's name (or an alias of the record in
     data/water-aliases.json) stands in the phrase as a whole, as consecutive words, the same words in any order ('Rouge
-    River' for the record 'River Rouge'), with no qualifier word (QUALIFIERS) directly before or after it. 'Lake Erie
-    via storm sewer' names Lake Erie; 'Little Cuyahoga River' does not name the Cuyahoga River."""
+    River' for the record 'River Rouge'), with no qualifier word (QUALIFIERS) directly before or after it, nor one
+    joined to it before by CONNECTORS ('South Branch of the X', 'tributary to X'). 'Lake Erie via storm sewer' names
+    Lake Erie; 'Little Cuyahoga River' does not name the Cuyahoga River."""
     try:
         aliases = json.loads(ALIASES_FILE.read_text()).get(c.get("water_slug"), [])
     except (OSError, ValueError):
@@ -169,6 +206,11 @@ def names_water(text: str, c: dict) -> bool:
         want = sorted(n)
         for i in range(len(t) - len(n) + 1):
             if sorted(t[i:i + len(n)]) != want:
+                continue
+            j = i - 1
+            while j >= 0 and t[j] in CONNECTORS:
+                j -= 1
+            if j < i - 1 and j >= 0 and t[j] in QUALIFIERS:
                 continue
             before = t[i - 1] if i else None
             after = t[i + len(n)] if i + len(n) < len(t) else None
@@ -211,10 +253,13 @@ def written(o: dict, c: dict) -> dict:
         before = {"water_slug": o.get("water_slug"), "water_name": o.get("water_name"), "match": o.get("match"),
                   "by": o.get("water_matched_by"), "why": WHY_RETIED if o.get("water_slug") else WHY_NO_WATER,
                   **{f: o[f] for f in BEFORE_FIELDS if o.get(f) is not None}}
-    return {"water_slug": c["water_slug"], "water_name": c["water_name"], "water_kind": c["water_kind"],
-            "distance_m": c["distance_m"], "match": PERMIT_MATCH if c.get("rule") == PERMIT_STATES else "geometry+name",
-            "water_match": f"hand correction: {c['basis']}",
-            "water_matched_by": f"{BY}, {c['date']})", "replaced_match": before}
+    out = {"water_slug": c["water_slug"], "water_name": c["water_name"], "water_kind": c["water_kind"],
+           "distance_m": c["distance_m"], "match": PERMIT_MATCH if c.get("rule") == PERMIT_STATES else "geometry+name",
+           "water_match": f"hand correction: {c['basis']}",
+           "water_matched_by": f"{BY}, {c['date']})", "replaced_match": before}
+    if c.get("rule") == PERMIT_STATES and c.get("distance_from") is not None:
+        out["distance_from"] = c["distance_from"]       # the point distance_m was measured from (stated_off_water)
+    return out
 
 
 def _for_file(name: str, rows: list[dict], corrections: list[dict] | None) -> tuple[list[dict], dict]:
@@ -239,8 +284,8 @@ def apply_rows(name: str, rows: list[dict], corrections: list[dict] | None = Non
     place: every row of the entry's outfall by the loader's key ('002' and '2' alike), in the entry's own file and in
     any other. Returns the problems: an entry whose row is missing from its own file, or whose row's receiving-water
     text is no longer the one the correction read (that row is not corrected, and goes back to the replaced tie if it
-    was), or an entry that fails entry_problems (refused: its rows are not corrected, and a row it corrected before
-    goes back to the replaced tie)."""
+    was), or an entry that fails entry_problems (refused: its rows are not corrected, and a row it corrected before is
+    left as it stands: the replaced tie may be the known-wrong water)."""
     cs, idx = _for_file(name, rows, corrections)
     problems = []
     for c in cs:
@@ -249,11 +294,8 @@ def apply_rows(name: str, rows: list[dict], corrections: list[dict] | None = Non
             problems.append(f"{name} {c['npdes_permit']}:{c['outfall']}: no such row")
             continue
         bad = entry_problems(c)
-        if bad:                     # refused: an entry is applied, or kept, only with its evidence (Astra 2026-11-28)
-            for o in found:
-                if is_hand(o):
-                    revert(o)
-            problems += [f"refused: {p}" for p in bad]
+        if bad:     # refused: an entry is applied only with its evidence (Astra 2026-11-28); its rows are left as they
+            problems += [f"refused: {p}" for p in bad]      # stand, never sent back to the replaced tie (pass 2)
             continue
         for o in found:
             if not agrees(o, c, name):
@@ -261,7 +303,10 @@ def apply_rows(name: str, rows: list[dict], corrections: list[dict] | None = Non
                     revert(o)
                 problems.append(_review(name, c, o))
                 continue
-            o.update(written(o, c))
+            want = written(o, c)
+            o.update(want)
+            if "distance_from" not in want:
+                o.pop("distance_from", None)
             o.pop("no_water_reason", None)          # kept in replaced_match (written); revert() gives it back
     return problems
 

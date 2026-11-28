@@ -125058,6 +125058,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 202,
+   "distance_from": [
+    41.611828,
+    -81.527876
+   ],
    "alternatives": [],
    "match": "permit_stated",
    "outfall_kind": "cso",
@@ -125098,6 +125102,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 1558,
+   "distance_from": [
+    41.610833,
+    -81.502222
+   ],
    "alternatives": [],
    "match": "permit_stated",
    "outfall_kind": "cso",
@@ -125165,6 +125173,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 3259,
+   "distance_from": [
+    41.59,
+    -81.51
+   ],
    "alternatives": [],
    "match": "permit_stated",
    "outfall_kind": "cso",
@@ -125203,6 +125215,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 1344,
+   "distance_from": [
+    41.609167,
+    -81.51
+   ],
    "alternatives": [],
    "match": "permit_stated",
    "outfall_kind": "cso",
@@ -125241,6 +125257,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 1419,
+   "distance_from": [
+    41.593333,
+    -81.537222
+   ],
    "alternatives": [],
    "match": "permit_stated",
    "outfall_kind": "cso",
@@ -125279,6 +125299,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 4164,
+   "distance_from": [
+    41.571944,
+    -81.524444
+   ],
    "alternatives": [],
    "match": "permit_stated",
    "outfall_kind": "cso",
@@ -125317,6 +125341,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 1412,
+   "distance_from": [
+    41.615833,
+    -81.495
+   ],
    "alternatives": [],
    "match": "permit_stated",
    "outfall_kind": "cso",
@@ -125413,6 +125441,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 3367,
+   "distance_from": [
+    41.590556,
+    -81.506667
+   ],
    "alternatives": [],
    "match": "permit_stated",
    "outfall_kind": "cso",
@@ -125515,6 +125547,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 5339,
+   "distance_from": [
+    41.570833,
+    -81.506667
+   ],
    "alternatives": [],
    "match": "permit_stated",
    "outfall_kind": "cso",
@@ -125553,6 +125589,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 836,
+   "distance_from": [
+    41.618056,
+    -81.502222
+   ],
    "alternatives": [],
    "match": "permit_stated",
    "outfall_kind": "cso",
@@ -125653,6 +125693,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 3724,
+   "distance_from": [
+    41.558333,
+    -81.5475
+   ],
    "alternatives": [],
    "match": "permit_stated",
    "outfall_kind": "cso",

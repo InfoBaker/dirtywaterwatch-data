@@ -2104,6 +2104,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 202,
+   "distance_from": [
+    41.611828,
+    -81.527876
+   ],
    "rule": "permit_states",
    "permit_text": "Lake Erie via storm sewer",
    "basis": "the permit's receiving water for outfall 005 ('E. 252 Street & Tungsten Road') in Ohio EPA permit 3PE00003 (City of Euclid, effective 2024-09-01), CSO table, is 'Lake Erie via storm sewer': the outfall discharges to Lake Erie through a storm sewer, and Lake Erie (lake-erie-oh) is the water the permit names; the row's point is the treatment plant's point, 202 m from the lake, so the tie rests on the permit's statement, not on the distance; EPA's inventory gives no receiving-water text",
@@ -2122,6 +2126,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 1558,
+   "distance_from": [
+    41.610833,
+    -81.502222
+   ],
    "rule": "permit_states",
    "permit_text": "Lake Erie via storm sewer",
    "basis": "the permit's receiving water for outfall 006 ('Farrington Avenue') in Ohio EPA permit 3PE00003 (City of Euclid, effective 2024-09-01), CSO table, is 'Lake Erie via storm sewer': the outfall discharges to Lake Erie through a storm sewer, and Lake Erie (lake-erie-oh) is the water the permit names; the row's point is EPA's point for the outfall (the regulator), 1558 m from the lake, so the tie rests on the permit's statement, not on the distance; EPA's text 'City of Euclid-Frontal Lake Erie' is a USGS watershed label, not a water",
@@ -2140,6 +2148,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 3259,
+   "distance_from": [
+    41.59,
+    -81.51
+   ],
    "rule": "permit_states",
    "permit_text": "Lake Erie via storm sewer",
    "basis": "the permit's receiving water for outfall 008 ('Tungsten Road & Babbitt Road') in Ohio EPA permit 3PE00003 (City of Euclid, effective 2024-09-01), CSO table, is 'Lake Erie via storm sewer': the outfall discharges to Lake Erie through a storm sewer, and Lake Erie (lake-erie-oh) is the water the permit names; the row's point is EPA's point for the outfall (the regulator), 3259 m from the lake, so the tie rests on the permit's statement, not on the distance; EPA's inventory gives no receiving-water text",
@@ -2158,6 +2170,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 1344,
+   "distance_from": [
+    41.609167,
+    -81.51
+   ],
    "rule": "permit_states",
    "permit_text": "Lake Erie via storm sewer",
    "basis": "the permit's receiving water for outfall 009 ('Briardale Avenue') in Ohio EPA permit 3PE00003 (City of Euclid, effective 2024-09-01), CSO table, is 'Lake Erie via storm sewer': the outfall discharges to Lake Erie through a storm sewer, and Lake Erie (lake-erie-oh) is the water the permit names; the row's point is EPA's point for the outfall (the regulator), 1344 m from the lake, so the tie rests on the permit's statement, not on the distance; EPA's inventory gives no receiving-water text",
@@ -2176,6 +2192,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 1419,
+   "distance_from": [
+    41.593333,
+    -81.537222
+   ],
    "rule": "permit_states",
    "permit_text": "Lake Erie via storm sewer",
    "basis": "the permit's receiving water for outfall 010 ('Priday Avenue') in Ohio EPA permit 3PE00003 (City of Euclid, effective 2024-09-01), CSO table, is 'Lake Erie via storm sewer': the outfall discharges to Lake Erie through a storm sewer, and Lake Erie (lake-erie-oh) is the water the permit names; the row's point is EPA's point for the outfall (the regulator), 1419 m from the lake, so the tie rests on the permit's statement, not on the distance; EPA's text 'City of Euclid-Frontal Lake Erie' is a USGS watershed label, not a water",
@@ -2194,6 +2214,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 4164,
+   "distance_from": [
+    41.571944,
+    -81.524444
+   ],
    "rule": "permit_states",
    "permit_text": "Lake Erie via storm sewer",
    "basis": "the permit's receiving water for outfall 011 ('Overlook on Euclid Avenue') in Ohio EPA permit 3PE00003 (City of Euclid, effective 2024-09-01), CSO table, is 'Lake Erie via storm sewer': the outfall discharges to Lake Erie through a storm sewer, and Lake Erie (lake-erie-oh) is the water the permit names; the row's point is EPA's point for the outfall (the regulator), 4164 m from the lake, so the tie rests on the permit's statement, not on the distance; EPA's text 'City of Euclid-Frontal Lake Erie' is a USGS watershed label, not a water",
@@ -2212,6 +2236,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 1412,
+   "distance_from": [
+    41.615833,
+    -81.495
+   ],
    "rule": "permit_states",
    "permit_text": "Lake Erie via storm sewer",
    "basis": "the permit's receiving water for outfall 012 ('Forestview Avenue @ E. 272 Street') in Ohio EPA permit 3PE00003 (City of Euclid, effective 2024-09-01), CSO table, is 'Lake Erie via storm sewer': the outfall discharges to Lake Erie through a storm sewer, and Lake Erie (lake-erie-oh) is the water the permit names; the row's point is EPA's point for the outfall (the regulator), 1412 m from the lake, so the tie rests on the permit's statement, not on the distance; EPA's inventory gives no receiving-water text",
@@ -2230,6 +2258,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 3367,
+   "distance_from": [
+    41.590556,
+    -81.506667
+   ],
    "rule": "permit_states",
    "permit_text": "Lake Erie via storm sewer",
    "basis": "the permit's receiving water for outfall 015 ('E. 256 Street & Tungsten Road') in Ohio EPA permit 3PE00003 (City of Euclid, effective 2024-09-01), CSO table, is 'Lake Erie via storm sewer': the outfall discharges to Lake Erie through a storm sewer, and Lake Erie (lake-erie-oh) is the water the permit names; the row's point is EPA's point for the outfall (the regulator), 3367 m from the lake, so the tie rests on the permit's statement, not on the distance; EPA's inventory gives no receiving-water text",
@@ -2248,6 +2280,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 5339,
+   "distance_from": [
+    41.570833,
+    -81.506667
+   ],
    "rule": "permit_states",
    "permit_text": "Lake Erie via storm sewer",
    "basis": "the permit's receiving water for outfall 018 ('Glenbrook Boulevard') in Ohio EPA permit 3PE00003 (City of Euclid, effective 2024-09-01), CSO table, is 'Lake Erie via storm sewer': the outfall discharges to Lake Erie through a storm sewer, and Lake Erie (lake-erie-oh) is the water the permit names; the row's point is EPA's point for the outfall (the regulator), 5339 m from the lake, so the tie rests on the permit's statement, not on the distance; EPA's text 'City of Euclid-Frontal Lake Erie' is a USGS watershed label, not a water",
@@ -2266,6 +2302,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 836,
+   "distance_from": [
+    41.618056,
+    -81.502222
+   ],
    "rule": "permit_states",
    "permit_text": "Lake Erie via storm sewer",
    "basis": "the permit's receiving water for outfall 019 ('E. 262 Street') in Ohio EPA permit 3PE00003 (City of Euclid, effective 2024-09-01), CSO table, is 'Lake Erie via storm sewer': the outfall discharges to Lake Erie through a storm sewer, and Lake Erie (lake-erie-oh) is the water the permit names; the row's point is EPA's point for the outfall (the regulator), 836 m from the lake, so the tie rests on the permit's statement, not on the distance; EPA's text 'City of Euclid-Frontal Lake Erie' is a USGS watershed label, not a water",
@@ -2284,6 +2324,10 @@
    "water_name": "Lake Erie",
    "water_kind": "lake",
    "distance_m": 3724,
+   "distance_from": [
+    41.558333,
+    -81.5475
+   ],
    "rule": "permit_states",
    "permit_text": "Lake Erie via storm sewer",
    "basis": "the permit's receiving water for outfall 022 ('Upper Valley Drive') in Ohio EPA permit 3PE00003 (City of Euclid, effective 2024-09-01), CSO table, is 'Lake Erie via storm sewer': the outfall discharges to Lake Erie through a storm sewer, and Lake Erie (lake-erie-oh) is the water the permit names; the row's point is EPA's point for the outfall (the regulator), 3724 m from the lake, so the tie rests on the permit's statement, not on the distance; EPA's text 'Doan Brook-Frontal Lake Erie' is a USGS watershed label, not a water",
