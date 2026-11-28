@@ -1939,7 +1939,9 @@ def outfall_lists(outfalls: list[dict], aliases: dict[str, str] | None = None) -
     counts and the reports); one without a permit is listed under its operator (discharger_id, aliases resolved)."""
     aliases = aliases or {}
     by_water, by_permit, by_operator = defaultdict(list), defaultdict(list), defaultdict(list)
+    from reported_places import public_place
     for o in outfalls:
+        o = public_place(o, listing=True) if is_provisional(o) else o
         if o.get("outfall_kind") == "other":
             continue                    # a row EPA flags CSO that is no sewage outfall (kind_note)
         slug = status_mod.SLUG_ALIASES.get(o["water_slug"], o["water_slug"]) if o.get("water_slug") else None

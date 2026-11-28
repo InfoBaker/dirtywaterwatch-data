@@ -248,7 +248,7 @@ OUTFALL_REGISTRY_GLOB = "outfalls-*.json"
 REPORTED_OUTFALLS = "build/outfalls-reported.json"
 OUTFALL_KINDS = ("cso", "plant", "reported", "other")   # other: a row EPA flags CSO that is none (kind_note says why)
 PROVISIONAL_FIELDS = ("record_status", "confidence", "report_count", "last_report_at", "event_ids", "reached_water",
-                      "on_map")
+                      "on_map", "place_basis", "place_tier", "place_method", "place_precision_m")
 # files the last load_outfall_registry() call could not read (a half-written file from another builder): "data/<name>: why"
 OUTFALL_REGISTRY_SKIPPED: list[str] = []
 
@@ -336,6 +336,8 @@ def load_outfall_registry(data_dir: Path | None = None, provisional: bool = True
                     continue
                 if not o.get("npdes_permit") and not o.get("discharger_id"):
                     continue
+                from reported_places import public_place
+                o = public_place(o)  # also protect an older cached build
                 kind = str(o.get("outfall_kind") or "reported").lower()
                 row = {**o, "record_status": o.get("record_status") or "provisional"}
                 if not row.get("water_slug") and isinstance(o.get("water_slugs"), list) and o["water_slugs"]:
