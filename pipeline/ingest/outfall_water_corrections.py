@@ -111,7 +111,7 @@ def holds(o: dict, corrections: list[dict] | None = None, name: str | None = Non
     """A corrected row whose correction still applies: its entry is in the file, the row's receiving-water text is
     still the entry's (agrees), and the row carries the entry's water."""
     c = entry_for(o, corrections)
-    return bool(is_hand(o) and c and agrees(o, c, name) and o.get("water_slug") == c["water_slug"])
+    return bool(is_hand(o) and c and valid(c) and agrees(o, c, name) and o.get("water_slug") == c["water_slug"])
 
 
 def revert(o: dict) -> None:
@@ -127,6 +127,47 @@ def revert(o: dict) -> None:
             o.pop(f, None)
     if not o.get("water_matched_by"):
         o.pop("water_matched_by", None)
+
+
+# Words that make another water of a name they stand next to: 'Little Cuyahoga River', 'West Branch Huron River',
+# 'Cuyahoga River North Branch' (Astra review 2026-11-28, P2: every word of 'Cuyahoga River' occurs in 'Little Cuyahoga
+# River'). The list of build.status.STATE_QUALIFIER_BEFORE (the widest the resolver uses), read on either side.
+QUALIFIERS = frozenset({"little", "big", "middle", "upper", "lower", "east", "west", "north", "south", "northeast",
+                        "northwest", "southeast", "southwest", "branch", "fork", "prong", "arm", "tributary", "trib"})
+ALIASES_FILE = ROOT / "data" / "water-aliases.json"
+
+
+def _words(s) -> list[str]:
+    return re.findall(r"[a-z0-9]+", str(s or "").lower().replace("'", ""))
+
+
+def names_water(text: str, c: dict) -> bool:
+    """Whether the permit's phrase names the entry's water: the record's name (or an alias of the record in
+    data/water-aliases.json) stands in the phrase as a whole, as consecutive words, the same words in any order ('Rouge
+    River' for the record 'River Rouge'), with no qualifier word (QUALIFIERS) directly before or after it. 'Lake Erie
+    via storm sewer' names Lake Erie; 'Little Cuyahoga River' does not name the Cuyahoga River."""
+    try:
+        aliases = json.loads(ALIASES_FILE.read_text()).get(c.get("water_slug"), [])
+    except (OSError, ValueError):
+        aliases = []
+    t = _words(text)
+    for name in [c.get("water_name"), *aliases]:
+        n = _words(name)
+        if not n:
+            continue
+        want = sorted(n)
+        for i in range(len(t) - len(n) + 1):
+            if sorted(t[i:i + len(n)]) != want:
+                continue
+            before = t[i - 1] if i else None
+            after = t[i + len(n)] if i + len(n) < len(t) else None
+            if before not in QUALIFIERS and after not in QUALIFIERS:
+                return True
+    return False
+
+
+def valid(c: dict) -> bool:
+    return not entry_problems(c)
 
 
 def entry_problems(c: dict) -> list[str]:
@@ -145,8 +186,7 @@ def entry_problems(c: dict) -> list[str]:
         out.append(f"{k}: the permit's phrase (permit_text) is missing")
     elif f"'{text}'" not in str(c.get("basis") or ""):
         out.append(f"{k}: the basis does not quote the permit's phrase '{text}'")
-    elif not set(re.findall(r"[a-z]+", str(c.get("water_name") or "").lower())) <= set(re.findall(r"[a-z]+", text.lower())):
-        # the record's name, its words in any order ('River Rouge' for the permit's 'Rouge River')
+    elif not names_water(text, c):
         out.append(f"{k}: the permit's phrase '{text}' does not name {c.get('water_name')}")
     if not str(c.get("url") or "").startswith("https://"):
         out.append(f"{k}: the permit's address (url) is missing")
@@ -188,13 +228,21 @@ def apply_rows(name: str, rows: list[dict], corrections: list[dict] | None = Non
     place: every row of the entry's outfall by the loader's key ('002' and '2' alike), in the entry's own file and in
     any other. Returns the problems: an entry whose row is missing from its own file, or whose row's receiving-water
     text is no longer the one the correction read (that row is not corrected, and goes back to the replaced tie if it
-    was)."""
+    was), or an entry that fails entry_problems (refused: its rows are not corrected, and a row it corrected before
+    goes back to the replaced tie)."""
     cs, idx = _for_file(name, rows, corrections)
     problems = []
     for c in cs:
         found = idx.get(key_of(c)) or []
         if not found:
             problems.append(f"{name} {c['npdes_permit']}:{c['outfall']}: no such row")
+            continue
+        bad = entry_problems(c)
+        if bad:                     # refused: an entry is applied, or kept, only with its evidence (Astra 2026-11-28)
+            for o in found:
+                if is_hand(o):
+                    revert(o)
+            problems += [f"refused: {p}" for p in bad]
             continue
         for o in found:
             if not agrees(o, c, name):

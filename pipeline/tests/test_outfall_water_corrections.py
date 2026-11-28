@@ -315,3 +315,42 @@ def test_a_row_tied_on_the_permits_statement_says_the_permit_names_the_water():
     how = Resolver.registry_how(o)
     assert how.startswith("the water its permit names, 1558 m from the point"), how
     assert "geometry" not in how
+
+
+def test_an_invalid_entry_is_refused_when_applied_and_a_row_it_corrected_goes_back():
+    """Astra review 2026-11-28 (P2): an entry exempt from the distance limit is applied only with its evidence. One
+    lacking the permit's phrase or address is refused by apply_rows itself (not only by the separate check), and a row
+    it corrected earlier is no longer kept."""
+    def row():
+        return _no_water_row(npdes_permit="OH0031062", outfall="006",
+                             receiving_water_echo="City of Euclid-Frontal Lake Erie", lat=41.610833, lon=-81.502222)
+    for bad in (_euclid(permit_text="", url=""), _euclid(url=""), _euclid(permit_text="")):
+        rows = [row()]
+        probs = H.apply_rows("outfalls-us.json", rows, [bad])
+        assert probs and any("refused" in p for p in probs), probs
+        assert rows[0]["water_slug"] is None and not H.is_hand(rows[0])
+    rows = [row()]
+    assert H.apply_rows("outfalls-us.json", rows, [_euclid()]) == [] and rows[0]["water_slug"] == "lake-erie-oh"
+    assert H.holds(rows[0], [_euclid()])
+    assert not H.holds(rows[0], [_euclid(url="")])                   # the registry pass does not keep it either
+    probs = H.apply_rows("outfalls-us.json", rows, [_euclid(url="")])
+    assert probs and rows[0]["water_slug"] is None and not H.is_hand(rows[0])
+    assert rows[0].get("no_water_reason") == row()["no_water_reason"]
+
+
+def test_a_qualified_name_in_the_permits_phrase_is_another_water():
+    """Astra review 2026-11-28 (P2): 'Little Cuyahoga River' does not name the Cuyahoga River. The record's name must
+    stand in the permit's phrase as a whole, its words in any order, with no qualifier word next to it."""
+    cuy = dict(water_slug="cuyahoga-river-oh", water_name="Cuyahoga River", water_kind="river")
+    def e(text):
+        return _euclid(**cuy, permit_text=text, basis=f"the permit's receiving water is '{text}'")
+    assert H.entry_problems(e("Cuyahoga River via combined sewer")) == []
+    for text in ("Little Cuyahoga River", "Cuyahoga River North Branch", "West Branch Cuyahoga River",
+                 "Upper Cuyahoga River", "River Cuyahoga Middle Fork", "Cuyahoga Falls river outfall",
+                 "Cuyahoga Little River"):
+        assert H.entry_problems(e(text)), text
+    rouge = dict(water_slug="river-rouge-detroit-mi", water_name="River Rouge", water_kind="river")
+    text = "Rouge River Outfall 082/Oakwood Pump Station"
+    assert H.entry_problems(_euclid(**rouge, permit_text=text, basis=f"is '{text}'")) == []      # the same words reordered
+    assert H.entry_problems(_euclid(**rouge, permit_text="Lower Rouge River", basis="is 'Lower Rouge River'"))
+    assert H.entry_problems(_euclid(**rouge, permit_text="Rouge Park drain", basis="is 'Rouge Park drain'"))
