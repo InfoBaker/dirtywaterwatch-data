@@ -2261,7 +2261,7 @@
   "access": [
    "csv"
   ],
-  "access_detail": "Public ZIP, no key. Comments are preserved, including the named water Singer Run in one historical row. HTTP ranges read all rows of NPDES_SE_VIOLATIONS.csv and NPDES_SICS.csv; PA prefix, codes F024S/A0020 (SSO), F036S/A0011 (bypass), D0011 (discharge without a valid permit) only with sewerage SIC 4952. No permit census limit. Validator checks avoid rereading unchanged archives.",
+  "access_detail": "Public ZIP, no key. Comments are preserved, including the named water Singer Run in one historical row. HTTP ranges read all rows of NPDES_SE_VIOLATIONS.csv and NPDES_SICS.csv; PA prefix, codes F024S/A0020 (SSO); F036S/A0011 (generic bypass) and D0011 (discharge without a valid permit) require sewerage SIC 4952. No permit census limit. Validator checks avoid rereading unchanged archives.",
   "machine_readable": true,
   "fields": [
    "NPDES_ID",
@@ -2309,7 +2309,7 @@
   "license": "U.S. federal government data (public domain); cite EPA ECHO.",
   "legal_basis": "Compliance records reported to regulators, not a public-notice channel named by the reviewed Pennsylvania law or permit.",
   "status": "used",
-  "status_reason": "Reads the PA bulk violation file and sewerage SIC join. Preserves each violation ID and regulatory dates; no invented volume or discharge end. Links compatible utility reports and separately flags uncertain matches. Multiple codes per permit/start day are grouped for counting as our interpretation.",
+  "status_reason": "Reads the PA bulk violation file and sewerage SIC join. Preserves each violation ID and regulatory dates; no invented volume or discharge end. Links compatible utility reports and separately flags uncertain matches. Multiple codes per permit/start day with compatible reported locations are grouped for counting as our interpretation; conflicting waters or outlets remain separate.",
   "verified": "fetched",
   "checked": "2026-11-28",
   "notes": "Follows Rhode Island ECHO DFR field conventions but uses the full bulk file. The ALCOSAN March 2026 power-outage violation is linked to its March 6 utility notice despite the EPA March 7 date. Its July 17 regulatory closure is not used as a discharge end. PWD poll records and routine Erie/ALCOSAN CSOs are not automatically equated with SSOs. The shared ZIP reader and row-selection function can later serve other states; only PA is enabled."

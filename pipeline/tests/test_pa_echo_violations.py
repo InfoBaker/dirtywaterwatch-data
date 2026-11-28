@@ -15,7 +15,7 @@ def rows(name='violations.csv'):
 
 def records():
     selected, _ = M.select_rows(rows(), rows('sics.csv'))
-    return M.normalize(selected, '2026-11-28T15:00:00Z', {}, {})
+    return M.normalize(selected, '2026-11-28T15:00:00Z', {}, {}, sic_rows=rows('sics.csv'))
 
 def test_real_rows_selection_precision_and_absent_fields():
     recs = records()
@@ -39,14 +39,14 @@ def test_identity_revisions_bad_dates_and_public_text():
     old = {r['event_id']: r for r in records()}
     selected[0]['SINGLE_EVENT_END_DATE'] = '11/28/2026'
     selected[0]['SINGLE_EVENT_VIOLATION_COMMENT'] = 'Overflow reached Example Creek; pump stopped.'
-    b = M.normalize(list(reversed(selected)), '2026-11-29T15:00:00Z', old, {})
+    b = M.normalize(list(reversed(selected)), '2026-11-29T15:00:00Z', old, {}, sic_rows=rows('sics.csv'))
     assert set(old) == {r['event_id'] for r in b}
     r = next(r for r in b if r['source_record_id'] == selected[0]['NPDES_VIOLATION_ID'])
     assert r['raw']['row']['SINGLE_EVENT_VIOLATION_COMMENT'] == selected[0]['SINGLE_EVENT_VIOLATION_COMMENT']
     assert r['raw']['_first_seen_at'] == old[r['event_id']]['raw']['_first_seen_at']
     assert r['published_at'] is None
     selected[0]['SINGLE_EVENT_VIOLATION_DATE'] = 'invalid'
-    r = M.normalize(selected[:1], '2026-11-29T15:00:00Z', old, {})[0]
+    r = M.normalize(selected[:1], '2026-11-29T15:00:00Z', old, {}, sic_rows=rows('sics.csv'))[0]
     assert r['started_at'] is None and r['parse_error'] and r['event_type'] == 'unknown'
 
 def test_links_preserve_records_without_equating_ssos_and_csos():
@@ -106,7 +106,7 @@ def test_failure_and_missing_rows_retain_history(tmp_path, monkeypatch):
     monkeypatch.setattr(M, 'registry', lambda: {})
     monkeypatch.setattr(common, 'EVENTS_DIR', tmp_path)
     selected, stats = M.select_rows(rows(), rows('sics.csv'))
-    snap = {'rows': selected, 'stats': stats, 'last_modified': None, 'read_at': '2026-11-28T15:00:00Z'}
+    snap = {'rows': selected, 'sic_rows': rows('sics.csv'), 'stats': stats, 'last_modified': None, 'read_at': '2026-11-28T15:00:00Z'}
     monkeypatch.setattr(M, 'fetch_snapshot', lambda **kw: snap)
     assert M.main([]) == 0
     path = tmp_path / (M.SOURCE_ID + '.json')
@@ -193,3 +193,136 @@ def test_no_water_name_does_not_inherit_the_plant_receiving_water():
                         [{'npdes_permit': 'PA0025984', 'outfall': '001', 'water_slug': 'ohio-river-pa'}],
                         discharger_waters={'PA0025984': ['ohio-river-pa']})
     assert resolver.resolve(r)['water_slugs'] == []
+
+
+@pytest.mark.parametrize('stage', ['select', 'normalize'])
+def test_real_industrial_bypasses_require_sewerage_evidence(stage):
+    source = rows() + rows('industrial_bypasses.csv')
+    sics = rows('sics.csv') + rows('industrial_sics.csv')
+    if stage == 'select':
+        selected, _ = M.select_rows(source, sics)
+        ids = {r['NPDES_VIOLATION_ID'] for r in selected}
+    else:
+        # Old cached snapshots contain these rows, even after selection is fixed.
+        normalized = M.normalize(source, '2026-11-28T15:00:00Z', {}, {}, sic_rows=sics)
+        ids = {r['source_record_id'] for r in normalized}
+    assert not ids & {'3637746096', '3690502307'}
+    assert '3687608730' in ids  # real sewerage-permit bypass still included
+    # Any SIC slot can establish sewerage, not just the primary industry.
+    sics.append({'NPDES_ID': 'PA0004073', 'SIC_CODE': '4952', 'PRIMARY_INDICATOR_FLAG': 'N'})
+    selected, _ = M.select_rows(source, sics)
+    assert '3690502307' in {r['NPDES_VIOLATION_ID'] for r in selected}
+
+
+@pytest.mark.parametrize('snapshot_has_industrial_rows', [True, False])
+def test_replay_corrects_previously_published_industrial_bypasses(tmp_path, monkeypatch, snapshot_has_industrial_rows):
+    source, sics = rows(), rows('sics.csv')
+    industrial = rows('industrial_bypasses.csv')
+    selected, stats = M.select_rows(source, sics)
+    original = M.normalize(selected, '2026-11-28T15:00:00Z', {}, {}, sic_rows=sics)
+    # Reproduce records written by the earlier reader, retaining its published IDs.
+    legacy = [common.event(source_id=M.SOURCE_ID, source_record_id=r['NPDES_VIOLATION_ID'],
+                           event_type='bypass', status='unknown', npdes_permit=r['NPDES_ID'],
+                           started_at=M.day_iso(r['SINGLE_EVENT_VIOLATION_DATE']),
+                           raw={'row': r, 'sic_rows': [s for s in rows('industrial_sics.csv')
+                                                     if s['NPDES_ID'] == r['NPDES_ID']]}) for r in industrial]
+    path = tmp_path / (M.SOURCE_ID + '.json')
+    common.write_json(path, {'records': original + legacy})
+    snapshot = {'rows': selected + industrial if snapshot_has_industrial_rows else selected[:1],
+                'sic_rows': sics + rows('industrial_sics.csv') if snapshot_has_industrial_rows else sics,
+                'stats': stats, 'read_at': '2026-11-28T15:00:00Z'}
+    monkeypatch.setattr(M, 'CACHE_PATH', tmp_path / 'cache.json')
+    common.write_json(M.CACHE_PATH, snapshot)
+    monkeypatch.setattr(M, 'EVENTS_DIR', tmp_path)
+    monkeypatch.setattr(common, 'EVENTS_DIR', tmp_path)
+    monkeypatch.setattr(M, 'registry', lambda: {})
+    assert M.main(['--from-raw']) == 0
+    actual = json.loads(path.read_text())['records']
+    assert {r['event_id'] for r in actual} == {r['event_id'] for r in original}
+    old = {r['event_id']: r for r in original}
+    for r in actual:
+        for key in ('started_at', 'ended_at', 'reported_at', 'published_at'):
+            assert r[key] == old[r['event_id']][key]
+        assert r['raw']['_first_seen_at'] == old[r['event_id']]['raw']['_first_seen_at']
+
+
+def singer_variants(second_comment='Leak at manhole 575 into Example Creek'):
+    # Only the first row is real; the second is a synthetic same-permit/day report.
+    singer = next(r for r in rows() if r['NPDES_VIOLATION_ID'] == '3633971227')
+    second = {**singer, 'NPDES_VIOLATION_ID': 'synthetic-second',
+              'SINGLE_EVENT_VIOLATION_COMMENT': second_comment}
+    return M.normalize([singer, second], '2026-11-28T15:00:00Z', {}, {})
+
+
+@pytest.mark.parametrize('conflict', ['water', 'outfall', 'manhole'])
+def test_distinct_locations_are_not_confirmed_duplicates(conflict):
+    comment = ('Leak at manhole 576 into Singer Run' if conflict == 'manhole' else
+               'Leak at manhole 575 into Singer Run' if conflict == 'outfall' else
+               'Leak at manhole 575 into Example Creek')
+    recs = singer_variants(comment)
+    if conflict == 'outfall':
+        recs[0]['outfall_id'], recs[1]['outfall_id'] = '001', '002'
+    M.link_records(recs, [])
+    assert all(r['duplicate_of'] is None for r in recs)
+    assert all('count_basis' not in r['raw'] for r in recs)
+
+
+@pytest.mark.parametrize('conflict', ['water', 'outfall', 'manhole'])
+def test_utility_location_conflicts_remain_possible_only(conflict):
+    r = singer_variants()[0]
+    r['outfall_id'] = '001'
+    candidate = common.event(source_id='pa-alcosan', source_record_id='synthetic-location',
+                             npdes_permit=r['npdes_permit'], event_type='sso', started_at=r['started_at'],
+                             time_precision='day', waterbody_text='Singer Run', outfall_id='001',
+                             raw={'overflow_point': 'manhole 575'})
+    if conflict == 'water':
+        candidate['waterbody_text'] = 'Example Creek'
+    elif conflict == 'outfall':
+        candidate['outfall_id'] = '002'
+    else:
+        candidate['raw']['overflow_point'] = 'manhole 576'
+    M.link_records([r], [candidate])
+    assert r['duplicate_of'] is None
+    assert r['raw']['possible_matches'] == [candidate['event_id']]
+
+
+@pytest.mark.parametrize('bridge', ['epa', 'utility'])
+def test_missing_location_cannot_bridge_conflicting_waters(bridge):
+    from copy import deepcopy
+    from itertools import permutations
+    recs = singer_variants()
+    unknown = common.event(source_id=M.SOURCE_ID if bridge == 'epa' else 'pa-alcosan',
+                           source_record_id='synthetic-unknown-place', npdes_permit=recs[0]['npdes_permit'],
+                           event_type='sso', started_at=recs[0]['started_at'], time_precision='day')
+    local = [unknown] if bridge == 'utility' else []
+    if bridge == 'epa':
+        recs.append(unknown)
+    for order in permutations(recs):
+        group = deepcopy(list(order))
+        M.link_records(group, local)
+        assert all(r['duplicate_of'] is None for r in group)
+
+
+def test_compatible_locations_keep_deterministic_links():
+    recs = singer_variants('Leak at manhole 575 into Singer Run')
+    ids = {r['event_id'] for r in recs}
+    M.link_records(recs, [])
+    assert recs[1]['duplicate_of'] == recs[0]['event_id']
+    candidate = common.event(source_id='pa-alcosan', source_record_id='synthetic-compatible',
+                             npdes_permit=recs[0]['npdes_permit'], event_type='sso',
+                             started_at=recs[0]['started_at'], time_precision='day',
+                             waterbody_text='Singer Run', raw={'overflow_point': 'manhole 575'})
+    M.link_records(list(reversed(recs)), [candidate])
+    assert all(r['duplicate_of'] == candidate['event_id'] for r in recs)
+    assert {r['event_id'] for r in recs} == ids
+
+
+def test_documented_alcosan_link_also_respects_location_conflicts():
+    r = next(r for r in records() if r['source_record_id'] == '3687608730')
+    # Synthetic location evidence must override even the incident-specific match.
+    r['waterbody_text'] = 'Example Creek'
+    candidate = common.event(source_id='pa-alcosan', source_record_id=M.ALCOSAN_POWER_OUTAGE.split(':', 1)[1],
+                             npdes_permit=r['npdes_permit'], event_type='bypass',
+                             started_at='2026-03-06T18:00:00-05:00', waterbody_text='Ohio River')
+    M.link_records([r], [candidate])
+    assert r['duplicate_of'] is None

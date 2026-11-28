@@ -37,3 +37,27 @@ def test_confirmed_cross_source_link_is_bidirectional_in_export():
     links = D.links_of(records_ + [local])
     assert links[local['event_id']]['linked_records'][0]['event_id'] == r['event_id']
     assert links[r['event_id']]['linked_records'][0]['event_id'] == local['event_id']
+
+
+def test_different_named_waters_keep_independent_status_and_counts(tmp_path):
+    import json
+    from datetime import datetime
+    from test_pa_echo_violations import singer_variants
+
+    recs = singer_variants()
+    M.link_records(recs, [])
+    (tmp_path / (M.SOURCE_ID + '.json')).write_text(json.dumps({
+        'source_id': M.SOURCE_ID, 'ok': True, 'records': recs,
+        'last_ok_at': '2026-11-28T15:00:00Z'}))
+    waters = {slug: {'slug': slug, 'name': name, 'state': 'PA', 'kind': 'stream'}
+              for slug, name in [('singer-run-pa', 'Singer Run'), ('example-creek-pa', 'Example Creek')]}
+    status, _ = S.build(events_dir=tmp_path, waters=waters, outfalls=[], registry={}, reaches={}, flows=({}, {}),
+                        now=datetime.fromisoformat('2017-10-04T12:00:00-04:00'), write=False)
+    assert status['duplicates'] == {}
+    assert status['counts']['events_by_category'] == {'sewage': 2}
+    for r, slug in zip(recs, waters):
+        assert status['placements'][r['event_id']].get('duplicate_of') is None
+        assert status['placements'][r['event_id']]['water_slugs'] == [slug]
+        water = status['waters'][slug]
+        assert water['events'] == [r['event_id']]
+        assert water['status'] == 'yellow'

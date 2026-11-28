@@ -1,8 +1,8 @@
 """PA EPA ECHO ICIS-NPDES single-event violations, following RI DFR field conventions.
 
 Hourly refresh checks the ZIP's validators; range-read only SE violations and SICs
-when changed. No permit census limit. D0011 requires a 4952 sewerage SIC; the explicit
-SSO/bypass codes are kept as published. Dates are local calendar days, not times.
+when changed. No permit census limit. D0011 and generic bypass codes require a 4952
+sewerage SIC; explicit SSO codes establish sewage. Dates are local calendar days, not times.
 Violation closure dates stay in source_end_date, not discharge ended_at: the live
 ALCOSAN record closes July 17 although its discharge ended March 6. No volume,
 cause, receiving water, publication date or receipt date is invented. Public comments
@@ -29,6 +29,7 @@ import requests
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, HEADERS, ROOT, error_detail, event,
                     now_iso, read_json, save_raw, write_events, write_json)
 from ingest.echo_zip import RemoteZip
+from build.status import norm_oid, waters_differ
 
 SOURCE_ID = 'pa-echo-violations'
 ZIP_URL = 'https://echo.epa.gov/files/echodownloads/npdes_downloads.zip'
@@ -57,8 +58,16 @@ def csv_rows(z, member, required):
             yield row
 
 
+def selected_row(row, sewerage):
+    """Generic bypass and unpermitted-discharge codes alone do not establish sewage."""
+    code = row.get('VIOLATION_CODE')
+    return row.get('VIOLATION_TYPE_CODE') == 'S' and (
+        code in ('F024S', 'A0020') or
+        code in ('F036S', 'A0011', 'D0011') and row.get('NPDES_ID') in sewerage)
+
+
 def select_rows(violations, sics, state='PA'):
-    """Explicit SSO/bypass codes; D0011 only at permits with SIC 4952 (any SIC slot)."""
+    """Explicit SSOs; generic bypasses and D0011 require SIC 4952 (any SIC slot)."""
     sewerage = {r['NPDES_ID'] for r in sics if r['NPDES_ID'].startswith(state) and r['SIC_CODE'] == '4952'}
     selected, stats, seen = [], Counter(), {}
     if not sewerage:
@@ -67,8 +76,7 @@ def select_rows(violations, sics, state='PA'):
         if not row['NPDES_ID'].startswith(state):
             continue
         stats['state_violation_rows'] += 1
-        code = row['VIOLATION_CODE']
-        if row['VIOLATION_TYPE_CODE'] != 'S' or not (code in CODES or code == 'D0011' and row['NPDES_ID'] in sewerage):
+        if not selected_row(row, sewerage):
             continue
         vid = row['NPDES_VIOLATION_ID']
         if not vid or not row['NPDES_ID']:
@@ -141,8 +149,12 @@ def normalize(rows, fetched, previous, operators, modified=None, sic_rows=()):
     sics = defaultdict(list)
     for row in sic_rows:
         sics[row['NPDES_ID']].append(row)
+    sewerage = {permit for permit, evidence in sics.items() if any(r['SIC_CODE'] == '4952' for r in evidence)}
     records = []
     for row in rows:
+        # Apply current scope to old snapshots too, including unchanged HEADs and --from-raw.
+        if not selected_row(row, sewerage):
+            continue
         vid, permit = row['NPDES_VIOLATION_ID'], row['NPDES_ID']
         old = previous.get(f'{SOURCE_ID}:{vid}', {})
         problems = []
@@ -172,7 +184,10 @@ def normalize(rows, fetched, previous, operators, modified=None, sic_rows=()):
             'archive_last_modified': modified,
             'source_updated_at_basis': 'Last-Modified of the EPA download archive, not a per-record update time.',
             'selection_basis': ('Sewerage SIC 4952 and discharge without a valid permit; overflow type is not stated.'
-                                if row['VIOLATION_CODE'] == 'D0011' else 'EPA single-event SSO or bypass violation code.'),
+                                if row['VIOLATION_CODE'] == 'D0011' else
+                                'Sewerage SIC 4952 and an EPA single-event bypass violation code.'
+                                if row['VIOLATION_CODE'] in ('A0011', 'F036S') else
+                                'EPA single-event sanitary sewer overflow violation code.'),
         }
         records.append(event(source_id=SOURCE_ID, source_record_id=vid,
             event_type=CODES.get(row['VIOLATION_CODE'], 'unknown') if start else 'unknown', status='unknown',
@@ -194,8 +209,35 @@ def local_day(value):
         return None
 
 
+def compatible_location(a, b):
+    """Missing place evidence is compatible; contradictory stated places are not."""
+    if waters_differ(a, b):
+        return False
+    for key in ('outfall_id', 'outfall_name'):
+        if a.get(key) and b.get(key) and norm_oid(a[key]) != norm_oid(b[key]):
+            return False
+    ap, bp = (a.get('raw') or {}).get('overflow_point'), (b.get('raw') or {}).get('overflow_point')
+    return not (ap and bp and norm_oid(ap) != norm_oid(bp))
+
+
+def location_groups(records):
+    """Compare every member, so an unspecified place cannot bridge conflicting ones."""
+    groups = []
+    # Locate the specific reports first; an ambiguous unlocated report remains separate.
+    ordered = sorted(records, key=lambda r: (
+        -sum(bool(v) for v in (r.get('waterbody_text'), r.get('outfall_id'), r.get('outfall_name'),
+                              (r.get('raw') or {}).get('overflow_point'))), r['source_record_id']))
+    for r in ordered:
+        matches = [g for g in groups if all(compatible_location(r, other) for other in g)]
+        if len(matches) == 1:
+            matches[0].append(r)
+        else:
+            groups.append([r])
+    return groups
+
+
 def link_records(records, local):
-    """Deterministic permit/day counting; explicit links never borrow a time or volume."""
+    """Permit/day counting with compatible places; links never borrow a time or volume."""
     groups = defaultdict(list)
     local = [r for r in local if r.get('source_id') in LOCAL_SOURCES and not r.get('duplicate_of')]
     for r in records:
@@ -204,24 +246,37 @@ def link_records(records, local):
             r['raw'].pop(key, None)
         if r.get('started_at'):
             groups[r['npdes_permit'], local_day(r['started_at'])].append(r)
-    for (permit, day), group in groups.items():
+    plans = []
+    for (permit, day), reports in groups.items():
+        for group in location_groups(reports):
+            plans.append((permit, day, group))
+    matches = []
+    for permit, day, group in plans:
         # Prefer the explicit overflow type over broad D0011; stable ID is the tie-breaker.
         group.sort(key=lambda r: (r['event_type'] == 'unknown', r['source_record_id']))
         primary = group[0]
         if len(group) > 1:
             primary['raw']['count_basis'] = (
-                'We count violation codes for the same permit and start day as one reported occurrence; '
-                'EPA does not distinguish separate discharges that day.')
+                'We count violation codes for the same permit and start day with compatible reported locations '
+                'as one occurrence.')
         candidates = [n for n in local if n.get('npdes_permit') == permit and local_day(n.get('started_at')) == day]
         confirmed = [n for n in candidates if n.get('event_type') == primary['event_type'] != 'unknown'
-                     and n.get('time_precision') not in ('poll', 'bound')]
+                     and n.get('time_precision') not in ('poll', 'bound')
+                     and all(compatible_location(r, n) for r in group)]
         # Independently checked against ALCOSAN's named power-outage notice. ECHO uses
         # the notice's calendar date, one day after the operator's event date.
         if any(r['source_record_id'] == '3687608730' for r in group) and permit == 'PA0025984' and day == '2026-03-07':
             confirmed = [n for n in local if n['event_id'] == ALCOSAN_POWER_OUTAGE
                          and n.get('npdes_permit') == permit and n.get('event_type') == 'bypass'
-                         and local_day(n.get('started_at')) == '2026-03-06']
-        target = confirmed[0] if len(confirmed) == 1 else None
+                         and local_day(n.get('started_at')) == '2026-03-06'
+                         and n.get('time_precision') not in ('poll', 'bound')
+                         and all(compatible_location(r, n) for r in group)]
+        matches.append((group, candidates, confirmed))
+    # A utility report without a location cannot absorb distinct EPA location groups.
+    uses = Counter(n['event_id'] for _, _, confirmed in matches for n in confirmed)
+    for group, candidates, confirmed in matches:
+        primary = group[0]
+        target = confirmed[0] if len(confirmed) == 1 and uses[confirmed[0]['event_id']] == 1 else None
         if target:
             primary['duplicate_of'] = target['event_id']
             primary['raw']['_other_source_record'] = target['event_id']
@@ -229,7 +284,8 @@ def link_records(records, local):
                 'We link the ALCOSAN power-outage notice to this violation. The notice dates the discharge March 6, '
                 '2026; EPA dates the violation March 7. Both source dates are retained.'
                 if target['event_id'] == ALCOSAN_POWER_OUTAGE else
-                'We match the same permit, local start date and overflow type to the utility report; EPA gives no outfall.')
+                'We match the same permit, local start date and overflow type with compatible reported locations '
+                'to the utility report.')
         for r in group:
             if candidates and not target:
                 r['raw']['possible_matches'] = sorted(n['event_id'] for n in candidates)
@@ -237,8 +293,8 @@ def link_records(records, local):
                 continue
             r['duplicate_of'] = primary['duplicate_of'] or primary['event_id']
             r['raw']['_other_source_record'] = r['duplicate_of']
-            r['raw']['_duplicate_basis'] = ('Our counting groups EPA violation codes for the same permit and start day '
-                                           'as one reported occurrence; the file does not distinguish separate discharges that day.')
+            r['raw']['_duplicate_basis'] = ('We count EPA violation codes for the same permit and start day with '
+                                           'compatible reported locations as one occurrence.')
 
 
 def main(argv=None):
@@ -250,14 +306,27 @@ def main(argv=None):
         records = normalize(snapshot['rows'], snapshot['read_at'], old, registry(), snapshot.get('last_modified'),
                             snapshot.get('sic_rows', []))
         ids = {r['event_id'] for r in records}
-        kept = [r for eid, r in old.items() if eid not in ids]
+        current_sics = defaultdict(list)
+        for row in snapshot.get('sic_rows', []):
+            current_sics[row['NPDES_ID']].append(row)
+        kept = []
+        for eid, r in old.items():
+            if eid in ids:
+                continue
+            raw = r.get('raw') or {}
+            evidence = current_sics.get(r['npdes_permit'], raw.get('sic_rows', []))
+            sewerage = {s['NPDES_ID'] for s in evidence if s['SIC_CODE'] == '4952'}
+            # Missing history stays only if it still meets the source's sewage scope.
+            if selected_row(raw.get('row') or {}, sewerage):
+                kept.append(r)
         for r in kept:
             r['raw'].setdefault('_missing_from_source_since', now_iso())
         records.extend(kept)
         local = [r for sid in LOCAL_SOURCES
                  for r in (read_json(EVENTS_DIR / f'{sid}.json', {}) or {}).get('records', [])]
         link_records(records, local)
-        meta = {**snapshot['stats'], 'url': ZIP_URL, 'member': SE_MEMBER, 'sic_member': SIC_MEMBER,
+        meta = {**snapshot['stats'], 'selected_rows': len(records) - len(kept),
+                'url': ZIP_URL, 'member': SE_MEMBER, 'sic_member': SIC_MEMBER,
                 'archive_last_modified': snapshot.get('last_modified'), 'snapshot_read_at': snapshot['read_at'],
                 'kept_from_previous': len(kept), 'duplicates': sum(bool(r['duplicate_of']) for r in records),
                 'by_year': dict(sorted(Counter(r['started_at'][:4] for r in records if r['started_at']).items())),

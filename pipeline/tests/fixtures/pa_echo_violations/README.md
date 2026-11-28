@@ -24,3 +24,16 @@ that unrelated current utility records do not become duplicates.
 
 Tests change copies in memory for bad dates, malformed rows and other-state
 queries; those changed inputs are synthetic test cases, not source claims.
+
+`industrial_bypasses.csv` and `industrial_sics.csv` contain two real violations
+and their SIC rows copied from the saved Nov. 28, 2026, 13:55:03 UTC snapshot of
+the same EPA archive (same Last-Modified above). Violation 3637746096 is A0011 at
+water-supply permit PA0000272 (SIC 4941); 3690502307 is F036S at steel-mill
+permit PA0004073 (SIC 3312). Neither establishes sewage. ALCOSAN's bypass in
+`violations.csv` is the sewerage-SIC positive control. Tests add a secondary 4952
+SIC in memory solely to check that any SIC slot may supply sewerage evidence.
+
+The location-conflict tests change copies of the real Singer Run row in memory
+to name Example Creek or another manhole, or supply different outfall IDs. Those
+variants and utility candidates marked `synthetic-` are invented test cases,
+not additional EPA or utility records. The tests preserve the real row's date.
