@@ -154,8 +154,11 @@ def test_a_report_on_a_river_behaves_as_before():
 def test_nothing_older_than_30_days_is_queued():
     old = spill("old", raw={"reached_water": True}, started_at=iso(NOW - 31 * 24 * H), status="ended",
                 ended_at=iso(NOW - 31 * 24 * H + H))
-    st, _ = run([old])
-    assert st["needs_reach"] == [] and st["counts"]["point_trace"] == {"traced": {}, "queued": {}, "aside": {}}
+    undated = spill("u", raw={"reached_water": True}, started_at=None, status="ended")
+    reported = spill("r", raw={"reached_water": True}, started_at=None, reported_at=iso(NOW - 3 * H))
+    st, _ = run([old, undated, reported])
+    assert [n["event_id"] for n in st["needs_reach"]] == ["ma-test:r"]
+    assert st["counts"]["point_trace"]["queued"] == {S.POINT_TRACE_REACHED: 1}
 
 
 def test_month_precision_and_advisories_are_unaffected():

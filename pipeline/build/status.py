@@ -5822,7 +5822,9 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
         point_basis = None
         if (is_discharge and live and not future and not coarse and not stretched and not outlet_basis
                 and not pl["water_slugs"] and ev.get("lat") is not None and ev.get("lon") is not None):
-            recent = (parse_time(ev.get("started_at")) or now) > now - timedelta(days=POINT_TRACE_DAYS)
+            # its start, else its report time; an undated report is not recent (NC's 2022-2025 rows give no start)
+            began = parse_time(ev.get("started_at") or ev.get("reported_at"))
+            recent = began is not None and began > now - timedelta(days=POINT_TRACE_DAYS)
             own = [x for x in found if str(x[0].get("key") or "").startswith("pt-")]
             if own or (recent and not found):
                 kind, why = point_trace_basis(ev, pl)
