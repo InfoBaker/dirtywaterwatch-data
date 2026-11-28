@@ -229,9 +229,9 @@ Rows with live reports are listed first; reports are the audit's counts from the
 
 ### OH0023833 Akron (41 registry rows in data/outfalls-us.json; 36 without a water, 26 of them open CSOs)
 
-**Not applied.** None of the 36 rows without a water has a receiving-water text in EPA's inventory, and every one carries
-the facility's point (coords_from 'facility', point_shared_by 35, at 41.157121, -81.569837: the treatment plant, not an
-outfall). The Cuyahoga River record's 199 m is measured from that plant point, so it says nothing about where any CSO
+**Not applied.** 35 of the 36 rows without a water have no receiving-water text in EPA's inventory and carry the
+facility's point (coords_from 'facility', point_shared_by 35, at 41.157121, -81.569837: the treatment plant, not an
+outfall); the 36th (082, closed) names the Ohio Canal Enclosure, which has no record. The Cuyahoga River record's 199 m is measured from that plant point, so it says nothing about where any CSO
 discharges. The permit's own listed receiving waters (data/dischargers.json, research/oh/dischargers.json) are the
 Little Cuyahoga River, the Ohio Canal Enclosure and 'SS to Little Cuyahoga River', not the Cuyahoga main stem, and the
 Akron rows that do have a text name the Little Cuyahoga (073, 074) or the Ohio Canal Enclosure (082). A record exists for
