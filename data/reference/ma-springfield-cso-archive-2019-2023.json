@@ -631,6 +631,10 @@
      "volume_gal": 1,
      "why": "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
     }
+   },
+   "known_difference": {
+    "volume_gal": 1,
+    "why": "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
    }
   },
   "2019-04": {
@@ -834,6 +838,10 @@
      "volume_gal": -1,
      "why": "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
     }
+   },
+   "known_difference": {
+    "volume_gal": -1,
+    "why": "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
    }
   },
   "2019-05": {
@@ -1037,6 +1045,10 @@
      "volume_gal": 1,
      "why": "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
     }
+   },
+   "known_difference": {
+    "volume_gal": 1,
+    "why": "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
    }
   },
   "2019-06": {
@@ -1837,6 +1849,10 @@
      "events": -2.25,
      "why": "the Total row prints 38.75 events, not a whole number; the rows give 41 (gallons and hours add up)"
     }
+   },
+   "known_difference": {
+    "events": -2.25,
+    "why": "the Total row prints 38.75 events, not a whole number; the rows give 41 (gallons and hours add up)"
    }
   },
   "2019-10": {
@@ -6631,6 +6647,10 @@
      "volume_gal": -1,
      "why": "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
     }
+   },
+   "known_difference": {
+    "volume_gal": -1,
+    "why": "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
    }
   },
   "2021-10": {
@@ -7082,6 +7102,10 @@
      "volume_gal": -1,
      "why": "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
     }
+   },
+   "known_difference": {
+    "volume_gal": -1,
+    "why": "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
    }
   },
   "2021-12": {
@@ -9558,6 +9582,10 @@
      "volume_gal": 1,
      "why": "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
     }
+   },
+   "known_difference": {
+    "volume_gal": 1,
+    "why": "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
    }
   },
   "2022-12": {

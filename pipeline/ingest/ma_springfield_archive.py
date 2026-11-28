@@ -91,8 +91,10 @@ ALIASES = {"CSO036": "CSO036A", "CSO037A": "CSO037"}
 HANDCORRECTIONS: list[dict] = []
 # Months whose own Total row differs from the sum of their rows, as printed by the commission (the rows are kept as
 # printed; nothing is corrected). Each value is the printed total minus the rows' sum; the check passes only for
-# exactly this difference, so a new one still stops the extraction. The annual sheets' month lines equal the printed
-# totals in every case, and the 2019 annual sheet's 452 events equal the monthly rows' sum with September at 41.
+# exactly this difference, so a new one still stops the extraction. The extraction writes each into its month
+# (known_difference), and the hourly run checks the transcript against what the transcript itself lists. For the
+# 1-gallon months the annual sheet's month line equals the printed total (March 2019 apart, whose line differs by more,
+# as several 2019 lines do: research/ma/springfield-archive-comparison.md).
 GALLON_ROUNDING = "the Total row differs from the rows by 1 gallon in the commission's report (rounding)"
 KNOWN_DIFFERENCES: dict[str, dict] = {
     "2019-03": {"volume_gal": 1, "why": GALLON_ROUNDING},
@@ -183,7 +185,7 @@ def validate(doc: dict) -> list[str]:
                 raise TranscriptError(f"{ym}: computed with no method stated")
             continue
         try:
-            check_month(rows, m.get("total_row") or {}, KNOWN_DIFFERENCES.get(ym))
+            check_month(rows, m.get("total_row") or {}, m.get("known_difference"))
         except TranscriptError as e:
             raise TranscriptError(f"{ym}: {e}") from None
     return sorted(months)
@@ -565,6 +567,8 @@ def extract(raw_dir: Path, out: Path = REFERENCE) -> dict:
         if ym:
             m = parse_month(pdf_text(p), ym)
             m["check"] = check_month(m["rows"], m["total_row"], KNOWN_DIFFERENCES.get(ym))
+            if ym in KNOWN_DIFFERENCES:
+                m["known_difference"] = KNOWN_DIFFERENCES[ym]
             months[ym] = {"file": file_entry(p, idx), **m}
         elif am:
             annual[am.group(1)] = {"file": file_entry(p, idx), **parse_annual(pdf_text(p), am.group(1))}
@@ -578,6 +582,8 @@ def extract(raw_dir: Path, out: Path = REFERENCE) -> dict:
                                   " (the Internet Archive holds no copy); the text was extracted in the browser")},
                  "rows": rows, "total_row": m["total_row"], "duration_label": "Hours"}
         entry["check"] = check_month(rows, m["total_row"], KNOWN_DIFFERENCES.get(ym))
+        if ym in KNOWN_DIFFERENCES:
+            entry["known_difference"] = KNOWN_DIFFERENCES[ym]
         months[ym] = entry
     if COMPUTED_MONTH in months:
         raise TranscriptError("October 2021 has a report: it should not be computed")
