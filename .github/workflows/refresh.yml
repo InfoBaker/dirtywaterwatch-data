@@ -76,8 +76,13 @@ jobs:
           due=0
           if [ "$EVENT" = workflow_dispatch ] && [ "$RELEASE" = no ]; then due=0
           elif [ "$EVENT" = workflow_dispatch ] && [ "$RELEASE" = daily ]; then
-            last=$(gh release view latest -R "$GITHUB_REPOSITORY" --json assets -q '.assets[] | select(.name == "dataset.zip") | .updatedAt' 2>/dev/null || true)
-            if [ -z "$last" ]; then due=1
+            # a lookup that fails for any reason but a missing release skips the release this run, so an API error
+            # cannot upload the 700 MB dataset on every run (Astra 2026-11-27 P3)
+            rc=0; last=$(gh release view latest -R "$GITHUB_REPOSITORY" --json assets -q '.assets[] | select(.name == "dataset.zip") | .updatedAt' 2>"$RUNNER_TEMP/rel.err") || rc=$?
+            if [ "$rc" != 0 ]; then
+              if grep -qi 'release not found' "$RUNNER_TEMP/rel.err"; then due=1
+              else echo "::warning::the latest release could not be read, so this run skips the dataset release: $(head -c 200 "$RUNNER_TEMP/rel.err")"; fi
+            elif [ -z "$last" ]; then due=1
             elif [ $(( $(date -u +%s) - $(date -u -d "$last" +%s) )) -gt 72000 ]; then due=1; fi
             echo "latest dataset uploaded ${last:-never}"
           elif [ "$EVENT" = workflow_dispatch ]; then due=1
