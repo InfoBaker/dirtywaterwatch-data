@@ -302,3 +302,88 @@ def test_a_named_registered_outlet_needs_no_point_of_its_own():
     st, _ = run([m], {no_water["key"]: no_water})
     assert "reach" not in st["placements"][m["event_id"]] or not st["placements"][m["event_id"]].get("reach_basis")
     assert st["counts"]["point_trace"] == {"traced": {}, "queued": {}, "aside": {}}
+
+
+# ---------------------------------------------------------------- review 2026-11-28 pass 2 (Astra P1, P2 x2, P3)
+
+OTHER_BROOK = {"slug": "other-brook-ma", "name": "Other Brook", "kind": "stream", "state": "MA",
+               "bbox": [-71.95, 42.03, -71.95, 42.0605],
+               "geometry": {"type": "LineString", "coordinates": [[-71.95, 42.0605], [-71.95, 42.03]]}}
+
+
+def test_a_placed_report_never_colours_a_water_it_says_was_not_reached():
+    from build import rain_sso as SS
+    e = spill("placed", waterbody_text="Did not impact Test River; sewage entered Other Brook")
+    k, r = point_reach(e["event_id"])
+    r["segments"][0]["gnis_name"] = "Other Brook"          # its stretch runs down Other Brook into the Test River
+    w = world(tmp_events([e]))
+    w["waters"]["other-brook-ma"] = dict(OTHER_BROOK)
+    w["reaches"] = {k: r}
+    st, hist = S.build(now=NOW, write=False, state_outlines=_ma(), **w)
+    pl = st["placements"][e["event_id"]]
+    assert pl["water_slugs"] == ["other-brook-ma"]          # the water it names is still shown
+    assert st["waters"]["other-brook-ma"]["status"] == "red"
+    river = st["waters"].get("test-river-ma") or {}
+    assert river.get("status", "grey") == "grey" and not river.get("reasons") and e["event_id"] not in str(river)
+    assert "reach" not in pl and k not in st["reaches"] and k not in (hist.get("reaches") or {})
+    assert pl["point_trace_aside"] == S.POINT_TRACE_NOT_REACHED and S.point_trace_withheld(pl, k)
+    assert st["needs_reach"] == []                          # never queued again for the same trace
+    entry = {"places": {"events": [{"event_id": e["event_id"], "point": [e["lat"], e["lon"]],
+                                    "water_slugs": ["other-brook-ma"], "reaches": []}], "waters": []}}
+    keys, tags, _, _ = SS.placement(entry, {}, {k: r}, lambda r, w: ["test-river-ma"], st["placements"])
+    assert keys == [] and "test-river-ma" not in tags
+
+
+def test_a_stretch_along_a_named_water_with_no_record_the_report_denies_is_not_drawn():
+    e = spill("bear", waterbody_text="Did not impact Bear Creek; sewage entered Other Brook")
+    k, r = point_reach(e["event_id"])
+    r["segments"][0]["gnis_name"] = "Bear Creek"            # no water record for Bear Creek
+    st, hist = run([e], {k: r})
+    pl = st["placements"][e["event_id"]]
+    assert pl["water_slugs"] == [] and "reach" not in pl and k not in st["reaches"]
+    assert (st["waters"].get("test-river-ma") or {}).get("status", "grey") == "grey"
+    assert pl["point_trace_aside"] == S.POINT_TRACE_NOT_REACHED
+    # a stretch along another water is drawn as before
+    e2 = spill("bear2", waterbody_text="Did not impact Bear Creek; sewage entered Other Brook")
+    k2, r2 = point_reach(e2["event_id"])
+    r2["segments"][0]["gnis_name"] = "Bear Brook"
+    st, _ = run([e2], {k2: r2})
+    assert st["placements"][e2["event_id"]]["reach"] == k2
+
+
+def test_a_statement_that_it_reached_water_wins_and_only_a_whole_recovery_or_a_water_denial_denies():
+    D = S.written_denial
+    # reached water: always wins over a recovery or denial phrase
+    assert D(spill("a", raw={"description": "Spill reached surface water; fully recovered"})) is None
+    assert D(spill("b", raw={"reached_water": True, "description": "All sewage fully recovered"})) is None
+    assert D(spill("c", raw={"reached_water": True, "description": "No discharge to waters of the state"})) is None
+    # a part, or the solids, recovered: not the whole discharge
+    assert D(spill("d", raw={"description": "Recovered 500 of 5,000 gallons; visible solids fully recovered"})) is None
+    assert D(spill("e", raw={"description": "Not fully recovered. All visible solids fully recovered."})) is None
+    assert D(spill("f", raw={"description": "All visible solids fully recovered"})) is None
+    # a denial of something that is not water
+    assert D(spill("g", raw={"description": "Spill did not impact the road"})) is None
+    assert D(spill("h", raw={"description": "Did not leave the property"})) is None
+    assert D(spill("i", raw={"description": "Sewage was contained in the creek"})) is None
+    # whole recoveries and water denials still deny
+    for t in ("All sewage fully recovered", "No discharge to waters of the state", "Did not reach the storm drain",
+              "The spill did not reach any surface water", "Recovered 5,000 of 5,000 gallons; all of it was recovered",
+              "Did not impact Bear Creek"):
+        assert D(spill("z", raw={"description": t})), t
+    st, _ = run([spill("road", raw={"reached_water": True, "description": "Spill did not impact the road"}),
+                 spill("sw", raw={"description": "Spill reached surface water; fully recovered"})])
+    assert sorted(n["event_id"] for n in st["needs_reach"]) == ["ma-test:road", "ma-test:sw"]
+
+
+def test_traces_withheld_for_a_missing_state_outline_are_counted_at_any_age():
+    old = spill("old", raw={"reached_water": True}, started_at=iso(NOW - 40 * 24 * H), status="ended",
+                ended_at=iso(NOW - 40 * 24 * H + H))
+    k, r = point_reach(old["event_id"])
+    st, _ = run([old], {k: r}, outlines={})
+    assert k not in st["reaches"]                            # fail closed, as before
+    assert st["counts"]["point_trace"]["outline_missing"] == {"MA": 1}
+    assert any("outline" in p and "MA" in p for p in st["problems"])
+    assert "outline" in S.point_trace_summary(st["counts"]["point_trace"])
+    # with the outline, no such count
+    st, _ = run([old], {k: r})
+    assert "outline_missing" not in st["counts"]["point_trace"] and k in st["reaches"]
