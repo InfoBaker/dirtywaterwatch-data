@@ -1,0 +1,103 @@
+{
+ "about": "Receiving-water names of reports that name a registered outfall and sat on no water page, for which the waters follow-up of 2026-11-28 found a public line and a public name (research/registry/waters-followup-2026-11-28.md): for python -m ingest.waters_from_nhd --names <this file> --state MI --hand-only, which builds only the hand records that name this file (ingest/waters_from_nhd.py HAND, names_file). Points are the outfalls' own.",
+ "state": "MI",
+ "waters": 0,
+ "reports": 0,
+ "resolved_names": 5,
+ "resolved_reports": 109,
+ "build": {
+  "date": "2026-11-28",
+  "command": "python -m ingest.waters_from_nhd --names research/mi/receiving-waters-followup-2026-11-28.json --state MI --hand-only",
+  "records_built": 5,
+  "names_resolved": 5,
+  "network_requests": 6
+ },
+ "rows": [],
+ "resolved": [
+  {
+   "name": "St. Louis Creek",
+   "reports": 105,
+   "slugs": [
+    "st-louis-creek-mi"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     47.2339669,
+     -88.428109
+    ]
+   ],
+   "towns": [
+    "Calumet"
+   ]
+  },
+  {
+   "name": "Big Beaver Creek",
+   "reports": 1,
+   "slugs": [
+    "big-beaver-creek-mi"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     42.53198,
+     -83.02119
+    ]
+   ],
+   "towns": [
+    "Warren"
+   ]
+  },
+  {
+   "name": "Bradshaw Drain",
+   "reports": 1,
+   "slugs": [
+    "bradshaw-drain-mi"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     42.1297,
+     -83.5393
+    ]
+   ],
+   "towns": [
+    "Van Buren"
+   ]
+  },
+  {
+   "name": "Crystal Creek",
+   "reports": 1,
+   "slugs": [
+    "crystal-creek-mi"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     43.19251,
+     -83.31586
+    ]
+   ],
+   "towns": [
+    "North Branch"
+   ]
+  },
+  {
+   "name": "Holly Drain",
+   "reports": 1,
+   "slugs": [
+    "holly-drain-mi"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     42.927061,
+     -83.988297
+    ]
+   ],
+   "towns": [
+    "Durand"
+   ]
+  }
+ ]
+}

@@ -3421,6 +3421,108 @@ HAND: list[dict] = [
              "2.7 km), which passes 2 m from the second GNIS point where the canyon crosses the international border "
              "(32.5369 N 117.0997 W) and runs west to the Tijuana River Estuary's southern arm near Border Field "
              "(32.5371 N 117.1201 W); the canyon's part in Mexico is not a record."),
+    # Waters follow-up of 2026-11-28 (research/registry/waters-followup-2026-11-28.md): receiving waters that a permit or
+    # an operator names for a registered outfall and no record had. Each is the USGS NHD high-resolution line at the
+    # outfall's own point, with the name from a cited public source; built by a --names run on the state's
+    # research/<st>/receiving-waters-followup-2026-11-28.json (names_file: that run builds these only) and by every
+    # other run of the state as its other hand records are.
+    dict(name="St. Louis Creek", state="MI", kind="stream", source="nhd", service="hr",
+         aliases=["St Louis Creek", "Saint Louis Creek"],
+         names_file="research/mi/receiving-waters-followup-2026-11-28.json",
+         pids=["116536231"], box=(-88.434, 47.217, -88.385, 47.239), near=(-88.428109, 47.2339669),
+         why="EPA's permit list for the Great Lakes basin (https://www.epa.gov/node/253663) and ECHO give St. Louis Creek "
+             "as the receiving water of North Houghton County Water and Sewer Authority's CSO outfall 001 (MI0043982, "
+             "First Street and Isle Royale, Calumet and Laurium; 105 reports). Neither NHDPlus V2.1 nor the NHD "
+             "high-resolution flowlines carry the name, and USGS GNIS lists no St. Louis Creek in Michigan. This record "
+             "is the one unnamed NHD high-resolution flowline (permanent identifier 116536231, reach 04020103000279, "
+             "3.4 km) that begins 3 m from EPA's point for the outfall (47.2339669 N 88.428109 W) and ends at the Trap "
+             "Rock River (47.2224 N 88.3904 W); St. Louis Falls on St. Louis Creek, which runs from the swamps near "
+             "Laurium to the Trap Rock River (https://www.waterfallsofthekeweenaw.com/st-louis-creek/st-louis-falls, "
+             "47.22895 N 88.40872 W), lies 10 m from the same flowline."),
+    dict(name="Big Beaver Creek", state="MI", kind="stream", source="nhd", service="hr", gnis_id="621294",
+         names_file="research/mi/receiving-waters-followup-2026-11-28.json", near=(-83.02119, 42.53198),
+         why="EGLE's MiEnviro sewage report for the Warren WWTP (MI0024295) names Big Beaver Creek for its outfall 004 "
+             "bypass. NHDPlus V2.1 has no flowline of that name near Warren; the NHD high-resolution flowlines carry Big "
+             "Beaver Creek (USGS GNIS 621294, Oakland and Macomb Counties; mouth at 42.53088 N 83.01965 W) 42 m from "
+             "ECHO's point for the plant (42.53198 N 83.02119 W; https://echo.epa.gov/detailed-facility-report?"
+             "fid=110000759965); the other Big Beaver Creek in Michigan (GNIS 621293) is in Chippewa County."),
+    dict(name="Holly Drain", state="MI", kind="canal", source="nhd", service="hr", gnis_id="628443",
+         names_file="research/mi/receiving-waters-followup-2026-11-28.json", near=(-83.988297, 42.927061),
+         why="EGLE's MiEnviro sewage report for the Durand WWTP (MI0022063) names Holly Drain for its outfall 001. The NHD "
+             "high-resolution flowlines carry Holly Drain (USGS GNIS 628443, Shiawassee County) 33 m from ECHO's point "
+             "for the plant (42.927061 N 83.988297 W, 4910 S Durand Rd; "
+             "https://echo.epa.gov/detailed-facility-report?fid=110006740866); the other Holly Drain in Michigan (GNIS "
+             "628442) is in Eaton County."),
+    dict(name="Crystal Creek", state="MI", kind="stream", source="nhd", service="hr", gnis_id="624169",
+         names_file="research/mi/receiving-waters-followup-2026-11-28.json", near=(-83.31586, 43.19251),
+         why="EGLE's MiEnviro sewage report for Deerfield Pines MHC (MI0053180, 110 Linden Drive, North Branch) names "
+             "Crystal Creek for its outfall 001. The NHD high-resolution flowlines carry Crystal Creek (USGS GNIS "
+             "624169, Lapeer County) 139 m from ECHO's address point for the facility (43.19251 N 83.31586 W; "
+             "https://echo.epa.gov/detailed-facility-report?fid=110006739896); the other Crystal Creek in Michigan "
+             "(GNIS 1619631) is in Oceana County."),
+    dict(name="Bradshaw Drain", state="MI", kind="canal", source="nhd", service="hr", gnis_id="621856",
+         names_file="research/mi/receiving-waters-followup-2026-11-28.json", near=(-83.5393, 42.1297),
+         why="EGLE's MiEnviro sewage report for Rawsonville Woods MHC (MI0056677, 10825 Rawsonville Road, Van Buren "
+             "Township) names Bradshaw Drain for its outfall 001. The NHD high-resolution flowlines carry Bradshaw "
+             "Drain (USGS GNIS 621856, Wayne, Washtenaw and Monroe Counties) 47 m from ECHO's point for the facility "
+             "(42.1297 N 83.5393 W; https://echo.epa.gov/detailed-facility-report?fid=110006742506); the other "
+             "Bradshaw Drain in Michigan (GNIS 621855) is in Sanilac County."),
+    # NEORSD's CSO alerts map (https://www.neorsd.org/cso-alerts-map-and-status-of-outfalls/, layers 4 and 5 of
+    # CSONotificationApp_PROD) names each outfall's receiving water and gives its point; the NHD high-resolution
+    # flowlines carry no feature of these names, and USGS GNIS lists none in Cuyahoga County. Each record is the
+    # unnamed NHD reach the operator's point lies on.
+    dict(name="Spring Creek", state="OH", kind="stream", source="nhd", service="hr",
+         names_file="research/oh/receiving-waters-followup-2026-11-28.json",
+         pids=["123057428"], box=(-81.695, 41.426, -81.674, 41.443), near=(-81.682069, 41.436564),
+         why="NEORSD's CSO alerts map names Spring Creek as the receiving water of its outfalls 059 (Spring Rd. at "
+             "Jennings Rd.) and 257 (OH0043991, Cleveland), at 41.436564 N 81.682069 W and 41.436739 N 81.681896 W. "
+             "This record is the unnamed NHD high-resolution flowline 123057428 (reach 04110002001790, 1.3 km), 1 m "
+             "from outfall 059's point and 28 m from 257's."),
+    dict(name="Wolf Creek", state="OH", kind="stream", source="nhd", service="hr",
+         names_file="research/oh/receiving-waters-followup-2026-11-28.json",
+         pids=["123062755", "123062744"], box=(-81.61, 41.407, -81.582, 41.437), near=(-81.599487, 41.42304),
+         why="NEORSD's CSO alerts map names Wolf Creek as the receiving water of its outfall 249 (OH0043991, east of E. "
+             "119th St. and north of McCracken Rd., Cleveland; Garfield Park Reservation), at 41.42304 N 81.599487 W. "
+             "The state's other Wolf Creek records are elsewhere. This record is the unnamed NHD high-resolution reach "
+             "04110002000732 (flowlines 123062755 and 123062744, 3.1 km), 3 m from the outfall's point; it ends 561 m "
+             "from Mill Creek."),
+    dict(name="Green Creek", state="OH", kind="stream", source="nhd", service="hr",
+         names_file="research/oh/receiving-waters-followup-2026-11-28.json",
+         pids=["128582007"], box=(-81.551, 41.539, -81.527, 41.562), near=(-81.543681, 41.552446),
+         why="NEORSD's CSO alerts map names Green Creek as the receiving water of its outfall 256 (OH0043991), at "
+             "41.552446 N 81.543681 W. This record is the unnamed NHD high-resolution flowline 128582007 (reach "
+             "04110003000171, 2.0 km), 6 m from the outfall's point."),
+    dict(name="Shaw Brook", state="OH", kind="stream", source="nhd", service="hr",
+         names_file="research/oh/receiving-waters-followup-2026-11-28.json",
+         pids=["128582001"], box=(-81.611, 41.547, -81.595, 41.563), near=(-81.599685, 41.552456),
+         why="NEORSD's CSO alerts map names Shaw Brook as the receiving water of its outfall 232 (OH0043991), at "
+             "41.552456 N 81.599685 W. This record is the unnamed NHD high-resolution flowline 128582001 (reach "
+             "04110003001588, 0.85 km toward Lake Erie), 37 m from the outfall's point."),
+    dict(name="Bloody Run", state="OH", kind="stream", source="nhd", service="hr",
+         names_file="research/oh/receiving-waters-followup-2026-11-28.json",
+         pids=["155894542", "{6EF149E7-7D35-4AFD-A42F-3CB9F252B92A}", "{A1D71092-8F75-4105-A456-FD774DC2A96B}",
+               "155894540"], box=(-84.503, 39.174, -84.464, 39.194), near=(-84.4866667, 39.1794444),
+         why="EPA's CSO inventory gives Bloody Run as the receiving water of MSD of Greater Cincinnati's outfall 181 "
+             "(OH0105457; https://echo.epa.gov/detailed-facility-report?fid=110009661302), at 39.1794444 N "
+             "84.4866667 W, and indexes the outfall to NHD reach 05090203000609. The NHD high-resolution flowlines "
+             "carry that reach unnamed; USGS GNIS lists no Bloody Run in Hamilton County (the state's three are in "
+             "Scioto, Morgan and Licking Counties). This record is the reach (four flowlines, 3.4 km, west to Mill "
+             "Creek), 31 m from the outfall's point."),
+    dict(name="Longfellow Creek", state="WA", kind="stream", source="nhd", service="hr",
+         names_file="research/wa/receiving-waters-followup-2026-11-28.json",
+         pids=["165399003", "{B55FE202-AC66-4538-86E1-92AA15633A64}", "{1C5FBF1F-D79D-4252-9B18-24AA573C9B17}",
+               "165399002", "165399000", "165390094", "165390089", "165399001",
+               "{F6A4AFAA-C510-4368-B296-10906413EEB8}"],
+         box=(-122.374, 47.524, -122.356, 47.579), near=(-122.3638, 47.5291595),
+         why="Ecology's permit WA0031682 (City of Seattle combined sewer system), table 2, as Seattle Public Utilities' "
+             "CSO basin layer repeats it, gives Longfellow Creek (Ecology water body WA-09-1000) as the receiving water "
+             "of Seattle's outfalls 168, 169 and 170; EPA names outfall 169 'LONGFELLOW CREEK; 2450 SW THISTLE ST'. "
+             "Neither NHDPlus V2.1 nor the NHD high-resolution flowlines carry the name. This record is the unnamed NHD "
+             "high-resolution reach 17110019019025 (nine flowlines, 5.8 km, north through Delridge to the Duwamish "
+             "West Waterway), which begins 4 m from EPA's point for outfall 169 and follows Seattle Public Utilities' "
+             "own published line for the creek, 'Longfellow - Mainstem' in its Urban Watercourses layer "
+             "(https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Urban_Watercourses/FeatureServer/0): "
+             "86% of the reach lies within 60 m of that line."),
 ]
 
 

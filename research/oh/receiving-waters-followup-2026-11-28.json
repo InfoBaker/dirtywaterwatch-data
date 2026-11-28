@@ -1,0 +1,121 @@
+{
+ "about": "Receiving-water names of reports that name a registered outfall and sat on no water page, for which the waters follow-up of 2026-11-28 found a public line and a public name (research/registry/waters-followup-2026-11-28.md): for python -m ingest.waters_from_nhd --names <this file> --state OH --hand-only, which builds only the hand records that name this file (ingest/waters_from_nhd.py HAND, names_file). Points are the outfalls' own.",
+ "state": "OH",
+ "waters": 0,
+ "reports": 0,
+ "resolved_names": 5,
+ "resolved_reports": 53,
+ "build": {
+  "date": "2026-11-28",
+  "command": "python -m ingest.waters_from_nhd --names research/oh/receiving-waters-followup-2026-11-28.json --state OH --hand-only",
+  "records_built": 5,
+  "names_resolved": 5,
+  "network_requests": 6
+ },
+ "rows": [],
+ "resolved": [
+  {
+   "name": "Bloody Run",
+   "reports": 20,
+   "slugs": [
+    "bloody-run-oh"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     39.1794444,
+     -84.4866667
+    ]
+   ],
+   "towns": [
+    "Cincinnati"
+   ]
+  },
+  {
+   "name": "Spring Creek",
+   "reports": 19,
+   "slugs": [
+    "spring-creek-oh"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     41.436564,
+     -81.682069
+    ],
+    [
+     41.436739,
+     -81.681896
+    ]
+   ],
+   "towns": [
+    "Cleveland"
+   ],
+   "places_failed": [
+    {
+     "lon": -81.68207,
+     "lat": 41.43656,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.43656, -81.68207) (the nearest is 30.9 km away)"
+    }
+   ]
+  },
+  {
+   "name": "Wolf Creek",
+   "reports": 8,
+   "slugs": [
+    "wolf-creek-garfield-heights-oh"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     41.42304,
+     -81.599487
+    ]
+   ],
+   "towns": [
+    "Cleveland"
+   ]
+  },
+  {
+   "name": "Shaw Brook",
+   "reports": 4,
+   "slugs": [
+    "shaw-brook-oh"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     41.552456,
+     -81.599685
+    ]
+   ],
+   "towns": [
+    "Cleveland"
+   ]
+  },
+  {
+   "name": "Green Creek",
+   "reports": 2,
+   "slugs": [
+    "green-creek-oh"
+   ],
+   "how": "the same water as a record on file",
+   "points": [
+    [
+     41.552446,
+     -81.543681
+    ]
+   ],
+   "towns": [
+    "Cleveland"
+   ],
+   "places_failed": [
+    {
+     "lon": -81.54368,
+     "lat": 41.55245,
+     "reason": "no NHD water of that name within 2 km of the reports' point (41.55245, -81.54368) (the nearest is 123.2 km away)"
+    }
+   ]
+  }
+ ]
+}
