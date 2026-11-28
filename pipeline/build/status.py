@@ -289,7 +289,9 @@ def red_rule_for(ev: dict, state: str | None, rules: dict) -> dict:
     if ev.get("advice_window_hours") is not None:
         return {"rule": "red.event", "hours": float(ev["advice_window_hours"]),
                 "rationale": ev.get("advice_window_basis") or "stated in the source record",
-                "source": ev.get("source_url"), "clock": "end_of_discharge"}
+                "source": ev.get("source_url"),
+                "clock": ("observed_return_to_normal" if ev.get("source_id") == "oh-msdgc-cso-activity-map"
+                          else "end_of_discharge")}
     by_d = (rules.get("red") or {}).get("by_discharger") or {}
     did = ev.get("discharger_id")
     if did not in by_d and ev.get("discharger_id_source") in by_d:    # a rule written under the ingester's id
@@ -841,6 +843,7 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
                     continue
             events.append(r)
     settle_dropped_notices(events, dropped_notices)
+    prefer_msdgc_observations(events)
     carry_map_ends(events)
     return files, events, problems
 
@@ -873,6 +876,28 @@ def settle_dropped_notices(events: list[dict], dropped: set) -> None:
                     "_ended_before_basis": raw.get("_ended_before_basis"),
                     "_ended_before_from": e["event_id"]}
         t.update(status="ended", time_precision="bound")
+
+
+def prefer_msdgc_observations(events: list[dict]) -> None:
+    """Keep the map's observed status/bounds when a linked dated report has no end.
+
+    Reverse only an explicit, bounded same-outfall link from the MSDGC reader.
+    Both IDs and both source records survive; no dates are copied or invented.
+    This runs on load for both status and public export. A reported end wins.
+    """
+    by_id = {e["event_id"]: e for e in events}
+    for e in events:
+        t = by_id.get(e.get("duplicate_of"))
+        if (e.get("source_id") != "oh-msdgc-cso-activity-map" or t is None or t is e
+                or t.get("source_id") == e["source_id"] or t.get("duplicate_of")
+                or t.get("ended_at") or t.get("status") not in {"unknown", "ongoing"}
+                or e.get("status") not in {"ongoing", "ended"}):
+            continue
+        e["duplicate_of"] = None
+        t["duplicate_of"] = e["event_id"]
+        raw = dict(t.get("raw") or {})
+        raw["duplicate_basis"] = "The linked MSDGC map record retains the observed activity and return to normal water levels."
+        t["raw"] = raw
 
 
 # operator sources whose linked duplicates give their end to the shown record (ingest/ma_springfield_aquasight.py)

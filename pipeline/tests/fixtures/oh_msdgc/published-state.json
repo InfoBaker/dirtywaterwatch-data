@@ -1,0 +1,336 @@
+{
+  "events": {
+    "19701004:2026-11-28T08:45:19-05:00": {
+      "start": "2026-11-28T08:45:19-05:00",
+      "first_seen_at": "2026-11-28T13:51:29Z",
+      "start_row": {
+        "facility_id": "19701004",
+        "Current State": "Currently Active",
+        "timestamp": 1795855519000,
+        "Site Status": 6,
+        "Overflow Timer": 72,
+        "Active Status": "Active",
+        "State": "Active",
+        "info": {
+          "facility_id": "19701004",
+          "asset_type": "CSO",
+          "facility_name": "CSO-223",
+          "facility_name_edmr": "CSO-223",
+          "watershed": null,
+          "sewershed": "Muddy Creek",
+          "latitude": "39.08892",
+          "longitude": "-84.64595",
+          "event_trigger": null,
+          "include_in_cso_dashboard": 1,
+          "raingauge_name": null
+        }
+      },
+      "start_bounds": [
+        null,
+        "2026-11-28T08:45:19-05:00"
+      ],
+      "last_active_at": "2026-11-28T08:45:19-05:00",
+      "row": {
+        "facility_id": "19701004",
+        "Current State": "Currently Active",
+        "timestamp": 1795855519000,
+        "Site Status": 6,
+        "Overflow Timer": 72,
+        "Active Status": "Active",
+        "State": "Active",
+        "info": {
+          "facility_id": "19701004",
+          "asset_type": "CSO",
+          "facility_name": "CSO-223",
+          "facility_name_edmr": "CSO-223",
+          "watershed": null,
+          "sewershed": "Muddy Creek",
+          "latitude": "39.08892",
+          "longitude": "-84.64595",
+          "event_trigger": null,
+          "include_in_cso_dashboard": 1,
+          "raingauge_name": null
+        }
+      },
+      "source_updated_at": "2026-11-28T08:45:19-05:00",
+      "last_seen_at": "2026-11-28T13:51:29Z"
+    },
+    "19806003:2026-11-28T08:45:20-05:00": {
+      "start": "2026-11-28T08:45:20-05:00",
+      "first_seen_at": "2026-11-28T13:51:29Z",
+      "start_row": {
+        "facility_id": "19806003",
+        "Current State": "Currently Active",
+        "timestamp": 1795855520000,
+        "Site Status": 6,
+        "Overflow Timer": 72,
+        "Active Status": "Active",
+        "State": "Active",
+        "info": {
+          "facility_id": "19806003",
+          "asset_type": "CSO",
+          "facility_name": "CSO-410",
+          "facility_name_edmr": "CSO-410",
+          "watershed": null,
+          "sewershed": "Muddy Creek",
+          "latitude": "39.07984694",
+          "longitude": "-84.63301306",
+          "event_trigger": null,
+          "include_in_cso_dashboard": 1,
+          "raingauge_name": null
+        }
+      },
+      "start_bounds": [
+        null,
+        "2026-11-28T08:45:20-05:00"
+      ],
+      "last_active_at": "2026-11-28T08:45:20-05:00",
+      "row": {
+        "facility_id": "19806003",
+        "Current State": "Currently Active",
+        "timestamp": 1795855520000,
+        "Site Status": 6,
+        "Overflow Timer": 72,
+        "Active Status": "Active",
+        "State": "Active",
+        "info": {
+          "facility_id": "19806003",
+          "asset_type": "CSO",
+          "facility_name": "CSO-410",
+          "facility_name_edmr": "CSO-410",
+          "watershed": null,
+          "sewershed": "Muddy Creek",
+          "latitude": "39.07984694",
+          "longitude": "-84.63301306",
+          "event_trigger": null,
+          "include_in_cso_dashboard": 1,
+          "raingauge_name": null
+        }
+      },
+      "source_updated_at": "2026-11-28T08:45:20-05:00",
+      "last_seen_at": "2026-11-28T13:51:29Z"
+    },
+    "24708017:2026-11-28T08:45:26-05:00": {
+      "start": "2026-11-28T08:45:26-05:00",
+      "first_seen_at": "2026-11-28T13:51:29Z",
+      "start_row": {
+        "facility_id": "24708017",
+        "Current State": "Currently Active",
+        "timestamp": 1795855526000,
+        "Site Status": 6,
+        "Overflow Timer": 72,
+        "Active Status": "Active",
+        "State": "Active",
+        "info": {
+          "facility_id": "24708017",
+          "asset_type": "CSO",
+          "facility_name": "CSO-416",
+          "facility_name_edmr": "CSO-416",
+          "watershed": null,
+          "sewershed": "Muddy Creek",
+          "latitude": "39.08072222",
+          "longitude": "-84.58605556",
+          "event_trigger": null,
+          "include_in_cso_dashboard": 1,
+          "raingauge_name": null
+        }
+      },
+      "start_bounds": [
+        null,
+        "2026-11-28T08:45:26-05:00"
+      ],
+      "last_active_at": "2026-11-28T08:45:26-05:00",
+      "row": {
+        "facility_id": "24708017",
+        "Current State": "Currently Active",
+        "timestamp": 1795855526000,
+        "Site Status": 6,
+        "Overflow Timer": 72,
+        "Active Status": "Active",
+        "State": "Active",
+        "info": {
+          "facility_id": "24708017",
+          "asset_type": "CSO",
+          "facility_name": "CSO-416",
+          "facility_name_edmr": "CSO-416",
+          "watershed": null,
+          "sewershed": "Muddy Creek",
+          "latitude": "39.08072222",
+          "longitude": "-84.58605556",
+          "event_trigger": null,
+          "include_in_cso_dashboard": 1,
+          "raingauge_name": null
+        }
+      },
+      "source_updated_at": "2026-11-28T08:45:26-05:00",
+      "last_seen_at": "2026-11-28T13:51:29Z"
+    },
+    "32608035:2026-11-28T08:45:54-05:00": {
+      "start": "2026-11-28T08:45:54-05:00",
+      "first_seen_at": "2026-11-28T13:51:29Z",
+      "start_row": {
+        "facility_id": "32608035",
+        "Current State": "Currently Active",
+        "timestamp": 1795855554000,
+        "Site Status": 6,
+        "Overflow Timer": 72,
+        "Active Status": "Active",
+        "State": "Active",
+        "info": {
+          "facility_id": "32608035",
+          "asset_type": "CSO",
+          "facility_name": "CSO-024",
+          "facility_name_edmr": "CSO-024",
+          "watershed": null,
+          "sewershed": "Mill Creek",
+          "latitude": "39.15936111",
+          "longitude": "-84.53226389",
+          "event_trigger": null,
+          "include_in_cso_dashboard": 1,
+          "raingauge_name": null
+        }
+      },
+      "start_bounds": [
+        null,
+        "2026-11-28T08:45:54-05:00"
+      ],
+      "last_active_at": "2026-11-28T08:45:54-05:00",
+      "row": {
+        "facility_id": "32608035",
+        "Current State": "Currently Active",
+        "timestamp": 1795855554000,
+        "Site Status": 6,
+        "Overflow Timer": 72,
+        "Active Status": "Active",
+        "State": "Active",
+        "info": {
+          "facility_id": "32608035",
+          "asset_type": "CSO",
+          "facility_name": "CSO-024",
+          "facility_name_edmr": "CSO-024",
+          "watershed": null,
+          "sewershed": "Mill Creek",
+          "latitude": "39.15936111",
+          "longitude": "-84.53226389",
+          "event_trigger": null,
+          "include_in_cso_dashboard": 1,
+          "raingauge_name": null
+        }
+      },
+      "source_updated_at": "2026-11-28T08:45:54-05:00",
+      "last_seen_at": "2026-11-28T13:51:29Z"
+    }
+  },
+  "open": {
+    "19701004": "19701004:2026-11-28T08:45:19-05:00",
+    "19806003": "19806003:2026-11-28T08:45:20-05:00",
+    "24708017": "24708017:2026-11-28T08:45:26-05:00",
+    "32608035": "32608035:2026-11-28T08:45:54-05:00"
+  },
+  "sites": {
+    "19701004": {
+      "at": "2026-11-28T08:45:19-05:00",
+      "seen_at": "2026-11-28T13:51:29Z",
+      "row": {
+        "facility_id": "19701004",
+        "Current State": "Currently Active",
+        "timestamp": 1795855519000,
+        "Site Status": 6,
+        "Overflow Timer": 72,
+        "Active Status": "Active",
+        "State": "Active",
+        "info": {
+          "facility_id": "19701004",
+          "asset_type": "CSO",
+          "facility_name": "CSO-223",
+          "facility_name_edmr": "CSO-223",
+          "watershed": null,
+          "sewershed": "Muddy Creek",
+          "latitude": "39.08892",
+          "longitude": "-84.64595",
+          "event_trigger": null,
+          "include_in_cso_dashboard": 1,
+          "raingauge_name": null
+        }
+      }
+    },
+    "19806003": {
+      "at": "2026-11-28T08:45:20-05:00",
+      "seen_at": "2026-11-28T13:51:29Z",
+      "row": {
+        "facility_id": "19806003",
+        "Current State": "Currently Active",
+        "timestamp": 1795855520000,
+        "Site Status": 6,
+        "Overflow Timer": 72,
+        "Active Status": "Active",
+        "State": "Active",
+        "info": {
+          "facility_id": "19806003",
+          "asset_type": "CSO",
+          "facility_name": "CSO-410",
+          "facility_name_edmr": "CSO-410",
+          "watershed": null,
+          "sewershed": "Muddy Creek",
+          "latitude": "39.07984694",
+          "longitude": "-84.63301306",
+          "event_trigger": null,
+          "include_in_cso_dashboard": 1,
+          "raingauge_name": null
+        }
+      }
+    },
+    "24708017": {
+      "at": "2026-11-28T08:45:26-05:00",
+      "seen_at": "2026-11-28T13:51:29Z",
+      "row": {
+        "facility_id": "24708017",
+        "Current State": "Currently Active",
+        "timestamp": 1795855526000,
+        "Site Status": 6,
+        "Overflow Timer": 72,
+        "Active Status": "Active",
+        "State": "Active",
+        "info": {
+          "facility_id": "24708017",
+          "asset_type": "CSO",
+          "facility_name": "CSO-416",
+          "facility_name_edmr": "CSO-416",
+          "watershed": null,
+          "sewershed": "Muddy Creek",
+          "latitude": "39.08072222",
+          "longitude": "-84.58605556",
+          "event_trigger": null,
+          "include_in_cso_dashboard": 1,
+          "raingauge_name": null
+        }
+      }
+    },
+    "32608035": {
+      "at": "2026-11-28T08:45:54-05:00",
+      "seen_at": "2026-11-28T13:51:29Z",
+      "row": {
+        "facility_id": "32608035",
+        "Current State": "Currently Active",
+        "timestamp": 1795855554000,
+        "Site Status": 6,
+        "Overflow Timer": 72,
+        "Active Status": "Active",
+        "State": "Active",
+        "info": {
+          "facility_id": "32608035",
+          "asset_type": "CSO",
+          "facility_name": "CSO-024",
+          "facility_name_edmr": "CSO-024",
+          "watershed": null,
+          "sewershed": "Mill Creek",
+          "latitude": "39.15936111",
+          "longitude": "-84.53226389",
+          "event_trigger": null,
+          "include_in_cso_dashboard": 1,
+          "raingauge_name": null
+        }
+      }
+    }
+  }
+}
