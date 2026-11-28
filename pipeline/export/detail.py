@@ -532,7 +532,7 @@ SOURCES: dict[str, dict] = {
     # Springfield's CSO map (ingest/ma_springfield_aquasight.py): the volume is the outfall's three-year average per
     # event, the commission's estimate for its notice; the log's remarks as written
     "ma-springfield-aquasight": {"volume_qualifier": lambda raw: "estimated" if raw.get("volume_method") else None,
-                                 "notes": text("row.remarks")},
+                                 "volume_method": text("volume_method"), "notes": text("row.remarks")},
 }
 
 

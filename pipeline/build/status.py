@@ -841,6 +841,7 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
                     continue
             events.append(r)
     settle_dropped_notices(events, dropped_notices)
+    carry_map_ends(events)
     return files, events, problems
 
 
@@ -872,6 +873,48 @@ def settle_dropped_notices(events: list[dict], dropped: set) -> None:
                     "_ended_before_basis": raw.get("_ended_before_basis"),
                     "_ended_before_from": e["event_id"]}
         t.update(status="ended", time_precision="bound")
+
+
+# operator sources whose linked duplicates give their end to the shown record (ingest/ma_springfield_aquasight.py)
+MAP_END_SOURCES = {"ma-springfield-aquasight"}
+
+
+def carry_map_ends(events: list[dict]) -> None:
+    """In place, after load: an ended record of MAP_END_SOURCES linked as the duplicate of a shown record that has no
+    ended_at gives that record its end (Springfield's CSO map logs each overflow's end; MassDEP's portal notices give
+    none, so the portal record had only the bound of its ceased report, raw._ended_before, or no end at all). The shown
+    record gets ended_at, raw._ended_at_from (the map's event id), raw._ended_at_basis in plain words and
+    raw._ended_at_precision; a stated end replaces a bound (time_precision "bound" becomes the end's precision) and an
+    ongoing record becomes ended, since the operator's own instrument record says the overflow ended. Never over an
+    ended_at the shown record already has (a verified duration wins), never an end before its start (Astra 2026-11-28
+    P1)."""
+    by_id = {e["event_id"]: e for e in events}
+    for e in events:
+        t = by_id.get(e.get("duplicate_of"))
+        if e.get("source_id") not in MAP_END_SOURCES or t is None or t is e or e.get("status") != "ended":
+            continue
+        end = parse_time(e.get("ended_at"))
+        if end is None or t.get("ended_at"):
+            continue
+        start = parse_time(t.get("started_at"))
+        if start is not None and end < start:
+            continue
+        traw = dict(t.get("raw") if isinstance(t.get("raw"), dict) else {})
+        was = t.get("status")
+        basis = f"end time from the operator's CSO map, record {e['event_id']}"
+        if was == "ongoing":
+            basis += "; the map's own record says the overflow ended, so this record is ended"
+        if traw.get("_ended_before"):
+            basis += f"; it replaces the latest possible end {traw['_ended_before']}"
+            traw["_ended_before_replaced"] = traw.pop("_ended_before")
+            traw.pop("_ended_before_basis", None)
+        traw.update(_ended_at_from=e["event_id"], _ended_at_basis=basis,
+                    _ended_at_precision=e.get("time_precision") or "minute")
+        t["raw"] = traw
+        t["ended_at"] = e["ended_at"]
+        t["status"] = "ended"
+        if t.get("time_precision") == "bound":
+            t["time_precision"] = e.get("time_precision") or "minute"
 
 
 # read last, in this order, tagged extra: OSM receiving waters, DC's NHD waters (ingest/dc_waters.py), the NHD

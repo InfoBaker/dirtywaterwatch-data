@@ -372,3 +372,147 @@ def test_the_current_status_goes_to_meta_with_the_maps_own_rules(tmp_path, ctx):
     assert all(r["event_type"] == "cso" for r in recs)          # status rows never become events
     text = json.dumps(meta).lower()
     assert "clean" not in text and "not a finding that the water is safe" in text
+
+
+# ---------------------------------------------------------------- Astra 2026-11-28
+
+def test_an_ongoing_row_is_never_linked(tmp_path, ctx):
+    """P1 (a): an overflow the map shows as going on stands on its own, never behind a portal record."""
+    write_json(tmp_path / "ma-massdep.json", {"source_id": "ma-massdep", "ok": True,
+                                              "records": [portal_rec("n9", "SPR010", "2026-11-27T19:55:00-05:00")]})
+    log = [row(1, "CSO010", "2026-11-27 19:55:00", None, "2026-11-27 20:10:00")]
+    code, recs, meta = S.run(CONFIG, STATUS, log, NOW, events_dir=tmp_path, out=tmp_path / "out.json", ctx=ctx)
+    assert recs[0]["status"] == "ongoing" and recs[0]["duplicate_of"] is None
+    assert meta["links"]["linked_to_portal"] == 0
+
+
+def test_a_portal_record_that_starts_after_the_rows_end_is_another_overflow(tmp_path, ctx):
+    """P2: the map's 10:00-10:05 and the portal's 10:10 at the same outfall are two overflows."""
+    write_json(tmp_path / "ma-massdep.json", {"source_id": "ma-massdep", "ok": True,
+                                              "records": [portal_rec("n8", "SPR010", "2026-11-20T10:10:00-05:00")]})
+    log = [row(1, "CSO010", "2026-11-20 10:00:00", "2026-11-20 10:05:00"),
+           row(2, "CSO010", "2026-11-20 10:10:00", "2026-11-20 10:15:00")]
+    code, recs, meta = S.run(CONFIG, STATUS, log, NOW, events_dir=tmp_path, out=tmp_path / "out.json", ctx=ctx)
+    by = {r["source_record_id"]: r for r in recs}
+    assert by["1"]["duplicate_of"] is None and by["2"]["duplicate_of"] == "ma-massdep:n8"
+
+
+def test_one_row_that_does_not_build_keeps_its_previous_record(tmp_path, ctx, monkeypatch):
+    """P3: a far-future end is read as out of range (the record stays, with a parse error); a row that raises keeps
+    the previous version of its record, and the run's health is false."""
+    out = tmp_path / "out.json"
+    log = LOG + [row(100 + i, "CSO042", f"2026-10-{10 + i} 10:00:00", f"2026-10-{10 + i} 10:30:00") for i in range(6)]
+    assert S.run(CONFIG, STATUS, log, NOW, events_dir=tmp_path, out=out, ctx=ctx)[0] == 0
+    bad = [dict(LOG[0], end_timestamp="9999-12-31 23:59:00")] + log[1:]
+    code, recs, meta = S.run(CONFIG, STATUS, bad, NOW, events_dir=tmp_path, out=out, ctx=ctx)
+    r = {x["source_record_id"]: x for x in recs}["70749"]
+    assert code == 0 and len(recs) == len(log) and r["ended_at"] is None and "out of range" in r["parse_error"]
+    real = S.to_record
+
+    def boom(row, *a, **k):
+        if row.get("id") == 70970:
+            raise OverflowError("date value out of range")
+        return real(row, *a, **k)
+    monkeypatch.setattr(S, "to_record", boom)
+    code, recs, meta = S.run(CONFIG, STATUS, log, NOW, events_dir=tmp_path, out=out, ctx=ctx)
+    doc = read_json(out)
+    assert code == 1 and doc["ok"] is False and doc["count"] == len(log) and meta["kept_previous"] == 1
+    kept = {x["source_record_id"]: x for x in doc["records"]}["70970"]
+    assert kept["ended_at"] == "2026-11-27T00:20:00-05:00" and kept["raw"]["_kept_previous_since"]
+
+
+def test_many_rows_that_do_not_build_are_a_failed_read(tmp_path, ctx, monkeypatch):
+    out = tmp_path / "out.json"
+    assert S.run(CONFIG, STATUS, LOG, NOW, events_dir=tmp_path, out=out, ctx=ctx)[0] == 0
+    before = read_json(out)["records"]
+
+    def boom(row, *a, **k):
+        raise OverflowError("date value out of range")
+    monkeypatch.setattr(S, "to_record", boom)
+    assert S.run(CONFIG, STATUS, LOG, NOW, events_dir=tmp_path, out=out, ctx=ctx)[0] == 1
+    doc = read_json(out)
+    assert doc["ok"] is False and doc["records"] == before and "did not build" in doc["error"]
+
+
+def test_the_volume_basis_reaches_the_public_detail_and_the_csv(ctx):
+    """P5: the reader is told the figure is the outfall's three-year average, the operator's estimate."""
+    from export import csv as C
+    from export import detail as D
+    r = build(ctx)["70970"]
+    det = D.detail_of(r)
+    assert det["volume_qualifier"] == "estimated"
+    for words in ("Springfield Water and Sewer Commission", "three-year average", "not a measurement of this event"):
+        assert words in det["volume_method"], words
+    e = {**r, "detail": det}
+    row_ = dict(zip(C.COLUMNS, C.event_row(e, C._Context([], [], {}, C.SiteLinks([e], [], [], set())))[0]))
+    assert row_["volume_gal"] == "2009573" and row_["volume_qualifier"] == "estimated"
+    assert "three-year average" in row_["volume_method"] and "not a measurement" in row_["volume_method"]
+    assert "volume_method" not in D.detail_of(build(ctx)["60001"])       # no volume, no method
+
+
+# ---------------------------------------------------------------- the map's end on the portal record (build/status.py)
+
+def _load(tmp_path, portal, mapped):
+    from build import status as ST
+    d = tmp_path / "events"
+    d.mkdir(exist_ok=True)
+    for sid, rs in (("ma-massdep", portal), (S.SOURCE_ID, mapped)):
+        (d / f"{sid}.json").write_text(json.dumps({"source_id": sid, "fetched_at": "2026-11-28T01:00:00Z", "ok": True,
+                                                    "count": len(rs), "records": rs}))
+    _, events, problems = ST.load_events(d)
+    return ST, {e["event_id"]: e for e in events}
+
+
+def _mapped(ctx, start, end, dup):
+    r = build(ctx, log=[row(7, "CSO010", start, end)])["7"]
+    r["duplicate_of"] = dup
+    return r
+
+
+def test_a_portal_record_with_no_end_takes_the_maps_end(tmp_path, ctx):
+    p = portal_rec("n1", "SPR010", "2026-11-26T20:15:00-05:00")
+    p["status"] = "ongoing"
+    m = _mapped(ctx, "2026-11-26 20:15:00", "2026-11-27 00:20:00", p["event_id"])
+    ST, ev = _load(tmp_path, [p], [m])
+    t = ev[p["event_id"]]
+    assert t["ended_at"] == "2026-11-27T00:20:00-05:00" and t["status"] == "ended"
+    assert t["raw"]["_ended_at_from"] == m["event_id"] and t["raw"]["_ended_at_precision"] == "minute"
+    assert t["raw"]["_ended_at_basis"].startswith("end time from the operator's CSO map, record ")
+    assert "so this record is ended" in t["raw"]["_ended_at_basis"]
+    rules = ST.read_json(ST.DATA_DIR / "rules.json")
+    ivs = ST._event_intervals(t, "MA", datetime(2026, 11, 27, 12, 0, tzinfo=UTC), None, rules)
+    assert ivs and min(iv["start"] for iv in ivs) <= datetime(2026, 11, 27, 1, 15, tzinfo=UTC)
+    assert all(iv["end"] <= datetime(2026, 11, 27, 5, 20, tzinfo=UTC) + ST.timedelta(hours=73) for iv in ivs)
+
+
+def test_the_maps_end_replaces_a_bound(tmp_path, ctx):
+    p = portal_rec("n2", "SPR010", "2026-11-26T20:15:00-05:00")
+    p.update(time_precision="bound")
+    p["raw"].update(_ended_before="2026-11-27T09:00:00-05:00", _ended_before_basis="the portal's ceased report")
+    m = _mapped(ctx, "2026-11-26 20:15:00", "2026-11-27 00:20:00", p["event_id"])
+    _, ev = _load(tmp_path, [p], [m])
+    t = ev[p["event_id"]]
+    assert t["ended_at"] == "2026-11-27T00:20:00-05:00" and t["time_precision"] == "minute"
+    assert "_ended_before" not in t["raw"] and t["raw"]["_ended_before_replaced"] == "2026-11-27T09:00:00-05:00"
+    assert "replaces the latest possible end" in t["raw"]["_ended_at_basis"]
+
+
+def test_an_end_the_portal_record_has_is_kept(tmp_path, ctx):
+    p = portal_rec("n3", "SPR010", "2026-11-26T20:15:00-05:00")
+    p["ended_at"] = "2026-11-27T01:00:00-05:00"                         # a verified duration's end
+    m = _mapped(ctx, "2026-11-26 20:15:00", "2026-11-27 00:20:00", p["event_id"])
+    early = portal_rec("n4", "SPR010", "2026-11-27T02:00:00-05:00")       # the map's end is before this start
+    m2 = _mapped(ctx, "2026-11-26 20:15:00", "2026-11-27 00:20:00", early["event_id"])
+    m2["event_id"] = m2["event_id"] + "b"
+    _, ev = _load(tmp_path, [p, early], [m, m2])
+    assert ev[p["event_id"]]["ended_at"] == "2026-11-27T01:00:00-05:00"
+    assert "_ended_at_from" not in ev[p["event_id"]]["raw"]
+    assert ev[early["event_id"]]["ended_at"] is None and "_ended_at_from" not in ev[early["event_id"]]["raw"]
+
+
+def test_an_ongoing_map_record_gives_no_end(tmp_path, ctx):
+    p = portal_rec("n5", "SPR010", "2026-11-27T19:55:00-05:00")
+    p["status"] = "ongoing"
+    m = _mapped(ctx, "2026-11-27 19:55:00", None, p["event_id"])        # as if linked by an older run
+    _, ev = _load(tmp_path, [p], [m])
+    assert ev[p["event_id"]]["status"] == "ongoing" and ev[p["event_id"]]["ended_at"] is None

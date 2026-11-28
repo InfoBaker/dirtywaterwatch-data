@@ -44,8 +44,10 @@ Records (one cso record per log row, in ingest.ma_massdep's shape)
 
 One event, not two
   MassDEP's portal holds the same overflows. A log row and the portal's record of the same overflow (same permit and the
-  same outfall, suffix included, starts within LINK_MINUTES) are one event: the row becomes duplicate_of the portal
-  family's shown record (operator_mail.portal_families), one to one, closest first. On the saved answers of 2026-11-28
+  same outfall, suffix included, the portal's start within LINK_MINUTES of the row's and not after the row's end) are
+  one event: the row becomes duplicate_of the portal family's shown record (operator_mail.portal_families), one to
+  one, closest first. A row with no end is never linked, so an overflow going on is never hidden. build/status.py
+  (carry_map_ends) gives a shown portal record with no end the linked row's end. On the saved answers of 2026-11-28
   against the portal file of 2026-11-14, 1,286 rows link within 10 minutes (1,265 at the same minute); wider gaps are
   mostly the next overflow of the outfall (the portal's start at the row's end). The module sorts after ma_massdep and
   reads that run's events file; with no file, every row stands alone (meta.links says so).
@@ -56,8 +58,9 @@ Current status (meta.outfalls, never events)
   status answer, shows "Data Not Received"). meta.data_not_received lists those outfalls so the gap is visible. A label
   is the map's own; none is a finding that the water is safe.
 
-Failures: a failed request, no key, a non-JSON answer, a row of another community, an empty log or one under half the
-  records held: ok=False, the previous records kept. A failed status read writes the records with health false
+Failures: a failed request, no key, a non-JSON answer, a row of another community, an empty log, one under half the
+  records held, or more than a tenth of its rows not built: ok=False, the previous records kept. A row that does not
+  build keeps the previous version of its record (meta.kept_previous; health false). A failed status read writes the records with health false
   (partial) and says so in meta.
 Run from pipeline/: python -m ingest.ma_springfield_aquasight [--files CONFIG STATUS LOG --out events.json]
 Cadence: hourly with the refresh (Massachusetts is live).
@@ -99,6 +102,7 @@ TZ = ZoneInfo(TZ_NAME)
 SPEC = {"source_id": SOURCE_ID, "outfall_prefix": "SPR", "town": "SPRINGFIELD"}      # ma_common.place's lookups
 LINK_MINUTES = 10               # a log row and a portal record of the same outfall this close in start are one overflow
 SHRINK = 0.5                    # a log under this share of the records held is a failed read
+MAX_UNBUILT = 0.1               # more than this share of rows that do not build is a failed read
 STATUS_HOURS = 56               # the app asks cso_status and cso_status_log this far back
 STALE_HOURS = 12                # the app shows "Data Not Received" for a noOverflow row not updated in this long
 MAX_SCRIPTS = 8
@@ -130,9 +134,9 @@ ADVICE = ("Avoid contact with these water bodies for 48 hours after the discharg
           "resource areas, such as bathing beaches,are affected.")
 ADVICE_BASIS = "the operator's CSO map pop-up (the wording of 314 CMR 16.04(10)(g))"
 TIME_BASIS = "local clock as printed, no zone stated; read as America/New_York"
-VOLUME_METHOD = ("the operator's estimate for its notice: the outfall's three-year average discharge per event, which "
-                 "the map prints for every event (the commission's \"Estimated volumes and calculation method\", "
-                 "CSO-Three-Year-Volumes); not a measurement of this event")
+VOLUME_METHOD = ("Springfield Water and Sewer Commission's estimate for its notice: the outfall's three-year average "
+                 "discharge per event, which its map shows for every event at the outfall; not a measurement of this "
+                 "event")
 PERSONAL_CONFIG_KEYS = re.compile(r"(?i)(_user|user_|^user$|created_by|modified_by|email|phone)")
 
 
@@ -278,11 +282,11 @@ def local_time(s, later: bool = False) -> tuple[datetime | None, str | None]:
     if not m:
         return None, "not a date and time"
     y, mo, d, hh, mi, ss = (int(x) if x else 0 for x in m.groups())
-    if y < 2000:
+    if not 2000 <= y <= 2100:
         return None, "the year is out of range"
     try:
         dt = datetime(y, mo, d, hh, mi, ss, tzinfo=TZ, fold=1 if later else 0)
-    except ValueError:
+    except (ValueError, OverflowError):
         return None, "not a valid date"
     if dt.astimezone(UTC).astimezone(TZ).replace(tzinfo=None, fold=0) != dt.replace(tzinfo=None, fold=0):
         return None, "a clock time that does not exist that day (the hour skipped when daylight time begins)"
@@ -422,8 +426,11 @@ def read_portal(events_dir: Path) -> list[dict] | None:
 
 
 def link(records: list[dict], portal: list[dict] | None) -> dict:
-    """Each row to the portal family of the same overflow: same permit and outfall id (suffix included), starts within
-    LINK_MINUTES, one to one, closest first; the row becomes duplicate_of the family's shown record."""
+    """Each row to the portal family of the same overflow: same permit and outfall id (suffix included), the portal's
+    start within LINK_MINUTES of the row's start and not after the row's end, one to one, closest start first; the row
+    becomes duplicate_of the family's shown record. A row with no end (ongoing, or an end not read) is never linked: it
+    stands on its own, so an overflow the map shows as going on is never hidden behind a portal record. build/status.py
+    carries a linked row's end to a shown portal record that has none (carry_map_ends)."""
     from ingest import operator_mail as O
     for r in records:
         r["duplicate_of"] = None
@@ -440,12 +447,12 @@ def link(records: list[dict], portal: list[dict] | None) -> dict:
         by_outfall.setdefault(oid, []).append(f)
     pairs = []
     for r in records:
-        s = O.parse_iso(r.get("started_at"))
-        if s is None or not r.get("outfall_id"):
+        s, e = O.parse_iso(r.get("started_at")), O.parse_iso(r.get("ended_at"))
+        if s is None or e is None or r.get("status") != "ended" or not r.get("outfall_id"):
             continue
         for f in by_outfall.get(r["outfall_id"].upper(), []):
             gap = abs((f["start"] - s).total_seconds())
-            if gap <= LINK_MINUTES * 60:
+            if gap <= LINK_MINUTES * 60 and f["start"].astimezone(UTC) <= e.astimezone(UTC):
                 pairs.append((gap, r["event_id"], f["root"], r, f))
     pairs.sort(key=lambda x: (x[0], x[1], x[2]))
     used_r, used_f, n = set(), set(), 0
@@ -530,12 +537,23 @@ def run(config: list[dict], status: list[dict] | None, log: list[dict], now: dat
         from ingest import operator_mail as O
         ctx = O.ma_context({"springfield": SPEC})
     cfg = {str(c.get("asset")).strip().upper(): c for c in config}
-    recs, unread = [], []
+    before = {str(r.get("source_record_id")): r for r in prev.get("records") or [] if isinstance(r, dict)}
+    recs, unread, kept = [], [], 0
     for row in log:
         try:
             recs.append(to_record(row, cfg.get(str(row.get("asset") or "").strip().upper()), ctx, fetched_at))
         except Exception as e:  # noqa: BLE001 - one row never stops the others
             unread.append(f"log row {row.get('id')}: not built ({type(e).__name__})")
+            old = before.get(str(row.get("id")))
+            if old is not None:             # the previous version of the record stays
+                old["raw"] = {**(old.get("raw") or {}), "_kept_previous_since": fetched_at}
+                recs.append(old)
+                kept += 1
+    if len(unread) > len(log) * MAX_UNBUILT:
+        why = (f"{len(unread)} of {len(log)} overflow-log rows did not build; the previous records are kept")
+        write_events(SOURCE_ID, [], ok=False, error=why, meta={"unread": unread[:50]}, path=out)
+        print(f"{SOURCE_ID}: FAILED {why}", file=sys.stderr)
+        return 1, [], {}
     links = link(recs, read_portal(events_dir))
     recs.sort(key=lambda r: (r["started_at"] or "", r["event_id"]), reverse=True)
     outfalls = outfall_status(config, status, log, now)
@@ -552,6 +570,7 @@ def run(config: list[dict], status: list[dict] | None, log: list[dict], now: dat
         meta["status_error"] = status_error or "the status table was not read"
     if unread:
         meta["unread"] = unread
+        meta["kept_previous"] = kept
     if status is None or unread:
         write_events(SOURCE_ID, recs, ok=False, partial=True, meta=meta, path=out,
                      error="; ".join(([meta["status_error"]] if status is None else []) + unread))
