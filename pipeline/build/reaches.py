@@ -107,6 +107,7 @@ import common
 from build import shoreline as SH
 from common import BUILD_DIR, DATA_DIR, HEADERS, now_iso, read_json, write_json
 from common import error_detail, error_text
+from ingest import outfall_water_corrections as HAND
 
 NLDI = "https://api.water.usgs.gov/nldi/linked-data"
 EPA_ATTRS = "https://watersgeo.epa.gov/arcgis/rest/services/NHDPlus/NHDPlus/MapServer/2/query"
@@ -716,13 +717,19 @@ def reported_outfalls(days: int = REPORTED_DAYS) -> set:
     return out
 
 
+# a registry row tied by the permit's statement alone, its point away from the water (candidate_outfalls)
+PERMIT_STATED_OFF_WATER = "permit_stated_off_water"
+
+
 @publication_inputs
 def candidate_outfalls(waters: dict | None = None, registry: list[dict] | None = None, live: set | None = None,
                        skipped: dict | None = None, reported: set | None = None,
                        plants: bool | None = None, shore: dict | None = None) -> list[dict]:
     """The outfalls to trace (module docstring). `skipped` (if given) receives {key: {permit, outfall,
     state, kind, status, why}} for registry outfalls in live states that are not traced: closed,
-    coords_problem, not_river (its water record is a bay, sound, lake or pond), no_location. An outfall
+    coords_problem, not_river (its water record is a bay, sound, lake or pond), no_location,
+    permit_stated_off_water (tied by the permit's statement alone, its point beyond the tie distance of the water:
+    ingest.outfall_water_corrections.stated_off_water). An outfall
     the registry lists as closed but a recent report names (`reported`, reported_outfalls()) is traced:
     it is open in fact (Vermont reports discharges from outfalls ECHO lists as closed). Treatment-plant
     outfalls (outfall_kind "plant") are traced only with plants=True (TRACE_PLANTS; --plants), else
@@ -810,6 +817,13 @@ def candidate_outfalls(waters: dict | None = None, registry: list[dict] | None =
             continue
         if o.get("coords_problem"):
             skip[k] = {**base, "why": "coords_problem", "note": str(o["coords_problem"])[:300]}
+            continue
+        if HAND.stated_off_water(o):
+            skip[k] = {**base, "why": PERMIT_STATED_OFF_WATER,
+                       "note": (f"tied to {o.get('water_slug')} by the permit's statement; its point is "
+                                + (f"{o['distance_m']} m from" if o.get("distance_m") is not None else "at an unknown "
+                                   "distance from") + f" the water, beyond the {HAND.TIE_M} m tie distance: no stretch "
+                                "is modeled from a point the outfall is not at")}
             continue
         add(permit, oid, o.get("lat"), o.get("lon"), o.get("water_slug"), "echo", o.get("outfall_name"), row=o)
         if k in out and is_closed(o):
@@ -1486,7 +1500,13 @@ def stale_traces(cached: dict[str, dict], cands: list[dict], skipped: dict[str, 
          (a renamed slug: plan()'s touch path writes the new one) is not changed water; a record with no path (tidal
          or lake at the outfall) of a row still traced is only relabelled by the touch path, since its answer comes
          from the point, not the water;
-      3. the outfall is gone from the registry (a live state's outfall no registry file lists; only when every
+      3. the row is tied by the permit's statement alone and the trace's own start point is known to lie beyond the
+         tie distance of the water (skipped as permit_stated_off_water, and the trace starts at the point the row's
+         distance was measured from, ingest.outfall_water_corrections.point_off_water: Euclid's regulators; a stretch
+         from that point is drawn where the outfall is not). A row skipped so for an unknown distance (no point now,
+         or a point other than the measured one) keeps a trace of the same water (Astra review 2026-11-28 pass 2: an
+         unknown distance blocks a new stretch but does not remove one);
+      4. the outfall is gone from the registry (a live state's outfall no registry file lists; only when every
          registry file was read, registry_complete).
     A closed outfall's trace is retire_closed()'s. Event points, advisory stretches and the separate sewer caution's
     points are not registry outfalls: never here.
@@ -1527,6 +1547,11 @@ def stale_traces(cached: dict[str, dict], cands: list[dict], skipped: dict[str, 
             continue
         if c is None and ((v is not None and v.get("why") == "closed") or (r is not None and is_closed(r))):
             continue                                # retire_closed
+        if c is None and v is not None and v.get("why") == PERMIT_STATED_OFF_WATER and r is not None \
+                and HAND.point_off_water(r, d.get("lat"), d.get("lon")) is True:
+            out[k] = ("traced from a point the outfall is not at: the row is tied to its water by the permit's "
+                      "statement alone, and its point lies beyond the tie distance of the water")
+            continue        # not known off (the row lost its point, or moved): the water checks below decide (pass 2)
         if r is not None:
             row_slug = r.get("water_slug")
         else:
@@ -1567,7 +1592,8 @@ def retire_stale(cached: dict[str, dict], cands: list[dict], skipped: dict[str, 
 def write_index(cands: list[dict], skipped: dict[str, dict], cached: dict[str, dict], live: set, run: dict | None) -> dict:
     """data/build/reach-outfalls.json: every live-state registry outfall's trace state (traced,
     tidal_at_outfall, lake_at_outfall, no_trace, pending; or why it is not traced: closed,
-    coords_problem, not_river, no_location), counts by state, and the last runs' request counts."""
+    coords_problem, not_river, no_location, permit_stated_off_water), counts by state, and the last runs' request
+    counts."""
     prev = read_json(REACH_INDEX) or {}
     rows = {}
     for c in cands:
@@ -1601,6 +1627,8 @@ def write_index(cands: list[dict], skipped: dict[str, dict], cached: dict[str, d
                         "coords_problem": "the registry flags the outfall's coordinates: not traced",
                         "not_river": "its water record is a bay, sound, lake or pond: not traced",
                         "no_location": "no coordinates and no EPA reach id: not traced",
+                        PERMIT_STATED_OFF_WATER: "tied to its water by the permit's statement alone, its point beyond "
+                        "the tie distance of the water: not traced (no stretch from a point the outfall is not at)",
                         "plant_deferred": "treatment-plant outfall: not traced yet (--plants)"},
            "counts": {"total": dict(Counter(r["status"] for r in rows.values())),
                       "by_state": {s: dict(c) for s, c in sorted(by_state.items())}},

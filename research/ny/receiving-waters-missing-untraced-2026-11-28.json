@@ -1,0 +1,36 @@
+{
+ "about": "Receiving-water names of reports that sat on no water page (untraced-outfall water fixes, 2026-11-28; research/registry/untraced-outfall-waters-2026-11-28.csv): North Tonawanda's overflow reports (NY0026280, NY DEC Sewage Pollution Right to Know) name Sawyer Creek, which the USGS NHD high-resolution flowlines carry (GNIS 942105) 73 m from the reports' point, for python -m ingest.waters_from_nhd --names <this file> --state NY. Points are the reports' own.",
+ "state": "NY",
+ "waters": 0,
+ "reports": 0,
+ "resolved_names": 1,
+ "resolved_reports": 5,
+ "build": {
+  "date": "2026-11-28",
+  "command": "python -m ingest.waters_from_nhd --names research/ny/receiving-waters-missing-untraced-2026-11-28.json --state NY",
+  "records_built": 4,
+  "names_resolved": 1,
+  "network_requests": 6
+ },
+ "rows": [],
+ "resolved": [
+  {
+   "name": "Sawyer Creek",
+   "reports": 5,
+   "slugs": [
+    "sawyer-creek-ny"
+   ],
+   "how": "record built from the name",
+   "points": [
+    [
+     43.0635,
+     -78.844
+    ],
+    [
+     43.0621,
+     -78.8465
+    ]
+   ]
+  }
+ ]
+}

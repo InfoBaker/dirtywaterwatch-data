@@ -38,6 +38,12 @@ outfalls are not rounded; the Indiana file's own three-decimal rule aside, 2 bel
    kept (counted once: build.rain_likely.cso_counted, export.outfalls alias_of; the rain caution still reads both rows),
    and the kept row lists the other permits in also_permits. A row is never deleted.
 
+5. PERMIT (2026-11-28, untraced-outfall fixes, research/registry/untraced-outfall-waters-2026-11-28.csv): an outfall
+   EPA places only at the permittee's treatment plant (coords_from 'facility', one point shared by every outfall of the
+   permit: Akron, OH0023833) whose state permit lists its own coordinates. The corrected point is the permit's, in
+   decimal degrees; EPA's point is kept in epa_lat/epa_lon, and the row is corrected only while EPA's row still carries
+   the facility point.
+
 Every entry states the row it expects. A row that is neither as expected nor already corrected is reported and left as
 it is (changed EPA evidence must be looked at, not overwritten); the script writes nothing then.
 """
@@ -117,6 +123,58 @@ FEATURE = {
 }
 
 
+AKRON_PERMIT = ("Ohio EPA NPDES permit 3PF00000 (City of Akron, OH0023833, effective 2023-09-01), Part II E.1 "
+                "'Permitted CSO Outfalls'")
+AKRON_URL = "https://dam.assets.ohio.gov/image/upload/epa.ohio.gov/Portals/35/permits/doc/3PF00000.pdf"
+AKRON_FACILITY = (41.157121, -81.569837)        # EPA's point for every Akron CSO row: the treatment plant's
+# outfall, its name in the permit, the receiving water the permit names, latitude and longitude (degrees minutes
+# seconds, as the permit gives them; west longitude)
+AKRON_OUTFALLS = (
+    ("046", "Kelly Avenue - Rack 3", "Little Cuyahoga River", "41 03'50\"", "81 28'53\""),
+    ("049", "Factory Street - Rack 6", "Little Cuyahoga River", "41 03'54\"", "81 29'05\""),
+    ("053", "Case Avenue - Newton Street District Rack 10", "Little Cuyahoga River", "41 04'30\"", "81 29'03\""),
+    ("054", "Hazel Street - District 4 - Rack 11", "Little Cuyahoga River", "41 04'45\"", "81 29'09\""),
+    ("057", "Forge Field Storage Basin (former Rack 14)", "Little Cuyahoga River", "41 05'7.6\"", "81 29'43.1\""),
+    ("058", "Cascade Village Storage Basin (former Rack 15)", "Little Cuyahoga River", "41 05'27\"", "81 30'16\""),
+    ("065", "Howard Street Storage Basin (former Rack 22)", "Little Cuyahoga River", "41 05'34.3\"", "81 31'5.3\""),
+    ("069", "Aqueduct Street Outlet @ Hickory Street - Rack 26", "Little Cuyahoga River", "41 06'05\"", "81 31'40\""),
+    ("070", "Uhler Avenue @ Memorial Parkway - Rack 27", "Little Cuyahoga River", "41 06'15\"", "81 31'38\""),
+    ("071", "Memorial Parkway @ Hickory Street - Rack 28", "Little Cuyahoga River", "41 06'15\"", "81 31'40\""),
+    ("072", "Uhler Avenue - Carpenter Street Outlet - Rack 29", "Little Cuyahoga River", "41 06'30\"", "81 31'40\""),
+    ("075", "Carpenter Heights District at Cascade Park Rd - Rack 32", "Cuyahoga River", "41 07'04\"", "81 31'20\""),
+    ("076", "North Side Interceptor at Cuyahoga River & Main Street - Rack 33", "Cuyahoga River", "41 07'23\"",
+     "81 30'38\""),
+    ("077", "Riverside Drive District at Metroparks Easement Rd - Rack 34", "Cuyahoga River", "41 07'24\"",
+     "81 29'55\""),
+    ("078", "Gorge Boulevard District at Front St Bridge - Rack 35", "Cuyahoga River", "41 07'04\"", "81 29'38\""),
+    ("081", "Goodyear Retention Tank (former Racks 2N and 2S)", "Little Cuyahoga River", "41 03'34\"", "81 28'29\""),
+    ("083", "Cuyahoga Street Storage Facility (former Racks 40/31)", "Little Cuyahoga River", "41 06'46.3\"",
+     "81 31'39.4\""),
+    ("084", "Ohio Canal Interceptor Tunnel", "Little Cuyahoga River", "41 05'40.9\"", "81 31'21.1\""),
+)
+
+
+def dms(text: str) -> float:
+    """'41 03'50"' -> 41.063889 (degrees minutes seconds to decimal degrees, six places)."""
+    d, rest = text.split(" ", 1)
+    m, sec = rest.rstrip('"').split("'")
+    return round(int(d) + int(m) / 60 + float(sec) / 3600, 6)
+
+
+# (file, permit, outfall): EPA's point, the permit's point, coords_note, the source read
+PERMIT = {
+    ("outfalls-us.json", "OH0023833", n): (
+        AKRON_FACILITY, (dms(lat), -dms(lon)),
+        f"EPA's inventory gives this outfall only the treatment plant's point ({AKRON_FACILITY[0]}, "
+        f"{AKRON_FACILITY[1]}), shared by every Akron CSO row; the point used is the one the City of Akron's Ohio EPA "
+        f"permit lists for outfall {n} ('{name}', to the {water}: {lat} N, {lon} W), in decimal degrees. EPA's point "
+        "is kept in epa_lat/epa_lon",
+        {"name": f"{AKRON_PERMIT}: outfall {n} '{name}' to {water}, at {lat}, {lon}", "url": AKRON_URL,
+         "read_at": "2026-11-28"})
+    for n, name, water, lat, lon in AKRON_OUTFALLS
+}
+
+
 def _searched(idem: str, cso: str, outfalls: str) -> str:
     return (f"EPA's national CSO inventory gives only the treatment plant's point for this outfall, and no source "
             f"found places it (read {READ}): {IDEM_LAYER} lists {idem}; {CSO_LAYER} lists {cso}; {OUTFALL_LAYER} lists "
@@ -176,7 +234,7 @@ def _pt(o: dict, a: str = "lat", b: str = "lon") -> tuple:
 
 
 def _tables():
-    return (("sign", SIGN), ("feature", FEATURE), ("nopoint", NO_POINT), ("status", FIXES["status"]),
+    return (("sign", SIGN), ("feature", FEATURE), ("nopoint", NO_POINT), ("permit", PERMIT), ("status", FIXES["status"]),
             ("add", FIXES["add"]), ("shared", FIXES["shared"]), ("also", FIXES["also"]))
 
 
@@ -245,6 +303,14 @@ def state(table: str, o: dict, v) -> str:
             return "original"
         return (f"{k}: neither EPA's row as expected (EPA's point {epa}) nor the corrected row: lat/lon {_pt(o)}, echo "
                 f"{_pt(o, 'echo_lat', 'echo_lon')}, epa {_pt(o, 'epa_lat', 'epa_lon')}; not changed")
+    if table == "permit":
+        if _pt(o) == v[1] and _pt(o, "epa_lat", "epa_lon") == v[0]:
+            return "corrected"
+        if "epa_lat" not in o and _pt(o) == v[0] and o.get("coords_from") == "facility":
+            return "original"
+        return (f"{k}: neither EPA's row as expected (the facility point {v[0]}, coords_from 'facility') nor the "
+                f"corrected row: lat/lon {_pt(o)} ({o.get('coords_from')!r}), epa {_pt(o, 'epa_lat', 'epa_lon')}; not "
+                "changed")
     if table == "feature":
         if _pt(o) == v[0]:
             return "corrected"
@@ -287,7 +353,10 @@ def write(table: str, o: dict, v) -> bool:
     moved = _pt(o) != (v[0] if table == "feature" else v[1])
     for f in GONE:
         o.pop(f, None)
-    if table == "sign":
+    if table == "permit":
+        (o["epa_lat"], o["epa_lon"]), (o["lat"], o["lon"]) = v[0], v[1]
+        o["coords_from"], o["coords_note"], src = "state permit", v[2], v[3]
+    elif table == "sign":
         (o["epa_lat"], o["epa_lon"]), (o["lat"], o["lon"]) = v[0], v[1]
         if v[4] is not None:                     # EPA's reach for its own wrong point: evidence of the wrong place
             o["epa_reach_id"] = v[4]
@@ -313,8 +382,11 @@ def problems(table: str, o: dict, v) -> list[str]:
         return [f"{k}: {f} is not the table's" for f, w in want.items() if o.get(f) != w]
     if table in ("nopoint", "add", "shared", "also"):
         return []
-    want = dict(zip(("lat", "lon"), v[1] if table == "sign" else v[0]))
-    if table == "sign":
+    want = dict(zip(("lat", "lon"), v[1] if table in ("sign", "permit") else v[0]))
+    if table == "permit":
+        want.update(epa_lat=v[0][0], epa_lon=v[0][1], coords_from="state permit", coords_note=v[2],
+                    coords_source={**v[3], "by": BY})
+    elif table == "sign":
         want.update(epa_lat=v[0][0], epa_lon=v[0][1], coords_from="permitted_feature", coords_note=v[2],
                     coords_source={**v[3], "by": BY})
     else:

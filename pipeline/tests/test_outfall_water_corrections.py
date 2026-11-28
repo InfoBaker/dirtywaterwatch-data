@@ -44,14 +44,15 @@ def test_every_entry_names_a_record_of_its_state_with_its_name_and_kind():
     from build import status as S
     waters = S.load_waters()
     cs = H.load()
-    assert len(cs) == 116
+    assert len(cs) == 150
     for c in cs:
         w = waters.get(c["water_slug"])
         assert w, c["water_slug"]
         assert w.get("state") == c["state"], c
         assert (w.get("name"), w.get("kind")) == (c["water_name"], c["water_kind"]), c
-        assert c["was"] in waters and c["was"] != c["water_slug"]
-        assert 0 <= c["distance_m"] <= 400
+        # was None: the row had no water at all (untraced-outfall water fixes 2026-11-28: Defiance's Preston Run rows)
+        assert c["was"] is None or (c["was"] in waters and c["was"] != c["water_slug"])
+        assert H.entry_problems(c) == [], c
         assert c["stated"] in c["basis"] and c["basis"].startswith("the permit's receiving water")
     assert len({(c["file"], c["npdes_permit"], c["outfall"]) for c in cs}) == len(cs)
 
@@ -198,3 +199,229 @@ def test_a_corrected_row_whose_receiving_water_text_changed_goes_back_to_the_mat
     held = [_matchers_row()]
     H.apply_rows("outfalls-new-england.json", held, [_entry()])
     assert OW.hand_kept(held[0], counts) is True and counts["MA"]["kept: hand correction"] == 1
+
+
+# ---------------------------------------------------------------- untraced-outfall fixes 2026-11-28 (the module's defects)
+
+def _no_water_row(**kw):
+    """A row the registry pass left with no water (ingest.outfall_waters: no record of the permit's name then)."""
+    o = {"npdes_permit": "OH0024899", "outfall": "014", "state": "OH", "receiving_water_echo": "Preston Run",
+         "lat": 41.28, "lon": -84.36, "water_slug": None, "water_name": None, "water_kind": None, "distance_m": None,
+         "match": "none", "water_match": "none: no record named 'Preston Run' in OH",
+         "no_water_reason": "no record named 'Preston Run' in OH", "water_matched_by": "ingest.outfall_waters (2026-11-17)"}
+    o.update(kw)
+    return o
+
+
+def _preston(**kw):
+    e = {"file": "outfalls-us.json", "npdes_permit": "OH0024899", "outfall": "014", "state": "OH", "stated": "Preston Run",
+         "was": None, "water_slug": "preston-run-oh", "water_name": "Preston Run", "water_kind": "stream",
+         "distance_m": 96, "date": "2026-11-28",
+         "basis": "the permit's receiving water in EPA's CSO inventory is 'Preston Run'"}
+    e.update(kw)
+    return e
+
+
+def test_a_row_that_had_no_water_is_not_said_to_have_had_another_one():
+    rows = [_no_water_row()]
+    assert H.apply_rows("outfalls-us.json", rows, [_preston()]) == []
+    why = rows[0]["replaced_match"]["why"]
+    assert "another water" not in why and "no water record" in why
+    # a row that had a water keeps the wording of a re-tie
+    rows = [_matchers_row()]
+    H.apply_rows("outfalls-new-england.json", rows, [_entry()])
+    assert rows[0]["replaced_match"]["why"] == "the permit names another water, which has its own record at the point"
+
+
+def test_revert_gives_back_the_reason_the_row_had_no_water():
+    rows = [_no_water_row()]
+    H.apply_rows("outfalls-us.json", rows, [_preston()])
+    o = rows[0]
+    assert "no_water_reason" not in o and o["replaced_match"]["no_water_reason"] == "no record named 'Preston Run' in OH"
+    o["receiving_water_echo"] = "Preston Ditch"                 # the permit's text changed: the correction goes back
+    assert H.apply_rows("outfalls-us.json", rows, [_preston()])
+    assert o["water_slug"] is None and o["match"] == "none" and not H.is_hand(o)
+    assert o["no_water_reason"] == "no record named 'Preston Run' in OH"
+    assert o["water_match"] == "none: no record named 'Preston Run' in OH" and "replaced_match" not in o
+
+
+def test_the_committed_rows_that_had_no_water_say_so_and_keep_their_reason():
+    for o in _rows("outfalls-us.json"):
+        before = o.get("replaced_match") if H.is_hand(o) else None
+        if before is not None and not before.get("water_slug"):
+            assert "another water" not in before["why"], (o["npdes_permit"], o["outfall"])
+            assert before.get("no_water_reason"), (o["npdes_permit"], o["outfall"])
+
+
+def _ninemile(**kw):
+    e = {"file": "outfalls-oh.json", "npdes_permit": "OH0043991", "outfall": "211", "state": "OH",
+         "stated": "Nine Mile Creek", "was": None, "water_slug": "ninemile-creek-cleveland-oh",
+         "water_name": "Ninemile Creek", "water_kind": "stream", "distance_m": 10, "date": "2026-11-28",
+         "basis": "the permit's receiving water in NEORSD's CSO notification layer is 'Nine Mile Creek'"}
+    e.update(kw)
+    return e
+
+
+def test_a_copy_with_no_receiving_water_text_in_another_file_takes_the_entry():
+    """NEORSD's outfall 211: the row the loader reads (data/outfalls-oh.json) names Nine Mile Creek; EPA's copy in
+    data/outfalls-us.json has no text at all, which says nothing against the entry, so it is corrected too and not
+    flagged for review. The entry's own row must still carry the text."""
+    us = [_no_water_row(npdes_permit="OH0043991", outfall="211", receiving_water_echo=None)]
+    assert H.apply_rows("outfalls-us.json", us, [_ninemile()]) == []
+    assert us[0]["water_slug"] == "ninemile-creek-cleveland-oh" and H.is_hand(us[0])
+    assert H.check("outfalls-us.json", us, [_ninemile()]) == []
+    assert H.holds(us[0], [_ninemile()])
+    # the entry's own file: a row with no text is not the row the correction read
+    oh = [_no_water_row(npdes_permit="OH0043991", outfall="211", receiving_water_echo=None)]
+    p = H.apply_rows("outfalls-oh.json", oh, [_ninemile()])
+    assert p and "needs review" in p[0] and oh[0]["water_slug"] is None
+    # a copy in another file whose text names another water still needs review
+    other = [_no_water_row(npdes_permit="OH0043991", outfall="211", receiving_water_echo="Euclid Creek")]
+    assert H.apply_rows("outfalls-us.json", other, [_ninemile()]) and other[0]["water_slug"] is None
+
+
+# ---------------------------------------------------------------- the permit states the water (Euclid, 2026-11-28)
+
+def _euclid(**kw):
+    e = {"file": "outfalls-us.json", "npdes_permit": "OH0031062", "outfall": "006", "state": "OH",
+         "stated": "City of Euclid-Frontal Lake Erie", "was": None, "water_slug": "lake-erie-oh", "water_name": "Lake Erie",
+         "water_kind": "lake", "distance_m": 1558, "date": "2026-11-28", "rule": "permit_states",
+         "permit_text": "Lake Erie via storm sewer",
+         "basis": "the permit's receiving water for outfall 006 in Ohio EPA permit 3PE00003 is 'Lake Erie via storm sewer'",
+         "url": "https://dam.assets.ohio.gov/image/upload/epa.ohio.gov/Portals/35/permits/doc/3PE00003.pdf"}
+    e.update(kw)
+    return e
+
+
+def test_an_entry_on_the_permits_statement_needs_the_quoted_phrase_and_its_address_not_a_distance():
+    assert H.entry_problems(_euclid()) == []
+    assert H.entry_problems(_entry()) == []
+    assert H.entry_problems(_entry(distance_m=401))                     # a tie by distance keeps its 400 m limit
+    assert H.entry_problems(_euclid(url=""))
+    assert H.entry_problems(_euclid(permit_text=""))
+    assert H.entry_problems(_euclid(basis="the permit's receiving water is Lake Erie"))   # the phrase not quoted
+    assert H.entry_problems(_euclid(permit_text="Euclid Creek via storm sewer"))           # names another water
+    assert H.entry_problems(_euclid(rule="nearest"))
+
+
+def test_a_row_tied_on_the_permits_statement_says_the_permit_names_the_water():
+    rows = [_no_water_row(npdes_permit="OH0031062", outfall="006", receiving_water_echo="City of Euclid-Frontal Lake Erie",
+                          lat=41.610833, lon=-81.502222)]
+    assert H.apply_rows("outfalls-us.json", rows, [_euclid()]) == []
+    o = rows[0]
+    assert o["water_slug"] == "lake-erie-oh" and o["match"] == "permit_stated" and o["distance_m"] == 1558
+    assert "'Lake Erie via storm sewer'" in o["water_match"] and (o["lat"], o["lon"]) == (41.610833, -81.502222)
+    from build.status import Resolver
+    how = Resolver.registry_how(o)
+    assert how.startswith("the water its permit names, 1558 m from the point"), how
+    assert "geometry" not in how
+
+
+def test_an_invalid_entry_is_refused_when_applied_and_a_row_it_corrected_goes_back():
+    """Astra review 2026-11-28 (P2): an entry exempt from the distance limit is applied only with its evidence. One
+    lacking the permit's phrase or address is refused by apply_rows itself (not only by the separate check), and a row
+    it corrected earlier is no longer kept."""
+    def row():
+        return _no_water_row(npdes_permit="OH0031062", outfall="006",
+                             receiving_water_echo="City of Euclid-Frontal Lake Erie", lat=41.610833, lon=-81.502222)
+    for bad in (_euclid(permit_text="", url=""), _euclid(url=""), _euclid(permit_text="")):
+        rows = [row()]
+        probs = H.apply_rows("outfalls-us.json", rows, [bad])
+        assert probs and any("refused" in p for p in probs), probs
+        assert rows[0]["water_slug"] is None and not H.is_hand(rows[0])
+    rows = [row()]
+    assert H.apply_rows("outfalls-us.json", rows, [_euclid()]) == [] and rows[0]["water_slug"] == "lake-erie-oh"
+    assert H.holds(rows[0], [_euclid()])
+    assert not H.holds(rows[0], [_euclid(url="")])
+    # a row it corrected before is left as it stands (pass 2: the replaced tie may be the wrong water); the problem is
+    # reported, and the check exits non-zero on it
+    keep = copy.deepcopy(rows)
+    probs = H.apply_rows("outfalls-us.json", rows, [_euclid(url="")])
+    assert probs and any("refused" in p for p in probs) and rows == keep
+
+
+def test_a_refused_entry_does_not_bring_back_the_water_it_replaced():
+    """Astra review 2026-11-28 pass 2 (P2): MA0100382:002 names Mount Hope Bay; its earlier tie (Narragansett Bay) is
+    the known-wrong water. An entry refused for missing evidence leaves the row as it stands, in apply_rows and in the
+    registry pass (hand_kept), and says so."""
+    from ingest import outfall_waters as OW
+    rows = [_matchers_row()]
+    assert H.apply_rows("outfalls-new-england.json", rows, [_entry()]) == []
+    assert rows[0]["water_slug"] == "mount-hope-bay-ma"
+    bad = _entry(rule="permit_states", permit_text="Mount Hope Bay", url="")
+    assert H.entry_problems(bad)
+    keep = copy.deepcopy(rows)
+    probs = H.apply_rows("outfalls-new-england.json", rows, [bad])
+    assert probs and all(p.startswith("refused") for p in probs), probs
+    assert rows == keep and rows[0]["water_slug"] == "mount-hope-bay-ma"
+    counts = defaultdict(Counter)
+    import unittest.mock as um
+    with um.patch.object(H, "_default", lambda: [bad]):
+        assert OW.hand_kept(rows[0], counts) is True
+    assert rows == keep and rows[0]["water_slug"] != "narragansett-bay-ma"
+
+
+def test_a_qualifier_joined_by_of_or_to_is_another_water():
+    """Astra review 2026-11-28 pass 2 (P2): 'South Branch of the Kalamazoo River' is the South Branch's own record, not
+    the Kalamazoo River; a qualifier joined to the name by 'of', 'of the', 'to' or 'to the' belongs to it."""
+    kal = dict(water_slug="kalamazoo-river-mi", water_name="Kalamazoo River", water_kind="river")
+    def e(text):
+        return _euclid(**kal, permit_text=text, basis=f"the permit's receiving water is '{text}'")
+    for text in ("South Branch of the Kalamazoo River", "North Fork of Kalamazoo River", "tributary to the Kalamazoo River",
+                 "Tributary of Kalamazoo River", "an unnamed tributary to Kalamazoo River"):
+        assert H.entry_problems(e(text)), text
+    for text in ("Kalamazoo River", "Kalamazoo River via storm sewer", "the Kalamazoo River at Plainwell",
+                 "Outfall 3 to the Kalamazoo River"):
+        assert H.entry_problems(e(text)) == [], text
+
+
+def test_the_distance_counts_only_from_the_point_it_was_measured_from():
+    """Astra review 2026-11-28 pass 2 (P2): a permit-stated row is near its water only at the point the entry's
+    distance was measured from (distance_from). A row moved to another point, or with no measured point, or with no
+    distance, is off the water for new modeling."""
+    shore = _euclid(outfall="005", stated="", distance_m=202, distance_from=[41.611828, -81.527876])
+    rows = [_no_water_row(npdes_permit="OH0031062", outfall="005", receiving_water_echo=None,
+                          lat=41.611828, lon=-81.527876)]
+    assert H.apply_rows("outfalls-us.json", rows, [shore]) == []
+    o = rows[0]
+    assert o["distance_from"] == [41.611828, -81.527876] and not H.stated_off_water(o)
+    moved = dict(copy.deepcopy(o), lat=41.610833, lon=-81.502222)        # 006's inland point
+    assert H.apply_rows("outfalls-us.json", [moved], [shore]) == [] and moved["distance_m"] == 202
+    assert H.stated_off_water(moved)
+    assert H.stated_off_water(dict(o, lat=None, lon=None))
+    assert H.stated_off_water(dict(o, distance_m=None))
+    no_point = {k: v for k, v in o.items() if k != "distance_from"}
+    assert H.stated_off_water(no_point)
+    assert H.point_off_water(o, 41.611828, -81.527876) is False
+    assert H.point_off_water(dict(o, distance_m=1558), 41.611828, -81.527876) is True
+    assert H.point_off_water(o, 41.610833, -81.502222) is None                # another point: not known
+    H.revert(o)
+    assert "distance_from" not in o
+
+
+def test_the_committed_permit_stated_entries_carry_the_point_of_their_distance():
+    for c in H.load():
+        if c.get("rule") == H.PERMIT_STATES and c.get("distance_m") is not None:
+            assert isinstance(c.get("distance_from"), list) and len(c["distance_from"]) == 2, c["outfall"]
+    row = next(o for o in _rows("outfalls-us.json") if (o["npdes_permit"], o["outfall"]) == ("OH0031062", "005"))
+    assert not H.stated_off_water(row)                         # Euclid 005 at the plant's point, 202 m from the lake
+    row = next(o for o in _rows("outfalls-us.json") if (o["npdes_permit"], o["outfall"]) == ("OH0031062", "006"))
+    assert H.stated_off_water(row)
+
+
+def test_a_qualified_name_in_the_permits_phrase_is_another_water():
+    """Astra review 2026-11-28 (P2): 'Little Cuyahoga River' does not name the Cuyahoga River. The record's name must
+    stand in the permit's phrase as a whole, its words in any order, with no qualifier word next to it."""
+    cuy = dict(water_slug="cuyahoga-river-oh", water_name="Cuyahoga River", water_kind="river")
+    def e(text):
+        return _euclid(**cuy, permit_text=text, basis=f"the permit's receiving water is '{text}'")
+    assert H.entry_problems(e("Cuyahoga River via combined sewer")) == []
+    for text in ("Little Cuyahoga River", "Cuyahoga River North Branch", "West Branch Cuyahoga River",
+                 "Upper Cuyahoga River", "River Cuyahoga Middle Fork", "Cuyahoga Falls river outfall",
+                 "Cuyahoga Little River"):
+        assert H.entry_problems(e(text)), text
+    rouge = dict(water_slug="river-rouge-detroit-mi", water_name="River Rouge", water_kind="river")
+    text = "Rouge River Outfall 082/Oakwood Pump Station"
+    assert H.entry_problems(_euclid(**rouge, permit_text=text, basis=f"is '{text}'")) == []      # the same words reordered
+    assert H.entry_problems(_euclid(**rouge, permit_text="Lower Rouge River", basis="is 'Lower Rouge River'"))
+    assert H.entry_problems(_euclid(**rouge, permit_text="Rouge Park drain", basis="is 'Rouge Park drain'"))

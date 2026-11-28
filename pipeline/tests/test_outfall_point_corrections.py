@@ -322,3 +322,38 @@ def test_a_rebuilt_delta_row_with_another_reach_is_reported_not_corrected(mod, c
     o["reach_id"] = "4100009000073"
     moved, bad = mod.apply_rows("outfalls-us.json", [o])
     assert moved == [] and any("OH0020974 014" in b and "reach" in b for b in bad)
+
+
+# ---------------------------------------------------------------- 5. PERMIT: Akron's outfalls at the permit's points
+
+AKRON = ["046", "049", "053", "054", "057", "058", "065", "069", "070", "071", "072", "075", "076", "077", "078", "081",
+         "083", "084"]
+
+
+def test_the_permit_coordinates_are_read_as_decimal_degrees(mod):
+    assert mod.dms("41 03'50\"") == 41.063889 and mod.dms("81 31'5.3\"") == 81.518139
+    assert mod.PERMIT[("outfalls-us.json", "OH0023833", "046")][1] == (41.063889, -81.481389)
+    assert sorted(n for _, _, n in mod.PERMIT) == AKRON
+
+
+@pytest.mark.parametrize("n", AKRON)
+def test_akrons_outfalls_sit_at_the_permits_points_not_the_plant(mod, committed, n):
+    o = next(r for r in committed["outfalls-us.json"]["outfalls"] if (r["npdes_permit"], r["outfall"]) == ("OH0023833", n))
+    v = mod.PERMIT[("outfalls-us.json", "OH0023833", n)]
+    assert (o["lat"], o["lon"]) == v[1] != (41.157121, -81.569837)
+    assert (o["epa_lat"], o["epa_lon"]) == (41.157121, -81.569837) and o["coords_from"] == "state permit"
+    assert o["coords_source"]["url"].endswith("/3PF00000.pdf") and f"outfall {n} " in o["coords_source"]["name"]
+
+
+def test_a_rebuilt_akron_row_at_the_plant_point_is_corrected_again_and_a_changed_one_is_left(mod, committed):
+    k = ("outfalls-us.json", "OH0023833", "046")
+    o = next(r for r in committed["outfalls-us.json"]["outfalls"] if (r["npdes_permit"], r["outfall"]) == k[1:])
+    epa = {f: v for f, v in o.items() if f not in ("epa_lat", "epa_lon", "coords_note", "coords_source")}
+    epa.update(lat=41.157121, lon=-81.569837, coords_from="facility")
+    rows = [copy.deepcopy(epa)]
+    assert mod.state("permit", rows[0], mod.PERMIT[k]) == "original"
+    moved, bad = mod.apply_rows("outfalls-us.json", rows)
+    assert bad == [] and moved == rows and mod.problems("permit", rows[0], mod.PERMIT[k]) == []
+    # EPA gives the outfall its own point now: looked at, not overwritten
+    changed = dict(copy.deepcopy(epa), lat=41.07, lon=-81.49, coords_from="permitted_feature")
+    assert "not changed" in mod.state("permit", changed, mod.PERMIT[k])

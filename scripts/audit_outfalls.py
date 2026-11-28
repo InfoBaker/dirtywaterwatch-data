@@ -18,7 +18,7 @@ from common import live_states, load_outfall_registry  # noqa: E402
 from build import status as S  # noqa: E402
 from build.rain_likely import cso_open  # noqa: E402
 
-REACH_DONE = {"traced", "tidal_at_outfall", "lake_at_outfall", "not_river"}
+REACH_DONE = {"traced", "tidal_at_outfall", "lake_at_outfall", "not_river", "permit_stated_off_water"}
 
 
 def read(p):
