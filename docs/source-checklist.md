@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1760 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1761 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -21,7 +21,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | hydrography | 17 | 21 | 10 | 6 | 1 | 55 |
 | ny | 15 | 6 | 18 | 2 | 1 | 42 |
 | nj | 14 | 6 | 11 | 7 | 4 | 42 |
-| pa | 16 | 3 | 20 | 14 | 3 | 56 |
+| pa | 17 | 3 | 20 | 14 | 3 | 57 |
 | md | 11 | 8 | 15 | 11 | 4 | 49 |
 | va | 22 | 11 | 28 | 7 | 1 | 69 |
 | dc | 24 | 7 | 25 | 12 | 5 | 73 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **656** | **240** | **549** | **236** | **79** | **1760** |
+| **all** | **657** | **240** | **549** | **236** | **79** | **1761** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1064,7 +1064,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `nj-njdep-dataminer-njems` | NJDEP DataMiner (njems.nj.gov) - DMR data by NJPDES number and designator, complaints, incidents | unreachable | fetched | permits | Bot wall (Imperva). Same DMR values are available from EPA ECHO. |
 | `nj-raritan-riverkeeper` | Raritan Riverkeeper | unreachable | fetched | monitoring | No site; see nj-nynj-baykeeper and nj-lrwp-raritan-pathogens. |
 
-## pa: Pennsylvania (56)
+## pa: Pennsylvania (57)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
@@ -1074,6 +1074,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `pa-dep-cso-program-page` | PA DEP Combined Sewer Overflows program page | used | fetched | permits | Program context and the link to the statewide permittee list. |
 | `pa-dep-cso-status-spreadsheet` | PA DEP CSO Status Spreadsheet (existing and former CSO permittees) | used | fetched | permits | Authoritative state list of CSO permittees and outfall counts; basis of dischargers.json. |
 | `pa-doh-habs-dashboard` | PA Department of Health Harmful Algal Blooms dashboard and layer (HABS2018_2021_FIXED) | used | fetched | advisories | Statewide, current, queryable HAB advisory levels with coordinates and waterbody names; good for lake pages. |
+| `pa-echo-violations` | EPA ECHO Pennsylvania single-event sewer violations | used | fetched | events | Reads the PA bulk violation file and sewerage SIC join. Preserves each violation ID and regulatory dates; no invented volume or discharge end. Links compatible utility reports and separately flags uncertain matches. Multiple codes per permit/start day are grouped for counting as our interpretation. |
 | `pa-epa-cso-outfall-map` | EPA 'Where Combined Sewer Overflow Outfalls Are Located' national map | used | search_only | outfalls | Same National CSO Inventory already joined (pa-epa-echo-cso-inventory-pa). |
 | `pa-epa-echo-cso-inventory-pa` | EPA National CSO Inventory (ECHO ALL_CSO_DOWNLOADS) Pennsylvania rows | used | fetched | outfalls | Outfall backbone for dischargers.json; reconcile against DEP eMapPA/PASDA where reachable. |
 | `pa-epa-great-lakes-cso-pa` | EPA 'Combined Sewer Overflows in the Great Lakes Basin: Pennsylvania' page | used | fetched | law | Confirms the only PA permittee with a federal public-notification rule. |

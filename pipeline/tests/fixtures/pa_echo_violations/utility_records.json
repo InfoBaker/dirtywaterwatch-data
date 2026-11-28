@@ -1,0 +1,35 @@
+[
+  {
+    "event_id": "pa-alcosan:news-2026-03-07-advisory-issued-following-power-outage-and-river-discharge",
+    "source_id": "pa-alcosan",
+    "started_at": "2026-03-06T18:00:00-05:00",
+    "ended_at": "2026-03-06T20:00:00-05:00",
+    "event_type": "bypass",
+    "time_precision": "hour",
+    "duplicate_of": null,
+    "npdes_permit": "PA0025984",
+    "source_url": "https://www.alcosan.org/news-and-events/featured-news/news/2026/03/07/advisory-issued-following-power-outage-and-river-discharge"
+  },
+  {
+    "event_id": "pa-phila-csocast:D_39-20261127T2302",
+    "source_id": "pa-phila-csocast",
+    "started_at": "2026-11-27T23:02:30-05:00",
+    "ended_at": null,
+    "event_type": "cso",
+    "time_precision": "poll",
+    "duplicate_of": null,
+    "npdes_permit": "PA0026662",
+    "source_url": "https://water.phila.gov/maps/csocast/"
+  },
+  {
+    "event_id": "pa-erie:294143-20261126T1835",
+    "source_id": "pa-erie",
+    "started_at": "2026-11-26T18:35:00-05:00",
+    "ended_at": "2026-11-26T18:55:00-05:00",
+    "event_type": "cso",
+    "time_precision": "minute",
+    "duplicate_of": null,
+    "npdes_permit": "PA0026301",
+    "source_url": "https://telog.erie.pa.us/CSO.Monitoring/Report?startDate=10%2F29%2F2026+12%3A00%3A00+AM&endDate=11%2F29%2F2026+12%3A00%3A00+AM"
+  }
+]

@@ -1,0 +1,36 @@
+id: pa-echo-violations
+name: EPA ECHO Pennsylvania single-event sewer violations
+url: https://echo.epa.gov/files/echodownloads/npdes_downloads.zip
+homepage: https://echo.epa.gov/tools/data-downloads/icis-npdes-download-summary
+kind: csv
+level: federal
+enabled: true
+role: events
+states: [PA]
+registry_ids: ["pa-echo-violations"]
+event_types: [sso, bypass, unknown]
+cadence: 1 hour; HEAD check each refresh, range download when the weekly EPA archive changes
+license: U.S. federal government data (public domain)
+attribution: U.S. EPA ECHO, including violations entered by Pennsylvania DEP
+access: [csv]
+machine_readable: true
+access_detail: >-
+  Public ZIP, no key. HTTP byte ranges read NPDES_SE_VIOLATIONS.csv and NPDES_SICS.csv;
+  a complete scan selects Pennsylvania permits and codes F024S, A0020, F036S and A0011,
+  plus D0011 only at permits carrying sewerage SIC 4952. Each source violation ID is kept.
+  We group multiple violation codes for the same permit and start day for counting, with links
+  and an explicit basis. The dates are violation dates, to the day in America/New_York;
+  violation closure dates are preserved separately from discharge ends. No volume, cause,
+  receiving water, outfall, publication date or receipt date is supplied by these columns.
+  Public comments are retained; one historical comment names Singer Run and a manhole. The ZIP's Last-Modified is an archive update, not a record update.
+legal_basis: >-
+  Regulatory compliance records reported to EPA; ECHO is not a Pennsylvania public-notice channel
+  named by the reviewed law or permit. The underlying reports to DEP do not constitute public advisories.
+raw_fields:
+  reporter_contact: []
+  customer_identifier: []
+  description: [row.VIOLATION_DESC, row.SINGLE_EVENT_VIOLATION_COMMENT]
+# Neither selected CSV has dedicated reporter-contact or customer-identifier columns.
+# Permit and violation IDs identify regulated facilities and public regulatory records.
+# Public free text is retained; private removal requests use the common removal service.
+checked: '2026-11-28'
