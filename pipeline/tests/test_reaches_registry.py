@@ -481,7 +481,7 @@ def test_a_trace_walks_nhdplus_once_nldi_navigation_is_spent(cache, monkeypatch)
     R._ATTR_MEMO.pop(11, None)
 
 
-# ---------------------------------------------------------------- cached traces that no longer agree with the registry
+# ---------------------------------------------------------------- cached traces that are now wrong for their registry row
 # (registry water review 2026-11-28, P2-1: a hand correction moved an outfall's water, the old trace stayed in use)
 
 SHORE = {"lakes": [{"name": "Lake Erie", "wikidata": "Q5492"}]}
@@ -489,53 +489,60 @@ STALE_WATERS = {
     "lake-erie-pa": {"slug": "lake-erie-pa", "kind": "lake", "state": "PA", "name": "Lake Erie", "wikidata": "Q5492"},
     "mill-creek-erie-pa": {"slug": "mill-creek-erie-pa", "kind": "stream", "state": "PA", "name": "Mill Creek"},
     "charles-river-ma": {"slug": "charles-river-ma", "kind": "river", "state": "MA", "name": "Charles River"},
-    "boston-harbor-ma": {"slug": "boston-harbor-ma", "kind": "bay", "state": "MA", "name": "Boston Harbor"},
+    "boston-harbor-ma": {"slug": "boston-harbor-ma", "kind": "bay", "state": "MA", "name": "Boston Inner Harbor"},
+    "chicopee-reservoir-ma": {"slug": "chicopee-reservoir-ma", "kind": "reservoir", "state": "MA",
+                              "name": "Chicopee River Reservoir"},
+    "sudbury-river-ma": {"slug": "sudbury-river-ma", "kind": "river", "state": "MA", "name": "Sudbury River"},
 }
+STALE_LIVE = {"PA", "MA"}
 
 
 def stale_cands(registry, skipped):
-    return R.candidate_outfalls(waters=STALE_WATERS, registry=registry, live={"PA", "MA"}, skipped=skipped,
+    return R.candidate_outfalls(waters=STALE_WATERS, registry=registry, live=STALE_LIVE, skipped=skipped,
                                 reported=set(), plants=False, shore=SHORE)
 
 
-def test_a_cached_trace_that_no_longer_agrees_with_its_registry_row_is_retired_before_anything_reads_it(cache):
+def stale_rec(key, slug, **kw):
+    permit, oid = key.split("-", 1)
+    return rec(key, NOW, permit=permit, outfall=oid, water_slug=slug, state=permit[:2], **kw)
+
+
+def stale_setup(cache, registry, cached):
+    for k, d in cached.items():
+        R.write_json(cache / f"{k}.json", d)
+    skipped = {}
+    return stale_cands(registry, skipped), skipped
+
+
+def test_the_two_review_cases_are_retired_before_anything_reads_the_cache(cache):
     # PA0026301:008, re-tied from Lake Erie to Mill Creek: its Lake Erie shoreline stretch; MA0103284:C03, re-tied from
-    # the Charles River to a bay: its Charles River trace; one river trace whose water is now Lake Erie; one outfall
-    # the registry no longer lists; a river trace whose river was renamed (kept: the touch path updates it); an event
+    # the Charles River to a bay: its Charles River trace; a river trace whose water is now Lake Erie; an outfall the
+    # registry no longer lists; a river trace whose river was renamed (kept: the touch path updates it); an event
     # point and a plant trace waiting for --plants (kept)
     registry = [row("PA0026301", "008", "PA", "mill-creek-erie-pa"),
                 row("MA0103284", "C03", "MA", "boston-harbor-ma"),
                 row("PA0026301", "009", "PA", "lake-erie-pa"),
                 row("PA0026301", "010", "PA", "mill-creek-erie-pa"),
                 row("PA0026301", "011", "PA", "mill-creek-erie-pa", outfall_kind="plant")]
-    cached = {
-        "PA0026301-008": rec("PA0026301-008", NOW, permit="PA0026301", outfall="008", water_slug="lake-erie-pa",
-                             model=R.SH.MODEL, state="PA"),
-        "MA0103284-C03": rec("MA0103284-C03", NOW, permit="MA0103284", outfall="C03", water_slug="charles-river-ma",
-                             state="MA"),
-        "PA0026301-009": rec("PA0026301-009", NOW, permit="PA0026301", outfall="009", water_slug="mill-creek-erie-pa",
-                             state="PA"),
-        "PA0026301-010": rec("PA0026301-010", NOW, permit="PA0026301", outfall="010", water_slug="old-name-pa",
-                             state="PA"),
-        "PA0026301-011": rec("PA0026301-011", NOW, permit="PA0026301", outfall="011", water_slug="mill-creek-erie-pa",
-                             state="PA"),
-        "PA0026301-099": rec("PA0026301-099", NOW, permit="PA0026301", outfall="099", water_slug="mill-creek-erie-pa",
-                             state="PA"),
-        "pt-abc": rec("pt-abc", NOW, outfall=None, sources=["event-point"], water_slug="charles-river-ma"),
-    }
-    for k, d in cached.items():
-        R.write_json(cache / f"{k}.json", d)
-    skipped = {}
-    cs = stale_cands(registry, skipped)
+    cs, skipped = stale_setup(cache, registry, {
+        "PA0026301-008": stale_rec("PA0026301-008", "lake-erie-pa", model=R.SH.MODEL),
+        "MA0103284-C03": stale_rec("MA0103284-C03", "charles-river-ma"),
+        "PA0026301-009": stale_rec("PA0026301-009", "mill-creek-erie-pa"),
+        "PA0026301-010": stale_rec("PA0026301-010", "old-name-pa"),
+        "PA0026301-011": stale_rec("PA0026301-011", "mill-creek-erie-pa"),
+        "PA0026301-099": stale_rec("PA0026301-099", "mill-creek-erie-pa"),
+        "pt-abc": rec("pt-abc", NOW, outfall=None, sources=["event-point"], water_slug="charles-river-ma")})
     assert {c["key"]: c.get("model") for c in cs} == {"PA0026301-008": None, "PA0026301-009": R.SH.MODEL,
                                                        "PA0026301-010": None}
     assert skipped["MA0103284-C03"]["why"] == "not_river" and skipped["PA0026301-011"]["why"] == "plant_deferred"
-    stale = R.stale_traces(R.load_reaches(), cs, skipped, {"PA", "MA"})
+    stale = R.stale_traces(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS)
     assert set(stale) == {"PA0026301-008", "MA0103284-C03", "PA0026301-009", "PA0026301-099"}
-    assert "shoreline stretch of lake-erie-pa" in stale["PA0026301-008"] and "not_river" in stale["MA0103284-C03"]
+    assert "shoreline stretch of lake-erie-pa" in stale["PA0026301-008"]
+    assert "traced for charles-river-ma" in stale["MA0103284-C03"]
     # with a registry file unread, an outfall missing from it is not taken as gone
-    assert "PA0026301-099" not in R.stale_traces(R.load_reaches(), cs, skipped, {"PA", "MA"}, registry_complete=False)
-    moved = R.retire_stale(R.load_reaches(), cs, skipped, {"PA", "MA"})
+    assert "PA0026301-099" not in R.stale_traces(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS,
+                                                 registry_complete=False)
+    moved = R.retire_stale(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS)
     assert moved == stale
     left = R.load_reaches()          # what status, the rain caution and the export read
     assert set(left) == {"PA0026301-010", "PA0026301-011", "pt-abc"}
@@ -548,3 +555,34 @@ def test_a_cached_trace_that_no_longer_agrees_with_its_registry_row_is_retired_b
     # and the re-tied river outfall is due with the first traces, ahead of the old ones
     todo, _ = R.plan([c for c in cs if c.get("model") != R.SH.MODEL], left, NOW)
     assert [c["key"] for c in todo] == ["PA0026301-008"]
+
+
+def test_a_trace_that_is_still_right_stays_though_the_outfall_would_not_be_traced_afresh(cache):
+    """Err on showing likely-affected water: a not_river row whose trace was made for the same water, or with no
+    water, or whose trace runs along its new water, and a row that lost its coordinates, all keep their traces."""
+    seg = {"km_start": 0, "km_end": 1, "gnis_name": "Sudbury River", "comid": 7}
+    registry = [row("MA0101613", "036A", "MA", "chicopee-reservoir-ma"),          # not_river, the same water
+                row("MA0101613", "037", "MA", "chicopee-reservoir-ma"),           # not_river, traced with no water
+                row("MA0101613", "038", "MA", "sudbury-river-ma"),                # re-tied to the river it runs along
+                row("MD0021598", "002", "MD", "charles-river-ma", lat=None, lon=None, reach_id=None)]   # no_location
+    cs, skipped = stale_setup(cache, registry, {
+        "MA0101613-036A": stale_rec("MA0101613-036A", "chicopee-reservoir-ma"),
+        "MA0101613-037": stale_rec("MA0101613-037", None),
+        "MA0101613-038": dict(stale_rec("MA0101613-038", "charles-river-ma"), segments=[seg]),
+        "MD0021598-002": stale_rec("MD0021598-002", "charles-river-ma")})
+    live = STALE_LIVE | {"MD"}
+    cs = R.candidate_outfalls(waters=STALE_WATERS, registry=registry, live=live, skipped=skipped, reported=set(),
+                              plants=False, shore=SHORE)
+    assert skipped["MA0101613-036A"]["why"] == "not_river" and skipped["MD0021598-002"]["why"] == "no_location"
+    assert R.stale_traces(R.load_reaches(), cs, skipped, live, STALE_WATERS) == {}
+    assert R.retire_stale(R.load_reaches(), cs, skipped, live, STALE_WATERS) == {}
+    assert set(R.load_reaches()) == {"MA0101613-036A", "MA0101613-037", "MA0101613-038", "MD0021598-002"}
+
+
+def test_a_tidal_answer_of_a_traced_row_is_relabelled_and_one_of_a_bay_row_with_another_water_is_retired(cache):
+    registry = [row("MA0103284", "MWR010", "MA", "charles-river-ma"),       # a candidate: the touch path relabels it
+                row("MA0103284", "MWR203", "MA", "boston-harbor-ma")]       # not_river now: its old water is wrong
+    cs, skipped = stale_setup(cache, registry, {
+        "MA0103284-MWR010": stale_rec("MA0103284-MWR010", "sudbury-river-ma", cut="tidal_at_outfall", segs=False),
+        "MA0103284-MWR203": stale_rec("MA0103284-MWR203", "charles-river-ma", cut="tidal_at_outfall", segs=False)})
+    assert set(R.stale_traces(R.load_reaches(), cs, skipped, STALE_LIVE, STALE_WATERS)) == {"MA0103284-MWR203"}
