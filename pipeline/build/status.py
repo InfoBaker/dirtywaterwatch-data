@@ -3300,6 +3300,11 @@ class Resolver:
 
         state = event_state(ev)
         point = []                          # by_point, computed once when needed
+        operator_point = (ev.get("raw") or {}).get("_place_from_operator_coords")
+        operator_point = operator_point if isinstance(operator_point, dict) and operator_point.get("place_tier") == 1 \
+            and ev.get("coord_source") == "source" and ev.get("lat") is not None and ev.get("lon") is not None else None
+        operator_named_water = bool(operator_point and (known or
+                                    (ev.get("waterbody_text") and not no_water_text(ev["waterbody_text"]))))
 
         def on_a_water():
             if not point:
@@ -3309,15 +3314,14 @@ class Resolver:
 
         def yields_to_point(slugs, relaxed):
             """A named water kept only beyond NAME_MATCH_M gives way to a point that lies on a water."""
-            if slugs and all(x in relaxed for x in slugs) and on_a_water():
+            if not operator_point and slugs and all(x in relaxed for x in slugs) and on_a_water():
                 aside.extend((x, relaxed[x].replace("named in the report; ", "named in the report but not used: ")
                               + "; the report's point lies on another water") for x in slugs)
                 return True
             return False
 
-        # a source whose rule places a report only on the water it names (raw._placement named_water_only: Texas's TCEQ
-        # table, which gives no point or outfall): never on its permit's outfalls' water, never by a point (final
-        # audit 2026-11-07 P1-1); a report naming no water stays unplaced, listed with its county
+        # named_water_only excludes permit/plant fallback. The operator-coordinate
+        # exception below can use the report's own point after trying its named water.
         named_only = named_water_only(ev)
         own_only = own_place_only(ev)
         yielded = False
@@ -3353,9 +3357,12 @@ class Resolver:
             if slugs:
                 return placed(slugs, "name", nnote or note, [relaxed[x] for x in slugs if x in relaxed],
                               outfalls=self.named_water_outfalls(ev, state, slugs))
-        near = None if named_only else on_a_water()
+        # Houston's operator coordinates are source points. Keep the named-only guard
+        # for registry/plant fallback and give an explicit named water first priority.
+        near = None if (named_only and not operator_point) or operator_named_water else on_a_water()
         if near:
-            return placed([near[1]], "geometry", f"point {round(near[0])} m from the water")
+            return placed([near[1]], "geometry", f"point {round(near[0])} m from the water",
+                          [operator_point["place_basis"]] if operator_point else [])
         reason = None
         text = (ev.get("waterbody_text") or "").strip()
         names_none = not text or (placeholder_text(text) and ev.get("event_type") == "cso")
@@ -3383,7 +3390,9 @@ class Resolver:
             out.pop("unplaced_reason", None)
             out["no_receiving_water"] = nw
             return out
-        if named_only and not text and not out.get("unplaced_reason"):
+        if operator_point and not out.get("unplaced_reason"):
+            out["unplaced_reason"] = "the operator's reported location did not match a water in our records"
+        if named_only and not operator_point and not text and not out.get("unplaced_reason"):
             out["unplaced_reason"] = NAMED_ONLY_NONE
         if own_only and not text and not out.get("unplaced_reason"):
             out["unplaced_reason"] = OWN_PLACE_NONE

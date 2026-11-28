@@ -26,7 +26,7 @@ HEADER = ("event_id,water,water_slug,state,operator,operator_id,outlet_id,outlet
           "later_record_published_at,later_record_id,linked_record_ids,notice_volume_gal,notice_record_id,"
           "listed_without_colour,resolution,notes,"
           "description,location_description,rate_text,volume_estimate_gal,volume_estimate_low_gal,"
-          "volume_estimate_high_gal,volume_estimate_bound,volume_estimate_basis,end_estimate_at,end_estimate_basis,water_reach,confirmation_method,source_end_date,source_end_text,source_status,sample_analyte,sample_result_text,sample_unit,sample_qualifier,sample_date,toxin,release_url,result_source_url,result_observed_at,sample_results_json").split(",")
+          "volume_estimate_high_gal,volume_estimate_bound,volume_estimate_basis,end_estimate_at,end_estimate_basis,water_reach,confirmation_method,source_end_date,source_end_text,source_status,sample_analyte,sample_result_text,sample_unit,sample_qualifier,sample_date,toxin,release_url,result_source_url,result_observed_at,sample_results_json,place_basis,place_tier,place_method,place_precision_m").split(",")
 AS_OF = "2026-11-02T12:00:00Z"
 
 
@@ -455,3 +455,15 @@ def test_an_operators_notice_volume_fills_its_own_columns(tmp_path):
     assert (rows["1"]["volume_gal"], rows["1"]["notice_volume_gal"], rows["1"]["notice_record_id"]) == \
         ("", "225192", "ma-holyoke-everbridge:m1:1")
     assert rows["2"]["notice_volume_gal"] == "" and rows["2"]["volume_gal"] == "35500000"   # its own volume first
+
+
+def test_operator_coordinate_basis_in_download(tmp_path):
+    e = ev("operator-point")
+    e.update(place_tier=1, place_method="operator_coordinates", place_precision_m=None,
+             place_basis="Location: the operator's coordinates in the report, which we converted.",
+             lat=29.802886073224176, lon=-95.47902970511512)
+    out, _ = write(tmp_path, [e])
+    r = read(out / "all-reports-2026.csv")[0]
+    assert r["place_tier"] == "1" and r["place_method"] == "operator_coordinates"
+    assert r["place_precision_m"] == "" and r["place_basis"] == e["place_basis"]
+    assert r["lat"] == "29.80289" and r["lon"] == "-95.47903"
