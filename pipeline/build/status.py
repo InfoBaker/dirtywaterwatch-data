@@ -57,7 +57,7 @@ from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, discharg
                     system_wide_advisory, no_ok_read_since, error_text, public_error,
                     now_iso, read_json, rules_live_states, write_json)
 from build import beach_reason as BR
-from common import error_detail
+from common import error_detail, no_discharge_notice
 from build import shoreline as SH
 from build.redact import REDACTED, person_shaped
 
@@ -811,6 +811,11 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
         for r in d.get("records") or []:
             if not isinstance(r, dict) or not r.get("event_id"):
                 problems.append(f"{p.name}: record without event_id")
+                continue
+            if no_discharge_notice(r):
+                # a notice that no discharge happened (Manchester's all-clear): kept in the source's file, where it
+                # bounds the notices before it; never an event, a window, a place or a count
+                files[sid]["no_discharge_notices"] = files[sid].get("no_discharge_notices", 0) + 1
                 continue
             r = dict(r)
             r["_fixture"] = fixture
@@ -3838,6 +3843,8 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         return parse_time(v, tz)          # the record's own clock (event_zone)
     if et == "annual_total" or ev.get("time_precision") in COARSE_PRECISION:
         return []                 # outfall-months and annual totals are history, never a colour
+    if no_discharge_notice(ev):
+        return []                 # a notice that no discharge happened starts no window (load_events leaves it out)
     if future_start(ev, now):
         return []                 # a start in the future as published: no colour (FUTURE_START_H)
     if et == "unknown" and st != "ongoing":

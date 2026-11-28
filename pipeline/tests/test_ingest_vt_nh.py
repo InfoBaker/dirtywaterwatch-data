@@ -144,6 +144,105 @@ def test_pairing_is_idempotent_and_clears_old_exact_ends():
     assert a["raw"]["_ended_before"] == "2026-10-12T20:00:00-04:00"
 
 
+# --------------------------------------------------------------------------- NH: an all-clear is not an event
+
+MAN_PAGE = """<div class="DnnModule"><div>
+<div id="Item14081" class="Announcement"><h4>City of Manchester CSO Notification</h4>
+<div class="Header">Published: 11/13/2026 9:55 AM</div>
+<p>Please be advised that the City of Manchester has experienced no CSO activations during the past 12 hours.</p></div>
+<div id="Item14080" class="Announcement"><h4>City Of Manchester CSO Notification - No Activations for 12 Hours</h4>
+<div class="Header">Published: 11/13/2026 4:09 AM</div>
+<p>Please be advised that the City of Manchester has experienced no CSO activations during the past 12 hours.</p></div>
+<div id="Item14079" class="Announcement"><h4>City of Manchester CSO Notification</h4>
+<div class="Header">Published: 11/12/2026 4:58 PM</div>
+<p>Please be advised that the City of Manchester has experienced CSO activations due to heavy rain and/or snow melt
+and corresponding high flows.</p></div>
+<div id="Item14078" class="Announcement"><h4>City Of Manchester CSO Notification - Activation</h4>
+<div class="Header">Published: 11/12/2026 4:04 PM</div>
+<p>Please be advised that the City of Manchester has experienced CSO activations due to heavy rain and corresponding
+high flows.</p></div>
+<div id="Item14001" class="Announcement"><h4>Office closed Friday</h4>
+<div class="Header">Published: 11/01/2026 9:00 AM</div><p>The office is closed.</p></div>
+</div></div>"""
+
+
+def test_manchester_posts_are_read_from_their_own_sentence():
+    recs = {r["raw"]["item_id"]: r for r in NH.manchester(MAN_PAGE, "2026-11-13T15:00:00Z")}
+    assert {k: r["raw"]["kind"] for k, r in recs.items()} == {
+        "Item14081": "all_clear", "Item14080": "all_clear", "Item14079": "activation", "Item14078": "activation",
+        "Item14001": "other"}
+    assert recs["Item14079"]["event_type"] == "cso" and recs["Item14001"]["event_type"] == "unknown"
+    # the sentence wins over a title that says otherwise; the title decides only when the body has neither
+    assert NH.manchester_kind("CSO Notification - Activation",
+                              "the City of Manchester has experienced no CSO activations during the past 12 hours") \
+        == "all_clear"
+    assert NH.manchester_kind("CSO Notification - No Activations for 12 Hours", "") == "all_clear"
+    assert NH.manchester_kind("CSO Notification - Activation", None) == "activation"
+
+
+def test_a_stored_post_read_by_title_only_is_read_again_from_its_sentence():
+    old = mh(14079, "other", "2026-11-12T16:58:00-05:00")
+    old.update(event_type="unknown", material=None)
+    old["raw"].update(title="City of Manchester CSO Notification",
+                      body="Please be advised that the City of Manchester has experienced CSO activations due to rain")
+    clear = mh(14081, "other", "2026-11-13T09:55:00-05:00")
+    clear["raw"].update(title="City of Manchester CSO Notification",
+                        body="the City of Manchester has experienced no CSO activations during the past 12 hours.")
+    other = mh(14001, "other", "2026-11-01T09:00:00-04:00")
+    other.update(event_type="unknown")
+    other["raw"].update(title="Office closed Friday", body="The office is closed.")
+    NH.pair_manchester([old, clear, other])
+    assert old["raw"]["kind"] == "activation" and old["event_type"] == "cso" and old["material"] == NH.CSO_MATERIAL
+    assert old["status"] == "ended" and old["raw"]["_ended_before"] == "2026-11-12T21:55:00-05:00"
+    assert clear["raw"]["kind"] == "all_clear"
+    assert other["raw"]["kind"] == "other" and other["event_type"] == "unknown"
+
+
+def _status():
+    from build import status as S
+    return S
+
+
+def test_an_all_clear_is_kept_in_the_file_and_is_never_an_event(tmp_path):
+    """Manchester's Nov. 13, 2026 notice (Item14080) said no overflow in the 12 hours before it and was published as
+    "CSO reported" with a 72-hour window of its own."""
+    import json
+    from common import no_discharge_notice
+    S = _status()
+    a = mh(14078, "activation", "2026-11-12T16:04:00-05:00")
+    c = mh(14080, "all_clear", "2026-11-13T04:09:00-05:00")
+    lone = mh(14200, "all_clear", "2026-11-20T04:00:00-05:00")        # nothing open before it
+    mail = event(source_id="nh-manchester-cso-email", source_record_id="m1", event_type="cso", status="ended",
+                 reported_at="2026-11-13T09:10:00Z", published_at="2026-11-13T09:10:00Z", time_precision="minute",
+                 raw={"_channel": "email", "kind": "all_clear", "_all_clear_hours": 12})
+    recs = [a, c, lone]
+    NH.pair_manchester(recs)
+    assert [no_discharge_notice(r) for r in recs] == [False, True, True] and no_discharge_notice(mail)
+    assert c in recs and lone in recs                                   # still in the source's file
+    assert a["status"] == "ended" and "Item14080" in a["raw"]["_ended_before_basis"]
+    d = tmp_path / "events"
+    d.mkdir()
+    for sid, rs in (("nh-permittees", recs), ("nh-manchester-cso-email", [mail])):
+        (d / f"{sid}.json").write_text(json.dumps({"source_id": sid, "fetched_at": "2026-11-20T10:00:00Z", "ok": True,
+                                                    "count": len(rs), "records": rs}))
+    files, events, problems = S.load_events(d)
+    assert not problems and [e["event_id"] for e in events] == [a["event_id"]]
+    assert files["nh-permittees"]["no_discharge_notices"] == 2 and files["nh-permittees"]["records"] == 3
+    assert files["nh-manchester-cso-email"]["no_discharge_notices"] == 1
+
+
+def test_an_all_clear_starts_no_window_even_if_it_reaches_the_status_rules():
+    from datetime import UTC, datetime
+    S = _status()
+    rules = S.read_json(S.DATA_DIR / "rules.json")
+    now = datetime(2026, 11, 13, 12, 0, tzinfo=UTC)
+    a = mh(14078, "activation", "2026-11-12T16:04:00-05:00")
+    c = mh(14080, "all_clear", "2026-11-13T04:09:00-05:00")
+    NH.pair_manchester([a, c])
+    assert S._event_intervals(c, "NH", now, None, rules) == []
+    assert S._event_intervals(a, "NH", now, None, rules)                # the activation keeps its windows
+
+
 # --------------------------------------------------------------------------- NH #14
 
 def nashua_rec(day: str) -> dict:
