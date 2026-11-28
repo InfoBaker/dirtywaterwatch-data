@@ -22,6 +22,9 @@
 #                  layer), md_mde_overflows (MDE statewide table; sorted order matters: it marks its
 #                  copies of City SSOs duplicate_of the md-baltimore-sso records, so it runs after);
 #                  md_waters is a helper (`python -m ingest.md_waters --extract` re-extracts waters-md.json).
+#                  Massachusetts: ma_massdep (MassDEP's portal), then ma_somerville_cso and ma_springfield_aquasight
+#                  (Springfield's live CSO map) and operator_mail (sorted order matters: each links its records as
+#                  duplicates of the ma-massdep events file of the same run, so they run after it).
 #                  Virginia: va_alexrenew_cso (status layer snapshot state machine: poll every 15
 #                  minutes), va_deq_prep (DEQ PReP sewage reports, last 30 days; `--backfill` from
 #                  2025-01-01), va_richmond_cso (Richmond monthly workbooks; `--backfill` from

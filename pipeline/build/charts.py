@@ -137,6 +137,7 @@ SOURCE_LABEL = {
     "me-cbep-portland-cso": "City of Portland and Portland Water District overflow filings, 2015 to 2019, published by the Casco Bay Estuary Partnership",
     "me-bangor-sso-log": "City of Bangor sewer overflow logs, from its yearly reports to the U.S. Environmental Protection Agency",
     "ma-somerville-cso-table": "City of Somerville combined sewer overflow table",
+    "ma-springfield-aquasight": "Springfield Water and Sewer Commission combined sewer overflow map",
     "tx-houston-sso-monthly": "City of Houston monthly sanitary sewer overflow reports",
     "me-healthy-beaches": "Maine Healthy Beaches",
     "nh-des-swimming": "New Hampshire Department of Environmental Services Healthy Swimming",

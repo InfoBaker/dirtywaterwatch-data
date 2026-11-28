@@ -12,7 +12,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 |---|---:|---:|---:|---:|---:|---:|
 | science | 137 | 29 | 7 | 20 | 11 | 204 |
 | federal | 31 | 22 | 25 | 21 | 1 | 100 |
-| ma | 20 | 34 | 21 | 6 | 3 | 84 |
+| ma | 21 | 34 | 20 | 6 | 3 | 84 |
 | ct | 19 | 17 | 14 | 16 | 2 | 68 |
 | ri | 27 | 12 | 11 | 14 | 3 | 67 |
 | nh-vt | 44 | 24 | 28 | 13 | 11 | 120 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **654** | **240** | **550** | **236** | **79** | **1759** |
+| **all** | **655** | **240** | **549** | **236** | **79** | **1759** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -401,6 +401,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ma-massdep-sewage-notification-system-howto` | MassDEP 'Sewage Notification System' how-to page (permittee reporting instructions) | used | fetched | law | Gives the DEP filing deadline that explains portal latency. |
 | `ma-massdep-sso-cso-guide` | MassDEP guide page 'Sanitary Sewer Systems & Combined Sewer Overflows' | used | fetched | permits | Index of the outfall map, annual reports, CSO variances (Charles, Alewife/Upper Mystic) and contacts; says 24 permittees reduced to 19. |
 | `ma-mrwc-cso-page` | Merrimack River Watershed Council CSO page ('How to stay informed about CSOs') | used | fetched | prior_art | Gives the Merrimack permittees' channels and how each reports (Lowell: start, end and a volume follow-up; GLSD: start and end, volume days later; Haverhill/Manchester: one email linking to a map). |
+| `ma-swsc-aquasight-cso-map` | SWSC CSO Notifications map (Aquasight / ADS) | used | fetched | events | Feed ma-springfield-aquasight: one cso record per overflow-log row, linked to the MassDEP portal record of the same overflow |
 | `news-ctmirror-commonwealthbeacon` | CT Mirror / CommonWealth Beacon | used | fetched | news | Records Holyoke's treated-vs-untreated claim |
 | `news-western-mass-news` | Western Mass News (WGGB/WSHM) | used | fetched | news | Most frequent local coverage, dated bylines; figures sometimes differ from verified data |
 | `news-wfsb` | WFSB (Hartford) | used | fetched | news | Holyoke 11/27/2023 |
@@ -454,7 +455,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ma-massdep-csoapi-attachments` | Advisory documents attached to portal records (.eml copies of the emailed public advisory, PDFs) | watch | fetched | events | Would give the actual advisory wording and send time; download failed from here. The attachment filename carries the advisory timestamp (e.g. 2026-10-16T152805). |
 | `ma-pvpc` | Pioneer Valley Planning Commission (Connecticut River CSO work, regional stormwater) | watch | inferred | prior_art | Not checked this run (sub-agent lost). PVPC GIS hosts MS4/stormwater layers (ArcGIS search: MS4_NSI_PVPC). |
 | `ma-save-the-harbor-report-card` | Save the Harbor/Save the Bay beach water quality report card | watch | search_only | science | Annual analysis, not a live feed. |
-| `ma-swsc-aquasight-cso-map` | SWSC CSO Notifications map (Aquasight / ADS) | watch | fetched | events | Best real-time Springfield signal; keyed vendor API, needs SWSC/Aquasight permission |
 | `ma-wbur-cso-map` | WBUR 'Map: Real-time sewage overflows into Mass. rivers and bays' | watch | fetched | prior_art | Direct prior art for this project in MA; shows the email-scraping approach and its fragility. |
 | `news-ct-house-gop-zawistowski` | CT Rep. Tami Zawistowski press releases (cthousegop.com / CTNewsWire) | watch | fetched | news | Political source; figures conflict with verified data |
 | `news-nepm` | New England Public Media | watch | fetched | news | Context only |
