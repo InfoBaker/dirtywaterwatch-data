@@ -1,0 +1,83 @@
+{
+  "jobIds": [
+    "bcba617e-d589-4ab9-a3e0-3c9dca0b882a"
+  ],
+  "results": [
+    {
+      "jobId": "bcba617e-d589-4ab9-a3e0-3c9dca0b882a",
+      "result": {
+        "data": {
+          "timestamp": "2026-11-28T13:40:13.617Z",
+          "rootActivityId": "8346a1a3-3afe-4990-8205-44925ea1421c",
+          "descriptor": {
+            "Select": [
+              {
+                "Kind": 1,
+                "Depth": 0,
+                "Value": "G0",
+                "Format": "G",
+                "GroupKeys": [
+                  {
+                    "Source": {
+                      "Entity": "Refreshed",
+                      "Property": "Updated"
+                    },
+                    "Calc": "G0",
+                    "IsSameAsSelect": true
+                  }
+                ],
+                "Name": "r.Updated"
+              }
+            ],
+            "Expressions": {
+              "Primary": {
+                "Groupings": [
+                  {
+                    "Keys": [
+                      {
+                        "Source": {
+                          "Entity": "Refreshed",
+                          "Property": "Updated"
+                        },
+                        "Select": 0
+                      }
+                    ],
+                    "Member": "DM0"
+                  }
+                ]
+              }
+            },
+            "Version": 2
+          },
+          "fromCache": false,
+          "dsr": {
+            "Version": 2,
+            "MinorVersion": 1,
+            "DS": [
+              {
+                "N": "DS0",
+                "PH": [
+                  {
+                    "DM0": [
+                      {
+                        "S": [
+                          {
+                            "N": "G0",
+                            "T": 7
+                          }
+                        ],
+                        "G0": 1795854665000
+                      }
+                    ]
+                  }
+                ],
+                "IC": true,
+                "HAD": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

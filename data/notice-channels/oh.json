@@ -240,27 +240,28 @@
    "operator_id": "oh-cincinnati-galbraith-road-msd-site-oh0105457",
    "agency": null,
    "permit": "OH0105457",
-   "checked": "2026-11-08",
+   "checked": "2026-11-28",
    "id": "oh-cincinnati-galbraith-road-msd-site-oh0105457-cso-activity-map",
    "name": "Metropolitan Sewer District of Greater Cincinnati",
-   "legal_basis": "40 CFR 122.38 (Great Lakes CSO public notification): \"initial notification ... as soon as possible but no later than four hours after becoming aware\" of a combined sewer overflow discharge, under the permittee's public notification plan",
-   "basis_kind": "law",
+   "legal_basis": "MSDGC consent-decree report Q3 2026, section G.2, CSO Public Notification Program: the public activity map implements the program for the Little Miami, Mill Creek and Muddy Creek service areas. https://msdgc.org/sites/default/assets/downloads/programs/Progress/Consent_Decree_Quarterly_Reports/CD_Q3_2026.pdf",
+   "basis_kind": "permit",
    "channel_kind": "operator_page",
    "urls": [
     "https://msdgc.org/programs/cso-notification-program/"
    ],
    "method": "html",
-   "monitored": true,
-   "unmonitored_reason": null,
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
    "publishes": "status",
-   "every_hours": 24,
+   "every_hours": 1,
    "records": false,
    "noun": "CSO activity map",
    "sources": [
     "oh-msdgc-cso-activity-map"
    ],
-   "note": "MSD of Greater Cincinnati's CSO activity map is a Power BI embed (outfalls active now or in the past 72 hours, hourly) with no machine-readable output; MSD advises avoiding contact with streams for 72 hours after rain. The page is watched for health and changes; the map itself shows only as an image. (oh-msdgc-cso-activity-map)",
-   "barrier": null
+   "note": "We read the public Power BI query hourly: 205 sites, including 200 CSOs. Suspected active overflows become dated observations; later normal-water-level states bound their stops. Missing data never supplies an end. This shared MSD channel covers collection-system permit OH0105457 and the Mill Creek (OH0025461), Little Miami (OH0025453) and Muddy Creek (OH0025470) treatment service areas. The Ohio River basin is outside 40 CFR 122.38. MSD advises avoiding stream contact for at least 72 hours after rainfall or return to normal water levels.",
+   "barrier": null,
+   "feed_source_id": "oh-msdgc-cso-activity-map"
   },
   {
    "state": "OH",

@@ -1,0 +1,31 @@
+# Feed row: pipeline/ingest/oh_msdgc_cso.py; archive data/build/oh-msdgc-cso-state.json.
+# Public report identifiers are not credentials. No sign-in or customer/contact fields.
+raw_fields:
+  reporter_contact: []
+  customer_identifier: []
+  description: [source_words, source_status, row, start_row, stop_row]
+id: "oh-msdgc-cso-activity-map"
+name: "MSD of Greater Cincinnati CSO Activity Map"
+url: "https://msdgc.org/programs/cso-notification-program/"
+homepage: "https://msdgc.org/programs/cso-notification-program/"
+kind: "json"
+level: "municipal"
+cadence: "1 hour"
+license: "none stated"
+attribution: "Metropolitan Sewer District of Greater Cincinnati"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["OH"]
+access: ["json"]
+access_detail: "Public Power BI querydata POST, model 346: CSOs and CSO_Info joined by facility_id. Complete 5000-row windows, compressed rows decoded and completeness checked. No sign-in."
+machine_readable: true
+legal_basis: "MSDGC consent-decree reporting, Q3 2026 report section G.2, CSO Public Notification Program; Ohio River basin, not the Great Lakes public-notice rule."
+checked: "2026-11-28"
+# 205 sites: 200 CSOs, four RTCs, one HRT. Only Currently Active CSO assets open events.
+# Recently Active closes an observed active event at the newer source update (poll bound).
+# Unavailable/flooded/absent/stale sites never supply a stop. Timer remains source evidence.
+# No volume, cause or explicit event start/end; no backfill from 72-hour timer or recent-only rows.
+# Source dates interpreted as Eastern wall time; exact numeric value preserved, event precision poll.
+# Exact registry CSO number plus point check; receiving water from registry, never sewershed.
+# The numbered outfalls use OH0105457; treatment permits (including OH0025461) link separately.
