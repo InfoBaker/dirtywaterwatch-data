@@ -141743,7 +141743,8 @@
   "kind": "cso",
   "npdes_permit": "MI0048879",
   "npdes_permits": [
-   "MI0048879"
+   "MI0048879",
+   "GW1810192"
   ],
   "receiving_waters": [
    "PAINT RIVER"
@@ -141757,7 +141758,7 @@
   "towns": [
    "Crystal Falls"
   ],
-  "notes": "",
+  "notes": "Permit GW1810192 (Crystal Falls WWTP, Iron County) is the city's: EGLE's MiEnviro CSO/SSO List names Crystal Falls as its responsible party.",
   "verified": "inferred",
   "checked": "2026-11-04",
   "aliases": [
@@ -142400,7 +142401,8 @@
   "kind": "cso",
   "npdes_permit": "MI0020362",
   "npdes_permits": [
-   "MI0020362"
+   "MI0020362",
+   "3112a-0142"
   ],
   "receiving_waters": [
    "Manistee Lake"
@@ -142414,7 +142416,7 @@
   "towns": [
    "Manistee"
   ],
-  "notes": "Permittee from EPA ICIS-NPDES permit name; facility as EPA's CSO inventory names it.",
+  "notes": "Permittee from EPA ICIS-NPDES permit name; facility as EPA's CSO inventory names it. Permit 3112a-0142 (Manistee CM, Manistee County) is the city's collection system: EGLE's MiEnviro CSO/SSO List names the City of Manistee as its responsible party.",
   "verified": "inferred",
   "checked": "2026-11-04",
   "aliases": [

@@ -126,3 +126,20 @@ def test_the_waters_left_without_a_record_stay_untied(resolver, permit, oid):
     ev = event(source_id="test-registry", source_record_id=f"{permit}-{oid}", event_type="cso", status="ended",
                npdes_permit=permit, outfall_id=oid, raw={"state": permit[:2]})
     assert resolver.resolve(ev)["water_slugs"] == []
+
+
+# ------------------------------------------------------------------ Michigan permits with no town on record
+
+def test_the_two_michigan_permits_take_their_holders_town():
+    """EGLE's MiEnviro CSO/SSO List names the City of Manistee as responsible party for 3112a-0142 (Manistee CM) and
+    Crystal Falls for GW1810192 (Crystal Falls WWTP): each permit joins its city's row (scripts/add_mi_operators.py's
+    owner-key rule)."""
+    towns = S.load_discharger_towns()
+    assert towns["3112a-0142"] == ["Manistee"] and towns["GW1810192"] == ["Crystal Falls"]
+
+
+def test_manistees_collection_system_reports_go_to_the_lake_at_manistee(resolver):
+    ev = event(source_id="mi-egle-mienviro-cso-sso-list", source_record_id="3112a-0142-018", event_type="cso",
+               status="ended", waterbody_text="Manistee Lake", npdes_permit="3112a-0142", outfall_id="018",
+               raw={"state": "MI"})
+    assert resolver.resolve(ev)["water_slugs"] == ["manistee-lake-mi"]
