@@ -1644,14 +1644,22 @@
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
    },
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no record named 'Spring Creek' in OH",
-   "no_water_reason": "no record named 'Spring Creek' in OH",
-   "water_matched_by": "ingest.outfall_waters (2026-11-17)"
+   "water_slug": "spring-creek-oh",
+   "water_name": "Spring Creek",
+   "water_kind": "stream",
+   "distance_m": 0,
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in NEORSD's CSO alerts map (https://www.neorsd.org/cso-alerts-map-and-status-of-outfalls/), the operator's list for permit OH0043991 is 'Spring Creek'; Spring Creek (spring-creek-oh), the record built for it from the USGS NHD high-resolution line at the outfall (waters follow-up 2026-11-28), lies 0 m from the row's point; the row had no water record",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": null,
+    "water_name": null,
+    "match": "none",
+    "by": "ingest.outfall_waters (2026-11-17)",
+    "why": "the row had no water record; the receiving water the permit names has one",
+    "water_match": "none: no record named 'Spring Creek' in OH",
+    "no_water_reason": "no record named 'Spring Creek' in OH"
+   }
   },
   {
    "npdes_permit": "OH0043991",
@@ -4217,14 +4225,22 @@
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
    },
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no record named 'Shaw Brook' in OH",
-   "no_water_reason": "no record named 'Shaw Brook' in OH",
-   "water_matched_by": "ingest.outfall_waters (2026-11-17)"
+   "water_slug": "shaw-brook-oh",
+   "water_name": "Shaw Brook",
+   "water_kind": "stream",
+   "distance_m": 49,
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in NEORSD's CSO alerts map (https://www.neorsd.org/cso-alerts-map-and-status-of-outfalls/), the operator's list for permit OH0043991 is 'Shaw Brook'; Shaw Brook (shaw-brook-oh), the record built for it from the USGS NHD high-resolution line at the outfall (waters follow-up 2026-11-28), lies 49 m from the row's point; the row had no water record",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": null,
+    "water_name": null,
+    "match": "none",
+    "by": "ingest.outfall_waters (2026-11-17)",
+    "why": "the row had no water record; the receiving water the permit names has one",
+    "water_match": "none: no record named 'Shaw Brook' in OH",
+    "no_water_reason": "no record named 'Shaw Brook' in OH"
+   }
   },
   {
    "npdes_permit": "OH0043991",
@@ -4703,14 +4719,22 @@
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
    },
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: the NHD builder's records for 'Wolf Creek' (wolf-creek-oh, wolf-creek-perry-oh, wolf-creek-norton-oh) lie elsewhere in the state",
-   "no_water_reason": "the NHD builder's records for 'Wolf Creek' (wolf-creek-oh, wolf-creek-perry-oh, wolf-creek-norton-oh) lie elsewhere in the state",
-   "water_matched_by": "ingest.outfall_waters (2026-11-17)"
+   "water_slug": "wolf-creek-garfield-heights-oh",
+   "water_name": "Wolf Creek",
+   "water_kind": "stream",
+   "distance_m": 6,
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in NEORSD's CSO alerts map (https://www.neorsd.org/cso-alerts-map-and-status-of-outfalls/), the operator's list for permit OH0043991 is 'Wolf Creek'; Wolf Creek (wolf-creek-garfield-heights-oh), the record built for it from the USGS NHD high-resolution line at the outfall (waters follow-up 2026-11-28), lies 6 m from the row's point; the row had no water record",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": null,
+    "water_name": null,
+    "match": "none",
+    "by": "ingest.outfall_waters (2026-11-17)",
+    "why": "the row had no water record; the receiving water the permit names has one",
+    "water_match": "none: the NHD builder's records for 'Wolf Creek' (wolf-creek-oh, wolf-creek-perry-oh, wolf-creek-norton-oh) lie elsewhere in the state",
+    "no_water_reason": "the NHD builder's records for 'Wolf Creek' (wolf-creek-oh, wolf-creek-perry-oh, wolf-creek-norton-oh) lie elsewhere in the state"
+   }
   },
   {
    "npdes_permit": "OH0043991",
@@ -4925,14 +4949,22 @@
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
    },
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no record named 'Green Creek' in OH",
-   "no_water_reason": "no record named 'Green Creek' in OH",
-   "water_matched_by": "ingest.outfall_waters (2026-11-17)"
+   "water_slug": "green-creek-oh",
+   "water_name": "Green Creek",
+   "water_kind": "stream",
+   "distance_m": 15,
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in NEORSD's CSO alerts map (https://www.neorsd.org/cso-alerts-map-and-status-of-outfalls/), the operator's list for permit OH0043991 is 'Green Creek'; Green Creek (green-creek-oh), the record built for it from the USGS NHD high-resolution line at the outfall (waters follow-up 2026-11-28), lies 15 m from the row's point; the row had no water record",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": null,
+    "water_name": null,
+    "match": "none",
+    "by": "ingest.outfall_waters (2026-11-17)",
+    "why": "the row had no water record; the receiving water the permit names has one",
+    "water_match": "none: no record named 'Green Creek' in OH",
+    "no_water_reason": "no record named 'Green Creek' in OH"
+   }
   },
   {
    "npdes_permit": "OH0043991",
@@ -4970,14 +5002,22 @@
     "coords_from": "facility",
     "note": "EPA's row gives the plant's point and no receiving water"
    },
-   "water_slug": null,
-   "water_name": null,
-   "water_kind": null,
-   "distance_m": null,
-   "match": "none",
-   "water_match": "none: no record named 'Spring Creek' in OH",
-   "no_water_reason": "no record named 'Spring Creek' in OH",
-   "water_matched_by": "ingest.outfall_waters (2026-11-17)"
+   "water_slug": "spring-creek-oh",
+   "water_name": "Spring Creek",
+   "water_kind": "stream",
+   "distance_m": 3,
+   "match": "geometry+name",
+   "water_match": "hand correction: the permit's receiving water in NEORSD's CSO alerts map (https://www.neorsd.org/cso-alerts-map-and-status-of-outfalls/), the operator's list for permit OH0043991 is 'Spring Creek'; Spring Creek (spring-creek-oh), the record built for it from the USGS NHD high-resolution line at the outfall (waters follow-up 2026-11-28), lies 3 m from the row's point; the row had no water record",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": null,
+    "water_name": null,
+    "match": "none",
+    "by": "ingest.outfall_waters (2026-11-17)",
+    "why": "the row had no water record; the receiving water the permit names has one",
+    "water_match": "none: no record named 'Spring Creek' in OH",
+    "no_water_reason": "no record named 'Spring Creek' in OH"
+   }
   },
   {
    "npdes_permit": "OH0043991",

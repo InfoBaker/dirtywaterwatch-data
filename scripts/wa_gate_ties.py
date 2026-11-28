@@ -23,9 +23,11 @@ page publishes it (the cloud runs' outlines; none is on file here), or to the re
 and NHD records, data/waters-nhd.json). Nothing here moves a point except the South plant's marine outfall, whose EPA
 point (a permitted-feature point inland, about 4 km west of the plant in Renton) lies 18 km from the diffuser the
 permit locates; EPA's point is kept in epa_lat/epa_lon.
-Rows the operators name a water for that has no record (Seattle's three Longfellow Creek outfalls: NHDPlus V2.1, the
-NHD high-resolution flowlines and the Census hydrography carry no Longfellow Creek; OpenStreetMap does, and its
-Overpass service did not answer from here) get the override and a reason, no tie.
+Rows the operators name a water for that has no record get the override and a reason, no tie (NO_RECORD). Seattle's
+three Longfellow Creek outfalls were such rows until the waters follow-up of 2026-11-28 built longfellow-creek-wa (the
+unnamed NHD high-resolution reach that follows Seattle Public Utilities' own published line for the creek;
+ingest/waters_from_nhd.py HAND); they are tied to it now, each copy at its distance from its own point (a point beyond
+400 m, EPA's 170 in Kitsap County and the status file's 169, gives match name_only).
 """
 from __future__ import annotations
 
@@ -45,6 +47,7 @@ SOUTH = "Ecology's permit WA0029581 (King County South plant, effective 2015-07-
 OBL = "openboatlaunch record; distance to its outline as published on its water page, 2026-11-06"
 CENSUS = "Census TIGER/Line record (data/waters-nhd.json)"
 NHD = "NHDPlus V2.1 record (data/waters-nhd.json)"
+NHD_HR = "NHD high-resolution hand record in data/waters-nhd.json"
 
 FILES = {"wa": "outfalls-wa.json", "us": "outfalls-us.json", "plants": "outfalls-plants-us.json"}
 
@@ -216,18 +219,26 @@ MOVE = {("plants", "WA0029581", "001"): (47.602778, -122.429), ("plants", "WA002
 LONGFELLOW = ("Seattle's permit names Longfellow Creek; NHDPlus V2.1, the NHD high-resolution flowlines and the "
               "Census hydrography carry no Longfellow Creek (a stream largely in pipes); OpenStreetMap does, and a "
               "record from it waits for a run that reaches OpenStreetMap's Overpass service")
-NO_RECORD = {
-    ("wa", "WA0031682", "168"): ("Longfellow Creek", sea("168", "Longfellow Creek", "WA-09-1000")),
-    ("wa", "WA0031682", "169"): ("Longfellow Creek", sea("169", "Longfellow Creek", "WA-09-1000")),
-    ("wa", "WA0031682", "170"): ("Longfellow Creek", sea("170", "Longfellow Creek", "WA-09-1000")),
-    ("us", "WA0031682", "168"): ("Longfellow Creek", sea("168", "Longfellow Creek", "WA-09-1000")),
-    ("us", "WA0031682", "169"): ("Longfellow Creek", sea("169", "Longfellow Creek", "WA-09-1000")),
-    ("us", "WA0031682", "170"): ("Longfellow Creek", sea("170", "Longfellow Creek", "WA-09-1000")
+NO_RECORD: dict = {}
+
+# Seattle's Longfellow Creek outfalls, tied once the record was built (waters follow-up 2026-11-28); distances from each
+# copy's own point to longfellow-creek-wa's line, measured as the other NHD and Census rows here
+LF = "longfellow-creek-wa"
+TABLE.update({
+    ("wa", "WA0031682", "168"): (LF, "Longfellow Creek", 4, NHD_HR, sea("168", "Longfellow Creek", "WA-09-1000")),
+    ("wa", "WA0031682", "169"): (LF, "Longfellow Creek", 725, NHD_HR, sea("169", "Longfellow Creek", "WA-09-1000")
+                                 + "; the status file's point lies 725 m south of the creek's mapped head, EPA's 4 m"),
+    ("wa", "WA0031682", "170"): (LF, "Longfellow Creek", 20, NHD_HR, sea("170", "Longfellow Creek", "WA-09-1000")),
+    ("us", "WA0031682", "168"): (LF, "Longfellow Creek", 0, NHD_HR, sea("168", "Longfellow Creek", "WA-09-1000")),
+    ("us", "WA0031682", "169"): (LF, "Longfellow Creek", 4, NHD_HR, sea("169", "Longfellow Creek", "WA-09-1000")),
+    ("us", "WA0031682", "170"): (LF, "Longfellow Creek", 19867, NHD_HR, sea("170", "Longfellow Creek", "WA-09-1000")
                                  + "; EPA's point for this outfall lies 20 km away in Kitsap County (review "
                                    "2026-11-04), where it was tied to Blackjack Creek"),
-}
+})
+# the two copies whose point lies beyond the tie distance: tied on the operator's statement, no stretch from the point
+STATED_ONLY = {("wa", "WA0031682", "169"), ("us", "WA0031682", "170")}
 
-SOURCES = {OBL: "openboatlaunch", CENSUS: "Census TIGER/Line", NHD: "NHDPlus V2.1"}
+SOURCES = {OBL: "openboatlaunch", CENSUS: "Census TIGER/Line", NHD: "NHDPlus V2.1", NHD_HR: "NHD high resolution"}
 
 
 def waters() -> dict:
@@ -235,12 +246,20 @@ def waters() -> dict:
     return S.load_waters()
 
 
-def tie(o: dict, entry: tuple, w: dict) -> None:
+def tie(o: dict, entry: tuple, w: dict, stated_only: bool = False) -> None:
+    """stated_only (STATED_ONLY): the tie rests on the operator's statement alone and the row's point lies beyond the
+    tie distance, so it is written as ingest.outfall_water_corrections writes such a tie (match 'permit_stated', the
+    distance bound to the point it was measured from): reports still place on the water, and no stretch is modeled
+    from a point the outfall is not at (build.reaches.candidate_outfalls, stated_off_water)."""
     slug, water, d, how, basis = entry
     o["receiving_water_override"] = {"water": water, "basis": basis + " (WA go-live gates 2026-11-06)"}
     named = water.lower() in [str(x).lower() for x in [w.get("name")] + list(w.get("aliases") or [])]
     o.update(water_slug=slug, water_name=w.get("name"), water_kind=w.get("kind"), distance_m=d,
              match="geometry+name" if named and d <= 400 else "geometry" if d <= 400 else "name_only")
+    if stated_only:
+        o.update(match="permit_stated", distance_from=[o.get("lat"), o.get("lon")])
+    else:
+        o.pop("distance_from", None)
     o["water_match"] = (f"operator's list: {basis}; {w.get('name')} ({slug}, {how}), {d} m from the point")
     o["water_matched_by"] = BY
     o.pop("no_water_reason", None)
@@ -276,7 +295,7 @@ def apply(docs: dict, wat: dict) -> list[str]:
             continue
         if key in MOVE:
             move(o, *MOVE[key])
-        tie(o, entry, wat[entry[0]])
+        tie(o, entry, wat[entry[0]], key in STATED_ONLY)
     for key, (water, basis) in NO_RECORD.items():
         o = idx.get(key)
         if o is None:

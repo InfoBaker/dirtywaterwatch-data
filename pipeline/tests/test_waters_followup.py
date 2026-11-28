@@ -90,3 +90,39 @@ def test_michigans_reports_place_by_their_own_text_on_the_new_record(resolver, t
                status="ended", waterbody_text=text, npdes_permit=permit, outfall_id=oid, raw={"state": "MI"})
     pl = resolver.resolve(ev)
     assert pl["water_slugs"] == [slug], pl
+
+
+# ------------------------------------------------------------------ the outfalls tied to the new records
+
+TIED = {("MI0043982", "001"): "st-louis-creek-mi", ("OH0043991", "059"): "spring-creek-oh",
+        ("OH0043991", "257"): "spring-creek-oh", ("OH0043991", "249"): "wolf-creek-garfield-heights-oh",
+        ("OH0043991", "256"): "green-creek-oh", ("OH0043991", "232"): "shaw-brook-oh",
+        ("OH0105457", "181"): "bloody-run-oh", ("WA0031682", "168"): "longfellow-creek-wa",
+        ("WA0031682", "169"): "longfellow-creek-wa", ("WA0031682", "170"): "longfellow-creek-wa"}
+
+
+@pytest.mark.parametrize("permit,oid", sorted(TIED))
+def test_a_report_of_a_tied_outfall_places_on_its_new_record(resolver, permit, oid):
+    ev = event(source_id="test-registry", source_record_id=f"{permit}-{oid}", event_type="cso", status="ended",
+               npdes_permit=permit, outfall_id=oid, raw={"state": permit[:2]})
+    pl = resolver.resolve(ev)
+    assert pl["water_slugs"] == [TIED[(permit, oid)]] and pl["water_match"] == "outfall_registry", pl
+
+
+def test_the_ties_rest_on_the_hand_corrections_and_the_washington_gate_table():
+    from common import load_outfall_registry
+    loaded = {(o["npdes_permit"], o["outfall"]): o for o in load_outfall_registry(provisional=False)}
+    for k, slug in TIED.items():
+        o = loaded[k]
+        by = "scripts/wa_gate_ties.py" if k[0] == "WA0031682" else "data/outfall-water-corrections.json"
+        assert o["water_slug"] == slug and o["water_matched_by"].startswith(by), k
+
+
+@pytest.mark.parametrize("permit,oid", [("OH0043991", "230"), ("OH0043991", "231"), ("NJ0108758", "026"),
+                                        ("NY0213934", "002"), ("OH0023833", "047"), ("OH0023833", "055")])
+def test_the_waters_left_without_a_record_stay_untied(resolver, permit, oid):
+    """Dugway Brook (no published line reaches the outfalls), Queen Ditch (no line within 300 m), the tributary of
+    Little Snake Creek (4 km from the creek) and Akron's Ohio Canal and Camp Brook (no named line) are left."""
+    ev = event(source_id="test-registry", source_record_id=f"{permit}-{oid}", event_type="cso", status="ended",
+               npdes_permit=permit, outfall_id=oid, raw={"state": permit[:2]})
+    assert resolver.resolve(ev)["water_slugs"] == []

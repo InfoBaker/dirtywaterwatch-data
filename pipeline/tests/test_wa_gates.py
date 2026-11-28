@@ -81,7 +81,7 @@ def test_the_washington_hand_records_are_the_census_polygons_at_the_operators_po
 
 def test_the_washington_hand_specs_name_their_tiger_ids():
     from ingest import waters_from_nhd as N
-    wa = {h["name"]: h for h in N.HAND if h["state"] == "WA"}
+    wa = {h["name"]: h for h in N.HAND if h["state"] == "WA" and h.get("service") == "tiger"}   # Longfellow Creek: NHD
     assert {n: h["oids"] for n, h in wa.items()} == {v[0]: [v[1]] for v in HAND.values()}
     assert all(h["service"] == "tiger" and h.get("near") for h in wa.values())
 
@@ -102,8 +102,8 @@ def _gate_ties():
 
 
 def test_every_king_county_and_seattle_outfall_has_a_record_or_the_operators_water_and_a_reason():
-    """Before the gates, 41 rows of the three permits had no record; now only Seattle's Longfellow Creek outfalls lack
-    one, and they carry the operator's water and why."""
+    """Before the gates, 41 rows of the three permits had no record; then only Seattle's Longfellow Creek outfalls
+    lacked one, and since the waters follow-up of 2026-11-28 built longfellow-creek-wa, none does."""
     from build import status as S
     waters = S.load_waters()
     left = []
@@ -117,8 +117,26 @@ def test_every_king_county_and_seattle_outfall_has_a_record_or_the_operators_wat
                 left.append((name, o["outfall"]))
                 assert o["receiving_water_override"]["water"] == "Longfellow Creek"
                 assert "Longfellow Creek" in o["no_water_reason"] and "Overpass" in o["no_water_reason"]
-    assert sorted(left) == sorted([("outfalls-wa.json", x) for x in ("168", "169", "170")]
-                                  + [("outfalls-us.json", x) for x in ("168", "169", "170")])
+    assert left == []
+
+
+def test_seattles_longfellow_creek_outfalls_are_tied_and_a_far_point_models_no_stretch():
+    """Waters follow-up 2026-11-28: the six copies of outfalls 168 to 170 take longfellow-creek-wa; the two whose point
+    lies beyond 400 m of the creek (the status file's 169, EPA's 170 in Kitsap County) rest on the operator's statement
+    alone (match permit_stated, distance bound to the point), so no stretch is modeled from them."""
+    from ingest.outfall_water_corrections import stated_off_water
+    mod = _gate_ties()
+    assert mod.NO_RECORD == {}
+    got = {}
+    for name in ("outfalls-wa.json", "outfalls-us.json"):
+        for o in _rows(name):
+            if o["npdes_permit"] == "WA0031682" and o["outfall"] in ("168", "169", "170"):
+                assert o["water_slug"] == "longfellow-creek-wa" and "no_water_reason" not in o
+                got[(name, o["outfall"])] = (o["match"], stated_off_water(o))
+    far = {("outfalls-wa.json", "169"), ("outfalls-us.json", "170")}
+    assert len(got) == 6
+    for k, (match, off) in got.items():
+        assert (match, off) == (("permit_stated", True) if k in far else ("geometry+name", False)), k
 
 
 def test_each_hand_tie_cites_the_operators_list_and_the_record_it_names():
@@ -127,7 +145,7 @@ def test_each_hand_tie_cites_the_operators_list_and_the_record_it_names():
     mod = _gate_ties()
     files = {"wa": "outfalls-wa.json", "us": "outfalls-us.json", "plants": "outfalls-plants-us.json"}
     idx = {(k, o["npdes_permit"], o["outfall"]): o for k, n in files.items() for o in _rows(n)}
-    assert len(mod.TABLE) == 55
+    assert len(mod.TABLE) == 61     # 55, and Seattle's six Longfellow Creek rows (waters follow-up 2026-11-28)
     for key, (slug, water, d, how, basis) in mod.TABLE.items():
         o = idx[key]
         assert o["water_slug"] == slug and o["distance_m"] == d and o["water_matched_by"] == mod.BY, key
@@ -153,7 +171,7 @@ def test_the_census_and_nhd_distances_are_measured_from_the_rows_own_points():
         got = _dist_m(shape(recs[slug]["geometry"]), o["lat"], o["lon"])
         assert abs(got - d) <= 5, (key, got, d)
         n += 1
-    assert n == 15
+    assert n == 21      # 15, and Seattle's six Longfellow Creek rows (waters follow-up 2026-11-28)
 
 
 def test_the_old_wrong_ties_are_gone():
@@ -165,7 +183,8 @@ def test_the_old_wrong_ties_are_gone():
             assert o["water_slug"] not in ("pipers-creek-wa", "blackjack-creek-wa", "black-river-wa"), o["outfall"]
             if (o.get("distance_m") or 0) > 400:      # only a hand tie whose basis says why the point is far
                 assert o["water_matched_by"].startswith("scripts/wa_gate_ties.py"), (o["npdes_permit"], o["outfall"])
-                assert o["outfall"] in ("031", "161"), (o["npdes_permit"], o["outfall"], o["water_slug"], o["distance_m"])
+                assert o["outfall"] in ("031", "161") or (o["water_slug"] == "longfellow-creek-wa" and o["match"] ==
+                                                          "permit_stated"), (o["npdes_permit"], o["outfall"], o["water_slug"])
 
 
 def test_the_south_plants_marine_outfall_is_at_the_permits_diffuser_with_epas_point_kept():
