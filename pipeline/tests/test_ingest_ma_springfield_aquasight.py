@@ -542,3 +542,19 @@ def test_a_map_end_after_the_map_was_read_changes_nothing(tmp_path, ctx):
     _, ev = _load(tmp_path, [p], [m])
     t = ev[p["event_id"]]
     assert t["status"] == "ongoing" and t["ended_at"] is None and "_ended_at_from" not in t["raw"]
+
+
+def test_springfields_mill_river_outfalls_take_the_mill_river():
+    """Outfalls 024, 025 and 048 sit on the dammed Mill River; the registry's nearest water is the lake, by geometry
+    alone, which resolve_water sets aside. The crosswalk's NAME@TOWN row places them, in Springfield only."""
+    from ingest import ma_massdep as M
+    cw = M.load_crosswalk()
+    echo = {"water_slug": "lake-massasoit-ma", "water_name": "Lake Massasoit", "match": "geometry"}
+    for text in ("Mill River", "Mill River, Connecticut River", "MILL R."):
+        slugs, match, note = M.resolve_water([("map", text)], "SPRINGFIELD", echo, cw, {})
+        assert slugs == ["mill-river-springfield-ma"] and match == "outfall_registry", (text, slugs, note)
+    slugs, match, _ = M.resolve_water([("portal", "MILL RIVER")], "Springfield", None, cw, {})
+    assert slugs == ["mill-river-springfield-ma"] and match == "name"
+    # another town's Mill River is still left to its permittee's own match
+    slugs, match, note = M.resolve_water([("portal", "MILL RIVER")], "TAUNTON", None, cw, {})
+    assert slugs == [] and match == "none" and note.get("no_slug")

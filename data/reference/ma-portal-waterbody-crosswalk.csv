@@ -8,6 +8,9 @@ CHICOPEE RIVER,chicopee-river-ma,medium,same
 WILLIMANSETT BK,,none,Chicopee CHI42 (Roberts Pond) - no slug
 MILL R.,,none,Springfield Mill River - no slug (mill-river-ma is Norfolk)
 MILL RIVER,,none,check permittee; mill-river-ma is Norfolk
+MILL RIVER@SPRINGFIELD,mill-river-springfield-ma,high,Springfield's Mill River as the Commission names it (outfalls 017 019 024 025 045 046 048); 024 025 and 048 are on its dammed stretch (Lake Massasoit) so the registry's nearest-water match alone would leave them unplaced
+MILL R.@SPRINGFIELD,mill-river-springfield-ma,high,same
+"MILL RIVER, CONNECTICUT RIVER@SPRINGFIELD",mill-river-springfield-ma,high,the live map's wording: the Mill River then the Connecticut; the first is the receiving water and the Connecticut comes by the modeled reach
 WESTFIELD RIVER,westfield-river-ma,high,
 WEST BRANCH WESTFIELD RIVER,,none,no slug for the West Branch
 MERRIMACK RIVER,merrimack-river-ma,high,Lowell/Lawrence/Haverhill
