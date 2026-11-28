@@ -546,7 +546,12 @@ def test_random_membership_upload_and_restore_sequences_preserve_saved_records(t
             if rng.randrange(4) == 0: doc['meta']['table_version'] += 1
             path.write_text(json.dumps(doc))
             state = build / states[0]; state.parent.mkdir(parents=True, exist_ok=True)
-            state.write_text(json.dumps({'sha256': 'a' * 64, 'last_modified': '2026-11-20T00:00:00Z'}))
+            if sid == 'fed-beacon-beach-actions':
+                # BEACON requires its saved rows, not the version markers used by the other feeds.
+                companion = {'years': {'2014': {'rows': {r['event_id']: r for r in doc['records']}}}}
+            else:
+                companion = {'sha256': 'a' * 64, 'last_modified': '2026-11-20T00:00:00Z'}
+            state.write_text(json.dumps(companion))
         # Periodic guaranteed successes ensure the property covers saves after interruptions.
         failure = rng.choice(['checkpoint', 'frozen', 'final-hot', None]) if step % 4 else None
         candidate = run / 'frozen.gz'
