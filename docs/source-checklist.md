@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1761 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1762 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -30,7 +30,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | fl | 6 | 0 | 5 | 1 | 0 | 12 |
 | mi | 6 | 2 | 5 | 2 | 0 | 15 |
 | wa | 6 | 3 | 4 | 1 | 0 | 14 |
-| ca | 9 | 1 | 10 | 3 | 0 | 23 |
+| ca | 13 | 1 | 7 | 3 | 0 | 24 |
 | il | 11 | 1 | 11 | 3 | 2 | 28 |
 | az | 3 | 1 | 3 | 3 | 1 | 11 |
 | sd | 3 | 1 | 5 | 0 | 0 | 9 |
@@ -45,7 +45,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | or | 7 | 1 | 5 | 1 | 0 | 14 |
 | ky | 8 | 0 | 3 | 1 | 1 | 13 |
 | tn | 7 | 2 | 3 | 1 | 0 | 13 |
-| oh | 16 | 2 | 8 | 1 | 1 | 28 |
+| oh | 17 | 2 | 7 | 1 | 1 | 28 |
 | mn | 7 | 0 | 6 | 4 | 1 | 18 |
 | nd | 6 | 0 | 7 | 1 | 1 | 15 |
 | mo | 7 | 0 | 4 | 2 | 0 | 13 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **657** | **240** | **549** | **236** | **79** | **1761** |
+| **all** | **662** | **240** | **545** | **236** | **79** | **1762** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1429,7 +1429,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `wa-spokane-annual-cso` | City of Spokane annual CSO reports | watch | search_only | monitoring | Annual totals per outfall (2015-2017 PDFs seen in search). |
 | `wa-ecology-erts` | Ecology Environmental Report Tracking System (ERTS) | rejected | search_only | events | Intake system for complaints and spill reports; no public list found; the sewage spill website is its public output for permitted facilities. |
 
-## ca: California (23)
+## ca: California (24)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
@@ -1437,7 +1437,11 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ca-go-2022-0103-dwq` | Statewide Sanitary Sewer Systems General Order WQ 2022-0103-DWQ (effective 2023-06-05), Attachment E1 | used | fetched | law | Defines categories and deadlines: Cat 1 = any volume reaching surface water; Cat 2 >= 1,000 gal not reaching water; Cat 3 50 to 999 gal; Cat 4 < 50 gal. |
 | `ca-hsc-115885` | Health and Safety Code 115885 and 17 CCR 7956-7961 (AB 411 beach posting and closure) | used | fetched | law | The public duty in California: the health officer posts and closes beaches after a known sewage release and runs a closure hotline. |
 | `ca-hsc-5411-5` | Health and Safety Code 5411.5 (notice to local health officer) | used | fetched | law | Duty to tell the health officer, not the public. |
+| `ca-lacounty-beach` | Los Angeles County beach water quality map and ocean notices | used | fetched | advisories | Read hourly by pipeline/ingest/ca_lacounty_beaches.py; paged archive and KML checked live November 28, 2026: 176 notices and 97 stations. |
+| `ca-long-beach-water-quality` | Long Beach recreational water conditions | used | fetched | advisories | Read hourly by pipeline/ingest/ca_long_beach_water_quality.py; 15 stations, all Open, updated November 25, 2026, read November 28. |
+| `ca-ocbeachinfo` | Orange County Health Care Agency ocean and bay water closures (ocbeachinfo.com) | used | fetched | advisories | Built ca_oc_beaches reader with strict table validation and retention on failure. Native HTML/PDF extraction awaits runner verification; real-record fixtures are trimmed public-text transcriptions. |
 | `ca-sacramento-css-permit` | City of Sacramento Combined Wastewater Collection and Treatment System, Order R5-2026-0003 (NPDES CA0079111) | used | fetched | permits | Read the public notification clause. |
+| `ca-sdcounty-beachinfo` | San Diego County DEHQ beach and bay status (sdbeachinfo.com) | used | fetched | advisories | Built ca_sd_beaches hourly reader; native live read Nov. 28: 7 advisories, 6 closures, no warnings. Most rows have no current-event reason and are listed without color. |
 | `ca-sfpuc-beach-map` | SFPUC San Francisco Beach Water Quality map (combined sewer discharge flags) and getBeaches service | used | fetched | events | Read hourly by pipeline/ingest/ca_sfpuc_beaches.py as a snapshot: the combined sewer discharge sign per station (SFPUC's own 24-72 hour window, red while shown) and the postings (beach advisories). 20 stations, no flag on 2026-11-04. |
 | `ca-swrcb-ciwqs-spills-flatfile` | State Water Board CIWQS Sanitary Sewer System spill data: Cat1-2-3-Spills.txt (nightly flat file) | used | fetched | events | Statewide, event-level, machine-readable, public: read hourly by pipeline/ingest/ca_swrcb_ciwqs_spills.py (If-Modified-Since: the file changes once a day; 3,567 spills since June 2023 on 2026-11-04 with the backfill: 1,284 Category 1 shown, 459 Category 2 and 1,824 Category 3 kept as reaching no water). Narrative and certifier columns never read. |
 | `ca-swrcb-fhab` | Surface Water - Freshwater Harmful Algal Blooms (FHAB bloom reports, cases, advisories) | used | fetched | advisories | Read by pipeline/ingest/ca_swrcb_fhab.py when the table changes (about daily): Caution, Warning, Danger and mat-alert advisories (1,304 on 2026-11-04) and new reports not yet assessed; reports with no advisory counted, not shown. Blooms, not sewage. |
@@ -1445,10 +1449,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ca-sd-regional-board-ibwc-spills` | San Diego Water Board: USIBWC Spill Events and Transboundary Flow Events from Mexico | candidate | fetched | events | The shared-water (US-Mexico) case the owner's rule covers; small HTML table, poll weekly. |
 | `ca-caloes-spill-reports` | Cal OES Hazardous Materials Spill Reports | watch | search_only | events | Potentially faster (hours) than CIWQS for >= 1,000 gal; format and reuse unconfirmed. |
 | `ca-heal-the-bay` | Heal the Bay Beach Report Card and River Report Card | watch | search_only | prior_art | Prior art: weekly grades; their app shows closures. |
-| `ca-lacounty-beach` | Los Angeles County Public Health ocean water quality and beach closures | watch | search_only | advisories | Closures for sewage spills in LA County; not fetched in the time box. LA County also publishes 'sewage discharge reporting guidelines'. |
-| `ca-ocbeachinfo` | Orange County Health Care Agency ocean and bay water closures (ocbeachinfo.com) | watch | search_only | advisories | Sewage-spill closures with extent; not fetched. |
 | `ca-sdcoastkeeper-swim-guide` | San Diego Coastkeeper beach advisories (Swim Guide affiliate) | watch | search_only | prior_art | Republishes county closures; prior art. |
-| `ca-sdcounty-beachinfo` | San Diego County DEHQ beach and bay status (sdbeachinfo.com) | watch | fetched | advisories | Live closures (incl. sewage and Tijuana closures) but no documented API; Beach Watch carries the same records later. The prompt's 'API' lead was not confirmed. |
 | `ca-sf-beach-wq-opendata` | DataSF Beach Water Quality Monitoring (v3fv-x3ux) | watch | fetched | monitoring | Bacteria results; context. |
 | `ca-swrcb-plps-spills` | plps_spills.txt (private lateral and private system spills, voluntary) | watch | fetched | events | Voluntary, small, privacy-sensitive. |
 | `ca-swrcb-sewer-overflows-arcgis` | Water Boards ArcGIS MapServer Water_Quality/Sewer_Overflows | watch | fetched | events | Bot-walled to scripts; the nightly flat file carries the same points. |
@@ -1717,6 +1718,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-lakewood-cso-map` | Lakewood CSO Alerts & Status | used | fetched | events | Read hourly by pipeline/ingest/oh_lakewood_cso.py from 2026-11-16: each event a card shows becomes a dated record (start, end, volume, receiving water); the history grows from the first read. The first read on 2026-11-16 found no event in progress or in the past 48 hours; four sites gave only the end of their last event (the newest CSO-052, 2026-11-12 19:10). |
 | `oh-law-40cfr122-38` | 40 CFR 122.38 Great Lakes CSO public notification (Lake Erie basin permittees) | used | inferred | law | 4-hour public notice for Ohio CSO permittees in the Lake Erie basin (42 operators on EPA's Ohio list); implemented through their public notification plans. |
 | `oh-law-oac-3745-33-08` | OAC 3745-33-08 Generic NPDES permit conditions (outfall signs; notice to public water supply operators) | used | fetched | law | Ohio's only general rule touching public notice: permanent outfall signs, and notice to drinking-water intake operators near major discharges. |
+| `oh-msdgc-cso-activity-map` | MSD of Greater Cincinnati CSO Activity Map (Power BI) | used | fetched | events | We read the public query hourly and retain suspected-overflow events. Active observations open events; a later Recently Active observation confirms water levels returned to normal and bounds the stop. Missing or unavailable readings retain ongoing events. No volume or cause is supplied. |
 | `oh-neorsd-cso-notification-map` | NEORSD CSO Alerts: map and status of outfalls (ArcGIS) | used | fetched | events | Read hourly by pipeline/ingest/oh_neorsd_cso.py (layers 4 and 5, safe fields): each new last wet- or dry-weather overflow per outfall becomes a dated cso record with NEORSD's start, end and volume, labelled metered (24 outfalls) or modelled (88) by NEORSD; 148 records from the first poll on 2026-11-08 (102 of them in 2026). The 112 outfalls' points and receiving waters improve EPA's rows (data/outfalls-oh.json). |
 | `oh-odh-beachguard` | Ohio Department of Health BeachGuard public (bathing beach and HAB advisories) | used | fetched | advisories | Read hourly by pipeline/ingest/oh_odh_beachguard.py: current advisories, lifted at the first poll that no longer lists them; bacteria as beach advisories, HAB types as blooms. The full list of past advisories (8,657 since 2008 on 2026-11-21) is read by pages on --backfill and weekly, each past advisory ended at the reopening BeachGuard gives. |
 | `oh-willard-cso-notices` | Willard CSO public notifications | used | fetched | events | Read hourly by pipeline/ingest/oh_willard_cso.py from 2026-11-16: 2 overflows from 4 notices (2025-04-05, 11.24 million gallons; 2026-04-01, 7.78 million gallons), each initial and supplemental notice pair one record. |
@@ -1727,7 +1729,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `oh-elyria-cso` | Elyria Combined Sewer Overflow page | watch | fetched | events | Annual CSO reports and notification plan; links Lorain County Emergency Alerting System; Ordinance 521.11 prohibits swimming in the Black River within city limits. |
 | `oh-epa-noncompliance-sso-notification` | Ohio EPA NPDES non-compliance and SSO notification (24-hour report to Ohio EPA; SSO 5-day follow-up form) | watch | search_only | law | Regulator-only reports; no public output found. |
 | `oh-euclid-cso-notification` | Euclid Combined Sewer Overflow Public Notification | watch | fetched | events | Describes 17 CSO structures and the notification plan; no event list seen in the fetched page. |
-| `oh-msdgc-cso-activity-map` | MSD of Greater Cincinnati CSO Activity Map (Power BI) | watch | fetched | events | Power BI embed (app.powerbi.com/view?r=...), updated hourly, outfalls active now or in the past 72 hours; no machine-readable output. MSD advises avoiding streams for 72 hours after rain. |
 | `oh-sso-annual-reports` | Municipal SSO annual reports (Dayton, Elyria, Willoughby, Wooster, Middlefield, Montgomery County) | watch | search_only | events | Annual PDFs required by permits; annual precision only. |
 | `oh-upper-sandusky-cso-reports` | Upper Sandusky CSO public notification reports by year | watch | search_only | events | Yearly CSO report pages (2023-2025) per search. |
 | `oh-echo-sobe` | EPA SOBE (eRule Phase 2) sewer overflow events, Ohio | rejected | inferred | events | 0 Ohio rows on 2026-11-03; Ohio collects through its own channels (email/phone 24-hour notice, STREAMS annual SSO report). |
