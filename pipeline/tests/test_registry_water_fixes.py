@@ -35,6 +35,8 @@ def waters():
     ("BEAVER BROOK", "LOWELL", "beaver-brook-lowell-ma"),
     ("Beaver Brook", "Lowell", "beaver-brook-lowell-ma"),
     ("LITTLE RIVER", "HAVERHILL", "little-river-ma"),
+    ("LITTLE MYSTIC CHANNEL", "BOSTON", "boston-inner-harbor-ma"),     # second batch (waters follow-up 2026-11-28)
+    ("RESERVED CHANNEL", "BOSTON", "boston-inner-harbor-ma"),
 ])
 def test_the_crosswalk_places_the_waters_that_have_records_now(cw, waters, text, town, slug):
     slugs, match, note = M.resolve_water([("portal", text)], town, None, cw, {})
@@ -84,3 +86,34 @@ def test_manistee_lake_goes_to_the_lake_at_manistee_by_the_dischargers_town(reso
     assert pl["water_slugs"] == ["manistee-lake-mi"]
     # another permittee with no town still meets two Manistee Lakes
     assert resolver.resolve(_mi_event("Manistee Lake", "MI9999999", None))["water_slugs"] == []
+
+
+# ------------------------------------------------------------ second registry batch (waters follow-up 2026-11-28)
+# research/registry/outfall-water-fixes-2026-11-28-review.md: the 15 rows marked apply
+
+SECOND_BATCH = {("ME0102075", "005"): "back-cove-me", ("ME0102075", "007"): "back-cove-me",
+                ("ME0102075", "012"): "back-cove-me", ("ME0102075", "015"): "back-cove-me",
+                ("ME0102075", "016"): "back-cove-me", ("ME0101435", "006"): "back-cove-me",
+                ("PA0021407", "006"): "camp-run-pa", ("PA0025984", "212"): "sawmill-run-pa",
+                ("PA0217611", "056"): "sawmill-run-pa", ("PA0027111", "004"): "pucketa-creek-pa",
+                ("PA0027391", "004"): "bull-creek-pa", ("NY0027057", "020"): "eighteenmile-creek-lockport-ny",
+                ("NY0027057", "023"): "eighteenmile-creek-lockport-ny",
+                ("NY0027057", "034"): "eighteenmile-creek-lockport-ny", ("VT0101010", "005"): "white-river-vt"}
+# rows the review left alone: 'Portland Harbor, Back Cove, Ca' names three waters (do not apply); South Portland's
+# Fore River rows (two Fore River records; cannot tell); Fall River's 010 (cannot tell)
+LEFT = {("ME0101435", "013"): "casco-bay-me", ("ME0101435", "017"): "casco-bay-me",
+        ("ME0101435", "018"): "casco-bay-me", ("ME0101435", "024"): "casco-bay-me",
+        ("MA0100382", "010"): "narragansett-bay-ma"}
+
+
+def test_the_second_batch_rows_carry_their_stated_water_in_the_registry_the_loader_reads():
+    from common import load_outfall_registry
+    loaded = {(o["npdes_permit"], o["outfall"]): o for o in load_outfall_registry(provisional=False)}
+    for k, slug in SECOND_BATCH.items():
+        o = loaded[k]
+        assert o["water_slug"] == slug and o["water_matched_by"].startswith("data/outfall-water-corrections.json"), k
+    # the one Portland row whose shared point lies beyond the tie distance rests on the stated water, off the water
+    from ingest.outfall_water_corrections import stated_off_water
+    assert loaded[("ME0101435", "006")]["match"] == "permit_stated" and stated_off_water(loaded[("ME0101435", "006")])
+    for k, slug in LEFT.items():
+        assert loaded[k]["water_slug"] == slug, k
