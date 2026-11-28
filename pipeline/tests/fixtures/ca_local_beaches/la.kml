@@ -1,0 +1,163 @@
+<ns0:kml xmlns:ns0="http://www.opengis.net/kml/2.2">
+  <ns0:Document>
+    <ns0:name>LAC Ocean Monitoring Locations</ns0:name>
+    <ns0:description />
+    <ns0:Style id="icon-503-009D57-labelson">
+      <ns0:IconStyle>
+        <ns0:color>ff579d00</ns0:color>
+        <ns0:scale>1.1</ns0:scale>
+        <ns0:Icon>
+          <ns0:href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</ns0:href>
+        </ns0:Icon>
+        <ns0:hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels" />
+      </ns0:IconStyle>
+    </ns0:Style>
+    <ns0:Style id="icon-503-62AF44-labelson">
+      <ns0:IconStyle>
+        <ns0:color>ff44af62</ns0:color>
+        <ns0:scale>1.1</ns0:scale>
+        <ns0:Icon>
+          <ns0:href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</ns0:href>
+        </ns0:Icon>
+        <ns0:hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels" />
+      </ns0:IconStyle>
+    </ns0:Style>
+    <ns0:Style id="icon-503-F4EB37-labelson">
+      <ns0:IconStyle>
+        <ns0:color>ff37ebf4</ns0:color>
+        <ns0:scale>1.1</ns0:scale>
+        <ns0:Icon>
+          <ns0:href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</ns0:href>
+        </ns0:Icon>
+        <ns0:hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels" />
+      </ns0:IconStyle>
+    </ns0:Style>
+    <ns0:Style id="icon-503-FFFFFF-labelson">
+      <ns0:IconStyle>
+        <ns0:color>ffffffff</ns0:color>
+        <ns0:scale>1.1</ns0:scale>
+        <ns0:Icon>
+          <ns0:href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</ns0:href>
+        </ns0:Icon>
+        <ns0:hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels" />
+      </ns0:IconStyle>
+    </ns0:Style>
+    <ns0:Folder>
+      <ns0:name>Wednesday, November 25th, 2026 03:30 PM</ns0:name>
+      <ns0:Placemark>
+        <ns0:name>DPH10 Leo Carillo State Beach</ns0:name>
+        <ns0:description>Location: Arroyo Sequit Creek outlet&lt;br&gt;Station No.: DPH010&lt;br&gt;Inspection Frequency: Tuesday, all year&lt;br&gt;Latitude: 34.0445211&lt;br&gt;Longitude: -118.9338129</ns0:description>
+        <ns0:styleUrl>#icon-503-62AF44-labelson</ns0:styleUrl>
+        <ns0:ExtendedData>
+          <ns0:Data name="Location">
+            <ns0:value>Arroyo Sequit Creek outlet</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Station No.">
+            <ns0:value>DPH010</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Inspection Frequency">
+            <ns0:value>Tuesday, all year</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Latitude">
+            <ns0:value>34.0445211</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Longitude">
+            <ns0:value>-118.9338129</ns0:value>
+          </ns0:Data>
+        </ns0:ExtendedData>
+        <ns0:Point>
+          <ns0:coordinates>
+            -118.9338129,34.0445211,0
+          </ns0:coordinates>
+        </ns0:Point>
+      </ns0:Placemark>
+      <ns0:Placemark>
+        <ns0:name>SMB-1-13 Carbon Canyon Beach</ns0:name>
+        <ns0:description>Location: Sweet Water Canyon storm drain&lt;br&gt;Station No.: SMB-1-13&lt;br&gt;Inspection Frequency: Tuesday, all year&lt;br&gt;Latitude: 34.0380544&lt;br&gt;Longitude: -118.6739549</ns0:description>
+        <ns0:styleUrl>#icon-503-FFFFFF-labelson</ns0:styleUrl>
+        <ns0:ExtendedData>
+          <ns0:Data name="Location">
+            <ns0:value>Sweet Water Canyon storm drain</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Station No.">
+            <ns0:value>SMB-1-13</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Inspection Frequency">
+            <ns0:value>Tuesday, all year</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Latitude">
+            <ns0:value>34.0380544</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Longitude">
+            <ns0:value>-118.6739549</ns0:value>
+          </ns0:Data>
+        </ns0:ExtendedData>
+        <ns0:Point>
+          <ns0:coordinates>
+            -118.6739549,34.0380544,0
+          </ns0:coordinates>
+        </ns0:Point>
+      </ns0:Placemark>
+      <ns0:Placemark>
+        <ns0:name>DPH106 Santa Monica State Beach</ns0:name>
+        <ns0:description>Location: Strand Street extended&lt;br&gt;Station No.: DPH 106&lt;br&gt;Inspection Frequency: Monday, all year&lt;br&gt;Latitude: 34.0024369&lt;br&gt;Longitude: -118.49071</ns0:description>
+        <ns0:styleUrl>#icon-503-F4EB37-labelson</ns0:styleUrl>
+        <ns0:ExtendedData>
+          <ns0:Data name="Location">
+            <ns0:value>Strand Street extended</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Station No.">
+            <ns0:value>DPH 106</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Inspection Frequency">
+            <ns0:value>Monday, all year</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Latitude">
+            <ns0:value>34.0024369</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Longitude">
+            <ns0:value>-118.49071</ns0:value>
+          </ns0:Data>
+        </ns0:ExtendedData>
+        <ns0:Point>
+          <ns0:coordinates>
+            -118.49071,34.0024369,0
+          </ns0:coordinates>
+        </ns0:Point>
+      </ns0:Placemark>
+      <ns0:Placemark>
+        <ns0:name>MDRH-1 Marina Beach, Mother's Beach</ns0:name>
+        <ns0:description>Location: Playground&lt;br&gt;Station No.: MDRH-1&lt;br&gt;Inspection Frequency: M, T, W, Th, F, S, all year&lt;br&gt;Latitude: 33.979889&lt;br&gt;Longitude: -118.4577173</ns0:description>
+        <ns0:styleUrl>#icon-503-F4EB37-labelson</ns0:styleUrl>
+        <ns0:ExtendedData>
+          <ns0:Data name="Location">
+            <ns0:value>Playground</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Station No.">
+            <ns0:value>MDRH-1</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Inspection Frequency">
+            <ns0:value>M, T, W, Th, F, S, all year</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Latitude">
+            <ns0:value>33.979889</ns0:value>
+          </ns0:Data>
+          <ns0:Data name="Longitude">
+            <ns0:value>-118.4577173</ns0:value>
+          </ns0:Data>
+        </ns0:ExtendedData>
+        <ns0:Point>
+          <ns0:coordinates>
+            -118.4577173,33.979889,0
+          </ns0:coordinates>
+        </ns0:Point>
+      </ns0:Placemark>
+      </ns0:Folder>
+    <ns0:Folder>
+      <ns0:name>Untitled layer</ns0:name>
+    </ns0:Folder>
+    <ns0:Folder>
+      <ns0:name>Untitled layer</ns0:name>
+    </ns0:Folder>
+  </ns0:Document>
+</ns0:kml>

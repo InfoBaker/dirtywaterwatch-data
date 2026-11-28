@@ -1,0 +1,30 @@
+[
+  {
+    "Advisory id": 67160,
+    "AdvisoryType": "Closure",
+    "AdvisoryCause": "Sewage Spill",
+    "DateofAdvisory": "2026-01-01",
+    "TimeofAdvisory": "00:00",
+    "DateOpened": "2026-01-13",
+    "TimeOpened": "13:00",
+    "Station_Name": "CB-01",
+    "Station_Description": "Inner Cabrillo Beach",
+    "Beach_Name": "Inner Cabrillo Beach",
+    "WaterBodyName": "Pacific Ocean",
+    "County": "Los Angeles"
+  },
+  {
+    "Advisory id": 67161,
+    "AdvisoryType": "Closure",
+    "AdvisoryCause": "Sewage Spill",
+    "DateofAdvisory": "2026-01-01",
+    "TimeofAdvisory": "00:00",
+    "DateOpened": "2026-01-13",
+    "TimeOpened": "13:00",
+    "Station_Name": "CB-02",
+    "Station_Description": "Inner Cabrillo Beach",
+    "Beach_Name": "Inner Cabrillo Beach",
+    "WaterBodyName": "Pacific Ocean",
+    "County": "Los Angeles"
+  }
+]

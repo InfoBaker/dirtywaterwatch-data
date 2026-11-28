@@ -1,0 +1,29 @@
+id: ca-lacounty-beach
+name: Los Angeles County beach water quality map and ocean notices
+url: https://admin.publichealth.lacounty.gov/phcommon/public/eh/water_quality/beach_grades.cfm
+homepage: https://admin.publichealth.lacounty.gov/phcommon/public/eh/water_quality/beach_grades.cfm
+kind: html
+level: county
+cadence: Hourly; current map and complete current-year press-release index. New notices fetched once, recent notices rechecked daily.
+license: No explicit reuse license found; public agency notices.
+attribution: Los Angeles County Department of Public Health
+enabled: true
+role: advisories
+event_types: [beach_advisory, beach_closure, rain_advisory, sso]
+states: [CA]
+access: [html, kml]
+access_detail: Public KML linked from the county page, with station IDs and source coordinates; paged ocean release index with native prid identifiers. No login. The local archive retains prior years when the live index rolls over.
+machine_readable: true
+legal_basis: HSC 115885 and 17 CCR 7958 govern health-officer beach posting and closure; the website is voluntary. The law names signs and a telephone hotline.
+checked: '2026-11-28'
+raw_fields:
+  reporter_contact: []
+  customer_identifier: []
+  description: ["notices[].text", notice.text, notice.body_html, row.fields.Location, extent]
+# No structured reporter-contact or customer-identifier fields are read. Narrative text
+# is preserved as published, including any embedded public contact; removals apply at export.
+# Reader: pipeline/ingest/ca_lacounty_beaches.py; state: ca-lacounty-beaches-state.json.
+# Sewage-related closures use sso + advisory_active, with closure times distinguished
+# from discharge times. A closure with no stated water-quality reason is listed only.
+# Starts remain null; notice/map dates are publication dates with Pacific precision.
+# A map observation and the same named current warning are linked, not counted twice.

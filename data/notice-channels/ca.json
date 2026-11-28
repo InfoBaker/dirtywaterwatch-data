@@ -8766,27 +8766,28 @@
    "operator_id": null,
    "agency": "Los Angeles County Department of Public Health",
    "permit": null,
-   "checked": "2026-11-04",
+   "checked": "2026-11-28",
    "id": "ca-lacounty-beach-grades",
    "name": "Los Angeles County beach water quality",
    "channel_kind": "local_health_page",
    "urls": [
-    "http://publichealth.lacounty.gov/phcommon/public/eh/water_quality/beach_grades.cfm"
+    "https://admin.publichealth.lacounty.gov/phcommon/public/eh/water_quality/beach_grades.cfm"
    ],
    "method": "html",
    "legal_basis": null,
    "basis_kind": "voluntary",
-   "monitored": true,
-   "unmonitored_reason": null,
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
    "publishes": "status",
    "records": false,
    "every_hours": 24,
    "noun": "Voluntary page",
-   "note": "The county's beach status page (closures, rain advisories and grades); answered 200 on 2026-11-04. Watched for changes; no records made. Voluntary. (research/ca/report.md §2.5)",
+   "note": "Voluntary county map and ocean press releases, read hourly. HSC 115885 names beach signs and a telephone hotline; it does not require this web page.",
    "sources": [
     "ca-lacounty-beach"
    ],
-   "barrier": null
+   "barrier": null,
+   "feed_source_id": "ca-lacounty-beach"
   },
   {
    "state": "CA",
@@ -9795,6 +9796,34 @@
    ],
    "note": "No web form: Long Beach Utilities Department: notice of each sewage discharge to the local health officer or director of environmental health as soon as it is known; the law does not require the officer to publish it. No web channel found. (research/ca/report.md §2.1)",
    "barrier": "no_web_page"
+  },
+  {
+   "state": "CA",
+   "operator_id": null,
+   "agency": "Long Beach Department of Health and Human Services",
+   "permit": null,
+   "checked": "2026-11-28",
+   "id": "ca-long-beach-water-quality",
+   "name": "Long Beach recreational water conditions",
+   "channel_kind": "local_health_page",
+   "urls": [
+    "https://www.longbeach.gov/health/inspections-and-reporting/inspections/recreational-water-samples/"
+   ],
+   "method": "html",
+   "legal_basis": null,
+   "basis_kind": "voluntary",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "publishes": "status",
+   "records": false,
+   "every_hours": 24,
+   "noun": "Voluntary page",
+   "note": "Voluntary city health conditions page, read hourly. HSC 115885 names beach signs and a telephone hotline; it does not require this web page.",
+   "sources": [
+    "ca-long-beach-water-quality"
+   ],
+   "barrier": null,
+   "feed_source_id": "ca-long-beach-water-quality"
   },
   {
    "state": "CA",
