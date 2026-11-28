@@ -1,6 +1,6 @@
 """New Mexico: NMED's HABs Mapper layer through the generic ArcGIS ingester (data/sources/nm-nmed-hab-mapper.yaml,
 ingest/nm_transforms.py). The fixture holds real rows of the layer fetched 2026-11-07 (the internal-notes field and
-the GlobalID left out), with a placeholder staff note added to one row to prove it never reaches a record."""
+the GlobalID left out), with a placeholder staff note added to one row to verify source-text retention."""
 import copy
 import json
 from pathlib import Path
@@ -57,10 +57,10 @@ def test_the_html_link_leaves_the_advice_text_and_is_kept_apart():
     assert ov["raw"]["_links"][0]["url"].startswith("https://www.blm.gov/announcement/")
 
 
-def test_a_personal_note_never_reaches_the_records():
+def test_a_published_note_is_kept_in_the_records():
     recs, _ = build()
     blob = json.dumps(recs)
-    assert "Pat Example" not in blob and "505-555-0100" not in blob and "SWQB_internal_notes" not in blob
+    assert "Pat Example" in blob and "505-555-0100" in blob and "SWQB_internal_notes" in blob
 
 
 def test_a_point_outside_new_mexico_is_not_used():

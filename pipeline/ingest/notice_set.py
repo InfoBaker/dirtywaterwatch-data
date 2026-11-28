@@ -1,4 +1,8 @@
 """A reviewed set of official notices: one page per notice, its records transcribed from the page by a reviewer and
+
+Public-record policy: downloaded source text is retained, including published names, contacts and addresses.
+Structured event classification still uses the documented source fields. Requested removals apply at export.
+
 checked against the page at every read (co_official_notices, mt_deq_notices).
 
 Why
@@ -112,13 +116,13 @@ def build(source_id: str, notices: list[dict], fetched: str, previous: list[dict
             status, text, err = status, None, "none of the notice's sentences is on the answer"
         pages.append({"notice": n["id"], "url": n["url"], "http_status": status, "error": err,
                       "quotes_found": len(found), "quotes_missing": len(missing) if text is not None else None,
-                      "text_sha256": hashlib.sha256(text.encode()).hexdigest() if text else None})
+                      "source_text": text, "text_sha256": hashlib.sha256(text.encode()).hexdigest() if text else None})
         if text is None:
             unvalidated.append({"notice": n["id"], "reason": err or "not read"})
         for rec in n["records"]:
             f = {k: v for k, v in rec.items() if k not in ("quotes", "core_quotes", "raw")}
             raw = {**(rec.get("raw") or {}), "notice_id": n["id"], "notice_kind": n["kind"],
-                   "quotes": rec.get("quotes") or [], "reviewed": n["reviewed"]}
+                   "quotes": rec.get("quotes") or [], "reviewed": n["reviewed"], "source_text": text}
             base = f"{source_id}:{f['source_record_id']}"
             # a standing notice's episodes: the record and its relistings (raw.episode_of); the latest is the current
             eps = sorted([r for e, r in prev.items() if e == base or (r.get("raw") or {}).get("episode_of") == base],

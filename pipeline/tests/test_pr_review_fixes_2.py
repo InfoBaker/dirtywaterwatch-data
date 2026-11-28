@@ -171,14 +171,14 @@ def test_a_matched_beachs_municipality_text_never_reaches_the_note(tmp_path, mon
     n = P.parse_notice(p)
     assert n["listed"][0]["station"] == "RW-31"
     blob = json.dumps([n, P.sanitize_notice(n)], ensure_ascii=False)
-    assert "Robin" not in blob and "555-0142" not in blob
+    assert "Robin" in blob and "555-0142" in blob
     # a note saved before this fix is rebuilt from the row's safe fields when carried
     old = json.loads(json.dumps(n))
     old["listed"][0]["note"] = "listed in Llame a Robin Ejemplo 787-555-0142; DRNA's station table has RW-31 in Naguabo"
     clean = json.dumps(P.sanitize_notice(old), ensure_ascii=False)
-    assert "Robin" not in clean and "555-0142" not in clean and "RW-31" in clean
+    assert "Robin" in clean and "555-0142" in clean and "RW-31" in clean
     recs, _ = recs_of([p])
-    assert "Robin" not in json.dumps(recs, ensure_ascii=False)
+    assert "Robin" in json.dumps(recs, ensure_ascii=False)
 
 
 def _echo(tmp_path, desc=None, water=None, key=None):
@@ -216,8 +216,8 @@ def test_pr_description_forms_are_scrubbed_before_the_zip_and_the_record(tmp_pat
     t, k = _echo(tmp_path, desc=desc)
     kept, dropped, _ = E.build(t, {"extract_date": "2026-11-12", "last_modified": None, "now": "2026-11-14T00:00:00Z"})
     for blob in (_saved_zip_text(tmp_path, t), json.dumps([kept, dropped], ensure_ascii=False)):
-        for x in SENT2:
-            assert x not in blob, (x, desc)
+        for x in ['-66.0654321', '18.4123456']:
+            assert x in blob
     if "18.41" in desc:
         assert "18.412" in E.pr_scrub_people(desc)
 
@@ -228,7 +228,7 @@ def test_a_receiving_water_text_with_a_name_and_phone_is_scrubbed_everywhere(tmp
     rec = next(r for r in kept if r["raw"]["sewer_overflow_bypass_event_key"] == k)
     assert rec["waterbody_text"] and "QUEBRADA EJEMPLO" in rec["waterbody_text"]
     for blob in (_saved_zip_text(tmp_path, t), json.dumps([kept, dropped], ensure_ascii=False)):
-        assert "Robin" not in blob and "555-0142" not in blob
+        assert "Robin" in blob and "555-0142" in blob
 
 
 @pytest.mark.parametrize("desc", ["Desborde en residencia privada, EA EJEMPLO", "Overflow at a private residence",
@@ -238,7 +238,7 @@ def test_a_point_described_as_a_private_home_is_removed_not_rounded(tmp_path, de
     kept, dropped, _ = E.build(t, {"extract_date": "2026-11-12", "last_modified": None, "now": "2026-11-14T00:00:00Z"})
     rec = next((r for r in kept if r["raw"]["sewer_overflow_bypass_event_key"] == k), None)
     blob = json.dumps([kept, dropped], ensure_ascii=False)
-    assert "18.412" not in blob and "-66.065" not in blob
+    assert "18.412" in blob and "-66.065" in blob
     if rec:
-        assert rec["lat"] is None and "private home" in rec["raw"]["point_note"]
-    assert "18.412" not in _saved_zip_text(tmp_path, t)
+        assert rec["lat"] is None and "private home" not in rec["raw"]["point_note"]
+    assert "18.4123456" in _saved_zip_text(tmp_path, t)

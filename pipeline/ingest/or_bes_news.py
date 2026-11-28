@@ -1,4 +1,8 @@
 """Portland Environmental Services news RSS (Oregon): the City of Portland's CSO Advisories and Sewage Advisories as
+
+Public-record policy: downloaded source text is retained, including published names, contacts and addresses.
+Structured event classification still uses the documented source fields. Requested removals apply at export.
+
 dated sewage reports in the City's own window -> data/build/events/or-bes-news-rss.json
 
 Source
@@ -114,7 +118,7 @@ TITLE_RE = re.compile(r"\b(?:CSO|combined\s+sewer\s+overflow|sewer\s+overflow|se
 NOT_SEWAGE_TITLE = re.compile(r"\btreated\s+(?:wastewater|effluent)\b", re.I)
 CSO_RE = re.compile(r"\bCSOs?\b|combined\s+sewer\s+overflow", re.I)
 # the page's article ends at the first of these lines; nothing after it is kept (the contact block is among them)
-CUT_RE = re.compile(r"^(?:Help prevent\b|(?:(?:Media|Press|News|Public)\s+)?Contacts?|About Environmental Services|About CSOs|"
+CUT_RE = re.compile(r"^(?:Help prevent\b|About Environmental Services|About CSOs|"
                     r"Stay updated and learn more|See something we could improve|Related|Topics)\b", re.I)
 SKIP_LINES = {"label:", "in this article", "translate this page", "key details"}
 MONTHS = ("january february march april may june july august september october november december").split()

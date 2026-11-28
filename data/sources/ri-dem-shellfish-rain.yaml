@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ri-dem-shellfish-rain"
 name: "RI DEM conditional shellfish area rainfall closures (Upper Narragansett Bay)"
 url: "https://www.ri.gov/press/view/28491"

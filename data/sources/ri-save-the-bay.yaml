@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ri-save-the-bay"
 name: "Save The Bay (Baykeeper statements; weekly Upper Bay bacteria sampling reported to RIDOH)"
 url: "https://savebay.org/category/water-quality/"

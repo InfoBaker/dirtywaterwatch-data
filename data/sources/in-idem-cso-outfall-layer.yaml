@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "in-idem-cso-outfall-layer"
 name: "IDEM Indiana CSO Outfall Map (ArcGIS hosted layer)"
 url: "https://services5.arcgis.com/w1CjlfkUGYWS5MJd/arcgis/rest/services/CSO_Locations_Map_WFL1/FeatureServer/0"

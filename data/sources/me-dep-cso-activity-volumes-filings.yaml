@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "me-dep-cso-activity-volumes-filings"
 name: "Permittee annual 'CSO Activity and Volumes' spreadsheets filed with DEP (per event, per outfall)"
 url: "https://www.maine.gov/dep/water/cso/CSO%20Activity%20%26%20Volumes%20template.xlsx"

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ny-dec-sewage-discharge-reports-xlsx"
 name: "DEC SPRTK workbook 'SPRTK_Data.xlsx' (NY-Alert export, Jan 2021-Aug 2026) and older 'Sewage_Discharge_Reports.xlsx' (2013-2020)"
 url: "https://www.dec.ny.gov/fs/data/Sewage_Discharge_Reports.xlsx"

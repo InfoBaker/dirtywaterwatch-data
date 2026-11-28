@@ -330,9 +330,10 @@ def record_ids(rows: list[dict]) -> list[str]:
     out = []
     for r in rows:
         d = parse_date(r.get("start"))
-        # the hash is of the location as scrubbed (a house number or name is never recoverable from the key: second
-        # review P1), ten hex digits (40 bits)
-        loc = strip_house_numbers(scrub_text(clean(r.get("location")))).lower()
+        # Preserve the historical street-based identity independently of the published
+        # location. Source text below remains complete, including house numbers.
+        from ingest import identity_text
+        loc = identity_text.strip_house_numbers(identity_text.scrub_text(clean(r.get("location")))).lower()
         base = (f"{d.isoformat() if d else 'no-start'}-{slugify(water_name(loc) or 'site')}-"
                 f"{hashlib.sha256(loc.encode()).hexdigest()[:10]}")
         seen[base] += 1

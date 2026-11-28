@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": ["USER_NAME", "EMAIL", "PHONE_NUMBER", "Creator", "Editor"], "customer_identifier": [], "description": []}
 id: "ct-deep-agol-cso-reporting-archive"
 name: "CT DEEP CSO_Reporting_Archive_deepgis (CSO events 2016-07 to 2021-11)"
 url: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_Reporting_Archive_deepgis/FeatureServer/0"

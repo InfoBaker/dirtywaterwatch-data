@@ -360,10 +360,8 @@ DESCRIBED = re.compile(r"^(stream|creek|pond|lake|cove|inlet|spring)\b\s+(by|nea
 
 
 def round_text_coords(text):
-    """DEQ's coordinates written in a waterbody name, rounded to 0.001 degree before anything is saved."""
-    if not isinstance(text, str):
-        return text
-    return COORDS.sub(lambda m: f"(coordinates {round(float(m.group(1)), 3)}, {round(float(m.group(2)), 3)})", text)
+    """Preserve the source public record (decision 57)."""
+    return text
 
 
 # "on Big Huston Creek", "near Exampleville" after a lake's name: where the lake lies (the stream it is on, the town
@@ -481,10 +479,11 @@ def ar_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
             notes["start_basis"] = "DEQ's Date Posted"
     # the point: DEQ's own coordinates where the row gives them, else the GNIS feature of that name in its county
     m = COORDS.search(raw_name)
-    if m:
-        rec["lat"], rec["lon"] = round(float(m.group(1)), 3), round(float(m.group(2)), 3)
-        rec["coord_source"], rec["coord_precision_m"] = "source", 150
-        notes["_point_basis"] = "the coordinates DEQ gives in the advisory's waterbody name, rounded to 0.001 degree"
+    point = (float(m.group(1)), float(m.group(2))) if m else stated_dms_point(raw_name)
+    if point:
+        rec["lat"], rec["lon"] = point
+        rec["coord_source"], rec["coord_precision_m"] = "source", None
+        notes["_point_basis"] = "the coordinates DEQ gives in the advisory's waterbody name"
     elif not qualifier and not described:
         # the parent lake's GNIS point is never used for a bay, an arm or a described place: that would draw the
         # marker at the wrong place (review 2026-11-14 P1-3); such a row has a point only where DEQ gives one
@@ -542,47 +541,24 @@ def _dec(deg: str, mins: str | None, secs: str | None, hemi: str | None) -> str 
     v = d + m / 60 + s / 3600
     if (hemi or "").upper() in ("S", "W") or deg.startswith("-"):
         v = -v
-    return f"{round(v, 3):.3f}"
+    return str(v)
+
+
+def stated_dms_point(text):
+    """Convert a source-stated DMS pair for geometry, preserving its original text."""
+    values = [_dec(*m.groups()) for m in DMS_MARKED.finditer(text)]
+    if len(values) == 2 and all(v is not None for v in values):
+        lat, lon = map(float, values)
+        if -90 <= lat <= 90 and -180 <= lon <= 180:
+            return lat, lon
+    return None
 
 
 def scrub_coord_text(text):
-    """The text with every coordinate finer than 0.001 degree, in any of the forms above, cut to three decimals; a
-    number beyond 180 or minutes or seconds of 60 or more are not a coordinate and stay."""
-    if not isinstance(text, str) or not text:
-        return text
-
-    def lead(m):
-        return _dec(m.group(2), m.group(3), m.group(4), m.group(1)) or m.group(0)
-
-    def marked(m):
-        return _dec(m.group(1), m.group(2), m.group(3), m.group(4)) or m.group(0)
-
-    def spaced(m):
-        return _dec(m.group(1), m.group(2), m.group(3), m.group(4)) or m.group(0)
-
-    def hemi(m):
-        return _dec(m.group(2), m.group(3), None, m.group(1)) or m.group(0)
-
-    def fine(m):
-        v = float(m.group(1))
-        return f"{round(v, 3):.3f}" if abs(v) <= 180 else m.group(1)
-    t = DMS_LEAD.sub(lead, text)
-    t = DMS_MARKED.sub(marked, t)
-    t = DMS_SPACED.sub(spaced, t)
-    t = DM_HEMI.sub(hemi, t)
-    t = DM_TRAIL.sub(lambda m: _dec(m.group(1), m.group(2), None, m.group(3)) or m.group(0), t)
-    return FINE_DEGREE.sub(fine, t)
+    """Preserve the source public record (decision 57)."""
+    return text
 
 
 def scrub_coords_deep(obj, key: str = ""):
-    """A copy of a record (or any JSON value) with scrub_coord_text applied to every string that can hold a place in
-    words: raw rows, revisions' old values, tracked values, derived fields (outfall name, place, water). Times,
-    identifiers, paths and volumes are left as they are. Used on everything carried from earlier state before it is
-    read or saved again, so a point an older rule kept is cut at the next run, failed runs included."""
-    if isinstance(obj, dict):
-        return {k: (v if _NOT_PLACE_KEY.search(str(k)) else scrub_coords_deep(v, str(k))) for k, v in obj.items()}
-    if isinstance(obj, list):
-        return [scrub_coords_deep(v, key) for v in obj]
-    if isinstance(obj, str):
-        return scrub_coord_text(obj)
+    """Preserve the source public record (decision 57)."""
     return obj

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ny-parks-beaches"
 name: "NYS Parks 'Water Quality - Beach Results' page and live Beach Status layer (2025_Beach_Status_view)"
 url: "https://services.arcgis.com/1xFZPtKn1wKC6POA/arcgis/rest/services/2025_Beach_Status_view/FeatureServer/0"

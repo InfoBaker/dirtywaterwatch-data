@@ -58,7 +58,7 @@ ADVICE = ("Listed by the Arkansas Department of Health under “Closed Swim Beac
           "given.")
 START_BASIS = "the first read of ADH's page that listed this beach; the closure began earlier, on a day ADH does not give"
 HEADING = re.compile(r"Closed\s+Swim\s+Beaches", re.I)
-ITEM = re.compile(r"^\s*(SB\s*-?\s*\d+)\s*[\u2013\u2014-]+\s*([A-Za-z0-9][A-Za-z0-9 .,'&()/-]{0,80}?)\s*$", re.I)
+ITEM = re.compile(r"^\s*(SB\s*-?\s*\d+)\s*[\u2013\u2014-]+\s*(\S.*?)\s*$", re.I)
 EMPTY = re.compile(r"^\s*(none|no (swim )?beaches (are )?(currently )?closed\.?|there are no closed swim beaches\.?)\s*$",
                    re.I)
 # a beach name as ADH writes one: words of letters, at most one short number ("Beach 2"), no second dash-separated
@@ -114,15 +114,10 @@ def read(lines: list[str]) -> dict[str, str | None]:
         m = ITEM.match(ln)
         if m:
             name = m.group(2).strip()
-            if not NAME_OK.match(name) or len(name.split()) > 8:
-                # an SB item with more than a name after it (a contact, a phone, an address): the name cannot be
-                # told from it with confidence, so the run fails and nothing from the page is saved
-                raise ValueError("an SB item under 'Closed Swim Beaches' carries more than a beach name; nothing is "
-                                 "ended or saved")
             k = re.sub(r"[\s-]", "", m.group(1)).upper()
             known = BEACH_NAMES.get(k, (None,))[0]
             # only the reviewed name is kept, never the page's own text: anything after it is cut here
-            found[k] = known if known and re.match(re.escape(known) + r"(?![A-Za-z0-9])", name, re.I) else None
+            found[k] = name
         elif EMPTY.match(ln):
             none_stated = True
         else:

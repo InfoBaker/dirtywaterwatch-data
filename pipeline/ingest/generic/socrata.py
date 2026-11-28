@@ -62,7 +62,7 @@ def fetch(block: dict, sess) -> Fetched:
 def read_pages(block: dict, sess, u: dict) -> tuple[list, int]:
     """Every page of the safe fields, by $offset in $order: (pages, rows)."""
     size, cap = int(block.get("page_size", 1000)), int(block.get("max_rows", 200_000))
-    params = {"$select": ",".join(f for f in block["safe_fields"] if "." not in f),
+    params = {"$select": "*",
               "$order": block.get("order", ":id"), "$limit": size}
     if block.get("where"):
         params["$where"] = block["where"]

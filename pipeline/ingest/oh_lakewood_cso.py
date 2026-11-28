@@ -1,5 +1,9 @@
 """City of Lakewood CSO alerts and status -> data/build/events/oh-lakewood-cso-map.json.
 
+Public-record policy: downloaded source text is retained, including published names, contacts and addresses.
+Structured event classification still uses the documented source fields. Requested removals apply at export.
+
+
 Source (registry oh-lakewood-cso-map; 40 CFR 122.38, the Great Lakes CSO public notice rule)
   Lakewood's "CSO Alerts & Status" site, https://cso.lakewoodoh.gov/ (an ASP.NET page by Verdantas; 200 to GitHub's
   runner, probe 43941639288 of 2026-11-16; this machine cannot resolve the host). The page is rendered on the server:
@@ -166,7 +170,7 @@ def parse(page: str) -> tuple[list[dict], list[str]]:
         if bad:
             unread.append(f"{site}: " + ", ".join(bad))
             continue
-        cards.append({"site": site, **rows})
+        cards.append({"site": site, "source_text": clean(page), **rows})
     if not cards:
         raise LayoutError("no card could be read: " + "; ".join(unread[:5]))
     return cards, unread
@@ -234,7 +238,7 @@ def poll(state: dict, cards: list[dict], now: str) -> dict:
                                                  "replaced_at": now})
                     counts["updated"] += 1
                 cur.update(end=end, end_basis="published", volume=c.get("volume"))
-            cur.update(running=es == "ongoing" and not cur.get("end"), last_seen_at=now, updated=upd,
+            cur.update(source_text=c.get("source_text"), running=es == "ongoing" and not cur.get("end"), last_seen_at=now, updated=upd,
                        location=c.get("location"), water=c.get("water"), public_access=c.get("public_access"),
                        last_state=es)
             if es == "ongoing":
@@ -314,7 +318,7 @@ def to_record(key: str, ev: dict, points: dict[str, dict], site_water: dict[str,
         water = water_from_site = site_water[ev["site"]]
     o = tie(ev["site"], points, water)
     status = "ongoing" if ev.get("running") else ("ended" if end else "unknown")
-    raw = {"site": ev["site"], "time_zone": TZ_NAME, "state": "OH", "_first_seen_at": ev["first_seen_at"],
+    raw = {"source_text": ev.get("source_text"), "site": ev["site"], "time_zone": TZ_NAME, "state": "OH", "_first_seen_at": ev["first_seen_at"],
            "_last_seen_in_source": ev["last_seen_at"], "last_card_state": ev.get("last_state"),
            "discharge_location": strip_house_numbers(ev["location"]) if ev.get("location") else None,
            "public_access_areas_affected": ev.get("public_access"),

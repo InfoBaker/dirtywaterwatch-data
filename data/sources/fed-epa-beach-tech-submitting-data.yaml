@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "fed-epa-beach-tech-submitting-data"
 name: "EPA 'Submitting Data to EPA' (eBeaches: WQX monitoring, PRAWN notification, verification tool)"
 url: "https://www.epa.gov/beach-tech/submitting-data-epa"

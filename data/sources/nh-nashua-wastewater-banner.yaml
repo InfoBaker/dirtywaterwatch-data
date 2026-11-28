@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nh-nashua-wastewater-banner"
 name: "Nashua Wastewater Department page CSO banner"
 url: "https://www.nashuanh.gov/392/Wastewater-Department"

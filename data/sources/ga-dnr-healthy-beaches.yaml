@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ga-dnr-healthy-beaches"
 name: "Georgia DNR Coastal Resources Division Healthy Beaches (with Coastal Health District)"
 url: "https://coastalgadnr.org/HealthyBeaches"

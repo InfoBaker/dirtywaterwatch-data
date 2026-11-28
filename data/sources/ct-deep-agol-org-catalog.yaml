@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-deep-agol-org-catalog"
 name: "CT DEEP ArcGIS Online org FjPcSmEFuDYlIdKC (service catalog)"
 url: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services?f=json"

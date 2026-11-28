@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ia-dnr-focomp-incoming-reports"
 name: "Iowa DNR Field Office Compliance: bypass reports (incoming reports)"
 url: "https://programs.iowadnr.gov/focomp/Detail/FacilityDetail?facilityID=310634683"

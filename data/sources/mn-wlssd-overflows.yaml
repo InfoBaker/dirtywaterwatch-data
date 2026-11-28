@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "mn-wlssd-overflows"
 name: "Resource Renew (Western Lake Superior Sanitary District) overflow points ArcGIS layer"
 url: "https://services3.arcgis.com/3RQJoZkAUQLOEu2Y/arcgis/rest/services/Overflows_view/FeatureServer/0"
@@ -38,6 +39,7 @@ fetch:
   metadata: false        # the layer's edit time is the source's health, never a record's time
   time_zone: "America/Chicago"
   bounds: [-97.3, 43.4, -89.4, 49.45]      # Minnesota; a point outside is not used (raw._coords_rejected)
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [OBJECTID, OverflowDate, FacilityType, GlobalID, ReleaseAmount, StateWaters, _x, _y]
   round_coords: 3
   free_text: [FacilityType, ReleaseAmount, StateWaters]

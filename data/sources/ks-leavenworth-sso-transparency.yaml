@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ks-leavenworth-sso-transparency"
 name: "City of Leavenworth Sanitary Sewer Overflow Transparency Reports"
 url: "https://www.leavenworthks.gov/publicworks/page/sanitary-sewer-overflow-transparency-report"

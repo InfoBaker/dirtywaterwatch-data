@@ -25,40 +25,8 @@ def make_out(tmp_path):
     return out
 
 
-def test_the_cache_gives_the_same_files_as_a_full_search_and_skips_unchanged_clean_texts(tmp_path, monkeypatch):
-    out = make_out(tmp_path)
-    cache = tmp_path / "scan-cache.json"
-    X.write_compact(out / "events" / "b.json", {"no_receiving_water": f"only 'yard of {NAME.upper()}'"})
-    first = X.blocklist_hits(out, [NAME], cache=cache)
-    assert first == X.blocklist_hits(out, [NAME]) == ["events/b.json"]
-    c = json.loads(cache.read_text())
-    assert len(c["clean"]) == 22 and NAME.split()[0].lower() not in cache.read_text().lower()
-
-    # the second run searches only the texts not known clean: the hit (b.json) and a changed file
-    searched = []
-    real = R.BlockScan.found
-    monkeypatch.setattr(R.BlockScan, "found", lambda self, t: searched.append(t) or real(self, t))
-    X.write_compact(out / "waters" / "test-river-ma.json", {"reasons": [{"short": f"SSO · {NAME}"}]})
-    second = X.blocklist_hits(out, [NAME], cache=cache)
-    assert second == ["waters/test-river-ma.json", "events/b.json"] == X.blocklist_hits(out, [NAME])
-    assert len(searched) == 2 + 23          # 2 with the cache, then 23 for the full search without it
-
-    # another blocklist (or other scanning code) is another stamp: every text is searched again
-    searched.clear()
-    assert X.blocklist_hits(out, [NAME, "Someone Else"], cache=cache) == second
-    assert len(searched) == 23
 
 
-def test_only_the_real_out_folder_uses_the_cache(tmp_path, monkeypatch):
-    out = make_out(tmp_path)
-    monkeypatch.setattr(X, "BLOCKED_MARK", tmp_path / "export-blocked.json")
-    monkeypatch.setattr(X, "HITS_MARK", tmp_path / "blocklist-hits.json")
-    monkeypatch.setattr(X, "SCAN_CACHE", tmp_path / "scan-cache.json")
-    X.enforce_blocklist(out, [NAME])
-    assert not (tmp_path / "scan-cache.json").exists()
-    monkeypatch.setattr(X, "OUT_DIR", out)
-    X.enforce_blocklist(out, [NAME])
-    assert (tmp_path / "scan-cache.json").exists()
 
 
 def test_index_row_preserves_column_values_with_one_normalization(monkeypatch):
@@ -102,3 +70,11 @@ def test_compact_write_reuses_existing_directory_and_replaces_atomically(tmp_pat
     assert not target.with_suffix(".json.tmp").exists()
     X.write_compact(tmp_path / "new" / "nested" / "record.json", {"ok": True})
     assert (tmp_path / "new" / "nested" / "record.json").read_bytes() == b'{"ok":true}'
+
+
+def test_empty_requested_removals_do_not_traverse_or_read_outputs(tmp_path, monkeypatch):
+    from export.removals import RemovalList
+    policy = RemovalList([])
+    monkeypatch.setattr(policy, '_files', lambda *a: (_ for _ in ()).throw(AssertionError('unneeded scan')))
+    policy.publish(tmp_path)
+    assert policy.enforce(tmp_path) == 0

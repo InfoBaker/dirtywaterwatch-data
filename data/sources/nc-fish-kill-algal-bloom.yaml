@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": ["Creator", "Editor"], "customer_identifier": [], "description": ["details", "locdesc"]}
 id: "nc-fish-kill-algal-bloom"
 name: "NC DEQ Fish Kills and Algal Blooms public reports (Fish_Kill_Algal_Bloom_Public_View)"
 url: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Fish_Kill_Algal_Bloom_Public_View/FeatureServer/0"

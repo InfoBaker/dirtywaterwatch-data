@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-deq-hab-topic"
 name: "DEQ 'Harmful Algal Blooms' topic page"
 url: "https://www.deq.virginia.gov/news-info/shortcuts/topics-of-interest/harmful-algal-blooms"

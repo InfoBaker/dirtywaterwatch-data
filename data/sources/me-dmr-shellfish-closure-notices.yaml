@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "me-dmr-shellfish-closure-notices"
 name: "Maine DMR Shellfish Closures: legal notices (Conditional Area, Area 500 Emergency, Pollution Abatement, growing-area PDFs)"
 url: "https://www.maine.gov/dmr/fisheries/shellfish/closures"

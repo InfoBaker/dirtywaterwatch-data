@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-richmond-emnet-cso-map"
 name: "City of Richmond public CSO map (Xylem/EmNet BLU-X 'CSO Map Notification Web Application')"
 url: "https://apps.emnet.net/richmond-pub-map-app/?city=47&config=5c0cacee-7e95-4eea-922d-c736c83eb4b9"

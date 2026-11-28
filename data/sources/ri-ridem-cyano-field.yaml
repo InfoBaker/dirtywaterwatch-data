@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ri-ridem-cyano-field"
 name: "RIDEM cyanobacteria field inspections and sample results (Survey123 layer)"
 url: "https://services1.arcgis.com/HAt3zp2GOzn12Lxk/arcgis/rest/services/service_7411369b745f4933b4c151ff6e7b4970/FeatureServer/0"

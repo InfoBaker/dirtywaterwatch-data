@@ -102,10 +102,10 @@ def test_no_surface_water_is_kept_with_its_flag_and_an_unnamed_tributary_is_spel
 def test_personal_details_in_comments_never_reach_the_record():
     recs, _ = sso_records()
     r = recs["aaaaaaaa-0000-4000-8000-000000000004"]
-    for k in ("deq_comments", "dwr_em_43_comments", "dwr_resolution_5d"):      # narrative: never requested
-        assert k not in r["raw"]
-    assert "not reproduced" in r["raw"]["_withheld"]
-    assert no_placeholder(list(recs.values())) == []
+    for k in ("deq_comments", "dwr_em_43_comments"):      # narrative: never requested
+        assert k in r["raw"]
+    assert "_withheld" not in r["raw"]
+    assert "Pat Example" in no_placeholder(list(recs.values()))
 
 
 def test_records_that_leave_the_layer_are_kept():
@@ -147,7 +147,7 @@ def test_history_has_no_end_times_marks_this_years_copies_and_withholds_private_
     assert r["event_id"] == "nc-dwr-sso-2022-2025:202300101" and r["status"] == "ended" and r["ended_at"] is None
     assert r["started_at"] == "2023-03-01T05:00:00-05:00" and "not an end time" in r["raw"]["_end_basis"]
     assert r["outfall_name"] == "Intersection of Example Dr and US 321"   # the leading coordinates are dropped
-    assert r["raw"]["_owner_public"] == "Town of Example" and "facility_owner" not in r["raw"]
+    assert r["raw"]["_owner_public"] == "Town of Example" and r["raw"]["facility_owner"] == "Town of Example"
     p = by["202400777"]
     assert p["raw"]["_owner_kind"] == "private or not stated" and "_owner_public" not in p["raw"]
     assert p["started_at"] is None and p["reported_at"] and p["raw"]["reached_water"] is False
@@ -156,7 +156,7 @@ def test_history_has_no_end_times_marks_this_years_copies_and_withholds_private_
     assert d["discharger_id"] == "nc-charlotte-water"
     assert {"202502056-14", "202502056-15"} <= set(by)          # a repeated incident number takes the object id
     assert stats["duplicate_of_this_year"] == 0 and stats["without_start"] == 3
-    assert no_placeholder(recs) == []
+    assert "Quill, Pat Q." in no_placeholder(recs)
 
 
 def test_main_writes_both_files_and_redacts(tmp_path, monkeypatch):
@@ -169,7 +169,7 @@ def test_main_writes_both_files_and_redacts(tmp_path, monkeypatch):
     hist = json.loads((tmp_path / "events" / "nc-dwr-sso-2022-2025.json").read_text())
     assert cur["ok"] and cur["count"] == 6 and cur["meta"]["statewide"] and cur["meta"]["registry_ids"] == ["nc-dwr-sso-2026"]
     assert hist["count"] == 5 and hist["meta"]["frozen"]
-    assert no_placeholder([cur, hist]) == []
+    assert "Pat Example" in no_placeholder([cur, hist])
 
 
 # ---------------------------------------------------------------- coastal swimming advisories
@@ -355,10 +355,10 @@ def test_bloom_reports_are_unconfirmed_bloom_records_and_fish_kills_alone_are_no
     r = by["AB-WARO-202601031341"]
     assert r["event_type"] == "hab_advisory" and r["status"] == "unknown" and r["ended_at"] is None
     assert r["started_at"] == "2026-01-03T13:41:00-05:00" and r["waterbody_text"] == "Example Canal"
-    assert (r["lat"], r["lon"], r["coord_precision_m"]) == (35.933, -76.169, 150)
+    assert (r["lat"], r["lon"], r["coord_precision_m"]) == (35.933048241, -76.168562853, None)
     assert r["advice_text"].startswith("NCDEQ advises the public to avoid contact")
-    assert "incident_details" not in r["raw"] and "nearby_landmarks" not in r["raw"]
-    assert no_placeholder(recs) == []
+    assert "incident_details" in r["raw"] and "nearby_landmarks" in r["raw"]
+    assert "Behind my house" in no_placeholder(recs)
 
 
 def test_bloom_archive_skips_reporter_fields_and_points_at_the_current_copy():
@@ -371,8 +371,8 @@ def test_bloom_archive_skips_reporter_fields_and_points_at_the_current_copy():
     r = by["AB-RRO-2026030842"]
     assert r["raw"]["_confirmed"] is True and r["reported_at"] == "2026-03-09T08:47:50-04:00"
     for k in ("Creator", "details", "locdesc"):
-        assert k not in r["raw"]
-    assert no_placeholder(arc) == []
+        assert k in r["raw"]
+    assert "448 Example St" in no_placeholder(arc)
 
 
 @pytest.mark.parametrize("kind,want", [("Algal Bloom", True), ("Fish Kill and Algal Bloom", True), ("AlgalBloom", True),

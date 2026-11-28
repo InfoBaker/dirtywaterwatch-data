@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ny-riverkeeper-data-portal"
 name: "Riverkeeper water quality data portal (data.riverkeeper.org)"
 url: "https://data.riverkeeper.org/"

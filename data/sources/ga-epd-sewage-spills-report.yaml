@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ga-epd-sewage-spills-report"
 name: "Georgia EPD \"Municipal Sewage Spills Reported to EPD\" daily spreadsheet"
 url: "https://epd.georgia.gov/sewage-spills-report"

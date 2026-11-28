@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nj-pvsc-website-cso"
 name: "Passaic Valley Sewerage Commission website: 'PVSC & NJCSO' page and 'CSO Notification System' link"
 url: "https://www.nj.gov/pvsc/what/njcso/"

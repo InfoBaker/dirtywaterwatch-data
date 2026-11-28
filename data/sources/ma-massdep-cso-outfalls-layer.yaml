@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ma-massdep-cso-outfalls-layer"
 name: "MassDEP CSOs feature layer (MassDEP_CSOs_2)"
 url: "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0"

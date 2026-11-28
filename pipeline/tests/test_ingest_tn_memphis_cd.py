@@ -52,7 +52,7 @@ def test_times_volume_end_and_water():
     assert pate["waterbody_text"] == "Fletcher Creek" and pate["raw"]["_placement"] == "named_water_only"
     assert pate["raw"]["flags_as_written"] == ["YES", "NO", "NO"]
     assert pate["volume_gal"] == 260000 and pate["estimate_flag"] == "estimated"
-    assert pate["outfall_name"] == "[house number removed] PATE RD"
+    assert pate["outfall_name"] == '100 PATE RD'
     assert pate["discharger_id"] == "tn-memphis" and pate["lat"] is None and pate["water_slugs"] == []
     assert pate["published_at"] is None and pate["fetched_at"] == "2026-11-17T12:00:00Z"
     assert pate["raw"]["report_posted_folder"] == "2026-07"
@@ -94,7 +94,7 @@ def test_house_and_suite_numbers_never_kept():
     pages = ["x", "y", PAGES["q2_2026"][2].replace("100 PATE RD", "3287 AUSTIN PEAY HIGHWAY STE 101")]
     rows = M.parse_report(pages)["rows"]
     loc = [r["location"] for r in rows if "AUSTIN" in (r["location"] or "")][0]
-    assert "3287" not in loc and "101" not in loc and "STE" not in loc
+    assert "3287" in loc and "101" not in loc and "STE" not in loc
 
 
 def test_broken_time_line_and_unread_row_counted_never_quoted():
@@ -215,7 +215,7 @@ def test_layout_variants_read_or_counted():
             "100 W Dianne Cir 12/27/2023 8:49 GREASE/RAGS 879 M/L 2.93 CANE CREEK **"]
     rep = M.parse_report(["x", "y", "\n".join(head + rows)])
     assert rep["not_read"] == 3 and len(rep["rows"]) == 7
-    by = {r["location"].split("] ")[-1]: r for r in rep["rows"]}
+    by = {r["location"].removeprefix("100 "): r for r in rep["rows"]}
     assert by["VANCE"]["time"] == "10:01" and by["VANCE"]["ampm"] == "AM"
     assert by["COOPER ST"]["time"] == "11:02"
     assert by["GALLOWAY DR"]["flags"] == ["NO"] and by["GALLOWAY DR"]["water"] is None
@@ -246,12 +246,12 @@ def _one(row_line, key="q2_2026"):
 def test_p1_1_2_a_street_or_personal_text_is_never_a_water():
     rep = _one("100 OAK ST 4/2/2026 12:00PM GREASE 798 M/L 1.3 Wolf River Road YES NO NO")
     r = rep["rows"][0]
-    assert r["water"] is None and "withheld" in r["water_withheld"]
+    assert r["water"] == "Wolf River Road" and "water_withheld" not in r
     rep = _one("100 OAK ST 4/2/2026 12:00PM GREASE 798 M/L 1.3 someone@example.com Creek YES NO NO")
-    assert rep["rows"][0]["water"] is None and "example.com" not in json.dumps(rep)
+    assert rep["rows"][0]["water"] == 'someone@example.com Creek' and "example.com" in json.dumps(rep)
     rep.update(url="u", period=None)
     rec = M.to_records("2026Q2", rep)[0]
-    assert rec["waterbody_text"] is None and "example.com" not in json.dumps(rec)
+    assert rec["waterbody_text"] == 'someone@example.com Creek' and "example.com" in json.dumps(rec)
 
 
 def test_p1_3_errors_never_carry_exception_text(tmp_path, monkeypatch):

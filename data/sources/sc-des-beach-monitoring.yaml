@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": ["Creator", "Editor"], "customer_identifier": [], "description": []}
 id: "sc-des-beach-monitoring"
 name: "South Carolina DES Beach Monitoring: the S.C. Beach Access Guide's station layer"
 url: "https://gis.des.sc.gov/gisserver/rest/services/water/BW_Monitoring_Stations/MapServer/0"

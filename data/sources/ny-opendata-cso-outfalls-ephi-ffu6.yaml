@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ny-opendata-cso-outfalls-ephi-ffu6"
 name: "Open Data NY 'Combined Sewer Overflows (CSOs): Beginning 2013' (ephi-ffu6) and map view i8hd-rmbi"
 url: "https://data.ny.gov/d/ephi-ffu6"

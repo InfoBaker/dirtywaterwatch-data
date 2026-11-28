@@ -151,8 +151,8 @@ def test_an_operator_with_only_mid_atlantic_outfalls_gets_them_on_its_page_and_t
     two = X.operator_outfalls(DIS[1], by_permit, by_operator)                     # every permit the operator holds
     assert [(o["npdes_permit"], o["outfall"], o["outfall_status"]) for o in two] == [
         ("MA0100001", "001", "CSO"), ("MA0100002", "005", "CLS")]
-    village = X.operator_outfalls(DIS[2], by_permit, by_operator)                 # a provisional place, no address
-    assert len(village) == 1 and village[0]["record_status"] == "provisional" and village[0]["outfall_name"] is None
+    village = X.operator_outfalls(DIS[2], by_permit, by_operator)                 # a provisional place keeps the source address
+    assert len(village) == 1 and village[0]["record_status"] == "provisional" and village[0]["outfall_name"] == "12 Elm Street"
     assert village[0]["report_count"] == 2 and village[0]["event_ids"] == ["e1", "e2"]
     assert [o["outfall"] for o in by_water["susquehanna-river-pa"]] == ["002"]
     assert "ohio-river-oh" not in by_water
@@ -289,9 +289,9 @@ def test_provisional_rows_as_the_report_step_writes_them(tmp_path):
     assert "rep-3" not in out                                                    # not drawn: reached no water
     assert out["rep-2"]["rain"]["status"] == "below" and out["rep-2"]["water_match"] == "reports"
     assert out["rep-4"]["discharger_id"] is None and out["rep-4"]["source_id"] == "outfalls-reported"
-    # a provisional place's receiving water is report text (not redacted here): left out, the water record stands
+    # A provisional place keeps its source receiving-water wording.
     noted = rep("rep-5", receiving_water="May be reaching Swan Creek; shared by a nearby owner")
-    assert XO.receiving_water(noted) is None and XO.receiving_water(row("CT0100366", "015", receiving_water_echo="Mill River")) == "Mill River"
+    assert XO.receiving_water(noted) == noted["receiving_water"] and XO.receiving_water(row("CT0100366", "015", receiving_water_echo="Mill River")) == "Mill River"
 
 
 # ---------------------------------------------------------------- the live states: data/rules.json live_states

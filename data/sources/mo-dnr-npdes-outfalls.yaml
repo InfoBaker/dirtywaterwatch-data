@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "mo-dnr-npdes-outfalls"
 name: "Missouri DNR NPDES Waste Water Outfalls (CSO flag)"
 url: "https://gis.dnr.mo.gov/host/rest/services/waste/NPDES_WasteWaterOutfalls/MapServer/1"

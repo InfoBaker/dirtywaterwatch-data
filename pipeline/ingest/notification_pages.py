@@ -955,7 +955,8 @@ def notice_record(n: dict, page: dict, at: str) -> dict:
     rows = page["rows"]
     ops = sorted({r["operator_id"] for r in rows if r.get("operator_id")})
     one = rows[0] if len(ops) <= 1 else None
-    norm = re.sub(r"\s+", " ", n["text"]).strip().lower()
+    from ingest import identity_text
+    norm = re.sub(r"\s+", " ", identity_text.scrub_text(n["text"])).strip().lower()
     key = f"{page['page_id']}:{n['start'].isoformat()}:{hashlib.sha1(norm.encode()).hexdigest()[:10]}"
     raw = {"notice_text": n["text"], "page_line": n["line"] if n["line"] != n["text"] else None,
            "dates_in_text": n["dates"], "date_from": n["date_from"], "type_basis": n["type_basis"],

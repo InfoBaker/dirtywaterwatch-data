@@ -767,3 +767,84 @@ def test_a_copy_list_counts_its_notices_as_copies_and_makes_no_record():
     # the kind is part of the rule, so a list moved from pending to copy has its stored messages read again
     assert R.rule_of(spec) != R.rule_of({**spec, "kind": "pending"})
     assert O.load_lists()["al-adem-sso"]["kind"] == "copy"
+
+
+def test_a_platform_list_marked_stands_alone_publishes_on_its_own(tmp_path):
+    """Owner, 2026-11-27: Holyoke's Everbridge notices (both of Holyoke's marks present) stand alone while the portal
+    lags; another Everbridge customer's mail still fails the marks, and a list without the flag still holds."""
+    spec = {**LISTS["holyoke"], "platform": {**LISTS["holyoke"]["platform"], "stands_alone": True}}
+    raw = eml("City of Holyoke <noreply@everbridge.net>", "holyoke@x", "CSO Notification", HOLYOKE_ACTIVE,
+              auth=cf("everbridge.net"))
+    forged = eml("Someone <noreply@everbridge.net>", "holyoke@x", "CSO Notification",
+                 HOLYOKE_ACTIVE.replace("453003085611624", "000000000000000"), auth=cf("everbridge.net"))
+    rows = [{"id": "e1", "received_at": "2026-11-17T02:00:00Z", "list_id": "holyoke", "raw_key": "k1", "size": 1},
+            {"id": "e2", "received_at": "2026-11-17T02:05:00Z", "list_id": "holyoke", "raw_key": "k2", "size": 1}]
+    ev_dir = tmp_path / "events"
+    run_feed(FakeTransport(rows, {"k1": raw, "k2": forged}), {"holyoke": spec}, tmp_path / "i.json", ev_dir, now=NOW)
+    ev = json.loads((ev_dir / "ma-holyoke-everbridge.json").read_text())
+    assert ev["count"] == 1 and ev["meta"]["held_platform_only"] == 0
+    rec = ev["records"][0]
+    assert rec["raw"]["_trust"] == "platform" and rec["status"] == "ongoing" and not rec.get("duplicate_of")
+    assert ev["meta"]["results"] == {"notice": 1, "unverified": 1}
+    # a portal record of the same overflow later still takes the e-mail as its duplicate
+    (ev_dir / "ma-massdep.json").write_text(json.dumps({"records": [
+        portal("p1", "HOL021", "2026-01-10T18:50:00-05:00", "2026-01-12T09:00:00-05:00")]}))
+    run_feed(FakeTransport(rows, {"k1": raw, "k2": forged}), {"holyoke": spec}, tmp_path / "i2.json", ev_dir, now=NOW)
+    ev = json.loads((ev_dir / "ma-holyoke-everbridge.json").read_text())
+    assert ev["count"] == 1 and ev["records"][0]["duplicate_of"] == "ma-massdep:p1"
+
+
+def test_the_shipped_lists_let_only_holyoke_stand_alone():
+    lists = json.loads((Path(__file__).resolve().parents[2] / "data/mail-lists.json").read_text())["lists"]
+    alone = [lid for lid, s in lists.items() if (s.get("platform") or {}).get("stands_alone")]
+    assert alone == ["holyoke"]
+    assert set(lists["holyoke"]["platform"]["body_marks"]) == {"MA0101630", "453003085611624"}
+
+
+def test_stands_alone_never_lets_a_platform_ceased_notice_clear_an_active_one(tmp_path):
+    """Astra 2026-11-27 P1: with stands_alone, a Ceased notice proven only by Everbridge (its marks are public text)
+    could close an open discharge. It is held; the Active notice stays the record shown, ongoing. An operator-proven
+    Ceased notice still closes it; a lone platform Ceased notice (nothing to close) stands, since it only adds red."""
+    spec = {**LISTS["holyoke"], "platform": {**LISTS["holyoke"]["platform"], "stands_alone": True}}
+    act = eml("City of Holyoke <noreply@everbridge.net>", "holyoke@x", "CSO", HOLYOKE_ACTIVE, auth=cf("everbridge.net"))
+    ceased = eml("City of Holyoke <noreply@everbridge.net>", "holyoke@x", "CSO", HOLYOKE_CEASED,
+                 auth=cf("everbridge.net"))
+    rows = [{"id": "e1", "received_at": "2026-01-11T00:00:00Z", "list_id": "holyoke", "raw_key": "k1", "size": 1},
+            {"id": "e2", "received_at": "2026-01-11T03:50:00Z", "list_id": "holyoke", "raw_key": "k2", "size": 1},
+            {"id": "e3", "received_at": "2026-01-11T03:55:00Z", "list_id": "holyoke", "raw_key": "k3", "size": 1}]
+    ev_dir = tmp_path / "events"
+    run_feed(FakeTransport(rows, {"k1": act, "k2": ceased, "k3": ceased}), {"holyoke": spec}, tmp_path / "i.json",
+             ev_dir, now=NOW)
+    ev = json.loads((ev_dir / "ma-holyoke-everbridge.json").read_text())
+    assert ev["count"] == 1 and ev["meta"]["held_platform_only"] == 2           # the Ceased notice and its re-send
+    assert ev["records"][0]["status"] == "ongoing" and not ev["records"][0].get("ended_at")
+    # only the Ceased notice: nothing to close, it stands (48 h of red from its end)
+    run_feed(FakeTransport(rows[1:2], {"k2": ceased}), {"holyoke": spec}, tmp_path / "j.json",
+             tmp_path / "ev2", now=NOW)
+    ev = json.loads((tmp_path / "ev2" / "ma-holyoke-everbridge.json").read_text())
+    assert ev["count"] == 1 and ev["records"][0]["status"] == "ended" and ev["meta"]["held_platform_only"] == 0
+    # the operator's own domain closes it as before
+    own = eml("City of Holyoke <cso@holyoke.org>", "holyoke@x", "CSO", HOLYOKE_CEASED, auth=cf("holyoke.org"))
+    run_feed(FakeTransport(rows[:2], {"k1": act, "k2": own}), {"holyoke": spec}, tmp_path / "k.json",
+             tmp_path / "ev3", now=NOW)
+    ev = json.loads((tmp_path / "ev3" / "ma-holyoke-everbridge.json").read_text())
+    assert ev["meta"]["held_platform_only"] == 0 and any(r["status"] == "ended" for r in ev["records"])
+
+
+def test_an_operator_ceased_after_a_held_platform_ceased_still_closes_the_active_one(tmp_path):
+    """Astra 2026-11-27 pass 2 P2: Active -> platform Ceased -> platform re-send -> operator Ceased (same end): the
+    operator's record pointed at the held re-send, so the Active notice was never replaced."""
+    spec = {**LISTS["holyoke"], "platform": {**LISTS["holyoke"]["platform"], "stands_alone": True}}
+    act = eml("City of Holyoke <noreply@everbridge.net>", "holyoke@x", "CSO", HOLYOKE_ACTIVE, auth=cf("everbridge.net"))
+    plat = eml("City of Holyoke <noreply@everbridge.net>", "holyoke@x", "CSO", HOLYOKE_CEASED, auth=cf("everbridge.net"))
+    own = eml("City of Holyoke <cso@holyoke.org>", "holyoke@x", "CSO", HOLYOKE_CEASED, auth=cf("holyoke.org"))
+    rows = [{"id": f"e{i}", "received_at": f"2026-01-11T0{i}:00:00Z", "list_id": "holyoke", "raw_key": f"k{i}",
+             "size": 1} for i in range(1, 5)]
+    ev_dir = tmp_path / "events"
+    run_feed(FakeTransport(rows, {"k1": act, "k2": plat, "k3": plat, "k4": own}), {"holyoke": spec},
+             tmp_path / "i.json", ev_dir, now=NOW)
+    ev = json.loads((ev_dir / "ma-holyoke-everbridge.json").read_text())
+    ids = {r["event_id"] for r in ev["records"]}
+    assert ev["meta"]["held_platform_only"] == 2 and len(ev["records"]) == 2
+    closer = next(r for r in ev["records"] if r["status"] == "ended")
+    assert closer["parent_event_id"] in ids                      # points at the Active notice, which it replaces

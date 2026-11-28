@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nhdes-gis-npdes-outfalls"
 name: "NHDES GIS 'NPDES Outfalls' (Core_GIS_Datasets/DES_Data_Public MapServer layer 9)"
 url: "https://gis.des.nh.gov/server/rest/services/Core_GIS_Datasets/DES_Data_Public/MapServer/9"

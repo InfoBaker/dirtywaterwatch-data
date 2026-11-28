@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ri-ridoh-volunteer-beach-risks"
 name: "RIDOH 'Beach Risks Observed by Volunteer Groups' (Google Sheet)"
 url: "https://docs.google.com/spreadsheets/d/1TnS_fnhEGhXE17G3M2zB9DjajJPW57ij7JaL4YoGKLU/gviz/tq?tqx=out:csv&gid=406560422"

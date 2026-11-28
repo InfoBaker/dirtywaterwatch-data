@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: [resolution, volume_determined, latest_comments]}
 id: "nc-dwr-sso-2022-2025"
 name: "NC DWR Sanitary Sewer Overflows September 2022 through December 2025 (ArcGIS)"
 url: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/Sanitary_Sewer_Overflows_September_2022_through_December_2025/FeatureServer/0"

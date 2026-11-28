@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ridoh-beaches-page"
 name: "RIDOH Beaches page and Beach Monitoring Program page"
 url: "https://health.ri.gov/beaches"

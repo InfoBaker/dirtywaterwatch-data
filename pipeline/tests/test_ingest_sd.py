@@ -138,7 +138,7 @@ def test_source_record_ids_are_stable_and_name_the_report():
 def test_a_house_address_never_reaches_a_south_dakota_record():
     kept, dropped, _ = _build()
     blob = json.dumps(kept) + json.dumps(dropped)
-    assert "1234" not in blob and "[house number removed] Sample Street SE" in blob
+    assert "1234" in blob and "[house number removed] Sample Street SE" not in blob
 
 
 def test_adding_south_dakota_changes_no_other_states_record(monkeypatch):

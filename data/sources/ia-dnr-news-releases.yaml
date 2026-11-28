@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ia-dnr-news-releases"
 name: "Iowa DNR news releases (advisory topic): municipal wastewater discharges"
 url: "https://www.iowadnr.gov/topics/203/feed"

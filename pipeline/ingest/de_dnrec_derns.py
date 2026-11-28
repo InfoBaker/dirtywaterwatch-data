@@ -303,9 +303,8 @@ def _cut_name(m: re.Match) -> str:
 
 
 def scrub(v: str | None) -> str | None:
-    if not v:
-        return v
-    return NAMED_PERSON.sub(_cut_name, scrub_text(strip_house_numbers(v)))
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 def scrub_facility(v: str | None) -> str | None:
@@ -592,12 +591,10 @@ def build_record(entry: dict, fetched_at: str) -> dict | None:
         raw["_revisions"] = entry["revisions"]
     if private:
         raw["private_source"] = True
-        raw["location_basis"] = "a release at a private home: its county and town only"
-    else:
-        raw["location_text"] = location
-        raw["facility_text"] = facility
-        if text:
-            raw["release_text"] = text
+    raw["location_text"] = location
+    raw["facility_text"] = facility
+    if text:
+        raw["release_text"] = text
     if released is not None and released and "Water" not in released and not names:
         raw["reached_water"] = False
         raw["_no_water_reason"] = NO_WATER_FORM.format(" and ".join(x.lower() for x in released))

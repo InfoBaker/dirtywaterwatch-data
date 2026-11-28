@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nhdes-healthy-swimming-email-alerts"
 name: "NHDES Healthy Swimming waterbody-specific email notifications (Constant Contact)"
 url: "https://lp.constantcontactpages.com/su/pHPCXq8/healthyswimming"

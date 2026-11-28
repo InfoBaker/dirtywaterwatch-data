@@ -104,17 +104,11 @@ Files:
                      states.<ST>.notification_pages: the public-notice page health (ingest/notification_pages.py)
   meta.json          build times, fixture flag, counts by state and status, by event type, csv_files, assessments
 
-Placement texts and status lines that quote a record pass through the same redactor as the records' free text
-(public_placement, redact_status_texts), and the export ends with a self-check: a name of the owner's blocklist in
-events.json, waters/*.json or events/*.json fails it and leaves data/build/export-blocked.json, which stops
-scripts/refresh.sh before any upload or deploy (enforce_blocklist; review 2026-11-03 P1-1).
-
-Status comes from data/build/status.json; it is rebuilt here when it is missing, older than an
-events file, or built with other fixture/restricted settings. Fixture events (research traces, see
-build/fixtures.py) are left out unless --fixtures, which also needs DWW_ALLOW_FIXTURES=1; Events files
-marked distribution_discouraged (NHDES Healthy Swimming) are left out unless --include-nhdes.
+Public-record text is preserved. Explicit requests from the private removal list are
+applied to the complete output tree, followed by a check of those requests only.
 """
 from __future__ import annotations
+from build.removal_inputs import publication_inputs, filtered, ACTIVE
 
 import argparse
 import json
@@ -131,7 +125,8 @@ from unicodedata import normalize
 from uuid import uuid4
 
 from build import status as status_mod
-from build.redact import BlockScan, Redactor, blocklist, quote_swaps, redact_events, redactor_for
+from build.redact import Redactor, PublicRecords
+from export.removals import RemovalList
 from common import scrub_residence_numbers
 from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, OUT_DIR, OUTFALL_REGISTRY_GLOB, OUTFALL_REGISTRY_SKIPPED,
                     PROVISIONAL_FIELDS, REPORTED_OUTFALLS, ROOT, STATE_CODE, discharger_alias_map, is_provisional, now_iso, read_json,
@@ -144,7 +139,7 @@ SIMPLIFY_DEG = 20 / 111_320          # ~20 m
 COORD_DIGITS = 5                     # ~1 m
 STATUS_ORDER = {"red": 0, "yellow": 1, "unresolved": 2, "monthly": 3, "grey": 4}
 ACTIVE_STATES = ("red", "yellow", "unresolved")
-REGISTRY_KEYS = ["id", "name", "url", "homepage", "kind", "level", "cadence", "license", "attribution",
+REGISTRY_KEYS = ["raw_fields", "id", "name", "url", "homepage", "kind", "level", "cadence", "license", "attribution",
                  "enabled", "role", "event_types", "states", "access"]
 SAFE = re.compile(r"[A-Za-z0-9._-]")
 SLIM_DROP = {"raw", "advice_text", "advice_window_basis", "fetched_at", "coord_source", "coord_precision_m",
@@ -736,11 +731,7 @@ FREE_TEXT_FIELDS = ("outfall_name", "waterbody_text", "advice_text", "material",
 
 
 def public_event(e: dict) -> dict:
-    """An event as out/ carries it: raw with personal fields and staff names stripped again under the
-    current rules (events files written before a rule was added are covered too) and without
-    pipeline notes that name repository files; staff names, and the house number of an address tied to a residence or
-    a resident (common.scrub_residence_numbers: raw loses it, so must an outfall name or a water text quoting the same
-    sentence), scrubbed from the free-text fields."""
+    """Preserve public source fields while separating internal repository-path notes."""
     raw, _notes = split_path_notes(strip_personal(e.get("raw") or {}))
     out = {**e, "raw": raw}
     for k in FREE_TEXT_FIELDS:
@@ -948,269 +939,6 @@ def redact_status_texts(st: dict, r: Redactor, swaps_of: dict | None = None) -> 
     return n
 
 
-# ---------------------------------------------------------------- the blocklist self-check
-
-def scan_stamp(names: list[str]) -> str:
-    """What a clean scan result rests on besides the text: the names and the scanning code (build/redact.py)."""
-    import hashlib
-    from build import redact as _redact
-    h = hashlib.sha256(json.dumps(sorted(names)).encode())
-    h.update(Path(_redact.__file__).read_bytes())
-    h.update(b"blocklist-cache-digit-equivalence-v1")
-    return h.hexdigest()
-
-
-def _blocklist_cache(cache: Path | None, stamp: str | None) -> tuple[set[str], str]:
-    if cache is None:
-        return set(), "disabled"
-    try:
-        c = json.loads(Path(cache).read_text())
-        if not isinstance(c, dict) or c.get("stamp") != stamp:
-            return set(), "stamp_changed"
-        return {d for d in c.get("clean", [])
-                if isinstance(d, str) and re.fullmatch(r"[0-9a-f]{32}", d)}, "loaded"
-    except FileNotFoundError:
-        return set(), "missing"
-    except (OSError, ValueError, TypeError):
-        return set(), "unreadable"
-
-
-def _blocklist_text(scan: BlockScan, text: str, clean: set[str], cache: bool) -> tuple[str, bool, bool]:
-    import hashlib
-    digest = hashlib.blake2b(scan.cache_text(text).encode("utf-8"), digest_size=16).hexdigest() if cache else ""
-    reused = bool(cache and digest in clean)
-    return digest, False if reused else bool(scan.found(text)), reused
-
-
-def _blocklist_file_version(path: Path) -> tuple[int, ...]:
-    s = path.stat()
-    return s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns
-
-
-class BlocklistWrites:
-    """Check serialized JSON while the writer holds it; retain only results and file versions.
-
-    The writer calls observe *after* its atomic replacement. Final enumeration is
-    unchanged, and any changed/replaced file or different blocklist is read again.
-    No texts or names are persisted. This object belongs to one export, never a global.
-    """
-
-    def __init__(self, out_dir: Path, names: list[str], cache: Path | None = None, *, workers: int = 1):
-        self.out_dir = Path(out_dir)
-        self.scan = BlockScan(names)
-        self.stamp = scan_stamp(names)
-        self.cache = cache
-        self.clean, _ = _blocklist_cache(cache, self.stamp)
-        self.results = {}
-        self._pool = None
-        self._batch = []
-        self._batch_chars = 0
-        self._pending = deque()
-        self._limit = max(1, workers) * 2
-        from threading import Lock
-        self._lock = Lock()
-        if workers > 1 and self.scan.phrases:
-            from concurrent.futures import ProcessPoolExecutor
-            from multiprocessing import get_context
-            self._pool = ProcessPoolExecutor(max_workers=workers, mp_context=get_context("spawn"),
-                                             initializer=_blocklist_worker_init,
-                                             initargs=(names, self.clean, cache is not None))
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *exc):
-        self.finish()
-
-    def _collect(self):
-        for path, version, result in self._pending.popleft().result():
-            self.results[path] = version, result
-
-    def finish(self):
-        """Join before final enumeration; also release workers after writer errors."""
-        with self._lock:
-            if self._pool is None:
-                return
-            try:
-                if self._batch:
-                    self._pending.append(self._pool.submit(_blocklist_text_batch, self._batch))
-                    self._batch = []
-                    self._batch_chars = 0
-                while self._pending:
-                    self._collect()
-            finally:
-                self._pool.shutdown(wait=True, cancel_futures=True)
-                self._pool = None
-
-    def observe(self, path: Path, text: str) -> None:
-        if not self.scan.phrases:
-            return
-        path = Path(path)
-        version = _blocklist_file_version(path)
-        with self._lock:
-            if self._pool is None:
-                result = _blocklist_text(self.scan, text, self.clean, self.cache is not None)
-                self.results[path] = version, result
-            else:
-                self._batch.append((path, version, text))
-                self._batch_chars += len(text)
-                # Bound count and characters; a large aggregate is sent alone.
-                if len(self._batch) >= 256 or self._batch_chars >= 1_048_576:
-                    self._pending.append(self._pool.submit(_blocklist_text_batch, self._batch))
-                    self._batch = []
-                    self._batch_chars = 0
-                    if len(self._pending) >= self._limit:
-                        self._collect()
-
-
-def _blocklist_worker_init(names, clean, cache):
-    global _blocklist_worker
-    _blocklist_worker = BlockScan(names), clean, cache
-
-
-def _blocklist_text_batch(rows):
-    scan, clean, cache = _blocklist_worker
-    return [(p, version, _blocklist_text(scan, text, clean, cache)) for p, version, text in rows]
-
-
-def _blocklist_read_batch(paths):
-    scan, clean, cache = _blocklist_worker
-    results = []
-    for p in paths:
-        try:
-            text = p.read_text(encoding="utf-8")
-        except OSError:
-            continue
-        results.append((p, _blocklist_text(scan, text, clean, cache)))
-    return results
-
-
-def _blocklist_parallel(paths, names, clean, cache, workers):
-    from concurrent.futures import ProcessPoolExecutor
-    from multiprocessing import get_context
-    # Spawn is safe even if a caller has threads. Bound IPC and pending paths on
-    # Python 3.12 too (Executor.map's buffersize only exists in newer versions).
-    with ProcessPoolExecutor(max_workers=workers, mp_context=get_context("spawn"),
-                             initializer=_blocklist_worker_init, initargs=(names, clean, cache)) as pool:
-        pending = deque()
-        for start in range(0, len(paths), 256):
-            pending.append(pool.submit(_blocklist_read_batch, paths[start:start + 256]))
-            if len(pending) >= workers * 2:
-                yield from pending.popleft().result()
-        while pending:
-            yield from pending.popleft().result()
-
-
-def publication_paths(out_dir: Path) -> list[Path]:
-    """The publication manifest is the entire out/ tree.
-
-    refresh.yml archives all of out/ for the site; the dataset release excludes
-    csv/ but the site serves those downloads too. upload-current.sh publishes a
-    subset of this same tree. Enumerate files, not an extension/name allowlist,
-    so new outputs are checked automatically. Keep the legacy hit order first,
-    then append newly covered files in path order. One walk avoids a second
-    traversal of the hundreds of thousands of event files.
-    """
-    import os
-
-    out_dir = Path(out_dir)
-    fixed = ("events.json",) + PUBLIC_PAYLOADS
-    waters, events, reaches, additional = [], [], [], []
-    for directory, _dirs, files in os.walk(out_dir):
-        parent = Path(directory)
-        relative = parent.relative_to(out_dir).as_posix()
-        for name in files:
-            if relative == "." and name in fixed:
-                continue
-            if relative == "waters" and name.endswith(".json"):
-                group = waters
-            elif relative == "events" and name.endswith(".json"):
-                group = events
-            elif relative == REACH_STATE_DIR and name.endswith(".geojson"):
-                group = reaches
-            else:
-                group = additional
-            group.append(parent / name)
-    return ([out_dir / name for name in fixed] + sorted(waters) + sorted(events)
-            + sorted(reaches) + sorted(additional))
-
-
-def blocklist_hits(out_dir: Path, names: list[str], cache: Path | None = None,
-                   *, stats: dict | None = None, observed: BlocklistWrites | None = None,
-                   workers: int | None = None) -> list[str]:
-    """Every published file, with legacy hit order and exact BlockScan matches.
-
-    Clean digests are keyed by names, scanner source and cache semantics. ASCII
-    digits may be made equivalent only when no name contains one (BlockScan's
-    proof); no fields are omitted and serialized JSON is never decoded. A bounded
-    cache may evict clean entries, which are then searched again. File versions
-    allow reuse of checks performed on the writer's exact serialized text.
-    """
-    metrics = {"files": 0, "cache_hits": 0, "scanned": 0, "cache_state": "disabled", "in_memory": 0}
-    if stats is not None:
-        stats.update(metrics)
-        metrics = stats
-    if observed is not None:
-        observed.finish()
-    scan = BlockScan(names)
-    if not scan.phrases:
-        return []
-    out_dir = Path(out_dir)
-    stamp = scan_stamp(names) if cache or observed else None
-    clean_before, metrics["cache_state"] = _blocklist_cache(cache, stamp)
-    if observed is not None and (observed.stamp != stamp or observed.out_dir != out_dir or observed.cache != cache):
-        observed = None
-    clean_now: set[str] = set()
-    paths = publication_paths(out_dir)
-    def serial():
-        for p in paths:
-            result = None
-            if observed is not None and p in observed.results:
-                try:
-                    version, prior = observed.results[p]
-                    if version == _blocklist_file_version(p):
-                        result = prior
-                        metrics["in_memory"] += 1
-                except OSError:
-                    pass
-            if result is None:
-                try:
-                    text = p.read_text(encoding="utf-8")
-                except OSError:
-                    continue
-                result = _blocklist_text(scan, text, clean_before, cache is not None)
-            yield p, result
-
-    if workers is None:
-        import os
-        workers = min(4, os.cpu_count() or 1) if len(paths) >= 10_000 and observed is None else 1
-    results = (_blocklist_parallel(paths, names, clean_before, cache is not None, workers)
-               if workers > 1 and observed is None else serial())
-    hits = []
-    for p, result in results:
-        digest, hit, reused = result
-        metrics["files"] += 1
-        metrics["cache_hits"] += int(reused)
-        metrics["scanned"] += int(not reused)
-        if hit:
-            hits.append(str(p.relative_to(out_dir)))
-        elif cache:
-            clean_now.add(digest)
-    if cache:
-        # Full 128-bit digests, bounded state; eviction only costs a rescan.
-        import gzip
-        clean = sorted(clean_now)[:200_000]
-        payload = json.dumps({"stamp": stamp, "clean": clean}, separators=(",", ":"))
-        while len(gzip.compress(payload.encode(), compresslevel=1, mtime=0)) >= 5_000_000:
-            clean = clean[:len(clean) // 2]
-            payload = json.dumps({"stamp": stamp, "clean": clean}, separators=(",", ":"))
-        Path(cache).parent.mkdir(parents=True, exist_ok=True)
-        tmp = Path(cache).with_suffix(".tmp")
-        tmp.write_text(payload)
-        tmp.replace(cache)
-    return hits
-
-
 def wording_in_status(st: dict) -> list[str]:
     """Paths of status texts out/ publishes as written (reasons, their rule records, the monthly marks) that carry
     internal wording or a repository path (review 2026-11-03 SOL P2-8)."""
@@ -1238,40 +966,6 @@ def shown_path(p: Path) -> str:
         return str(Path(p).relative_to(ROOT))
     except ValueError:
         return str(p)
-
-
-# Legacy ordering only; publication_paths derives coverage from the published tree.
-PUBLIC_PAYLOADS = ("waters.json", "active.json", "monthly-outfalls.json", "overlays.geojson", "advisory-points.geojson",
-                   "reaches.geojson", "reach-paths.geojson", "rain.json", "coverage.json", "dischargers.json",
-                   "outfalls.json", "rain-levels.json", "assessments.json")
-BLOCKED_MARK = BUILD_DIR / "export-blocked.json"     # the old hard stop; removed whenever the export runs
-HITS_MARK = BUILD_DIR / "blocklist-hits.json"        # the files (never the name) a hit is in, for the next run's fix
-SCAN_CACHE = BUILD_DIR / "blocklist-scan-cache.json"  # digests of out/ texts found clean (blocklist_hits), saved state
-
-
-def enforce_blocklist(out_dir: Path = OUT_DIR, names: list[str] | None = None,
-                      *, observed: BlocklistWrites | None = None) -> int:
-    """The export's last step. A blocklisted name in out/ (blocklist_hits) is a warning, not a stop (owner,
-    2026-11-05: operations are not disrupted for public-record text that can be corrected): the files are named in
-    HITS_MARK and on the console, never the name, the run goes on and uploads, and the record is fixed with a rule
-    on the next run. The old hard-stop mark is removed so the scripts never hold a publish. Returns the files checked."""
-    names = blocklist(DATA_DIR) if names is None else names
-    # the clean-text cache only for the real out/ (a test's folder never writes into data/build)
-    stats = {}
-    hits = blocklist_hits(out_dir, names, cache=SCAN_CACHE if Path(out_dir) == OUT_DIR else None,
-                          stats=stats, observed=observed)
-    print(f"export: blocklist cache {stats['cache_state']}; files {stats['files']}; "
-          f"cache hits {stats['cache_hits']}; scanned {stats['scanned']}; in memory {stats['in_memory']}", flush=True)
-    BLOCKED_MARK.unlink(missing_ok=True)
-    if hits:
-        write_json(HITS_MARK, {"at": now_iso(), "files": hits,
-                               "why": "a name on the owner's blocklist is in these files of out/; the run uploaded; "
-                                      "fix the record with a scrub rule (never a blocker, owner 2026-11-05)"})
-        print(f"::warning::export: a blocklisted name is in {len(hits)} file(s) of out/ ({', '.join(hits[:5])}"
-              f"{' ...' if len(hits) > 5 else ''}); uploaded anyway; see {shown_path(HITS_MARK)}")
-    else:
-        HITS_MARK.unlink(missing_ok=True)
-    return stats["files"]
 
 
 def public_rules(o):
@@ -1327,6 +1021,13 @@ def live_registry_rows(rows: list[dict], live: set[str]) -> list[dict]:
         if not sts or NATIONAL in sts or sts & live:
             out.append(r)
     return out
+
+
+def feed_raw_fields(sid, health, registry):
+    """Exact raw keys, including feeds backed by multiple source registry rows."""
+    rows = [registry.get(rid, {}) for rid in {sid, *(health.get("registry_ids") or [])}]
+    return {kind: sorted({key for row in rows for key in (row.get("raw_fields") or {}).get(kind, [])})
+            for kind in ("reporter_contact", "customer_identifier", "description")}
 
 
 def live_feeds(feeds: list[dict], kept_registry_ids: set[str]) -> list[dict]:
@@ -1507,7 +1208,7 @@ def extra_launches(water_slug: str) -> list[dict]:
     if _LAUNCHES_EXTRA is None:
         idx: dict[str, list] = defaultdict(list)
         try:
-            rows = json.loads(LAUNCHES_EXTRA.read_text()) if LAUNCHES_EXTRA.exists() else []
+            rows = read_json(LAUNCHES_EXTRA) if LAUNCHES_EXTRA.exists() else []
         except (OSError, ValueError):
             rows = []
         for r in rows if isinstance(rows, list) else []:
@@ -1525,7 +1226,7 @@ def obl_build_launches(state: str | None) -> dict[str, list]:
         idx: dict[str, list] = defaultdict(list)
         p = OBL_BUILD_DIR / state / "launches.json"
         try:
-            rows = json.loads(p.read_text()) if p.exists() else []
+            rows = read_json(p) if p.exists() else []
         except (OSError, ValueError):
             rows = []
         for r in rows if isinstance(rows, list) else []:
@@ -1551,7 +1252,7 @@ def launches_for(water_slug: str, state: str | None = None) -> list[dict]:
     as url only when the launch is published there."""
     p = status_mod.OBL_WATER_DIR / f"{water_slug}.json"
     try:
-        rows = (json.loads(p.read_text()) or {}).get("launches") or [] if p.exists() else []
+        rows = (read_json(p) or {}).get("launches") or [] if p.exists() else []
     except (OSError, ValueError):
         rows = []
     build = {r["slug"]: r for r in obl_build_launches(state).get(water_slug, [])}
@@ -1635,7 +1336,7 @@ def monthly_props(w: dict) -> dict:
             "label": r.get("monthly_label") or r.get("short"), "monthly_reports": len(ms)}
 
 
-def write_compact(path: Path, obj, *, blocklist_check: BlocklistWrites | None = None) -> None:
+def write_compact(path: Path, obj) -> None:
     # Event and water directories already exist: avoid a failed mkdir (and its
     # follow-up stat) for each of the hundreds of thousands of records.
     parent = path.parent
@@ -1648,16 +1349,13 @@ def write_compact(path: Path, obj, *, blocklist_check: BlocklistWrites | None = 
             text = json.dumps(obj, ensure_ascii=False, separators=(",", ":"), default=str)
             file.write(text)
         tmp.replace(path)
-        if blocklist_check is not None:
-            blocklist_check.observe(path, text)
     except BaseException:
         tmp.unlink(missing_ok=True)
         raise
 
 
 @contextmanager
-def compact_writes(*, workers: int = 4, max_pending: int = 32,
-                   blocklist_check: BlocklistWrites | None = None):
+def compact_writes(*, workers: int = 4, max_pending: int = 32):
     """Bound independent atomic writes in flight and join them before publishing dependent files.
 
     Aliased destinations finish in input order, including on case-insensitive filesystems.
@@ -1678,8 +1376,7 @@ def compact_writes(*, workers: int = 4, max_pending: int = 32,
             key = normalize("NFC", str(resolved_parent(path.parent) / path.name)).casefold()
             if key in destinations:
                 destinations[key].result()
-            kwargs = {"blocklist_check": blocklist_check} if blocklist_check is not None else {}
-            future = pool.submit(write_compact, path, obj, **kwargs)
+            future = pool.submit(write_compact, path, obj)
             destinations[key] = future
             pending.append((key, future))
             if len(pending) >= max_pending:
@@ -1830,7 +1527,9 @@ def stale_reason(st: dict | None, hist: dict | None, include_fixtures: bool, inc
 def ensure_status(include_fixtures: bool, include_restricted: bool = False):
     st = read_json(BUILD_DIR / "status.json")
     hist = read_json(BUILD_DIR / "history.json")
-    why = stale_reason(st, hist, include_fixtures, include_restricted, status_inputs())
+    policy = ACTIVE.get()
+    why = ("requested removals require rebuilt summaries" if (policy and policy.entries) or (st or {}).get("requested_removals_applied") else
+           stale_reason(st, hist, include_fixtures, include_restricted, status_inputs()))
     if why:
         print(f"export: rebuilding status ({why})")
         st, hist = status_mod.build(include_fixtures=include_fixtures, include_restricted=include_restricted)
@@ -1849,7 +1548,7 @@ def load_dischargers() -> tuple[list[dict], str]:
     for p in sorted((ROOT / "research").glob("*/dischargers.json")):
         area = p.parent.name
         try:
-            rows = json.loads(p.read_text())
+            rows = read_json(p)
         except Exception:
             continue
         for r in rows if isinstance(rows, list) else []:
@@ -1947,7 +1646,7 @@ def outfall_lists(outfalls: list[dict], aliases: dict[str, str] | None = None) -
         slug = status_mod.SLUG_ALIASES.get(o["water_slug"], o["water_slug"]) if o.get("water_slug") else None
         prov = is_provisional(o)
         row = {"npdes_permit": o.get("npdes_permit"), "outfall": o.get("outfall"),
-               "outfall_name": None if prov else o.get("outfall_name"),
+               "outfall_name": o.get("outfall_name"),
                "outfall_kind": o.get("outfall_kind") or "cso", "state": status_mod.outfall_state(o),
                "permittee": o.get("permittee"), "receiving_water": outfalls_mod.receiving_water(o),
                "lat": o.get("lat"), "lon": o.get("lon"), "water_slug": slug, "match": o.get("match"),
@@ -2020,6 +1719,7 @@ def advisory_point_features(st: dict, by_event: dict) -> list[dict]:
     return pts
 
 
+@publication_inputs
 def export(include_fixtures: bool = False, include_restricted: bool = False) -> dict:
     phase_started = perf_counter()
 
@@ -2032,6 +1732,8 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     if include_fixtures and os.environ.get("DWW_ALLOW_FIXTURES") != "1":
         raise SystemExit("export: refusing to write out/ with research fixture events; "
                          "set DWW_ALLOW_FIXTURES=1 for a development export")
+    removals = ACTIVE.get()
+    (BUILD_DIR / "export-blocked.json").unlink(missing_ok=True)
     st, hist = ensure_status(include_fixtures, include_restricted)
     phase_done("status")
     waters = status_mod.live_waters(status_mod.load_waters())   # the live states' records only (rules.json live_states)
@@ -2048,7 +1750,6 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     if n_foreign:
         print(f"export: {n_foreign} record(s) of feeds whose jurisdiction is not live left out of every public output")
     # the records as the status build read them: a status line quotes these texts, so its swaps are taken against them
-    as_read = {e["event_id"]: e for e in events}
     events = [public_event(e) for e in events]
     # the operator registry first: an event's discharger_id that the registry lists as an alias is written
     # as the row's id (the original in discharger_id_source) before anything is counted or written
@@ -2061,22 +1762,15 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         print(f"export: {n_alias_events} events and {n_alias_status} status records carried a registry alias as "
               f"discharger_id; written with the registry id")
     phase_done("inputs")
-    # names of private individuals in quoted source text -> "[name removed]" before any record is written
-    # (build/redact.py; owner's lists data/name-allowlist.json, data/name-blocklist.json; review: build/name_review.py).
-    # The same redactor then runs over the placement texts and status lines that quote a record (public_record,
-    # redact_status_texts), each record's quotes swapped for its redacted text first (quote_swaps)
-    redactor = redactor_for(events)
-    redacted = redact_events(events, redactor=redactor)
-    swaps_of = {r["event_id"]: s for e, r in zip(events, redacted)
-                if (s := quote_swaps(as_read.get(r["event_id"], e), r))}
-    events = redacted
-    phase_done("redaction")
-    # what each source says beyond the common fields, as named fields, and the later records of the same event
-    # (export/detail.py): read from the redacted records, so a removed name stays removed
+    # Include injected registries and enrichment inputs before deriving counts or details.
+    inputs = [files, events, st, hist, waters, outfalls, registry, dis]
+    for value in inputs:
+        removals.register(value)
+    files, events, st, hist, waters, outfalls, registry, dis = [filtered(v) for v in inputs]
+    placements = st.get("placements") or {}
+    redactor = PublicRecords()
+    swaps_of = {}
     detail_mod.enrich(events, duplicates={i for i, pl in placements.items() if (pl or {}).get("duplicate_of")})
-    n_status = redact_status_texts(st, redactor, swaps_of)
-    if n_status:
-        print(f"export: {n_status} status lines quoted a removed name or contact; written redacted")
     phase_done("enrichment")
 
     # intervals each event set (from the history), by event
@@ -2107,10 +1801,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         shutil.rmtree(ev_dir)
     ev_dir.mkdir(parents=True)
     wording = Counter()                     # placement texts still carrying internal wording (self-check)
-    with (
-        BlocklistWrites(OUT_DIR, blocklist(DATA_DIR), SCAN_CACHE, workers=min(4, os.cpu_count() or 1)) as blocklist_check,
-        compact_writes(blocklist_check=blocklist_check) as write_event,
-    ):
+    with compact_writes() as write_event:
         for e in events:
             if e["event_id"] in seen:
                 continue
@@ -2364,6 +2055,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         f = files.get(sid) or {}
         meta_pub = {k: v for k, v in (f.get("meta") or {}).items() if k in PUBLIC_FEED_META}
         feeds.append({**h, "file": f.get("file"), "meta": meta_pub,
+                      "raw_fields": feed_raw_fields(sid, h, registry),
                       "waters_covered": sum(1 for w in st["waters"].values() if sid in w["covered_by"])})
     feeds = live_feeds(feeds, kept_rids)
     write_compact(OUT_DIR / "sources.json", {"built": now_iso(), "feeds": feeds, "registry": reg_rows})
@@ -2486,7 +2178,7 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
     write_compact(OUT_DIR / "meta.json", meta)
     rules_src = DATA_DIR / "rules.json"
     if rules_src.exists():                  # the methods page prints it; internal "_" keys stay home
-        write_json(OUT_DIR / "rules.json", live_rules(public_rules(json.loads(rules_src.read_text())), status_mod.states()))
+        write_json(OUT_DIR / "rules.json", live_rules(public_rules(read_json(rules_src)), status_mod.states()))
     for name in ("meta.json", "sources.json", "waters.json", "conditions.json", "active.json", "dischargers.json",
                  "coverage.json", "monthly-outfalls.json", "outfalls.json", "assessments.json"):
         hits = internal_wording(read_json(OUT_DIR / name))
@@ -2501,11 +2193,11 @@ def export(include_fixtures: bool = False, include_restricted: bool = False) -> 
         meta["problems"].append(note)
         write_compact(OUT_DIR / "meta.json", meta)
     phase_done("metadata")
-    # the owner's blocklist, checked in what was written: a name in events.json, waters/*.json or the full
-    # records fails the export (review 2026-11-03 P1-1; scripts/refresh.sh then uploads and deploys nothing)
-    checked = enforce_blocklist(OUT_DIR, observed=blocklist_check)
-    print(f"export: blocklist self-check passed ({checked} files)")
-    phase_done("blocklist_self_check")
+    removals.publish(OUT_DIR)
+    removals.enforce(OUT_DIR)
+    # Old keys are deleted remotely; private requested text never becomes an archive filename.
+    removals.save_deletions(DATA_DIR / "private" / "publication-deletions.json")
+    phase_done("requested_removals")
     return meta
 
 

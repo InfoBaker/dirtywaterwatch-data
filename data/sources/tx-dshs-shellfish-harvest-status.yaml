@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "tx-dshs-shellfish-harvest-status"
 name: "Texas DSHS Status of Shellfish Harvesting Areas (status table)"
 url: "https://www.dshs.texas.gov/seafood-aquatic-life-group/information-on-consumption-advisories-possession-bans-rescinded-orders-seafood-aquatic-life/shellfish-harvest-map"

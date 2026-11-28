@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": ["created_user", "last_edited_user"], "customer_identifier": [], "description": ["steps_taken_to_contain_or_clean"]}
 id: "wa-ecology-sewage-spills"
 name: "Washington Ecology Sewage Spills list (RCW 90.48.636 public website)"
 url: "https://ecology.wa.gov/water-shorelines/water-quality/wastewater/sewage-spills"

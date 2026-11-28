@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "me-dep-mepdes-cso-outfalls"
 name: "Maine DEP MEPDES CSO outfall layer (Maine GeoLibrary / gis.maine.gov)"
 url: "https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2"

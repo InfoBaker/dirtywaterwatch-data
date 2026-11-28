@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nv-state-parks-hab"
 name: "Nevada State Parks HAB advisory page"
 url: "https://parks.nv.gov/about/hab-advisory"

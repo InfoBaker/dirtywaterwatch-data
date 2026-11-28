@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "pa-myrwa-boating-advisory"
 name: "Mystic River Watershed Association daily Boating Advisory (recflag API)"
 url: "https://mysticriver.org/boatingadvisory"

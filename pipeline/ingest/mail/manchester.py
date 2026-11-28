@@ -5,7 +5,8 @@ nh-permittees): "Please be advised that the City of Manchester has experienced C
 (an activation somewhere in the system: no outfall, no time, no volume) and "... has experienced no CSO activations
 during the past 12 hours" (the all-clear). Read the way the page's feed reads them: an activation is ongoing from the
 time it was published; an all-clear closes the open activations with an upper bound (no activation in the 12 hours
-before it), status ended, time_precision "bound". The e-mail gives no start: the notice's time is the time the e-mail
+before it), status ended, time_precision "bound"; the all-clear itself stays in the list's file and is never published
+as an event (common.no_discharge_notice). The e-mail gives no start: the notice's time is the time the e-mail
 reached the project (published_at), and the Date header is kept as the city's sending time. The welcome message of the
 newsletter and any other subject are not notices; a CSO subject with other wording is a failure.
 """

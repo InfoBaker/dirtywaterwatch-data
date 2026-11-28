@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "fed-beacon-beach-actions"
 name: "U.S. EPA BEACON 2.0 Beach Actions: state beach advisories and closures as filed with EPA (history)"
 url: "https://beacon.epa.gov/ords/beacon2/r/beacon_apex/beacon2/beach-actions"

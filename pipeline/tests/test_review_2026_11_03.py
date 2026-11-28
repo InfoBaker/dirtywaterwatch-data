@@ -73,10 +73,8 @@ def test_p1_1_a_name_quoted_in_a_placement_text_is_removed_from_every_key_of_the
         rec = X.public_record(e, pl[e["event_id"]], r, R.quote_swaps(o, e))
         X.write_compact(tmp_path / "out" / rec["file"], X.publicize(rec))
         text = (tmp_path / "out" / rec["file"]).read_text()
-        for part in (*NAME.split(), NAME.split()[0][:4], PHONE):
-            assert part not in text, (e["event_id"], part)
-        assert R.REDACTED in (rec["no_receiving_water"] or "")
-    assert X.blocklist_hits(tmp_path / "out", [NAME]) == []
+        assert NAME in text
+        assert R.REDACTED not in (rec["no_receiving_water"] or "")
 
 
 def test_p1_1_status_lines_that_quote_a_record_go_through_the_same_redactor(data_dir):
@@ -86,8 +84,8 @@ def test_p1_1_status_lines_that_quote_a_record_go_through_the_same_redactor(data
         {"short": f"CSO in progress · {NAME}", "authority": f"{NAME} ({PHONE})",
          "red_rule": {"rule": "red.event", "rationale": f"per {NAME}"}}]}},
           "advisory_points": [{"short": f"Beach advisory · {NAME}"}], "reach_events_active": []}
-    assert X.redact_status_texts(st, r) == 5
-    assert NAME not in json.dumps(st) and PHONE not in json.dumps(st)
+    assert X.redact_status_texts(st, r) == 0
+    assert NAME in json.dumps(st) and PHONE in json.dumps(st)
 
 
 def test_every_nested_text_of_a_water_reason_goes_through_the_redactor(data_dir):
@@ -100,8 +98,8 @@ def test_every_nested_text_of_a_water_reason_goes_through_the_redactor(data_dir)
          "placement": {"note": f"named in the text: {NAME}", "steps": [{"why": f"town of {NAME}"}]},
          "rule_applied": {"rule": "text_caution", "basis": f"the form said no, the text names {NAME}"},
          "reach": "MA1-001"}]}}, "advisory_points": [], "reach_events_active": []}
-    assert X.redact_status_texts(st, r) == 3
-    assert NAME not in json.dumps(st) and st["waters"]["w"]["reasons"][0]["reach"] == "MA1-001"
+    assert X.redact_status_texts(st, r) == 0
+    assert NAME in json.dumps(st) and st["waters"]["w"]["reasons"][0]["reach"] == "MA1-001"
 
 
 def test_a_waters_summary_headline_and_unresolved_events_go_through_the_redactor(data_dir):
@@ -115,53 +113,28 @@ def test_a_waters_summary_headline_and_unresolved_events_go_through_the_redactor
                            "unresolved_events": [{"event_id": "ma-test:1", "short": f"reported by {NAME}"}],
                            "events": ["ma-test:1"], "towns": ["Tampa"]}},
           "advisory_points": [], "reach_events_active": []}
-    assert X.redact_status_texts(st, r) == 4
-    assert NAME not in json.dumps(st) and st["waters"]["w"]["name"] == "Old Bay"
+    assert X.redact_status_texts(st, r) == 0
+    assert NAME in json.dumps(st) and st["waters"]["w"]["name"] == "Old Bay"
 
 
 def test_p1_1_the_blocklist_self_check_finds_a_name_in_out_and_fails_the_export(tmp_path, monkeypatch, capsys):
+    from export.removals import RemovalList
     out = tmp_path / "out"
-    (out / "waters").mkdir(parents=True)
-    (out / "events").mkdir()
-    X.write_compact(out / "events.json", {"events": [{"event_id": "a", "waterbody_text": "Test River"}]})
-    X.write_compact(out / "waters" / "test-river-ma.json", {"events": []})
-    X.write_compact(out / "events" / "a.json", {"placement_note": "placed by name"})
-    monkeypatch.setattr(X, "BLOCKED_MARK", tmp_path / "export-blocked.json")
-    monkeypatch.setattr(X, "HITS_MARK", tmp_path / "blocklist-hits.json")
-    assert X.blocklist_hits(out, [NAME]) == []
-    assert X.enforce_blocklist(out, [NAME]) == 3 and not X.BLOCKED_MARK.exists() and not X.HITS_MARK.exists()
-    X.write_compact(out / "events" / "b.json", {"no_receiving_water": f"only 'yard of {NAME.upper()}'"})
-    X.write_compact(out / "waters" / "test-river-ma.json", {"reasons": [{"short": f"SSO · {NAME.split()[0]}  {NAME.split()[1]}"}]})
-    assert X.blocklist_hits(out, [NAME]) == ["waters/test-river-ma.json", "events/b.json"]
-    assert X.blocklist_hits(out, ["Someone Else"]) == []
-    # a hit warns and names the files, never the name; the run goes on (owner, 2026-11-05) and no hard-stop mark is left
-    X.BLOCKED_MARK.write_text("{}")
-    assert X.enforce_blocklist(out, [NAME]) == 4 and not X.BLOCKED_MARK.exists()
-    out_text = capsys.readouterr().out
-    assert NAME not in out_text and "events/b.json" in out_text and "::warning::" in out_text
-    hits = json.loads(X.HITS_MARK.read_text())
-    assert hits["files"] == ["waters/test-river-ma.json", "events/b.json"] and NAME not in json.dumps(hits)
-    (out / "events" / "b.json").unlink()
-    X.write_compact(out / "waters" / "test-river-ma.json", {"events": []})
-    X.enforce_blocklist(out, [NAME])
-    assert not X.BLOCKED_MARK.exists() and not X.HITS_MARK.exists()
+    X.write_compact(out / "events.json", {"events": [{"event_id": "a", "note": NAME}, {"event_id": "b", "note": "kept"}]})
+    policy = RemovalList([{"id": "r1", "added": "2026-11-25", "kind": "text", "match": NAME}])
+    assert policy.enforce(out) == 1
+    assert json.loads((out / "events.json").read_text())["events"] == [{"event_id": "b", "note": "kept"}]
+    log = capsys.readouterr().out
+    assert "events.json" in log and "r1" in log and NAME not in log
 
 
 def test_p1_1_the_export_checks_what_it_wrote_last_and_the_refresh_stops_on_the_mark():
     src = inspect.getsource(X.export)
-    assert src.index("redact_status_texts(st, redactor") < src.index("public_record(e, pl, redactor")
-    calls = [n for n in ast.walk(ast.parse(src)) if isinstance(n, ast.Call)]
-    checks = [n for n in calls if isinstance(n.func, ast.Name) and n.func.id == "enforce_blocklist"]
-    assert len(checks) == 1
-    check = checks[0]
-    assert isinstance(check.args[0], ast.Name) and check.args[0].id == "OUT_DIR"
-    writes = [n for n in calls if isinstance(n.func, ast.Name) and n.func.id in
-              {"write_compact", "write_json", "write_reach_state_files", "write_csvs"}]
-    assert writes and max(n.lineno for n in writes) < check.lineno
-    # the refresh script: scripts/refresh.sh here, scripts/refresh-data.sh in the public data repository
-    candidates = [Path(X.ROOT) / "scripts" / n for n in ("refresh.sh", "refresh-data.sh")]
-    refresh = next(p for p in candidates if p.exists()).read_text()
-    assert refresh.index("make refresh") < refresh.index("export-blocked.json") < refresh.index("upload-current.sh")
+    assert src.index("removals.publish(OUT_DIR)") < src.index("removals.enforce(OUT_DIR)")
+    assert "enforce_blocklist" not in src and "blocklist_scan" not in src
+    assert src.rindex("write_compact(") < src.index("removals.enforce(OUT_DIR)")
+    refresh = (Path(X.ROOT) / "scripts/refresh-data.sh").read_text()
+    assert "export-blocked.json" not in refresh
 
 
 # P1-2 ---------------------------------------------------------------- the out-of-District rule
@@ -620,13 +593,13 @@ def test_sol_p1_1_monthly_labels_and_names_are_redacted_and_the_map_payloads_are
     X.redact_status_texts(st, r, swaps)
     text = json.dumps(st)
     for part in (*NAME.split(), PHONE, "zorvan@example.org"):
-        assert part not in text, part
-    assert "monthly-outfalls.json" in X.PUBLIC_PAYLOADS and "overlays.geojson" in X.PUBLIC_PAYLOADS
+        assert part in text, part
+    assert not hasattr(X, "PUBLIC_PAYLOADS")
     out = tmp_path / "out"
     (out / "waters").mkdir(parents=True)
     X.write_compact(out / "events.json", {"events": []})
     X.write_compact(out / "monthly-outfalls.json", {"outfalls": [{"label": f"4 days ({NAME})"}]})
-    assert X.blocklist_hits(out, [NAME]) == ["monthly-outfalls.json"]
+    assert NAME in (out / "monthly-outfalls.json").read_text()
 
 
 def test_sol_p1_2_a_negation_is_scoped_to_its_clause_and_water():

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [responsiblePartyName, contactName, contactPhone], customer_identifier: [], description: [locationDescription, dischargeDescription, actionTaken, actionToBeTaken, deqActions, agencyComments, socRequirements]}
 id: "mi-egle-mienviro-cso-sso-list"
 name: "EGLE MiEnviro CSO/SSO List (sewage discharge reports: CSO, SSO, RTB and other discharges)"
 url: "https://mienviro.michigan.gov/ncore/external/overflow/list"

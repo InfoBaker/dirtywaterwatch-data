@@ -57,8 +57,8 @@ unread row can never end one. Every page but the last must list ten proclamation
 entry that is only a date with no proclamation (the oldest page) is skipped by name (meta.skipped).
 
 Reads: the first READ_PAGES pages and the pages of carried unread rows every run; every page the pager names when no
-earlier record is held (the first run) or with --backfill. Privacy: only the proclamation list is read (the contact paragraph above it is not); every
-field is cleaned before any save; the raw save is the parsed rows as JSON.
+earlier record is held (the first run) or with --backfill. Only the proclamation list is read (the contact paragraph above it is not).
+Source text is retained in the parsed JSON; historical normalization is used only for matching keys and IDs.
 
 Run from pipeline/:  python -m ingest.nc_dmf_shellfish [--file p0.html [p1.html ...]] [--backfill]
 """
@@ -77,6 +77,7 @@ import requests
 from common import EVENTS_DIR, HEADERS, event, now_iso, read_json, save_raw, write_events
 from common import error_detail
 from ingest import nv_state_parks_hab as P
+from ingest.identity_compat import nv_field as identity_field
 
 SOURCE_ID = "nc-dmf-polluted-area-proclamations"
 URL = ("https://www.deq.nc.gov/about/divisions/marine-fisheries/rules-proclamations-and-size-and-bag-limits/"
@@ -240,8 +241,8 @@ def split_areas(lst: str) -> list[dict]:
         name = PORTION.sub("", t)
         cq = COUNTY_Q.search(name)
         county = P.clean_field(cq.group("c").strip(), "place") if cq else None
-        # the key comes from the cleaned name: a name withheld for privacy never reaches a key or an id (Astra P1-1)
-        name = P.clean_field(COUNTY_Q.sub("", name), "place")
+        # Preserve the historical match/identity key; source text stays in text/summary.
+        name = identity_field(COUNTY_Q.sub("", name), "place")
         key = re.sub(r"^the\s+", "", re.sub(r"\s+", " ", name).strip().lower())
         out.append({"text": P.clean_field(t, "place"), "key": key, "portion": bool(q), "qualifier": qualifier,
                     "county": county})
@@ -365,7 +366,8 @@ def area_counties(area: dict, row: dict) -> tuple[set[str], bool]:
 
 
 def srid_of(row: dict, area: dict) -> str:
-    return (f"{row['id']}:{P.slug(area['key'])}" + (f"-{P.slug(area['county'])}" if area.get("county") else "")
+    county = identity_field(area['county'], "place") if area.get("county") else None
+    return (f"{row['id']}:{P.slug(area['key'])}" + (f"-{P.slug(county)}" if county else "")
             + (f"-{P.slug(area['qualifier'])}" if area.get("qualifier") else ""))
 
 

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ut-dwq-recreational-advisories"
 name: "Utah DWQ Recreational Waters Map (HAB and E. coli advisories) AutoMap_Source_Data feature service"
 url: "https://services2.arcgis.com/NnxP4LZ3zX8wWmP9/arcgis/rest/services/AutoMap_Source_Data/FeatureServer/0"
@@ -41,6 +42,7 @@ fetch:
   bounds: [-114.1, 36.95, -109.0, 42.05]
   # the layer may be cut back between seasons: a short answer is the season, not a failure
   min_rows_ratio: 0.0
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [FID, MLID, Waterbody, Site_Name, Public_Name, Monitored_Date, Lat, Long, Advisory, Advisory_Date,
                 Additional_Advisory_Notes]
   reviewed_fields:

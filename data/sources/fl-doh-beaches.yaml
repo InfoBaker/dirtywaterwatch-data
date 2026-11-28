@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "fl-doh-beaches"
 name: "Florida Department of Health Healthy Beaches, sample results and advisories by sampling point"
 url: "https://c0cqk120.caspio.com/dp/cb8a100027f4e6ea6cbc4260a71e"

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "mwra-cso-notification-plan"
 name: "MWRA final CSO public notification plan"
 url: null

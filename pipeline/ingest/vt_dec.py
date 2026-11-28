@@ -188,12 +188,7 @@ def _link(cell: str) -> tuple[str, str | None]:
 
 
 def _scrub(v):
-    if isinstance(v, str):
-        return PHONE.sub("[phone removed]", v)
-    if isinstance(v, dict):
-        return {k: _scrub(x) for k, x in v.items()}
-    if isinstance(v, list):
-        return [_scrub(x) for x in v]
+    """Preserve public source text."""
     return v
 
 

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ma-holyoke-everbridge"
 name: "Holyoke Emergency Notification System (Everbridge, incl. CSO)"
 url: "https://www.holyoke.org/emergency-notification-system/"

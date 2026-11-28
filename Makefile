@@ -22,6 +22,9 @@
 #                  layer), md_mde_overflows (MDE statewide table; sorted order matters: it marks its
 #                  copies of City SSOs duplicate_of the md-baltimore-sso records, so it runs after);
 #                  md_waters is a helper (`python -m ingest.md_waters --extract` re-extracts waters-md.json).
+#                  Massachusetts: ma_massdep (MassDEP's portal), then ma_somerville_cso and ma_springfield_aquasight
+#                  (Springfield's live CSO map) and operator_mail (sorted order matters: each links its records as
+#                  duplicates of the ma-massdep events file of the same run, so they run after it).
 #                  Virginia: va_alexrenew_cso (status layer snapshot state machine: poll every 15
 #                  minutes), va_deq_prep (DEQ PReP sewage reports, last 30 days; `--backfill` from
 #                  2025-01-01), va_richmond_cso (Richmond monthly workbooks; `--backfill` from
@@ -182,6 +185,8 @@
 #                  Central time by the event's county, data/reference/in-central-time-counties.json) and the generic
 #                  ArcGIS block in-idem-cyanobacteria (IDEM's beach samples with IDEM's advisory level; ingest/
 #                  in_transforms.py); IDEM's outfall layer is data/outfalls-in.json (scripts/build_in_outfalls.py)
+#                  in_evansville_releases (EWSU SSO/CSSR history: source IDs, gallons, cause, minute start/end,
+#                  affected water; Central time, full history checked against yearly windows; CSO status separate).
 #                  West Virginia: wv_echo_cso_monthly (EPA's monthly DMRs at combined sewer outlets: two permits report flow
 #                  at an outlet; month precision; a weekly cache in data/build) and wv_dep_hab_advisories (DEP's algal bloom
 #                  advisory map, three layers, poll-dated); outlets from DEP's layer (data/outfalls-wv.json, built by hand with

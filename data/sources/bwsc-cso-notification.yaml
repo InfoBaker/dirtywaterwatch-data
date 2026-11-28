@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "bwsc-cso-notification"
 name: "Boston Water and Sewer Commission CSO notification page"
 url: null

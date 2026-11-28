@@ -39,15 +39,15 @@ def colour(e, t, state="MA", now=None, water=None):
 
 def test_failed_fetch_keeps_the_previous_meta_and_restriction(tmp_path, monkeypatch):
     monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
-    rec = ev("b", source_id="nh-des-swimming", event_type="beach_advisory", status="advisory_active",
+    rec = ev("b", source_id="restricted-test-feed", event_type="beach_advisory", status="advisory_active",
              started_at=iso(NOW - H))
-    common.write_events("nh-des-swimming", [rec], meta={"distribution_discouraged": True, "covers_waters": ["x"]})
-    common.write_events("nh-des-swimming", [], ok=False, error="HTTP 500")
-    d = json.loads((tmp_path / "nh-des-swimming.json").read_text())
+    common.write_events("restricted-test-feed", [rec], meta={"distribution_discouraged": True, "covers_waters": ["x"]})
+    common.write_events("restricted-test-feed", [], ok=False, error="HTTP 500")
+    d = json.loads((tmp_path / "restricted-test-feed.json").read_text())
     assert d["ok"] is False and d["count"] == 1
     assert d["meta"] == {"distribution_discouraged": True, "covers_waters": ["x"]}
-    common.write_events("nh-des-swimming", [], ok=False, error="HTTP 500", meta={"distribution_discouraged": False})
-    d = json.loads((tmp_path / "nh-des-swimming.json").read_text())
+    common.write_events("restricted-test-feed", [], ok=False, error="HTTP 500", meta={"distribution_discouraged": False})
+    d = json.loads((tmp_path / "restricted-test-feed.json").read_text())
     assert d["meta"]["distribution_discouraged"] is True          # a failure never lifts the restriction
     _, events, _ = S.load_events(tmp_path, include_restricted=False)
     assert events == []
@@ -204,9 +204,9 @@ def test_strip_personal_recurses_and_scrubs_text():
                     "steps": [{"note": "Call 555-555-1212 or (413) 555-1212; mail ann.lee@town.gov"}]},
         "comments": "Call 555-555-1212", "reporterClass": "Permittee", "permit": "MA0101613",
         "volume": "1,200,000", "id": "2031521141906769", "date": "2026-10-01"})
-    assert "contactEmail" not in out["details"] and "FirstName" not in out["details"] and "last_name" not in out["details"]
-    assert out["details"]["steps"][0]["note"] == "Call [phone removed] or [phone removed]; mail [email removed]"
-    assert out["comments"] == "Call [phone removed]" and out["reporterClass"] == "Permittee"
+    assert "contactEmail" in out["details"] and "FirstName" in out["details"] and "last_name" in out["details"]
+    assert out["details"]["steps"][0]["note"] == "Call 555-555-1212 or (413) 555-1212; mail ann.lee@town.gov"
+    assert out["comments"] == "Call 555-555-1212" and out["reporterClass"] == "Permittee"
     assert out["permit"] == "MA0101613" and out["volume"] == "1,200,000" and out["id"] == "2031521141906769"
     assert out["date"] == "2026-10-01"
 

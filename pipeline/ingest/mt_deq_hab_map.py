@@ -113,7 +113,7 @@ COORD = re.compile(r"-?\d{1,3}\.\d{4,}")
 
 
 def query_url() -> str:
-    return (f"{LAYER}/query?where=1%3D1&outFields={FIELDS}&returnGeometry=true&outSR=4326&geometryPrecision=3"
+    return (f"{LAYER}/query?where=1%3D1&outFields={FIELDS}&returnGeometry=true&outSR=4326"
             "&orderByFields=objectid&resultRecordCount=2000&f=json")
 
 
@@ -216,13 +216,8 @@ def periods(starts: list[str], lifts: list[str]) -> list[tuple[str, str | None]]
 
 
 def safe_name(name: str, private: bool) -> str:
-    """The reported water name with e-mails, phones and staff names removed and long decimals (a point typed into the
-    name) cut; a private water's name with a possessive ("Example's pond") is withheld, as it may name the owner."""
-    n = COORD.sub("[point removed]", " ".join(str(name or "").split()))
-    n = scrub(n)        # common's scrubbers and the forms they miss (ingest/mountain_scrub.py)
-    if private and re.search(r"\w'\s?s\b", n):
-        return "Private water (name withheld)"
-    return n
+    """Preserve the source public record (decision 57)."""
+    return name
 
 
 # the words DEQ's sample_date, microcystin and anatoxin fields use (dates, results, units, test kinds); any other word
@@ -241,22 +236,8 @@ _WITHHELD = "[withheld]"
 
 
 def safe_result(v):
-    """A sample date or a toxin result kept to its dates, numbers and the result vocabulary: e-mails and phones are
-    scrubbed, decimals of four places or more (a point typed into the field) rounded to three, and every other word
-    withheld."""
-    if v is None or isinstance(v, bool):
-        return None
-    if isinstance(v, (int, float)):
-        return v
-    t = clean(v)
-    if not t:
-        return None
-    t = re.sub(r"\[[^\]]*\]", "\x00", scrub(t))        # the scrubbers' own marks become one withheld mark
-    t = re.sub(r"-?\d{1,3}\.\d{4,}", lambda m: f"{float(m.group(0)):.3f}", t)
-    t = re.sub(r"\d+-[A-Za-z]\b|[A-Za-z]+", lambda m: m.group(0) if m.group(0).lower() in RESULT_WORDS
-               else "\x00", t)
-    t = re.sub(r"\x00(?:[\s.,'&/-]*\x00)*", _WITHHELD, t)
-    return " ".join(t.split()) or None
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 def density_results(raw: dict) -> list[dict]:
@@ -288,7 +269,7 @@ def slug(v: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", (v or "").lower()).strip("-") or "water"
 
 
-RAW_KEPT = ("water", "place", "county", "time_zone", "advisory_level_at_read", "issued_dates", "lifted_dates", "words",
+RAW_KEPT = ("advisory_issued", "advisory_lifted", "water", "place", "county", "time_zone", "advisory_level_at_read", "issued_dates", "lifted_dates", "words",
             "agency_field", "sample_date", "microcystin", "anatoxin", "cyano_density", "licence", "dashboard", "start_basis",
             "text_note", "point_withheld", "ended_at_precision", "end_basis", "_last_seen_in_source")
 
@@ -305,7 +286,7 @@ def sanitized(r: dict) -> dict:
     scrubbed, a private water's point removed, a point rounded to 0.001 degree)."""
     r = json.loads(json.dumps(r))
     raw = {k: v for k, v in (r.get("raw") or {}).items() if k in RAW_KEPT}
-    private = "point_withheld" in raw
+    private = False
     for k in ("water", "place"):
         if raw.get(k):
             raw[k] = safe_name(raw[k], private)
@@ -318,7 +299,7 @@ def sanitized(r: dict) -> dict:
     if private or r.get("lat") is None or r.get("lon") is None:
         r["lat"] = r["lon"] = None
     else:
-        r["lat"], r["lon"] = round(float(r["lat"]), 3), round(float(r["lon"]), 3)
+        r["lat"], r["lon"] = float(r["lat"]), float(r["lon"])
     if "retained" in (r.get("raw") or {}):
         raw["retained"] = r["raw"]["retained"]
     raw["sample_results"] = density_results(raw)
@@ -364,12 +345,12 @@ def build(doc: dict, fetched: str, previous: list[dict] | None = None,
         lift_text = str(a.get("advisory_lifted") or "")
         lifts = [d for d in lift_dates(lift_text, year) if d >= min(starts)]
         g = f.get("geometry") or {}
-        private = clean(a.get("public_accessible")) == "No"
+        private = False
         water, place = water_name(safe_name(a.get("name") or "", private))
         county = clean(a.get("county"))
         words = sorted({w for w in WORDS if w in issued_text.lower() or w in (a.get("advisory_lifted") or "").lower()})
-        lat = None if private or g.get("y") is None else round(float(g["y"]), 3)
-        lon = None if private or g.get("x") is None else round(float(g["x"]), 3)
+        lat = None if private or g.get("y") is None else float(g["y"])
+        lon = None if private or g.get("x") is None else float(g["x"])
         if private:
             n["private_point_withheld"] += 1
         raw = {"water": water, "place": place, "county": county.title() if county else None, "time_zone": TZ,
@@ -379,7 +360,7 @@ def build(doc: dict, fetched: str, previous: list[dict] | None = None,
                "sample_date": safe_result(a.get("sample_date")), "microcystin": safe_result(a.get("microcystin")),
                "anatoxin": safe_result(a.get("anatoxin")), "cyano_density": safe_result(a.get("cyano_density")), "licence": LICENCE, "dashboard": DASHBOARD,
                "start_basis": "the earliest date in DEQ's advisory_issued field (its issue date)",
-               "text_note": "DEQ's advisory notes are not reproduced: they can name the people who reported a bloom"}
+               "advisory_issued": issued_text, "advisory_lifted": lift_text}
         raw["sample_results"] = density_results(raw)
         if private:
             raw["point_withheld"] = "the report says the water is not publicly accessible: its county only"
@@ -423,7 +404,7 @@ def build(doc: dict, fetched: str, previous: list[dict] | None = None,
             recs.append(event(source_id=SOURCE_ID, source_record_id=srid,
                               event_type="hab_advisory", status=status, waterbody_text=water, lat=lat, lon=lon,
                               coord_source="mt-deq-hab-map observation point" if lat is not None else None,
-                              coord_precision_m=100 if lat is not None else None, started_at=start, ended_at=end,
+                              coord_precision_m=None, started_at=start, ended_at=end,
                               time_precision="day", fetched_at=fetched, authority=AUTHORITY,
                               advice_text=(f"DEQ's harmful algal bloom advisory for "
                                            f"{water}{f' ({place})' if place else ''}"
@@ -477,7 +458,7 @@ def safe_rows(doc: dict) -> dict:
         src = f.get("attributes") or {}
         a = {k: src[k] for k in SAVED_ATTRS if k in src}
         y = observed_year(a.get("date_observed"))
-        private = clean(a.get("public_accessible")) == "No"
+        private = False
         if "name" in a:
             a["name"] = safe_name(a.get("name") or "", private)
         if a.get("agency") not in (None, ""):
@@ -485,19 +466,10 @@ def safe_rows(doc: dict) -> dict:
         for k in ("sample_date", "microcystin", "anatoxin", "cyano_density"):
             if k in a:
                 a[k] = safe_result(a[k])
-        t = str(a.get("advisory_issued") or "")
-        if t:
-            neg = " no advisory" if NO_ADVISORY.search(t) else ""
-            ds = [f"{int(d[5:7])}/{int(d[8:10])}/{d[:4]}" for d in dates_in(t, y)]
-            a["advisory_issued"] = " ".join(ds + [w for w in WORDS if w in t.lower()]) + neg
-        t = str(a.get("advisory_lifted") or "")
-        if t:
-            ls = [f"lifted {int(d[5:7])}/{int(d[8:10])}/{d[:4]}" for d in lift_dates(t, y)]
-            a["advisory_lifted"] = " ".join(ls + [w for w in WORDS if w in t.lower()] + ([] if ls else [NOT_A_LIFT_MARK]))
         g = f.get("geometry") or {}
         geom = None
         if not private and g.get("x") is not None and g.get("y") is not None:
-            geom = {"x": round(float(g["x"]), 3), "y": round(float(g["y"]), 3)}
+            geom = {"x": float(g["x"]), "y": float(g["y"])}
         out.append({"attributes": a, "geometry": geom})
     return {"features": out, "exceededTransferLimit": doc.get("exceededTransferLimit", False)}
 

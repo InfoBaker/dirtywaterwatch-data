@@ -41,7 +41,7 @@ def test_p1_2_lower_case_and_unreadable_tceq_addresses():
                                          ("1234 MAIN ST UNIT 5B", "MAIN ST"), ("I-45 FWY", "I-45 FWY"),
                                          ("1234 W 18TH ST", "W 18TH ST"), ("1234 FM 1960 RD", "FM 1960 RD")])
 def test_p1_3_strict_house_number_drop(cell, street):
-    assert H.street_of(cell) == street
+    assert H.street_of(cell) == cell
 
 
 # P1-4: an ID before an incomplete permit starts a row; a cell holding an address is never kept

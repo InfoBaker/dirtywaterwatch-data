@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "mo-msd-stl-project-clear"
 name: "MSD Project Clear overflow alerts and news releases (WordPress REST API)"
 url: "https://msdprojectclear.org/wp-json/wp/v2/posts"

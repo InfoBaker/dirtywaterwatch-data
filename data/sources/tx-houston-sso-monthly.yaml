@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "tx-houston-sso-monthly"
 name: "City of Houston, Houston Public Works, monthly SSO reports and history (wastewater consent decree)"
 url: "https://www.houstonpublicworks.org/wastewater-cd"

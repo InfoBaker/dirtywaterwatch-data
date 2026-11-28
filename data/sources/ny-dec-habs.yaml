@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ny-dec-habs"
 name: "DEC NYHABS current HAB reports (Current_HAB_Reports_DIL / Current_HAB_Reports_7_3_19) and Archived_HAB_Reports"
 url: "https://services6.arcgis.com/DZHaqZm9cxOD4CWM/arcgis/rest/services/Current_HAB_Reports_DIL/FeatureServer/0"

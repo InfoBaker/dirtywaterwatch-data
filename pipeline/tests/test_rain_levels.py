@@ -340,7 +340,8 @@ def test_the_export_carries_level_evidence_and_the_outfalls_own_counts():
     st0, _ = build(key=False, values=wet(range(0, 6), v=1.2))
     row0 = XO.rain_of(X.public_rain(st0["rain_likely"])["permits"][PERMIT], lv, PERMIT, "013")
     assert set(row0) == set(XO.RAIN_FIELDS)
-    assert "rain-levels.json" in X.PUBLIC_PAYLOADS
+    # Actual rain-levels.json publication is covered by test_export_build; the retired
+    # blocklist scanner's PUBLIC_PAYLOADS list is no longer an export contract.
     assert "levels" not in X.public_rain(st0["rain_likely"])
 
 

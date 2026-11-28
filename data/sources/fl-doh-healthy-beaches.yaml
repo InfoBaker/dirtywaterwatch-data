@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "fl-doh-healthy-beaches"
 name: "Florida Department of Health Healthy Beaches program (beach detail pages; sampling-point layer)"
 url: "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/"

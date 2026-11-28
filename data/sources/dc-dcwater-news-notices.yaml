@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-dcwater-news-notices"
 name: "DC Water news releases and public notices (sewer overflow notices)"
 url: "https://www.dcwater.com/about-dc-water/media/news"

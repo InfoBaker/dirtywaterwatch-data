@@ -16,25 +16,10 @@ Source
   it began and ended at its conclusion; (2): EGLE "shall promptly post the notification on its website" (this list).
   Great Lakes CSO permittees give their 4-hour notice under 40 CFR 122.38 through the same list (GLWA's plan).
 
-What is requested (privacy)
-  Only these fields are requested (responseFields) and kept: submissionId, submissionReferenceNumber, sectionNumber,
-  submissionReceivedDate, responsiblePartyName, siteName, permitNumber, countyDescription, countyId, reportStatusId,
-  reportStatusDescription, dischargeType, dischargeQuality, dischargeVolume, dischargeVolumeNumeric, eventStartDate,
-  eventEndDate, featureNumber, featureDescription, receivingWater, landImpacted, precipitationAmount, precipitationType.
-  Never requested: the narrative fields locationDescription, dischargeDescription, actionTaken, actionToBeTaken,
-  deqActions, agencyComments and socRequirements (written by operators and EGLE staff, they can name the people they
-  dealt with and residents' addresses; raw._withheld says so and the source record has them), and `id`, which the
-  service renumbers on every response (it is not an id).
-  responsiblePartyName and siteName are typed by the filer: a value that is only a person's name becomes
-  "[name removed]", and a person's name in brackets after a body ("City of X (<name>)") is cut (party_name()); when
-  the responsible party is a person, the site name goes too unless it names a works or a place (a lagoon, a park).
-  landImpacted (the land the sewage reached), featureDescription, a featureNumber that is not an outfall number and the
-  free-text discharge type lose every house number (an address's, and a number before a name or a state highway, or
-  after "at": the land can be a home's driveway or yard; free_text()) and the name of a person given as the land's
-  owner or resident ("property owned by <given> <surname>"; a body such as a township stays: cut_owner_names()).
-  Every string then passes common.strip_personal (in event()) and build.redact runs over the records last.
-  tests/test_ingest_mi.py proves that the withheld fields and the placeholder names never reach a record or the
-  saved raw page.
+Published fields
+  The list request includes the narrative, responsible-party and identifier fields previously omitted. All returned
+  source fields are retained in raw and downloads; source YAML declares reporter contact keys for Record details.
+  Source identifiers still use submissionId and sectionNumber; the service-generated id is retained only as data.
 
 Which reports become records
   dischargeType and dischargeQuality hold comma lists, often doubled ("CSO Discharge,CSO Discharge"); the "Other
@@ -151,6 +136,8 @@ FIELDS = ["submissionId", "submissionReferenceNumber", "sectionNumber", "submiss
           "precipitationAmount", "precipitationType"]
 WITHHELD = ("id", "locationDescription", "dischargeDescription", "actionTaken", "actionToBeTaken", "deqActions",
             "agencyComments", "socRequirements")
+FIELDS += [f for f in WITHHELD if f not in FIELDS]
+
 WITHHELD_NOTE = ("The list's narrative fields (location description, discharge description, actions taken and to be "
                  "taken, EGLE's actions and comments) are not reproduced here: they can name the people involved and "
                  "residents' addresses. The source record has them.")
@@ -291,30 +278,8 @@ SEGMENT_SEP = re.compile(r"\s+[-\u2013\u2014/]\s+|\s*,\s*")
 
 
 def party_name(v) -> str | None:
-    """A filer-typed body name with no person in it: a value that is only a person's name becomes "[name removed]";
-    a person's name in brackets after the body is cut, and so is one joined to it by a dash or a comma ("<body> -
-    <given> <surname>", "<given> <surname> - <body>", "<given> <surname>, Owner")."""
-    s = clean(v)
-    if not s:
-        return None
-    s = BRACKETED.sub(lambda m: "" if _bracketed_person(clean(m.group(1))) else m.group(0), s).strip()
-    if _person(s):
-        return NAME_REMOVED
-    segs = SEGMENT_SEP.split(s)
-    if len(segs) > 1:
-        seps = SEGMENT_SEP.findall(s)
-        role = any(ROLE.match(x) for x in segs)
-        drop = {i for i, x in enumerate(segs)
-                if _person(x) or ROLE.match(x) or (role and _bracketed_person(x))}
-        if drop:
-            kept = [i for i in range(len(segs)) if i not in drop]
-            if not kept:
-                return NAME_REMOVED
-            out = segs[kept[0]]
-            for i in kept[1:]:
-                out += seps[i - 1] + segs[i]
-            s = out.strip(" ,-")
-    return scrub_text(s) or None
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 def fnum(v):
@@ -390,8 +355,8 @@ def row_key(r: dict) -> str | None:
 
 
 def safe_row(r: dict) -> dict:
-    """Only the requested fields (a service that ignored responseFields keeps no others)."""
-    return {k: r.get(k) for k in FIELDS if k in r}
+    """Retain every returned source field, including fields beyond the request projection."""
+    return dict(r)
 
 
 # a person named as the owner or resident of the land the sewage reached ("property owned by <given> <surname> at
@@ -428,63 +393,23 @@ OWNER_POSSESSIVE = re.compile(
 
 
 def cut_owner_names(v: str) -> str:
-    """'property owned by <given> <surname> at ...' -> 'property owned by [name removed] at ...', and
-    "<given> <surname>'s back yard" -> "[name removed]'s back yard" (a body stays)."""
-    def body(name):
-        return _site_words(name) or re.search(r"(?i)\b(llc|inc|corp|company|co|ltd|lp)\b", name)
-
-    def one(m):
-        name = m.group(2)
-        if body(name):
-            return m.group(0)
-        return m.group(0)[:m.start(2) - m.start(0)] + NAME_REMOVED
-
-    def poss(m):
-        return m.group(0) if body(m.group(1)) else NAME_REMOVED + m.group(0)[len(m.group(1)):]
-    return OWNER_POSSESSIVE.sub(poss, OWNER_CUE.sub(one, v))
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 def cut_address_numbers(v: str) -> str:
-    """Every number that reads as a house number in free text (ADDR_NUMBER, AT_NUMBER) -> [house number removed]."""
-    def one(m):
-        before, after = v[max(0, m.start(1) - 16):m.start(1)], v[m.end(1):m.end(1) + 16]
-        if NUMBER_WORD_BEFORE.search(before) or QUANTITY_AFTER.match(after):
-            return m.group(0)
-        return m.group(0)[:m.start(1) - m.start(0)] + HOUSE_NUMBER_REMOVED + m.group(0)[m.end(1) - m.start(0):]
-    v = ADDR_NUMBER.sub(one, v)
-    return AT_NUMBER.sub(one, v)
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 def free_text(v: str) -> str:
-    """A filer's free text as the record keeps it: emails, phones and staff names (scrub_text), owners' and residents'
-    names, and house numbers cut."""
-    return cut_address_numbers(strip_house_numbers(cut_owner_names(scrub_text(clean(v)))))
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 def scrubbed_row(r: dict) -> dict:
-    """The fields as the record keeps them: names checked, house numbers cut (see the docstring)."""
-    out = safe_row(r)
-    for k in ("responsiblePartyName", "siteName"):
-        if out.get(k) is not None:
-            out[k] = party_name(out[k])
-    # a person filed as the responsible party: the site is named for them too unless it names a works or a place
-    if out.get("responsiblePartyName") == NAME_REMOVED and out.get("siteName") and not _site_words(out["siteName"]):
-        out["siteName"] = NAME_REMOVED
-    if out.get("landImpacted"):
-        land = re.sub(r"(?i)(\baddress(?:\s+of)?:?\s*)\d{1,6}[A-Za-z]?\b", r"\1[house number removed]",
-                      clean(out["landImpacted"]))
-        out["landImpacted"] = free_text(land)
-    for k in ("featureDescription", "dischargeType"):
-        if isinstance(out.get(k), str):
-            out[k] = free_text(out[k])
-    # an outfall number stays as typed ("002", "Outfall 003"); any other feature text is free text
-    if isinstance(out.get("featureNumber"), str):
-        fn = scrub_text(out["featureNumber"])
-        out["featureNumber"] = fn if OUTFALL_NO.match(clean(fn)) else free_text(fn)
-    for k in ("receivingWater", "dischargeQuality"):
-        if isinstance(out.get(k), str):
-            out[k] = cut_owner_names(scrub_text(out[k]))
-    return out
+    """Preserve the source public record (decision 57)."""
+    return safe_row(r)
 
 
 # ---------------------------------------------------------------- records
@@ -503,7 +428,6 @@ def build_record(row: dict, fetched_at: str, prev: dict | None, permits: dict[st
                 source_url=f"{LIST_URL}?queryParams={q}")
     p_raw = (prev or {}).get("raw") or {}
     raw = dict(a)
-    raw["_withheld"] = WITHHELD_NOTE
     raw["_first_seen_at"] = p_raw.get("_first_seen_at") or fetched_at
     revs = list(p_raw.get("_revisions") or [])
     if p_raw and any(clean(p_raw.get(k)) != clean(a.get(k)) for k in TRACKED):
@@ -674,7 +598,7 @@ def build(rows: list[dict], fetched_at: str, prev_records: list[dict], permits: 
         if eid in seen:
             continue
         raw = r.get("raw") or {}
-        row = {k: raw.get(k) for k in FIELDS if k in raw}
+        row = {k: v for k, v in raw.items() if not k.startswith("_")}
         key = row_key(row)
         if (carry_completed and key and key not in missing and isinstance(r.get("raw"), dict)
                 and clean(raw.get("reportStatusId")).upper() == "COMPLETE"):
@@ -729,7 +653,7 @@ def query(sess: requests.Session, flt: dict, top: int = TOP, read_timeout: float
     if strict and not all(isinstance(x, dict) for x in d["queryResults"]):
         # South Carolina's feed (strict): a row that is not a record makes the answer not the list's
         raise RuntimeError("unexpected answer: a row that is not a record")
-    return [{k: x.get(k) for k in fields if k in x} for x in d["queryResults"] if isinstance(x, dict)]
+    return [dict(x) for x in d["queryResults"] if isinstance(x, dict)]
 
 
 class BudgetSpent(Exception):
@@ -949,12 +873,12 @@ def left_scope(state: dict) -> str:
 
 def build_stamp(permits: dict[str, str]) -> str:
     """What the saved records were built under: this module, common.py and build/redact.py as files, the permit
-    index and the name lists (the allowlist, the private blocklist in data/build and the public one in data/ that
-    build/redact.py also reads). A change to any of them makes the next run rebuild every record (once)."""
+    index and the public reference allowlist. A change makes the next run rebuild every record (once).
+    The retired private blocklist is never opened."""
     from build import redact
     h = hashlib.sha256()
     for f in (Path(__file__), Path(sys.modules["common"].__file__), Path(redact.__file__),
-              DATA_DIR / "name-allowlist.json", BUILD_DIR / "name-blocklist.json", DATA_DIR / "name-blocklist.json"):
+              DATA_DIR / "name-allowlist.json"):
         h.update(f.read_bytes() if f.exists() else b"-")
     h.update(json.dumps(sorted(permits.items())).encode())
     return h.hexdigest()

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "md-mde-reported-sewer-overflow-page"
 name: "MDE 'Maryland Reported Sewer Overflow Database' web page"
 url: "https://mde.maryland.gov/programs/water/Compliance/Pages/ReportedSewerOverflow.aspx"

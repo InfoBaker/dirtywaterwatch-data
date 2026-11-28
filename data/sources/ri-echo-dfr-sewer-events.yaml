@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ri-echo-dfr-sewer-events"
 name: "EPA ECHO detailed facility reports - RI single-event violations and sewer overflow/bypass event totals"
 url: "https://echodata.epa.gov/echo/dfr_rest_services.get_dfr?p_id=RI0100072&output=JSON"

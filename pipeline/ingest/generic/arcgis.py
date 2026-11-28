@@ -3,7 +3,7 @@
 fetch block keys
   platform: arcgis
   url: the layer (.../FeatureServer/0 or .../MapServer/0)
-  where ("1=1"), out_fields (the safe fields by default: only those are asked for), cursor_field (the object id,
+  where ("1=1"), out_fields (legacy configuration; all source fields are requested), cursor_field (the object id,
   "OBJECTID" by default: pages are "id greater than the last one seen", so a server that ignores resultOffset
   cannot repeat a page), page_size (1000), max_rows (50000; reaching it fails the fetch)
   geometry: true asks for points in WGS 84 (outSR 4326); each row then has _x and _y (map them to lon and lat)
@@ -38,9 +38,9 @@ def fetch(block: dict, sess) -> Fetched:
     works on servers that ignore resultOffset, and cannot repeat a page. A page whose ids do not move past the
     last one is an error; reaching max_rows is an error (a short table would mark every later row missing)."""
     layer = block["url"].rstrip("/")
-    fields = list(block.get("out_fields") or [f for f in block["safe_fields"] if not f.startswith("_")])
+    fields = ["*"]
     oid = block.get("cursor_field") or block.get("order_by") or "OBJECTID"
-    if oid not in fields:
+    if "*" not in fields and oid not in fields:
         fields.append(oid)
     size, cap = int(block.get("page_size", 1000)), int(block.get("max_rows", 50_000))
     base_where = block.get("where", "1=1")

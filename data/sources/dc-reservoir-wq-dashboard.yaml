@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-reservoir-wq-dashboard"
 name: "Reservoir Center / Xylem 'Water Quality' dashboard and API (Anacostia, Potomac, Shenandoah sondes + CMC E. coli)"
 url: "https://water-quality.reservoircenter.org/"

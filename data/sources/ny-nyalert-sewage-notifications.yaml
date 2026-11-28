@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ny-nyalert-sewage-notifications"
 name: "NY-Alert 'Sewage Discharge Notifications' subscription (email, text, phone, fax)"
 url: "https://alert.ny.gov/sign-up-ny-alert"

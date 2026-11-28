@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "me-dep-cyano-bloom-reports"
 name: "Maine DEP cyanobacteria bloom reports (Survey123 results layer) and Maine Cyanobacteria Dashboard"
 url: "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/arcgis/rest/services/survey123_20bc958a745244c2a4c2bbf74b3c00cc_results/FeatureServer/0"

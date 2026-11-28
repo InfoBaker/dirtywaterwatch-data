@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nh-manchester-supplemental-cso-info"
 name: "Manchester Supplemental CSO Information (CD reports, annual CSO DMRs, outfall map)"
 url: "https://www.manchesternh.gov/Departments/Sewer-and-Stormwater/CSO/Supplemental-CSO-Information"

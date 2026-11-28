@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-crc-is-it-clean"
 name: "Is It Clean? (Connecticut River Conservancy) - E. coli results and 'likely condition' map"
 url: "https://www.isitclean.us/"

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-dcgis-css-layers"
 name: "DC GIS Combined Sewer System Area (layer 31) and Combined Sewer Sewershed (layer 19)"
 url: "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Environment_Stormwater_Management_WebMercator/MapServer"

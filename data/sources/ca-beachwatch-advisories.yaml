@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": ["advisory.Advisories_Contact_Person", "advisory.ActionBy"], "customer_identifier": [], "description": ["advisory.Advisory_Comments"]}
 id: "ca-beachwatch-advisories"
 name: "Beach Watch: Beach Advisories (Postings and Closures) and Beach Water Quality Monitoring (data.ca.gov)"
 url: "https://data.ca.gov/dataset/beach-water-quality-postings-and-closures"

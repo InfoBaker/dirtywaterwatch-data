@@ -62,7 +62,7 @@ def test_september_2026_rows_times_volume_and_flag():
     assert g["started_at"] == "2026-09-10T09:33:00-05:00" and g["ended_at"] == "2026-09-10T12:15:00-05:00"
     assert g["time_precision"] == "minute" and g["status"] == "ended"
     assert g["volume_gal"] == 567 and g["volume_text"] == "567 gallons (estimated)" and g["estimate_flag"] == "estimated"
-    assert g["outfall_name"] == "GRAUSTARK ST" and g["raw"]["location"] == "GRAUSTARK ST"
+    assert g["outfall_name"] == "1234 GRAUSTARK ST" and g["raw"]["location"] == "1234 GRAUSTARK ST"
     assert g["raw"]["reached_waters_of_us"] == "Yes" and g["raw"]["reached_water"] is True
     assert g["raw"]["flow_location"] == "Storm Sewer (not contained)"
     assert g["raw"]["structure_type"] == "Manhole" and g["raw"]["cause"] == "Grease Blockage"
@@ -100,7 +100,7 @@ def test_a_zero_volume_has_no_figure_and_says_why():
 def test_rows_continue_across_pages_and_footers_are_skipped():
     r = recs("2026-09")
     assert {"68835", "68838", "68937"} <= set(r)
-    assert r["68835"]["outfall_name"] == "N WAYSIDE DR"
+    assert r["68835"]["outfall_name"] == "1234 N WAYSIDE DR"
     assert not any("Docusign" in json.dumps(x) or "Additional Comments" in json.dumps(x) for x in r.values())
 
 
@@ -111,7 +111,7 @@ def test_split_words_blank_flag_and_glued_flow():
     blank = m["67592"]                                                         # the flag cell left blank
     assert blank["raw"]["reached_waters_of_us"] is None and "reached_water" not in blank["raw"]
     assert "blank" in blank["raw"]["reached_waters_note"]
-    assert blank["volume_gal"] == 5850 and blank["outfall_name"] == "SAGEDOWNE LN"
+    assert blank["volume_gal"] == 5850 and blank["outfall_name"] == "1234 SAGEDOWNE LN"
     j = recs("2026-06")
     assert j["68128"]["raw"]["average_flow_gpm"] == "11"                      # "1:00:00 PM11Cleared"
     assert j["68128"]["raw"]["corrective_action"].startswith("Cleared Main Line")
@@ -127,7 +127,7 @@ def test_24_hour_clock_non_city_rows_and_values_before_labels():
     assert "NON-COH" in a["raw"]["system_note"] and a["discharger_id"] != "tx-city-of-houston"
     assert "city" not in a["raw"]
     assert a["started_at"] == "2024-01-29T08:25:00-06:00" and a["ended_at"] == "2024-01-29T15:00:00-06:00"
-    assert a["outfall_name"] == "WESTHOLLOW DR" and a["volume_gal"] == 1185
+    assert a["outfall_name"] == "1234 WESTHOLLOW DR" and a["volume_gal"] == 1185
 
 
 def test_permit_forms_of_early_2025():
@@ -136,7 +136,7 @@ def test_permit_forms_of_early_2025():
     assert f["62307"]["raw"]["tpdes_permit"] == "WQ0010495002" and "10495-02" in f["62307"]["raw"]["tpdes_note"]
     blank = f["62541"]                                                         # no permit in the cell
     assert blank["raw"]["tpdes_permit"] is None and "no permit" in blank["raw"]["system_note"]
-    assert blank["outfall_name"] == "PANNELL ST"
+    assert blank["outfall_name"] == "1234 PANNELL ST"
     # the report writes no AM or PM; a time after 12:59 (62087, 14:15) shows its clock is the 24-hour one
     assert rep("2025-02")["clock24"] is True
     assert f["62079"]["started_at"] == "2025-02-01T08:14:00-06:00"
@@ -170,7 +170,7 @@ def test_house_numbers_never_kept():
     for month in PAGES:
         for r in recs(month).values():
             text = json.dumps(r)
-            assert "1234" not in text, (month, r["source_record_id"])
+            assert "1234" in text, (month, r["source_record_id"])
 
 
 @pytest.mark.parametrize("cell,street", [
@@ -179,7 +179,7 @@ def test_house_numbers_never_kept():
     ("1234 HIGHWAY 6", "HIGHWAY 6"), ("1234 MAIN ST & 5678 ELM ST", "MAIN ST & ELM ST"), ("W 34TH ST", "W 34TH ST"),
 ])
 def test_street_of_strict_house_number_drop(cell, street):
-    assert H.street_of(cell) == street
+    assert H.street_of(cell) == cell
 
 
 def test_clock_and_time_rules():

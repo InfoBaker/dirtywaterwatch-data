@@ -170,7 +170,7 @@ def split_water(name: str) -> tuple[str, float | None, float | None]:
     m = COORD_RE.search(name)
     if not m:
         return name, None, None
-    lat, lon = round(float(m.group(1)), 3), round(float(m.group(2)), 3)
+    lat, lon = float(m.group(1)), float(m.group(2))
     if not (40.9 <= lat <= 45.1 and -111.1 <= lon <= -104.0):
         return COORD_RE.sub("", name).strip(" -"), None, None        # not a Wyoming point: dropped, never used
     return COORD_RE.sub("", name).strip(" -"), lat, lon

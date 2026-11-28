@@ -3093,14 +3093,16 @@
    "legal_basis": null,
    "basis_kind": "voluntary",
    "monitored": false,
-   "unmonitored_reason": "login",
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "ma-springfield-aquasight",
    "publishes": "status",
-   "note": "Springfield live CSO map (Aquasight/ADS). Voluntary real-time map beyond the required advisory; keeps 48-56 hours; vendor API key embedded in the page (use needs permission). Same app lists Boston, Haverhill, Montague and Somerville. (research/ma/report.md §2.6)",
-   "checked": "2026-11-03",
+   "note": "Springfield live CSO map (Aquasight/ADS), embedded at springfieldalerts.com/Suez/index.php/map-of-cso-locations/. Voluntary real-time map beyond the required advisory. Its overflow log holds the whole history (2,134 overflows, 2022-03-19 to 2026-11-26, on 2026-11-28), each with start and end; the feed reads it hourly with the key the app's own script carries, and each overflow is linked to MassDEP's portal record of the same overflow. The current status per outfall goes to the feed's meta. Same app lists Boston, Haverhill, Montague and Somerville. (research/ma/report.md §2.6; ma-springfield-aquasight)",
+   "checked": "2026-11-28",
    "sources": [
-    "ma-swsc-aquasight-cso-map"
+    "ma-swsc-aquasight-cso-map",
+    "ma-springfield-aquasight"
    ],
-   "barrier": "login_required"
+   "barrier": null
   },
   {
    "id": "ma-taunton-rwa",

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "az-adeq-reported-habs"
 name: "ADEQ AZHABs \"Currently Reported\" harmful algal bloom list"
 url: "https://azdeq.gov/reported-habs"

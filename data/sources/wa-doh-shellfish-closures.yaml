@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "wa-doh-shellfish-closures"
 name: "Washington DOH Shellfish Safety Map and commercial growing area closures (incl. sewage-spill emergency closures)"
 url: "https://fortress.wa.gov/doh/biotoxin/biotoxin.html"

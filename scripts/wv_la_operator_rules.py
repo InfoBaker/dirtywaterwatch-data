@@ -156,8 +156,6 @@ def owner(permit_name, permittee, facility_type, state: str, permit: str, overri
         return title(raw), "tribal", "rule"
     if re.search(r"\bparish\b|\bph\b", raw, re.I) and not STRONG_COMPANY.search(raw):
         return re.sub(r"\bPh\b", "Parish", title(raw)), "county", "rule"
-    if person_shaped(raw):
-        return f"Holder of permit {permit}", "facility (permittee not named)", "person-shaped name withheld"
     name = title(raw)
     name = re.sub(r"\bPSD\b", "Public Service District", name)
     for pat, form in RULES:

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "fed-echo-cso-inventory-featureserver"
 name: "EPA National CSO Inventory Service (ArcGIS FeatureServer 'Combined Sewer Overflows')"
 url: "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Combined_Sewer_Overflows/FeatureServer/0"

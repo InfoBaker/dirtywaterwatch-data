@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ak-epa-sobe"
 name: "EPA eRule Sewer Overflow/Bypass Event reports (Alaska APDES permittees)"
 url: "https://echo.epa.gov/files/echodownloads/current_sewer_overflow_and_collection_systems_tables.zip"

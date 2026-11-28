@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "wi-dnr-beach-health"
 name: "Wisconsin DNR Beach Health: the beach advisories and closures in effect (beach map layer)"
 url: "https://dnrmaps.wi.gov/arcgis2/rest/services/OGW_Beach_Monitoring/BEACH_MONITORING_LOCATIONS/MapServer/1"

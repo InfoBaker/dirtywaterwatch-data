@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "pa-pwd-csocast"
 name: "Philadelphia Water Department CSOcast (Combined Sewer Overflow Public Notification System)"
 url: "https://water.phila.gov/maps/csocast/"

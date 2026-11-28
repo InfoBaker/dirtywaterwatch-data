@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nd-deq-hab-listings"
 name: "ND DEQ harmful algal bloom advisories and warnings listing (PDF)"
 url: "https://www.deq.nd.gov/publications/WQ/3_WM/HABs/HABsListings.pdf"

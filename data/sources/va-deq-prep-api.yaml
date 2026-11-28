@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-deq-prep-api"
 name: "DEQ Pollution Response Program (PReP) public report API (myDEQ portal)"
 url: "https://portal.deq.virginia.gov/v2/prep/search"

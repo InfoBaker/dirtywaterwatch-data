@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ar-deq-overflow-incidents"
 name: "Arkansas DEQ Reported Noncompliance Incident Data (sewer overflows, bypasses, upsets and unpermitted discharges)"
 url: "https://adeq.state.ar.us/water/enforcement/sso/data.aspx"
@@ -40,6 +41,7 @@ fetch:
   module: "ar_deq_overflow_incidents"
   time_zone: "America/Chicago"
   # the result table's columns and the detail row's labelled fields; the Comments row is never read
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [permit_no, facility_name, location, location_withheld, date_started, date_stopped, date_reported,
                 volume_gal, impact, incident_type, environmental_damage, confirmation_no, cause, action_taken,
                 overflow_type]

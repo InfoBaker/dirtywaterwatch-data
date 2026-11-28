@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "il-iepa-hab-program"
 name: "Illinois EPA Harmful Algal Bloom program and Algal Bloom Dashboard"
 url: "https://epa.illinois.gov/topics/water-quality/monitoring/algal-bloom/2026-harmful-algal-bloom-program.html"

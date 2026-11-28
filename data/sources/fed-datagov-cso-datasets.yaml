@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "fed-datagov-cso-datasets"
 name: "data.gov catalog search for national CSO/SSO datasets"
 url: "https://catalog.data.gov/search?q=combined+sewer+overflow"

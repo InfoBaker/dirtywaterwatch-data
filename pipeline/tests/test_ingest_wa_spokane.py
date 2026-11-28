@@ -178,12 +178,13 @@ def test_a_site_unread_then_missing_keeps_health_false(tmp_path):
     assert f["ok"] is False and "CSO2" in json.dumps(f["meta"].get("unread"))
 
 
-def test_contact_text_in_a_location_is_scrubbed(tmp_path):
+def test_contact_text_in_a_location_is_preserved(tmp_path):
     page = PAGE.replace("0.6 miles downstream of RPWRF", "0.6 miles downstream of RPWRF, call Jane 509-555-0123")
     rows, _ = SP.parse(page)
     st = tmp_path / "s.json"
     SP.run(rows, NOW, st, REG)
-    assert "555-0123" not in json.dumps(rows) + st.read_text()
+    assert "555-0123" in json.dumps(rows)
+    assert "555-0123" in st.read_text()
 
 
 # the hourly refresh of 2026-11-17 02:41Z read a page without the table ("no CSO table (MainContent_CSOGridView) on

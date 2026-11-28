@@ -616,7 +616,7 @@ def build_records(cells: dict, names: dict, reg: dict, disc: dict, stats: dict, 
             # EPA gives this outfall only the plant's point: not the outfall's place (review 2026-11-14 P1-4)
             point_note, lat, lon = "the registry gives only the treatment plant's point for this outfall: not used", None, None
         if lat is not None:
-            lat, lon = round(float(lat), 3), round(float(lon), 3)
+            lat, lon = float(lat), float(lon)
         slug = o.get("water_slug")
         tz = zone_of(o, lat, lon)
         vol_note = None

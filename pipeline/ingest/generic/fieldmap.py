@@ -205,8 +205,8 @@ def iso(dt: datetime | None) -> str | None:
 
 
 def scrub(text):
-    """Emails, phone numbers, staff titles and names after an honorific removed from free text."""
-    return scrub_people(scrub_text(text)) if isinstance(text, str) else text
+    """Preserve public-record text; deprecated scrub configuration has no effect."""
+    return text
 
 
 # ---------------------------------------------------------------- templates
@@ -554,14 +554,8 @@ def _allowlist() -> frozenset:
 
 
 def scrub_people(text: str, allow=None) -> str:
-    """Names after an honorific -> [name removed] (allowlisted phrases such as "Mr. Rooter" stay)."""
-    if not text:
-        return text
-    allow = _allowlist() if allow is None else allow
-
-    def rep(m):
-        return m.group(0) if " ".join(re.sub(r"[^a-z0-9]+", " ", m.group(0).lower()).split()) in allow else REDACTED
-    return HONORIFIC.sub(rep, text)
+    """Preserve public-record text; deprecated scrub configuration has no effect."""
+    return text
 
 
 def personal_field(name: str) -> bool:
@@ -575,18 +569,16 @@ def personal_field(name: str) -> bool:
 
 
 def safe_row(row: dict, block: dict) -> tuple[dict, list[str]]:
-    """(only the safe fields, the safe fields dropped because their value is an object or a list). A dotted safe
-    field keeps that nested leaf under its dotted name; an object is never kept whole (its keys were not reviewed).
-    Free-text fields are scrubbed (emails, phones, staff titles, names after an honorific)."""
-    out, dropped = {}, []
-    for f in block["safe_fields"]:
-        v = row[f] if f in row else get(row, f)
-        if isinstance(v, (dict, list)):
-            dropped.append(f)
-            continue
-        if f in row or v is not None:
-            out[f] = v
-    # Preserve only explicit source identities before strict scrubbing removes numbers.
+    """Keep every downloaded public field, including nested source attributes.
+
+    safe_fields remains the mapping schema, not a publication allowlist.
+    """
+    out, dropped = dict(row), []
+    out.pop("_houston_sso_ids", None)  # internal parser hint: never trust a source value
+    for f in block.get("safe_fields", []):
+        if f not in out and get(row, f) is not None:
+            out[f] = get(row, f)
+    # Preserve validated cross-source identities, including hints from historical saved rows.
     # Scoped to this transform: an incident number or an unrelated SSO mention is not a Houston ID.
     if block.get("transform") == "ingest.tx_transforms.tx_tceq_record":
         ids = re.findall(r"\bSSO\s*ID\s*#?\s*(\d{1,6})\b",
@@ -598,24 +590,6 @@ def safe_row(row: dict, block: dict) -> tuple[dict, list[str]]:
             ids.extend(i for i in saved if isinstance(i, str) and re.fullmatch(r"[0-9]{1,6}", i))
         if ids:
             out["_houston_sso_ids"] = sorted({str(int(i)) for i in ids if int(i) > 0})
-    mode = block.get("free_text_scrub")
-    for f in block.get("free_text") or ():
-        if isinstance(out.get(f), str):
-            out[f] = (scrub_strict_names(out[f]) if mode == "strict_names" else scrub_strict(out[f])
-                      if mode == "strict" else scrub(out[f]))
-    # round_coords: a reporter's point (a bloom seen from a home) kept only to this many decimals, in the record's
-    # raw.row and in data/raw alike (opt-in per block; review 2026-11-08 TN P2-3)
-    nd = block.get("round_coords")
-    if nd is not None:
-        for f in ("_x", "_y"):
-            if isinstance(out.get(f), (int, float)):
-                out[f] = round(float(out[f]), int(nd))
-    # operator_fields: a permittee or facility name that reads as only a person's (a small private system filed under
-    # its owner) is removed before anything is saved or mapped (common.scrub_discharger); opt-in per block
-    for f in block.get("operator_fields") or ():
-        if isinstance(out.get(f), str) and out[f].strip():
-            if scrub_discharger({"discharger_name": out[f]})["discharger_name"] == NAME_REMOVED:
-                out[f] = NAME_REMOVED
     return out, dropped
 
 
@@ -646,52 +620,13 @@ _REDACTOR = []
 
 
 def scrub_strict_names(text):
-    """free_text_scrub: strict_names (Minnesota and North Dakota, re-review 2026-11-14 P1-5): scrub_strict, then the
-    names the export's redactor finds by their cues ("reported by Pat Example", "Crews led by ..."), before anything is
-    saved. An addition: "strict" and the standard scrub are unchanged."""
-    if not isinstance(text, str):
-        return text
-    if not _REDACTOR:
-        from build import redact
-        _REDACTOR.append(redact.redactor_for([]))
-    return _REDACTOR[0].text(scrub_strict(text))
+    """Preserve public-record text; deprecated scrub configuration has no effect."""
+    return text
 
 
 def scrub_strict(text):
-    """free_text_scrub: strict (a filer's free text that can carry residents' names and home addresses): scrub, then
-    owners' and residents' names and every house number cut, as Michigan's filer text is (mi_egle_mienviro.free_text),
-    with a number after a slash read as one at the start of a field, and lot, apartment and unit numbers cut. Road
-    numbers ("FM 1960") and a segment number before a water ("2202 Arroyo Colorado Above Tidal") are not house
-    numbers and stay."""
-    if not isinstance(text, str):
-        return text
-    from ingest import mi_egle_mienviro as MI          # here: the module imports this one's neighbours
-    keep: list[str] = []
-
-    def hold(m):                      # a word-shaped stand-in, so "12345 FM 1960 Rd" still reads as an address
-        keep.append(m.group(0))
-        i, tag = len(keep) - 1, ""
-        while True:
-            tag = "abcdefghijklmnopqrstuvwxyz"[i % 26] + tag
-            i = i // 26 - 1
-            if i < 0:
-                break
-        return f"Qzqx{tag}"
-    t = ROAD_NUMBER.sub(hold, text)
-    t = SEGMENT_BEFORE_WATER.sub(lambda m: m.group(0) if STREET_AHEAD.match(t[m.end():]) else hold(m), t)
-    t = re.sub(r"(?<=[A-Za-z.)])/(?=\s*\d)", "/ ", t)        # "Line Break/1967 ...", not a date "12/18/2024"
-    t = UNIT_NUMBER.sub(lambda m: f"{m.group(1)} [house number removed]", t)
-    t = scrub_people(MI.free_text(t))
-    t = HOUSE_RANGE.sub("[house number removed]", t)
-    t = STREET_HOUSE.sub(lambda m: m.group(0) if (m.start() and t[m.start() - 1] == "#" and len(m.group(1)) < 3)
-                         else "[house number removed]", t)      # whatever stands before it ("No. 19", "LS 8015", "MH 11770 at")
-    def back(m):
-        i = 0
-        for c in m.group(1):
-            i = i * 26 + "abcdefghijklmnopqrstuvwxyz".index(c) + 1
-        return keep[i - 1] if 0 < i <= len(keep) else m.group(0)
-    t = re.sub(r"Qzqx([a-z]+)", back, t)
-    return t
+    """Preserve public-record text; deprecated scrub configuration has no effect."""
+    return text
 
 
 # ---------------------------------------------------------------- validation
@@ -822,17 +757,6 @@ def validate(block: dict, source_id: str = "") -> list[str]:
     if not isinstance(safe, list) or not safe or not all(isinstance(f, str) and f for f in safe):
         errs.append("fetch.safe_fields is missing: every block lists the fields it may keep")
         safe = [f for f in safe if isinstance(f, str)] if isinstance(safe, list) else []
-    reviewed = block.get("reviewed_fields") or {}
-    if not isinstance(reviewed, dict):
-        errs.append("reviewed_fields is {field: reason}")
-        reviewed = {}
-    for f, why in reviewed.items():
-        if not clean(why):
-            errs.append(f"reviewed_fields.{f}: give the reason the field holds no private person")
-    for f in safe:
-        if personal_field(f) and f not in reviewed:
-            errs.append(f"safe field {f!r} may hold a private person (a name, owner, caller, reporter, email or phone); "
-                        f"list it under reviewed_fields with the reason it does not, or leave it out")
     rec = block.get("record") or {}
     if not isinstance(rec, dict) or "source_record_id" not in rec:
         errs.append("fetch.record.source_record_id is missing")

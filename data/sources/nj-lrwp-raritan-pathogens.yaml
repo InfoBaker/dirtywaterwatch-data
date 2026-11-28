@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nj-lrwp-raritan-pathogens"
 name: "Lower Raritan Watershed Partnership / Rutgers Cooperative Extension weekly Raritan River pathogen results"
 url: "https://lowerraritanwatershed.org/lower-raritan-pathogens-monitoring-results-09-24-2026/"

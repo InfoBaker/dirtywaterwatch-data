@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ri-nbc-cso-api-pins"
 name: "NBC CSO Alarm Map live outfall status (JSON)"
 url: "https://cso-api.narrabay.com/pins"

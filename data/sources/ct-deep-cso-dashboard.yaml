@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-deep-cso-dashboard"
 name: "CT DEEP CSO/SSO Performance Dashboard (QScend)"
 url: "https://deepct.qscend.mygovcenter.com/"

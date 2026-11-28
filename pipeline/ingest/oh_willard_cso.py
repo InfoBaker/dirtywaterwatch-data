@@ -1,5 +1,9 @@
 """City of Willard CSO public notifications -> data/build/events/oh-willard-cso-notices.json.
 
+Public-record policy: downloaded source text is retained, including published names, contacts and addresses.
+Structured event classification still uses the documented source fields. Requested removals apply at export.
+
+
 Source (registry oh-willard-cso-notices; 40 CFR 122.38, the Great Lakes CSO public notice rule)
   Willard's "Combined Sewer Overflows (CSO)" page, https://www.willardohio.gov/cso.html (a Weebly page; 200 to this
   machine and GitHub's runner, 2026-11-16). Under "PUBLIC NOTIFICATION" the city posts each overflow's notices as
@@ -222,7 +226,7 @@ def parse(page: str) -> tuple[list[dict], list[str]]:
             unread.append(f"{km.group(1).lower()} notice of {km.group(2)[:30]}: end '{end_text[:30]}' not read")
             continue
         notices.append({
-            "kind": km.group(1).lower(), "notice_date": notice_day(km.group(2)), "notice_heading": title,
+            "source_text": "\n".join([title, *body]), "kind": km.group(1).lower(), "notice_date": notice_day(km.group(2)), "notice_heading": title,
             "start_text": joined(f.get("start")), "start": st.isoformat(),
             "end_text": end_text, "end": end.isoformat() if end else None,
             "duration": joined(f.get("duration")), "location": joined(place_lines(f.get("location")), ", "),
@@ -278,7 +282,7 @@ def to_record(key: str, notices: list[dict]) -> dict:
     vol_text = last("volume_text")
     gal = volume_gallons(vol_text)
     raw = {"time_zone": TZ_NAME, "state": "OH",
-           "notices": [{"kind": n["kind"], "notice_date": n.get("notice_date"), "start_as_written": n["start_text"],
+           "notices": [{"source_text": n.get("source_text"), "kind": n["kind"], "notice_date": n.get("notice_date"), "start_as_written": n["start_text"],
                         "end_as_written": n.get("end_text"), "status_at_notice": n.get("status_text"),
                         "_first_seen_at": n["first_seen_at"], "_last_seen_in_source": n["last_seen_at"]}
                        for n in notices],

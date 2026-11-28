@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "vt-burlington-newsflash-publicworks"
 name: "Burlington News Flash, Public Works category"
 url: "https://www.burlingtonvt.gov/m/newsflash?cat=8"

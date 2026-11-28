@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nv-ndep-hab-dashboard"
 name: "Nevada HAB Dashboard (Office of State Epidemiology, Power BI) and weekly HAB email list"
 url: "https://app.powerbigov.us/view?r=eyJrIjoiZDIxMmZiZjktMTlhMS00ZTgxLWFmNTAtY2Y5Yzc3NzE0MTU4IiwidCI6ImU0YTM0MGU2LWI4OWUtNGU2OC04ZWFhLTE1NDRkMjcwMzk4MCJ9"

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-alexrenew-cso"
 name: "AlexRenew Outfall Overflow Status (Alexandria combined sewer outfalls)"
 url: "https://services8.arcgis.com/gPxDs3sbKpglnSk7/arcgis/rest/services/Outfall_Overflow_Status_view/FeatureServer/0"

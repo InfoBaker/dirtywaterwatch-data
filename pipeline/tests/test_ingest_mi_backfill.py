@@ -1,8 +1,7 @@
 """Michigan's history from 2001 (pipeline/ingest/mi_egle_mienviro.py --backfill): spans a year at a time, each saved
 to the archive as it arrives, a time budget that a later --backfill resumes from, a 4xx answer that stops the backfill
-against transient failures that are named and asked again, meta.backfill, and the privacy of the archived rows.
-The service is faked from the name-free fixture tests/fixtures/mi_mienviro_list.json (its placeholders must never
-reach a record or the archive).
+against transient failures that are named and asked again, meta.backfill, and retention of source text.
+The service is faked from tests/fixtures/mi_mienviro_list.json; synthetic public contacts stay in downloads.
 Run from pipeline/: python -m pytest tests/test_ingest_mi_backfill.py -q
 """
 from __future__ import annotations
@@ -46,7 +45,7 @@ def year_rows(year: int, n: int = 3) -> list[dict]:
 
 def old_shape_row(year: int) -> dict:
     """An older report with the fields the list leaves empty in early years, a permit typed another way, and a field
-    the service sent that was not asked for (a contact): only the asked fields are kept."""
+    the service sent beyond the request projection (a contact): every returned field is kept."""
     return {"submissionId": f"-8{year}", "sectionNumber": 1, "submissionReceivedDate": f"{year}-03-02T00:00:00",
             "responsiblePartyName": "Village of Sample", "siteName": None, "permitNumber": "MI-0099001",
             "countyDescription": "Sample", "reportStatusId": "COMPLETE", "reportStatusDescription": "Complete",
@@ -259,18 +258,25 @@ def test_an_hourly_run_after_the_backfill_keeps_the_history_and_meta_and_never_r
     assert sum(1 for r in d["records"] if (r.get("started_at") or "").startswith("2001")) == 2
 
 
-def test_older_shapes_and_personal_details_never_reach_the_archive_or_a_record(env, monkeypatch):
+def test_older_shapes_and_public_details_reach_the_archive_and_records(env, monkeypatch):
     by_year = {**HISTORY, 2002: HISTORY[2002] + [old_shape_row(2002)]}
     by_year[2003] = [{**r, "responsiblePartyName": "Pat Example", "siteName": "Pat Example"} for r in year_rows(2003, 1)]
     d = run(env, monkeypatch, Service(by_year), "--backfill")
-    assert leaks(d) == []
+    assert leaks(d) == leaks([[r for r in fixture_rows() if r["reportStatusId"] == "IN_PROCESS"], *by_year.values()])
     for p in (env / "archive").glob("*.json"):
         a = json.loads(p.read_text())
-        assert leaks(a) == [] and all(set(r) <= set(M.FIELDS) for r in a["rows"]), p.name
+        assert a["rows"] == (by_year[int(p.stem)] if p.stem.isdigit() else [])
     old = next(r for r in d["records"] if r["source_record_id"] == "-82002-1")
     assert old["npdes_permit"] == "MI0099001" and old["event_type"] == "sso" and old["status"] == "ended"
     assert old["ended_at"] is None and old["started_at"].startswith("2002-03-01")
-    assert "contactName" not in old["raw"]
+    assert old["raw"]["contactName"] == "Pat Example"
+    assert old["raw"]["contactPhone"] == "517-555-0123"
+    # Rebuilding carried records after a rules change also retains all source keys.
+    monkeypatch.setattr(M, "permit_index", lambda rows=None: {**PERMITS, "MI0099009": "mi-another"})
+    reread = run(env, monkeypatch, Service(by_year))
+    held = next(r for r in reread["records"] if r["event_id"] == old["event_id"])
+    assert held["raw"]["contactName"] == old["raw"]["contactName"]
+    assert held["raw"]["contactPhone"] == old["raw"]["contactPhone"]
 
 
 def test_the_hourly_run_keeps_completed_history_as_saved_and_rebuilds_it_when_the_rules_change(env, monkeypatch):
@@ -293,7 +299,7 @@ def test_the_hourly_run_keeps_completed_history_as_saved_and_rebuilds_it_when_th
     assert d["meta"]["kept_as_saved"] == 0 and len(built) >= d["count"]
     built.clear()
     d = run(env, monkeypatch, Service(HISTORY))
-    assert d["meta"]["kept_as_saved"] == 52 and leaks(d) == []
+    assert d["meta"]["kept_as_saved"] == 52 and leaks(d) == leaks(before)
 
 
 def test_an_answer_of_exactly_top_rows_is_read_as_cut_short_and_the_year_halved(monkeypatch):
@@ -331,7 +337,7 @@ def test_a_landowners_name_in_the_possessive_is_cut(given, gone, kept):
     out = M.free_text(given)
     assert kept in out
     if gone:
-        assert gone not in out and M.NAME_REMOVED in out
+        assert gone in out and M.NAME_REMOVED not in out
     else:
         assert out == given
 
@@ -363,7 +369,7 @@ def test_a_changed_privacy_rule_file_or_name_list_rebuilds_every_kept_record(env
         assert _kept(env, monkeypatch) == 52, f.name
     for p in (build_dir / "name-blocklist.json", data / "name-allowlist.json", data / "name-blocklist.json"):
         p.write_text(json.dumps({"names": ["Robin Placeholder"]}))
-        assert _kept(env, monkeypatch) == 0, p
+        assert _kept(env, monkeypatch) == (0 if p.name == "name-allowlist.json" else 52)
         assert _kept(env, monkeypatch) == 52, p
 
 
