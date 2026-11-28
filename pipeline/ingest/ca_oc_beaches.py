@@ -189,12 +189,19 @@ def chart_records(content, url, at, year):
         if not amounts:
             raise ValueError('closure chart has no recognized source volumes')
         cause = first['agency_reason']
+        phase_keys = set()
         for index, phase in enumerate(phases):
             start = day(phase['date_closed'])
             end = day(phase['date_opened']) if phase['date_opened'] else None
             # Keep the already published ID on its original area. Later phases use their
-            # source start date, so volume/area wording revisions do not change their ID.
+            # source start date. For additional phases on that date, add the source
+            # row label so neither retention nor wording revisions lose an area.
             key = 'closure-' + number + (('-phase-' + start[:10]) if index else '')
+            if key in phase_keys:
+                key += '-row-' + phase['row_number']
+            if key in phase_keys:
+                raise ValueError('closure chart repeats a phase identity')
+            phase_keys.add(key)
             records.append(event(source_id=SOURCE_ID, source_record_id=key,
                              event_type='beach_closure', status='advisory_lifted' if end else 'advisory_active',
                              outfall_name=phase['area'], waterbody_text=phase['area'],

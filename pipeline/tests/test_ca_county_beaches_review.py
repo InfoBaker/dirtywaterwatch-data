@@ -57,6 +57,42 @@ def test_oc_area_phases_keep_their_own_status_windows_and_original_id():
     assert [r['event_id'] for r in chart()] == [r['event_id'] for r in records]
 
 
+def test_oc_same_day_reductions_retain_each_area_window_and_published_ids():
+    # Synthetic third phase: two distinct later areas begin on July 4. The
+    # source dates remain day precision, including the same-day reduction.
+    content = (FIX / 'oc_closures_2026.txt').read_text()
+    content = content.replace('1b 26-035 7/4/2026 7/5/2026',
+                              '1b 26-035 7/4/2026 7/4/2026 (reduced on)')
+    third = ('1c 26-035 7/4/2026 7/5/2026 1 0.04 '
+             'From 100 feet upcoast to 100 feet downcoast of Anita Street Beach\n'
+             'PPO – Mechanical Failure\nSee above\nN\n')
+    content = content.replace('* Amount Spilled:', third + '* Amount Spilled:')
+    records = OC.chart_records(content, OC.chart_url(2026), AT, 2026)
+    assert len(records) == 3
+    assert len({r['event_id'] for r in records}) == 3
+    published = {r['raw']['phase']['row_number']: r['event_id'] for r in chart()}
+    assert all(r['event_id'] == published[r['raw']['phase']['row_number']]
+               for r in records if r['raw']['phase']['row_number'] in published)
+    retained = OC.retain(records, chart(), AT, scope={'chart'})
+    assert len(retained) == 3
+    expected = {'1a': ('2026-07-02', '2026-07-04', '2026-07-05T07:00:00Z'),
+                '1b': ('2026-07-04', '2026-07-04', '2026-07-05T07:00:00Z'),
+                '1c': ('2026-07-04', '2026-07-05', '2026-07-06T07:00:00Z')}
+    assert len({r['outfall_name'] for r in retained}) == 3
+    for r in retained:
+        start, end, interval_end = expected[r['raw']['phase']['row_number']]
+        assert r['started_at'] == start + 'T00:00:00-07:00'
+        assert r['ended_at'] == end + 'T00:00:00-07:00'
+        assert r['time_precision'] == 'day'
+        intervals = S.event_intervals(r, 'CA', dt(AT))
+        assert len(intervals) == 1 and intervals[0]['end'] == dt(interval_end)
+    # Wording/volume corrections must not create new phase identities.
+    revised = content.replace('100 feet', '110 feet').replace('500 gallons', '450 gallons')
+    reread = OC.chart_records(revised, OC.chart_url(2026), AT, 2026)
+    assert [r['event_id'] for r in reread] == [r['event_id'] for r in records]
+    assert len(OC.retain(reread, retained, AT, scope={'chart'})) == 3
+
+
 def test_sd_fallback_retains_later_lift_and_stops_colouring():
     data = json.loads((FIX / 'sd_notifications.json').read_text())
     row = next(r for r in data['rows'] if r['Site']['StationID'] == 'FM-010')
