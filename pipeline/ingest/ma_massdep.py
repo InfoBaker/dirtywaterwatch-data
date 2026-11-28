@@ -227,7 +227,8 @@ def load_crosswalk() -> dict:
         for row in csv.DictReader(fh):
             v = (row["water_slug"].strip() or None, row["confidence"].strip(), row["note"].strip())
             cw[row["portal_waterBody"].strip().upper()] = v
-            cw.setdefault("N:" + norm_name(row["portal_waterBody"]), v)
+            if "@" not in row["portal_waterBody"]:      # NAME@TOWN rows: the name in that town only (resolve_water)
+                cw.setdefault("N:" + norm_name(row["portal_waterBody"]), v)
     return cw
 
 
@@ -356,7 +357,8 @@ def resolve_water(texts: list[tuple[str, str]], town: str | None, echo_rec: dict
         if blank(text):
             continue
         key = str(text).strip().upper()
-        hit = cw.get(key) or cw.get("N:" + norm_name(text))
+        # a NAME@TOWN row decides first: one name is several waters across the state (Springfield's Mill River)
+        hit = (cw.get(f"{key}@{town.strip().upper()}") if town else None) or cw.get(key) or cw.get("N:" + norm_name(text))
         if hit:
             slug, conf, why = hit
             if slug:
