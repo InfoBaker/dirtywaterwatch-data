@@ -13086,6 +13086,69 @@
   "area": "ma"
  },
  {
+  "id": "ma-swsc-cso-data-archive",
+  "name": "Springfield Water and Sewer Commission CSO Data Archive (monthly CSO reports, 2019 to 2023)",
+  "jurisdiction": "MA",
+  "operator": "Springfield Water and Sewer Commission",
+  "operator_type": "utility",
+  "role": "events",
+  "event_types": [
+   "cso"
+  ],
+  "waters_covered": "Connecticut, Mill and Chicopee Rivers (Springfield)",
+  "water_slugs": [
+   "connecticut-river-ma",
+   "mill-river-springfield-ma",
+   "chicopee-river-ma"
+  ],
+  "url": "https://springfieldalerts.com/Suez/index.php/cso-data-archive/",
+  "access": [
+   "pdf"
+  ],
+  "access_detail": "One PDF per month, January 2019 to April 2023, linked from the page (the October 2021 link is broken), and annual sheets 2019 to 2022. January 2019 to December 2022 read from Internet Archive copies checked by SHA-1 digest (three compared byte for byte with the commission's copies); January to April 2023, which the Internet Archive does not hold, read from the commission's page. Transcribed once into data/reference/ma-springfield-cso-archive-2019-2023.json; read by pipeline/ingest/ma_springfield_archive.py (registry ma-springfield-archive).",
+  "machine_readable": false,
+  "sample_record": {
+   "NPDES Site": "CSO 010",
+   "Watershed Discharge": "Connecticut River",
+   "# of Overflow Events (24 Hr. Response)*": 3,
+   "Total Overflow Volume (Gal)": "5,677,000",
+   "Overflow Duration (Hours)": 15.3
+  },
+  "fields": [
+   "NPDES Site",
+   "Watershed Discharge",
+   "# of Overflow Events (24 Hr. Response)",
+   "Total Overflow Volume (Gal)",
+   "Overflow Duration (Hours or H.M)",
+   "Total row",
+   "rain gauges"
+  ],
+  "fills_event_fields": [
+   "outfall_id",
+   "volume_gal (monthly total)",
+   "volume_text (events, hours)",
+   "waterbody_text"
+  ],
+  "cannot_fill": [
+   "started_at and ended_at of an overflow (month only)",
+   "reported_at",
+   "published_at",
+   "October 2021 per outfall (no report online)"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": true,
+  "cadence": "Static: nothing posted after April 2023",
+  "history": "Monthly reports 2019-01 to 2023-04 (October 2021 missing); annual sheets 2019 to 2022",
+  "license": null,
+  "legal_basis": "314 CMR 16.05(1)",
+  "status": "used",
+  "status_reason": "Feed ma-springfield-archive: one month-precision cso record per outfall-month with events, January 2019 to April 2023; October 2021 one record for all outfalls combined, the annual sheet's printed line",
+  "verified": "fetched",
+  "checked": "2026-11-28",
+  "notes": "An event is a storm event (preceded and followed by 24 hours of dry weather). The annual sheets carry revisions the monthly reports do not (research/ma/springfield-archive-comparison.md).",
+  "area": "ma"
+ },
+ {
   "id": "ma-swsc-springfieldalerts",
   "name": "Springfield Alerts (SWSC CSO/SSO/blending advisory site)",
   "jurisdiction": "MA",

@@ -1,0 +1,33 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
+id: "ma-springfield-archive"
+name: "Springfield Water and Sewer Commission monthly CSO reports, 2019 to 2023"
+url: "https://springfieldalerts.com/Suez/index.php/cso-data-archive/"
+homepage: "https://springfieldalerts.com/Suez/index.php/cso-data-archive/"
+kind: "pdf"
+level: "utility"
+# Feed row: written by pipeline/ingest/ma_springfield_archive.py (data/build/events/ma-springfield-archive.json).
+# Built 2026-11-28. The commission's CSO Data Archive page links one PDF per month, January 2019 to April 2023: per
+#   outfall the number of overflow events (storm events: preceded and followed by 24 hours of dry weather), the total
+#   gallons and the hours, and a Total row. Static since May 2023. Transcribed once into
+#   data/reference/ma-springfield-cso-archive-2019-2023.json (`--extract` from the PDFs: Internet Archive copies checked
+#   by digest, January to April 2023 from the commission's page); the hourly run reads only that file.
+# Records: one month-precision cso record per outfall-month with at least one event (735), the monthly mark only.
+#   October 2021 has no report online: one record with no outfall, the 31,039,264 gallons the 2021 annual sheet prints
+#   on its October line for all outfalls combined (the commission's figure, not computed; no events or hours, which
+#   the sheet does not print for a month), placed as a report of the permit that names no outfall. No per-outfall
+#   October figures: the sheet revises May, July and August, and the figures do not tell which outfalls those
+#   revisions belong to (research/ma/springfield-archive-comparison.md). 736 records in all.
+# Beside event records: from 2022-03-19 the CSO map log (ma-springfield-aquasight) and from July 2022 MassDEP's portal
+#   hold the same overflows one by one; a monthly total stands beside them, never counted as an event.
+cadence: "Static archive: January 2019 to April 2023; nothing posted after April 2023."
+license: "none stated"
+attribution: "Springfield Water and Sewer Commission"
+enabled: true
+role: "events"
+event_types: ["cso"]
+states: ["MA"]
+access: ["pdf"]
+access_detail: "One PDF per month on the commission's CSO Data Archive page (the October 2021 link is broken) and annual sheets 2019 to 2022. Read into a committed transcript; no request at run time."
+machine_readable: false
+legal_basis: "314 CMR 16.05(1) (the CSO permittee's website: monthly data)"
+checked: "2026-11-28"

@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1759 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1760 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -12,7 +12,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 |---|---:|---:|---:|---:|---:|---:|
 | science | 137 | 29 | 7 | 20 | 11 | 204 |
 | federal | 31 | 22 | 25 | 21 | 1 | 100 |
-| ma | 21 | 34 | 20 | 6 | 3 | 84 |
+| ma | 22 | 34 | 20 | 6 | 3 | 85 |
 | ct | 19 | 17 | 14 | 16 | 2 | 68 |
 | ri | 27 | 12 | 11 | 14 | 3 | 67 |
 | nh-vt | 44 | 24 | 28 | 13 | 11 | 120 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **655** | **240** | **549** | **236** | **79** | **1759** |
+| **all** | **656** | **240** | **549** | **236** | **79** | **1760** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -381,7 +381,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `st-nj-njpdes-cso-layer` | NJDEP Utilities MapServer layer 0 "NJPDES Combined Sewer Overflow (CSO)" | rejected | fetched | outfalls | CSO outfalls only (covered by the CSO registry); no treatment-plant outfall layer. |
 | `fed-r1-cso-web-pages` | EPA Region 1 CSO web pages (guessed URLs) | unreachable | fetched | permits | No live Region 1 CSO page or community list found on epa.gov; the ArcGIS layers above are the only Region 1 list. |
 
-## ma: Massachusetts (84)
+## ma: Massachusetts (85)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
@@ -402,6 +402,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ma-massdep-sso-cso-guide` | MassDEP guide page 'Sanitary Sewer Systems & Combined Sewer Overflows' | used | fetched | permits | Index of the outfall map, annual reports, CSO variances (Charles, Alewife/Upper Mystic) and contacts; says 24 permittees reduced to 19. |
 | `ma-mrwc-cso-page` | Merrimack River Watershed Council CSO page ('How to stay informed about CSOs') | used | fetched | prior_art | Gives the Merrimack permittees' channels and how each reports (Lowell: start, end and a volume follow-up; GLSD: start and end, volume days later; Haverhill/Manchester: one email linking to a map). |
 | `ma-swsc-aquasight-cso-map` | SWSC CSO Notifications map (Aquasight / ADS) | used | fetched | events | Feed ma-springfield-aquasight: one cso record per overflow-log row, linked to the MassDEP portal record of the same overflow |
+| `ma-swsc-cso-data-archive` | Springfield Water and Sewer Commission CSO Data Archive (monthly CSO reports, 2019 to 2023) | used | fetched | events | Feed ma-springfield-archive: one month-precision cso record per outfall-month with events, January 2019 to April 2023; October 2021 one record for all outfalls combined, the annual sheet's printed line |
 | `news-ctmirror-commonwealthbeacon` | CT Mirror / CommonWealth Beacon | used | fetched | news | Records Holyoke's treated-vs-untreated claim |
 | `news-western-mass-news` | Western Mass News (WGGB/WSHM) | used | fetched | news | Most frequent local coverage, dated bylines; figures sometimes differ from verified data |
 | `news-wfsb` | WFSB (Hartford) | used | fetched | news | Holyoke 11/27/2023 |

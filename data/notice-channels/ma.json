@@ -3105,6 +3105,32 @@
    "barrier": null
   },
   {
+   "id": "ma-swsc-cso-data-archive",
+   "state": "MA",
+   "operator_id": "ma-springfield-wsc",
+   "agency": null,
+   "name": "Springfield Water and Sewer Commission",
+   "permit": "MA0101613",
+   "channel_kind": "operator_page",
+   "urls": [
+    "https://springfieldalerts.com/Suez/index.php/cso-data-archive/"
+   ],
+   "method": "pdf",
+   "legal_basis": "314 CMR 16.05(1) (the CSO permittee's website: monthly data within 15 days)",
+   "basis_kind": "law",
+   "monitored": false,
+   "unmonitored_reason": "feed_ingested",
+   "feed_source_id": "ma-springfield-archive",
+   "publishes": "documents",
+   "note": "Springfield's CSO Data Archive page: one PDF per month, January 2019 to April 2023 (per outfall: events, gallons, hours), and annual sheets 2019 to 2022; nothing posted after April 2023 (the CSO map's log carries the overflows since 2022-03-19). The October 2021 link is broken. Read once into a committed transcript (data/reference/ma-springfield-cso-archive-2019-2023.json) from Internet Archive copies checked by digest, January to April 2023 from the page itself; feed ma-springfield-archive. (research/ma/springfield-archive-comparison.md)",
+   "checked": "2026-11-28",
+   "sources": [
+    "ma-swsc-springfieldalerts",
+    "ma-springfield-archive"
+   ],
+   "barrier": null
+  },
+  {
    "id": "ma-taunton-rwa",
    "state": "MA",
    "operator_id": null,
