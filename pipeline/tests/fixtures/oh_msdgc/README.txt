@@ -11,3 +11,13 @@ Tests vary its state/timestamp explicitly to simulate subsequent transitions;
 those transitions are synthetic, not claims of a witnessed stop.
 No reporter contacts or customer identifiers are in these queried tables.
 Public facility_id is the monitored sewer asset identifier, not a customer id.
+
+snapshot.json: all 205 decoded CSOs + CSO_Info rows from the saved live-events.state.json
+read of 2026-11-28. Includes both source facility IDs for CSO-403 (11511001,
+11511034), each named CSO-403 in facility_name and facility_name_edmr, in the
+Muddy Creek sewershed. Tests change statuses/timestamps and remove a row to
+simulate transitions and inventory retirement; these changes are not live events.
+
+published-state.json: the four saved events and their open/site entries from
+live-events.state.json, without the unrelated quiet-site entries or snapshot.
+Tests verify migration keeps those published source_record_id/event_id values.

@@ -2,13 +2,14 @@
 
 The publish-to-web resource key identifies the public report (no sign-in). Two
 complete 5000-row queries join by facility_id. Malformed/limited answers fail
-closed. Raw responses are retained without default redaction.
+closed; complete matching inventories may grow or shrink without losing history.
+Raw responses are retained without default redaction.
 
 Only CSO assets seen Currently Active open suspected-overflow records. Starts
 and stops are observation bounds, not exact discharge times (precision poll).
-A newer Recently Active observation says water levels returned to normal and
-closes an open event. Unavailable/flooded/missing/stale sites never end it. The
-72-hour timer is retained, never subtracted to invent an end. Recent-only first
+Newer Recently Active observations from every known facility ID of an outfall
+say water levels returned to normal and close its open event. Unavailable, flooded,
+missing and stale sites never end it. The 72-hour timer is retained, never subtracted to invent an end. Recent-only first
 reads and RTC/HRT assets remain snapshot evidence, not newly dated CSO events.
 
 Numeric source dates carry local wall time, interpreted in America/New_York;
@@ -155,7 +156,7 @@ def rows_of(bundle: dict, previous: dict) -> list[dict]:
     indexed = {str(r['facility_id']): r for r in infos}
     ids = [str(r['facility_id']) for r in states]
     if (len(ids) != len(set(ids)) or len(indexed) != len(infos) or set(ids) != set(indexed)
-            or len(ids) < 200 or len(ids) < previous.get('last_poll', {}).get('sites', 0)):
+            or not ids):
         raise ValueError('missing, duplicated or truncated site inventory')
     rows = []
     for r in states:
@@ -169,37 +170,89 @@ def rows_of(bundle: dict, previous: dict) -> list[dict]:
     return rows
 
 
+def physical_site(row: dict) -> tuple:
+    """The source's reporting outfall and sewershed, never a proximity guess.
+
+    CSO_Info assigns both 11511001 and 11511034 to CSO-403 / Muddy Creek
+    (saved 2026-11-28). The same relationship appears for CSOs 402–406.
+    Unknown reporting names or sewersheds keep their facility identity.
+    """
+    info = row['info']
+    name = info.get('facility_name_edmr') or ''
+    shed = info.get('sewershed')
+    if re.fullmatch(r'CSO-\d{3}', name) and shed in PLANTS:
+        return name, shed
+    return ('facility', str(row['facility_id']))
+
+
 def poll(state: dict, rows: list[dict], now: str) -> dict:
     evs, opened, sites = (state.setdefault(k, {}) for k in ('events', 'open', 'sites'))
     counts = {'opened': 0, 'ended': 0, 'continued': 0}
-    for r in rows:
-        if r['info']['asset_type'] != 'CSO':
+    incoming = {str(r['facility_id']): r for r in rows if r['info']['asset_type'] == 'CSO'}
+    known = {unit: s['row'] for unit, s in sites.items()}
+    known.update(incoming)
+    groups = {}
+    for unit, row in known.items():
+        groups.setdefault(physical_site(row), []).append(unit)
+    for units in groups.values():
+        fresh = {u: incoming[u] for u in units if u in incoming
+                 and (u not in sites or incoming[u]['timestamp'] > sites[u]['row']['timestamp'])}
+        if not fresh:
             continue
-        unit = str(r['facility_id'])
-        at = source_time(r['timestamp'])
-        prev = sites.get(unit)
-        if prev and r['timestamp'] <= prev['row']['timestamp']:
-            continue
-        cur = opened.get(unit)
-        status = r['Current State']
-        if status == 'Currently Active':
-            if cur is None:
-                cur = f'{unit}:{at}'
-                evs[cur] = {'start': at, 'first_seen_at': now, 'start_row': copy.deepcopy(r),
-                            'start_bounds': [prev['at'] if prev and prev['row']['Current State'] == 'Recently Active'
-                                             else None, at]}
-                opened[unit] = cur
-                counts['opened'] += 1
-            else:
-                counts['continued'] += 1
-            evs[cur]['last_active_at'] = at
-        elif status == 'Recently Active' and cur:
-            evs[cur].update(end=at, end_bounds=[evs[cur]['last_active_at'], at], stop_row=copy.deepcopy(r))
-            del opened[unit]
-            counts['ended'] += 1
+        latest = {u: fresh[u] if u in fresh else sites[u]['row'] for u in units}
+        keys = {opened[u] for u in units if u in opened}
+        cur = min(keys, key=lambda k: (evs[k]['start'], k)) if keys else None
+        # Upgrade old per-facility archives without deleting or renaming published records.
+        for key in keys - {cur}:
+            evs[key]['duplicate_of'] = cur
+            evs[cur]['last_active_at'] = max(evs[cur]['last_active_at'], evs[key]['last_active_at'])
+        active = [r for r in fresh.values() if r['Current State'] == 'Currently Active']
+        if active and cur is None:
+            first = min(active, key=lambda r: (r['timestamp'], str(r['facility_id'])))
+            at = source_time(first['timestamp'])
+            cur = f'{first["facility_id"]}:{at}'
+            prior = [sites.get(u) for u in units]
+            lower = (min(s['at'] for s in prior) if all(
+                s and s['row']['Current State'] == 'Recently Active' for s in prior) else None)
+            evs[cur] = {'start': at, 'first_seen_at': now, 'start_row': copy.deepcopy(first),
+                        'start_bounds': [lower, at], 'last_active_at': at}
+            counts['opened'] += 1
+        elif active:
+            counts['continued'] += 1
         if cur:
-            evs[cur].update(row=copy.deepcopy(r), source_updated_at=at, last_seen_at=now)
-        sites[unit] = {'at': at, 'seen_at': now, 'row': copy.deepcopy(r)}
+            ev = evs[cur]
+            for u in units:
+                opened[u] = cur
+            if active:
+                ev['last_active_at'] = max(ev['last_active_at'], *(source_time(r['timestamp']) for r in active))
+            evidence = ev.setdefault('facility_observations', [])
+            seen = {(r['facility_id'], r['timestamp']) for r in evidence}
+            # Also retain the start rows of any old aliases merged into this event.
+            for r in [evs[k]['start_row'] for k in keys] + list(latest.values()):
+                if (r['facility_id'], r['timestamp']) not in seen:
+                    evidence.append(copy.deepcopy(r))
+                    seen.add((r['facility_id'], r['timestamp']))
+            # Every known sensor must explicitly show normal levels after the last active
+            # observation and still be present. Absence/unavailability never supplies a stop.
+            normal = all(u in incoming and latest[u]['Current State'] == 'Recently Active'
+                         and source_time(latest[u]['timestamp']) > ev['last_active_at'] for u in units)
+            row = max(latest.values(), key=lambda r: (r['timestamp'], str(r['facility_id'])))
+            at = source_time(row['timestamp'])
+            if normal:
+                ev.update(end=at, end_bounds=[ev['last_active_at'], at], stop_row=copy.deepcopy(row),
+                          stop_rows=copy.deepcopy(list(latest.values())))
+                for u in units:
+                    del opened[u]
+                counts['ended'] += 1
+            ev.update(row=copy.deepcopy(row), source_updated_at=at, last_seen_at=now)
+            # Existing alias pages remain reachable and get the same observed bounds.
+            for key in [k for k, v in evs.items() if v.get('duplicate_of') == cur]:
+                for field in ('end', 'end_bounds', 'stop_row', 'stop_rows', 'row', 'source_updated_at',
+                              'last_seen_at', 'last_active_at', 'facility_observations'):
+                    if field in ev:
+                        evs[key][field] = copy.deepcopy(ev[field])
+        for unit, row in fresh.items():
+            sites[unit] = {'at': source_time(row['timestamp']), 'seen_at': now, 'row': copy.deepcopy(row)}
     return counts
 
 
@@ -236,6 +289,9 @@ def to_record(key: str, ev: dict, registry: list[dict]) -> dict:
            'time_zone': TZ_NAME, 'time_note': 'We interpret the source’s numeric wall-clock dates in Eastern time.',
            'start_basis': 'We first observed an active state at this source update; the overflow may have begun earlier.',
            'start_bounds': ev['start_bounds'], 'start_precision': 'poll',
+           'facility_observations': ev.get('facility_observations', [ev['start_row'], row]),
+           'identity_basis': ('We group facility IDs with the same reporting CSO name and sewershed '
+                              'in MSDGC’s CSO_Info table.'), 'identity_source': URL,
            '_first_seen_at': ev['first_seen_at'], '_last_seen_in_source': ev['last_seen_at'],
            'treatment_plant_permit': PLANTS.get(info.get('sewershed')), 'treatment_plant_permit_source': PERMIT_URL,
            'timer_note': 'The source’s Overflow Timer is retained as given; we do not use it as an event start or end.',
@@ -244,10 +300,12 @@ def to_record(key: str, ev: dict, registry: list[dict]) -> dict:
            'water_basis': 'Receiving water from the matched outfall registry.' if water else None}
     if ev.get('end'):
         raw.update(ended_at_precision='poll', end_bounds=ev['end_bounds'], stop_row=ev['stop_row'],
+                   stop_rows=ev.get('stop_rows', [ev['stop_row']]),
                    end_basis='The source showed water levels had returned to normal by this update; the exact stop is not given.')
     else:
         raw['end_note'] = 'No stop has been observed; the event remains ongoing.'
     return event(source_id=SOURCE_ID, source_record_id=key, event_type='cso',
+                 duplicate_of=f'{SOURCE_ID}:{ev["duplicate_of"]}' if ev.get('duplicate_of') else None,
                  status='ended' if ev.get('end') else 'ongoing', discharger_name=AUTHORITY,
                  npdes_permit=outfall['npdes_permit'] if outfall else None,
                  outfall_id=outfall['outfall'] if outfall else None,
@@ -258,6 +316,9 @@ def to_record(key: str, ev: dict, registry: list[dict]) -> dict:
                  started_at=ev['start'], ended_at=ev.get('end'), time_precision='poll',
                  source_updated_at=ev['source_updated_at'], fetched_at=ev['last_seen_at'],
                  authority=AUTHORITY, material='combined sewage and stormwater', advice_text=ADVICE,
+                 advice_window_hours=72,
+                 advice_window_basis=(f'{AUTHORITY}: “{ADVICE}” We count the 72 hours from the observed '
+                                      'return to normal water levels; the exact discharge stop is not given.'),
                  source_url=URL, raw=raw)
 
 
@@ -268,6 +329,8 @@ def link_records(records: list[dict], others: list[dict]) -> None:
     A first active read without a lower bound cannot identify another source's start.
     """
     for e in records:
+        if e.get('duplicate_of'):
+            continue
         lower, upper = e['raw']['start_bounds']
         matches, monthly = [], []
         for other in others:

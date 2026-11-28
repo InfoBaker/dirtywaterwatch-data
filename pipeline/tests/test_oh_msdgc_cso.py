@@ -100,7 +100,7 @@ def test_zone_precision_and_absent_volume_cause():
     assert 'cause' not in e['raw']
     assert e['raw']['source_status'] == 'Currently Active'
     assert e['raw']['treatment_plant_permit'] == 'OH0025470'
-    assert e['advice_window_hours'] is None  # rain advice is not an end-of-discharge window
+    assert e['advice_window_hours'] == 72  # MSDGC's window after observed normal levels
 
 
 def test_registry_exact_number_not_plant_outlet():
