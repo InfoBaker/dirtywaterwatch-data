@@ -399,7 +399,8 @@ def run(reference: Path = REFERENCE, out: Path | None = None, ctx: dict | None =
             "latest_month_by_outfall": counts["latest_month_by_outfall"], "overlap": overlap(months),
             "crosswalk": A.crosswalk_check(ctx), "covers_permits": [PERMIT], "statewide": False}
     path = write_events(SOURCE_ID, recs, meta=meta, path=out)
-    print(f"{SOURCE_ID}: {len(recs)} outfall-months with events from {len(months)} months "
+    print(f"{SOURCE_ID}: {len(recs)} records (outfall-months with events, and months from the annual sheet) from "
+          f"{len(months)} months "
           f"({counts['zero_rows']} zero rows not records) -> {path}")
     return 0
 
