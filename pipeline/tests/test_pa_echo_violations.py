@@ -246,6 +246,46 @@ def test_replay_corrects_previously_published_industrial_bypasses(tmp_path, monk
         assert r['raw']['_first_seen_at'] == old[r['event_id']]['raw']['_first_seen_at']
 
 
+def test_partial_sic_refresh_retains_supported_historical_bypass(tmp_path, monkeypatch):
+    source = [r for r in rows() if r['NPDES_ID'] == 'PA0025984']
+    # Synthetic second SIC on the real permit reproduces an incomplete later table.
+    sics = [r for r in rows('sics.csv') if r['NPDES_ID'] == 'PA0025984']
+    other_sic = {'NPDES_ID': 'PA0025984', 'SIC_CODE': '4941',
+                 'SIC_DESC': 'Water Supply', 'PRIMARY_INDICATOR_FLAG': 'N'}
+    sics.append(other_sic)
+    selected, stats = M.select_rows(source, sics)
+    snapshot = {'rows': selected, 'sic_rows': sics, 'stats': stats,
+                'read_at': '2026-11-28T15:00:00Z'}
+    monkeypatch.setattr(M, 'EVENTS_DIR', tmp_path)
+    monkeypatch.setattr(common, 'EVENTS_DIR', tmp_path)
+    monkeypatch.setattr(M, 'registry', lambda: {})
+    monkeypatch.setattr(M, 'fetch_snapshot', lambda **kw: snapshot)
+    assert M.main([]) == 0
+    path = tmp_path / (M.SOURCE_ID + '.json')
+    original = {r['event_id']: r for r in json.loads(path.read_text())['records']}
+    expected_ids = {f'{M.SOURCE_ID}:3656108544', f'{M.SOURCE_ID}:3687608730'}
+    assert set(original) == expected_ids
+
+    snapshot = {**snapshot, 'rows': [r for r in selected if r['VIOLATION_CODE'] == 'A0020'],
+                'sic_rows': [other_sic], 'read_at': '2026-11-29T15:00:00Z'}
+    # Repeated refreshes must keep the archived positive evidence as well as the ID.
+    for _ in range(2):
+        assert M.main([]) == 0
+        refreshed = json.loads(path.read_text())
+        actual = {r['event_id']: r for r in refreshed['records']}
+        assert set(actual) == expected_ids
+        assert refreshed['meta']['selected_rows'] == 1
+        assert refreshed['meta']['kept_from_previous'] == 1
+        for eid, r in actual.items():
+            for key in ('source_record_id', 'started_at', 'ended_at', 'reported_at', 'published_at'):
+                assert r[key] == original[eid][key]
+            assert r['raw']['_first_seen_at'] == original[eid]['raw']['_first_seen_at']
+        bypass = actual[f'{M.SOURCE_ID}:3687608730']
+        assert bypass['raw']['sic_rows'] == original[bypass['event_id']]['raw']['sic_rows']
+        assert bypass['raw']['source_end_date'] == original[bypass['event_id']]['raw']['source_end_date']
+        assert bypass['raw']['_missing_from_source_since']
+
+
 def singer_variants(second_comment='Leak at manhole 575 into Example Creek'):
     # Only the first row is real; the second is a synthetic same-permit/day report.
     singer = next(r for r in rows() if r['NPDES_VIOLATION_ID'] == '3633971227')

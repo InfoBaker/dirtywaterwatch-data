@@ -314,7 +314,9 @@ def main(argv=None):
             if eid in ids:
                 continue
             raw = r.get('raw') or {}
-            evidence = current_sics.get(r['npdes_permit'], raw.get('sic_rows', []))
+            # A later SIC table may be partial; omitted 4952 rows do not revoke
+            # positive sewerage evidence archived with a historical violation.
+            evidence = raw.get('sic_rows', []) + current_sics.get(r['npdes_permit'], [])
             sewerage = {s['NPDES_ID'] for s in evidence if s['SIC_CODE'] == '4952'}
             # Missing history stays only if it still meets the source's sewage scope.
             if selected_row(raw.get('row') or {}, sewerage):
