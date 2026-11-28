@@ -100,10 +100,12 @@ SECOND_BATCH = {("ME0102075", "005"): "back-cove-me", ("ME0102075", "007"): "bac
                 ("NY0027057", "023"): "eighteenmile-creek-lockport-ny",
                 ("NY0027057", "034"): "eighteenmile-creek-lockport-ny", ("VT0101010", "005"): "white-river-vt"}
 # rows the review left alone: 'Portland Harbor, Back Cove, Ca' names three waters (do not apply); South Portland's
-# Fore River rows (two Fore River records; cannot tell); Fall River's 010 (cannot tell)
+# Fore River rows (two Fore River records; cannot tell). Fall River's 010 (cannot tell from the repository's data) was
+# settled later by MassDEP's own outfall layer (waters follow-up 2026-11-28; the test below)
 LEFT = {("ME0101435", "013"): "casco-bay-me", ("ME0101435", "017"): "casco-bay-me",
         ("ME0101435", "018"): "casco-bay-me", ("ME0101435", "024"): "casco-bay-me",
-        ("MA0100382", "010"): "narragansett-bay-ma"}
+        ("ME0100633", "005"): "casco-bay-me", ("ME0100633", "006"): "casco-bay-me",
+        ("ME0100633", "018"): "casco-bay-me", ("ME0100633", "024"): "casco-bay-me"}
 
 
 def test_the_second_batch_rows_carry_their_stated_water_in_the_registry_the_loader_reads():
@@ -117,3 +119,13 @@ def test_the_second_batch_rows_carry_their_stated_water_in_the_registry_the_load
     assert loaded[("ME0101435", "006")]["match"] == "permit_stated" and stated_off_water(loaded[("ME0101435", "006")])
     for k, slug in LEFT.items():
         assert loaded[k]["water_slug"] == slug, k
+
+
+def test_fall_rivers_city_pier_outfall_rests_on_the_taunton_river_the_permit_and_massdep_name():
+    """MassDEP's CSO outfall layer gives FAL010 (City Pier) the receiving water 'TAUNTON RIVER' at EPA's own point; the
+    river's centre line lies 560 m away, so the tie rests on the statement and no stretch is modeled from the point."""
+    from common import load_outfall_registry
+    from ingest.outfall_water_corrections import stated_off_water
+    o = next(x for x in load_outfall_registry(provisional=False) if (x["npdes_permit"], x["outfall"]) == ("MA0100382", "010"))
+    assert o["water_slug"] == "taunton-river-ma" and o["match"] == "permit_stated" and stated_off_water(o)
+    assert o["replaced_match"]["water_slug"] == "narragansett-bay-ma"

@@ -3021,14 +3021,28 @@
    "echo_url": "https://echo.epa.gov/detailed-facility-report?fid=110000732592",
    "lat": 41.7118901,
    "lon": -71.1589881,
-   "water_slug": "narragansett-bay-ma",
-   "water_name": "Narragansett Bay",
-   "water_kind": "bay",
-   "distance_m": 285,
+   "water_slug": "taunton-river-ma",
+   "water_name": "Taunton River",
+   "water_kind": "river",
+   "distance_m": 560,
    "alternatives": [],
-   "match": "geometry",
-   "water_match": "EPA's point lies 285 m from Narragansett Bay (narragansett-bay-ma), the nearest openboatlaunch water within 400 m; the receiving water ('Taunton River') does not share its name; scripts/match_outfalls.py",
-   "water_matched_by": "scripts/match_outfalls.py (2026-11-01)"
+   "match": "permit_stated",
+   "water_match": "hand correction: the permit's receiving water for outfall 010 (City Pier, Fall River) is 'Taunton River' in EPA's CSO inventory and in MassDEP's own CSO outfall layer (FAL010, RECVING_WA 'TAUNTON RIVER', at 41.711899, -71.158989, the same point as EPA's), and MassDEP's CSO portal reports for the outfall are placed on the Taunton River; the Taunton River's record (taunton-river-ma, a centre line) lies 560 m from that point, beyond the tie distance, and Mount Hope Bay's outline 7 m, so the tie rests on the permit's statement and no stretch is modeled from the point; Narragansett Bay (narragansett-bay-ma), the nearest-water tie it replaces, 359 m",
+   "water_matched_by": "data/outfall-water-corrections.json (hand correction, 2026-11-28)",
+   "replaced_match": {
+    "water_slug": "narragansett-bay-ma",
+    "water_name": "Narragansett Bay",
+    "match": "geometry",
+    "by": "scripts/match_outfalls.py (2026-11-01)",
+    "why": "the permit names another water, which has its own record at the point",
+    "water_kind": "bay",
+    "distance_m": 285,
+    "water_match": "EPA's point lies 285 m from Narragansett Bay (narragansett-bay-ma), the nearest openboatlaunch water within 400 m; the receiving water ('Taunton River') does not share its name; scripts/match_outfalls.py"
+   },
+   "distance_from": [
+    41.7118901,
+    -71.1589881
+   ]
   },
   {
    "npdes_permit": "MA0100382",

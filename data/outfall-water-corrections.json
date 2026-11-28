@@ -2696,6 +2696,28 @@
    "date": "2026-11-28",
    "source": "research/registry/waters-followup-2026-11-28.md",
    "url": "https://echo.epa.gov/detailed-facility-report?fid=110009661302"
+  },
+  {
+   "file": "outfalls-new-england.json",
+   "npdes_permit": "MA0100382",
+   "outfall": "010",
+   "state": "MA",
+   "stated": "Taunton River",
+   "was": "narragansett-bay-ma",
+   "water_slug": "taunton-river-ma",
+   "water_name": "Taunton River",
+   "water_kind": "river",
+   "distance_m": 560,
+   "distance_from": [
+    41.7118901,
+    -71.1589881
+   ],
+   "rule": "permit_states",
+   "permit_text": "Taunton River",
+   "basis": "the permit's receiving water for outfall 010 (City Pier, Fall River) is 'Taunton River' in EPA's CSO inventory and in MassDEP's own CSO outfall layer (FAL010, RECVING_WA 'TAUNTON RIVER', at 41.711899, -71.158989, the same point as EPA's), and MassDEP's CSO portal reports for the outfall are placed on the Taunton River; the Taunton River's record (taunton-river-ma, a centre line) lies 560 m from that point, beyond the tie distance, and Mount Hope Bay's outline 7 m, so the tie rests on the permit's statement and no stretch is modeled from the point; Narragansett Bay (narragansett-bay-ma), the nearest-water tie it replaces, 359 m",
+   "date": "2026-11-28",
+   "source": "research/registry/waters-followup-2026-11-28.md",
+   "url": "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/MassDEP_CSOs_2/FeatureServer/0/query?where=NPDES_ID%3D%27MA0100382%27&outFields=*&f=json"
   }
  ]
 }
