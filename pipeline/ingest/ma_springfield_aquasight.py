@@ -452,7 +452,12 @@ def link(records: list[dict], portal: list[dict] | None) -> dict:
             continue
         for f in by_outfall.get(r["outfall_id"].upper(), []):
             gap = abs((f["start"] - s).total_seconds())
-            if gap <= LINK_MINUTES * 60 and f["start"].astimezone(UTC) <= e.astimezone(UTC):
+            # the two must overlap in time: the portal's start before the row's end, and a portal record with an
+            # end of its own not over before the row began (Astra 2026-11-28 pass 2: an overflow that begins as
+            # the row ends, or ended before it began, is another overflow)
+            fend = O.parse_iso(f["target"].get("ended_at"))
+            if gap <= LINK_MINUTES * 60 and f["start"].astimezone(UTC) < e.astimezone(UTC) \
+                    and not (fend is not None and fend.astimezone(UTC) < s.astimezone(UTC)):
                 pairs.append((gap, r["event_id"], f["root"], r, f))
     pairs.sort(key=lambda x: (x[0], x[1], x[2]))
     used_r, used_f, n = set(), set(), 0
