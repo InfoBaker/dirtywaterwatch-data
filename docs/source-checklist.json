@@ -41179,6 +41179,78 @@
   "area": "pa"
  },
  {
+  "id": "pa-echo-violations",
+  "name": "EPA ECHO Pennsylvania single-event sewer violations",
+  "jurisdiction": "PA",
+  "operator": "U.S. EPA, with Pennsylvania DEP state-entered violations",
+  "operator_type": "federal",
+  "role": "events",
+  "event_types": [
+   "sso",
+   "bypass",
+   "unknown"
+  ],
+  "waters_covered": "Pennsylvania permits; no dedicated receiving-water or outfall columns. One historical comment names Singer Run and a manhole.",
+  "water_slugs": [],
+  "url": "https://echo.epa.gov/files/echodownloads/npdes_downloads.zip",
+  "access": [
+   "csv"
+  ],
+  "access_detail": "Public ZIP, no key. Comments are preserved, including the named water Singer Run in one historical row. HTTP ranges read all rows of NPDES_SE_VIOLATIONS.csv and NPDES_SICS.csv; PA prefix, codes F024S/A0020 (SSO); F036S/A0011 (generic bypass) and D0011 (discharge without a valid permit) require sewerage SIC 4952. No permit census limit. Validator checks avoid rereading unchanged archives.",
+  "machine_readable": true,
+  "fields": [
+   "NPDES_ID",
+   "NPDES_VIOLATION_ID",
+   "VIOLATION_TYPE_CODE",
+   "VIOLATION_CODE",
+   "VIOLATION_DESC",
+   "SINGLE_EVENT_VIOLATION_DATE",
+   "SINGLE_EVENT_END_DATE",
+   "SINGLE_EVENT_VIOLATION_COMMENT",
+   "SINGLE_EVENT_AGENCY_TYPE_CODE",
+   "RNC_DETECTION_CODE",
+   "RNC_DETECTION_DESC",
+   "RNC_DETECTION_DATE",
+   "RNC_RESOLUTION_CODE",
+   "RNC_RESOLUTION_DESC",
+   "RNC_RESOLUTION_DATE"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "npdes_permit",
+   "event_type from explicit code; D0011 remains unknown",
+   "started_at (violation start, day precision)",
+   "source_end_date (regulatory violation closure, not discharge end)",
+   "source_updated_at (archive Last-Modified only)",
+   "authority",
+   "source_url",
+   "raw"
+  ],
+  "cannot_fill": [
+   "clock times",
+   "confirmed discharge end",
+   "per-event volume",
+   "cause",
+   "receiving water",
+   "outfall",
+   "coordinates",
+   "publication date",
+   "receipt date"
+  ],
+  "has_coordinates": false,
+  "has_outfall_ids": false,
+  "cadence": "Hourly validator check; EPA archive usually weekly, violations entered weeks to months after the event.",
+  "history": "Live ZIP contains historical violations; retained records survive later disappearance and outages.",
+  "license": "U.S. federal government data (public domain); cite EPA ECHO.",
+  "legal_basis": "Compliance records reported to regulators, not a public-notice channel named by the reviewed Pennsylvania law or permit.",
+  "status": "used",
+  "status_reason": "Reads the PA bulk violation file and sewerage SIC join. Preserves each violation ID and regulatory dates; no invented volume or discharge end. Links compatible utility reports and separately flags uncertain matches. Multiple codes per permit/start day with compatible reported locations are grouped for counting as our interpretation; conflicting waters or outlets remain separate.",
+  "verified": "fetched",
+  "checked": "2026-11-28",
+  "notes": "Follows Rhode Island ECHO DFR field conventions but uses the full bulk file. The ALCOSAN March 2026 power-outage violation is linked to its March 6 utility notice despite the EPA March 7 date. Its July 17 regulatory closure is not used as a discharge end. PWD poll records and routine Erie/ALCOSAN CSOs are not automatically equated with SSOs. The shared ZIP reader and row-selection function can later serve other states; only PA is enabled.",
+  "area": "pa"
+ },
+ {
   "id": "md-law-env-9-331-1",
   "name": "Md. Code, Environment § 9-331.1 (sewer overflow and treatment plant bypass reporting and public notification)",
   "jurisdiction": "MD",

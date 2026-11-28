@@ -5388,6 +5388,9 @@ def find_duplicates(events: list[dict]) -> dict[str, str]:
     different particular waters (waters_differ) are not linked at all: they may be two spills of one system."""
     groups = defaultdict(list)
     for ev in events:
+        # PA regulatory violations use explicit links: a same-day CSO or poll alone is not an SSO match.
+        if ev.get("source_id") == "pa-echo-violations":
+            continue
         if ev.get("_fixture") or ev.get("time_precision") in COARSE_PRECISION or ev.get("duplicate_of"):
             continue
         if citizen_report(ev):

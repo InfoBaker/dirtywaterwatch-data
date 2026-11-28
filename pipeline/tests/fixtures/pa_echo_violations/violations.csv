@@ -1,0 +1,10 @@
+NPDES_ID,NPDES_VIOLATION_ID,VIOLATION_TYPE_CODE,VIOLATION_CODE,VIOLATION_DESC,SINGLE_EVENT_VIOLATION_DATE,SINGLE_EVENT_END_DATE,SINGLE_EVENT_VIOLATION_COMMENT,SINGLE_EVENT_AGENCY_TYPE_CODE,RNC_DETECTION_CODE,RNC_DETECTION_DESC,RNC_DETECTION_DATE,RNC_RESOLUTION_CODE,RNC_RESOLUTION_DESC,RNC_RESOLUTION_DATE
+PA0000272,3641054984,S,E0012,Reporting Violations - Failure to Submit DMRs,07/13/2018,07/13/2018,,ST6,,,,,,
+PA0000507,3671083220,S,D0011,Permit Violations - Discharge Without a Valid Permit,08/09/2023,08/09/2023,,ST6,J,Manual 2A3 - Unpermitted Discharge,08/09/2023,8,RP - Manual Due to Formal Enforcement Action Formal Order,08/09/2023
+PA0025984,3656108544,S,A0020,WW SSO - Discharge to Waters,01/29/2021,07/13/2022,,ST6,J,Manual 2A3 - Unpermitted Discharge,01/29/2021,8,RP - Manual Due to Formal Enforcement Action Formal Order,07/13/2022
+PA0025984,3687608730,S,F036S,Failure to minimize or prevent an unanticipated prohibited bypass to waters of the U.S.,03/07/2026,07/17/2026,,ST6,I,Manual 2A2 - Unauthorized Bypass,03/07/2026,9,RE - Manual by Back into Compliance/Administratively Resolved,07/17/2026
+PA0026671,3678885175,S,F024S,Failure to minimize or prevent SSO to waters of the U.S. - adverse impacts [40 CFR 122.41(d)],06/26/2024,,,ST6,,,,,,
+PA0026671,3678885172,S,D0011,Permit Violations - Discharge Without a Valid Permit,06/26/2024,,,ST6,,,,,,
+PA0026689,3687268890,S,D0011,Permit Violations - Discharge Without a Valid Permit,01/07/2026,,,ST6,,,,,,
+PA0026891,3692072049,S,F024S,Failure to minimize or prevent SSO to waters of the U.S. - adverse impacts [40 CFR 122.41(d)],10/20/2026,10/29/2026,,ST6,J,Manual 2A3 - Unpermitted Discharge,10/20/2026,9,RE - Manual by Back into Compliance/Administratively Resolved,10/29/2026
+PA0060097,3633971227,S,A0020,WW SSO - Discharge to Waters,10/04/2017,10/04/2017,Leak at manhole 575 into Singer Run,ST6,J,Manual 2A3 - Unpermitted Discharge,10/04/2017,9,RE - Manual by Back into Compliance/Administratively Resolved,10/04/2017
