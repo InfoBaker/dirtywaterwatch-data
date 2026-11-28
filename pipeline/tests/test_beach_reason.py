@@ -89,7 +89,7 @@ def test_the_rule_is_on_with_its_rationale_and_every_beach_source_read():
                 "ut-dwq-recreational-advisories", "va-vdh-advisories", "vt-advisories", "wi-dnr-beach-health"}
     # EPA's BEACON archive (ingest/fed_beacon_beach_actions.py): its entry reaches data/rules.json with the coordinator's
     # shared-files patch (tests/test_fed_beacon.py checks the entry itself)
-    expected |= {"fed-beacon-beach-actions"} & set(cfg["sources"])
+    expected |= {"fed-beacon-beach-actions", "ca-sdcounty-beachinfo", "ca-ocbeachinfo"} & set(cfg["sources"])
     assert expected == set(cfg["sources"])
     for sid, ent in cfg["sources"].items():
         assert ent["kind"] in ("program", "fields", "none"), sid

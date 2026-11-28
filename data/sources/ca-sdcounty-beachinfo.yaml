@@ -1,0 +1,25 @@
+# Feed row: pipeline/ingest/ca_sd_beaches.py; hourly anonymous public screen calls.
+id: "ca-sdcounty-beachinfo"
+name: "San Diego County beach and bay water quality"
+url: "https://cosdapps.sandiegocounty.gov/sdbeachinfo/"
+homepage: "https://cosdapps.sandiegocounty.gov/sdbeachinfo/"
+kind: "api"
+level: "county"
+enabled: true
+role: "advisories"
+states: ["CA"]
+event_types: ["beach_advisory", "beach_closure"]
+registry_ids: ["ca-sdcounty-beachinfo"]
+raw_fields:
+  reporter_contact: ["row.Event.CreatedBy", "row.Event.UpdatedBy", "row.Site.CreatedBy", "row.Site.UpdatedBy", "row.Event_Affected_Sites.CreatedBy", "row.Event_Affected_Sites.UpdatedBy"]
+  customer_identifier: []
+  description: ["row.Event.DescriptionIssue", "row.Event.DescriptionLifted", "row.Event.Reason", "row.Site.Description"]
+access: ["api"]
+machine_readable: true
+access_detail: "OutSystems MainFlow.Home: public module manifest and component scripts supply current request versions; BlockNotification/ScreenDataSetGetEventsList for advisory, closure and warning types, paged with StartIndex/MaxRecords. HomeBlockNew counters validate completeness; DataActionGetLastDateTime supplies the source update. No account or API key. Anonymous session material is kept only in memory."
+cadence: "hourly"
+license: "No dataset redistribution license found; public read access. Retain county attribution."
+attribution: "San Diego County Department of Environmental Health and Quality"
+legal_basis: "California Health and Safety Code 115885 and 17 CCR 7958 govern county beach posting and closure. The app is a voluntary web channel; the statute names a hotline and signs."
+checked: "2026-11-28"
+notes: "Current list only: 7 advisories, 6 closures and no warnings on Nov. 28, including Tijuana-border closures. Event.Id is projected as zero; our key uses station, type and issue time. UTC API times are shown in Pacific time; no reopening inferred from disappearance. Rows without an event-specific water-quality reason are listed without color. Public-record text is preserved."

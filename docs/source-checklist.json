@@ -52967,31 +52967,56 @@
   "role": "advisories",
   "event_types": [
    "beach_advisory",
-   "sso"
+   "beach_closure"
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://www.sdbeachinfo.com/",
+  "url": "https://cosdapps.sandiegocounty.gov/sdbeachinfo/",
   "access": [
-   "html"
+   "api"
   ],
-  "access_detail": "Redirects to an OutSystems React app (cosdapps.sandiegocounty.gov/sdbeachinfo/); guessed /api paths 404. The CivicData 'Beach and Bay Postings' resource cd5f21db-... has 780 rows but the tail rows are empty.",
-  "machine_readable": false,
-  "sample_record": null,
-  "fields": [],
-  "fills_event_fields": [],
-  "cannot_fill": [],
-  "has_coordinates": false,
+  "access_detail": "Verified anonymous OutSystems MainFlow.Home calls: moduleinfo manifest and component scripts provide version values; BlockNotification/ScreenDataSetGetEventsList with EventTypeId 1, 2, 3 and StartIndex/MaxRecords. Home counters validate completeness. LastUpdate is UTC. No login or static credential.",
+  "machine_readable": true,
+  "sample_record": "pipeline/tests/fixtures/ca_county_beaches/sd_notifications.json",
+  "fields": [
+   "StationID",
+   "BeachName",
+   "LocationName",
+   "Latitude",
+   "Longitude",
+   "EventType.Id",
+   "Event.IssueDateTime",
+   "Event.LiftedDateTime",
+   "Event.DescriptionIssue",
+   "Event.Reason",
+   "LastUpdate"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "event_type",
+   "started_at",
+   "ended_at where supplied",
+   "waterbody_text as named",
+   "authority",
+   "advice_text",
+   "volume_gal where stated"
+  ],
+  "cannot_fill": [
+   "discharge start/end from beach action dates",
+   "reported_at",
+   "published_at"
+  ],
+  "has_coordinates": true,
   "has_outfall_ids": false,
-  "cadence": null,
-  "history": null,
-  "license": null,
-  "legal_basis": null,
-  "status": "watch",
-  "status_reason": "Live closures (incl. sewage and Tijuana closures) but no documented API; Beach Watch carries the same records later. The prompt's 'API' lead was not confirmed.",
+  "cadence": "Hourly current list",
+  "history": "Current snapshot: starts 1997, 2025 and 2026; not a complete action archive.",
+  "license": "No explicit dataset redistribution license found; public read access, county attribution retained.",
+  "legal_basis": "California Health and Safety Code 115885 and 17 CCR 7958; the web page is voluntary (law names a hotline and signs).",
+  "status": "used",
+  "status_reason": "Built ca_sd_beaches hourly reader; native live read Nov. 28: 7 advisories, 6 closures, no warnings. Most rows have no current-event reason and are listed without color.",
   "verified": "fetched",
-  "checked": "2026-11-03",
-  "notes": "",
+  "checked": "2026-11-28",
+  "notes": "No inferred end on disappearance. Our station/type/issue-time keys avoid zero placeholder IDs. Source narrative preserves the 160,000-gallon San Diego River sewage release. Conservative post-feed Beach Watch links; BEACON linker follows. Regional IBWC spill totals are different records from beach closures.",
   "area": "ca"
  },
  {
@@ -53039,31 +53064,58 @@
   "role": "advisories",
   "event_types": [
    "beach_advisory",
-   "sso"
+   "beach_closure"
   ],
   "waters_covered": null,
   "water_slugs": [],
-  "url": "https://www.ocbeachinfo.com/",
+  "url": "https://ocbeachinfo.com/",
   "access": [
-   "html"
+   "html",
+   "pdf"
   ],
-  "access_detail": null,
-  "machine_readable": false,
-  "sample_record": null,
-  "fields": [],
-  "fills_event_fields": [],
-  "cannot_fill": [],
+  "access_detail": "Home page CLOSURES/WARNINGS/ADVISORIES and annual closure PDF links from /download/. Web client verified one current Aliso Beach advisory, three chart spills in 2024, two in 2025, one in 2026. Requests to both host forms and the PDF timed out from the Mac.",
+  "machine_readable": true,
+  "sample_record": "pipeline/tests/fixtures/ca_county_beaches/oc_current.html",
+  "fields": [
+   "notice section",
+   "posted on",
+   "affected area",
+   "spill number",
+   "date closed",
+   "date opened",
+   "agency/reason",
+   "amount spilled",
+   "amount recovered",
+   "amount released",
+   "closure phases"
+  ],
+  "fills_event_fields": [
+   "source_record_id",
+   "event_type",
+   "started_at",
+   "ended_at where supplied",
+   "waterbody_text as named",
+   "authority",
+   "advice_text",
+   "volume_gal where stated"
+  ],
+  "cannot_fill": [
+   "discharge start/end from beach action dates",
+   "reported_at",
+   "published_at",
+   "coordinates"
+  ],
   "has_coordinates": false,
   "has_outfall_ids": false,
-  "cadence": null,
-  "history": null,
-  "license": null,
-  "legal_basis": null,
-  "status": "watch",
-  "status_reason": "Sewage-spill closures with extent; not fetched.",
-  "verified": "search_only",
-  "checked": "2026-11-03",
-  "notes": "",
+  "cadence": "Hourly current notices; daily closure charts",
+  "history": "Charts listed 1999-2026; 2024-2026 read through web client, default ingestion requests current and previous year. Current page has no archive.",
+  "license": "No explicit dataset redistribution license found; public read access, county attribution retained.",
+  "legal_basis": "California Health and Safety Code 115885 and 17 CCR 7958; the web page is voluntary (law names a hotline and signs).",
+  "status": "used",
+  "status_reason": "Built ca_oc_beaches reader with strict table validation and retention on failure. Native HTML/PDF extraction awaits runner verification; real-record fixtures are trimmed public-text transcriptions.",
+  "verified": "fetched",
+  "checked": "2026-11-28",
+  "notes": "Charts group closure extent phases by source spill number; source revisions override initial volume, without arithmetic. Unknown layout fails visibly. No coordinates invented. No reporter-contact or customer-identifier structured keys occur in the read schema; public free text is preserved.",
   "area": "ca"
  },
  {
