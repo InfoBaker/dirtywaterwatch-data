@@ -137,7 +137,9 @@ def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | Non
         return by_permit.get(permit) or (did if did in ids else None)
     rain_permits = rain_permits or {}
     rows, by_key = [], {}
+    from reported_places import public_place
     for o in registry:
+        o = public_place(o) if is_provisional(o) else o
         permit = str(o.get("npdes_permit") or "").strip().upper()
         st = str(o.get("state") or permit[:2]).upper()
         prov = is_provisional(o)
@@ -146,7 +148,7 @@ def outfall_rows(registry: list[dict], live: set[str], *, waters: set[str] | Non
         if o.get("outfall_kind") == "other":
             continue                    # not a sewage outfall (kind_note): no point on the map
         if prov and o.get("on_map") is False:
-            continue                    # its reports all say the sewage reached no water: the operator page lists it
+            continue                    # a listing without a marker: privacy or reports of no water reached
         slug = canon(o["water_slug"]) if o.get("water_slug") else None
         slugs = [slug] if slug and (waters is None or slug in waters) else []
         lat, lon = coord(o.get("lat")), coord(o.get("lon"))

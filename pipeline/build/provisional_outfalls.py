@@ -1324,7 +1324,11 @@ def carry_over(places: list[dict], prev: dict[str, list[dict]], now: str) -> Non
                 d = dist_m(p["lat"], p["lon"], float(r["lat"]), float(r["lon"]))
             except (TypeError, ValueError):
                 continue
-            if d <= CLUSTER_M:
+            # Preserve IDs from legacy three-decimal outputs when rebuilding at lookup precision.
+            same_rounded_place = (p.get("geolocation") and r.get("place_method")
+                                  and set(p.get("event_ids") or []) & set(r.get("event_ids") or [])
+                                  and all(round(p[k], 3) == r[k] for k in ("lat", "lon")))
+            if d <= CLUSTER_M or same_rounded_place:
                 pairs.append((d, i, j, r))
     used_p, used_r = set(), set()
     for d, i, j, r in sorted(pairs, key=lambda x: (x[0], x[1], x[2])):
@@ -1409,7 +1413,8 @@ def public_row(p: dict) -> dict:
     p["label"] = PLANT_LABEL if p.get("stand_in") else PUBLIC_LABEL
     p["on_map"] = p["record_status"] != "superseded" and p["reached_water"] != "no"
     p["method"] = method_text(p)
-    return strip_personal(p)
+    from reported_places import public_place
+    return strip_personal(public_place(p))
 
 
 def waters_without_record(places: list[dict]) -> list[dict]:
@@ -1434,6 +1439,7 @@ def waters_without_record(places: list[dict]) -> list[dict]:
 
 def summarize(places: list[dict], drops: Counter, unlocated: list[dict], key: dict, by_id: dict,
               registry: list[dict]) -> dict:
+    from reported_places import public_place
     reg_permits = {str(o["npdes_permit"]).upper() for o in registry}
     no_point = []
     for rid, r in by_id.items():
@@ -1463,7 +1469,8 @@ def summarize(places: list[dict], drops: Counter, unlocated: list[dict], key: di
         "by_confidence": dict(Counter(p["confidence"] for p in places if p["record_status"] != "superseded")),
         "by_kind": dict(Counter(p["outfall_kind"] for p in places if p["record_status"] != "superseded")),
         "by_state": {s: dict(c) for s, c in sorted(by_state.items())},
-        "on_map": sum(1 for p in places if p["record_status"] != "superseded" and p["reached_water"] != "no"),
+        "on_map": sum(1 for p in places if p["record_status"] != "superseded" and p["reached_water"] != "no"
+                      and public_place(p).get("on_map", True)),
         "reports_placed": sum(p["report_count"] for p in places),
         "operators_with_places": len({p["discharger_id"] for p in places}),
         "registry_operators_without_registry_point": len(no_point),
