@@ -3426,6 +3426,9 @@ HAND: list[dict] = [
     # outfall's own point, with the name from a cited public source; built by a --names run on the state's
     # research/<st>/receiving-waters-followup-2026-11-28.json (names_file: that run builds these only) and by every
     # other run of the state as its other hand records are.
+    # Four Michigan records built in the same run (Big Beaver Creek, Holly Drain, Crystal Creek, Bradshaw Drain, one
+    # report each) were taken out after review: common names the resolver indexes statewide, and Michigan reports with
+    # no point are not checked for county, so another county's creek of the name would have taken the record.
     dict(name="St. Louis Creek", state="MI", kind="stream", source="nhd", service="hr",
          aliases=["St Louis Creek", "Saint Louis Creek"],
          names_file="research/mi/receiving-waters-followup-2026-11-28.json",
@@ -3439,34 +3442,6 @@ HAND: list[dict] = [
              "Rock River (47.2224 N 88.3904 W); St. Louis Falls on St. Louis Creek, which runs from the swamps near "
              "Laurium to the Trap Rock River (https://www.waterfallsofthekeweenaw.com/st-louis-creek/st-louis-falls, "
              "47.22895 N 88.40872 W), lies 10 m from the same flowline."),
-    dict(name="Big Beaver Creek", state="MI", kind="stream", source="nhd", service="hr", gnis_id="621294",
-         names_file="research/mi/receiving-waters-followup-2026-11-28.json", near=(-83.02119, 42.53198),
-         why="EGLE's MiEnviro sewage report for the Warren WWTP (MI0024295) names Big Beaver Creek for its outfall 004 "
-             "bypass. NHDPlus V2.1 has no flowline of that name near Warren; the NHD high-resolution flowlines carry Big "
-             "Beaver Creek (USGS GNIS 621294, Oakland and Macomb Counties; mouth at 42.53088 N 83.01965 W) 42 m from "
-             "ECHO's point for the plant (42.53198 N 83.02119 W; https://echo.epa.gov/detailed-facility-report?"
-             "fid=110000759965); the other Big Beaver Creek in Michigan (GNIS 621293) is in Chippewa County."),
-    dict(name="Holly Drain", state="MI", kind="canal", source="nhd", service="hr", gnis_id="628443",
-         names_file="research/mi/receiving-waters-followup-2026-11-28.json", near=(-83.988297, 42.927061),
-         why="EGLE's MiEnviro sewage report for the Durand WWTP (MI0022063) names Holly Drain for its outfall 001. The NHD "
-             "high-resolution flowlines carry Holly Drain (USGS GNIS 628443, Shiawassee County) 33 m from ECHO's point "
-             "for the plant (42.927061 N 83.988297 W, 4910 S Durand Rd; "
-             "https://echo.epa.gov/detailed-facility-report?fid=110006740866); the other Holly Drain in Michigan (GNIS "
-             "628442) is in Eaton County."),
-    dict(name="Crystal Creek", state="MI", kind="stream", source="nhd", service="hr", gnis_id="624169",
-         names_file="research/mi/receiving-waters-followup-2026-11-28.json", near=(-83.31586, 43.19251),
-         why="EGLE's MiEnviro sewage report for Deerfield Pines MHC (MI0053180, 110 Linden Drive, North Branch) names "
-             "Crystal Creek for its outfall 001. The NHD high-resolution flowlines carry Crystal Creek (USGS GNIS "
-             "624169, Lapeer County) 139 m from ECHO's address point for the facility (43.19251 N 83.31586 W; "
-             "https://echo.epa.gov/detailed-facility-report?fid=110006739896); the other Crystal Creek in Michigan "
-             "(GNIS 1619631) is in Oceana County."),
-    dict(name="Bradshaw Drain", state="MI", kind="canal", source="nhd", service="hr", gnis_id="621856",
-         names_file="research/mi/receiving-waters-followup-2026-11-28.json", near=(-83.5393, 42.1297),
-         why="EGLE's MiEnviro sewage report for Rawsonville Woods MHC (MI0056677, 10825 Rawsonville Road, Van Buren "
-             "Township) names Bradshaw Drain for its outfall 001. The NHD high-resolution flowlines carry Bradshaw "
-             "Drain (USGS GNIS 621856, Wayne, Washtenaw and Monroe Counties) 47 m from ECHO's point for the facility "
-             "(42.1297 N 83.5393 W; https://echo.epa.gov/detailed-facility-report?fid=110006742506); the other "
-             "Bradshaw Drain in Michigan (GNIS 621855) is in Sanilac County."),
     # NEORSD's CSO alerts map (https://www.neorsd.org/cso-alerts-map-and-status-of-outfalls/, layers 4 and 5 of
     # CSONotificationApp_PROD) names each outfall's receiving water and gives its point; the NHD high-resolution
     # flowlines carry no feature of these names, and USGS GNIS lists none in Cuyahoga County. Each record is the

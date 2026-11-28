@@ -29,7 +29,7 @@ CHELSEA RIVER,chelsea-river-ma,high,Chelsea Creek (Boston outfall BOS014): the r
 LITTLE MYSTIC CHANNEL,boston-inner-harbor-ma,medium,Boston outfall BOS019: the Little Mystic Channel (Charlestown) opens on the Inner Harbor and has no record of its own; boston-inner-harbor-ma carries it as an alias and the registry ties BOS019 there; registry water review 2026-11-28
 BOSTON INNER HARBOR,boston-inner-harbor-ma,high,Boston outfalls BOS009 BOS010 BOS012: the record boston-inner-harbor-ma made since; registry water audit 2026-11-28
 FORT POINT CHANNEL,fort-point-channel-ma,high,Boston outfall BOS062: the record fort-point-channel-ma made since; registry water audit 2026-11-28
-RESERVED CHANNEL,boston-inner-harbor-ma,medium,Boston outfalls BOS076 BOS078 BOS079 BOS080: boston-inner-harbor-ma carries the name as an alias and its outline holds the channel; the registry ties the four outfalls there (0 to 7 m); reserved-channel-ma (an OSM centre line) lies 63 to 181 m from their points; registry water review 2026-11-28
+RESERVED CHANNEL,reserved-channel-ma,medium,"Boston outfalls BOS076 BOS078 BOS079 BOS080 (South Boston): the portal names the Reserved Channel, which has its own record (reserved-channel-ma, an OSM centre line 63 to 181 m from the outfalls' points); the registry still ties the outfalls to boston-inner-harbor-ma by their points (EPA states no Reserved Channel for them); waters follow-up review 2026-11-28"
 MUDDY RIVER,,none,no slug
 DORCHESTER BAY,dorchester-bay-ma,high,
 MASSACHUSETTS BAY,massachusetts-bay-ma,medium,large water; use outfall point

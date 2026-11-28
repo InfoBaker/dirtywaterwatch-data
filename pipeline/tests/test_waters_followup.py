@@ -23,10 +23,6 @@ FOLLOWUP = "-followup-2026-11-28.json"
 # slug: (name, kind, state, GNIS id or None, the outfall point the record was built at (lat, lon), at most this far)
 RECORDS = {
     "st-louis-creek-mi": ("St. Louis Creek", "stream", "MI", None, (47.2339669, -88.428109), 25),
-    "big-beaver-creek-mi": ("Big Beaver Creek", "stream", "MI", "621294", (42.53198, -83.02119), 60),
-    "holly-drain-mi": ("Holly Drain", "canal", "MI", "628443", (42.927061, -83.988297), 50),
-    "crystal-creek-mi": ("Crystal Creek", "stream", "MI", "624169", (43.19251, -83.31586), 160),
-    "bradshaw-drain-mi": ("Bradshaw Drain", "canal", "MI", "621856", (42.1297, -83.5393), 60),
     "spring-creek-oh": ("Spring Creek", "stream", "OH", None, (41.436564, -81.682069), 25),
     "wolf-creek-garfield-heights-oh": ("Wolf Creek", "stream", "OH", None, (41.42304, -81.599487), 25),
     "green-creek-oh": ("Green Creek", "stream", "OH", None, (41.552446, -81.543681), 25),
@@ -80,12 +76,8 @@ def test_each_record_has_its_spec_scoped_to_the_follow_up_names_file(slug):
 
 @pytest.mark.parametrize("text,permit,oid,slug", [
     ("St. Louis Creek", "MI0043982", "001", "st-louis-creek-mi"),
-    ("Big Beaver Creek", "MI0024295", "004", "big-beaver-creek-mi"),
-    ("Holly Drain", "MI0022063", "001", "holly-drain-mi"),
-    ("Crystal Creek", "MI0053180", "001", "crystal-creek-mi"),
-    ("Bradshaw Drain", "MI0056677", "001", "bradshaw-drain-mi"),
 ])
-def test_michigans_reports_place_by_their_own_text_on_the_new_record(resolver, text, permit, oid, slug):
+def test_michigans_report_places_by_its_own_text_on_the_new_record(resolver, text, permit, oid, slug):
     ev = event(source_id="mi-egle-mienviro-cso-sso-list", source_record_id=f"{permit}-{oid}", event_type="cso",
                status="ended", waterbody_text=text, npdes_permit=permit, outfall_id=oid, raw={"state": "MI"})
     pl = resolver.resolve(ev)
@@ -143,3 +135,71 @@ def test_manistees_collection_system_reports_go_to_the_lake_at_manistee(resolver
                status="ended", waterbody_text="Manistee Lake", npdes_permit="3112a-0142", outfall_id="018",
                raw={"state": "MI"})
     assert resolver.resolve(ev)["water_slugs"] == ["manistee-lake-mi"]
+
+
+# ------------------------------------------------------------------ common names and other localities (review P2)
+
+def _no_point(text, state, county=None, permit=None):
+    raw = {"state": state, **({"county": county} if county else {})}
+    return event(source_id="test-no-point", source_record_id=f"{state}-{text}-{county}", event_type="sso",
+                 status="ended", waterbody_text=text, npdes_permit=permit, raw=raw)
+
+
+@pytest.mark.parametrize("slug", ["big-beaver-creek-mi", "holly-drain-mi", "crystal-creek-mi", "bradshaw-drain-mi"])
+def test_the_four_michigan_common_names_are_not_records(waters, slug):
+    """Michigan is not a county state: a report with no point naming 'Crystal Creek' in Oceana County would take the
+    Lapeer County record. Each served one report, so the records were left out (summary: a statewide name with no
+    locality check)."""
+    assert slug not in waters
+    assert not [h for h in W.HAND if h["state"] == "MI" and str(h.get("names_file", "")).endswith(FOLLOWUP)
+                and h.get("gnis_id")]
+
+
+def test_a_crystal_creek_report_from_oceana_county_is_not_placed_on_lapeers_creek(resolver):
+    pl = resolver.resolve(_no_point("Crystal Creek", "MI", "Oceana"))
+    assert "crystal-creek-mi" not in pl["water_slugs"], pl
+
+
+@pytest.mark.parametrize("text,county,slug", [("Spring Creek", "Medina", "spring-creek-oh"),
+                                              ("Spring Creek", "Hamilton", "spring-creek-oh"),
+                                              ("Bloody Run", "Licking", "bloody-run-oh"),
+                                              ("Bloody Run", "Cuyahoga", "bloody-run-oh"),
+                                              ("Green Creek", "Sandusky", "green-creek-oh"),
+                                              ("Shaw Brook", "Lake", "shaw-brook-oh")])
+def test_an_ohio_report_from_another_county_is_not_placed_on_the_new_record(resolver, text, county, slug):
+    """Ohio is a county state with a county field (status.COUNTY_STATES, COUNTY_FIELD_STATES): a name goes only to a
+    record reaching the county of the report's point or its own county field."""
+    assert "OH" in S.COUNTY_STATES and "OH" in S.COUNTY_FIELD_STATES
+    pl = resolver.resolve(_no_point(text, "OH", county))
+    assert slug not in pl["water_slugs"], pl
+
+
+@pytest.mark.parametrize("text,county,slug", [("Spring Creek", "Cuyahoga", "spring-creek-oh"),
+                                              ("Bloody Run", "Hamilton", "bloody-run-oh")])
+def test_an_ohio_report_from_the_records_county_is_placed_on_it(resolver, text, county, slug):
+    assert resolver.resolve(_no_point(text, "OH", county))["water_slugs"] == [slug]
+
+
+@pytest.mark.parametrize("text,permit,oid,slug", [("Spring Creek", "OH0043991", "059", "spring-creek-oh"),
+                                                  ("Spring Creek", "OH0043991", "257", "spring-creek-oh"),
+                                                  ("Bloody Run", "OH0105457", "181", "bloody-run-oh")])
+def test_neorsds_and_cincinnatis_named_reports_still_place(resolver, text, permit, oid, slug):
+    ev = event(source_id="test-registry", source_record_id=f"{permit}-{oid}", event_type="cso", status="ended",
+               waterbody_text=text, npdes_permit=permit, outfall_id=oid, raw={"state": "OH"})
+    assert resolver.resolve(ev)["water_slugs"] == [slug]
+
+
+@pytest.mark.parametrize("slug,names", [("st-louis-creek-mi", ("St. Louis Creek", "St Louis Creek", "Saint Louis Creek")),
+                                        ("longfellow-creek-wa", ("Longfellow Creek",))])
+def test_the_records_kept_in_states_without_a_county_check_are_the_only_ones_of_their_name(resolver, slug, names):
+    """Michigan and Washington are not county states: St. Louis Creek and Longfellow Creek stay because no other water
+    of the name is known in the state (the NHD high-resolution flowlines, whose names are GNIS's, carry none in
+    Michigan or Washington; research/registry/waters-followup-2026-11-28.md), so the statewide name catches no other
+    locality's report. A report with a point is still held to the placement guard's distance."""
+    st = resolver.waters[slug]["state"]
+    for n in map(S.norm_name, names):
+        assert sorted(set(resolver.names.get((st, n), []) + resolver.exact.get((st, n), []))) == [slug], n
+    far = event(source_id="test-point", source_record_id=f"{slug}-far", event_type="sso", status="ended",
+                waterbody_text=resolver.waters[slug]["name"], raw={"state": st},
+                lat=46.0 if st == "MI" else 47.66, lon=-84.0 if st == "MI" else -117.42)
+    assert slug not in resolver.resolve(far)["water_slugs"]

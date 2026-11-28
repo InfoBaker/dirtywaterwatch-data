@@ -36,7 +36,7 @@ def waters():
     ("Beaver Brook", "Lowell", "beaver-brook-lowell-ma"),
     ("LITTLE RIVER", "HAVERHILL", "little-river-ma"),
     ("LITTLE MYSTIC CHANNEL", "BOSTON", "boston-inner-harbor-ma"),     # second batch (waters follow-up 2026-11-28)
-    ("RESERVED CHANNEL", "BOSTON", "boston-inner-harbor-ma"),
+    ("RESERVED CHANNEL", "BOSTON", "reserved-channel-ma"),       # its own record, not the harbor around it (review P2)
 ])
 def test_the_crosswalk_places_the_waters_that_have_records_now(cw, waters, text, town, slug):
     slugs, match, note = M.resolve_water([("portal", text)], town, None, cw, {})

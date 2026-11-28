@@ -25,15 +25,19 @@ waterbody BACK COVE, 0 to 2 m from back-cove-me
 (https://gis.maine.gov/mapservices/rest/services/dep/MainePollutantDischargeEliminationSystem/MapServer/2, queried by
 NEPDES_FAC); the layer's address is on each entry.
 
-data/reference/ma-portal-waterbody-crosswalk.csv: LITTLE MYSTIC CHANNEL (27 reports) and RESERVED CHANNEL (35 reports)
-now name boston-inner-harbor-ma (medium), which carries both names as aliases and holds the channels.
+data/reference/ma-portal-waterbody-crosswalk.csv: LITTLE MYSTIC CHANNEL (27 reports) now names boston-inner-harbor-ma
+(medium), which carries the name as an alias and holds the channel; the Little Mystic Channel has no record of its own.
+RESERVED CHANNEL (35 reports) names reserved-channel-ma (medium), the channel's own record, not the harbor around it
+(review of 2026-11-28).
 
 Left as the review says (every "do not apply" and "cannot tell" row). One finding for a later decision: the same Maine
 DEP layer lists ME0101435 017 and 018 (EPA's text 'Portland Harbor, Back Cove, Ca') as BACK COVE at their own points,
 and 024 as 'PORTLAND HARBOR, AT CASCO BAY'; 013 is CLOSED there. That layer could settle those rows (478 reports), which
 the review marked "do not apply"; they were not touched. A record reserved-channel-ma (an OSM centre line, 63 to 181 m
-from Boston's outfalls 076 to 080) exists; the review's note that the channel "has no record of its own" is not right,
-but the crosswalk row follows the registry, which ties those outfalls to boston-inner-harbor-ma.
+from Boston's outfalls 076 to 080) exists, and the crosswalk row names it. The registry's ties of 076, 078, 079 and 080
+to boston-inner-harbor-ma are left: they are main's point ties (0 to 7 m, inside the harbor's outline), not a correction
+of this batch, and EPA states no Reserved Channel for those outfalls (076 and 078: the HUC label 'Charles River-Frontal
+Boston Harbor'; 079 and 080: no text), so nothing ties them to the channel on a stated name.
 
 ## 2. Water records that did not exist
 
@@ -45,10 +49,6 @@ Cumberland, Guadalupe, Red and Yellowstone River records) were left out.
 | Record | Line | Name | Outfall tie | Reports |
 |---|---|---|---|---|
 | st-louis-creek-mi | NHD HR flowline 116536231 (reach 04020103000279, 3.4 km to the Trap Rock River), starting 3 m from EPA's point for MI0043982 001 | EPA's permit list (https://www.epa.gov/node/253663) and ECHO; St. Louis Falls on St. Louis Creek (https://www.waterfallsofthekeweenaw.com/st-louis-creek/st-louis-falls) lies 10 m from the flowline | correction, 2 m | 105 |
-| big-beaver-creek-mi | NHD HR, GNIS 621294 | GNIS; MiEnviro report of Warren WWTP (MI0024295 004); ECHO's plant point 42 m | by the report's text | 1 |
-| holly-drain-mi | NHD HR, GNIS 628443 | GNIS; MiEnviro report of Durand WWTP (MI0022063 001); ECHO point 33 m | by text | 1 |
-| crystal-creek-mi | NHD HR, GNIS 624169 | GNIS; MiEnviro report of Deerfield Pines MHC (MI0053180 001); ECHO point 139 m | by text | 1 |
-| bradshaw-drain-mi | NHD HR, GNIS 621856 | GNIS; MiEnviro report of Rawsonville Woods MHC (MI0056677 001); ECHO point 47 m | by text | 1 |
 | spring-creek-oh | NHD HR flowline 123057428 (reach 04110002001790) | NEORSD's CSO alerts map (https://www.neorsd.org/cso-alerts-map-and-status-of-outfalls/), outfalls 059 and 257 | corrections, 0 and 3 m | 21 |
 | wolf-creek-garfield-heights-oh | NHD HR reach 04110002000732 (2 flowlines) | NEORSD's map, outfall 249 | correction, 6 m | 8 |
 | green-creek-oh | NHD HR flowline 128582007 | NEORSD's map, outfall 256 | correction, 15 m | 2 |
@@ -63,8 +63,25 @@ did. Seattle's 169 (the status file's point, 725 m from the creek) and EPA's 170
 the operator's statement with the distance bound to the point (match permit_stated), so no stretch is modeled from
 them; the other four copies lie 0 to 20 m from the creek.
 
+St. Louis Creek and Longfellow Creek are kept although Michigan and Washington do not check a report's county: no
+other water of either name is known in the state. GNIS lists no St. Louis Creek in Michigan, and the NHD
+high-resolution flowlines (whose names are GNIS's) carry no name containing "Louis Creek" in a box around Michigan
+(queried 2026-11-28); the NHD high-resolution flowlines' only Longfellow Creeks (GNIS 773659, 786544, 266945) lie in
+regions 17010207, 10030101 and 18010206, none in Washington. Each record is the only one of its name in its state, and a
+report with a point is still held to the placement guard's distance. The Ohio records are protected by the county
+check: Ohio is a county state with a county field, so a name goes only to a record reaching the county of the report's
+point or its own county field (tests/test_waters_followup.py: Spring Creek from Medina or Hamilton County and Bloody Run
+from Licking or Cuyahoga County are not placed on the new records). An Ohio report with neither a point nor a county
+would still take the record of the name.
+
 Left, with what is missing:
 
+- Big Beaver Creek (Warren, MI0024295 004), Holly Drain (Durand, MI0022063 001), Crystal Creek (North Branch,
+  MI0053180 001) and Bradshaw Drain (Van Buren Township, MI0056677 001), one report each: left: a statewide name with no
+  locality check. Each was built from its GNIS feature on the NHD high-resolution flowlines and then removed: Michigan
+  is not a county state, and a report with no point naming the common name elsewhere (Crystal Creek in Oceana County,
+  Big Beaver Creek in Chippewa County, Holly Drain in Eaton County, Bradshaw Drain in Sanilac County) would have taken
+  the record. Building them needs a locality check for Michigan's no-point reports first.
 - Dugway Brook (NEORSD 230, 231; 8 reports): no published line reaches the outfalls. The nearest NHD HR flowline
   (unnamed, reach 04110003001590) is 140 m away; OpenStreetMap names Dugway Brook only on open stretches 3.7 km
   upstream (ways 276663371 to 276663556, read through the maps.mail.ru Overpass mirror); GNIS has none in Ohio.
@@ -111,5 +128,5 @@ the duplicate resolved in the water data, not a town.
 
 Expected to change placement: Portland's Back Cove outfalls 559 (from Casco Bay to Back Cove); Boston's two crosswalk
 rows 62 (placed at collection instead of later by alias); St. Louis Creek 105; Cleveland 35 (Spring Creek 21, Wolf
-Creek 8, Shaw Brook 4, Green Creek 2); Bloody Run 20; Manistee 25; Longfellow Creek 1; Michigan's four GNIS waters 4.
-About 811 reports in all; Fall River's 010 moves none.
+Creek 8, Shaw Brook 4, Green Creek 2); Bloody Run 20; Manistee 25; Longfellow Creek 1; the four Michigan GNIS waters were removed (4 reports stay unplaced).
+About 807 reports in all; Fall River's 010 moves none.
