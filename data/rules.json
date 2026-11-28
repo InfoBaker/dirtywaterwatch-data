@@ -887,6 +887,16 @@
     "kind": "program",
     "basis": "California requires the county health officer to post a beach when bacteria exceed the state standards and to close it after a known untreated sewage release (Health and Safety Code 115885; 17 CCR 7958); each record gives the cause the county entered."
    },
+   "ca-sdcounty-beachinfo": {
+    "kind": "fields",
+    "fields": ["row.Event.Reason", "row.Event.DescriptionIssue"],
+    "read": "San Diego County's reason and issue notice for this action; a station's general background is not a current-event reason"
+   },
+   "ca-ocbeachinfo": {
+    "kind": "fields",
+    "fields": ["cause", "reason", "row.title"],
+    "read": "Orange County's notice text, stated warning or advisory reason, and sewage closure chart"
+   },
    "ca-sfpuc-beach-map": {
     "kind": "program",
     "basis": "SFPUC posts a beach when “Concentrations of bacteria were elevated at this location within the past 24 hours” or a combined sewer discharge has recently occurred there."

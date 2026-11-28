@@ -66,7 +66,10 @@
 #                  matters: it reads the events file of ca_swrcb_ciwqs_spills, which runs before it), ca_sfpuc_beaches (SFPUC beach map snapshot:
 #                  the combined sewer discharge sign and postings), ca_swrcb_fhab (FHAB bloom reports) and
 #                  ca_beachwatch (Beach Watch postings and closures; `--backfill` once for 1985 on), both read
-#                  only when their data.ca.gov table changes; ca_datagov is a helper
+#                  only when their data.ca.gov table changes; ca_datagov is a helper. ca_sd_beaches reads
+#                  San Diego current actions hourly; ca_oc_beaches reads Orange current notices hourly and
+#                  annual closure charts daily. ca_county_beach_link links Beach Watch copies after feeds,
+#                  before BEACON is relinked; county actions stay in the beach category.
 #                  Illinois: echo_sewer_overflow_events (EPA's overflow tables, IL permits: the statewide record),
 #                  il_mwrd_possible_cso (MWRD's daily-reset map of possible CSO events, polled), il_mwrd_lake_reversals
 #                  (MWRD's table of reversals to Lake Michigan since 1985; needs pdftotext), il_idph_beachguard (IDPH's
@@ -294,7 +297,7 @@ FIXTURES ?= 0
 FIXTURE_FLAG = $(if $(filter 1 yes true,$(FIXTURES)),--fixtures,) $(if $(filter 1 yes true,$(NHDES)),--include-nhdes,)
 INGEST_SKIP ?= outfalls waters_extra waters_from_nhd   # waters_from_nhd runs as waters-nhd (INGEST_EXTRA), with a budget
 INGEST_PRE = nj_outfalls             # registries the feeds join (not feeds), run before them
-INGEST_SNAPSHOTS = nj_cso_likely tx_houston_tceq_link fed_beacon_beach_link   # snapshots read by build/ and links across feeds (not feeds), run after them
+INGEST_SNAPSHOTS = nj_cso_likely tx_houston_tceq_link ca_county_beach_link fed_beacon_beach_link   # snapshots read by build/ and links across feeds (not feeds), run after them
 INGEST_EXTRA = waters-nhd conditions rainfall   # not feeds (no events file), run after them
 # the NHD receiving-water build in the hourly run: new targets from this hour's reports, within a time budget (it stops
 # before a request, writes what it built merged into data/waters-nhd.json, and the next run resumes from data/raw's
