@@ -1,0 +1,27 @@
+id: ca-long-beach-water-quality
+name: Long Beach recreational water conditions
+url: https://www.longbeach.gov/health/inspections-and-reporting/inspections/recreational-water-samples/
+homepage: https://www.longbeach.gov/beachwaterquality
+kind: html
+level: municipal
+cadence: Hourly observations; page dated to the day, sampling generally weekly.
+license: No explicit reuse license found; public agency page.
+attribution: Long Beach Department of Health and Human Services
+enabled: true
+role: advisories
+event_types: [beach_advisory, beach_closure, rain_advisory]
+states: [CA]
+access: [html]
+access_detail: Public HTML conditions table; station ID, location, and dot position under Open, Advisory, Rain Advisory or Closed. Current snapshot only; monthly sample sheets are not historical advisories.
+machine_readable: true
+legal_basis: HSC 115885 and 17 CCR 7958 govern health-officer beach posting and closure; the web page is voluntary.
+checked: '2026-11-28'
+raw_fields:
+  reporter_contact: []
+  customer_identifier: []
+  description: [row.status_definition, cause]
+# Reader: pipeline/ingest/ca_long_beach_water_quality.py. No structured personal keys.
+# The source's Closed definition gives no specific water-quality reason: list only.
+# An Open row creates no report. Status disappearance never invents ended_at.
+# started_at and reported_at remain null. published_at is the date of the snapshot;
+# raw.observed_since is our observation, not an advisory start.

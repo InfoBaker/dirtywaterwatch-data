@@ -739,38 +739,70 @@
   },
   {
     "id": "ca-lacounty-beach",
-    "name": "Los Angeles County Public Health ocean water quality and beach closures",
+    "name": "Los Angeles County beach water quality map and ocean notices",
     "jurisdiction": "CA",
     "operator": "Los Angeles County Department of Public Health",
     "operator_type": "municipal",
     "role": "advisories",
     "event_types": [
       "beach_advisory",
+      "beach_closure",
+      "rain_advisory",
       "sso"
     ],
-    "waters_covered": null,
+    "waters_covered": "Los Angeles County coastal beaches",
     "water_slugs": [],
-    "url": "http://publichealth.lacounty.gov/phcommon/public/eh/water_quality/beach_grades.cfm",
+    "url": "https://admin.publichealth.lacounty.gov/phcommon/public/eh/water_quality/beach_grades.cfm",
     "access": [
-      "html"
+      "html",
+      "kml"
     ],
-    "access_detail": null,
-    "machine_readable": false,
+    "access_detail": "Public KML linked from the county page, with station IDs and source coordinates; paged ocean release index with native prid identifiers. No login. The local archive retains prior years when the live index rolls over.",
+    "machine_readable": true,
     "sample_record": null,
-    "fields": [],
-    "fills_event_fields": [],
-    "cannot_fill": [],
-    "has_coordinates": false,
+    "fields": [
+      "station_id",
+      "name",
+      "status",
+      "cause",
+      "source update date"
+    ],
+    "fills_event_fields": [
+      "source_record_id",
+      "event_type",
+      "waterbody_text",
+      "published_at",
+      "source_updated_at",
+      "authority",
+      "source_url"
+    ],
+    "cannot_fill": [
+      "advisory start time",
+      "discharge end time",
+      "receipt date"
+    ],
+    "has_coordinates": true,
     "has_outfall_ids": false,
-    "cadence": null,
-    "history": null,
-    "license": null,
-    "legal_basis": null,
-    "status": "watch",
-    "status_reason": "Closures for sewage spills in LA County; not fetched in the time box. LA County also publishes 'sewage discharge reporting guidelines'.",
-    "verified": "search_only",
-    "checked": "2026-11-03",
-    "notes": ""
+    "cadence": "Hourly; current map and complete current-year press-release index. New notices fetched once, recent notices rechecked daily.",
+    "history": "Current-year ocean notices plus our retained observations and cached prior-year notices.",
+    "license": "No explicit reuse license found; public agency notices.",
+    "legal_basis": "HSC 115885 and 17 CCR 7958 govern health-officer beach posting and closure; the website is voluntary. The law names signs and a telephone hotline.",
+    "status": "used",
+    "status_reason": "Read hourly by pipeline/ingest/ca_lacounty_beaches.py; paged archive and KML checked live November 28, 2026: 176 notices and 97 stations.",
+    "verified": "fetched",
+    "checked": "2026-11-28",
+    "notes": "Public text is preserved. Unknown starts and ends remain null. Notice dates, source updates and observations stay separate. The source-linking pass reconciles exact station/area and dated action evidence with Beach Watch.",
+    "raw_fields": {
+      "reporter_contact": [],
+      "customer_identifier": [],
+      "description": [
+        "notices[].text",
+        "notice.text",
+        "notice.body_html",
+        "row.fields.Location",
+        "extent"
+      ]
+    }
   },
   {
     "id": "ca-ocbeachinfo",
@@ -939,5 +971,67 @@
     "verified": "fetched",
     "checked": "2026-11-03",
     "notes": ""
+  },
+  {
+    "id": "ca-long-beach-water-quality",
+    "name": "Long Beach recreational water conditions",
+    "jurisdiction": "CA",
+    "operator": "Long Beach Department of Health and Human Services",
+    "operator_type": "municipal",
+    "role": "advisories",
+    "event_types": [
+      "beach_advisory",
+      "beach_closure",
+      "rain_advisory"
+    ],
+    "waters_covered": "Long Beach ocean and bay sampling locations",
+    "water_slugs": [],
+    "url": "https://www.longbeach.gov/health/inspections-and-reporting/inspections/recreational-water-samples/",
+    "access": [
+      "html"
+    ],
+    "access_detail": "Public HTML conditions table; station ID, location, and dot position under Open, Advisory, Rain Advisory or Closed. Current snapshot only; monthly sample sheets are not historical advisories.",
+    "machine_readable": true,
+    "sample_record": null,
+    "fields": [
+      "station_id",
+      "name",
+      "status",
+      "cause",
+      "source update date"
+    ],
+    "fills_event_fields": [
+      "source_record_id",
+      "event_type",
+      "waterbody_text",
+      "published_at",
+      "source_updated_at",
+      "authority",
+      "source_url"
+    ],
+    "cannot_fill": [
+      "advisory start time",
+      "discharge end time",
+      "receipt date"
+    ],
+    "has_coordinates": false,
+    "has_outfall_ids": false,
+    "cadence": "Hourly observations; page dated to the day, sampling generally weekly.",
+    "history": "Current conditions only. Our observations accumulate from first collection.",
+    "license": "No explicit reuse license found; public agency page.",
+    "legal_basis": "HSC 115885 and 17 CCR 7958 govern health-officer beach posting and closure; the web page is voluntary.",
+    "status": "used",
+    "status_reason": "Read hourly by pipeline/ingest/ca_long_beach_water_quality.py; 15 stations, all Open, updated November 25, 2026, read November 28.",
+    "verified": "fetched",
+    "checked": "2026-11-28",
+    "notes": "Public text is preserved. Unknown starts and ends remain null. Notice dates, source updates and observations stay separate. The source-linking pass reconciles exact station/area and dated action evidence with Beach Watch.",
+    "raw_fields": {
+      "reporter_contact": [],
+      "customer_identifier": [],
+      "description": [
+        "row.status_definition",
+        "cause"
+      ]
+    }
   }
 ]

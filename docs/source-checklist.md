@@ -1,6 +1,6 @@
 # Source checklist
 
-Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1760 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
+Every source considered by the wave-1 research, used or not, with its status and why. Generated 2026-11-02 from `research/*/sources.json` (1761 rows; the full rows with every field are in `docs/source-checklist.json`, each with an `area` field naming the research folder). The owner's rule: consider all of them, not just the top candidates. The "why" column is the research's status_reason; the JSON keeps the exact text (this table only swaps an em-dash for a hyphen).
 
 Statuses as the research agents set them: **used** (read and relied on, or chosen as a feed to build against), **candidate** (usable, not yet built or decided), **watch** (context, or check again later), **rejected** (looked at and not usable; reason given), **unreachable** (could not be fetched from the research machine; reason given). `verified`: fetched (the page or endpoint was read), search_only (found by search, not read), inferred.
 
@@ -30,7 +30,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | fl | 6 | 0 | 5 | 1 | 0 | 12 |
 | mi | 6 | 2 | 5 | 2 | 0 | 15 |
 | wa | 6 | 3 | 4 | 1 | 0 | 14 |
-| ca | 9 | 1 | 10 | 3 | 0 | 23 |
+| ca | 11 | 1 | 9 | 3 | 0 | 24 |
 | il | 11 | 1 | 11 | 3 | 2 | 28 |
 | az | 3 | 1 | 3 | 3 | 1 | 11 |
 | sd | 3 | 1 | 5 | 0 | 0 | 9 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **657** | **240** | **548** | **236** | **79** | **1760** |
+| **all** | **659** | **240** | **547** | **236** | **79** | **1761** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1428,7 +1428,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `wa-spokane-annual-cso` | City of Spokane annual CSO reports | watch | search_only | monitoring | Annual totals per outfall (2015-2017 PDFs seen in search). |
 | `wa-ecology-erts` | Ecology Environmental Report Tracking System (ERTS) | rejected | search_only | events | Intake system for complaints and spill reports; no public list found; the sewage spill website is its public output for permitted facilities. |
 
-## ca: California (23)
+## ca: California (24)
 
 | id | name | status | verified | role | why |
 |---|---|---|---|---|---|
@@ -1436,6 +1436,8 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ca-go-2022-0103-dwq` | Statewide Sanitary Sewer Systems General Order WQ 2022-0103-DWQ (effective 2023-06-05), Attachment E1 | used | fetched | law | Defines categories and deadlines: Cat 1 = any volume reaching surface water; Cat 2 >= 1,000 gal not reaching water; Cat 3 50 to 999 gal; Cat 4 < 50 gal. |
 | `ca-hsc-115885` | Health and Safety Code 115885 and 17 CCR 7956-7961 (AB 411 beach posting and closure) | used | fetched | law | The public duty in California: the health officer posts and closes beaches after a known sewage release and runs a closure hotline. |
 | `ca-hsc-5411-5` | Health and Safety Code 5411.5 (notice to local health officer) | used | fetched | law | Duty to tell the health officer, not the public. |
+| `ca-lacounty-beach` | Los Angeles County beach water quality map and ocean notices | used | fetched | advisories | Read hourly by pipeline/ingest/ca_lacounty_beaches.py; paged archive and KML checked live November 28, 2026: 176 notices and 97 stations. |
+| `ca-long-beach-water-quality` | Long Beach recreational water conditions | used | fetched | advisories | Read hourly by pipeline/ingest/ca_long_beach_water_quality.py; 15 stations, all Open, updated November 25, 2026, read November 28. |
 | `ca-sacramento-css-permit` | City of Sacramento Combined Wastewater Collection and Treatment System, Order R5-2026-0003 (NPDES CA0079111) | used | fetched | permits | Read the public notification clause. |
 | `ca-sfpuc-beach-map` | SFPUC San Francisco Beach Water Quality map (combined sewer discharge flags) and getBeaches service | used | fetched | events | Read hourly by pipeline/ingest/ca_sfpuc_beaches.py as a snapshot: the combined sewer discharge sign per station (SFPUC's own 24-72 hour window, red while shown) and the postings (beach advisories). 20 stations, no flag on 2026-11-04. |
 | `ca-swrcb-ciwqs-spills-flatfile` | State Water Board CIWQS Sanitary Sewer System spill data: Cat1-2-3-Spills.txt (nightly flat file) | used | fetched | events | Statewide, event-level, machine-readable, public: read hourly by pipeline/ingest/ca_swrcb_ciwqs_spills.py (If-Modified-Since: the file changes once a day; 3,567 spills since June 2023 on 2026-11-04 with the backfill: 1,284 Category 1 shown, 459 Category 2 and 1,824 Category 3 kept as reaching no water). Narrative and certifier columns never read. |
@@ -1444,7 +1446,6 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ca-sd-regional-board-ibwc-spills` | San Diego Water Board: USIBWC Spill Events and Transboundary Flow Events from Mexico | candidate | fetched | events | The shared-water (US-Mexico) case the owner's rule covers; small HTML table, poll weekly. |
 | `ca-caloes-spill-reports` | Cal OES Hazardous Materials Spill Reports | watch | search_only | events | Potentially faster (hours) than CIWQS for >= 1,000 gal; format and reuse unconfirmed. |
 | `ca-heal-the-bay` | Heal the Bay Beach Report Card and River Report Card | watch | search_only | prior_art | Prior art: weekly grades; their app shows closures. |
-| `ca-lacounty-beach` | Los Angeles County Public Health ocean water quality and beach closures | watch | search_only | advisories | Closures for sewage spills in LA County; not fetched in the time box. LA County also publishes 'sewage discharge reporting guidelines'. |
 | `ca-ocbeachinfo` | Orange County Health Care Agency ocean and bay water closures (ocbeachinfo.com) | watch | search_only | advisories | Sewage-spill closures with extent; not fetched. |
 | `ca-sdcoastkeeper-swim-guide` | San Diego Coastkeeper beach advisories (Swim Guide affiliate) | watch | search_only | prior_art | Republishes county closures; prior art. |
 | `ca-sdcounty-beachinfo` | San Diego County DEHQ beach and bay status (sdbeachinfo.com) | watch | fetched | advisories | Live closures (incl. sewage and Tijuana closures) but no documented API; Beach Watch carries the same records later. The prompt's 'API' lead was not confirmed. |
