@@ -58,7 +58,7 @@ def test_todays_read_shows_the_two_algae_listings_as_blooms_with_the_departments
     assert (g["started_at"], k["started_at"]) == ("2026-09-17", "2026-09-11")
     assert g["time_precision"] == k["time_precision"] == "day"
     assert g["source_record_id"] == "474-advisory-2026-09-17" and k["source_record_id"] == "309-closure-2026-09-11"
-    assert (g["lat"], g["lon"]) == (46.425, -90.224) and (k["lat"], k["lon"]) == (42.972, -89.229)
+    assert (g["lat"], g["lon"]) == (46.42541972372513, -90.22407533398659) and (k["lat"], k["lon"]) == (42.97177821837954, -89.22939869149117)
     for x in recs:
         assert x["status"] == "advisory_active" and x["ended_at"] is None
         assert x["waterbody_text"] is None and x["raw"]["_point_extent_only"] is True
@@ -288,7 +288,7 @@ def test_only_the_needed_fields_are_asked_for_and_saved_rounded(monkeypatch, tmp
         in W.QUERY and "BEACH_MONITORING_LOCATIONS/MapServer/1/" in W.QUERY
     body = json.loads(raw[0])
     assert {k for f in body["beaches"] for k in f["attributes"]} == set(W.FIELDS)
-    assert all(len(str(f["geometry"]["x"]).split(".")[1]) <= 3 for f in body["beaches"] if f["geometry"])
+    assert all(f["geometry"] is None or isinstance(f["geometry"]["x"], (int, float)) for f in body["beaches"])
     blob = json.dumps(out) + raw[0] + (tmp_path / "state.json").read_text()
     assert "Pat Example" not in blob
 

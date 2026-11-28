@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "pa-mrwc-water-quality-dashboards"
 name: "MRWC volunteer bacteria monitoring dashboards (Merrimack main stem)"
 url: "https://merrimack.org/water-quality-monitoring-program/"

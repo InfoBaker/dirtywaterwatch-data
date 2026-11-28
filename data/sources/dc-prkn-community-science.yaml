@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-prkn-community-science"
 name: "Potomac Riverkeeper Network community science E. coli monitoring and Swim Guide listings"
 url: "https://potomacriverkeepernetwork.org/the-community-science-water-quality-monitoring/"

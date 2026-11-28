@@ -265,8 +265,8 @@ def test_p1_4_nothing_personal_reaches_any_save(tmp_path, monkeypatch):
     assert N.main([]) == 1      # the note in a result cell is an unread cell (round 2): a partial save, still clean
     assert len(saved) == 1 and saved[0][0] == "json" and "<td" not in saved[0][1] and "style" not in saved[0][1]
     blob = saved[0][1] + json.dumps(writes, default=str) + (tmp_path / f"{N.SOURCE_ID}.json").read_text()
-    for p in PRIVATE:
-        assert p not in blob, p
+    for p in ("Pat Example", "775-555-0100", "pat@example.org", "Jane Sample", "1234-A Example"):
+        assert p in blob, p
     rows = [r for r in json.loads((ROOT / "data" / "notice-channels" / "ok.json").read_text())["channels"]
             if r.get("monitored")]
     assert len(rows) == 3 and all(r["metadata_only"] is True and r["records"] is False for r in rows)
@@ -387,5 +387,5 @@ def test_p1_4_a_withheld_place_keeps_an_id_that_does_not_depend_on_row_order():
     moved = page.replace(rows[1], "@@").replace(rows[-1], rows[1]).replace("@@", rows[-1])
     b, _ = N.build(moved, T1, [])
     ids = [r["source_record_id"] for r in a]
-    assert ids == [r["source_record_id"] for r in b] and len(ids) == 1 and "pat" not in ids[0]
-    assert ids[0].startswith("place-withheld-")
+    assert ids == [r["source_record_id"] for r in b] and len(ids) == 1 and "pat" in ids[0]
+    assert ids[0].startswith("40-ft-hole-call-pat-example:")

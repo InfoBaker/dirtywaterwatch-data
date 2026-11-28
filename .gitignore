@@ -57,3 +57,6 @@ probe/
 dataset.zip
 obl-water.tar.gz
 pause.check
+
+# Private request list, restored separately from pipeline history.
+data/private/

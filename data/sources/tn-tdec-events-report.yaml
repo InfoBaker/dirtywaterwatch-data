@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [contact_email], customer_identifier: [], description: []}
 id: "tn-tdec-events-report"
 name: "TDEC Division of Water Resources Events Report (sewer overflows, releases, bypasses, upsets, washouts)"
 url: "https://dataviewers.tdec.tn.gov/dataviewers/f?p=2005:34140"
@@ -44,6 +45,7 @@ fetch:
   csv: {encoding: "utf-8-sig"}
   time_zone: "America/Chicago"   # dates only; each record names its county's zone (tn_tdec_record)
   # every column of the table; none holds a reporter, a contact or free text about people
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [efo_name, county, permit_type, permit_no, permittee_name, project_name, event_type,
                 estimated_volume_gal, date_event_began, date_event_ended, duration_hours, event_address, event_city]
   reviewed_fields:

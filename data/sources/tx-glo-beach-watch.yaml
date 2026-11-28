@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "tx-glo-beach-watch"
 name: "Texas Beach Watch (Texas General Land Office): coastal station layer (ArcGIS BW2025_Summary)"
 url: "https://gisweb.glo.texas.gov/arcgis/rest/services/BW/BW2025_Summary/MapServer/0"
@@ -44,6 +45,7 @@ fetch:
   time_zone: "America/Chicago"
   bounds: [-97.9, 25.8, -93.5, 30.2]
   min_rows_ratio: 0.5
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [OBJECTID, StationID, Lat_DD, Long_DD, Name, chrCountyName, Advisory, cfu, Measurement, Date, stationname]
   reviewed_fields:
     Name: "the beach, park or its managing government ('Rockport Beach Park', 'City of South Padre Island'), never a person"

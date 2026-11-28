@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-deep-press-email"
 name: "Connecticut DEEP press releases by e-mail"
 url: "https://portal.ct.gov/deep/news-releases"

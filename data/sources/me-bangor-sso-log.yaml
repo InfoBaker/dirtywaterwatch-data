@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "me-bangor-sso-log"
 name: "City of Bangor (Maine) SSO Event Log, annual consent-decree compliance reports to EPA, 2016 to 2024"
 url: "https://bangormaine.gov/411/Consent-Decree---US-EPA"

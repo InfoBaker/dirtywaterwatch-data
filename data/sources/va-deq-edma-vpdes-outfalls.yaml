@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-deq-edma-vpdes-outfalls"
 name: "DEQ EDMA layer 119 'VPDES Outfalls (Daily)' (Virginia GIS / data.virginia.gov)"
 url: "https://gisdata.deq.virginia.gov/arcgis/rest/services/public/EDMA/MapServer/119"

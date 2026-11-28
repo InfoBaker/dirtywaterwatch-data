@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ky-sd1-wet-weather-notification"
 name: "SD1 Wet Weather Overflow Notification Program (Northern Kentucky)"
 url: "https://sd1.org/218/Wet-Weather-Overflow-Notification-Progra"

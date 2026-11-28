@@ -70,11 +70,8 @@ def closed(o: dict) -> bool:
 
 
 def receiving_water(o: dict) -> str | None:
-    """The receiving water as the permit names it (a reviewed correction of EPA's name first). None for a provisional
-    place: its text is quoted from the reports (it can name a property owner) and has not been through the export's
-    redaction; its water record (water_slugs) stands instead."""
-    if is_provisional(o):
-        return None
+    """The source receiving-water text, using a reviewed EPA correction when supplied.
+    Provisional records retain the receiving-water text quoted by their source reports."""
     ov = o.get("receiving_water_override")
     if isinstance(ov, dict) and ov.get("water"):
         return ov["water"]

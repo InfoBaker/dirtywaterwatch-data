@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "md-baltimore-dpw-sso-map"
 name: "Baltimore City DPW Sewer Overflow Map (SSO_Points2 map service)"
 url: "https://experience.arcgis.com/experience/f064b1b0addd4017ac179f1652e182e0"

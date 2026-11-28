@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nc-dmf-polluted-area-proclamations"
 name: "NC DEQ Division of Marine Fisheries polluted area proclamations (shellfish temporary closures and reopenings)"
 url: "https://www.deq.nc.gov/about/divisions/marine-fisheries/rules-proclamations-and-size-and-bag-limits/polluted-area-proclamations"

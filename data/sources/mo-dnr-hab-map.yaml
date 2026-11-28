@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "mo-dnr-hab-map"
 name: "Missouri DNR Harmful Algal Bloom reports map (WQM_HAB_POINTS_PUBLIC)"
 url: "https://gis.dnr.mo.gov/host/rest/services/wqm/HAB_SUBMIT_POINTS/MapServer/6"

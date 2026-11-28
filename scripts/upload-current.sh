@@ -12,6 +12,7 @@
 # replaced. No index at all (an export from before the reaches per state) is not a failure.
 set -eu
 cd "$(dirname "$0")/.."
+python3 -I scripts/publication_deletions.py || exit 1
 REACH_STATE_MAX=64
 failed=""
 put() {   # put <path under out/>: every file goes through this one check (present) and the same retries
@@ -26,7 +27,7 @@ put() {   # put <path under out/>: every file goes through this one check (prese
 }
 # Export already wrote and checked outfalls.json. Upload those exact bytes: a
 # registry change here must not regenerate an unchecked payload after that check.
-# A blocklist hit warns during export and still uploads, like every other file.
+# Requested removals have been checked before any upload.
 for f in outfalls.json meta.json waters.json active.json rules.json overlays.geojson reaches.geojson advisory-points.geojson launches.geojson history.json events-index.json sources.json dischargers.json; do
   put "$f" || failed="$failed $f"
 done

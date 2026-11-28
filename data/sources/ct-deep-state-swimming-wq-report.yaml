@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-deep-state-swimming-wq-report"
 name: "DEEP State Swimming Water Quality Report (21 state park swim areas)"
 url: "https://ctparks.com/water-quality-report"

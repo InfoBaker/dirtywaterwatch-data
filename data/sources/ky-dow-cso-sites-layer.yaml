@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ky-dow-cso-sites-layer"
 name: "Kentucky DOW Combined Sewer Overflow Sites (ArcGIS)"
 url: "https://services3.arcgis.com/ghsX9CKghMvyYjBU/arcgis/rest/services/Ky_DOW_Combined_Sewer_Overflow_Sites_WM_gdb/FeatureServer/0"

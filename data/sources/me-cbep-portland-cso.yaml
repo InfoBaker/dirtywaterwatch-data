@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "me-cbep-portland-cso"
 name: "Portland (Maine) combined sewer overflows by storm and outfall, 2015 to 2019 (Casco Bay Estuary Partnership archive of the City of Portland and Portland Water District filings)"
 url: "https://github.com/CBEP-SoCB-Details/Casco_Bay_CSOs/blob/99cadaabf605e1f46c619339c1e5220762b5d660/Derived_Data/Portland_CSO_data_2015_2019.csv"

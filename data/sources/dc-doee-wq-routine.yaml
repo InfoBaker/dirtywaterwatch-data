@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-doee-wq-routine"
 name: "DOEE routine ambient E. coli monitoring (6 sites: 3 Potomac, 2 Anacostia, 1 Washington Channel)"
 url: "https://doee.dc.gov/service/water-quality"

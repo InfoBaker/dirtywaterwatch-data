@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nysdec-cso-page"
 name: "NYSDEC Combined Sewer Overflow page"
 url: "https://dec.ny.gov/environmental-protection/water/water-quality/combined-sewer-overflow"

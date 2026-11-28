@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": [], "customer_identifier": [], "description": ["incident_details", "nearby_landmarks"]}
 id: "nc-dwr-algal-bloom-reports"
 name: "NC DEQ DWR Fish Kill and Algal Bloom Incidents (North_Carolina_Fish_Kills_and_Algal_Blooms_Public_Reports)"
 url: "https://services2.arcgis.com/kCu40SDxsCGcuUWO/arcgis/rest/services/North_Carolina_Fish_Kills_and_Algal_Blooms_Public_Reports/FeatureServer/0"

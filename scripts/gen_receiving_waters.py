@@ -61,13 +61,7 @@ ORG_WORDS = re.compile(r"\b(City|County|Water|Utilities|Utility|STP|WWTP|WWTF|WR
 
 
 def safe_permittee(s: str | None) -> str | None:
-    if not s:
-        return s
-    m = CONTACT.match(s)
-    if m and CONTACT_SUFFIX.match(s[m.end():]):
-        return s[m.end():]
-    if BARE_PERSON.match(s) and not ORG_WORDS.search(s):
-        return "permit holder (EPA permit name is a person; name withheld)"
+    """Keep the permittee the source publishes."""
     return s
 
 

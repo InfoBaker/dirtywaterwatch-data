@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nh-mrwc-water-quality-dashboard"
 name: "Merrimack River Watershed Council water quality dashboard layer (E. coli/Enterococci, with CSO field)"
 url: "https://merrimack.org/"

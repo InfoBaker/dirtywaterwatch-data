@@ -1,10 +1,6 @@
-"""Privacy for the Iowa and Idaho feeds only (ia_dnr_focomp, ia_waterloo_sso, ia_dnr_news, id_deq_cyanohab): the
-scrub that runs on free text before the first save and again on everything carried from earlier state. It adds to
-common.scrub_text and common.strip_house_numbers (which other states use unchanged) the forms they miss: a house number
-with a suffix or a fraction ('123-A', '12 1/2'), a coordinate inside the text (rounded to three decimals like any
-report point), and text that names or may name a person ('Contact ...', 'Dr. ...', '... reported', 'the home of ...'),
-which is withheld whole, since it cannot be told apart from text that does not. A place described as a private home
-loses its point and its street (home_place). The detectors are wv_la_privacy's, imported, not changed."""
+"""Compatibility helpers for Iowa and Idaho: preserve public-record text and source points.
+Legacy detectors remain available for parsing; default scrub and home-place suppression are disabled.
+Requested removals are applied at export."""
 from __future__ import annotations
 
 import re
@@ -40,32 +36,15 @@ def _round_coord(m: re.Match) -> str:
 
 
 def scrub(text: str | None) -> str | None:
-    """The strict scrub: common's (emails, phones, titled names, house numbers), then every remaining house number
-    before a street word, coordinates rounded; text that may name a person is withheld whole. None stays None."""
-    if text is None:
-        return None
-    t = strip_house_numbers(scrub_text(str(text)))
-    t = ADDRESS_RE.sub(_house, t)
-    t = COORD_RE.sub(_round_coord, t)
-    probe = STREET_ABBR_RE.sub(lambda m: m.group(1) + " Street", t)
-    probe = AGENCY_CONTACTED_RE.sub("reached ", probe)
-    if t != WITHHELD and (names_a_person(probe) or HOME_OF_RE.search(probe)):
-        return WITHHELD
-    return t
+    """Preserve the source public record (decision 57)."""
+    return text
 
 
 def home_place(*texts: str | None) -> bool:
-    """True when the text describes the place as a private home: the point and the street are removed, not rounded."""
-    return any(t and (HOME_RE.search(t) or HOME_OF_RE.search(t)) for t in texts)
+    """Preserve the source public record (decision 57)."""
+    return False
 
 
 def scrub_sentences(text: str | None) -> str | None:
-    """The strict scrub sentence by sentence: a sentence that may name a person is withheld, the rest kept (an agency's
-    release keeps its facts when its contact line names someone)."""
-    if text is None:
-        return None
-    out = []
-    for line in str(text).split("\n"):
-        parts = re.split(r"(?<=[.!?])\s+(?=[A-Z\[\"“])", line)
-        out.append(" ".join(s for s in (scrub(x) for x in parts) if s))
-    return "\n".join(out)
+    """Preserve the source public record (decision 57)."""
+    return text

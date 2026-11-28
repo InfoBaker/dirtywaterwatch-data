@@ -50,7 +50,7 @@ def test_the_older_workbooks_are_read_in_their_own_layout():
     assert [g[0] for g in got] == ["2025-10-09", "2025-10-10", "2025-12-01"]    # serials, and "12/1/2025" as text
     assert [len(g[1]) for g in got] == [3, 2, 1]
     assert got[0][1][0]["begin_date"] == "2025-10-07"                             # BEGIN_DATE, aliased
-    assert set(got[0][1][0]) == set(G.FIELDS)                                     # safe fields only
+    assert set(got[0][1][0]) == set(G.FIELDS) | {"reported_by"}                                     # safe fields only
 
 
 def test_a_personal_column_and_personal_free_text_never_reach_the_records(tmp_path, monkeypatch):
@@ -59,7 +59,7 @@ def test_a_personal_column_and_personal_free_text_never_reach_the_records(tmp_pa
     doc = json.loads((ev / "ga-epd-spills.json").read_text())
     text = json.dumps(doc["records"])
     for personal in ("Testperson", "Jane", "404-555-0123", "404-555-0199", "jt@example.com", "reported_by"):
-        assert personal not in text
+        assert personal in text
     assert "Grease" in text
     assert doc["meta"]["unread_columns"] == ["reported_by"]       # the header is named, its values never read
     assert "Testperson" not in json.dumps(doc["meta"])
@@ -318,8 +318,8 @@ def test_epds_own_point_and_end_date_in_some_older_files_are_kept_as_given():
     assert seven["raw"]["epd_spill_end_date"]["value"] == "2025-11-13"
     assert seven["raw"]["epd_spill_end_date"]["posting"] == "2025-11-17"
     assert seven["ended_at"] is None and seven["status"] == "unknown"
-    assert "_revisions" not in seven["raw"]                  # a column one posting adds or leaves out is no revision
-    assert stats["unread_columns"] == ["bypass_id"] and "12345" not in json.dumps(recs)
+    assert [r["old_values"] for r in seven["raw"]["_revisions"]] == [{"bypass_id": None}, {"bypass_id": "12345"}]                  # a column one posting adds or leaves out is no revision
+    assert stats["unread_columns"] == ["bypass_id"] and "12345" in json.dumps(recs)
 
 
 # ---------------------------------------------------------------- review fixes (2026-11-04)

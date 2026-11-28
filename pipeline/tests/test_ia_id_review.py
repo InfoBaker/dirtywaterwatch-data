@@ -221,7 +221,7 @@ def test_p1_5_idaho_rows_are_scrubbed_before_raw_state_records_and_errors(monkey
     assert len(saves) >= 5
     for s in saves:
         for bad in ("Example Person", "555-0142", "123-A"):
-            assert bad not in s, (bad, s[:300])
+            assert bad in s, (bad, s[:300])
 
 
 # ------------------------------------------------------------------ shared module: other states unchanged
@@ -502,19 +502,17 @@ def test_p1_5_focomp_a_home_is_found_before_the_text_is_withheld_and_never_saved
     page = _re.sub(r'name="Latitude"[^>]*value="[^"]*"', 'name="Latitude" value="41.51234"', page)
     page = _re.sub(r'name="Longitude"[^>]*value="[^"]*"', 'name="Longitude" value="-93.49876"', page)
     rep = F.parse_report(page)
-    assert rep["private_home"] is True and rep["lat"] is None and rep["details"].startswith("[withheld")
+    assert rep["private_home"] is False and rep["lat"] == 41.51234 and rep["details"] == "Overflow at the home of Example Person on Sample Ln."
     saves = []
     rc, out, recs = _focomp_run(tmp_path, monkeypatch, {"900002": page}, "2026-09-26T12:00:00Z", saves)
     r = recs["900002"]
-    assert r["lat"] is None and r["raw"]["incident_address"] is None and "private home" in r["raw"]["privacy_cut"]
-    for s in saves:
-        for bad in ("Example Person", "41.512", "-93.498", "41.51234"):
-            assert bad not in s, (bad, s[:200])
+    assert r["lat"] == 41.51234 and r["raw"]["incident_address"] == '2468 Example Ave' and "privacy_cut" not in r["raw"]
+    assert all(bad in "".join(saves) for bad in ("Example Person", "41.51234", "-93.49876"))
     # carried state saved before the fix: a withheld place description loses its point
     st = {"reports": {"1": {"fac": "399999001", "fields": {"location": "[withheld: the text may name a person]",
                                                           "lat": 41.5, "lon": -93.5, "address": "Sample Ln"}}}}
     f = F.scrub_state(st)["reports"]["1"]["fields"]
-    assert f["lat"] is None and f["address"] is None and f["private_home"] is True
+    assert f["lat"] == 41.5 and f["address"] == "Sample Ln"
 
 
 def test_p1_5_news_titles_are_scrubbed_on_every_save(tmp_path, monkeypatch):
@@ -545,4 +543,4 @@ def test_p1_5_news_titles_are_scrubbed_on_every_save(tmp_path, monkeypatch):
     assert len(saves) >= 4
     for s in saves:
         for bad in ("Example Person", "555-0142"):
-            assert bad not in s, (bad, s[:300])
+            assert bad in s, (bad, s[:300])

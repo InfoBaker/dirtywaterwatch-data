@@ -188,7 +188,8 @@ def _ident(code: str, snap: dict) -> str:
     """The notice's identity across polls: MSD-01 by its code (one banner at a time), MSD-02 by its begin time,
     asset and receiving stream, anything else by its title."""
     if code == "MSD-02":
-        f = fields(snap.get("text"))
+        from ingest.identity_compat import mi_text
+        f = fields("\n".join(mi_text(ln) for ln in (snap.get("text") or "").split("\n")))
         basis = "|".join([snap.get("title") or "", f.get("DATE AND TIME DISCHARGE BEGAN", ""),
                           f.get("ASSET ADDRESS", ""), f.get("RECEIVING STREAM", "")])
         return "MSD-02:" + hashlib.sha1(basis.encode()).hexdigest()[:12]

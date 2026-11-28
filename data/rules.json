@@ -51,8 +51,8 @@
    "NH": {
     "hours": 72,
     "clock": "end_of_discharge",
-    "basis": "New Hampshire's law applies special water-use criteria during combined sewer discharges and for up to three days after they stop. We use 72 hours after the reported end.",
-    "source": "N.H. RSA 485-A:8, III"
+    "basis": "New Hampshire's law applies special water-use criteria during combined sewer discharges and for up to three days after they stop. We use 72 hours after the reported end. We publish beach advisories and algal bloom reports from the New Hampshire Department of Environmental Services (NHDES), whose Healthy Swimming Mapper licence states: “These data are to be used for screening purposes only. Distribution is discouraged.”",
+    "source": "N.H. RSA 485-A:8, III; NHDES Healthy Swimming Mapper, licence read Nov. 25, 2026 (UTC): https://nhdes.maps.arcgis.com/apps/dashboards/8d84a6b03acb4efaab571b222c78447b"
    },
    "ME": {
     "hours": null,
@@ -93,8 +93,8 @@
    "DC": {
     "hours": 24,
     "clock": "end_of_discharge",
-    "basis": "DC Water's permit requires a warning light on the Anacostia and on the Potomac: one colour while a combined sewer overflow is occurring and a second colour for 24 hours after it has stopped (NPDES permit DC0021199, Part III.B.1.h.i); DC Water's own page adds that after rain over one inch the effects can last up to three days. We use 24 hours from the end of the overflow, the permit's light period. No District law requires public notice of overflows, and swimming in the Potomac, the Anacostia and Rock Creek is prohibited by regulation (21 DCMR 1108.1)",
-    "source": "NPDES permit DC0021199 (EPA Region 3), Part III.B.1.h; DC Water combined sewer system page; 21 DCMR 1108.1"
+    "basis": "DC Water's permit requires a warning light on the Anacostia and on the Potomac: one colour while a combined sewer overflow is occurring and a second colour for 24 hours after it has stopped (NPDES permit DC0021199, Part III.B.1.h.i); DC Water's own page adds that after rain over one inch the effects can last up to three days. We use 24 hours from the end of the overflow, the permit's light period. No District law requires public notice of overflows, and swimming in the Potomac, the Anacostia and Rock Creek is prohibited by regulation (21 DCMR 1108.1). We publish sanitary sewer overflow reports from DC Water, whose Sanitary Sewer Dashboard states that the data are “not for any commercial, legal or other use.”",
+    "source": "NPDES permit DC0021199 (EPA Region 3), Part III.B.1.h; DC Water combined sewer system page; 21 DCMR 1108.1; DC Water Sanitary Sewer Dashboard, use condition read Nov. 25, 2026 (UTC): https://www.dcwater.com/resources/open-data-portal/sanitary-sewer-dashboard"
    },
    "NC": {
     "hours": null,
@@ -274,8 +274,8 @@
    "IN": {
     "hours": null,
     "clock": "end_of_discharge",
-    "basis": "Indiana law sets no period after a sewage discharge during which the water is to be avoided. A combined sewer community must notify the affected public, local health departments, drinking water suppliers downstream and anyone who asks after its March newspaper notice whenever an overflow is occurring or imminent, in a manner agreed with each recipient, and post signs at public access points saying that sewage may be in the water during and for several days after rain or snowmelt (327 IAC 5-2.1); in the Lake Michigan and Lake Erie basins a public notice is due within four hours (327 IAC 5-2.2; 40 CFR 122.38). Sanitary sewer overflows and bypasses are reported to the Indiana Department of Environmental Management within 24 hours; the Department publishes no list of them. We show each combined sewer outlet's monthly totals from the operators' discharge monitoring reports with the monthly mark, mark a reported discharge while it runs and apply our own caution after it ends, and apply our rain caution at each open combined sewer outfall with a location once the outfall is placed on its water. Times are read in Eastern time, and in Central time in the twelve counties of the northwest and southwest. A report of a discharge that reached no water is not shown on this site",
-    "source": "327 IAC 5-2.1-5 and 5-2.1-6; 327 IAC 5-2.2-1; 40 CFR 122.38; IDEM sewer bypass/overflow incident reporting (State Form 48373); U.S. EPA discharge monitoring reports and sewer overflow and bypass event data (ECHO); 49 CFR 71.5(b)"
+    "basis": "Indiana law sets no period after a sewage discharge during which the water is to be avoided. A combined sewer community must notify the affected public, local health departments, drinking water suppliers downstream and anyone who asks after its March newspaper notice whenever an overflow is occurring or imminent, in a manner agreed with each recipient, and post signs at public access points saying that sewage may be in the water during and for several days after rain or snowmelt (327 IAC 5-2.1); in the Lake Michigan and Lake Erie basins a public notice is due within four hours (327 IAC 5-2.2; 40 CFR 122.38). Sanitary sewer overflows and bypasses are reported to the Indiana Department of Environmental Management within 24 hours; the Department publishes no list of them. Evansville Water and Sewer Utility publishes sanitary release records with start and end times, gallons, causes and affected areas. We show each combined sewer outlet's monthly totals from the operators' discharge monitoring reports with the monthly mark, mark a reported discharge while it runs and apply our own caution after it ends, and apply our rain caution at each open combined sewer outfall with a location once the outfall is placed on its water. Times are read in Eastern time, and in Central time in the twelve counties of the northwest and southwest. A report of a discharge that reached no water is not shown on this site",
+    "source": "327 IAC 5-2.1-5 and 5-2.1-6; 327 IAC 5-2.2-1; 40 CFR 122.38; IDEM sewer bypass/overflow incident reporting (State Form 48373); U.S. EPA discharge monitoring reports and sewer overflow and bypass event data (ECHO); Evansville Water and Sewer Utility SSO/CSSR map (https://cso.ewsu.com/); 49 CFR 71.5(b)"
    },
    "WV": {
     "hours": null,
@@ -1039,8 +1039,25 @@
     "basis": "Nebraska's Beach Watch label is set from the week's E. coli sample, which each record gives."
    },
    "nh-des-swimming": {
-    "kind": "program",
-    "basis": "NHDES issues fecal-bacteria advisories under Env-Wq 1108.14 from its beach samples."
+    "kind": "fields",
+    "inherit_parent_reason": false,
+    "fields": [
+     "Status"
+    ],
+    "read": "NHDES Healthy Swimming Mapper's beach status and dated advisory history",
+    "program_values": {
+     "Status": [
+      "Advisory",
+      "No advisory"
+     ],
+     "season_from": [
+      "SampleDate year"
+     ]
+    },
+    "program_basis": "NHDES issues fecal-bacteria advisories under Env-Wq 1108.14 from its beach samples. Its Advisory and No advisory labels record those advisories and their lifting; dated advisory history records earlier advisories.",
+    "labels": {
+     "beach_advisory": "Beach status listed; the source gives no water-quality reason"
+    }
    },
    "nj-beaches": {
     "kind": "program",

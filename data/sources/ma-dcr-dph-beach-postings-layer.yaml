@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ma-dcr-dph-beach-postings-layer"
 name: "DCR layer 'WaterQuality_PullFromDPH' (DCR beach postings pulled from DPH)"
 url: "https://services1.arcgis.com/7iJyYTjCtKsZS1LR/arcgis/rest/services/WaterQuality_PullFromDPH/FeatureServer/0"

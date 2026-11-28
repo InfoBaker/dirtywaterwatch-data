@@ -27,7 +27,7 @@ State objects:
                            Copies use the restored archive even on a run that does not upload the primary object.
   state/build.tar.gz       data/build except the frozen manifest and files (pack-build): the ingesters' history and snapshot files, the reach traces
                            (data/build/reaches/, build/reaches.py: its NLDI and NHDPlus answers are kept there, 30
-                           days), the provisional-outfall and geocoder caches, the private name blocklist. Made with
+                           days), the provisional-outfall and geocoder caches, legacy state files. Requested removals are fetched separately from state/removal-list.json. Made with
                            pack-build; this script checks its size (check-size) and restores it
                            (unpack-build: data/build members only).
   state/raw-cache.tar.gz   the answers in data/raw that the code reads back (RAW_CACHE below, with the reasons),
@@ -255,7 +255,7 @@ GENERATION_KEY = re.compile(r"state/daily/(?:build|frozen)-(?:Mon|Tue|Wed|Thu|Fr
                             r"|state/monthly/(?:build|frozen)-[0-9]{4}-(?:0[1-9]|1[0-2])\.(?:tar\.gz|json)"
                             r"|state/held/(?:build|frozen)-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9a-z][0-9a-z-]{0,39}\.tar\.gz")
 # state/PAUSE: the shared pause switch; the history copies may be fetched too (to look at one before a rollback)
-STATE_KEY = re.compile(r"state/[a-z0-9][a-z0-9._-]*\.tar\.gz|state/PAUSE|" + GENERATION_KEY.pattern)
+STATE_KEY = re.compile(r"state/[a-z0-9][a-z0-9._-]*\.tar\.gz|state/PAUSE|state/removal-list\.json|" + GENERATION_KEY.pattern)
 # wrangler's answer for a key that is not there ("The specified key does not exist."): a first run, not a failure
 MISSING = re.compile(r"specified key does not exist|NoSuchKey", re.I)
 FETCHED, ABSENT, FAILED = 0, 3, 1

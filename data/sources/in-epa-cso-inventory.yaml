@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "in-epa-cso-inventory"
 name: "EPA National CSO Inventory (Indiana extract)"
 url: null

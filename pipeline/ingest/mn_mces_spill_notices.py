@@ -1,4 +1,8 @@
 """Metropolitan Council Environmental Services (Twin Cities): wastewater spill notices
+
+Public-record policy: downloaded source text is retained, including published names, contacts and addresses.
+Structured event classification still uses the documented source fields. Requested removals apply at export.
+
 -> data/build/events/mn-mces-spill-notices.json
 
 Source
@@ -301,7 +305,7 @@ def raw_save_doc(index: str, pages: dict) -> dict:
             out[u] = None
             continue
         parsed = parse_page(p)
-        out[u] = {"title": parsed["title"], "updates": [{"date": x["date"], "heading": x["heading"]}
+        out[u] = {"source_text": parsed, "title": parsed["title"], "updates": [{"date": x["date"], "heading": x["heading"]}
                                                        for x in parsed["updates"]],
                   "sha256": hashlib.sha256(json.dumps(parsed, sort_keys=True).encode()).hexdigest()}
     return scrubbed({"index": parse_index(index), "pages": out})
@@ -323,7 +327,7 @@ def build_one(item: dict, parsed: dict, fetched: str, previous: dict | None) -> 
     perr = []
     m = RESPONDED.search(intro)
     start = None
-    raw: dict = {"label": label, "title": parsed["title"], "time_zone": TZ, "page_url": item["url"],
+    raw: dict = {"source_text": parsed, "label": label, "title": parsed["title"], "time_zone": TZ, "page_url": item["url"],
                  "index_url": INDEX_URL}
     if m:
         mo, dy = MONTHS[m.group("month").lower()], int(m.group("day"))

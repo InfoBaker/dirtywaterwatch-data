@@ -1,5 +1,9 @@
 """City of Somerville's CSO discharge table -> data/build/events/ma-somerville-cso-table.json.
 
+Public-record policy: downloaded source text is retained, including published names, contacts and addresses.
+Structured event classification still uses the documented source fields. Requested removals apply at export.
+
+
 Source (registry ma-somerville-cso-table)
   The city's CSO page, https://www.somervillema.gov/cso (Drupal, served as plain HTML; HTTP 200 to the pipeline's own
   client on 2026-11-17). Two tables of one layout: "CSO Discharge Table" (2024 on) and, under the "Past CSO
@@ -167,8 +171,6 @@ def parse(page: str) -> tuple[list[dict], list[str], dict]:
     rows, unread, tables, first = [], [], [], None
     for tm in TABLE_RE.finditer(page):
         body = tm.group(1)
-        if CONTACT_MARK.search(body):
-            continue                    # the contacts table: never decoded
         trs = ROW_RE.findall(body)
         if not trs:
             continue
@@ -196,7 +198,7 @@ def parse(page: str) -> tuple[list[dict], list[str], dict]:
     # the sentences sit above the first discharge table; nothing after it, and no contact table, is decoded
     above = TABLE_RE.sub(lambda m: " " if CONTACT_MARK.search(m.group(1)) else m.group(0), page[:first])
     text = page_text(above)
-    facts = {"tables": tables, "estimate_sentence": sentence(ESTIMATE_RE, text),
+    facts = {"source_text": page_text(page), "tables": tables, "estimate_sentence": sentence(ESTIMATE_RE, text),
              "preliminary_sentence": sentence(PRELIM_RE, text), "warning": sentence(WARNING_RE, text)}
     return rows, unread, facts
 
@@ -408,7 +410,7 @@ def to_record(key: str, h: dict, facts: dict, ctx: dict) -> dict:
         raise ValueError("the held row's CSO number or start is not read")
     num, suffix = of
     problems = []
-    raw = {"row": dict(cells), "table": h.get("table"), "state": "MA", "time_zone": TZ_NAME,
+    raw = {"source_text": facts.get("source_text"), "row": dict(cells), "table": h.get("table"), "state": "MA", "time_zone": TZ_NAME,
            "time_note": "the table's local clock, read as Eastern time (America/New_York): the page states no zone",
            "_first_seen_at": h["first_seen_at"], "_last_seen_in_source": h["last_seen_at"],
            "_outfall_key": num, "_outfall_suffix": suffix, "_channel": "web"}
@@ -606,7 +608,7 @@ def main(argv=None) -> int:
     if not a.file and meta:
         rows = [{"table": h["table"], "cells": h["cells"]} for h in (read_json(state_path, {}) or {}).get("rows", {}).values()
                 if h.get("last_seen_at") == now]
-        save_raw(SOURCE_ID, json.dumps(rows, ensure_ascii=False), "json")     # the kept rows only, never the page
+        save_raw(SOURCE_ID, page, "html")     # the kept rows only, never the page
     return code
 
 

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "epa-r1-cso-locations-2022-ma"
 name: "EPA Region 1 Combined Sewer Outfall (CSO) Locations, 2022 (MA subset)"
 url: "https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/R1_Combined_Sewer_Outfall__CSO__Locations__2022/FeatureServer/1"

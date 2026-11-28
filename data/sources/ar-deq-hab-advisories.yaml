@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ar-deq-hab-advisories"
 name: "Arkansas DEQ harmful algal bloom advisories (current table and archive)"
 url: "https://adeq.state.ar.us/water/planning/hab/advisories.json"
@@ -36,6 +37,7 @@ fetch:
   url: "https://adeq.state.ar.us/water/planning/hab/advisories.json"
   json: {records_path: "advisories"}
   time_zone: "America/Chicago"
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [waterbody, county, area, date, lifted]
   free_text: [waterbody, area]
   record:

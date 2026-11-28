@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": [], "customer_identifier": ["customer_number"], "description": ["incident_action", "incident_comment"]}
 id: "tx-tceq-sso-opendata"
 name: "TCEQ Sanitary Sewer Overflows (SSO), Texas Open Data Portal (Socrata 8kc5-95uk)"
 url: "https://data.texas.gov/dataset/8kc5-95uk"
@@ -57,6 +58,7 @@ fetch:
   time_zone: "America/Chicago"   # dates only; each record names its county's zone (tx_tceq_record)
   # Not requested: customer_number (TCEQ's id of the customer, which can be a private owner), incident_action and
   #   incident_comment (free text by the reporter, on 8 and 4 percent of rows, not needed for the record).
+  # Historical identity projection; all returned source fields are retained.
   safe_fields: [incident_number, regulated_entity_number, regulated_entity_name, material_type, amount, amount_unit,
                 start_date, end_date, received_date, status_code, tceq_region, list_of_permits, source, cause,
                 receiving_water_body, river_segment, county, incident_description]

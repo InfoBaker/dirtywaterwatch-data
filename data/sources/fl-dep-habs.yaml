@@ -1,3 +1,4 @@
+raw_fields: {"reporter_contact": [], "customer_identifier": [], "description": ["Comments"]}
 id: "fl-dep-habs"
 name: "Florida DEP Algal Bloom Sampling, blooms and toxins by site (Algal Bloom Site Visits layer)"
 url: "https://services1.arcgis.com/nRHtyn3uE1kyzoYc/arcgis/rest/services/AlgalBloom_Final_View/FeatureServer/0"

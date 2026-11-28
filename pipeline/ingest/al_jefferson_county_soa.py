@@ -139,20 +139,8 @@ class ReadError(ValueError):
 # ---------------------------------------------------------------- text
 
 def street_only(v: str | None) -> str | None:
-    """A location with every house number removed: al_adem_sso.clean_text (common.strip_house_numbers and the
-    Alabama forms), then any number still standing on its own that no route word precedes ("2025", "1234-B MAIN
-    ST", "99/105 SUMMIT BOULEVARD"); ordinals ("15th Ave") and route numbers ("Highway 150") stay."""
-    s = clean_text(v)
-    if not s:
-        return None
-
-    def repl(m):
-        return m.group(0) if ROUTE_BEFORE.search(s[:m.start()]) else HOUSE_NUMBER_REMOVED
-    s = GLUED_NUMBER.sub(lambda m: f"{m.group(1)} {HOUSE_NUMBER_REMOVED}", s)
-    s = GLUED_BEFORE.sub(HOUSE_NUMBER_REMOVED + " ", s)
-    s = LEFT_NUMBER.sub(repl, s)
-    s = re.sub(rf"(?:{re.escape(HOUSE_NUMBER_REMOVED)}\s*[-/&,]?\s*){{2,}}", HOUSE_NUMBER_REMOVED + " ", s)
-    return " ".join(s.split()) or None
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 SUFFIXES = {"ROAD": "RD", "STREET": "ST", "AVENUE": "AVE", "AV": "AVE", "DRIVE": "DR", "LANE": "LN", "COURT": "CT",
@@ -163,7 +151,8 @@ SUFFIXES = {"ROAD": "RD", "STREET": "ST", "AVENUE": "AVE", "AV": "AVE", "DRIVE":
 def street_key(v: str | None) -> str:
     """A comparison key for a scrubbed street: letters and digits, street words in one form ("PINE GROVE ROAD" and
     "Pine Grove Rd." give "PINEGROVERD"; review 2026-11-17 P2-6)."""
-    s = (v or "").replace(HOUSE_NUMBER_REMOVED, " ").upper()
+    from ingest.identity_compat import al_street
+    s = (al_street(v) or "").replace(HOUSE_NUMBER_REMOVED, " ").upper()
     words = [SUFFIXES.get(w, w) for w in re.findall(r"[A-Z0-9]+", s)]
     return "".join(words)[:40] or "NOLOCATION"
 
@@ -189,7 +178,7 @@ def point(text: str) -> tuple[float | None, float | None, str | None]:
     lat, lon = float(m.group(1)), float(m.group(2))
     if not (AL_BOX[2] <= lat <= AL_BOX[3] and AL_BOX[0] <= lon <= AL_BOX[1]):
         return None, None, "the map point lies outside Alabama"
-    return round(lat, POINT_DECIMALS), round(lon, POINT_DECIMALS), None
+    return lat, lon, None
 
 
 # ---------------------------------------------------------------- the export
@@ -294,6 +283,9 @@ def base_id(r: dict) -> str:
 
 def ident(r: dict) -> str:
     """What tells two rows of one date, time and street apart (the water, reason, point, city and ZIP)."""
+    from ingest.identity_compat import al_point
+    lat, lon, _ = al_point(r.get("maplink") or "")
+    r = {**r, "maplink": f"{lat}, {lon}" if lat is not None else ""}
     return hashlib.sha256("\x1f".join(str(r.get(k) or "") for k in ("waterway", "reason", "maplink", "city", "zip"))
                           .encode()).hexdigest()[:6]
 
@@ -402,7 +394,7 @@ def to_record(rid: str, h: dict) -> dict:
         source_id=SOURCE_ID, source_record_id=rid, event_type="sso", status="unknown",
         discharger_id=DISCHARGER_ID, discharger_name=DISCHARGER, npdes_permit=None,
         waterbody_text=water, lat=lat, lon=lon, coord_source="source" if lat is not None else None,
-        coord_precision_m=100 if lat is not None else None,
+        coord_precision_m=None,
         started_at=st.isoformat(), ended_at=None, time_precision="minute" if c else "day",
         reported_at=None, published_at=None, source_updated_at=None, fetched_at=h.get("last_seen_at") or now_iso(),
         material="untreated sewage", volume_gal=None, volume_text=None, estimate_flag="unknown",

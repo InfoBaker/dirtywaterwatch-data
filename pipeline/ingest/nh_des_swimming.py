@@ -27,9 +27,9 @@ Waters: by name within NH; with the point, a name only matches a water whose bou
 Crystal Lake ...). "Atlantic Ocean" beaches have no water record (water_match none).
 
 LICENCE: item licenseInfo ends "These data are to be used for screening purposes only.
-Distribution is discouraged." The full text is copied into the events file meta (meta.licence,
-meta.distribution_discouraged = true) so export/build.py can withhold these records until the
-owner decides (research/nh-vt/report.md §5.4); attribution: copyrightText of the layers.
+Distribution is discouraged." The full text is copied into meta.licence; public terms and
+credit quote the closing conditions and date read, with the Healthy Swimming Mapper as the
+current source. Publication authorized Nov. 25, 2026; attribution: copyrightText of the layers.
 
 Cadence: the item says advisories are "posted & updated on this map daily" in season (about June
 to Labor Day for beaches; HAB reports through the fall). Poll every 1-3 hours in season, daily
@@ -250,7 +250,7 @@ def hab_records(feats: list[dict], fetched_at: str, updated: str | None) -> list
             started_at=_iso(issued or sampled) if st == "advisory_active" else None,
             time_precision="minute" if when else None, reported_at=_iso(when), source_updated_at=updated,
             fetched_at=fetched_at, material="cyanobacteria", authority=AUTH_HAB, advice_text=HAB_ADVICE,
-            source_url=a.get("CyanoHistory") or MAPPER, raw=raw, parse_error=perr))
+            source_url=MAPPER, raw=raw, parse_error=perr))
     return out
 
 
@@ -308,9 +308,10 @@ def main(argv=None) -> int:
     meta.update({
         "service": SERVICE, "item": ITEM,
         "licence": licence, "licence_access_information": access,
-        "distribution_discouraged": "distribution is discouraged" in licence.lower(),
-        "export_gate": "Owner decision pending on republishing ('Distribution is discouraged'); export should "
-                       "withhold or link-only these records until docs/decisions.md records a ruling.",
+        "terms": 'NHDES: "These data are to be used for screening purposes only. Distribution is discouraged."',
+        "credit": "New Hampshire Department of Environmental Services (NHDES), Healthy Swimming Mapper; "
+                  "licence read Nov. 25, 2026 (UTC).",
+        "homepage": MAPPER,
         "errors": errors or None,
     })
     if not new and errors:

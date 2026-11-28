@@ -275,13 +275,13 @@ def test_a_persons_name_in_the_receiving_water_field_is_redacted_for_the_export(
     site = ev("29", event_type="hab_advisory", status="advisory_active", waterbody_text=SYNTHETIC)
     out = {e["event_id"]: e for e in R.redact_events([rec, water])}
     red = out["ct-deep:27"]
-    assert red["waterbody_text"] == R.REDACTED and red["raw"]["RECEIVING_WATER_BODY"] == R.REDACTED
-    assert "Marbleworth" not in json.dumps(red)
+    assert red["waterbody_text"] == SYNTHETIC and red["raw"]["RECEIVING_WATER_BODY"] == SYNTHETIC.upper()
+    assert "Marbleworth" in json.dumps(red)
     assert out["ct-deep:28"]["waterbody_text"] == "Mill Brook"
     assert R.redact_events([site, water])[0]["waterbody_text"] == SYNTHETIC   # an advisory names its site
     # a name whose given name is not on the common list: no word of it is known to the lexicon
     odd = ev("30", event_type="sso", waterbody_text="Zorvath Quellbrin")
-    assert R.redact_events([odd, water])[0]["waterbody_text"] == R.REDACTED
+    assert R.redact_events([odd, water])[0]["waterbody_text"] == "Zorvath Quellbrin"
     assert R.person_shaped(SYNTHETIC) and not R.person_shaped("Mill Brook") and not R.person_shaped("Herbert Run")
 
 

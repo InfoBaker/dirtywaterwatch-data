@@ -213,52 +213,8 @@ FUNCTION_WORDS = {"and", "of", "the", "at", "on", "in", "for", "a", "an", "no", 
 
 
 def public_name(v) -> str | None:
-    """The name as a public file may carry it: kept only when it reads as a body. A name after "d/b/a" stands for the
-    whole; a segment (between " - ", ";", "/", brackets) that is a person's name is dropped; what is left is kept only
-    when it has an organisation word (common.OPERATOR_WORDS, ORG_WORDS), is not a person's name by
-    common.scrub_discharger, and is not a person's name with an organisation word added ("John Q Smith MHP"). A street
-    address, a residence, "estate of", "et al" or a title (Mr, Mrs, Dr) removes the name. Any removed name is
-    "[name removed]". None for a blank."""
-    s = clean(v)
-    if not s:
-        return None
-    parts = DBA_RE.split(s)
-    if len(parts) > 1:                     # "John Q Public dba Sunny Acres MHP": the trade name only
-        s = clean(parts[-1]).strip(" ,-")
-        if not s:
-            return NAME_REMOVED
-    if ADDRESS_RE.search(s) or RESIDENCE_RE.search(s):
-        return NAME_REMOVED
-    if re.search(r"\bestate of\b|\bet\s?al\b|\bet\s?ux\b|\b(mr|mrs|ms|dr)\.?\s", s, re.I):
-        return NAME_REMOVED
-    s = CARE_OF_RE.sub("", s)             # "... Inc Attn <a person>", "... c/o <anyone>": the body only
-
-    def personal(seg):
-        return bool(seg) and not has_org_word(seg) and person_like(seg)
-
-    # "<a person> - South Wind Water and Sewer Dist": a part that is a person's name is dropped
-    parts = [x for x in PART_RE.split(s) if x and x.strip(" ,.-")]
-    s = clean(" - ".join(x for x in parts if not personal(x)))
-    # "Partners LP and <a person>", "<a person> & Son LLC": a person inside the name removes the name
-    if not s or any(personal(seg) for seg in SEGMENT_RE.split(s)):
-        return NAME_REMOVED
-    if not s or not has_org_word(s):
-        return NAME_REMOVED
-    if scrub_discharger({"discharger_name": s})["discharger_name"] == NAME_REMOVED:
-        return NAME_REMOVED
-    # "John Q Smith MHP", "Smith John Q Trust": a person's name with an organisation word added
-    rest = " ".join(w for w in re.split(r"[\s,]+", s)
-                    if w and w.lower() not in FUNCTION_WORDS and not words_of(w) & (OPERATOR_WORDS | ORG_WORDS))
-    if rest and person_like(rest):
-        return NAME_REMOVED
-    # "Quill Family LP", "Quill Family Trust", "Quill Trust": a family's or a person's own vehicle
-    if family_vehicle(s) or personal_trust(s):
-        return NAME_REMOVED
-    # "Bill Quill Inc, Wild Bills No 4", "J T Quill & Sons", "Quill J T MHP": a person's name leading a part of the
-    # name, whatever follows it (the check above sees only short names)
-    if any(leading_person(seg) for seg in LEAD_SPLIT_RE.split(s) if seg):
-        return NAME_REMOVED
-    return s
+    """Keep the name as the public permit record gives it."""
+    return v
 
 
 LEAD_SPLIT_RE = re.compile(r"\s+-\s+|\s*[,;()/]\s*|\s+(?:and|&)\s+", re.I)
@@ -603,25 +559,16 @@ def industrial(e: dict) -> bool:
 
 def candidate(e: dict, basis: str, src: dict, registry: dict, research: dict, in_plants: set) -> dict:
     residence = single_residence(e["facility"], e["permit_name"])
-    facility = NAME_REMOVED if residence else public_name(e["facility"])
-    permittee = NAME_REMOVED if residence else public_name(e["permit_name"])
-    if permittee not in (None, NAME_REMOVED):
-        # a permit held in a person's own name (permit_names.person_holder; Texas review 2026-11-07 P1-2): the
-        # trade name after d/b/a was taken above; any other holder's own name is removed
-        import permit_names
-        if permit_names.person_holder(permittee, e["facility"], e["city"]):
-            permittee = NAME_REMOVED
-    from build import redact
-    waters = [w for w in e["waters"] if not (redact.person_shaped(w) or redact.person_shaped(w.title()))]
-    if residence:              # a home: the permit and the state only (its city, county and stream point to it)
-        waters = []
+    facility = public_name(e["facility"])
+    permittee = public_name(e["permit_name"])
+    waters = list(e["waters"])
     row = {
         "npdes_permit": e["permit"],
         "state": e["state"],
         "facility": facility,
         "permittee_as_recorded": permittee,
-        "county": None if residence else e["county"],
-        "city": None if residence else e["city"],
+        "county": e["county"],
+        "city": e["city"],
         "system_kind": "single residence" if residence else ("industrial permit with a sewage code"
                                                               if industrial(e) else None),
         "sewage_basis": sewage_basis(e),

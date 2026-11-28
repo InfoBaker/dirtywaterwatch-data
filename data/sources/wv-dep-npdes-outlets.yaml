@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "wv-dep-npdes-outlets"
 name: "WV DEP NPDES Outlets layer (CSO outlets, iut_code CSO)"
 url: "https://tagis.dep.wv.gov/arcgis/rest/services/WVDEP_enterprise/water_resources/MapServer/24"

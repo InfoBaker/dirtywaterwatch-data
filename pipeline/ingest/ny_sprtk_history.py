@@ -407,17 +407,8 @@ def check_shape(tabs: list[dict], state: dict) -> None:
 
 
 def withhold(row: dict, layout: str) -> tuple[dict, list[str]]:
-    """(the row with only the columns KEEP reads, the names of the others). A row naming no facility keeps its date
-    and time only. alert15's "Description" is kept only where it holds a bare volume and the volume column is empty
-    (the older rows put the volume there)."""
-    keep = KEEP[layout]
-    if not any(norm_header(k) in FACILITY_COLUMNS and clean(v) for k, v in row.items()):
-        keep = keep & TIME_COLUMNS
-    elif layout == "alert15" and not any(norm_header(k) == "volumeorrateofdischarge" and clean(v) for k, v in row.items()):
-        keep = keep | {k for k in ("description",) if BARE_VOLUME.fullmatch(str(next(
-            (v for c, v in row.items() if norm_header(c) == "description"), "") or ""))}
-    kept = {k: v for k, v in row.items() if norm_header(k) in keep}
-    return kept, [k for k in row if k not in kept]
+    """Preserve the source public record (decision 57)."""
+    return (dict(row), [])
 
 
 # ---------------------------------------------------------------- one row

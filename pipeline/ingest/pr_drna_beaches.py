@@ -365,18 +365,13 @@ def exceed_affirmed(text: str) -> re.Match | None:
 
 
 def _safe_unknown_name(name: str) -> str:
-    """An unmatched row's beach name, kept only when it reads as a place (a beach word first, letters only, six words
-    at most), else withheld: a cell that cannot be told apart from a person's name or address is not saved."""
-    t = re.sub(r"\s+", " ", name or "").strip()
-    if t and BEACH_WORD.match(fold(t)) and len(t.split()) <= 6 and not re.search(r"[\d@/:]", t):
-        return scrub_text(t)
-    return "[withheld: not a name in DRNA's station table]" if t else ""
+    """Preserve the source public record (decision 57)."""
+    return name
 
 
 def _safe_town(town: str) -> str:
-    t = _town_key(town)
-    hit = _TOWN_KEYS.get(t) or next((m for k, m in _TOWN_KEYS.items() if _near(t, k)), None)
-    return hit or ("[withheld]" if t else "")
+    """Preserve the source public record (decision 57)."""
+    return town
 
 
 def _safe_code(code: str) -> str:
@@ -418,7 +413,7 @@ def parse_notice(post: dict) -> dict:
     advice = None
     if ex:
         full = ADVICE_FULL.match(ex.group(1).strip())
-        advice = re.sub(r"\s+", " ", full.group(0)) if full else "no son aptas para bañistas"
+        advice = ex.group(1).strip()
     link = post.get("link") if isinstance(post.get("link"), str) and post["link"].startswith(LINK_PREFIX) else None
     return {"id": post.get("id"), "published": pub, "modified": mod, "link": link, "kind": kind,
             "sampled": sampled, "sample_words": words, "advice": advice, "listed": listed, "unknown": unknown,
@@ -438,17 +433,12 @@ def sanitize_notice(n: dict) -> dict:
             out[k] = n[k]
     if not (isinstance(out["link"], str) and out["link"].startswith(LINK_PREFIX)):
         out["link"] = None
-    if out["sample_words"] and not (SAMPLE.search("muestreos del " + out["sample_words"])
-                                    or SAFE_SAMPLE_WORDS.match(out["sample_words"])):
-        out["sample_words"] = None
-    if out["advice"] and not ADVICE_FULL.fullmatch(out["advice"]):
-        out["advice"] = "no son aptas para bañistas"
     rows = []
     for x in out.get("listed") or []:
         st = x.get("station")
         ok = st in STATIONS and norm(x.get("name") or "") in STATION_NAMES[st] | {""}
         row = {"station": st, "code": _safe_code(x.get("code") or ""),
-               "name": (x.get("name") or "") if ok else STATIONS[st][0] if st in STATIONS else "",
+               "name": x.get("name") or "",
                "municipio": _safe_town(x.get("municipio") or ""), "note": None}
         if ok and x.get("note"):   # the note rebuilt from the row's safe fields, never carried as text (verify P1-4)
             again = station_of(row["code"], row["name"], row["municipio"] if row["municipio"] != "[withheld]" else "")

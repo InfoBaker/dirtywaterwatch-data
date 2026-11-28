@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "de-dnrec-recreational-water"
 name: "Delaware DNREC Recreational Water Program: advisory history (data.delaware.gov) and sampling stations (FirstMap)"
 url: "https://data.delaware.gov/resource/ever-58ni.json"

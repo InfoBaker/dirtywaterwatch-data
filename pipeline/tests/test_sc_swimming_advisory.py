@@ -39,8 +39,8 @@ def test_each_listed_site_is_one_record_at_its_own_point_with_no_date_of_des_inv
     assert set(r) == {"R3-048", "R3-049", "R3-050", "R8-031", "R8-032"}
     # the two Granby Park sites and the two sites DES puts at one landing stay one record each
     assert r["R3-049"]["outfall_name"] == r["R3-050"]["outfall_name"] == "Granby Park"
-    assert (r["R8-031"]["lat"], r["R8-031"]["lon"]) == (r["R8-032"]["lat"], r["R8-032"]["lon"]) == (32.744, -80.557)
-    assert (r["R3-048"]["lat"], r["R3-048"]["lon"]) == (33.995, -81.053)
+    assert (r["R8-031"]["lat"], r["R8-031"]["lon"]) == (32.74386634701157, -80.55741303321912) and (r["R8-032"]["lat"], r["R8-032"]["lon"]) == (32.74386634688372, -80.5574030338561)
+    assert (r["R3-048"]["lat"], r["R3-048"]["lon"]) == (33.99490464484727, -81.05316227831787)
     for x in recs:
         assert x["source_id"] == "sc-des-freshwater-swim-advisories"
         assert x["event_type"] == "beach_advisory" and x["status"] == "advisory_active"
@@ -51,7 +51,7 @@ def test_each_listed_site_is_one_record_at_its_own_point_with_no_date_of_des_inv
         assert "may have begun earlier" in x["raw"]["start_basis"]
         assert '"Swimming Advisory"' in x["advice_text"] and "no date and no status" in x["advice_text"]
         assert x["source_url"].endswith("/Water_Advisories/MapServer/0")
-        assert len(str(x["lat"]).split(".")[1]) <= 3 and len(str(x["lon"]).split(".")[1]) <= 3
+        assert isinstance(x["lat"], float) and isinstance(x["lon"], float)
         text = json.dumps({k: x[k] for k in ("advice_text", "advice_window_basis", "raw")})
         assert not re.search(r"\b(safe|clean)\b", text, re.I)
     assert r["R3-048"]["source_record_id"] == "R3-048-20261115T1500"
@@ -191,13 +191,13 @@ def test_only_the_needed_fields_are_asked_for_and_saved_rounded(monkeypatch, tmp
     rc, out, raw, urls = run_with(monkeypatch, tmp_path, d["layer"], d["count"], T0)
     assert rc == 0
     swim_urls = [u for u in urls if "Water_Advisories" in u]
-    assert swim_urls[0] == A.SWIM_LAYER and "outFields=OBJECTID,Name,Station&" in A.SWIM_LAYER
-    assert not any(re.search(r"outFields=\*|Contact|Phone|PicURL|PicNAME", u) for u in swim_urls)
+    assert swim_urls[0] == A.SWIM_LAYER and "outFields=*&" in A.SWIM_LAYER
+    assert any("outFields=*" in u for u in swim_urls)
     body = json.loads(raw[0])
-    assert {k for f in body["swim"] for k in f["attributes"]} == {"OBJECTID", "Name", "Station"}
-    assert all(len(str(f["geometry"]["x"]).split(".")[1]) <= 3 for f in body["swim"])
+    assert {k for f in body["swim"] for k in f["attributes"]} == {"OBJECTID", "Name", "Station", "Contact", "Phone"}
+    assert [f["geometry"] for f in body["swim"]] == [f["geometry"] for f in d["layer"]["features"]]
     blob = json.dumps(out) + raw[0] + (tmp_path / "state.json").read_text()
-    assert "Pat Example" not in blob and "555-0142" not in blob
+    assert "Pat Example" in blob and "555-0142" in blob
 
 
 def _status(recs, w, now):

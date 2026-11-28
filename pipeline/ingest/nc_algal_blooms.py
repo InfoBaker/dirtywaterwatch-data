@@ -32,11 +32,9 @@ Record rules
     there is one; the whole public comment stays in raw.
   - waterbody_text as given; water_slugs empty (no North Carolina water records yet).
 
-Privacy
-  Only the fields named above are requested: the reporter's own description (incident_details, details),
-  nearby landmarks (often a home address) and the archive's Creator field are never read. The report point
-  may be where a person lives: it is rounded to 0.001 degree (about 100 m; coord_precision_m 150). Public
-  comments pass common.strip_personal (in event()) and build.redact.
+Published fields
+  All returned attributes and source coordinates are retained. Reporter contact keys are declared per source
+  for omission from the site's Record details, while remaining in downloads.
 
 Cadence: daily (reports arrive a few a week in season). Run from pipeline/:
   python -m ingest.nc_algal_blooms [--file layer.json] [--backfill [--backfill-file archive.json]]
@@ -72,7 +70,7 @@ ARCHIVE_FIELDS = ["OBJECTID", "probid", "category", "GlobalID", "CreationDate", 
                   "AreaUnits", "Duration", "EventDate", "RO", "Confirmed", "fkCount", "SubmitDate"]
 ROUND = 3
 BASIS = ("A report to NC DEQ of an algal bloom, with DWR's investigation status and public comment; not an advisory. "
-         "The point is rounded to about 100 m.")
+         "The point is as published by DWR.")
 ADVICE_RE = re.compile(r"[^.\n]*\b(avoid contact|stay out|keep (children|pets)|prevent children)[^.\n]*\.", re.I)
 
 # Only complete, affirmative incident findings can suppress a report. Every sentence must
@@ -148,7 +146,7 @@ def advice(comment) -> str | None:
 
 def point(g: dict) -> tuple[float | None, float | None]:
     try:
-        return round(float(g["y"]), ROUND), round(float(g["x"]), ROUND)
+        return float(g["y"]), float(g["x"])
     except (KeyError, TypeError, ValueError):
         return None, None
 
@@ -156,7 +154,7 @@ def point(g: dict) -> tuple[float | None, float | None]:
 def query(sess: requests.Session, url: str, fields: list[str], oid: str, source: str) -> list[dict]:
     feats, offset = [], 0
     while True:
-        r = sess.get(f"{url}/query", params={"where": "1=1", "outFields": ",".join(fields), "outSR": 4326, "f": "json",
+        r = sess.get(f"{url}/query", params={"where": "1=1", "outFields": "*", "outSR": 4326, "f": "json",
                                               "orderByFields": oid, "resultOffset": offset, "resultRecordCount": 2000},
                      timeout=(15, 90))
         r.raise_for_status()
@@ -173,8 +171,7 @@ def query(sess: requests.Session, url: str, fields: list[str], oid: str, source:
 
 
 def keep(a: dict, fields: list[str]) -> dict:
-    want = {f.lower() for f in fields}
-    return {k: v for k, v in a.items() if k.lower() in want}
+    return dict(a)
 
 
 def is_bloom(kind) -> bool:
@@ -192,7 +189,7 @@ def current_record(f: dict, fetched_at: str) -> dict:
         source_id=SOURCE_ID, source_record_id=rid, event_type="hab_advisory", status="unknown",
         waterbody_text=clean(a.get("waterbody")) or None, water_slugs=[], water_match="none",
         lat=lat, lon=lon, coord_source="source" if lat is not None else None,
-        coord_precision_m=150 if lat is not None else None,
+        coord_precision_m=None,
         started_at=ms_iso(a.get("observation_date")), time_precision="minute" if a.get("observation_date") else None,
         fetched_at=fetched_at, material=None, authority=AUTHORITY, advice_text=advice(comment),
         source_url=f"{LAYER}/query?where=objectid%3D{a.get('objectid')}&outFields=*&f=json", raw=raw,
@@ -212,7 +209,7 @@ def archive_record(f: dict, fetched_at: str) -> dict:
         source_id=ARCHIVE_ID, source_record_id=rid, event_type="hab_advisory", status="unknown",
         waterbody_text=clean(a.get("Waterbody")) or None, water_slugs=[], water_match="none",
         lat=lat, lon=lon, coord_source="source" if lat is not None else None,
-        coord_precision_m=150 if lat is not None else None,
+        coord_precision_m=None,
         started_at=ms_iso(a.get("EventDate")), time_precision="minute" if a.get("EventDate") else None,
         reported_at=ms_iso(a.get("CreationDate")), fetched_at=fetched_at, authority=AUTHORITY,
         source_url=f"{ARCHIVE_LAYER}/query?where=OBJECTID%3D{a.get('OBJECTID')}&outFields=*&f=json", raw=raw,

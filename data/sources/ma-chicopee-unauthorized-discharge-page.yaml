@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ma-chicopee-unauthorized-discharge-page"
 name: "Chicopee Unauthorized Discharge Notifications page"
 url: "https://www.chicopeema.gov/931/Unauthorized-Discharge-Notifications-Pag"

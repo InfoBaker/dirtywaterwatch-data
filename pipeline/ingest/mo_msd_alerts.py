@@ -35,8 +35,8 @@ Record rules
   - Place: no point; raw.counties names MSD's service area (St. Louis County and the City of St. Louis), so a water
     named in the post is placed only on a record of that name that reaches one of them.
 
-Privacy: the posts name contractors and occasionally staff; only the parsed fields and the post text through the
-house-number and personal-data scrub are stored; data/raw keeps those fields only, never the response.
+Public-record policy: preserve downloaded titles, notice text and published source URLs, including names and
+addresses. The existing WordPress request field selection is unchanged. Requested removals run at export.
 Run from pipeline/:  python -m ingest.mo_msd_alerts [--backfill] [--file posts.json ...]
 """
 from __future__ import annotations
@@ -152,7 +152,7 @@ def record(p: dict, at: str) -> dict:
                 ws.append(w)
     v, flag, vtext = volume(text)
     plant = bool(re.search(r"treatment plant", title, re.I))
-    raw = {"state": "MO", "time_zone": "America/Chicago", "place_key": place_key(title),
+    raw = {"title": title, "source_text": text, "state": "MO", "time_zone": "America/Chicago", "place_key": place_key(title),
            "place_key_version": PLACE_KEY_VERSION,
            "is_follow_up": bool(FOLLOW_UP.search(title)), "start_kind": kind, "day_read_from": how,
            "start_is_upper_bound": kind in ("discovered", "reported", "publication", "stated"),
@@ -177,8 +177,7 @@ def record(p: dict, at: str) -> dict:
 
 
 def permalink(p: dict) -> str:
-    """msdprojectclear.org/?p=<id>, the post's numeric permalink, so a name or address in its slug is never kept
-    (verification P1-4); the post's address only when it has no id."""
+    """Keep the published post address; use its numeric permalink only as a fallback."""
     return safe_link(p["link"], f"https://msdprojectclear.org/?p={p['id']}" if p.get("id") else None)
 
 
@@ -186,8 +185,7 @@ PLACE_KEY_VERSION = 2
 
 
 def place_key(title: str) -> str:
-    """The key that ties a follow-up post to its first post: the last place the title names, read from the scrubbed
-    title (safe_text), so a person's name in a title never becomes part of the key (verification P1-4)."""
+    """The key tying a follow-up to the last place named in its source title."""
     title = safe_text(common.strip_house_numbers(title or "")) or ""
     title = title.replace("[name removed]", " ")
     title = re.sub(r"\s*\b(?:completed?|update[ds]?|halted)\b\s*$", "", title, flags=re.I).strip(" :-")
@@ -222,14 +220,9 @@ def run(pages: list[list[dict]], prev: list[dict], at: str) -> tuple[list[dict],
     recs = {r["event_id"]: r for r in prev}
     for r in recs.values():
         if r["raw"].get("place_key_version") != PLACE_KEY_VERSION:
-            # a key made by an earlier version from the unscrubbed title can hold a name: remade from the title when
-            # the save still has it, else dropped (the post's next read remakes it); verification P1-4
             if r["raw"].get("title"):
                 r["raw"]["place_key"] = place_key(r["raw"]["title"])
-            else:
-                r["raw"].pop("place_key", None)
             r["raw"]["place_key_version"] = PLACE_KEY_VERSION
-        r["raw"].pop("title", None)                   # the post title is no longer kept (re-review P1-9)
         migrate_water_text(r)
         r["advice_text"] = safe_text(r.get("advice_text"))
         r["source_url"] = safe_link(r.get("source_url") or "", f"https://msdprojectclear.org/?p={r.get('source_record_id')}")
@@ -255,9 +248,8 @@ def run(pages: list[list[dict]], prev: list[dict], at: str) -> tuple[list[dict],
 
 
 def safe_posts(page: list[dict]) -> list[dict]:
-    return [{"id": p["id"], "date_gmt": p.get("date_gmt"), "modified_gmt": p.get("modified_gmt"), "link": permalink(p),
-             "place_key": place_key(common.strip_house_numbers(html.unescape(p["title"]["rendered"]))),
-             } for p in page if is_notice(p)]
+    return [{**p, "place_key": place_key(html.unescape(p["title"]["rendered"]))}
+            for p in page if is_notice(p)]
 
 
 def fetch(backfill: bool) -> list[list[dict]]:

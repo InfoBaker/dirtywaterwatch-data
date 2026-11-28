@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-deep-agol-cso-and-cso-groups"
 name: "CT DEEP CSO_and_CSO_Groups (CSO or CSO group locations used for event reporting)"
 url: "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/CSO_and_CSO_Groups/FeatureServer/0"

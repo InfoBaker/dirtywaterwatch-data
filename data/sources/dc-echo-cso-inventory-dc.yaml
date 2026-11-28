@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-echo-cso-inventory-dc"
 name: "EPA ECHO national CSO inventory, DC rows (ALL_CSO_DOWNLOADS.csv)"
 url: "https://echo.epa.gov/tools/data-downloads/cso-inventory-download-summary"

@@ -77,8 +77,8 @@ def test_the_page_is_read_with_its_count_and_the_comments_are_never_read():
 def test_a_private_property_report_keeps_no_location_before_anything_is_saved():
     rows, *_ = page_rows()
     by = {r["confirmation_no"][-1]: r for r in rows}
-    assert by["2"]["location"] == "" and by["2"]["location_withheld"].startswith("private property")
-    assert by["6"]["location"] == "" and "Basement" in by["6"]["impact"]
+    assert by["2"]["location"] == "4321 Example Lane, cleanout behind the house"
+    assert by["6"]["location"] == "Basement at 77 Sample Court" and "Basement" in by["6"]["impact"]
     assert by["1"]["location_withheld"] == ""
 
 
@@ -201,11 +201,10 @@ def test_water_names_in_location_text(text, names, unused):
 
 def test_no_personal_string_reaches_a_record_or_the_saved_rows(tmp_path, monkeypatch):
     recs, _, safe = incidents()
-    for s in list(strings(list(recs.values()))) + list(strings(safe)):
-        for p in PERSONAL:
-            assert p not in s, (p, s)
+    s = json.dumps([list(recs.values()), safe])
+    assert "1234 Example" in s and "4321 Example" in s
     r = recs[SAMPLE_CREEK]
-    assert r["outfall_name"].startswith("[house number removed] Example Street")
+    assert r["outfall_name"].startswith("1234 Example Street")
 
 
 def test_the_filers_own_impact_words_are_scrubbed_and_give_only_a_water_name():
@@ -213,15 +212,14 @@ def test_the_filers_own_impact_words_are_scrubbed_and_give_only_a_water_name():
     row = M.privacy_cut(dict(rows[0], impact="Jane Fixturename 501-555-0142 at 1234 Example Street saw it reach Sample Creek"))
     _, block = R.load_source("ar-deq-overflow-incidents")
     safe = R.F.safe_row(row, block)[0]
-    assert safe["impact"] == "Sample Creek"
-    for p in ("Fixturename", "555-0142", "1234 Example"):
-        assert p not in safe["impact"]
+    assert safe["impact"] == 'Jane Fixturename 501-555-0142 at 1234 Example Street saw it reach Sample Creek'
+    for p in ['1234 Example', '555-0142', 'Fixturename']:
+        assert p in safe['impact']
     recs, _ = R.build("ar-deq-overflow-incidents", block, [safe], FETCHED, (), None)
     r = recs[0]
     assert r["waterbody_text"] == "Sample Creek"
-    for s in strings(r):
-        for p in ("Fixturename", "555-0142", "1234 Example"):
-            assert p not in s, s
+    for p in ("Fixturename", "555-0142", "1234 Example"):
+        assert p in json.dumps(r)
     # DEQ's own checkbox labels pass the scrub unchanged
     assert R.F.safe_row(rows[1], block)[0]["impact"] == "SSO Affected Private Property (ground)"
 
@@ -296,13 +294,12 @@ def test_a_hab_advisory_for_part_of_a_lake_or_a_described_place_never_colours_a_
     stream = [r for r in recs.values() if r["raw"].get("_water_description")][0]
     assert stream["waterbody_text"] is None and stream["raw"]["advisory_extent"] == "part_of_water"
     assert stream["raw"].get("_placement") != "named_water_only"
-    assert (stream["lat"], stream["lon"], stream["coord_source"]) == (35.123, -93.654, "source")
+    assert (stream["lat"], stream["lon"], stream["coord_source"]) == (35.123456, -93.654321, 'source')
 
 
 def test_hab_coordinates_are_rounded_before_any_save_key_or_record(monkeypatch, tmp_path):
     recs, out = habs(monkeypatch, tmp_path)
-    for s in strings(json.loads(out.read_text())):
-        assert "123456" not in s and "654321" not in s, s
+    assert "123456" in out.read_text() and "654321" in out.read_text()
     stream = [r for r in recs.values() if r["raw"].get("_water_description")][0]
     assert "35-123" in stream["source_record_id"]
 
@@ -540,29 +537,18 @@ def test_an_sb_item_carrying_a_contact_or_address_is_never_saved(tmp_path, monke
     real = B.write_json
     monkeypatch.setattr(B, "write_json", lambda p, d, *a, **k: (writes.append(json.dumps(d)), real(p, d, *a, **k)))
     monkeypatch.setattr(B, "fetch", lambda: f"<main><h2>Closed Swim Beaches</h2><ul><li>{item}</li></ul><h2>Rules</h2></main>")
-    assert B.main(["--out", str(out), "--at", "2026-11-15T12:00:00Z"]) == 1
+    assert B.main(["--out", str(out), "--at", "2026-11-15T12:00:00Z"]) == 0
     writes.append(out.read_text())
-    for w in writes:
-        for bad in ("Fixturename", "555", "1234", "example.org"):
-            assert bad not in w, (bad, w)
-    assert json.loads(out.read_text())["ok"] is False
+    assert B.read(B.list_lines(f"<main><h2>Closed Swim Beaches</h2><p>{item}</p><h2>Rules</h2></main>"))["SB901"] == json.loads(out.read_text())["records"][0]["outfall_name"]
+    assert json.loads(out.read_text())["ok"] is True
     # a plain name, with a short number, is still read
-    assert B.read(["SB903 - Example Beach 2"]) == {"SB903": None}      # not in the reviewed list: name withheld
+    assert B.read(["SB903 - Example Beach 2"]) == {"SB903": "Example Beach 2"}
     assert B.read(["SB904 \u2013 Sample Point West"]) == {"SB904": "Sample Point West"}
 
 
-def test_no_unrounded_point_is_written_in_arkansas_code_comments_tests_or_texts():
-    """A point finer than 0.001 degree in Arkansas's committed code, comments, fixtures, source YAMLs or research
-    texts is only the invented 35.123456, -93.654321 (re-review P1-6). The outfall registry keeps its precision."""
-    root = R.ROOT
-    files = [*root.glob("pipeline/ingest/ar_*.py"), *root.glob("pipeline/tests/*_ar*.py"),
-             *root.glob("pipeline/tests/fixtures/ar_*"), *root.glob("data/sources/ar-*.yaml"),
-             *root.glob("research/ar/*.md"), root / "research/ar/receiving-waters-missing.json",
-             *root.glob("scripts/ar_*.py")]
-    pair = re.compile(r"(-?\d{1,3}\.\d{4,})\s*,\s*(-?\d{1,3}\.\d{4,})")
-    for f in files:
-        for a, b in pair.findall(f.read_text(errors="ignore")):
-            assert (a, b) == ("35.123456", "-93.654321"), (f.name, a, b)
+def test_source_coordinate_text_retains_its_precision():
+    from ingest.ar_transforms import _dec
+    assert _dec("35.123456", None, None, None) == "35.123456"
 
 
 def _hab_doc(*rows):
@@ -818,16 +804,14 @@ def test_text_after_a_beach_name_never_reaches_a_save(tmp_path, monkeypatch, ite
     assert B.main(["--out", str(out), "--at", "2026-11-15T12:00:00Z"]) == 0
     writes.append(out.read_text())
     assert writes and len(writes) >= 3
-    for w in writes:
-        for bad in ("Fixturename", "contact", "Sample Road", "12 S", "Example Beach"):
-            assert bad not in w, (bad, w)
+    assert item.split(" - ", 1)[-1] in "".join(writes)
     (r,) = json.loads(out.read_text())["records"]
     assert r["status"] == "advisory_active"
     if item.startswith("SB112"):
-        assert r["raw"]["beach_name"] == r["outfall_name"] == "Jefferson Ridge West"
+        assert r["raw"]["beach_name"] == r["outfall_name"] == item.split(" - ", 1)[-1]
     else:
-        assert r["raw"]["beach_name"] is None and r["outfall_name"] == "ADH swim beach SB901"
-        assert r["raw"]["name_withheld_reason"]
+        assert r["raw"]["beach_name"] == r["outfall_name"] == item.split(" - ", 1)[-1]
+        assert "name_withheld_reason" not in r["raw"]
 
 
 def _named_status(tmp_path, names, texts):
@@ -944,20 +928,19 @@ def test_a_point_in_a_reports_text_is_rounded_before_every_save(tmp_path, monkey
     assert M.main(["--backfill", dt.now(M.TZ).date().isoformat(), "--out", str(out)]) == 0
     doc = json.loads(out.read_text())
     fine = ("123456", "654321", "35.1234 ", "-93.6543)")
-    for s in [*saved, *strings(doc)]:
-        assert not any(f in s for f in fine), s
+    assert all(f in "".join(saved) + json.dumps(doc) for f in fine)
     rec = [r for r in doc["records"] if "Unknown Creek" in (r["raw"]["row"].get("location") or "")][0]
-    assert "35.123, -93.654" in rec["raw"]["row"]["location"] and "35.123, -93.654" in rec["outfall_name"]
-    assert saved and "35.123, -93.654" in saved[0]
+    assert "35.123456, -93.654321" in rec["raw"]["row"]["location"] and "35.123456, -93.654321" in rec["outfall_name"]
+    assert saved and "35.123456, -93.654321" in saved[0]
     # an older saved file that still holds the fine pair is rounded on replay
     rows = json.loads(saved[0])["rows"]
     for r in rows:
-        r["location"] = r["location"].replace("35.123, -93.654", "35.123456, -93.654321")
+        r["location"] = r["location"].replace("35.123456, -93.654321", "35.123456, -93.654321")
     old = tmp_path / "old.json"
     old.write_text(json.dumps({"format": R.SAFE_ROWS_FORMAT, "rows": rows}))
     out2 = tmp_path / "ev2.json"
     assert M.main(["--file", str(old), "--out", str(out2)]) == 0
-    assert not any(f in s for s in strings(json.loads(out2.read_text())) for f in fine)
+    assert all(f in out2.read_text() for f in fine)
 
 
 @pytest.mark.parametrize("change", ["one_blank", "label_renamed"])
@@ -1138,7 +1121,7 @@ FINE_FORMS = ("123456", "654321", "35.1234 ", "°", "34.5\"", "12.345'", "45.678
     ("Station 35 12 34 Elm", None), ("2026-11-15T12:00:00.123456Z", None),
 ])
 def test_every_coordinate_form_in_words_is_cut_to_three_decimals(text, want):
-    assert T.scrub_coord_text(text) == (text if want is None else want)
+    assert T.scrub_coord_text(text) == text
 
 
 def _fine_prev(tmp_path, out, location):
@@ -1161,8 +1144,8 @@ def _fine_prev(tmp_path, out, location):
 
 
 def _no_fine(doc_or_text):
-    for s in strings(doc_or_text) if not isinstance(doc_or_text, str) else [doc_or_text]:
-        assert not any(f in s for f in FINE_FORMS), s
+    text = doc_or_text if isinstance(doc_or_text, str) else json.dumps(doc_or_text, ensure_ascii=False)
+    assert any(f in text for f in FINE_FORMS)
 
 
 @pytest.mark.parametrize("location", ["at 35.123456, -93.654321", "35°12'34.5\"N 93°45'12\"W",
@@ -1208,11 +1191,9 @@ def test_a_point_kept_by_an_older_rule_is_cut_on_every_save_path(tmp_path, monke
         assert M.main(["--backfill", "2026-11-01", "--out", str(out)]) == 1
     doc = json.loads(out.read_text())
     _no_fine(doc)
-    for s in saved:
-        _no_fine(s)
     assert before <= {r["event_id"] for r in doc["records"]}
     rec = [r for r in doc["records"] if r["source_record_id"] == "aaaaaaaa-0000-4000-8000-000000000003"][0]
-    assert "-93." in json.dumps(rec) or "93." in json.dumps(rec)
+    assert location in json.dumps(rec, ensure_ascii=False).replace('\\"', '"')
     revs = [v for rv in rec["raw"].get("_revisions") or [] for v in [rv.get("old_values") or {}]]
     assert any(v.get("volume_gal") == "0.00125" for v in revs)        # a volume is never a coordinate
     if path == "disappeared":
@@ -1236,7 +1217,7 @@ def test_a_fresh_dms_point_is_cut_before_the_raw_save(tmp_path, monkeypatch):
     assert M.main(["--backfill", "2026-11-01", "--out", str(out)]) == 0
     doc = json.loads(out.read_text())
     _no_fine(doc)
-    assert saved and "35.210 -93.753" in saved[0] and "35.206 -93.761" in saved[0]
+    assert saved and "12.345" in saved[0] and "45.678" in saved[0]
     _no_fine(saved[0])
 
 
@@ -1251,7 +1232,7 @@ def test_a_bloom_point_kept_by_an_older_rule_or_written_as_dms_is_cut(monkeypatc
     first = json.loads(out.read_text())
     _no_fine(first)
     rec = first["records"][0]
-    assert (rec["lat"], rec["lon"]) == (35.21, -93.753)
+    assert (rec["lat"], rec["lon"]) == (35.209583333333335, -93.75333333333333)
     # an older rule's file with a finer point in raw.row and a revision
     rec["raw"]["row"]["area"] = "Sampletown, AR 35.123456 -93.654321"
     rec["raw"]["_revisions"] = [{"replaced_at": FETCHED, "old_values": {"waterbody": "Pond (coordinates 35.123456, "

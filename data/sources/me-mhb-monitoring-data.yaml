@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "me-mhb-monitoring-data"
 name: "Maine Healthy Beaches monitoring results download (CSV/XLSX/XML per beach)"
 url: "https://apps.web.maine.gov/online/healthy_beaches/public/monitoring-data.csv?beach=East%20End%20Beach&siteIds=&dateCollectedMin=&dateCollectedMax="

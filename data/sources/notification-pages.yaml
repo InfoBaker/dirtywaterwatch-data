@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "notification-pages"
 name: "Operators' and agencies' public notification pages (monitor of data/notice-channels.json)"
 url: null

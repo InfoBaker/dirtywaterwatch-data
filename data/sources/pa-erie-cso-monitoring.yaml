@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "pa-erie-cso-monitoring"
 name: "City of Erie Bureau of Sewers CSO Monitoring (real-time map and event reports)"
 url: "https://telog.erie.pa.us/CSO.Monitoring/Map"

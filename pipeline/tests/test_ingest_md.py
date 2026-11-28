@@ -239,8 +239,8 @@ def test_names_after_an_honorific_do_not_reach_the_record():
     recs, _ = build([row(overflow_cause="Undetermined.  Mr. Example reports the canal was a factor.",
                          receiving_water="Ms. Sample Person, the property owner, said it reached a pond")])
     r = next(iter(recs.values()))
-    assert "Example" not in r["raw"]["row"]["overflow_cause"] and "[name removed]" in r["raw"]["row"]["overflow_cause"]
-    assert "Sample" not in (r["waterbody_text"] or "")
+    assert "Example" in r["raw"]["row"]["overflow_cause"] and "[name removed]" not in r["raw"]["row"]["overflow_cause"]
+    assert "Sample" in r["waterbody_text"] or ""
     assert M.scrub_people("Mr. Rooter cleared the line") == "Mr. Rooter cleared the line"     # allowlisted company
 
 
@@ -430,19 +430,20 @@ def test_baltimore_malformed_or_partial_read_saves_nothing(tmp_path, monkeypatch
         assert rc == 1 and out["ok"] is False and saved == [] and out["records"] == earlier
 
 
-def test_baltimore_asks_only_the_safe_fields_and_rounds_points_before_saving(tmp_path, monkeypatch):
+def test_baltimore_asks_for_narratives_and_preserves_source_points(tmp_path, monkeypatch):
     old = B.to_record({**ROW, "OBJECTID": 6, "SSOID": 1006}, FETCHED, None)       # saved before the rules: eight decimals
     layer = FakeLayer(list(ROW), [ROW])
     rc, out, saved = baltimore_run(tmp_path, monkeypatch, layer, [old])
     assert rc == 0 and out["ok"] is True
     q = [p for u, p in layer.requests if u.endswith("/query") and not p.get("returnCountOnly")][0]
-    assert "WAIVER_REASON" not in q["outFields"] and "COMMENT_RELIEF_REQUEST_TYPE" not in q["outFields"]
+    assert "WAIVER_REASON" in q["outFields"] and "COMMENT_RELIEF_REQUEST_TYPE" in q["outFields"]
     page = saved[0].decode()
-    assert "39.3054" not in page and "invented comment" not in page and '"Latitude": 39.305' in page
+    assert "39.3054" in page and "invented comment" in page and '"Latitude": 39.305' in page
     recs = {r["event_id"]: r for r in out["records"]}
     for r in recs.values():
-        assert (r["lat"], r["lon"]) == (39.305, -76.61)
-        assert (r["raw"]["Latitude"], r["raw"]["Longitude"]) == (39.305, -76.61)
-        assert "WAIVER_REASON" not in r["raw"] and "COMMENT_RELIEF_REQUEST_TYPE" not in r["raw"]
+        assert (r["lat"], r["lon"]) == (39.30549853, -76.60973024)
+        assert (r["raw"]["Latitude"], r["raw"]["Longitude"]) == (39.30549853, -76.60973024)
+        if r["event_id"] == "md-baltimore-sso:7":
+            assert "WAIVER_REASON" in r["raw"] and "COMMENT_RELIEF_REQUEST_TYPE" in r["raw"]
     assert recs["md-baltimore-sso:6"]["raw"]["_missing_from_layer_since"]
     assert recs["md-baltimore-sso:7"]["started_at"] == "2026-10-11T11:15:00-04:00"

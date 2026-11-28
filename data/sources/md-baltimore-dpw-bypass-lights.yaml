@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "md-baltimore-dpw-bypass-lights"
 name: "Baltimore City bypass warning light notifications (Back River and Patapsco WWTPs)"
 url: "https://www.baltimorecity.gov/publicworks/water-system-in-the-city/wastewater-about/wastewater-treatment-consent-decree-program"

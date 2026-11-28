@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "oh-lima-cso-activity"
 name: "Lima Combined Sewer Overflow Activity Report"
 url: "https://www.limaohio.gov/410/Combined-Sewer-Overflow-Activity-Report"

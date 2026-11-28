@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "wi-epa-cso-inventory"
 name: "EPA National CSO Inventory, Wisconsin rows"
 url: "https://echo.epa.gov/files/echodownloads/ALL_CSO_downloads.zip"

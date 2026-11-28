@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "oh-epa-gl-cso-ohio"
 name: "EPA: Combined Sewer Overflows in the Great Lakes Basin, Ohio (operator list with websites and annual reports)"
 url: "https://www.epa.gov/npdes/combined-sewer-overflows-great-lakes-basin-ohio"

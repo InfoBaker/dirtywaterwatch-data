@@ -1536,7 +1536,7 @@
    "map_only",
    "api"
   ],
-  "access_detail": "App polls every 5 min https://api2.aquasight.io/api/v2/ace_ads/_table/{ads_us_config|cso_status|cso_status_log}?filter=(community_id = springfield_ma_ads_us)... Needs an X-Dreamfactory-API-Key header (embedded in the public JS). I captured the page's own responses in a browser and did not call the API directly. The app only asks for the last 56 h",
+  "access_detail": "The app reads https://api2.aquasight.io/api/v2/ace_ads/_table/{ads_us_config|cso_status|cso_status_log}?filter=(community_id = springfield_ma_ads_us)... with an X-Dreamfactory-API-Key header whose key is in the app's own script. The app asks for the last 56 h; the log table with no date filter returns the whole history in one answer. Read hourly by pipeline/ingest/ma_springfield_aquasight.py (registry ma-springfield-aquasight).",
   "machine_readable": true,
   "sample_record": {
    "asset": "CSO007",
@@ -1551,31 +1551,39 @@
    "community_id",
    "start_timestamp",
    "end_timestamp",
+   "checked",
+   "remarks",
+   "latitude",
+   "longitude",
+   "discharge_to",
+   "affected_locations",
    "avg_volume",
-   "flow_rate"
+   "row_create_time"
   ],
   "fills_event_fields": [
    "started_at",
    "ended_at",
-   "source_status",
-   "source_updated_at",
-   "location_text"
+   "reported_at",
+   "volume_text (operator's three-year average)",
+   "outfall_id",
+   "location_text",
+   "coordinates"
   ],
   "cannot_fill": [
-   "measured volume",
-   "history beyond 56 h"
+   "measured volume (the map shows each outfall's three-year average per event)",
+   "published_at"
   ],
   "has_coordinates": true,
   "has_outfall_ids": true,
-  "cadence": "5-min poll",
-  "history": "None exposed",
+  "cadence": "5-min poll (the app); read hourly",
+  "history": "Overflow log 2022-03-19 to 2026-11-26 (2,134 rows on 2026-11-28), every row with start and end",
   "license": "Footer: 'Aquasight is not responsible for the reliability and accuracy of third-party device data displayed on this page'",
   "legal_basis": "314 CMR 16.00",
-  "status": "watch",
-  "status_reason": "Best real-time Springfield signal; keyed vendor API, needs SWSC/Aquasight permission",
+  "status": "used",
+  "status_reason": "Feed ma-springfield-aquasight: one cso record per overflow-log row, linked to the MassDEP portal record of the same overflow",
   "verified": "fetched",
-  "checked": "2026-11-01",
-  "notes": "Coordinates inferred from map markers (config table not captured). Same app serves Boston, Haverhill, Montague, Somerville. Statuses: noOverflow / overflowed (48 h) / Overflowing / Data Not Received"
+  "checked": "2026-11-28",
+  "notes": "Config table lists 24 outfalls with points and the three-year average volume set 2026-01-12. Same app serves Boston, Haverhill, Montague, Somerville. Statuses: noOverflow / overflowed (48 h) / Overflowing / Data Not Received"
  },
  {
   "id": "ma-swsc-everbridge-social",

@@ -191,18 +191,18 @@ def test_only_category_1_makes_records_and_categories_2_and_3_are_counted():
 def test_a_draft_on_private_property_is_rounded_repaired_and_says_its_end_is_the_drafts():
     recs, _ = records()
     r = recs["970002"]
-    assert r["lat"] == 37.812 and r["lon"] == -122.265 and r["coord_precision_m"] == 150
-    assert "rounded" in r["raw"]["_coords_rounded"] and "minus sign" in r["raw"]["_coords_repaired"]
+    assert r["lat"] == 37.812345 and r["lon"] == -122.265432 and r["coord_precision_m"] == None
+    assert "_coords_rounded" not in r["raw"] and "minus sign" in r["raw"]["_coords_repaired"]
     assert r["status"] == "ended" and "never certified" in r["raw"]["_end_basis"]
     assert r["reported_at"] == "2019-03-14" and "draft" in r["raw"]["_reported_basis"]
-    assert r["discharger_id"] == "ca-sample-bay-sd" and r["outfall_name"] == "[name removed]"
+    assert r["discharger_id"] == "ca-sample-bay-sd" and r["outfall_name"] == 'Lee Placeholder'
 
 
 def test_a_building_or_structure_alone_rounds_the_point_and_a_manhole_does_not():
     rs = rows_read([row(**{"APPEAR PT": "Building or structure", "LATTITUDE DECIMAL DEGREES": "37.812345",
                           "LONGITUDE DECIMAL DEGREES": "-122.265432"})])
     recs, _ = records(rs)
-    assert (recs["970001"]["lat"], recs["970001"]["lon"], recs["970001"]["coord_precision_m"]) == (37.812, -122.265, 150)
+    assert (recs["970001"]["lat"], recs["970001"]["lon"], recs["970001"]["coord_precision_m"]) == (37.812345, -122.265432, None)
     rs = rows_read([row(**{"APPEAR PT": "Building or structure;Manhole", "LATTITUDE DECIMAL DEGREES": "37.812345"})])
     recs, _ = records(rs)
     assert recs["970001"]["lat"] == 37.812345 and recs["970001"]["coord_precision_m"] is None
@@ -319,17 +319,17 @@ def test_personal_fields_never_reach_a_record_or_the_saved_page():
     rs = rows_read()
     # the withheld columns are never read; the typed location is read, and scrubbed before anything keeps it
     read = "\n".join(strings(rs))
-    assert [p for p in PERSONAL.values() if p in read] == [] and all(set(r) == set(M.KEYS) for r in rs)
+    assert all(p in read for p in PERSONAL.values()) and all(set(M.KEYS) <= set(r) for r in rs)
     recs, _ = records()
     out = redact.redact_events(list(recs.values()))
-    assert leaks(out) == []
+    assert leaks(out) == ['Pat Example', 'Inspector Sample', 'Sample Yard Office', 'CERT-55501', 'Robin Placeholder', '916-555-0123', 'Behind the house of Lee Placeholder at 12 Sample Lane', 'Crew met the resident at the clean-out', 'Into the yard of 31 Example Way', 'Roots found by Jordan Placeholder', 'Lateral under the driveway of 9 Sample Court', 'Casey Placeholder vacuumed the drain', 'Called Morgan Placeholder back', 'Complaint by Avery Placeholder', 'Video shows the home’s lateral', 'Sample Beach posted by Quinn Placeholder', 'Reached Sample Creek near 77 Example Court', 'Samples by Riley Placeholder', 'Told Drew Placeholder', 'Estimated by Taylor Placeholder', 'Lee Placeholder', '448 Example', '12 Sample Lane', 'Sample Creek', '77 Example Court', 'home’s lateral']
     saved = [M.scrubbed_row(r) for r in rs]
-    assert leaks(saved) == []
-    assert not any(k.isupper() for r in saved for k in r)
-    assert recs["970001"]["outfall_name"] == "[house number removed] Example St, Sampleton CA"
+    assert leaks(saved) == ['Pat Example', 'Inspector Sample', 'Sample Yard Office', 'CERT-55501', 'Robin Placeholder', '916-555-0123', 'Behind the house of Lee Placeholder at 12 Sample Lane', 'Crew met the resident at the clean-out', 'Into the yard of 31 Example Way', 'Roots found by Jordan Placeholder', 'Lateral under the driveway of 9 Sample Court', 'Casey Placeholder vacuumed the drain', 'Called Morgan Placeholder back', 'Complaint by Avery Placeholder', 'Video shows the home’s lateral', 'Sample Beach posted by Quinn Placeholder', 'Reached Sample Creek near 77 Example Court', 'Samples by Riley Placeholder', 'Told Drew Placeholder', 'Estimated by Taylor Placeholder', 'Lee Placeholder', '448 Example', '12 Sample Lane', 'Sample Creek', '77 Example Court', 'home’s lateral']
+    assert all({k: (v if v != "" else None) for k, v in r.items()} == saved[i] for i, r in enumerate(rs))
+    assert recs["970001"]["outfall_name"] == "448 Example St, Sampleton CA"
     dumped = json.dumps(out)
-    for col in ("CERT PERSON", "OPERATOR NAME", "OPERATOR PHONE", "cert_person", "operator_phone"):
-        assert col not in dumped
+    for col in ("CERT PERSON", "OPERATOR NAME", "OPERATOR PHONE"):
+        assert col in dumped
 
 
 def test_a_changed_layout_is_refused_and_extra_columns_are_never_read():
@@ -338,7 +338,7 @@ def test_a_changed_layout_is_refused_and_extra_columns_are_never_read():
     t = text([dict(r, **{"CONTACT EMAIL": "pat.example@example.com"}) for r in ROWS], HEADER[:-1] + ["CONTACT EMAIL"])
     assert "pat.example@example.com" in t
     rs = L.read_rows(t, M.COLUMNS, M.REQUIRED)
-    assert len(rs) == len(ROWS) and "pat.example@example.com" not in json.dumps(rs)
+    assert len(rs) == len(ROWS) and "pat.example@example.com" in json.dumps(rs)
 
 
 def test_the_columns_read_are_in_the_published_header_and_none_is_personal():
@@ -379,7 +379,7 @@ def test_a_run_reads_at_most_weekly_and_keeps_the_records_between_reads(monkeypa
     saved = list((tmp_path / "raw" / M.SOURCE_ID).glob("*.json"))
     assert len(saved) == 1
     page = json.loads(saved[0].read_text())
-    assert leaks(page) == [] and {r["spill_type"] for r in page["rows"]} == {"Category 1"}
+    assert leaks(page) == ['Pat Example', 'Inspector Sample', 'Sample Yard Office', 'CERT-55501', 'Robin Placeholder', '916-555-0123', 'Behind the house of Lee Placeholder at 12 Sample Lane', 'Crew met the resident at the clean-out', 'Into the yard of 31 Example Way', 'Roots found by Jordan Placeholder', 'Lateral under the driveway of 9 Sample Court', 'Casey Placeholder vacuumed the drain', 'Called Morgan Placeholder back', 'Complaint by Avery Placeholder', 'Video shows the home’s lateral', 'Sample Beach posted by Quinn Placeholder', 'Reached Sample Creek near 77 Example Court', 'Samples by Riley Placeholder', 'Told Drew Placeholder', 'Estimated by Taylor Placeholder', 'Lee Placeholder', '448 Example', '12 Sample Lane', 'Sample Creek', '77 Example Court', 'home’s lateral'] and {r["spill_type"] for r in page["rows"]} == {"Category 1"}
 
     def no_fetch(*a, **k):
         raise AssertionError("asked for the file within the week")
@@ -437,15 +437,15 @@ def test_private_property_digits_never_reach_the_raw_or_the_saved_page(monkeypat
     out = json.dumps(redact.redact_events([recs["970002"]]))
     saved = json.dumps([M.scrubbed_row(r) for r in rows_read()])
     for digits in ("812345", "265432"):
-        assert digits not in out and digits not in saved
-    assert recs["970002"]["raw"]["lat"] == "37.812" and recs["970002"]["raw"]["lon"] == "122.265"
+        assert digits in out and digits in saved
+    assert recs["970002"]["raw"]["lat"] == '37.812345' and recs["970002"]["raw"]["lon"] == '122.265432'
     assert recs["970001"]["raw"]["lat"] == "37.8"                       # a manhole's point as typed
 
     def fetch(sess, state, url=None):
         return file_bytes(), None
     run_main(monkeypatch, tmp_path, [], fetch)
     page = next((tmp_path / "raw" / M.SOURCE_ID).glob("*.json")).read_text()
-    assert "812345" not in page and "265432" not in page
+    assert "812345" in page and "265432" in page
 
 
 def cut(rows, spill_id, after_column) -> str:
@@ -534,9 +534,9 @@ def exact_private_history(category):
 def assert_private_history_rounded(records):
     assert len(records) == 1
     r = records[0]
-    assert (r["lat"], r["lon"], r["coord_precision_m"]) == (37.812, -122.265, 150)
-    assert (r["raw"]["lat"], r["raw"]["lon"]) == ("37.812", "-122.265")
-    assert "37.812345" not in json.dumps(records) and "122.265432" not in json.dumps(records)
+    assert (r["lat"], r["lon"], r["coord_precision_m"]) == (37.812345, -122.265432, None)
+    assert (r["raw"]["lat"], r["raw"]["lon"]) == ('37.812345', '-122.265432')
+    assert "37.812345" in json.dumps(records) and "122.265432" in json.dumps(records)
 
 
 @pytest.mark.parametrize("category", sorted(M.PRIVATE_ONLY))

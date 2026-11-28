@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nyc-dep-advisories"
 name: "NYC DEP Waterbody Advisory System (dashboard JSON API)"
 url: "https://nycwaterbodyadvisory.azurewebsites.net/"

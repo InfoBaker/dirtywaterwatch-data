@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "il-mwrd-possible-cso-events-layer"
 name: "MWRD \"Possible CSO Events\" live map layer"
 url: "https://utility.arcgis.com/usrsvcs/servers/addf95280b254c1e8fe64dc8e35dfedc/rest/services/CSO/CSO_PossibleEvents/MapServer/0"

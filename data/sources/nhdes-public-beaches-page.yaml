@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nhdes-public-beaches-page"
 name: "NHDES Public Beaches (Beach Inspection Program) page"
 url: "https://www.des.nh.gov/water/healthy-swimming/public-beaches"

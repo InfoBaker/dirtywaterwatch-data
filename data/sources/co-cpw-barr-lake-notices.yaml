@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "co-cpw-barr-lake-notices"
 name: "Colorado Parks and Wildlife, Barr Lake State Park page notices (algae alert, boating closure)"
 url: "https://cpw.state.co.us/state-parks/barr-lake-state-park/barr-lake-state-park-activities-trails"

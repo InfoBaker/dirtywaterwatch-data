@@ -126,15 +126,8 @@ MEASURE = re.compile(r"(?i)\b\d+(?:\.\d+)?(?=\s*(?:cfu|mpn|colonies|ug/?l|\u00b5
 
 
 def clean_comment(v) -> str | None:
-    if not v or not str(v).strip():
-        return None
-    from ingest.il_idph_beachguard import scrub_comment      # a name after a contact cue, then the full scrub
-    text = " ".join(str(v).split())
-    kept = MEASURE.findall(text)
-    out = scrub_comment(MEASURE.sub("\u2063MEASURE\u2063", text)) or ""
-    for m in kept:
-        out = out.replace("\u2063MEASURE\u2063", m, 1)
-    return out
+    """Keep published comments; a blank field remains absent."""
+    return v or None
 
 
 def rows_of(doc) -> list[dict]:

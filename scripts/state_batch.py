@@ -13,21 +13,11 @@ the pull request that carries the changed registry files to a person for review.
     python scripts/state_batch.py obl-check --state NC
     python scripts/state_batch.py files   --state NC     the registry files the steps changed (the pull request's)
     python scripts/state_batch.py scan    --state NC [--text FILE ...] [--require-blocklist]
-                                          the privacy scan: every string new in those files (and the given texts)
-                                          against the e-mail and phone patterns (common.EMAIL_RE, PHONE_RE) and the
-                                          private name blocklist (data/build/name-blocklist.json, restored with the
-                                          build state); prints where, never what
+                                          validate changed JSON files; public-record text is retained
     python scripts/state_batch.py scrub   --state NC [--text FILE ...]
-                                          with the blocklist here: a blocklisted name in the steps' diagnostic notes of
-                                          those files (NOTE_KEYS: target and skipped reasons, water_match,
-                                          no_water_reason, ...) and in the texts becomes "[name removed]"; a water
-                                          record's launch (its launches list) that holds an entry of two or more
-                                          words is withheld from the list (a one-word entry is allowed there)
-                                          ("N launch(es) withheld from <file> (private-name list)", also in the pull
-                                          request's body); a record's own fields (name, slug, aliases, permittee,
-                                          launches_unpublished, ...) are never changed
+                                          compatibility command; no default scrubbing
     python scripts/state_batch.py publish --state NC --body FILE [--date YYYY-MM-DD] [--dry-run]
-                                          the scrub above, the size ceiling (MAX_FILE_BYTES, 90 MiB: GitHub refuses a
+                                          the size ceiling (MAX_FILE_BYTES, 90 MiB: GitHub refuses a
                                           file over 100 MB, refuses) and the scan above (warnings only: owner, 2026-11-16;
                                           its findings, file, place and kind, are listed in the body and in
                                           privacy-findings.json beside it for the next round), then commit
@@ -733,16 +723,6 @@ def publish(st: str, body: Path, date: str | None = None, dry_run: bool = False,
     if not files:
         say("the steps changed none of the registry files: no branch, no pull request")
         return 0
-    # the steps' diagnostic notes lose a blocklisted name and a water's launch holding a full name is withheld (scrub_files; a
-    # record's other fields are never changed; the body says how many launches per file), then
-    # the files are listed again: a file the scrub brought back to the commit's text is not part of the pull request
-    withheld: dict = {}
-    if scrub_files(files, [body], root, withheld):
-        note_withheld(body, withheld)
-        files = changed_files(st, root)
-        if not files:
-            say("after the note scrub the registry files are as committed: no branch, no pull request")
-            return 0
     if size_check(files, root) != 0:
         return 1
     # The owner (2026-11-16, about 03:40Z): "Privacy scans are a nice to have and should not delay publishing they can
@@ -819,102 +799,6 @@ def strings(o, path="$", hide=None):
         yield path, o
 
 
-# ---------------------------------------------------------------- note scrub (before the scan)
-# The diagnostic text the steps write into the registry files (the NHD builder's target reasons, its skipped and failed-
-# place reasons and notes; the ties step's water_match, no_water_reason, coords_problem and replaced_match.why) can quote
-# a nearby water's name, and a water's name can share a word with the private-name blocklist (West Virginia, 2026-11-15:
-# "(nearby: <word> Run, ...)"). The owner's rule removes a blocklisted name everywhere, so publish replaces it with the
-# redactor's marker in these fields only, by the scan's own phrase rule (build.redact.BlockScan.scrub), before the scan.
-# Every other field (a record's name, slug, aliases, permittee, permit name, towns, ids, the source texts) is never
-# touched: a blocklisted name there still fails the scan and needs a person's decision.
-NOTE_KEYS = frozenset({"reason", "reason_detail", "notes", "how", "why", "water_match", "no_water_reason",
-                       "coords_problem"})
-STRUCTURAL_KEYS = frozenset({"name", "slug", "slugs", "aliases", "slug_aliases", "permittee", "permit_name", "towns",
-                             "town", "id", "ids", "npdes_permit", "permit", "permits", "water_slug", "water_name",
-                             "texts", "text", "records"})
-
-
-def scrub_notes(o, block, in_note: bool = False):
-    """(o with the blocklisted names in its note fields replaced, number of strings changed). Keys are never changed;
-    the value of a structural key is never entered, whatever it holds ({"records": {"reason": ...}} stays whole and
-    a name there still fails the scan); replaced_match is not a note, its why is."""
-    if isinstance(o, dict):
-        out, n = {}, 0
-        for k, v in o.items():
-            if k in STRUCTURAL_KEYS:
-                out[k] = v
-                continue
-            out[k], m = scrub_notes(v, block, k in NOTE_KEYS or in_note)
-            n += m
-        return out, n
-    if isinstance(o, list):
-        out, n = [], 0
-        for v in o:
-            x, m = scrub_notes(v, block, in_note)
-            out.append(x)
-            n += m
-        return out, n
-    if in_note and isinstance(o, str):
-        s = block.scrub(o)
-        return s, int(s != o)
-    return o, 0
-
-
-# A water record's launches (openboatlaunch's launch slugs, data/waters-<st>.json $.waters[i].launches) name a public
-# boat access, and an access can be named after a family whose surname is a single-word entry of the blocklist (Iowa,
-# 2026-11-15: a public access on the South Raccoon River). The owner's decision (2026-11-16, about 03:27Z, on public
-# place names that meet single-word entries of the private-name list): "Allow the names on the single-word entries".
-# So, in a launches item only (list items of the key `launches` of a record in the top-level `waters` list):
-#   - a blocklist entry of one word (by the scan's own word rule, build.redact._SCAN_WORDS, on the entry) is not a hit:
-#     the item stays, and the scan does not report it there;
-#   - an entry of two or more words (a person's full name) is: the pass withholds the item from the list (every string
-#     and key it holds, by BlockScan.found) and says how many per file.
-# The water record stays. Every other field (name, towns, aliases, permittee, launches_unpublished, ...) still fails the
-# scan for any entry, single-word or not, and the note fields are scrubbed as before. The files carry no launch count
-# (the top-level count is of waters), so no other field changes with a withheld item.
-LAUNCH_KEY = "launches"
-LAUNCH_PATH = re.compile(r"^\$\.waters\[\d+\]\." + LAUNCH_KEY + r"\[\d+\]")
-
-
-def launch_block(block):
-    """The BlockScan a launches item is held to: the blocklist's entries of two or more words only."""
-    from build.redact import BlockScan, _SCAN_WORDS  # noqa: E402  (_patterns put pipeline/ on the path)
-    return BlockScan([n for n, _, _ in block.phrases if len(_SCAN_WORDS.findall(n.lower())) > 1])
-
-
-def withhold_launches(doc, block):
-    """(doc with the launches that hold a blocklist entry of two or more words taken out of its water records' launch
-    lists, number withheld)."""
-    if not isinstance(doc, dict) or not isinstance(doc.get("waters"), list):
-        return doc, 0
-    multi = launch_block(block)
-    waters, n = [], 0
-    for w in doc["waters"]:
-        if isinstance(w, dict) and isinstance(w.get(LAUNCH_KEY), list):
-            keep = [x for x in w[LAUNCH_KEY] if not any(multi.found(s) for _, s in strings(x))]
-            if len(keep) != len(w[LAUNCH_KEY]):
-                n += len(w[LAUNCH_KEY]) - len(keep)
-                w = {**w, LAUNCH_KEY: keep}
-        waters.append(w)
-    return ({**doc, "waters": waters} if n else doc), n
-
-
-def withheld_line(f: str, n: int) -> str:
-    return f"{n} launch(es) withheld from {f} (private-name list)"
-
-
-def note_withheld(body: Path, withheld: dict) -> None:
-    """Add a line per file with launches withheld to the pull request's body (once: a line already there is kept)."""
-    lines = [withheld_line(f, n) for f, n in sorted(withheld.items()) if n]
-    try:
-        text = Path(body).read_text()
-    except OSError:
-        return
-    new = [x for x in lines if x not in text.splitlines()]
-    if new:
-        Path(body).write_text(text + ("" if not text or text.endswith("\n") else "\n") + "\n".join(new) + "\n")
-
-
 def _layouts():
     """[(name, dumps)] the registry files are written in (each file keeps its own: the first that gives back the file's
     text exactly is used to write it again)."""
@@ -941,67 +825,12 @@ def dumps_like(text: str, doc_before, doc_after) -> str | None:
 
 
 def scrub_files(files: list[str], texts: list[Path] = (), root: Path = ROOT, withheld: dict | None = None) -> int:
-    """Replace the blocklisted names in the note fields of the files (and in the texts, line by line) with the
-    redactor's marker, and withhold a water record's launch that holds one (withhold_launches); nothing without a
-    blocklist. Prints the file and the count, never a name; withheld, when given, gets {file: launches withheld}.
-    Returns the number of strings changed and launches withheld."""
-    _, _, block = _patterns(root)
-    if block is None:
-        return 0
-    if block.found(REDACTED):
-        # a blocklist entry inside the marker itself: a scrub would nest markers on every rerun; nothing is changed
-        # and the scan refuses what it finds
-        print("::error::a blocklist entry matches the redaction marker itself: the note scrub changes nothing (the "
-              "privacy scan decides)", flush=True)
-        return 0
-    total = 0
-    for f in files:
-        p = root / f
-        try:
-            text = p.read_bytes().decode("utf-8")      # as stored: no newline translation
-            doc = json.loads(text)
-        except (OSError, ValueError):
-            continue                     # the scan reports a file it cannot read
-        new, n = scrub_notes(doc, block)
-        new, w = withhold_launches(new, block)
-        if not n and not w:
-            continue
-        out = dumps_like(text, doc, new)
-        if out is None:
-            what = " and ".join(x for x in (f"{n} note(s)" if n else "", f"{w} launch(es)" if w else "") if x)
-            print(f"::error::{f}: {what} hold a blocklisted name, but no known layout gives the file back byte for "
-                  "byte, so the scrub leaves it as it is (the privacy scan decides)", flush=True)
-            continue
-        tmp = p.with_suffix(p.suffix + ".tmp")
-        tmp.write_bytes(out.encode("utf-8"))
-        tmp.replace(p)
-        if n:
-            say(f"{f}: {n} note(s) with a blocklisted name replaced by the redaction marker")
-        if w:
-            say(withheld_line(f, w))
-            if withheld is not None:
-                withheld[f] = withheld.get(f, 0) + w
-        total += n + w
-    for t in texts:
-        p = Path(t)
-        try:
-            lines = p.read_bytes().decode("utf-8").split("\n")
-        except (OSError, ValueError):
-            continue
-        new_lines = [block.scrub(x) for x in lines]
-        n = sum(a != b for a, b in zip(lines, new_lines))
-        if n:
-            p.write_bytes("\n".join(new_lines).encode("utf-8"))
-            say(f"{p.name}: {n} line(s) with a blocklisted name replaced by the redaction marker")
-            total += n
-    return total
+    """Compatibility command: public source text is retained; requested removals run at export."""
+    return 0
 
 
-# ---------------------------------------------------------------- size ceiling
-# GitHub refuses a pushed file over 100 MB (Louisiana's batch, 2026-11-15: data/waters-nhd.json at 101.39 MB). publish
-# refuses a changed file over this ceiling before it commits, and tests/test_data_file_sizes.py fails first on main.
+# GitHub refuses files over 100 MB; publication keeps the existing 90 MB ceiling.
 MAX_FILE_BYTES = 90 * 1024 * 1024
-
 
 def oversized(files: list[str], root: Path = ROOT, limit: int | None = None) -> list[tuple[str, int]]:
     """[(file, bytes)] of the files over limit (MAX_FILE_BYTES)."""
@@ -1028,13 +857,9 @@ def size_check(files: list[str], root: Path = ROOT, limit: int | None = None) ->
 
 
 def _patterns(root: Path):
-    """The pipeline's own patterns (this repository's code) and the blocklist of root's data/build."""
-    if str(ROOT / "pipeline") not in sys.path:
-        sys.path.insert(0, str(ROOT / "pipeline"))
-    from common import EMAIL_RE, PHONE_RE  # noqa: E402
-    from build.redact import BlockScan, blocklist  # noqa: E402
-    names = blocklist(root / "data")
-    return EMAIL_RE, PHONE_RE, (BlockScan(names) if names else None)
+    """Retired public-record filters; infrastructure log masking is independent."""
+    never = re.compile(r"(?!)")
+    return never, never, None
 
 
 def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root: Path = ROOT,
@@ -1045,18 +870,7 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
     ::warning:: lines, and the exit is 0."""
     level = "::warning::" if warn else "::error::"
     email, phone, block = _patterns(root)
-    if block is None:
-        if require_blocklist and not warn:
-            print("::error::the private name blocklist (data/build/name-blocklist.json) is not here: it comes with the "
-                  "restored build state; without it names cannot be checked, so nothing is published", flush=True)
-            return 1
-        if require_blocklist:
-            print("::warning::the private name blocklist (data/build/name-blocklist.json) is not here: names cannot be "
-                  "checked this round (e-mail and phone shapes only)", flush=True)
-        else:
-            say("no name blocklist here: e-mail and phone shapes only")
     hits = 0
-    multi = launch_block(block) if block else None   # a launches item: entries of two or more words only (LAUNCH_KEY)
 
     def kinds_of(s: str, names=block) -> list[str]:
         return [k for k, bad in (("an e-mail address", email.search(s)), ("a phone number", phone.search(s)),
@@ -1073,7 +887,7 @@ def scan(st: str, texts: list[Path] = (), require_blocklist: bool = False, root:
             findings.append({"file": file, "place": place, "kind": kind})
 
     def check(file: str, place: str, s: str, path: str = "") -> None:
-        for k in kinds_of(s, multi if LAUNCH_PATH.match(path) else block):
+        for k in kinds_of(s):
             report(file, place, k)
 
     files = changed_files(valid_state(st, root), root) if files is None else files

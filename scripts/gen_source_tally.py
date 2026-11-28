@@ -26,8 +26,8 @@ checklist row, register rows monitored false) with a short reason and what would
 sources); and "Water records" (origin, geometry, outfalls with no record, unplaced reports, duplicate names).
 
 A source is never described as safe or clean here; this is a map of what we read and what we do not.
-No personal name or contact reaches the file: emails, phone numbers and the names in data/build/name-blocklist.json
-are scrubbed from every text taken from the inputs, and owner items are linked by line, never quoted.
+Public-record text is preserved, subject only to explicit requested removals.
+Owner items are linked by line, never quoted.
 """
 from __future__ import annotations
 
@@ -223,45 +223,21 @@ def load_registry(inp: Inputs) -> dict[str, dict]:
 # ------------------------------------------------------------------ scrubbing
 
 class Scrubber:
-    """Emails, phone numbers and the names in data/build/name-blocklist.json never reach the file."""
+    """Preserve public text; apply only the private requested removal list."""
 
     def __init__(self, root: Path):
-        names: list[str] = []
-        try:
-            d = json.loads((root / "data" / "build" / "name-blocklist.json").read_text())
-            names = [n for n in (d.get("names") if isinstance(d, dict) else d) or [] if isinstance(n, str) and len(n) > 3]
-        except Exception:
-            pass
-        self.rx = re.compile(r"(?<![\w])(?:" + "|".join(re.escape(n) for n in sorted(names, key=len, reverse=True))
-                             + r")(?![\w])", re.I) if names else None
-        self.person_shaped = None
-        pipe = root / "pipeline"
-        if (pipe / "build" / "redact.py").exists():
-            try:
-                if str(pipe) not in sys.path:
-                    sys.path.insert(0, str(pipe))
-                from build import redact  # type: ignore
-                data = root / "data"
-                self.person_shaped = lambda t: bool(redact.person_shaped(t, data))
-            except Exception:
-                self.person_shaped = None
+        pipe = Path(__file__).resolve().parents[1] / "pipeline"
+        if str(pipe) not in sys.path:
+            sys.path.insert(0, str(pipe))
+        from export.removals import RemovalList
+        self.removals = RemovalList.load(root / "data" / "private" / "removal-list.json")
 
     def __call__(self, s) -> str:
-        s = "" if s is None else str(s)
-        s = EMAIL_RX.sub("[email removed]", s)
-        s = PHONE_RX.sub("[phone removed]", s)
-        s = CONTACT_NAME_RX.sub("Contact: [name removed]", s)
-        if self.rx:
-            s = self.rx.sub("[name removed]", s)
-        return s
+        text = "" if s is None else str(s)
+        result = self.removals.apply({"text": text})
+        return result.get("text", "") if result else ""
 
-    def water_text(self, s) -> str:
-        """A report's water-name text: also drops a value that is only a person's name (a reporter's, as some
-        agencies fill that field)."""
-        s = self(s)
-        if self.person_shaped and s and "[" not in s and self.person_shaped(s):
-            return "[name removed]"
-        return s
+    water_text = __call__
 
 
 def clip(s, n: int = 110) -> str:

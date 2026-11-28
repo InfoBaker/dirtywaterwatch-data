@@ -152,19 +152,8 @@ def keep(row: dict) -> bool:
 
 
 def safe_row(row: dict) -> dict:
-    """The row as saved and kept in raw.row: the point rounded; a private place's point dropped."""
-    out = {k: row.get(k) for k in COLUMNS}
-    if out.get("contaminant"):
-        # names (by their cues), house numbers, phones and emails cut before any save (re-review 2026-11-14 P1-5)
-        out["contaminant"] = scrub_strict_names(common.strip_house_numbers(common.scrub_text(out["contaminant"])))
-    lat, lon = _num(row.get("latitude")), _num(row.get("longitude"))
-    private = residential_place(row.get("contaminant") or "")
-    out["latitude"] = None if private or lat is None else round(lat, 3)
-    out["longitude"] = None if private or lon is None else round(lon, 3)
-    if private:
-        out["twn_rng_sec"] = None
-        out["point_withheld"] = "a private residence, septic system or on-site housing: the county only"
-    return out
+    """Preserve the source public record (decision 57)."""
+    return {k: row.get(k) for k in COLUMNS}
 
 
 def record(row: dict, fetched: str) -> dict:
@@ -174,7 +163,7 @@ def record(row: dict, fetched: str) -> dict:
     # the zone from the county and, in Dunn, McKenzie or Sioux County, the side of the line the point lies on (the row's own
     # point, rounded, used here even when it is withheld from the record; re-review 2026-11-14 P2-4)
     plat, plon = _num(row.get("latitude")), _num(row.get("longitude"))
-    plat, plon = (round(plat, 3), round(plon, 3)) if plat is not None and plon is not None else (None, None)
+    plat, plon = (plat, plon) if plat is not None and plon is not None else (None, None)
     cty = f"{r['county']} County" if r["county"] else None
     tz, basis = zones.north_dakota_zone(cty, plat, plon)
     vol, unit = _num(r["volume"]), (r["units"] or "").strip().lower()
@@ -195,8 +184,8 @@ def record(row: dict, fetched: str) -> dict:
     perr = None if _day(r["date_incident"]) else f"no incident date read from {r['date_incident']!r}"
     return event(
         source_id=SOURCE_ID, source_record_id=r["incident_id"], event_type=et, status="unknown",
-        lat=r["latitude"], lon=r["longitude"], coord_source="source" if r["latitude"] is not None else None,
-        coord_precision_m=100 if r["latitude"] is not None else None,
+        lat=plat, lon=plon, coord_source="source" if plat is not None else None,
+        coord_precision_m=None,
         started_at=_day(r["date_incident"]), time_precision="day", reported_at=_day(r["date_reported"]),
         fetched_at=fetched, material=c or None, volume_gal=int(round(gal)) if gal is not None else None,
         volume_text=raw.get("volume_as_given"), estimate_flag="unknown", authority=AUTHORITY, source_url=URL,

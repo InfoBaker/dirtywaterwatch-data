@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "in-fort-wayne-cso-notifications"
 name: "Fort Wayne City Utilities CSO Past Seven Days Summary"
 url: "https://utilities.cityoffortwayne.org/sewer-system/cso-notifications"

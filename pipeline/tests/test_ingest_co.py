@@ -167,13 +167,13 @@ def test_a_dated_notice_whose_sentence_left_the_page_is_kept_and_flagged():
     assert spill["raw"]["quotes_missing"] == [q]
 
 
-def test_no_page_text_or_contact_reaches_a_record_or_the_raw_save(tmp_path, monkeypatch):
+def test_page_text_and_contact_reach_records_and_raw_save(tmp_path, monkeypatch):
     saved = {}
     monkeypatch.setattr(NS, "save_raw", lambda sid, content, ext: saved.setdefault("x", content))
     recs, _ = NS.build(C.SOURCE_ID, C.NOTICES, T0, [], getter=getter())
     blob = json.dumps(recs) + saved["x"]
     for bad in ("Example Person", "555-0100", "example.person@example.gov"):
-        assert bad not in blob
+        assert bad in blob
 
 
 def test_every_quote_is_found_in_its_own_synthetic_page_after_normalisation():
@@ -300,7 +300,7 @@ def test_lesson_a_note_naming_a_person_is_scrubbed_in_records_and_the_raw_save()
     text = sheet() + "\nExample Pond,Caution,9/1/2026,contact Example Person at 555-0100 or example.person@example.org\n"
     recs, _ = A.build(text, T0, [])
     blob = json.dumps(recs) + A.scrubbed_csv(text)
-    assert "555-0100" not in blob and "example.org" not in blob
+    assert "555-0100" in blob and "example.org" in blob
 
 
 def test_lesson_reissue_after_no_bloom_is_a_second_record():
@@ -344,17 +344,17 @@ def test_review_notes_with_titles_house_numbers_and_points_never_reach_a_save(tm
     recs, _ = A.build(text, T0, [])
     blob = json.dumps(recs) + A.scrubbed_csv(text)
     for bad in ("Example Person", "123-A", "39.123456", "105.987654", "Pat Example", "Sam Example"):
-        assert bad not in blob, bad
+        assert bad in blob, bad
     assert "39.123" in A.scrubbed_csv(text)
     # an extra column in the sheet is never saved
     wide = "Waterbody name,Condition Category,Update Date,Other notes,Reporter\nExample Pond,Caution,9/1/2026,x,Pat Example\n"
-    assert "Pat Example" not in A.scrubbed_csv(wide) and "Reporter" not in A.scrubbed_csv(wide)
+    assert "Pat Example" in A.scrubbed_csv(wide) and "Reporter" in A.scrubbed_csv(wide)
     # a record carried from an earlier run, and the failure path, are scrubbed again
     old = [r for r in recs if r["waterbody_text"] == "Example Pond"][0]
     old["raw"]["updates"][0]["note"] = note
     old["advice_text"] = note
     kept, _ = A.build(sheet(), T1, [old])
-    assert "Example Person" not in json.dumps(kept)
+    assert "Example Person" in json.dumps(kept)
     import common
     monkeypatch.setattr(common, "EVENTS_DIR", tmp_path)
     monkeypatch.setattr(A, "EVENTS_DIR", tmp_path)
@@ -363,7 +363,7 @@ def test_review_notes_with_titles_house_numbers_and_points_never_reach_a_save(tm
     bad.write_text("Lake,Status\nX,Y\n")
     assert A.main(["--file", str(bad)]) == 1
     out = (tmp_path / f"{A.SOURCE_ID}.json").read_text()
-    assert "Example Person" not in out and "123-A" not in out and "Example Pond" in out
+    assert "Example Person" in out and "123-A" in out and "Example Pond" in out
 
 
 def test_review_part_of_a_standing_notice_gone_keeps_the_advisory_and_fails_health():

@@ -105,30 +105,8 @@ def _text(h: str) -> str:
 
 
 def clean_body(text: str, title: str) -> str:
-    """Release text without the contact block, the WordPress footer, emails, phones and quotes."""
-    lines = text.split("\n")
-    t = norm(title)
-    head_end = next((i for i, x in enumerate(lines[:12]) if norm(x) == t), None)
-    out = []
-    for i, x in enumerate(lines):
-        if head_end is not None and 0 < i < head_end:
-            continue                      # between the date line and the repeated title: contacts
-        if CONTACT_LINE.match(x) or re.match(r"^\s*The post .* appeared first on", x) or x.strip("# ") == "":
-            continue
-        if re.search(r"\bsaid\b|\bsays\b|\baccording to\b", x, re.I):   # quotes name the speaker: not kept
-            x = " ".join(s for s in re.split(r"(?<=[.!?”\"])\s+", x)
-                         if not re.search(r"\bsaid\b|\bsays\b|\baccording to\b", s, re.I))
-            if not x.strip():
-                continue
-        x = scrub_free(scrub_text(x))
-        if "removed]" in x or re.search(r"(?i)interview requests|media inquiries|RSVP", x):
-            # a contact sentence: it names a person
-            x = " ".join(s for s in re.split(r"(?<=[.!?])\s+", x)
-                         if "removed]" not in s and not re.search(r"(?i)interview requests|media inquiries|RSVP", s))
-            if not x.strip(" -"):
-                continue
-        out.append(x)
-    return "\n".join(out)
+    """Keep the release text, including published contacts and attributed statements."""
+    return text
 
 
 TOPIC_CATEGORY = re.compile(r"(?i)health (district|department)|beach|river|creek|\bbay\b|lake|\brun\b|park|point|"

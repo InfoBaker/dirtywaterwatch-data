@@ -274,7 +274,7 @@ def test_the_placement_table_points_lie_in_the_named_waters_records():
 PRIVATE = ("Pat Example", "919-555-0100", "pat@example.org")
 
 
-def test_nothing_personal_reaches_any_save(run_nc):
+def test_source_text_survives_saves_and_a_failed_read(run_nc):
     page = edit(P0L, "This proclamation closes the following area in Onslow County: Queens Creek.",
                 "This proclamation closes the following area in Onslow County: Queens Creek near the home of Pat "
                 "Example.")                                                                              # invented
@@ -284,13 +284,13 @@ def test_nothing_personal_reaches_any_save(run_nc):
     assert code == 0 and doc["ok"]
     blob = json.dumps(doc) + json.dumps(run_nc.saved)
     for p in PRIVATE:
-        assert p not in blob, p
+        assert p in blob, p
     assert len(run_nc.saved) == 1 and run_nc.saved[0][0] == "json" and "<div" not in run_nc.saved[0][1]
     bad = dict(doc)
     bad["records"] = [dict(r, advice_text=r["advice_text"] + " Call Pat Example at 919-555-0100.") for r in doc["records"]]
     Path(N.EVENTS_DIR / f"{N.SOURCE_ID}.json").write_text(json.dumps(bad))
     code, doc = run_nc([""], "2026-11-17T00:30:00Z")
-    assert code == 1 and "Pat Example" not in json.dumps(doc) and "919-555-0100" not in json.dumps(doc)
+    assert code == 1 and doc["records"] == bad["records"]
 
 
 def test_the_fixtures_hold_no_contact():
@@ -384,14 +384,43 @@ def test_on_the_day_of_pa_63_each_placed_closure_is_a_red_marker_and_no_water_is
 
 # ---- the independent review (2026-11-16), one test per finding -------------------------------------------------------
 
-def test_review_p1_1_a_withheld_name_never_reaches_a_key_or_an_id():
+def test_review_p1_1_historical_keys_and_ids_keep_text_out_but_source_text_is_retained():
+    import copy
+    import hashlib
+    from export.removals import RemovalList
+    from ingest import identity_text
+    from tests.test_removal_fix_pass import historical
+
+    text = "Queens Creek near the home of Pat Example"
     page = edit(P0, "This proclamation closes the following area in Onslow County: Queens Creek.",
-                "This proclamation closes the following area in Onslow County: Queens Creek near the home of Pat "
-                "Example.")                                                                              # invented
-    recs, meta = N.build([page, P1, P2], T, [])
-    blob = json.dumps(recs) + json.dumps(meta)
-    for p in ("Pat Example", "pat example", "pat-example", "home of"):
-        assert p not in blob, p
+                f"This proclamation closes the following area in Onslow County: {text}.")
+    # Frozen pre-decision-57 clean_field: personal place -> digest, then slug.
+    key = "place withheld " + hashlib.sha256(text.encode()).hexdigest()[:10]
+    old_rules = historical("ingest/nv_state_parks_hab", ["clean_field"],
+                           {**vars(N.P), "scrub_text": identity_text.scrub_text})
+    assert old_rules["clean_field"](text, "place") == key
+    recs, _ = N.build([page, P1, P2], T, [])
+    rec = next(r for r in recs if text in r["raw"]["area_text"])
+    old_id = rec["raw"]["proclamation"] + ":" + N.P.slug(key)
+    assert rec["source_record_id"] == old_id
+    assert rec["raw"]["area_key"] == key
+    assert text in rec["waterbody_text"] and text in rec["raw"]["summary"]
+    for value in (rec["source_record_id"], rec["event_id"], rec["raw"]["area_key"]):
+        assert "pat" not in value.lower() and "home" not in value.lower()
+    history = copy.deepcopy(recs)
+    old = next(r for r in history if r["source_record_id"] == old_id)
+    old["raw"]["area_text"] = old["waterbody_text"] = key
+    old["raw"]["summary"] = "[sentence withheld]"
+    old["raw"]["_first_seen_at"] = "2026-11-01T00:00:00Z"
+    again, _ = N.build([page, P1, P2], T, history)
+    assert len(again) == len(history)
+    reread = next(r for r in again if r["source_record_id"] == old_id)
+    assert reread["raw"]["_first_seen_at"] == old["raw"]["_first_seen_at"]
+    assert reread["waterbody_text"] == text
+    policy = RemovalList([{"id": "historical", "added": "2026-11-25", "kind": "record",
+                             "match": old["event_id"], "scope": {"event_id": old["event_id"]}}])
+    policy.register(again)
+    assert all(r["event_id"] != old["event_id"] for r in policy.apply(again))
 
 
 def test_review_p1_4_a_different_portion_does_not_end_a_portion_closure():

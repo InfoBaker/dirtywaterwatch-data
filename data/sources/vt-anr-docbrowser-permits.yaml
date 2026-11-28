@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "vt-anr-docbrowser-permits"
 name: "ANR DocBrowser wastewater permit folders"
 url: "https://anrweb.vt.gov/ANR/vtANR/DocBrowser.aspx?Directory=DEC/WSMD/Wastewater/permits/3-1285/"

@@ -8,14 +8,10 @@ Source
   Date Reported, SpillVolInGal, Location, Description. DC Water's page attaches the condition "not for any
   commercial, legal or other use".
 
-What is kept and what is dropped (privacy)
-  Kept: Date Reported (reported_at, local time to the minute), SpillVolInGal (volume_gal; the file does not say
-  whether a figure is measured or estimated: estimate_flag unknown) and the Location's street names: an intersection
-  ("@HAWAII AVE @TAYLOR ST NE") as written without the '@' marks, an address with its house number removed
-  ("[house number removed] MINNESOTA AVE NE"), a block number too. A Location that still holds any other figure after
-  that is withheld (raw.location_withheld). Dropped before anything is saved: PremiseNo (a customer premise id),
-  Description (it repeats the address, house number included, and names no water) and every house number. The file
-  itself is never saved (no data/raw copy); only the kept fields reach the records and the health metadata.
+Published fields
+  Every downloaded column is retained, including Location, Description and PremiseNo. The source registry declares
+  PremiseNo as a customer identifier for the site's Record details exclusion; downloads retain it. Identity uses
+  the historical street normalization separately so rereads match saved records and requests for their old IDs.
 
 Records
   One per row: event_type sso, status unknown (no end is given), started_at null (the file gives the day the spill
@@ -58,8 +54,8 @@ URL = "https://serviceinfo.dcwater.com/dashboard/sso.csv"
 PAGE = "https://www.dcwater.com/resources/open-data-portal/sanitary-sewer-dashboard"
 ECHO_FILE = EVENTS_DIR / "echo-sewer-overflow.json"
 COLUMNS = ["PremiseNo", "Date Reported", "SpillVolInGal", "Location", "Description"]
-KEPT = ["Date Reported", "SpillVolInGal", "Location (street names only)"]
-DROPPED = ["PremiseNo", "Description", "the house number of Location"]
+KEPT = list(COLUMNS)
+DROPPED = []
 PERMIT = "DC0021199"
 DISCHARGER_ID = "dc-dc0021199"
 DISCHARGER_NAME = "District of Columbia Water and Sewer Authority (DC Water)"
@@ -81,6 +77,11 @@ STREET_PART = re.compile(r"^(?:[A-Z][A-Z'.-]*|\d{1,3}(?:ST|ND|RD|TH))(?: (?:[A-Z
 
 
 def safe_location(loc: str) -> tuple[str | None, str | None]:
+    """Preserve the source public record (decision 57)."""
+    return (loc or None, None)
+
+
+def identity_location(loc: str) -> tuple[str | None, str | None]:
     """(the Location's street names with no house number, why it was withheld or None). Every part must be a street
     name (words or an ordinal ending in a street word, a quadrant after it); anything else withholds the location."""
     t = " ".join((loc or "").replace("\\", " ").split())
@@ -149,7 +150,7 @@ def volume(v: str) -> int | None:
 
 def parse(text: str) -> tuple[list[dict], int]:
     """(the kept fields of each row, the number of rows whose date could not be read). Raises ValueError when the
-    header is not COLUMNS or there are no rows. Nothing of a dropped field leaves this function."""
+    header is not COLUMNS or there are no rows. All source columns are retained."""
     reader = csv.reader(io.StringIO(text.lstrip("﻿")))
     header = next(reader, None)
     if [h.strip() for h in header or []] != COLUMNS:
@@ -161,7 +162,7 @@ def parse(text: str) -> tuple[list[dict], int]:
             continue
         if len(cells) > len(COLUMNS) and not any(c.endswith("\\") for c in cells[:len(COLUMNS) - 1]):
             # a comma the file escapes with a backslash ('Street\,') inside the last column, Description, which is
-            # dropped: the cells after the fourth are all Description's
+            # retained: the cells after the fourth are all Description's
             cells = cells[:len(COLUMNS) - 1] + [",".join(cells[len(COLUMNS) - 1:])]
         if len(cells) != len(COLUMNS):
             bad += 1
@@ -173,7 +174,7 @@ def parse(text: str) -> tuple[list[dict], int]:
             continue
         loc, why = safe_location(r["Location"])
         rows.append({"reported_at": at, "id": rid, "volume_gal": volume(r["SpillVolInGal"]),
-                     "volume_as_given": r["SpillVolInGal"].strip() if volume(r["SpillVolInGal"]) is not None else None, "location": loc, "location_withheld": why})
+                     "volume_as_given": r["SpillVolInGal"].strip() if volume(r["SpillVolInGal"]) is not None else None, "location": loc, "location_withheld": why, "PremiseNo": r["PremiseNo"], "Description": r["Description"]})
     if not rows and not bad:
         raise ValueError("the file has no rows")
     return rows, bad
@@ -182,7 +183,7 @@ def parse(text: str) -> tuple[list[dict], int]:
 def row_id(r: dict) -> str:
     """The Date Reported to the second, with a digest of the row's own kept street names and gallons: never the premise
     id, the row order, another row or a house number."""
-    key = f"{r['location'] or ''}|{r['volume_as_given'] or ''}"
+    key = f"{identity_location(r['location'] or '')[0] or ''}|{r['volume_as_given'] or ''}"
     return f"{r['id']}-{hashlib.sha1(key.encode()).hexdigest()[:8]}"
 
 
@@ -193,7 +194,7 @@ def to_records(rows: list[dict], fetched_at: str) -> list[dict]:
         if rid in seen:
             continue                    # the same kept fields twice: one report
         seen.add(rid)
-        raw = {"date_reported": r["reported_at"], "volume_as_given": r["volume_as_given"],
+        raw = {"PremiseNo": r.get("PremiseNo"), "Description": r.get("Description"), "date_reported": r["reported_at"], "volume_as_given": r["volume_as_given"],
                "location_streets": r["location"], "fields_kept": KEPT, "fields_dropped": DROPPED,
                "date_basis": "the file's Date Reported; it gives no start or end of the spill",
                "placement": "the file names no water and gives no coordinates: a District report placed on no water",
@@ -287,11 +288,10 @@ def main(argv=None) -> int:
             "newest_reported": max((x["reported_at"] for x in rows), default=None),
             "coordinates": "the file gives none"}
     err = f"{bad} rows whose date or cells could not be read were skipped" if bad else None
-    # DC Water's page attaches "not for any commercial, legal or other use" to this file: the records are kept in the
-    # events file but withheld from the status build and the export until the owner has decided on that condition, as
-    # New Hampshire's swimming layer is (build/status.py load_events reads meta.distribution_discouraged)
-    meta["distribution_discouraged"] = True
     meta["use_condition"] = "DC Water's page: 'not for any commercial, legal or other use'"
+    meta["terms"] = meta["use_condition"]
+    meta["credit"] = "DC Water, Sanitary Sewer Dashboard; use condition read Nov. 25, 2026 (UTC)."
+    meta["homepage"] = PAGE
     out = write_events(SOURCE_ID, recs, ok=not bad, error=err, meta=meta, partial=bool(bad))
     print(f"{SOURCE_ID}: {len(recs)} records ({len(held)} no longer listed, {dups} linked to EPA rows) -> {out}")
     return 0 if not bad else 1

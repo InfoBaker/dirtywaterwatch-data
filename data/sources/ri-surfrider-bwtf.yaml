@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ri-surfrider-bwtf"
 name: "Surfrider RI Blue Water Task Force"
 url: "https://ri.surfrider.org/programs/blue-water-task-force"

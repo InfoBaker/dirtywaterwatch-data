@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "tx-el-paso-water-spill-news"
 name: "El Paso Water news releases on wastewater spills and overflows"
 url: "https://www.epwater.org/about-us/newsroom"

@@ -37,6 +37,7 @@ duplicates, advisory_points, dropped_fixtures, problems}; history.json {start, s
 waters: {slug: one char per hour, r/y/g}, intervals: {slug: [[from, until, colour, rule, event]]}}.
 """
 from __future__ import annotations
+from build.removal_inputs import publication_inputs, filtered, ACTIVE
 
 import argparse
 import copy
@@ -56,7 +57,7 @@ from common import (BUILD_DIR, DATA_DIR, EVENTS_DIR, ROOT, SOURCES_DIR, discharg
                     system_wide_advisory, no_ok_read_since, error_text, public_error,
                     now_iso, read_json, rules_live_states, write_json)
 from build import beach_reason as BR
-from common import error_detail
+from common import error_detail, no_discharge_notice
 from build import shoreline as SH
 from build.redact import REDACTED, person_shaped
 
@@ -723,7 +724,9 @@ def load_registry(sources_dir: Path = SOURCES_DIR) -> dict[str, dict]:
             reg[p.stem] = {"id": p.stem, "_error": f"unreadable yaml: {error_detail(e)}"}
             continue
         if isinstance(d, dict):
-            reg[d.get("id") or p.stem] = d
+            d = filtered(d)
+            if d:
+                reg[d.get("id") or p.stem] = d
     return reg
 
 
@@ -780,12 +783,13 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
     and the publish failed the wording scan). None (tests, batches, audits with a scratch rules file) keeps every
     state's records as before."""
     files, events, problems = {}, [], []
+    dropped_notices: set = set()
     WITHHELD.clear()
     NOT_LIVE.clear()
     live_up = {str(x).upper() for x in live} if live is not None else None
     for p in sorted(events_dir.glob("*.json")):
         try:
-            d = json.loads(p.read_text())
+            d = read_json(p)
         except Exception as e:
             problems.append(f"{p.name}: unreadable ({error_detail(e)})")
             continue
@@ -809,6 +813,13 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
             if not isinstance(r, dict) or not r.get("event_id"):
                 problems.append(f"{p.name}: record without event_id")
                 continue
+            if no_discharge_notice(r):
+                # a notice that no discharge happened (Manchester's all-clear): kept in the source's file, where it
+                # bounds the notices before it; never an event, a window, a place or a count
+                files[sid]["no_discharge_notices"] = files[sid].get("no_discharge_notices", 0) + 1
+                files[sid]["records"] -= 1
+                dropped_notices.add(r["event_id"])
+                continue
             r = dict(r)
             r["_fixture"] = fixture
             r["_file"] = p.name
@@ -829,7 +840,84 @@ def load_events(events_dir: Path = EVENTS_DIR, include_fixtures: bool = False, i
                     NOT_LIVE.append((sid, st))
                     continue
             events.append(r)
+    settle_dropped_notices(events, dropped_notices)
+    carry_map_ends(events)
     return files, events, problems
+
+
+def settle_dropped_notices(events: list[dict], dropped: set) -> None:
+    """After the no-discharge notices are left out (common.no_discharge_notice), in place:
+    - a record linked to a dropped notice (duplicate_of, parent_event_id) stands on its own: a link to a record the
+      build does not hold would hide it (Astra 2026-11-27 P2);
+    - the end a notice gave an activation is carried to the record shown for it. The city's e-mail all-clear bounds
+      the e-mail activation, which is the copy of the page's post; where the page's post has no end of its own (the
+      all-clear came by e-mail only), it takes the copy's bound and basis, so the window the notice set is kept
+      (Astra 2026-11-27 P1). Only between two activation notices (raw.kind "activation") that an ingester linked, and
+      never over an end the shown record already has."""
+    by_id = {e["event_id"]: e for e in events}
+    for e in events:
+        for k in ("duplicate_of", "parent_event_id"):
+            if e.get(k) in dropped:
+                e[k] = None
+    for e in events:
+        t = by_id.get(e.get("duplicate_of"))
+        raw = e.get("raw") if isinstance(e.get("raw"), dict) else {}
+        if t is None or t is e or raw.get("kind") != "activation" or not raw.get("_ended_before") \
+                or e.get("status") != "ended" or e.get("time_precision") != "bound":
+            continue
+        traw = t.get("raw") if isinstance(t.get("raw"), dict) else {}
+        if traw.get("kind") != "activation" or t.get("ended_at") or traw.get("_ended_before") \
+                or t.get("status") == "ended":
+            continue
+        t["raw"] = {**traw, "_ended_before": raw["_ended_before"],
+                    "_ended_before_basis": raw.get("_ended_before_basis"),
+                    "_ended_before_from": e["event_id"]}
+        t.update(status="ended", time_precision="bound")
+
+
+# operator sources whose linked duplicates give their end to the shown record (ingest/ma_springfield_aquasight.py)
+MAP_END_SOURCES = {"ma-springfield-aquasight"}
+
+
+def carry_map_ends(events: list[dict]) -> None:
+    """In place, after load: an ended record of MAP_END_SOURCES linked as the duplicate of a shown record that has no
+    ended_at gives that record its end (Springfield's CSO map logs each overflow's end; MassDEP's portal notices give
+    none, so the portal record had only the bound of its ceased report, raw._ended_before, or no end at all). The shown
+    record gets ended_at, raw._ended_at_from (the map's event id), raw._ended_at_basis in plain words and
+    raw._ended_at_precision; a stated end replaces a bound (time_precision "bound" becomes the end's precision) and an
+    ongoing record becomes ended, since the operator's own instrument record says the overflow ended. Never over an
+    ended_at the shown record already has (a verified duration wins), never an end before its start (Astra 2026-11-28
+    P1)."""
+    by_id = {e["event_id"]: e for e in events}
+    for e in events:
+        t = by_id.get(e.get("duplicate_of"))
+        if e.get("source_id") not in MAP_END_SOURCES or t is None or t is e or e.get("status") != "ended":
+            continue
+        end = parse_time(e.get("ended_at"))
+        if end is None or t.get("ended_at"):
+            continue
+        start = parse_time(t.get("started_at"))
+        if start is not None and end < start:
+            continue
+        read = parse_time(e.get("fetched_at")) or datetime.now(UTC)
+        if end > read:
+            continue        # an end after the map was read is a mistyped time: the shown record keeps its own status
+        traw = dict(t.get("raw") if isinstance(t.get("raw"), dict) else {})
+        was = t.get("status")
+        basis = f"end time from the operator's CSO map, record {e['event_id']}"
+        if was == "ongoing":
+            basis += "; the map's own record says the overflow ended, so this record is ended"
+        if traw.get("_ended_before"):
+            basis += f"; it replaces the latest possible end {traw['_ended_before']}"
+            traw["_ended_before_replaced"] = traw.pop("_ended_before")
+            traw.pop("_ended_before_basis", None)
+        traw.update(_ended_at_from=e["event_id"], _ended_at_basis=basis,
+                    _ended_at_precision=e.get("time_precision") or "minute")
+        t["raw"] = traw
+        t["ended_at"] = e["ended_at"]
+        t["status"] = "ended"
+        if t.get("time_precision") == "bound":
+            t["time_precision"] = e.get("time_precision") or "minute"
 
 
 # read last, in this order, tagged extra: OSM receiving waters, DC's NHD waters (ingest/dc_waters.py), the NHD
@@ -1061,7 +1149,7 @@ def water_geometry(slug: str, waters: dict | None = None):
         else:
             p = OBL_WATER_DIR / f"{slug}.json"
             if p.exists():
-                g = outline_of(json.loads(p.read_text()))
+                g = outline_of(read_json(p))
     except Exception:
         g = None
     _GEOM_CACHE[slug] = g
@@ -3441,8 +3529,11 @@ def annotate_beach_reasons(events: list[dict], by_id: dict, duplicates: dict, ru
     under a notice naming the sewage spill); a record shown for a closure takes the reason a linked duplicate of the same
     closure states (RIDOH's feed beside its sheet). Both are resolved together until nothing changes, so a reason passes
     through any chain of parents and duplicates (Astra review 2026-11-21, finding 4); a cycle ends, as each step only
-    turns a record with no reason into one with a reason. Returns the counts for status.json (beach_reason block)."""
-    if not BR.config(rules):
+    turns a record with no reason into one with a reason. A child's source can disable parent inheritance with
+    inherit_parent_reason: false when its links track successive statuses rather than the same advisory (NHDES).
+    Its own reason and linked duplicates still apply. Returns the counts for status.json (beach_reason block)."""
+    cfg = BR.config(rules)
+    if not cfg:
         return {"enabled": False}
     cur = {}
     for ev in events:
@@ -3460,7 +3551,9 @@ def annotate_beach_reasons(events: list[dict], by_id: dict, duplicates: dict, ru
             if v["stated"] is not False:
                 continue
             par = by_id[eid].get("parent_event_id")
-            if par and par != eid and good(cur.get(par)) and not history_only_rule(by_id.get(par) or {}, rules):
+            source = (cfg.get("sources") or {}).get(by_id[eid].get("source_id")) or {}
+            if source.get("inherit_parent_reason") is not False and par and par != eid \
+                    and good(cur.get(par)) and not history_only_rule(by_id.get(par) or {}, rules):
                 cur[eid] = {**cur[par], "how": "parent", "parent": par}
                 changed = True
                 continue
@@ -3839,6 +3932,8 @@ def _event_intervals(ev: dict, state: str | None, now: datetime, water: dict | N
         return parse_time(v, tz)          # the record's own clock (event_zone)
     if et == "annual_total" or ev.get("time_precision") in COARSE_PRECISION:
         return []                 # outfall-months and annual totals are history, never a colour
+    if no_discharge_notice(ev):
+        return []                 # a notice that no discharge happened starts no window (load_events leaves it out)
     if future_start(ev, now):
         return []                 # a start in the future as published: no colour (FUTURE_START_H)
     if et == "unknown" and st != "ongoing":
@@ -5330,6 +5425,7 @@ def record_hash(ev: dict) -> str:
     return hashlib.blake2b(json.dumps(ev, sort_keys=True, default=str).encode(), digest_size=16).hexdigest()
 
 
+@publication_inputs
 def build(include_fixtures: bool = False, now: datetime | None = None, events_dir: Path = EVENTS_DIR,
           write: bool = True, waters: dict | None = None, outfalls: list | None = None,
           registry: dict | None = None, include_restricted: bool = False, rules: dict | None = None,
@@ -5355,6 +5451,13 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
     registry = load_registry() if registry is None else registry
     files, events, problems = load_events(events_dir, include_fixtures, include_restricted,
                                           live=rules_live_states(rules if rules is not None else load_rules()) if live_only else None)
+    policy = ACTIVE.get()
+    inputs = [files, events, waters, placement_outfalls, outfalls, registry,
+              discharger_towns, discharger_waters, discharger_aliases_map, reaches, rain]
+    for value in inputs:
+        policy.register(value)
+    (files, events, waters, placement_outfalls, outfalls, registry,
+     discharger_towns, discharger_waters, discharger_aliases_map, reaches, rain) = [filtered(v) for v in inputs]
     if live_only and NOT_LIVE:
         by_state = defaultdict(int)
         for _, st in NOT_LIVE:
@@ -6136,7 +6239,7 @@ def build(include_fixtures: bool = False, now: datetime | None = None, events_di
                        for iv in ivs if iv.get("rule") == "outage_unconfirmed" and iv["start"] <= now
                        and (iv["end"] is None or iv["end"] > now))
     status = {
-        "built": now_iso(), "now": iso(now), "fixtures_included": include_fixtures,
+        "built": now_iso(), "requested_removals_applied": bool(policy.entries), "now": iso(now), "fixtures_included": include_fixtures,
         "restricted_included": include_restricted, "withheld_sources": withheld,
         "rules": {k: {"status": v[0], "label": v[1],
                       # the caution's label by which amount applied (build/rain_likely.py label_by_basis)

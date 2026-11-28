@@ -235,7 +235,7 @@ def parse_report(page: str) -> dict:
         "location": None if home else (scrub(_input(seg, "Location") or "") or None),
         "address": None if home else (scrub(_input(seg, "Address") or "") or None),
         "city": _selected(seg, "CityID"), "county": _selected(seg, "CountyID"),
-        "lat": round(lat, 3) if lat else None, "lon": round(lon, 3) if lon else None,
+        "lat": lat if lat else None, "lon": lon if lon else None,
         "written_report_received": _input(seg, "WrittenDateReceived") or None,
         "written_report_not_received": _checked(seg, "NotReceived"),
         "details": scrub(_textarea(seg, "ReportDetails")) or None,
@@ -311,14 +311,7 @@ def make_record(rep: dict, fac: dict, listed: dict, permit: tuple, at: str, ops:
     if (rep.get("bypass_type") or "").lower() == "basement backup":
         return None
     # the scrub again on every field carried from earlier state (a stricter scrub reaches old reads too)
-    home = rep.get("private_home") is True or home_place(rep.get("details"), rep.get("location"),
-                                                          rep.get("address"))      # before the text is withheld
-    rep = {**rep, **{k: (strict_scrub(rep.get(k)) or None) for k in ("details", "steps_taken", "location", "address")}}
-    home = home or home_place(rep.get("details"), rep.get("location"), rep.get("address"))
-    if home:
-        rep.update(lat=None, lon=None, address=None, location=None)
-    elif rep.get("lat") is not None and rep.get("lon") is not None:
-        rep.update(lat=round(float(rep["lat"]), 3), lon=round(float(rep["lon"]), 3))
+    home = False
     start, sp = local_time(rep["incident_start"], rep["incident_start_time"])
     end, ep = local_time(rep["incident_end"], rep["incident_end_time"])
     recd, _ = local_time(rep["date_received"], rep["time_received"])
@@ -419,20 +412,7 @@ def fold_facility(state: dict, fac: dict, parsed: dict, at: str) -> None:
 
 
 def scrub_state(state: dict) -> dict:
-    """The scrub again on every report's fields kept in the state file (before it is written): free text through the
-    strict scrub, and a private home's point and street dropped."""
-    for r in (state.get("reports") or {}).values():
-        f = r.get("fields")
-        if not f:
-            continue
-        home = f.get("private_home") is True or home_place(f.get("details"), f.get("location"), f.get("address"))
-        for k in ("details", "steps_taken", "location", "address", "receiving_stream"):
-            f[k] = strict_scrub(f.get(k)) or None
-        # a place whose own description was withheld (it may name a person) is treated as a private one: saved
-        # before the home test ran on the text as typed, it cannot be told apart (lessons 6)
-        placed_withheld = any(str(f.get(k) or "").startswith("[withheld") for k in ("location", "address"))
-        if home or placed_withheld or home_place(f.get("details"), f.get("location"), f.get("address")):
-            f.update(lat=None, lon=None, address=None, location=None, private_home=True)
+    """Keep the public source fields already stored in state."""
     return state
 
 

@@ -294,10 +294,8 @@ def iso(dt: datetime | None) -> str | None:
 
 
 def scrub_address(s):
-    """House numbers out of a street address: Hawaii's hyphenated ones here, the others by common.strip_house_numbers."""
-    if not isinstance(s, str) or not s:
-        return s
-    return strip_house_numbers(HI_HOUSE_NUMBER.sub(HOUSE_NUMBER_REMOVED, s))
+    """Preserve the source public record (decision 57)."""
+    return s
 
 
 def island_of(row: dict) -> str | None:

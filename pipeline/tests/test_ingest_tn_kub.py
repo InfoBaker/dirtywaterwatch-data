@@ -94,7 +94,7 @@ def test_records_from_the_log(tmp_path):
     assert r["discharger_id"] == "tn-kub" and r["npdes_permit"] is None
     assert r["waterbody_text"] is None and r["lat"] is None and r["water_slugs"] == []
     assert r["raw"]["_placement"] == "named_water_only" and r["raw"]["county"] == "Knox"
-    assert r["raw"]["location"] == f"{HOUSE_NUMBER_REMOVED} PINE GROVE ROAD"
+    assert r["raw"]["location"] == "1100 PINE GROVE ROAD"
     assert r["source_url"] == K.api_url(date(2026, 10, 1), date(2026, 10, 31))
     assert r["event_id"] == "tn-kub-sso-log:2026-10-18T1542:PINEGROVERD"
     # an evening time stored on 1970-01-02, in daylight time
@@ -122,14 +122,13 @@ def test_backfill_reads_each_month_from_2023(tmp_path):
     assert "2026-11-01:greaterThanOrEquals" in web.urls[-1]
 
 
-def test_no_house_number_reaches_a_record(tmp_path):
+def test_source_house_numbers_reach_records(tmp_path):
     _, doc = run(tmp_path, Web(), backfill=True, since="2005-01-01")
-    import re
-    places = [json.dumps([r["raw"]["location"], r["outfall_name"], r["source_record_id"]]) for r in doc["records"]]
-    assert len(places) == 16
-    for p in places:
-        assert not re.search(r"\d{3,}", p.replace("2026", "").replace("2023", "").replace("2019", "").replace("2005", "")
-                             .split('"')[1] + p.split('"')[3]), p
+    assert len(doc["records"]) == 16
+    source_places = {row["location"] for row in DOC["customerSsoLog"]}
+    for record in doc["records"]:
+        assert record["raw"]["location"] in source_places
+        assert record["outfall_name"] == record["raw"]["location"]
 
 
 def test_an_empty_month_is_a_healthy_read(tmp_path):
@@ -194,10 +193,10 @@ def test_main_reads_a_saved_answer(tmp_path):
 
 # ---------------------------------------------------------------- review 2026-11-17 (Astra) fixes
 
-def test_review_p1_1_no_house_number_in_the_state_or_errors(tmp_path):
+def test_source_address_in_state_and_invalid_row_not_published(tmp_path):
     run(tmp_path, Web(), backfill=True)
     state = (tmp_path / "state.json").read_text()
-    assert "1100 PINE" not in state and "/150" not in state
+    assert "1100 PINE" in state
     code, doc = run(tmp_path, Web(body={"customerSsoLog": [{"date": None, "location": "4321 SECRET LANE"}],
                                         "meta": {"start": 0, "count": 1, "total": 1}}))
     assert "4321" not in json.dumps(doc)

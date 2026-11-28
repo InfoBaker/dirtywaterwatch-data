@@ -264,24 +264,14 @@ def _verb_name(m: re.Match) -> str:
 
 
 def scrub_free(s, names: set[str] = frozenset()):
-    if not isinstance(s, str):
-        return s
-    for n in sorted(names, key=len, reverse=True):
-        s = re.sub(rf"\b{re.escape(n)}\b", "[name removed]", s, flags=re.I)
-    s = ASSIGNED_RE.sub(lambda m: f"{m.group(1)}: [name removed]", s)
-    s = USERNAME_RE.sub("[name removed]", s)
-    s = HONORIFIC_RE.sub("[name removed]", s)
-    s = VERB_NAME_RE.sub(_verb_name, s)
-    s = CORRESPONDENCE_RE.sub(_correspondence, s)
-    s = NAME_WITH_EMAIL_RE.sub("[name removed]", s)
-    return scrub_text(s)
+    """Preserve the source public record (decision 57)."""
+    return s
 
 
 def scrub_obj(obj, names: set[str] = frozenset()):
-    """A copy of an API/export object without personal keys, with names, emails and phones scrubbed
-    from strings (used for the saved raw pages and the record's raw)."""
+    """A copy of the downloaded public API/export object, preserving its keys and text."""
     if isinstance(obj, dict):
-        return {k: scrub_obj(v, names) for k, v in obj.items() if not _DROP_KEY.search(str(k))}
+        return {k: scrub_obj(v, names) for k, v in obj.items()}
     if isinstance(obj, list):
         return [scrub_obj(v, names) for v in obj]
     return scrub_free(obj, names)

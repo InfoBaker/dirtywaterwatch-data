@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "va-alexrenew-cso-alerts"
 name: "AlexRenew CSO email alerts (Real Magnet form) and CSO Tracking page"
 url: "https://alexrenew.com/our-work/cso-tracking/alerts"

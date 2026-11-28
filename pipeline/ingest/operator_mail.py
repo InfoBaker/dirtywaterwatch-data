@@ -29,7 +29,8 @@ One event, not two
   Manchester's e-mails repeat the city's page posts (ingest.nh_permittees): each becomes the duplicate of its post.
   This module runs after ma_massdep and nh_permittees (sorted order) and reads their events files of the same run.
   A message proven only by a shared sending platform (raw._trust "platform", Holyoke's Everbridge) may add to another
-  source's record of the same discharge and never stands alone: its chain is held back unless linked as a duplicate.
+  source's record of the same discharge and never stands alone: its chain is held back unless linked as a duplicate;
+  except on a list whose platform entry sets stands_alone (with at least one mark of the operator), where it does.
 
 A list that goes quiet (meta.quiet; the status build lists it as a stale reason)
   Lists that send only when something happens are checked against another source that sees the same operator: a
@@ -305,10 +306,39 @@ def build_list(lid: str, spec: dict, entries: list[dict], others: dict, now: dat
         stats["linked_to_portal"] = link_portal(recs, others.get("ma-massdep") or [], spec.get("npdes_permit"))
     # a message proven only by a shared platform (raw._trust "platform") may add to another source's record of the same
     # discharge, never stand alone: a chain of such records not linked as a duplicate is held back, counted, unpublished
-    held_chains = {r["raw"].get("_chain") or r["event_id"] for r in recs
-                   if r["raw"].get("_trust") == "platform" and not r.get("duplicate_of")}
-    held = [r for r in recs if (r["raw"].get("_chain") or r["event_id"]) in held_chains]
-    recs = [r for r in recs if (r["raw"].get("_chain") or r["event_id"]) not in held_chains]
+    # A list whose platform binding names the operator's own marks (spec.platform.stands_alone, owner 2026-11-27:
+    # Holyoke's Everbridge notices carry its permit and its own Everbridge account; the portal lags days) lets such
+    # a record stand alone: a forged notice could only make the map more cautious. Linking to the portal is unchanged.
+    alone = bool(((spec.get("platform") or {}).get("stands_alone"))
+                 and ((spec.get("platform") or {}).get("body_marks") or (spec.get("platform") or {}).get("header_marks")))
+    if alone:
+        # ... but a platform-only notice never closes an open one (Astra 2026-11-27 P1): a Ceased notice that joined
+        # an earlier notice's chain is held, with any re-send of it, so the earlier notice stays the record shown and
+        # stays ongoing until the portal's record of the same overflow (duplicate_of) or an operator-proven notice
+        # ends it. A forged notice can then only add red, never clear it. A Ceased notice that closes nothing stands.
+        by_id = {r["event_id"]: r for r in recs}
+        closing = {r["event_id"] for r in recs
+                   if r["raw"].get("_trust") == "platform" and not r.get("duplicate_of")
+                   and r["raw"].get("_notice_state") == "ceased" and r.get("parent_event_id") in by_id}
+        grew = True
+        while grew:                              # re-sends of a held Ceased notice are its children
+            more = {r["event_id"] for r in recs if r.get("parent_event_id") in closing and r["event_id"] not in closing
+                    and r["raw"].get("_trust") == "platform" and not r.get("duplicate_of")}
+            grew, closing = bool(more), closing | more
+        held = [r for r in recs if r["event_id"] in closing]
+        recs = [r for r in recs if r["event_id"] not in closing]
+        # a kept record whose parent was held points to the nearest kept ancestor, so a later operator-proven Ceased
+        # notice still replaces the Active one (Astra 2026-11-27 pass 2, P2)
+        for r in recs:
+            p = r.get("parent_event_id")
+            while p in closing:
+                p = by_id[p].get("parent_event_id")
+            r["parent_event_id"] = p
+    else:
+        held_chains = {r["raw"].get("_chain") or r["event_id"] for r in recs
+                       if r["raw"].get("_trust") == "platform" and not r.get("duplicate_of")}
+        held = [r for r in recs if (r["raw"].get("_chain") or r["event_id"]) in held_chains]
+        recs = [r for r in recs if (r["raw"].get("_chain") or r["event_id"]) not in held_chains]
     stats["held_platform_only"] = len(held)
     res = Counter(e.get("result") for e in entries)
     received = [e.get("received_at") for e in entries if e.get("received_at")]

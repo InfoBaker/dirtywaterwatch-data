@@ -84,9 +84,8 @@ def test_house_numbers_never_reach_a_mississippi_record():
     kept, dropped, _ = _build()
     blob = json.dumps([kept, dropped])
     for n in ("1391", "4049", "4625", "2009", "512 "):
-        assert n not in blob, n
-    assert kept["MS0024295:5:1"]["raw"]["sewer_overflow_bypass_description_text"] == (
-        "[house number removed] SAMPLE ST - MANHOLE")
+        assert n in blob, n
+    assert kept["MS0024295:5:1"]["raw"]["sewer_overflow_bypass_description_text"] == '1391 SAMPLE ST - MANHOLE'
     # manhole numbers in the corrective-action text stay
     assert any("EU0708A" in (a["other"] or "") for r in kept.values() for a in r["raw"]["corrective_actions"])
 

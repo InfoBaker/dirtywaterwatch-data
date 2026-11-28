@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "pa-alcosan-news-advisories"
 name: "ALCOSAN news posts for non-routine discharges (e.g. 2026-03-06 plant power outage)"
 url: "https://www.alcosan.org/news-and-events/featured-news/news/2026/03/07/advisory-issued-following-power-outage-and-river-discharge"

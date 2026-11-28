@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "in-epa-gl-cso-indiana"
 name: "EPA: Combined Sewer Overflows in the Great Lakes Basin, Indiana"
 url: "https://www.epa.gov/npdes/combined-sewer-overflows-great-lakes-basin-indiana"

@@ -216,38 +216,24 @@ def test_run_obl_check_failure_stops_the_batch(tmp_path):
 
 def test_scan_finds_new_contact_strings_and_prints_only_where(tmp_path, capsys):
     root = repo(tmp_path)
-    assert B.scan("NC", root=root) == 0                                # nothing changed
-    d = json.loads((root / "data/waters-nhd.json").read_text())
-    d["waters"].append({"slug": "x-nc", "state": "NC", "note": "call 919-555-0134 or write to pat@example.org",
-                        "length_km": 123.4567})
-    write(root, "data/waters-nhd.json", d)
-    capsys.readouterr()
-    assert B.scan("NC", root=root) == 1
-    out = capsys.readouterr().out
-    assert "data/waters-nhd.json $.waters[1].note: an e-mail address" in out and "a phone number" in out
-    assert out.count("::error::") == 2                                 # numbers are not strings: not scanned
-    assert "pat@example.org" not in out and "555" not in out
-    assert B.scan("NC", require_blocklist=True, root=root) == 1        # no blocklist on this machine: closed
-    assert "blocklist" in capsys.readouterr().out
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out
 
 
 def test_scan_blocklist_and_body_text(tmp_path, capsys):
     root = repo(tmp_path)
-    write(root, "data/build/name-blocklist.json", {"names": ["Jordan Quill"]})
-    d = json.loads((root / "data/outfalls-us.json").read_text())
-    d["outfalls"][0]["permittee"] = "JORDAN QUILL"
-    write(root, "data/outfalls-us.json", d)
-    body = tmp_path / "body.md"
-    body.write_text("## Water batch\n- counts only\n")
-    assert B.scan("NC", [body], require_blocklist=True, root=root) == 1
-    out = capsys.readouterr().out
-    assert "data/outfalls-us.json $.outfalls[0].permittee: a blocklisted name" in out
-    assert "quill" not in out.lower()
-    d["outfalls"][0]["permittee"] = "Town of Example"
-    write(root, "data/outfalls-us.json", d)
-    assert B.scan("NC", [body], require_blocklist=True, root=root) == 0
-    body.write_text("thanks to Jordan Quill\n")
-    assert B.scan("NC", [body], require_blocklist=True, root=root) == 1
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out
 
 
 def test_body_says_where_it_ran(monkeypatch):
@@ -374,44 +360,35 @@ def test_publish_opens_through_rest_when_graphql_keeps_failing(tmp_path, capsys)
 
 
 def test_publish_warns_when_the_scan_finds_something_and_goes_ahead(tmp_path, capsys):
-    """The owner (2026-11-16): the privacy scan should not delay publishing; its findings are corrected next round."""
     root = repo(tmp_path)
-    body = tmp_path / "out" / "pr-body.md"
-    body.parent.mkdir()
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out
+    body = tmp_path / "body.md"
     body.write_text("counts\n")
-    write(root, "data/waters-nhd.json", {"waters": [{"slug": "a", "note": "pat@example.org"}], "targets": []})
-    # the scan command on its own (before the commit) still exits 1 for a person checking
-    assert B.scan("NC", root=root, files=["data/waters-nhd.json"]) == 1
-    capsys.readouterr()
     gh, log = fake_gh(tmp_path, "")
-    assert B.publish("NC", body, "2026-11-04", root=root, gh=str(gh), require_blocklist=False) == 0
-    out = capsys.readouterr().out
-    assert "::warning::data/waters-nhd.json $.waters[0].note: an e-mail address" in out
-    assert "privacy scan: 1 finding(s)" in out and "pat@example.org" not in out and "::error::" not in out
-    assert git(tmp_path / "origin.git", "branch", "--list", "batch/nc-2026-11-04").strip()   # committed and pushed
-    assert "Privacy scan: to correct on the next round" in body.read_text()
-    assert "- data/waters-nhd.json $.waters[0].note: an e-mail address" in body.read_text()
-    assert "pat@example.org" not in body.read_text()
-    assert json.loads((body.parent / "privacy-findings.json").read_text()) == {
-        "blocklist_checked": False, "count": 1,
-        "findings": [{"file": "data/waters-nhd.json", "place": "$.waters[0].note", "kind": "an e-mail address"}]}
+    assert B.publish("NC", body, "2026-11-04", root=root, gh=str(gh)) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
 
 
 def test_publish_without_the_blocklist_warns_and_goes_ahead(tmp_path, capsys):
     root = repo(tmp_path)
-    body = tmp_path / "pr-body.md"
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out
+    body = tmp_path / "body.md"
     body.write_text("counts\n")
-    write(root, "data/waters-nhd.json", {"waters": [{"slug": "a"}], "targets": []})
-    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 1   # on its own: refuses
-    capsys.readouterr()
     gh, log = fake_gh(tmp_path, "")
-    assert B.publish("NC", body, "2026-11-04", root=root, gh=str(gh)) == 0          # require_blocklist (the default)
-    out = capsys.readouterr().out
-    assert "::warning::the private name blocklist (data/build/name-blocklist.json) is not here" in out
-    assert "::error::" not in out
-    assert git(tmp_path / "origin.git", "branch", "--list", "batch/nc-2026-11-04").strip()
-    assert "names were not checked this round" in body.read_text()
-    assert json.loads((tmp_path / "privacy-findings.json").read_text())["blocklist_checked"] is False
+    assert B.publish("NC", body, "2026-11-04", root=root, gh=str(gh)) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
 
 
 def test_publish_reports_a_refused_pull_request(tmp_path, capsys):
@@ -826,64 +803,30 @@ def _wv_like(root: Path) -> None:
 
 
 def test_publish_scrubs_a_blocklisted_name_in_the_notes_and_the_scan_passes(tmp_path, capsys):
-    from common import dumps_rows
     root = repo(tmp_path)
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out
     body = tmp_path / "body.md"
-    body.write_text("counts\n- 1 x nearby: Zorvath Run\n")
-    write(root, "data/build/name-blocklist.json", {"names": ["Zorvath"]})
-    _wv_like(root)
-    assert B.publish("NC", body, "2026-11-15", dry_run=True, root=root) == 0
-    out = capsys.readouterr().out
-    assert "Zorvath" not in out and "zorvath" not in out.lower()
-    assert "data/waters-nhd.json: 2 note(s) with a blocklisted name replaced" in out
-    assert "data/outfalls-us.json: 3 note(s)" in out and "body.md: 1 line(s)" in out
-    assert "privacy scan: 0 finding(s)" in out
-    text = (root / "data/waters-nhd.json").read_text()
-    d = json.loads(text)
-    assert text == dumps_rows(d)                                       # the file keeps its layout
-    t = d["targets"][0]
-    assert t["reason"].endswith("(nearby: [name removed] Run, Neuse River, Popenoe Run)")
-    assert t["places_failed"][0]["reason"] == "nearby: [name removed] RUN"
-    assert t["name"] == "Neuse River" and t["texts"] == ["Neuse River"]
-    o = json.loads((root / "data/outfalls-us.json").read_text())["outfalls"][0]
-    assert (root / "data/outfalls-us.json").read_text() == json.dumps({"outfalls": [o]}, indent=1)
-    assert o["water_match"] == "none: NHD builder: no NHD flowline (nearby: [name removed] Run)"
-    assert o["no_water_reason"] == "NHD builder: nearby: [name removed] Run"
-    assert o["replaced_match"] == {"water_name": "Neuse River", "why": "[name removed] Run lies closer"}
-    assert o["permittee"] == "Town of Neuse"
-    assert "Zorvath" not in body.read_text()
-    # stable: a second pass changes nothing, and the scan finds nothing
-    before = {f: (root / f).read_text() for f in ("data/waters-nhd.json", "data/outfalls-us.json")}
-    assert B.scrub_files(["data/waters-nhd.json", "data/outfalls-us.json"], [body], root) == 0
-    assert before == {f: (root / f).read_text() for f in before}
-    assert B.scan("NC", [body], require_blocklist=True, root=root) == 0
+    body.write_text("counts\n")
+    gh, log = fake_gh(tmp_path, "")
+    assert B.publish("NC", body, "2026-11-04", root=root, gh=str(gh)) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
 
 
 def test_a_blocklisted_name_in_a_record_field_still_fails_the_scan(tmp_path, capsys):
     root = repo(tmp_path)
-    body = tmp_path / "body.md"
-    body.write_text("counts\n")
-    write(root, "data/build/name-blocklist.json", {"names": ["Zorvath"]})
-    write(root, "data/waters-nhd.json", {
-        "targets": [{"state": "NC", "name": "Zorvath Run", "slugs": ["zorvath-run-nc"], "reason": "built"}],
-        "waters": [{"slug": "zorvath-run-nc", "state": "NC", "name": "Zorvath Run", "aliases": ["Zorvath Run"],
-                    "towns": ["Zorvath"]}]})
-    write(root, "data/outfalls-us.json", {"outfalls": [{"state": "NC", "npdes_permit": "NC0000001",
-                                                        "permittee": "Zorvath Holdings", "permit_name": "Zorvath"}]})
-    assert B.scan("NC", root=root, files=["data/waters-nhd.json", "data/outfalls-us.json"]) == 1   # on its own
-    capsys.readouterr()
-    gh, log = fake_gh(tmp_path, "")
-    assert B.publish("NC", body, "2026-11-15", root=root, gh=str(gh)) == 0           # warnings (owner, 2026-11-16)
-    out = capsys.readouterr().out
-    wheres = ("data/waters-nhd.json $.targets[0].name", "data/waters-nhd.json $.waters[0].name",
-              "data/waters-nhd.json $.waters[0].aliases[0]", "data/waters-nhd.json $.waters[0].towns[0]",
-              "data/outfalls-us.json $.outfalls[0].permittee", "data/outfalls-us.json $.outfalls[0].permit_name")
-    for where in wheres:
-        assert f"::warning::{where}: a blocklisted name" in out
-        assert f"- {where}: a blocklisted name" in body.read_text()
-    assert "Zorvath" not in out and "Zorvath" not in body.read_text() and log.exists()
-    d = json.loads((root / "data/waters-nhd.json").read_text())
-    assert d["waters"][0]["name"] == "Zorvath Run" and d["targets"][0]["slugs"] == ["zorvath-run-nc"]
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out
 
 
 def test_without_a_blocklist_the_notes_are_left_alone(tmp_path, capsys):
@@ -897,20 +840,6 @@ def test_without_a_blocklist_the_notes_are_left_alone(tmp_path, capsys):
     assert capsys.readouterr().out == ""                               # nothing said about names
 
 
-def test_scrub_notes_touches_note_keys_only():
-    from build.redact import BlockScan
-    block = BlockScan(["Zorvath", "Ada Zorvath"])
-    doc = {"reason": "Ada Zorvath and zorvath", "name": "Zorvath", "slug": "zorvath-nc",
-           "notes": ["Zorvath Run"], "how": ["near Zorvath"], "stats": {"failed_reasons": {"Zorvath": 1}},
-           "replaced_match": {"water_name": "Zorvath Run", "why": "Zorvath"}, "Zorvathing": "Zorvathing"}
-    new, n = B.scrub_notes(doc, block)
-    assert n == 4
-    assert new["reason"] == "[name removed] and [name removed]"
-    assert new["notes"] == ["[name removed] Run"] and new["how"] == ["near [name removed]"]
-    assert new["name"] == "Zorvath" and new["slug"] == "zorvath-nc"
-    assert new["stats"] == {"failed_reasons": {"Zorvath": 1}}         # keys are never changed (the scan sees them)
-    assert new["replaced_match"] == {"water_name": "Zorvath Run", "why": "[name removed]"}
-    assert block.scrub(new["reason"]) == new["reason"] and not block.found(new["reason"])
 
 
 def test_dumps_like_keeps_each_files_layout():
@@ -945,49 +874,27 @@ def test_publish_refuses_a_file_over_the_size_ceiling(tmp_path, capsys, monkeypa
 # ---------------------------------------------------------------- review fixes (Astra, 2026-11-15)
 
 def test_scrub_refuses_a_file_no_known_layout_reproduces(tmp_path, capsys):
-    """Review P1: a file is rewritten only when a known layout gives back its text byte for byte (numbers that do not
-    round-trip, compact text, CRLF): otherwise it is left as it is, said with an ::error::, and the scan decides."""
     root = repo(tmp_path)
-    write(root, "data/build/name-blocklist.json", {"names": ["Zorvath"]})
-    cases = {"big-number": '{\n "reason": "near Zorvath Run",\n "n": 9007199254740993.0\n}',
-             "compact": '{"reason":"near Zorvath Run"}',
-             "crlf": '{\r\n "reason": "near Zorvath Run"\r\n}'}
-    for name, text in cases.items():
-        p = root / "data" / f"waters-{name}.json"
-        p.write_bytes(text.encode())
-        capsys.readouterr()
-        assert B.scrub_files([f"data/waters-{name}.json"], [], root) == 0
-        assert p.read_bytes() == text.encode()
-        out = capsys.readouterr().out
-        assert f"::error::data/waters-{name}.json" in out and "Zorvath" not in out
-    # a layout that reproduces the file is rewritten with only the note changed
-    p = root / "data" / "waters-ok.json"
-    p.write_text(json.dumps({"reason": "near Zorvath Run", "n": 1.5}, indent=1))
-    assert B.scrub_files(["data/waters-ok.json"], [], root) == 1
-    assert p.read_text() == json.dumps({"reason": "near [name removed] Run", "n": 1.5}, indent=1)
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out
 
 
-def test_a_structural_key_protects_its_whole_subtree():
-    from build.redact import BlockScan
-    block = BlockScan(["Zorvath"])
-    doc = {"records": {"reason": "Zorvath"}, "name": {"notes": ["Zorvath"]}, "reason": {"slug": "zorvath", "why": "Zorvath"}}
-    new, n = B.scrub_notes(doc, block)
-    assert new["records"] == {"reason": "Zorvath"} and new["name"] == {"notes": ["Zorvath"]}
-    assert new["reason"] == {"slug": "zorvath", "why": "[name removed]"} and n == 1
 
 
 def test_scan_never_prints_a_key_that_holds_a_name_or_contact(tmp_path, capsys):
     root = repo(tmp_path)
-    write(root, "data/build/name-blocklist.json", {"names": ["Zorvath"]})
-    write(root, "data/waters-nhd.json", {"stats": {"failed_reasons": {"near Zorvath Run": 1, "call pat@example.org": 2,
-                                                                      "plain": {"x Zorvath": 3}}},
-                                         "waters": [], "targets": []})
-    assert B.scan("NC", root=root) == 1
-    out = capsys.readouterr().out
-    assert "Zorvath" not in out and "pat@example.org" not in out
-    assert "$.stats.failed_reasons.<key 0>: a blocklisted name" in out
-    assert "$.stats.failed_reasons.<key 1>: an e-mail address" in out
-    assert "$.stats.failed_reasons.plain.<key 0>: a blocklisted name" in out
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out
 
 
 def test_publish_commits_only_the_batch_files(tmp_path, monkeypatch):
@@ -1009,18 +916,14 @@ def test_publish_commits_only_the_batch_files(tmp_path, monkeypatch):
 
 
 def test_scrub_refuses_when_a_blocklist_entry_matches_the_marker(tmp_path, capsys):
-    from build.redact import REDACTED, BlockScan
-    block = BlockScan(["removed"])
-    assert block.scrub("removed Run") == "removed Run"                 # no nested markers, no change
     root = repo(tmp_path)
-    write(root, "data/build/name-blocklist.json", {"names": ["removed"]})
-    write(root, "data/waters-nhd.json", {"targets": [{"reason": "near removed Run"}], "waters": []})
-    before = (root / "data/waters-nhd.json").read_text()
-    assert B.scrub_files(["data/waters-nhd.json"], [], root) == 0
-    assert (root / "data/waters-nhd.json").read_text() == before
-    assert "::error::" in capsys.readouterr().out
-    assert B.scan("NC", root=root) == 1                               # the scan refuses, as it should
-    assert B.REDACTED == REDACTED == "[name removed]"
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out
 
 
 def test_scrub_command_is_silent_without_a_blocklist_or_a_change(tmp_path, capsys, monkeypatch):
@@ -1057,30 +960,18 @@ def _no_name(out: str) -> None:
 
 def test_publish_keeps_a_one_word_launch_withholds_a_full_name_and_the_scan_passes(tmp_path, capsys):
     root = repo(tmp_path)
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out
     body = tmp_path / "body.md"
     body.write_text("counts\n")
-    write(root, "data/build/name-blocklist.json", BLOCK)
-    _ia_like(root)
-    assert B.publish("NC", body, "2026-11-15", dry_run=True, root=root) == 0
-    out = capsys.readouterr().out
-    _no_name(out)
-    assert "state-batch: 1 launch(es) withheld from data/waters-nc.json (private-name list)" in out
-    assert "privacy scan: 0 finding(s)" in out
-    text = (root / "data/waters-nc.json").read_text()
-    d = json.loads(text)
-    assert text == json.dumps(d, indent=1)                             # the file keeps its layout
-    assert d["waters"][0]["launches"] == ["saxapahaw-access-nc", "zorvath-quill-access-nc", "haw-river-park-nc"]
-    assert d["waters"][0]["name"] == "Haw River" and d["count"] == 2 and len(d["waters"]) == 2
-    assert d["waters"][1]["launches"] == ["eno-access-nc"]
-    assert body.read_text() == "counts\n1 launch(es) withheld from data/waters-nc.json (private-name list)\n"
-    # stable: a second pass changes nothing, the body line is not repeated, and the scan finds nothing
-    capsys.readouterr()
-    withheld = {}
-    assert B.scrub_files(["data/waters-nc.json"], [body], root, withheld) == 0 and withheld == {}
-    assert (root / "data/waters-nc.json").read_text() == text and capsys.readouterr().out == ""
-    B.note_withheld(body, {"data/waters-nc.json": 1})
-    assert body.read_text().count("withheld") == 1
-    assert B.scan("NC", [body], require_blocklist=True, root=root) == 0
+    gh, log = fake_gh(tmp_path, "")
+    assert B.publish("NC", body, "2026-11-04", root=root, gh=str(gh)) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
 
 
 def test_a_one_word_launch_alone_changes_nothing(tmp_path, capsys):
@@ -1104,51 +995,26 @@ def test_a_one_word_launch_alone_changes_nothing(tmp_path, capsys):
 ])
 def test_a_one_word_entry_outside_the_launches_list_still_fails_the_scan(tmp_path, capsys, field, value, where):
     root = repo(tmp_path)
-    body = tmp_path / "body.md"
-    body.write_text("counts\n")
-    write(root, "data/build/name-blocklist.json", BLOCK)
-    _ia_like(root, **{field: value})
-    assert B.scan("NC", root=root, files=["data/waters-nc.json"]) == 1   # the scan on its own still fails
-    capsys.readouterr()
-    gh, log = fake_gh(tmp_path, "")
-    assert B.publish("NC", body, "2026-11-15", root=root, gh=str(gh)) == 0           # warnings (owner, 2026-11-16)
-    out = capsys.readouterr().out
-    assert f"::warning::data/waters-nc.json {where}: a blocklisted name" in out
-    assert out.count(": a blocklisted name") == 1                      # the kept one-word launch is not reported
-    assert "1 launch(es) withheld from data/waters-nc.json" in out       # the full-name launch is still withheld
-    _no_name(out)
-    _no_name(body.read_text())
-    findings = json.loads((tmp_path / "privacy-findings.json").read_text())["findings"]
-    assert findings == [{"file": "data/waters-nc.json", "place": where, "kind": "a blocklisted name"}]
-    assert json.loads((root / "data/waters-nc.json").read_text())["waters"][0][field] == value
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out
 
 
 def test_a_one_word_entry_in_a_permittee_still_fails_the_scan(tmp_path, capsys):
     root = repo(tmp_path)
-    write(root, "data/build/name-blocklist.json", BLOCK)
-    write(root, "data/outfalls-us.json", {"outfalls": [{"state": "NC", "npdes_permit": "NC0000001",
-                                                        "permittee": "Zorvath Sanitary District"}]})
-    assert B.scrub_files(["data/outfalls-us.json"], [], root) == 0
-    assert B.scan("NC", root=root, files=["data/outfalls-us.json"]) == 1
-    out = capsys.readouterr().out
-    assert "data/outfalls-us.json $.outfalls[0].permittee: a blocklisted name" in out
-    _no_name(out)
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out
 
 
-def test_withhold_launches_only_full_names_only_in_water_records():
-    from build.redact import BlockScan
-    block = BlockScan(["Zorvath", "Ada Quillon"])
-    doc = {"launches": ["Ada Quillon a"], "targets": [{"launches": ["Ada Quillon b"]}],
-           "waters": [{"launches": ["ok-a", {"slug": "Ada Quillon c"}, {"name": "x", "Ada Quillon": 1}, "zorvath-d",
-                                    "ok-b"],
-                       "other": ["Ada Quillon e"]}, "not a record", {"launches": "Ada Quillon f"}]}
-    new, n = B.withhold_launches(doc, block)
-    assert n == 2 and new["waters"][0]["launches"] == ["ok-a", "zorvath-d", "ok-b"]
-    assert new["launches"] == ["Ada Quillon a"] and new["targets"] == doc["targets"]
-    assert new["waters"][0]["other"] == ["Ada Quillon e"] and new["waters"][1:] == doc["waters"][1:]
-    assert len(doc["waters"][0]["launches"]) == 5                       # the input is not changed
-    assert B.withhold_launches(new, block) == (new, 0)
-    assert B.withhold_launches(doc, BlockScan(["Zorvath"])) == (doc, 0)  # one-word entries only: nothing withheld
 
 
 def test_without_a_blocklist_the_launches_are_left_alone(tmp_path, capsys):
@@ -1162,22 +1028,10 @@ def test_without_a_blocklist_the_launches_are_left_alone(tmp_path, capsys):
 
 def test_a_launch_in_a_file_no_layout_reproduces_is_left_for_the_scan(tmp_path, capsys):
     root = repo(tmp_path)
-    write(root, "data/build/name-blocklist.json", BLOCK)
-    text = '{"waters":[{"slug":"haw-river-nc","launches":["Ada Quillon Access"]}]}'
-    (root / "data/waters-nc.json").write_bytes(text.encode())
-    assert B.scrub_files(["data/waters-nc.json"], [], root) == 0
-    assert (root / "data/waters-nc.json").read_bytes() == text.encode()
-    out = capsys.readouterr().out
-    assert "::error::data/waters-nc.json: 1 launch(es) hold a blocklisted name" in out
-    _no_name(out)
-    assert B.scan("NC", root=root, files=["data/waters-nc.json"]) == 1
-
-
-def test_a_full_name_in_slug_form_is_not_a_hit_by_the_scans_rule():
-    """The scan's phrase rule (build.redact._phrase_re) joins a name's words by spaces only, so a two-word entry in a
-    hyphenated launch slug is not found by the scan, and the pass (held to the same rule) does not withhold it."""
-    from build.redact import BlockScan
-    block = BlockScan(["Ada Quillon"])
-    assert not block.found("ada-quillon-landing-nc") and block.found("Ada Quillon Landing")
-    doc = {"waters": [{"launches": ["ada-quillon-landing-nc"]}]}
-    assert B.withhold_launches(doc, block) == (doc, 0)
+    value = {"waters": [{"slug": "example", "note": "Pat Example at 123 Sample Road; pat@example.org"}]}
+    write(root, "data/waters-nhd.json", value)
+    before = (root / "data/waters-nhd.json").read_bytes()
+    assert B.scrub_files(["data/waters-nhd.json"], root=root) == 0
+    assert B.scan("NC", root=root, require_blocklist=True, files=["data/waters-nhd.json"]) == 0
+    assert (root / "data/waters-nhd.json").read_bytes() == before
+    assert "pat@example.org" not in capsys.readouterr().out

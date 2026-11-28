@@ -25,15 +25,8 @@ NAME_REMOVED = "[name removed]"
 
 
 def scrub(v: str | None) -> str:
-    """The text with personal forms removed and coordinates rounded to three decimals."""
-    t = scrub_names(scrub_text(" ".join(str(v or "").split())))
-    t = TITLE_RE.sub(NAME_REMOVED, t)
-    t = CONTACT_RE.sub(lambda m: m.group(1) + NAME_REMOVED, t)
-    t = HOME_RE.sub(lambda m: m.group(1) + NAME_REMOVED, t)
-    t = REPORTED_RE.sub(lambda m: m.group(0) if m.group(0).split()[-1] in _NOT_A_NAME_END else NAME_REMOVED, t)
-    t = SUFFIX_NUMBER_RE.sub(HOUSE_NUMBER_REMOVED, t)
-    t = strip_house_numbers(t, street_word_only=True)
-    return COORD_RE.sub(lambda m: f"{round(float(m.group(1)), 3):.3f}", t)
+    """Preserve the source public record (decision 57)."""
+    return v
 
 
 # "Example Lake reported", "CPW Staff reported": the words before "reported" that end a body or a water, not a person

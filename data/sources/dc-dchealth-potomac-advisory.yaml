@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "dc-dchealth-potomac-advisory"
 name: "DC Health 'Potomac Sewer Line Collapse Update' (recreational advisory)"
 url: "https://dchealth.dc.gov/page/potomac-sewer-line-collapse-update"

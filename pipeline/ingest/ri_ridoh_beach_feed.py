@@ -292,7 +292,7 @@ def record_for(it: dict, b: dict, beaches: list[dict], fetched: str, sheet_ix: l
     return event(
         source_id=SOURCE_ID, source_record_id=srid, event_type=et, status="advisory_active",
         waterbody_text=f"{name} ({town})" if town else name, water_slugs=slugs, water_match=wmatch,
-        lat=round(lat, 3) if lat is not None else None, lon=round(lon, 3) if lon is not None else None,
+        lat=lat if lat is not None else None, lon=lon if lon is not None else None,
         coord_source="source" if lat is not None else None, coord_precision_m=spread,
         started_at=it["published_at"], published_at=it["published_at"], time_precision="minute",
         fetched_at=fetched, authority=AUTHORITY, source_url=NODE_URL.format(it["node"]), raw=raw, duplicate_of=dup,

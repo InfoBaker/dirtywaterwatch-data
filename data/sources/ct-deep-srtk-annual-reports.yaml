@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ct-deep-srtk-annual-reports"
 name: "CT DEEP Sewage Right-to-Know annual reports (xlsx event reports + PDF overview), 2022-2026"
 url: "https://portal.ct.gov/-/media/deep/water/municipal_wastewater/srtk-annual-report/2026-cso-bypass.xlsx"

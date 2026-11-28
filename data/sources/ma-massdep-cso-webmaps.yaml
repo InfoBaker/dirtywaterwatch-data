@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ma-massdep-cso-webmaps"
 name: "MassDEP CSO outfall web map and 'CSOs and Beach/Boat Access' web map"
 url: "https://mass-eoeea.maps.arcgis.com/apps/webappviewer/index.html?id=08c0019270254f0095a0806b155abcde"

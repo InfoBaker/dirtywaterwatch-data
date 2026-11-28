@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "ri-ridem-shellfish-closure-page"
 name: "RIDEM Pollution-Related Conditional Area and Emergency Shellfish Closures (status table)"
 url: "https://dem.ri.gov/shellfish"

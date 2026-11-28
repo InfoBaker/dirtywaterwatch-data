@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "nhdes-data-and-mapping-page"
 name: "NHDES Data and Mapping page (Geodata Portal, OneStop Data Mapper, EMD)"
 url: "https://www.des.nh.gov/resource-center/data-and-mapping"

@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "me-dep-vrmp-geomeans"
 name: "Maine DEP Volunteer River Monitoring Program (VRMP) bacteria geomeans layer"
 url: "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services/VRMP_GEOMEANS_2020_2023/FeatureServer/0"

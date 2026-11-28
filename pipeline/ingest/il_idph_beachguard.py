@@ -100,11 +100,8 @@ CALL_NAME = re.compile(r"\b((?i:call|contact|e-?mail|ask\s+for|reach|speak\s+(?:
 
 
 def scrub_comment(v: str | None) -> str | None:
-    """The comment as the record keeps it: a name after a contact cue ("call <Name>") cut, then the full scrub."""
-    if not v:
-        return None
-    from ingest.mi_egle_mienviro import free_text
-    return free_text(CALL_NAME.sub(lambda m: m.group(1) + m.group(2) + "[name removed]", v))
+    """Keep published comments; a blank field remains absent."""
+    return v or None
 
 
 def parse_detail(page: str) -> dict:

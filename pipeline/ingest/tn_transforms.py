@@ -245,23 +245,6 @@ def tn_hab_record(row: dict, rec: dict, notes: dict, ctx: F.Ctx) -> None:
     zone = zones.tennessee_zone(county, lat, lon) if county else zones.tennessee_zone(lat=lat, lon=lon)
     if county:
         notes["county"] = county
-    if lat is not None and lon is not None:
-        if PRIVATE_RESIDENCE.search(F.clean(row.get("private_property"))):
-            rec["lat"] = rec["lon"] = None
-            rec["coord_source"] = None
-            notes["row"] = {k: v for k, v in (notes.get("row") or row).items() if k not in ("_x", "_y")}
-            notes["_point_withheld"] = ("TDEC marks this water a private residence or farm pond: only its county is "
-                                        "published")
-            # the reporter's words for the water may name the home's street ("pond located near ... block of ..."):
-            # a generic text with the county, never the words (final audit 2026-11-08 P2-4)
-            if rec.get("waterbody_text"):
-                notes["row"] = {**notes["row"], "name_of_the_waterbody": PRIVATE_WATER_TEXT}
-                rec["waterbody_text"] = None
-                notes["_water_text_withheld"] = PRIVATE_WATER_TEXT
-        else:
-            rec["lat"], rec["lon"] = round(float(lat), 3), round(float(lon), 3)
-            rec["coord_precision_m"] = 150
-            notes["_coords_rounded"] = "the reporter's point, rounded to 0.001 degree (a pond may be at a home)"
     notes["state"] = "TN"
     notes["time_zone"] = zone
     notes["timezone_note"] = (f"{'Eastern' if zone == zones.EASTERN else 'Central'} time "

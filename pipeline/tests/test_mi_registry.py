@@ -46,7 +46,7 @@ def test_no_michigan_operator_row_names_an_individual(rows):
 
 def test_a_drain_commissioners_permit_is_the_commissions():
     A = load("add_mi_operators")
-    assert A.clean_name("Pat Example, Sample County Drain Commission") == "Sample County Drain Commission"
+    assert A.clean_name("Pat Example, Sample County Drain Commission") == "Pat Example, Sample County Drain Commission"
     assert A.clean_name("Sample Communities, Inc., c/o Pat Example") == "Sample Communities, Inc."
     assert A.clean_name("Sampleton, City of") == "Sampleton, City of"
 

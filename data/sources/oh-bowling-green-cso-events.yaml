@@ -1,3 +1,4 @@
+raw_fields: {reporter_contact: [], customer_identifier: [], description: []}
 id: "oh-bowling-green-cso-events"
 name: "Bowling Green CSO Events yearly reporting table"
 url: "https://gis.bgohio.org/cso_events/dbo_cso_events_list.php"

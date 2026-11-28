@@ -8,9 +8,8 @@ Source
   visits fall 07:00-14:00 Eastern), MonitoringGroupPublicFacing (the DEP office or water management district),
   County, esrignss_latitude/longitude, BloomObserved (Yes/No), AlgalIDResult (dominant taxa), ToxinPresent
   (Yes/No/Pending), Microcystin, OtherToxin, CyanobacteriaDominant, locationString (the site), EditDate.
-  Requested fields only: the layer's Comments (free text) and PicURL (field photographs) are never asked for.
-  A site named by a street address ("Example Lake - 12 Example Lane", often a resident's dock) is published without
-  its house number (common.strip_house_numbers); its visits are still grouped by the name DEP gives.
+  Read all published layer attributes, including Comments and PicURL. Site names and address numbers are
+  retained; visits are grouped by the name DEP gives.
 
 Records (hab_advisory: a bloom record, the plum category; never a sewage record)
   This is DEP's sampling result, not a health advisory: the Department of Health issues health alerts separately,
@@ -149,12 +148,11 @@ def make(ep: dict, lift: dict | None, key: str, fetched_at: str, now: datetime) 
     a = ep["open"]
     last = ep["last_pos"]
     start, last_t = utc_time(a.get("SampleDateTime")), utc_time(last.get("SampleDateTime"))
-    # a site named by a street address ("Sample Lake - 12 Sample Lane") is often a resident's dock: the house number
-    # is not published (common.strip_house_numbers); the visits are grouped by the site as DEP names it
+    # Keep the full source site text; the common compatibility helper preserves it.
     site = strip_house_numbers(a["locationString"], street_word_only=True) if isinstance(a.get("locationString"), str) else a.get("locationString")
     if site != a.get("locationString"):
         key = site_key({**a, "locationString": site})
-    raw = {"site": site, "site_key": key, "county": a.get("County"),
+    raw = {**a, "site": site, "site_key": key, "county": a.get("County"),
            "group": a.get("MonitoringGroupPublicFacing"), "visits": ep["visits"], "basis": BASIS}
     if lift is not None:
         status, ended = "advisory_lifted", iso(utc_time(lift.get("SampleDateTime")))
@@ -187,7 +185,7 @@ def make(ep: dict, lift: dict | None, key: str, fetched_at: str, now: datetime) 
 def query_layer(sess: requests.Session) -> list[dict]:
     feats, offset = [], 0
     while True:
-        params = {"where": "1=1", "outFields": ",".join(FIELDS), "returnGeometry": "false", "orderByFields": "objectid",
+        params = {"where": "1=1", "outFields": "*", "returnGeometry": "false", "orderByFields": "objectid",
                   "resultOffset": offset, "resultRecordCount": 2000, "f": "json"}
         r = sess.get(f"{LAYER}/query", params=params, timeout=(15, 120))
         r.raise_for_status()
@@ -219,7 +217,7 @@ def main(argv=None) -> int:
         write_events(SOURCE_ID, [], ok=False, error=f"{error_text(e)}")
         print(f"{SOURCE_ID}: FAILED {error_detail(e)}", file=sys.stderr)
         return 1
-    features = [{k: a.get(k) for k in FIELDS} for a in features]
+    features = [dict(a) for a in features]
     state = read_json(STATE_FILE, {}) or {}
     raw_path = state.get("raw_path")
     if not args.file:
