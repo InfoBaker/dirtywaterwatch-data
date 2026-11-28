@@ -475,6 +475,15 @@ SOURCES: dict[str, dict] = {
                         "duration_text": _nc_duration,
                         "volume_to_water_gal": number("dwr_volume_waterbody_5d", "dwr_volume_waterbody", "volume_waterbody"),
                         "town": text("deq_municipality", "municipality")},
+    "pa-echo-violations": {
+        "report_kind": text("row.VIOLATION_DESC"),
+        "description": text("row.SINGLE_EVENT_VIOLATION_COMMENT"),
+        "overflow_point": text("overflow_point"),
+        "source_end_date": text("source_end_date"),
+        "source_end_text": text("source_end_text"),
+        "notes": joined(text("note"), text("time_basis"), text("source_updated_at_basis"),
+                        text("count_basis"), text("_duplicate_basis")),
+    },
     "echo-sewer-overflow": {
         "report_kind": text("program_report_npdes_data_group_desc"), "cause": text("causes[]"),
         "duration_text": with_unit("sewer_overflow_bypass_duration_hours", "hours"),
