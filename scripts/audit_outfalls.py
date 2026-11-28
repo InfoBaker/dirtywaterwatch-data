@@ -75,7 +75,13 @@ def main() -> int:
         tot.update(rows[st])
         print(st.ljust(6) + " ".join(str(rows[st][h]).rjust(13) for h in cols))
     print("all   " + " ".join(str(tot[h]).rjust(13) for h in cols))
-    return 0
+    # the hand corrections to outfall water ties (data/outfall-water-corrections.json): each applied, evidence unchanged
+    from ingest.outfall_water_corrections import check_registry
+    probs = check_registry()
+    for p in probs:
+        print("hand correction: " + p)
+    print(f"hand corrections: {len(probs)} problems")
+    return 1 if probs else 0
 
 
 if __name__ == "__main__":

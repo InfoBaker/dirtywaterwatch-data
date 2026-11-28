@@ -56,6 +56,14 @@ state (docs/reviews/2026-11-03-outfalls-without-water.md).
 
 The registry files are written only when something changed, atomically, in their own format (indent 1, ASCII).
 
+Hand corrections (2026-11-28, data/outfall-water-corrections.json, ingest.outfall_water_corrections): a row the file
+corrected is kept as it is while its correction holds, and the file is applied again after every pass (run, run_state,
+run_plants), so a row a rebuild of the registry reset is corrected again; an entry whose row's receiving-water text
+changed is not applied, its row goes back to the tie the correction replaced and is matched as any other row, and the
+entry is listed in the summary (hand_corrections_not_applied). After a pass that writes, the command checks the whole
+registry (outfall_water_corrections.check_registry: every copy of each entry's row, and the row the loader reads) and
+exits 1 on any problem, so the state build's ties step fails there.
+
 A state build (`--state XX`, 2026-11-04; after `ingest.waters_from_nhd --state XX`): every row of that state in
 data/outfalls-us.json (CSO rows: the steps above), data/outfalls-plants-us.json (plant rows: the plant steps below) and
 any data/outfalls-<st>.json, live or not, in place. Two steps are added for these rows: "reach", the record the NHD
@@ -100,6 +108,7 @@ from datetime import date
 
 from build import status as S
 from common import BUILD_DIR, DATA_DIR, dumps_plants, now_iso, read_json
+from ingest import outfall_water_corrections as HAND
 from ingest import waters_from_nhd as N
 
 FILES = ("outfalls-new-england.json", "outfalls-mid-atlantic.json")
@@ -1174,11 +1183,29 @@ def names_another_water(o: dict, waters: dict) -> bool:
     return not any(f" {n} " in f" {rn} " or f" {rn} " in f" {n} " for n in names if n)
 
 
+def hand_kept(o: dict, counts) -> bool:
+    """A row corrected by hand (ingest.outfall_water_corrections) is kept as it is while its correction holds (the
+    entry is in the file, the row's receiving-water text is still the entry's); one whose correction no longer holds
+    goes back to the tie the correction replaced and is matched as any other row (registry water review 2026-11-28,
+    P3: a changed receiving-water text kept the old hand tie)."""
+    if not HAND.is_hand(o):
+        return False
+    st = o.get("state")
+    if HAND.holds(o):
+        counts[st]["kept: hand correction"] += 1
+        return True
+    HAND.revert(o)
+    counts[st]["hand correction no longer applies: matched again"] += 1
+    return False
+
+
 def match_cso_row(mt: Matcher, name: str, o: dict, shared: Counter, diag: list, counts, state_build: bool = False) -> None:
     """One CSO registry row (run(), run_state()): match_outfalls' match kept or re-matched, the result written in place.
     state_build: match_outfalls' match is kept only when its slug is an openboatlaunch record (its note says so); a slug
     no water file held when it matched, now an NHD record of the same slug, is matched again here."""
     st = o.get("state")
+    if hand_kept(o, counts):    # a hand correction (data/outfall-water-corrections.json) is kept as it is
+        return
     if is_matchers(o) and mt.canon(o["water_slug"]) in mt.waters and \
             (not state_build or mt.source_of(mt.canon(o["water_slug"])) == "openboatlaunch"):
         slug0 = mt.canon(o["water_slug"])
@@ -1245,6 +1272,7 @@ def run(dry_run: bool = False, offline: bool = False) -> dict:
     diag, counts = [], defaultdict(Counter)
     for name, o in rows:
         match_cso_row(mt, name, o, shared, diag, counts)
+    hand_problems = [p for name in FILES for p in HAND.apply_rows(name, docs[name]["outfalls"])]
     changed = []
     if not dry_run:
         for name in FILES:
@@ -1256,7 +1284,8 @@ def run(dry_run: bool = False, offline: bool = False) -> dict:
                 tmp.replace(path)
                 changed.append(name)
     summary = {"built": now_iso(), "files_written": changed, "dry_run": dry_run,
-               "counts": {st: dict(sorted(c.items())) for st, c in sorted(counts.items())}, "outfalls": diag}
+               "counts": {st: dict(sorted(c.items())) for st, c in sorted(counts.items())}, "outfalls": diag,
+               "hand_corrections_not_applied": hand_problems}
     if not dry_run:
         SUMMARY.parent.mkdir(parents=True, exist_ok=True)
         SUMMARY.write_text(json.dumps(summary, indent=1))
@@ -1267,6 +1296,8 @@ def match_plant_row(mt: Matcher, o: dict, counts, diag: list, state_build: bool 
     """One plant row (run_plants(), run_state()): the match fields written in place. state_build: as match_cso_row."""
     st = o.get("state")
     counts[st]["plant rows"] += 1
+    if hand_kept(o, counts):    # a hand correction (data/outfall-water-corrections.json) is kept as it is
+        return
     slug0 = mt.canon(o["water_slug"]) if o.get("water_slug") else None
     mine = bool(slug0 and slug0 in mt.waters and str(o.get("water_matched_by") or "").startswith("scripts/match_outfalls")
                 and (not state_build or mt.source_of(slug0) == "openboatlaunch"))
@@ -1325,6 +1356,7 @@ def run_plants(dry_run: bool = False, offline: bool = False) -> dict:
         if st not in live or o.get("outfall_kind", "plant") != "plant":
             continue
         match_plant_row(mt, o, counts, diag)
+    hand_problems = HAND.apply_rows(PLANTS_FILE, doc["outfalls"])
     unrec = defaultdict(lambda: {"outfalls": 0, "permits": set(), "reach_ids": Counter(), "receiving_waters": Counter()})
     for d in diag:                  # the waters that have no record, for the NHD water-record builder
         text, gnis = d["receiving_water"], d["reach_gnis_name"]
@@ -1352,7 +1384,7 @@ def run_plants(dry_run: bool = False, offline: bool = False) -> dict:
             changed.append(PLANTS_FILE)
     summary = {"built": now_iso(), "files_written": changed, "dry_run": dry_run,
                "counts": {st: dict(sorted(c.items())) for st, c in sorted(counts.items())},
-               "unrecorded": unrecorded, "outfalls": diag}
+               "unrecorded": unrecorded, "outfalls": diag, "hand_corrections_not_applied": hand_problems}
     if not dry_run:
         PLANTS_SUMMARY.parent.mkdir(parents=True, exist_ok=True)
         PLANTS_SUMMARY.write_text(json.dumps(summary, indent=1))
@@ -1398,6 +1430,7 @@ def _run_state(states, dry_run: bool, offline: bool) -> dict:
         if (o.get("state") or "").upper() in states:
             counts[o["state"]][f"rows in {PLANTS_FILE}"] += 1
             match_plant_row(mt, o, counts, diag, state_build=True)
+    hand_problems = [p for n in names for p in HAND.apply_rows(n, docs[n]["outfalls"])]
     for n, o in cso + [(PLANTS_FILE, o) for o in docs[PLANTS_FILE]["outfalls"] if (o.get("state") or "").upper() in states]:
         counts[o["state"]]["tied to a record" if o.get("water_slug") else "with a stated reason"] += 1
     changed = []
@@ -1416,7 +1449,8 @@ def _run_state(states, dry_run: bool, offline: bool) -> dict:
             if path.read_text() != old:
                 changed.append(n)
     summary = {"built": now_iso(), "states": states, "files_written": changed, "dry_run": dry_run,
-               "counts": {st: dict(sorted(c.items())) for st, c in sorted(counts.items())}, "outfalls": diag}
+               "counts": {st: dict(sorted(c.items())) for st, c in sorted(counts.items())}, "outfalls": diag,
+               "hand_corrections_not_applied": hand_problems}
     if not dry_run:
         out = state_summary_path(states)
         out.parent.mkdir(parents=True, exist_ok=True)
@@ -1443,10 +1477,19 @@ def main(argv=None) -> int:
         tot.update(c)
         print(f"{st}: " + ", ".join(f"{k} {v}" for k, v in c.items()))
     print("ALL: " + ", ".join(f"{k} {v}" for k, v in sorted(tot.items())))
+    for p in summary.get("hand_corrections_not_applied") or []:
+        print("hand correction not applied: " + p)
     print(f"written: {', '.join(summary['files_written']) or 'nothing'}"
           + (f"; diagnosis in {N.shown(state_summary_path(args.state) if args.state else PLANTS_SUMMARY if args.plants else SUMMARY)}"
              if not args.dry_run else " (dry run)"))
-    return 0
+    if args.dry_run:
+        return 0
+    # the registry's gate for the hand corrections (the state build's ties step runs this in CI): every entry's row,
+    # each copy and the one the registry loader reads, carries its correction, and no entry's evidence changed
+    probs = HAND.check_registry()
+    for p in probs:
+        print("::error::hand correction: " + p)
+    return 1 if probs else 0
 
 
 if __name__ == "__main__":

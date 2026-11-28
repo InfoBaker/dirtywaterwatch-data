@@ -1,0 +1,4 @@
+permit,outfall,state,mechanism,current,proposed,live_reports,reason
+KY0026093,002,KY,registry_correction,cumberland-river-ky,martins-fork-cumberland-river-ky,0,"the permit names an unnamed tributary to Martins Fork; the point lies 21 m from Clover Fork Cumberland River, 84 m from the Cumberland River and 98 m from Martins Fork, so the point does not tell which water the tributary's outfall is on (two records fit)"
+NY0026158,003,NY,registry_correction,east-river-ny,bowery-bay-ny,0,"the point lies 477 m from the Bowery Bay record by the repository's outline measure, beyond the 400 m tie distance and 82 m farther than the East River record it has now; not plausibly beside it"
+PA0024589,005,PA,registry_correction,ohio-river-pa,little-sewickley-creek-edgeworth-pa,0,"the point lies 469 m from the Little Sewickley Creek record by the repository's outline measure, beyond the 400 m tie distance; not plausibly beside it"

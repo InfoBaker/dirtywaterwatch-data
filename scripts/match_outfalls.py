@@ -36,7 +36,8 @@ After this script, run `cd pipeline && python -m ingest.outfall_waters` (2026-11
 script leaves without a water the record of their receiving water (NHD, OSM, hand records), redoes the name-only
 matches here that name another water (words() drops kind words, so 'Onondaga Creek' matched Onondaga Lake), and adds
 water_match, water_matched_by, no_water_reason, replaced_match and coords_problem. A rerun of this script rewrites
-the rows from EPA's file and drops those fields until that pass runs again.
+the rows from EPA's file and drops those fields until that pass runs again, except the hand corrections of
+data/outfall-water-corrections.json (2026-11-28), which this script writes again on the rows it writes.
 
 National registry (2026-11-03, `--national`; data/outfalls-us.json): every state and territory in the inventory
 outside the 12 live ones (REGIONAL_STATES, read from the regional files: the New England six in data/outfalls-new-england.json and
@@ -597,6 +598,10 @@ if PLANTS:
             p[f] = r[f]
         if r.get("no_water_reason"):
             p["no_water_reason"] = r["no_water_reason"]
+    # hand corrections to the water ties (data/outfall-water-corrections.json): written again on every rebuild
+    from ingest import outfall_water_corrections as _hand  # noqa: E402
+    for _p in _hand.apply_rows(os.path.basename(out_path), PLANT_DOC["outfalls"]):
+        print("hand correction not applied:", _p, file=sys.stderr)
     # the file's own layout (research/federal/build_plant_outfalls.py): the header keys one per line, then the rows
     tmp = out_path + ".tmp"
     with open(tmp, "w") as fh:
@@ -699,6 +704,11 @@ if os.path.basename(out_path) in ("outfalls-us.json", "outfalls-mid-atlantic.jso
     _spec.loader.exec_module(_opc)
     _opc.for_builder(os.path.basename(out_path), out["outfalls"])
     out["count"] = len(out["outfalls"])          # an added row (the corrections' ADD table) is counted too
+# hand corrections to the water ties (data/outfall-water-corrections.json; ingest.outfall_water_corrections): written
+# again on every rebuild, after the rows are rewritten from EPA's file
+from ingest import outfall_water_corrections as _hand  # noqa: E402
+for _p in _hand.apply_rows(os.path.basename(out_path), out["outfalls"]):
+    print("hand correction not applied:", _p, file=sys.stderr)
 tmp = out_path + ".tmp"
 with open(tmp, "w") as fh:
     json.dump(out, fh, indent=1)
