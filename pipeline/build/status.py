@@ -1570,8 +1570,10 @@ COUNTY_FIELD_STATES.add("IA")
 COUNTY_STATES["ID"] = "id-counties.json"       # Idaho: DEQ's bloom table gives each water's county
 COUNTY_FIELD_STATES.add("ID")
 # States whose river remainder records (covers_part_of) step aside for their main record where it reaches the report
-# (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3)
-REMAINDER_MERGE_STATES = {"TN"}
+# (Resolver.merge_remainders; Tennessee's two Cumberland River records, final audit 2026-11-08 P2-3). Michigan
+# (untraced-outfall fixes 2026-11-28, research/mi/untraced-outfall-waters-2026-11-28.json): Port Huron's St. Clair
+# River, the main Rouge at Dearborn and Birmingham, Niles' St. Joseph River
+REMAINDER_MERGE_STATES = {"TN", "MI"}
 _COUNTIES: dict[str, list] = {}
 _RECORD_COUNTIES: dict[tuple, frozenset] = {}
 
@@ -2633,7 +2635,10 @@ class Resolver:
                 slugs = kept
                 if not slugs:
                     continue
-            if state in REMAINDER_MERGE_STATES and len(slugs) > 1:
+            if state in REMAINDER_MERGE_STATES and len(slugs) > 1 and (lat is not None or len(
+                    [x for x in slugs if self.event_towns(ev or {}) & water_town_keys(self.waters[x].get("towns"))]) != 1):
+                # with no point, the discharger's town picks first where it names one record only (GLWA's 'Rouge
+                # River' in Detroit is the Detroit remainder); else the remainder steps aside for its main record
                 slugs = self.merge_remainders(slugs, lat, lon)
             if len(slugs) == 1:
                 out.append(slugs[0])

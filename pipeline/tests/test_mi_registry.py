@@ -272,12 +272,16 @@ def test_the_operator_chooses_which_river_rouge_a_rouge_river_report_reaches(mi_
     assert mi_resolver.resolve(ev)["water_slugs"] == [slug]
 
 
-def test_a_rouge_river_report_whose_town_holds_neither_record_is_not_guessed(mi_resolver):
+def test_a_rouge_river_report_whose_town_holds_neither_record_goes_to_the_main_record(mi_resolver):
+    """river-rouge-detroit-mi is the NHD remainder of river-rouge-mi (covers_part_of): the stretch below Fort St in
+    Detroit and River Rouge that the main record lacks. A report with no point whose town holds neither record goes to
+    the main record (untraced-outfall fixes 2026-11-28: Michigan in REMAINDER_MERGE_STATES); Dearborn Heights lies on
+    the main Rouge, upstream of the remainder."""
     ev = {"event_id": "mi-egle-mienviro-cso-sso-list:y", "source_id": M.SOURCE_ID, "event_type": "cso",
           "waterbody_text": "Main Rouge River", "npdes_permit": "MI0051489",
           "discharger_id": "mi-wayne-co-dearborn-heights-cso-mi0051489"}
     r = mi_resolver.resolve(ev)
-    assert r["water_slugs"] == [] and r.get("unplaced_reason") == "ambiguous name"
+    assert r["water_slugs"] == ["river-rouge-mi"]
 
 
 def test_a_name_given_to_an_unnamed_record_is_cited_on_the_rows_it_ties():
