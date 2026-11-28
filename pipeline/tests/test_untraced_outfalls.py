@@ -162,3 +162,34 @@ def test_euclids_outfalls_take_lake_erie_on_the_permits_statement_and_keep_their
 @pytest.mark.parametrize("oid", ["023", "024"])
 def test_euclids_ravine_outfalls_stay_untied(resolver, oid):
     assert resolver.resolve(_oh("OH0031062", oid))["water_slugs"] == []
+
+
+# ------------------------------------------------------------------ 4. the Narragansett Bay Commission's outfall numbers
+
+@pytest.mark.parametrize("permit,oid,row,slug", [
+    ("RI0100072", "OF 107", "107A", "blackstone-river-ri"),
+    ("RI0100072", "OF 218", "218A", "seekonk-river-ri"),
+    ("RI0100315", "OF 027", "027A", "seekonk-river-ri"),
+])
+def test_an_nbc_report_of_of_107_is_the_registry_row_107a(resolver, permit, oid, row, slug):
+    rows = resolver.outfall_rows(permit, oid)
+    assert [r["outfall"] for r in rows] == [row]
+    ev = event(source_id="ri-nbc", source_record_id=f"{oid}-x", event_type="cso", status="ended", npdes_permit=permit,
+               outfall_id=oid, outfall_name=f"{oid} Regs Combined", raw={"state": "RI"})
+    pl = resolver.resolve(ev)
+    assert pl["water_slugs"] == [slug] and pl["water_match"] == "outfall_registry", pl
+
+
+def test_the_a_suffix_rule_is_only_the_nbc_permits_and_only_a_single_a_row(resolver):
+    assert S.NBC_A_SUFFIX_PERMITS == {"RI0100072", "RI0100315"}
+    by = {p: rows for p, rows in resolver.by_permit.items()}
+    # another permit with an 'A' row is not read so (a bare number names no lettered row there)
+    other = next(p for p, rows in sorted(by.items()) if p not in S.NBC_A_SUFFIX_PERMITS and p.startswith("MI")
+                 and any(str(r.get("outfall") or "").endswith("A") and str(r.get("outfall"))[:-1].isdigit() for r in rows)
+                 and not any(str(r.get("outfall") or "").isdigit() for r in rows
+                             if str(r.get("outfall")) + "A" in {str(x.get("outfall")) for x in rows}))
+    arow = next(r for r in by[other] if str(r.get("outfall") or "").endswith("A") and str(r.get("outfall"))[:-1].isdigit())
+    assert resolver.outfall_rows(other, "OF " + arow["outfall"][:-1]) == []
+    # a lettered report ('OF 107 B' style) or a plant outfall ('OF 002 BP') is not changed
+    assert resolver.outfall_rows("RI0100072", "OF 002 BP") == [] or \
+        all(r["outfall"] != "002A" for r in resolver.outfall_rows("RI0100072", "OF 002 BP"))

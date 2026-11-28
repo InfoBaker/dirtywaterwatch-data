@@ -1429,6 +1429,10 @@ def outfall_name_id(row: dict) -> str | None:
     return norm_oid(m.group(1)) if m else None
 
 
+# Permits whose overflow feed numbers an outfall without the registry's suffix A ('OF 107' for '107A'): the Narragansett
+# Bay Commission's (ri-nbc; Resolver.outfall_rows)
+NBC_A_SUFFIX_PERMITS = {"RI0100072", "RI0100315"}
+
 # States whose reports carry an island (raw.island) and no point: a name resolves only to a record on that island
 ISLAND_STATES = {"HI"}
 
@@ -2463,6 +2467,12 @@ class Resolver:
         hit = [r for r in rows if norm_oid(r.get("outfall")) == want or outfall_name_id(r) == want]
         if not hit and oid_key(oid) and not re.search(r"\d-\d", str(oid)):      # "002-1" is not outfall 021
             hit = [r for r in rows if oid_key(r.get("outfall")) == oid_key(oid) and outfall_name_id(r) in (None, want)]
+        if not hit and permit in NBC_A_SUFFIX_PERMITS and re.fullmatch(r"(?:OF)?\d+", want):
+            # the Narragansett Bay Commission's feed says 'OF 107' for the registry's '107A' (untraced-outfall fixes
+            # 2026-11-28): the number with the suffix A, when the permit has exactly one such row
+            k = oid_key(oid)
+            a = [r for r in rows if oid_key(r.get("outfall")) == (k[0], "A")]
+            hit = a if len(a) == 1 else []
         return hit
 
     def canon(self, slug):
