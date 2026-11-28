@@ -64,13 +64,33 @@ def test_a_remainder_with_a_point_near_it_alone_keeps_the_report(resolver):
         ["saint-clair-river-mi"]
 
 
+def test_a_town_missing_from_the_records_does_not_send_a_report_to_the_main_record(resolver):
+    """Astra review 2026-11-28 (P2): Algonac's 'St. Clair River' (MI0020389, no point, no outfall). Algonac is in no
+    record's town list, so the town picks nothing; the permit's registry outfall 001 lies on the Algonac remainder, so
+    the report goes there, never to the main record at Port Huron 35 km upstream."""
+    pl = resolver.resolve(_mi("St. Clair River", "MI0020389", "mi-algonac-wwtp-mi0020389"))
+    assert pl["water_slugs"] == ["saint-clair-river-algonac-mi"], pl
+    # Port Huron's registry outfall 001 lies by the main record: the main record, by the permit's points
+    pl = resolver.resolve(_mi("St. Clair River", "MI0023833", "mi-port-huron-wwtp-mi0023833"))
+    assert pl["water_slugs"] == ["saint-clair-river-mi"], pl
+
+
+def test_with_no_town_and_no_registry_point_a_michigan_split_river_stays_ambiguous(resolver):
+    """No town picks a record and the permit has no registry point: the name stays ambiguous in Michigan (missing data
+    does not decide); Tennessee keeps its rule (the remainder steps aside for the main record)."""
+    pl = resolver.resolve(_mi("St. Clair River", "MI9999999"))
+    assert pl["water_slugs"] == [] and "saint-clair-river-mi" in (pl.get("note") or ""), pl
+    slugs, _, ambiguous = resolver.by_name("St. Clair River", "MI", None, None, {"npdes_permit": "MI9999999"})
+    assert slugs == [] and ambiguous
+
+
 def test_crystal_falls_paint_river_is_still_two_unrelated_records(resolver):
-    """Crystal Falls' 'Paint River' (GW1810192, no operator on record, no point): the remainder steps aside, but
-    paint-river-mi (Crystal Falls) and paint-river-iron-river-mi (Iron River) are two main records, so the report
-    stays unplaced until its town or operator is on record (left for a decision)."""
+    """Crystal Falls' 'Paint River' (GW1810192, no operator on record, no point, no registry point): paint-river-mi
+    (Crystal Falls) and paint-river-iron-river-mi (Iron River) are two main records, and with no town and no registry
+    point the remainder (paint-river-mastodon-mi) no longer steps aside in Michigan either (Astra review 2026-11-28):
+    the report stays unplaced until its town or operator is on record (left for a decision)."""
     pl = resolver.resolve(_mi("Paint River", "GW1810192", None, "002"))
     assert pl["water_slugs"] == []
-    assert "paint-river-mastodon-mi" not in (pl.get("note") or "")
 
 
 # ------------------------------------------------------------------ 2. spellings the reports use

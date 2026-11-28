@@ -2645,11 +2645,8 @@ class Resolver:
                 slugs = kept
                 if not slugs:
                     continue
-            if state in REMAINDER_MERGE_STATES and len(slugs) > 1 and (lat is not None or len(
-                    [x for x in slugs if self.event_towns(ev or {}) & water_town_keys(self.waters[x].get("towns"))]) != 1):
-                # with no point, the discharger's town picks first where it names one record only (GLWA's 'Rouge
-                # River' in Detroit is the Detroit remainder); else the remainder steps aside for its main record
-                slugs = self.merge_remainders(slugs, lat, lon)
+            if state in REMAINDER_MERGE_STATES and len(slugs) > 1:
+                slugs = self.remainder_pick(slugs, state, lat, lon, ev or {})
             if len(slugs) == 1:
                 out.append(slugs[0])
                 continue
@@ -2688,6 +2685,48 @@ class Resolver:
             if slugs:
                 found[n] = slugs
         return found
+
+    def permit_points(self, ev: dict) -> list[tuple[float, float]]:
+        """The registry outfall points of the report's permit (outfall_rows for the report's outfall when it names one
+        the registry has, else every row of the permit), rows with flagged coordinates left out."""
+        permit = ev.get("npdes_permit")
+        if not permit:
+            return []
+        rows = self.outfall_rows(permit, ev.get("outfall_id")) or self.by_permit.get(permit) or []
+        return [(o["lat"], o["lon"]) for o in rows if isinstance(o.get("lat"), (int, float))
+                and isinstance(o.get("lon"), (int, float)) and not o.get("coords_problem")]
+
+    def remainder_pick(self, slugs: list, state, lat, lon, ev: dict) -> list:
+        """The records of a name a river's main record and its remainder (covers_part_of) share, in a
+        REMAINDER_MERGE_STATES state. With a point: merge_remainders. With none (Astra review 2026-11-28, P2: Algonac's
+        'St. Clair River' went to the main record because Algonac is in no record's town list; missing town data must
+        not decide): (a) the discharger's town, where it picks exactly one record (GLWA's 'Rouge River' in Detroit is
+        the Detroit remainder); (b) else the record nearest the permit's registry outfall points (permit_points), when
+        it lies within NAME_MATCH_M of one of them and no other record is as near (Port Huron's outfall 001 lies 262 m
+        from the main record, Algonac's 001 on the Algonac remainder); (c) else in Tennessee the remainder steps aside
+        for its main record (merge_remainders, final audit 2026-11-08 P2-3); in other states every record stays, and
+        the name is ambiguous unless a later step settles it."""
+        if lat is not None:
+            return self.merge_remainders(slugs, lat, lon)
+        towns = self.event_towns(ev)
+        by_town = [x for x in slugs if towns & water_town_keys(self.waters[x].get("towns"))]
+        if len(by_town) == 1:
+            return by_town
+        pts = self.permit_points(ev)
+        if pts:
+            best = {}
+            for x in slugs:
+                ds = [d for d in (self.distance_m(x, a, b) for a, b in pts) if d is not None]
+                if ds:
+                    best[x] = min(ds)
+            if best:
+                m = min(best.values())
+                near = [x for x, d in best.items() if d == m]
+                if m <= NAME_MATCH_M and len(near) == 1:
+                    return near
+        if state == "TN":
+            return self.merge_remainders(slugs, lat, lon)
+        return slugs
 
     def merge_remainders(self, slugs: list, lat, lon) -> list:
         """A river's remainder record (covers_part_of: the NHD record of the part the main record lacks) and its
