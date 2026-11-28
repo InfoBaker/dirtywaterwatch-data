@@ -48,7 +48,6 @@ def test_michigan_remainders_step_aside_for_their_main_record():
     ("Rouge River", "MI0025542", "mi-dearborn-cso-mi0025542", "011", "river-rouge-mi"),
     ("Rouge River", "MI0025542", "mi-dearborn-cso-mi0025542", "015", "river-rouge-mi"),
     ("Rouge River", "MI0025534", "mi-birmingham-cso-rtb-mi0025534", "102", "river-rouge-mi"),
-    ("St. Joseph River", "MI0023701", "mi-niles-wwtp-mi0023701", "004", "st-joseph-river-mi"),
 ])
 def test_a_pointless_report_naming_a_split_river_goes_to_the_main_record(resolver, text, permit, did, oid, slug):
     pl = resolver.resolve(_mi(text, permit, did, oid))
@@ -82,6 +81,27 @@ def test_with_no_town_and_no_registry_point_a_michigan_split_river_stays_ambiguo
     assert pl["water_slugs"] == [] and "saint-clair-river-mi" in (pl.get("note") or ""), pl
     slugs, _, ambiguous = resolver.by_name("St. Clair River", "MI", None, None, {"npdes_permit": "MI9999999"})
     assert slugs == [] and ambiguous
+
+
+def test_a_registry_point_does_not_choose_between_unrelated_namesakes(resolver, monkeypatch):
+    """Astra review 2026-11-28 pass 2 (P2): the permit's registry points settle only a river's main record and its
+    remainders. Two unrelated 'Mill Creek' records (Lexington, Kenockee) stay as they are, even with a registry point on
+    one of them: nothing says the reported overflow was at that outfall."""
+    monkeypatch.setattr(resolver, "permit_points", lambda ev: [(43.248739, -82.569039)])
+    two = ["mill-creek-lexington-mi", "mill-creek-kenockee-mi"]
+    assert not resolver.one_family(two)
+    assert resolver.remainder_pick(two, "MI", None, None, {"npdes_permit": "MI9999999", "outfall_id": "999"}) == two
+    assert resolver.one_family(["saint-clair-river-mi", "saint-clair-river-algonac-mi"])
+    assert not resolver.one_family(["paint-river-mi", "paint-river-iron-river-mi", "paint-river-mastodon-mi"])
+
+
+def test_niles_st_joseph_report_with_an_unregistered_outfall_stays_unplaced(resolver):
+    """Niles' outfall 004 is not in the registry, and 'St. Joseph River' names two main records (st-joseph-river-mi,
+    saint-joseph-river-mi) besides the Jonesville remainder: not one river's family, so the permit's other outfalls do
+    not choose (Astra review 2026-11-28 pass 2); the report stays unplaced until its outfall or town settles it."""
+    assert resolver.outfall_rows("MI0023701", "004") == []
+    pl = resolver.resolve(_mi("St. Joseph River", "MI0023701", "mi-niles-wwtp-mi0023701", "004"))
+    assert pl["water_slugs"] == [], pl
 
 
 def test_crystal_falls_paint_river_is_still_two_unrelated_records(resolver):

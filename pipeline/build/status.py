@@ -2703,7 +2703,9 @@ class Resolver:
         not decide): (a) the discharger's town, where it picks exactly one record (GLWA's 'Rouge River' in Detroit is
         the Detroit remainder); (b) else the record nearest the permit's registry outfall points (permit_points), when
         it lies within NAME_MATCH_M of one of them and no other record is as near (Port Huron's outfall 001 lies 262 m
-        from the main record, Algonac's 001 on the Algonac remainder); (c) else in Tennessee the remainder steps aside
+        from the main record, Algonac's 001 on the Algonac remainder), and only when the records are one river's main
+        record and its remainders (one_family; Astra review 2026-11-28 pass 2, P2: two unrelated 'Mill Creek' records
+        are not settled by a registry point the report does not name); (c) else in Tennessee the remainder steps aside
         for its main record (merge_remainders, final audit 2026-11-08 P2-3); in other states every record stays, and
         the name is ambiguous unless a later step settles it."""
         if lat is not None:
@@ -2712,7 +2714,7 @@ class Resolver:
         by_town = [x for x in slugs if towns & water_town_keys(self.waters[x].get("towns"))]
         if len(by_town) == 1:
             return by_town
-        pts = self.permit_points(ev)
+        pts = self.permit_points(ev) if self.one_family(slugs) else []
         if pts:
             best = {}
             for x in slugs:
@@ -2727,6 +2729,14 @@ class Resolver:
         if state == "TN":
             return self.merge_remainders(slugs, lat, lon)
         return slugs
+
+    def one_family(self, slugs: list) -> bool:
+        """Whether the records are one river: a main record and its remainders, each remainder's covers_part_of naming
+        that main record, which is among them. Unrelated records of one name are not."""
+        if len(slugs) < 2:
+            return False
+        roots = {self.waters[x].get("covers_part_of") or x for x in slugs}
+        return len(roots) == 1 and next(iter(roots)) in slugs
 
     def merge_remainders(self, slugs: list, lat, lon) -> list:
         """A river's remainder record (covers_part_of: the NHD record of the part the main record lacks) and its
