@@ -409,6 +409,12 @@ _mt_density.with_record = True
 
 
 SOURCES: dict[str, dict] = {
+    "ca-sdcounty-beachinfo": {"cause": text("cause"),
+                               "town": text("row.City.Label"),
+                               "location_description": text("row.Site.LocationName")},
+    "ca-ocbeachinfo": {"cause": text("cause", "reason"),
+                       "location_description": joined(text("row.extent"), text("phases[].area")),
+                       "volume_to_water_gal": number("volume_to_water_gal")},
     "mo-dnr-hab-map": {
         "confirmation_method": text("confirmation_method"),
         "source_end_date": text("dissolved_on"),

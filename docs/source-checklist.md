@@ -30,7 +30,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | fl | 6 | 0 | 5 | 1 | 0 | 12 |
 | mi | 6 | 2 | 5 | 2 | 0 | 15 |
 | wa | 6 | 3 | 4 | 1 | 0 | 14 |
-| ca | 11 | 1 | 9 | 3 | 0 | 24 |
+| ca | 13 | 1 | 7 | 3 | 0 | 24 |
 | il | 11 | 1 | 11 | 3 | 2 | 28 |
 | az | 3 | 1 | 3 | 3 | 1 | 11 |
 | sd | 3 | 1 | 5 | 0 | 0 | 9 |
@@ -65,7 +65,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | wy | 3 | 0 | 5 | 1 | 1 | 10 |
 | ia | 6 | 1 | 5 | 1 | 0 | 13 |
 | id | 3 | 0 | 8 | 0 | 0 | 11 |
-| **all** | **659** | **240** | **547** | **236** | **79** | **1761** |
+| **all** | **661** | **240** | **545** | **236** | **79** | **1761** |
 
 ## science: Science (criteria, studies, advisory wording) (204)
 
@@ -1438,7 +1438,9 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ca-hsc-5411-5` | Health and Safety Code 5411.5 (notice to local health officer) | used | fetched | law | Duty to tell the health officer, not the public. |
 | `ca-lacounty-beach` | Los Angeles County beach water quality map and ocean notices | used | fetched | advisories | Read hourly by pipeline/ingest/ca_lacounty_beaches.py; paged archive and KML checked live November 28, 2026: 176 notices and 97 stations. |
 | `ca-long-beach-water-quality` | Long Beach recreational water conditions | used | fetched | advisories | Read hourly by pipeline/ingest/ca_long_beach_water_quality.py; 15 stations, all Open, updated November 25, 2026, read November 28. |
+| `ca-ocbeachinfo` | Orange County Health Care Agency ocean and bay water closures (ocbeachinfo.com) | used | fetched | advisories | Built ca_oc_beaches reader with strict table validation and retention on failure. Native HTML/PDF extraction awaits runner verification; real-record fixtures are trimmed public-text transcriptions. |
 | `ca-sacramento-css-permit` | City of Sacramento Combined Wastewater Collection and Treatment System, Order R5-2026-0003 (NPDES CA0079111) | used | fetched | permits | Read the public notification clause. |
+| `ca-sdcounty-beachinfo` | San Diego County DEHQ beach and bay status (sdbeachinfo.com) | used | fetched | advisories | Built ca_sd_beaches hourly reader; native live read Nov. 28: 7 advisories, 6 closures, no warnings. Most rows have no current-event reason and are listed without color. |
 | `ca-sfpuc-beach-map` | SFPUC San Francisco Beach Water Quality map (combined sewer discharge flags) and getBeaches service | used | fetched | events | Read hourly by pipeline/ingest/ca_sfpuc_beaches.py as a snapshot: the combined sewer discharge sign per station (SFPUC's own 24-72 hour window, red while shown) and the postings (beach advisories). 20 stations, no flag on 2026-11-04. |
 | `ca-swrcb-ciwqs-spills-flatfile` | State Water Board CIWQS Sanitary Sewer System spill data: Cat1-2-3-Spills.txt (nightly flat file) | used | fetched | events | Statewide, event-level, machine-readable, public: read hourly by pipeline/ingest/ca_swrcb_ciwqs_spills.py (If-Modified-Since: the file changes once a day; 3,567 spills since June 2023 on 2026-11-04 with the backfill: 1,284 Category 1 shown, 459 Category 2 and 1,824 Category 3 kept as reaching no water). Narrative and certifier columns never read. |
 | `ca-swrcb-fhab` | Surface Water - Freshwater Harmful Algal Blooms (FHAB bloom reports, cases, advisories) | used | fetched | advisories | Read by pipeline/ingest/ca_swrcb_fhab.py when the table changes (about daily): Caution, Warning, Danger and mat-alert advisories (1,304 on 2026-11-04) and new reports not yet assessed; reports with no advisory counted, not shown. Blooms, not sewage. |
@@ -1446,9 +1448,7 @@ One id appears in two areas: `crwa-flagging` (hydrography: candidate; science: u
 | `ca-sd-regional-board-ibwc-spills` | San Diego Water Board: USIBWC Spill Events and Transboundary Flow Events from Mexico | candidate | fetched | events | The shared-water (US-Mexico) case the owner's rule covers; small HTML table, poll weekly. |
 | `ca-caloes-spill-reports` | Cal OES Hazardous Materials Spill Reports | watch | search_only | events | Potentially faster (hours) than CIWQS for >= 1,000 gal; format and reuse unconfirmed. |
 | `ca-heal-the-bay` | Heal the Bay Beach Report Card and River Report Card | watch | search_only | prior_art | Prior art: weekly grades; their app shows closures. |
-| `ca-ocbeachinfo` | Orange County Health Care Agency ocean and bay water closures (ocbeachinfo.com) | watch | search_only | advisories | Sewage-spill closures with extent; not fetched. |
 | `ca-sdcoastkeeper-swim-guide` | San Diego Coastkeeper beach advisories (Swim Guide affiliate) | watch | search_only | prior_art | Republishes county closures; prior art. |
-| `ca-sdcounty-beachinfo` | San Diego County DEHQ beach and bay status (sdbeachinfo.com) | watch | fetched | advisories | Live closures (incl. sewage and Tijuana closures) but no documented API; Beach Watch carries the same records later. The prompt's 'API' lead was not confirmed. |
 | `ca-sf-beach-wq-opendata` | DataSF Beach Water Quality Monitoring (v3fv-x3ux) | watch | fetched | monitoring | Bacteria results; context. |
 | `ca-swrcb-plps-spills` | plps_spills.txt (private lateral and private system spills, voluntary) | watch | fetched | events | Voluntary, small, privacy-sensitive. |
 | `ca-swrcb-sewer-overflows-arcgis` | Water Boards ArcGIS MapServer Water_Quality/Sewer_Overflows | watch | fetched | events | Bot-walled to scripts; the nightly flat file carries the same points. |

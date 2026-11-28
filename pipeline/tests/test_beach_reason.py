@@ -91,7 +91,7 @@ def test_the_rule_is_on_with_its_rationale_and_every_beach_source_read():
     # shared-files patch (tests/test_fed_beacon.py checks the entry itself)
     expected |= {"fed-beacon-beach-actions"} & set(cfg["sources"])
     # Local California entries also arrive through the shared-files integration patch.
-    expected |= {"ca-lacounty-beach", "ca-long-beach-water-quality"} & set(cfg["sources"])
+    expected |= {"ca-lacounty-beach", "ca-long-beach-water-quality", "ca-sdcounty-beachinfo", "ca-ocbeachinfo"} & set(cfg["sources"])
     assert expected == set(cfg["sources"])
     for sid, ent in cfg["sources"].items():
         assert ent["kind"] in ("program", "fields", "none"), sid

@@ -889,6 +889,16 @@
    },
    "ca-lacounty-beach": {"kind": "fields", "fields": ["cause"], "read": "The county notice's reason and its beach map legend; a closure without a specific water-quality reason is listed only."},
    "ca-long-beach-water-quality": {"kind": "fields", "fields": ["cause"], "read": "The city's condition legend: Advisory means bacterial levels outside state standards; Closed gives no specific water-quality reason."},
+   "ca-sdcounty-beachinfo": {
+    "kind": "fields",
+    "fields": ["row.Event.Reason", "row.Event.DescriptionIssue"],
+    "read": "San Diego County's reason and issue notice for this action; a station's general background is not a current-event reason"
+   },
+   "ca-ocbeachinfo": {
+    "kind": "fields",
+    "fields": ["cause", "reason", "row.title"],
+    "read": "Orange County's notice text, stated warning or advisory reason, and sewage closure chart"
+   },
    "ca-sfpuc-beach-map": {
     "kind": "program",
     "basis": "SFPUC posts a beach when “Concentrations of bacteria were elevated at this location within the past 24 hours” or a combined sewer discharge has recently occurred there."
