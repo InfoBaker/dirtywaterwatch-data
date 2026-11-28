@@ -1,6 +1,6 @@
 {
  "state": "MN",
- "source": "openboatlaunch API v1 snapshot 2026-11-07",
+ "source": "openboatlaunch out/water snapshot 2026-11-07, changes to 2026-11-07",
  "count": 2176,
  "waters": [
   {
@@ -3478,12 +3478,13 @@
    "gnis_id": null,
    "geometry_hash": "76a73c1ae171528d5f979e88674e37c30eb41ea0653e882781b508b87e681047",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "big-bass-lake-mn",
@@ -6341,12 +6342,13 @@
    "gnis_id": null,
    "geometry_hash": "759dcd1a84c5108037dc1a123ae62c9f7049538798b1cfa37e32a646ab49c857",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "boot-lake-mn",
@@ -20993,12 +20995,13 @@
    "gnis_id": null,
    "geometry_hash": "41aa21fc7f4ae3447689d7c9f228b5f44c6089e8934261f6f42c60d74eab819a",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "grassy-lake-mn",
@@ -37797,12 +37800,13 @@
    "gnis_id": null,
    "geometry_hash": "65ed66206a98939b78119838e185826f868de5ec502936f1eb6e23d984773960",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "long-lake-hubbard-mn",
@@ -38361,12 +38365,13 @@
    "gnis_id": null,
    "geometry_hash": "c7805f74427a3ac4755817479618c5fbcd83fd889c7dfc0683ec3d13987f8302",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "long-lake-saint-james-mn",
@@ -50521,12 +50526,13 @@
    "gnis_id": null,
    "geometry_hash": "e58641be4ffc90cfc4bf9dffb904838814de62ca7fb7317199b9b2ced2d53d9b",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "prairie-lake-mn",
@@ -61227,12 +61233,13 @@
    "gnis_id": null,
    "geometry_hash": "2cca257b9c13b2d474a225af93500853882a35f29f682005ecc1553feb439a44",
    "geometry_tolerance_m": 17,
-   "status": "active",
+   "status": "not_in_snapshot",
    "successor_slug": null,
    "previous_slugs": [],
    "updated_at": "2026-11-07T02:52:45+00:00",
    "launches_unpublished": [],
-   "advisories": []
+   "advisories": [],
+   "retired_at": null
   },
   {
    "slug": "sunrise-river-mn",
