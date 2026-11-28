@@ -338,7 +338,9 @@ def sheet_record(ym: str, m: dict, doc: dict, ctx: dict, fetched_at: str) -> dic
         outfall_name=None, waterbody_text=None, water_slugs=slugs, water_match=wmatch, lat=None, lon=None,
         coord_source=None, started_at=start, ended_at=end, time_precision="month", reported_at=None,
         published_at=None, source_updated_at=None, fetched_at=fetched_at, material="combined sewage and stormwater",
-        volume_gal=gal, volume_text=f"{gal:,} gallons, all outfalls combined, from the commission's {year} annual sheet",
+        # the figure is the permit's, not any one water's: the record sits on every water of the permit, so the
+        # number stays in the text and in raw.volume_gal and never in the summable field (Astra 2026-11-28 pass 2)
+        volume_gal=None, volume_text=f"{gal:,} gallons, all outfalls combined, from the commission's {year} annual sheet",
         estimate_flag="unknown", authority=AUTHORITY, source_url=source_url, raw=raw,
     )
 

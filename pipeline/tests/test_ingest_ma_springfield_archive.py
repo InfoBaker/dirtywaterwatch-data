@@ -202,7 +202,8 @@ def test_october_2021_is_one_record_of_the_sheets_printed_line():
     assert r["npdes_permit"] == "MA0101613" and r["event_type"] == "cso" and r["time_precision"] == "month"
     assert (r["started_at"], r["ended_at"]) == ("2021-10-01", "2021-10-31")
     assert r["reported_at"] is None and r["published_at"] is None
-    assert r["volume_gal"] == 31039264 and r["source_url"] == ANNUAL_URL
+    # the permit-wide figure is text and raw only: the record sits on five waters and must not sum on each
+    assert r["volume_gal"] is None and r["raw"]["volume_gal"] == 31039264 and r["source_url"] == ANNUAL_URL
     assert r["volume_text"] == "31,039,264 gallons, all outfalls combined, from the commission's 2021 annual sheet"
     raw = r["raw"]
     assert raw["permit_level"] is True and "computed" not in raw and "events" not in raw and "hours" not in raw
@@ -293,19 +294,20 @@ def _chart(recs, kind="discharger"):
 def test_chart_totals_never_turn_a_missing_volume_into_zero():
     """Astra review 2026-11-28 P2: a record of this source with no volume is null in the totals, never 0.0; a month
     with no record stays 0 (the source lists every month); on a water's chart the all-outfalls October figure is
-    unknown (it is for every water of the permit combined), on the operator's chart it is the sheet's figure."""
+    unknown (it is for every water of the permit combined); the record carries no summable volume at all, so the
+    operator's chart is unknown too and no export or CSV can add it to a water (pass 2)."""
     recs, _ = build(with_october())
     by = {r["started_at"][:7]: r for r in recs.values() if r["outfall_id"] in (None, "SPR010")}
     sep = {**by["2021-10"], "event_id": "x:2021-09", "started_at": "2021-09-01", "ended_at": "2021-09-30",
            "volume_gal": None}
     x, s = _chart([by["2021-10"], sep, by["2022-08"]])
     assert x[:2] == ["2021-09", "2021-10"]
-    assert s["gallons"][0] is None and s["gallons"][1] == 31039264.0
+    assert s["gallons"][0] is None and s["gallons"][1] is None     # October: printed in the text, not summed
     assert s["gallons"][2] == 0.0 and s["gallons"][-1] == 5677000.0          # November 2021: no record, no events
     x, s = _chart([by["2021-10"], by["2022-08"]], kind="water")
     assert s["gallons"][0] is None and s["gallons"][-1] == 5677000.0
     other = {**sep, "source_id": "xx-example-monthly"}
-    assert _chart([other, {**by["2021-10"], "source_id": "xx-example-monthly"}])[1]["gallons"][0] == 0.0
+    assert _chart([other, {**by["2021-10"], "source_id": "xx-example-monthly", "volume_gal": 31039264}])[1]["gallons"][0] == 0.0
 
 
 # ---------------------------------------------------------------- overlap and the committed transcript
@@ -340,7 +342,7 @@ def test_committed_transcript():
     assert len(recs) == 736 and counts["zero_rows"] == 458
     assert all(r["time_precision"] == "month" for r in recs)
     [oct_] = [r for r in recs if r["started_at"].startswith("2021-10")]
-    assert oct_["outfall_id"] is None and oct_["volume_gal"] == 31039264
+    assert oct_["outfall_id"] is None and oct_["volume_gal"] is None and oct_["raw"]["volume_gal"] == 31039264
     assert oct_["raw"]["available_no_later_than"] == "2022-09-28" and oct_["source_url"].endswith("Volumes-2021.pdf")
     assert all(r["outfall_id"].startswith("SPR") for r in recs if r is not oct_)
 
